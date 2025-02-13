@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" href="cartstyle.css">
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="navbar">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="#"><img src="#" alt="Logo"></a>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <ul class="nav-menu">
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Giới thiệu</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Lịch sử hình thành</a></li>
+                        <li><a href="#">Cam kết chất lượng</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Sản phẩm</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Rượu Tây Bắc</a></li>
+                        <li><a href="#">Phụ kiện</a></li>
+                        <li><a href="#">Set quà rượu</a></li>
+                        <li><a href="#">Đồ ngâm rượu</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Blogs</a>
+                    <ul class="dropdown">
+                        <li><a href="#">Kiến thức về rượu Tây Bắc</a></li>
+                        <li><a href="#">Câu chuyện khách hàng</a></li>
+                        <li><a href="#">Mẹo hữu ích</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">FAQs</a></li>
+            </ul>
+
+            <!-- Icons -->
+            <div class="icons">
+                <a href="#"><img src="images/find.png" alt="Search"></a>
+                <a href="#"><img src="images/cart.png" alt="Cart"></a>
+                <a href="#"><img src="images/account.png" alt="User"></a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div>
+            <h3 style="padding: 20px 50px;">Giỏ hàng (1)</h3>
+        </div>
+        
+        <div class="cart-container">
+            <!-- Cart Items -->
+            <div class="cart-items">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SẢN PHẨM</th>
+                            <th>ĐƠN GIÁ</th>
+                            <th>SỐ LƯỢNG</th>
+                            <th>SỐ TIỀN</th>
+                            <th>XÓA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="product-info">
+                                    <img src="product-placeholder.png" alt="Rượu mơ má đào Mộc Châu">
+                                    <p>Rượu mơ má đào Mộc Châu</p>
+                                </div>
+                            </td>
+                            <td>279,000đ</td>
+                            <td>
+                                <div class="quantity-control">
+                                    <button>-</button>
+                                    <input type="text" value="1">
+                                    <button>+</button>
+                                </div>
+                            </td>
+                            <td>279,000đ</td>
+                            <td>
+                                <button class="delete-button">
+                                    <img src="delete-icon.png" alt="Xóa">
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h2>Đơn hàng</h2>
+                <p><span>Tổng tiền:</span> 279,000đ</p>
+                <p><span>Phí vận chuyển:</span> Được miễn phí</p>
+                <p><span>Giảm giá:</span> Không áp dụng</p>
+                <p class="total"><span>Thành tiền:</span> 279,000đ</p>
+                <button class="order-button">Đặt hàng</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Products Section -->
+    <section class="related-products">
+        <h2>Sản phẩm liên quan</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="placeholder.png" alt="Sản phẩm">
+            </div>
+            <div class="product-card">
+                <img src="placeholder.png" alt="Sản phẩm">
+            </div>
+            <div class="product-card">
+                <img src="placeholder.png" alt="Sản phẩm">
+            </div>
+            <div class="product-card">
+                <img src="placeholder.png" alt="Sản phẩm">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="footer">
+        <div class="footer-highlights">
+            <div class="highlight">
+                <img src="icon1.png" alt="Rượu ngon thượng hạng">
+                <p>Rượu ngon thượng hạng</p>
+            </div>
+            <div class="highlight">
+                <img src="icon2.png" alt="Cam kết chất lượng">
+                <p>Cam kết chất lượng</p>
+            </div>
+            <div class="highlight">
+                <img src="icon3.png" alt="Hỗ trợ tư vấn">
+                <p>Hỗ trợ tư vấn</p>
+            </div>
+            <div class="highlight">
+                <img src="icon4.png" alt="Miễn phí vận chuyển">
+                <p>Miễn phí vận chuyển</p>
+            </div>
+        </div>
+        <div class="footer-main">
+            <div class="footer-info">
+                <img src="logo.png" alt="Logo">
+                <p><strong>Thông tin:</strong> Công ty TNHH Rượu Tây Bắc Sanu</p>
+                <p>Địa chỉ: Số 16 Lê Hồng Phong, TP. Lào Cai, tỉnh Lào Cai</p>
+                <p>Email: <a href="mailto:sanu.wice.wine@gmail.com">sanu.wice.wine@gmail.com</a></p>
+                <p>Hotline: 0123.456.789</p>
+                <div class="social-icons">
+                    <img src="facebook.png" alt="Facebook">
+                    <img src="instagram.png" alt="Instagram">
+                    <img src="youtube.png" alt="YouTube">
+                    <img src="tiktok.png" alt="TikTok">
+                </div>
+            </div>
+            <div class="footer-links">
+                <h3>GIỚI THIỆU</h3>
+                <ul>
+                    <li><a href="#">Lịch sử hình thành</a></li>
+                    <li><a href="#">Cam kết chất lượng</a></li>
+                    <li><a href="#">Liên hệ</a></li>
+                </ul>
+                <h3>CHÍNH SÁCH</h3>
+                <ul>
+                    <li><a href="#">Chính sách bảo hành</a></li>
+                    <li><a href="#">Chính sách giao hàng</a></li>
+                    <li><a href="#">Chính sách thanh toán</a></li>
+                </ul>
+                <h3>BLOGS</h3>
+                <ul>
+                    <li><a href="#">Kiến thức về rượu Tây Bắc</a></li>
+                    <li><a href="#">Câu chuyện khách hàng</a></li>
+                    <li><a href="#">Mẹo hữu ích</a></li>
+                </ul>
+            </div>
+            <div class="footer-chat">
+                <img src="chat-icon.png" alt="Chat">
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
