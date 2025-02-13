@@ -1,0 +1,75 @@
+<div class="container" [class.sign-up-mode]="isSignUpMode">
+    <div class="forms-container">
+      <div class="login-signup">
+        <form action="#" class="log-in-form" *ngIf="!isSignUpMode">
+          <h2 class="title">Login in</h2>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Username" />
+          </div>
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Password" />
+          </div>
+          <div class="input">
+            <input id="remember" type="checkbox"/>
+            <label for="remember">Ghi nhớ đăng nhập</label>
+            <a href="#">Quên mật khẩu?</a>
+          </div>
+          <input type="submit" value="Login" class="btn solid" />
+        </form>
+        <form action="#" class="sign-up-form" *ngIf="isSignUpMode">
+          <h2 class="title">Sign up</h2>
+
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Email" />
+          </div>
+
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Tạo Password" />
+          </div>
+
+          <div class="input-field">
+            <i class="fas fa-lock"></i>
+            <input type="password" placeholder="Xác nhận Password" />
+          </div>
+
+          <div>
+            <input id="subscribe" type="checkbox"/>
+            <label for="subscribe">Tôi muốn nhận email về các ưu đãi và thông báo từ Saru</label>
+          </div>
+          <p>Tôi đã đọc và đồng ý với <a href="#">Điều kiện giao dịch chung</a> và <a href="#">Chính sách bảo mật</a> của Saru.</p>
+          <input type="submit" class="btn" value="Sign up" />
+        </form>
+      </div>
+    </div>
+  
+    <div class="panels-container">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>XIN CHÀO ĐỒNG TỬU,</h3>
+          <p>
+            Nếu bạn chưa có tài khoản, hãy đăng ký để tận hưởng trải nghiệm tốt nhất nhé!
+          </p>
+          <button class="btn transparent" (click)="toggleSignUpMode()">
+            Đăng ký
+          </button>
+        </div>
+        <img src="img/log.svg" class="image" alt="" />
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>XIN CHÀO ĐỒNG TỬU,</h3>
+          <p>
+            Nếu bạn đã có tài khoản, hãy đăng nhập để tận hưởng trải nghiệm tốt nhất nhé!
+          </p>
+          <button class="btn transparent" (click)="toggleSignUpMode()">
+            Đăng nhập
+          </button>
+        </div>
+        <img src="img/register.svg" class="image" alt="" />
+      </div>
+    </div>
+  </div>
