@@ -1,0 +1,177 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* Container chính */
+.checkout-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 900px;
+    margin: 40px auto;
+    gap: 30px;
+}
+
+/* Form Địa chỉ nhận hàng */
+.shipping-info {
+    width: 60%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+/* Các nhóm input */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    font-weight: bold;
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Định dạng dấu * */
+span {
+    color: black;
+}
+
+/* Xác nhận */
+.confirm-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #FBBC05;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.confirm-button:hover {
+    background-color: #e6b800;
+}
+
+/* Đơn hàng */
+.order-summary {
+    width: 35%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Sản phẩm */
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #000; /* Thêm viền đen */
+    padding: 10px;
+    border-radius: 5px; /* Bo góc nhẹ */
+    background: #fff;
+}
+
+.order-item img {
+    width: 40px;
+    height: 40px;
+    background: #ccc; /* Placeholder màu xám */
+    border-radius: 3px;
+}
+
+.order-item p {
+    flex: 1;
+    font-size: 14px;
+}
+
+.order-item span {
+    font-weight: bold;
+}
+
+
+/* Chi tiết đơn hàng */
+.order-details p,h5 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+
+.order-details .total {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Phương thức thanh toán */
+.payment-methods {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.payment-option {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #000;
+    background: #D9D9D9;
+    border-radius: 6px;
+    font-size: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-right: 5px;
+}
+
+.payment-option:hover {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Nút thanh toán */
+.checkout-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #FBBC05;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 15px;
+}
+
+.checkout-button:hover {
+    background-color: #e6b800;
+}
+
+/* Điều khoản */
+.terms {
+    font-size: 12px;
+    color: #666;
+    margin-top: 10px;
+    text-align: center;
+}

@@ -1,0 +1,73 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Khung thông báo */
+.order-success {
+    width: 400px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    overflow: hidden;
+}
+
+/* Phần tiêu đề */
+.success-header {
+    background-color: #bfbfbf;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px;
+}
+
+/* Nội dung thông báo */
+.success-content {
+    padding: 20px;
+}
+
+/* Thông điệp */
+.success-message {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Nhóm nút */
+.success-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Nút bấm */
+.detail-button,
+.back-button {
+    padding: 10px 20px;
+    background-color: #FBBC05;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Hiệu ứng hover */
+.detail-button:hover,
+.back-button:hover {
+    background-color: #e6b800;
+}

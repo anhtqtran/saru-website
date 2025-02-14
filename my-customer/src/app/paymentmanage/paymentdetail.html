@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán</title>
+    <link rel="stylesheet" href="paymentdetailstyle.css">
+</head>
+<body>
+
+    <div class="checkout-container">
+        <!-- Form Địa chỉ nhận hàng -->
+        <section class="shipping-info">
+            <h2>Địa chỉ nhận hàng</h2>
+            <form>
+                <div class="input-group">
+                    <label for="full-name">Họ và tên <span style="color: red;">*</span></label>
+                    <input type="text" id="full-name" required>
+                </div>
+                <div class="input-group">
+                    <label for="phone-number">Số điện thoại <span style="color: red;">*</span></label>
+                    <input type="text" id="phone-number" required>
+                </div>
+                <div class="input-group full-width">
+                    <label for="location">Địa điểm <span style="color: red;">*</span></label>
+                    <select id="location">
+                        <option value="">Tỉnh/ Thành phố, Quận/Huyện, Phường/Xã</option>
+                    </select>
+                </div>
+                <div class="input-group full-width">
+                    <label for="address">Địa chỉ cụ thể <span style="color: red;">*</span></label>
+                    <input type="text" id="address" required>
+                </div>
+                <button class="confirm-button">Xác nhận</button>
+            </form>
+        </section>
+
+        <!-- Đơn hàng -->
+        <section class="order-summary">
+            <h2>Đơn hàng</h2>
+            <div class="order-item">
+                <img src="product-placeholder.png" alt="Rượu mơ má đào Mộc Châu">
+                <p>Rượu mơ má đào Mộc Châu x1</p>
+                <span>279.000đ</span>
+            </div>
+            <div class="order-details">
+                <br/>
+                <p><span>Tổng tiền:</span> <span>279.000đ</span></p>
+                <p><span>Phí vận chuyển:</span> <span class="select-location">Chọn địa điểm</span></p>
+                <p><span>Giảm giá:</span> <span class="discount-code">Mã giảm giá</span></p>
+                
+                <hr/>
+                <br/>
+                <h5 class="total"><span>Thành tiền:</span> <span>279.000đ</span></h5>
+                <br/>
+                <hr/>
+                <br/>
+            </div>
+
+            <h5>Phương thức thanh toán</h5>
+            <div class="payment-methods">
+                <button class="payment-option">Thanh toán khi nhận hàng</button>
+                <button class="payment-option">Ngân hàng</button>
+                <button class="payment-option">Ví điện tử</button>
+            </div>
+
+            <button class="checkout-button">Thanh toán</button>
+            <p class="terms">Nhấn "Thanh toán" đồng nghĩa với việc bạn đồng ý tuân theo Điều khoản của Saru</p>
+        </section>
+    </div>
+
+</body>
+</html>
