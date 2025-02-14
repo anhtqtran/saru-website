@@ -1,7 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { KhuyenmaiListComponent } from './khuyenmai-list/khuyenmai-list.component';
+import { KhuyenmaiCreateComponent } from './khuyenmai-create/khuyenmai-create.component';
+import { KhuyenmaiDetailComponent } from './khuyenmai-detail/khuyenmai-detail.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  {path: '', component: KhuyenmaiListComponent},
+  { path: 'khuyenmai-create', component: KhuyenmaiCreateComponent },
+  { path: 'khuyenmai-detail', component: KhuyenmaiDetailComponent }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
