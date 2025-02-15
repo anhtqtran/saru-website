@@ -1,75 +1,99 @@
-<div class="container" [class.sign-up-mode]="isSignUpMode">
-    <div class="forms-container">
-      <div class="login-signup">
-        <form action="#" class="log-in-form" *ngIf="!isSignUpMode">
-          <h2 class="title">Login in</h2>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Username" />
-          </div>
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Password" />
-          </div>
-          <div class="input">
-            <input id="remember" type="checkbox"/>
-            <label for="remember">Ghi nhớ đăng nhập</label>
-            <a href="#">Quên mật khẩu?</a>
-          </div>
-          <input type="submit" value="Login" class="btn solid" />
-        </form>
-        <form action="#" class="sign-up-form" *ngIf="isSignUpMode">
-          <h2 class="title">Sign up</h2>
+<div class="container" [ngClass]="{'sign-up-mode': isSignUpMode}">
+  <div class="forms-container">
+    <div class="login-signup">
+      <!-- Form Đăng Nhập -->
+      <form [formGroup]="loginForm" (ngSubmit)="onLoginSubmit()" class="log-in-form" *ngIf="!isSignUpMode">
+        <div class="flex items-center">
+          <img src="/assets/images/logo-doc.png" alt="Logo" class="w-18 mr-7">
+          <h2 class="text-3xl font-bold text-gray-900">ĐĂNG NHẬP</h2>
+      </div>
+        <div class="input-field" [ngClass]="{'error-active': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
+          <i class="fas fa-user"></i>
+          <input id="email" type="email" placeholder="Email" formControlName="email" autocomplete="email" aria-label="Email" />
+        </div>
+        <div class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+          {{ getErrorMessage('email', loginForm.get('email')?.errors) }}
+        </div>
 
-          <div class="input-field">
-            <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="Email" />
-          </div>
+        <div class="input-field" [ngClass]="{'error-active': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
+          <i class="fas" [ngClass]="passwordVisibility.loginPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility('loginPassword')"></i>
+          <input id="password" [type]="passwordVisibility.loginPassword ? 'text' : 'password'" placeholder="Mật khẩu" formControlName="password" autocomplete="current-password" aria-label="Mật khẩu" />
+        </div>
+        <div class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+          {{ getErrorMessage('password', loginForm.get('password')?.errors) }}
+        </div>
 
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Tạo Password" />
-          </div>
+        <div class="input">
+          <input id="remember" type="checkbox" formControlName="remember"/>
+          <label for="remember" class="remember-label">Ghi nhớ đăng nhập</label>
+          <a [routerLink]="['/reset-password']">Quên mật khẩu?</a>
+        </div>
 
-          <div class="input-field">
-            <i class="fas fa-lock"></i>
-            <input type="password" placeholder="Xác nhận Password" />
-          </div>
+        <input type="submit" value="Đăng Nhập" class="btn solid" />
+      </form>
 
-          <div>
-            <input id="subscribe" type="checkbox"/>
-            <label for="subscribe">Tôi muốn nhận email về các ưu đãi và thông báo từ Saru</label>
-          </div>
-          <p>Tôi đã đọc và đồng ý với <a href="#">Điều kiện giao dịch chung</a> và <a href="#">Chính sách bảo mật</a> của Saru.</p>
-          <input type="submit" class="btn" value="Sign up" />
-        </form>
+      <!-- Form Đăng Ký -->
+      <form [formGroup]="signUpForm" (ngSubmit)="onSignUpSubmit()" class="sign-up-form" *ngIf="isSignUpMode">
+        <div class="flex items-center">
+          <img src="/assets/images/logo-doc.png" alt="Logo" class="w-18 mr-7">
+          <h2 class="text-3xl font-bold text-gray-900">ĐĂNG KÝ</h2>
+      </div>
+
+        <div class="input-field" [ngClass]="{'error-active': signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched}">
+          <i class="fas fa-envelope"></i>
+          <input id="email-signup" type="email" placeholder="Email" formControlName="email" autocomplete="email" aria-label="Email" />
+        </div>
+        <div class="error" *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+          {{ getErrorMessage('email', signUpForm.get('email')?.errors) }}
+        </div>
+
+        <div class="input-field" [ngClass]="{'error-active': signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched}">
+          <i class="fas" [ngClass]="passwordVisibility.signUpPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility('signUpPassword')"></i>
+          <input id="password-signup" [type]="passwordVisibility.signUpPassword ? 'text' : 'password'" placeholder="Tạo Mật Khẩu" formControlName="password" autocomplete="new-password" aria-label="Tạo mật khẩu" />
+        </div>
+        <div class="error" *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+          {{ getErrorMessage('password', signUpForm.get('password')?.errors) }}
+        </div>
+
+        <div class="input-field" [ngClass]="{'error-active': signUpForm.get('passwordConfirm')?.invalid && signUpForm.get('passwordConfirm')?.touched}">
+          <i class="fas" [ngClass]="passwordVisibility.passwordConfirm ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility('passwordConfirm')"></i>
+          <input id="password-confirm" [type]="passwordVisibility.passwordConfirm ? 'text' : 'password'" placeholder="Xác Nhận Mật Khẩu" formControlName="passwordConfirm" autocomplete="new-password" aria-label="Xác nhận mật khẩu" />
+        </div>
+        <div class="error" *ngIf="signUpForm.hasError('notMatching') && signUpForm.get('passwordConfirm')?.touched">
+          Mật khẩu không khớp
+        </div>
+
+        <div class="subscribe-container">
+        <div>
+          <input id="subscribe" type="checkbox" formControlName="subscribe"/>
+          <label for="subscribe">Tôi muốn nhận email về các ưu đãi và thông báo từ Saru</label>
+        </div>
+          <p>Tôi đã đọc và đồng ý với <a [routerLink]="['/terms']">Điều kiện giao dịch chung</a> và <a [routerLink]="['/privacy-policy']">Chính sách bảo mật</a> của Saru.</p>
+        </div>
+        <input type="submit" class="btn" value="Đăng Ký" />
+      </form>
+    </div>
+  </div>
+
+  <!-- Panel Container for switching between Login and Sign Up -->
+  <div class="panels-container">
+    <div class="panel left-panel">
+      <div class="content">
+        <h3>XIN CHÀO ĐỒNG TỬU,</h3>
+        <p>Nếu bạn chưa có tài khoản, hãy đăng ký để tận hưởng trải nghiệm tốt nhất nhé!</p>
+        <button class="btn transparent" (click)="toggleSignUpMode()">
+          Đăng Ký
+        </button>
       </div>
     </div>
-  
-    <div class="panels-container">
-      <div class="panel left-panel">
-        <div class="content">
-          <h3>XIN CHÀO ĐỒNG TỬU,</h3>
-          <p>
-            Nếu bạn chưa có tài khoản, hãy đăng ký để tận hưởng trải nghiệm tốt nhất nhé!
-          </p>
-          <button class="btn transparent" (click)="toggleSignUpMode()">
-            Đăng ký
-          </button>
-        </div>
-        <img src="img/log.svg" class="image" alt="" />
-      </div>
-      <div class="panel right-panel">
-        <div class="content">
-          <h3>XIN CHÀO ĐỒNG TỬU,</h3>
-          <p>
-            Nếu bạn đã có tài khoản, hãy đăng nhập để tận hưởng trải nghiệm tốt nhất nhé!
-          </p>
-          <button class="btn transparent" (click)="toggleSignUpMode()">
-            Đăng nhập
-          </button>
-        </div>
-        <img src="img/register.svg" class="image" alt="" />
+    <div class="panel right-panel">
+      <div class="content">
+        <h3>XIN CHÀO ĐỒNG TỬU,</h3>
+        <p>Nếu bạn đã có tài khoản, hãy đăng nhập để tận hưởng trải nghiệm tốt nhất nhé!</p>
+        <button class="btn transparent" (click)="toggleSignUpMode()">
+          Đăng Nhập
+        </button>
       </div>
     </div>
   </div>
+</div>
