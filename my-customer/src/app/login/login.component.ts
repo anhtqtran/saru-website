@@ -17,6 +17,7 @@ export class LoginComponent {
     signUpPassword: false,
     passwordConfirm: false,
   };
+private _self: any|string;
 
   constructor(private fb: FormBuilder) {
     // Form Đăng Nhập
