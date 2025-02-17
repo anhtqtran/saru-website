@@ -1,0 +1,47 @@
+
+<!-- này m hỏi gpt bỏ html vô angular như nào, copy rồi quay v là sai -->
+
+    <div class="sidebar">
+        <h3>Lọc</h3>
+        <div class="filter-category">
+            <label><input type="checkbox" id="all" checked> All</label>
+
+            <label><input type="checkbox" id="name"> Tên</label>
+            <input type="text" id="name-filter" class="filter-input" placeholder="Nhập tên rượu..." style="display: none;">
+
+            <label><input type="checkbox" id="brand"> Thương hiệu</label>
+            <input type="text" id="brand-filter" class="filter-input" placeholder="Nhập thương hiệu..." style="display: none;">
+
+            <label><input type="checkbox" id="price"> Giá</label>
+            <input type="number" id="min-price" class="filter-input" placeholder="Giá thấp nhất" style="display: none;">
+            <input type="number" id="max-price" class="filter-input" placeholder="Giá cao nhất" style="display: none;">
+
+            <label><input type="checkbox" id="abv"> Độ mạnh</label>
+            <input type="number" id="min-abv" class="filter-input" placeholder="Độ mạnh thấp nhất" style="display: none;">
+            <input type="number" id="max-abv" class="filter-input" placeholder="Độ mạnh cao nhất" style="display: none;">
+
+            <label><input type="checkbox" id="type"> Loại rượu</label>
+            <select id="type-filter" class="filter-input" style="display: none;">
+                <option value="">Chọn loại rượu</option>
+                <option value="rượu lên men">Rượu lên men</option>
+                <option value="rượu ngâm">Rượu ngâm</option>
+                <option value="rượu nấu">Rượu nấu</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="search-bar">
+            <select id="category">
+                <option value="all">Rượu</option>
+            </select>
+            <input type="text" id="search-box" placeholder="Tìm kiếm sản phẩm..." />
+        </div>
+        
+        <div class="product-list" id="product-list"></div>
+    </div>
+
+
+
+
+
