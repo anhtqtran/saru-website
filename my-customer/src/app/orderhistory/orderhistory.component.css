@@ -100,17 +100,39 @@ body {
 }
 
 .filter-button {
-    background: #fff;
-    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: white;
+    border: 1px solid #ccc;
     padding: 8px 12px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-.search-bar {
-    padding: 8px;
-    border: 1px solid #ddd;
+.filter-button img {
+    width: 16px;
+    height: 16px;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 8px 12px;
     border-radius: 5px;
+}
+
+.search-box img {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
 }
 
 /* Table */

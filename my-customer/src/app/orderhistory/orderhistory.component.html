@@ -1,11 +1,12 @@
-<!DOCTYPE html>
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách đơn hàng</title>
-    <link rel="stylesheet" href="orderhistorystyle.css">
+    <link rel="stylesheet" href="orderhistory.component.css">
 </head>
+
 <body>
 
     <div class="container">
@@ -28,8 +29,13 @@
             <div class="order-header">
                 <h2>Danh sách đơn hàng</h2>
                 <div class="order-controls">
-                    <button class="filter-button">🛠 Thêm điều kiện lọc</button>
-                    <input type="text" class="search-bar" placeholder="🔍 Tìm kiếm">
+                    <button class="filter-button">
+                        <img src="images/filter-icon.png" alt="Thêm điều kiện lọc"> Thêm điều kiện lọc
+                    </button>
+                    <div class="search-box">
+                        <img src="images/search-icon.png" alt="Tìm kiếm">
+                        <input type="text" placeholder="Tìm kiếm">
+                    </div>
                 </div>
             </div>
 
@@ -85,4 +91,5 @@
     </div>
 
 </body>
+
 </html>
