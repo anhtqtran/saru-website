@@ -1,0 +1,113 @@
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chỉnh sửa sản phẩm</title>
+    <link rel="stylesheet" href="editproduct.component.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <a href="#" class="back-link">‹ Quay lại trang sản phẩm</a>
+        <h1 class="product-title">Tên sản phẩmxxxxxxxxxxx</h1>
+
+        <div class="product-form">
+            <label for="product-name">Tên sản phẩm</label>
+            <input type="text" id="product-name" placeholder="Tên sản phẩmxxxxxxxxxxx">
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="brand">Thương hiệu</label>
+                    <input type="text" id="brand">
+                </div>
+                <div class="form-group">
+                    <label for="category">Nhóm sản phẩm</label>
+                    <select id="category">
+                        <option>Rượu Tây Bắc</option>
+                        <option>Đồ ngâm rượu</option>
+                        <option>Phụ kiện</option>
+                        <option>Set quà rượu</option>
+                    </select>
+                </div>
+            </div>
+
+            <label for="short-description">Mô tả ngắn</label>
+            <input type="text" id="short-description">
+
+            <label for="detailed-description">Mô tả chi tiết</label>
+            <textarea id="detailed-description"></textarea>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="wine-type">Loại rượu</label>
+                    <input type="text" id="wine-type">
+                </div>
+                <div class="toggle-container">
+                    <label>Khuyến mãi</label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="togglePromo">
+                        <span class="slider"></span>
+                        <span #toggleText>Không</span> 
+                    </label>
+                </div>
+
+            </div>
+
+            <label>Hình ảnh</label>
+            <div class="image-upload">
+                <div class="image-box"></div>
+                <div class="image-box"></div>
+                <div class="image-box"></div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="price">Giá</label>
+                    <input type="text" id="price">
+                </div>
+                <div class="form-group">
+                    <label for="compare-price">Giá so sánh</label>
+                    <input type="text" id="compare-price">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="volume">Dung tích</label>
+                    <input type="text" id="volume">
+                </div>
+                <div class="form-group">
+                    <label for="sku">SKU</label>
+                    <input type="text" id="sku">
+                </div>
+            </div>
+
+            <div class="toggle-row">
+                <div class="left-section">
+                    <label for="dong-y">Đồng ý đặt hàng khi đã hết hàng</label>
+                </div>
+            
+                <div class="right-section">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="toggleOutOfStock">
+                        <span class="slider"></span>
+                        <span #toggleText2>Không</span>
+ 
+                    </label>
+                </div>
+            </div>
+
+
+            <div class="button-group">
+                <button class="cancel-button" disabled>Hủy thay đổi</button>
+                <button class="save-button" disabled>Lưu</button>
+            </div>
+
+        </div>
+    </div>
+    
+</body>
+
+</html>
