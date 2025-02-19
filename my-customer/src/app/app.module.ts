@@ -14,6 +14,10 @@ import { NewpassComponent } from './newpass/newpass.component';
 import { SuccessresetpassComponent } from './successresetpass/successresetpass.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { FeatureIntroComponent } from './feature-intro/feature-intro.component';
+import { HistoryComponent } from './history/history.component';
+import { ContactComponent } from './contact/contact.component';
+import { CommitmentComponent } from './commitment/commitment.component';
 
 
 @NgModule({
@@ -26,6 +30,10 @@ import { FooterComponent } from './footer/footer.component';
     SuccessresetpassComponent,
     HeaderComponent,
     FooterComponent,
+    FeatureIntroComponent,
+    HistoryComponent,
+    ContactComponent,
+    CommitmentComponent,
   ],
   imports: [
     BrowserModule,

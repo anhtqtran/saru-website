@@ -1,8 +1,8 @@
-<div class="bg-white">
-    <nav class="bg-white shadow-lg pt-3 pb-3 pl-6 pr-6 flex justify-between items-center relative">
+<header class="bg-white">
+    <nav class="bg-white shadow-lg pt-3 pb-3 pl-6 pr-6 flex justify-between items-center relative z-50 fixed w-full top-0 left-0">
         <!-- Logo -->
         <div class="flex items-center space-x-4">
-            <img class="w-23" src="assets/images/logo-ngang (2).png" alt="SARU">
+            <a [routerLink]="['/homepage']"><img class="w-23" src="assets/images/logo-ngang (2).png" alt="SARU"></a>
         </div>
 
         <!-- Menu toggle button for mobile -->
@@ -12,47 +12,47 @@
 
         <!-- Navigation Links -->
         <ul id="nav-links" class="hidden md:flex space-x-10 text-lg font-medium">
-            <li>  <a href="#" class="text-gray-700 hover:text-[#F8BC3B] relative group">
+            <li>  <a [routerLink]="['/homepage']" class="text-gray-700 hover:text-[#F8BC3B] relative group">
                 Trang chủ
-                <span class="absolute left-0 bottom-0 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
+                <span class="absolute left-0 bottom-0 translate-y-2 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
               </a></li>
             <li class="relative group">
-                <a href="#" class="text-gray-700 hover:text-[#F8BC3B] relative group">
+                <a [routerLink]="['/intro']" class="text-gray-700 hover:text-[#F8BC3B] relative group">
                     Giới thiệu
-                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
+                    <span class="absolute left-0 bottom-0 translate-y-2 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
                   </a>
                 <ul class="absolute left-0 hidden bg-white shadow-lg group-hover:block w-72 transition-all duration-300">
-                    <li><a href="../Gioithieu/Lichsuhinhthanh/lichsu.html" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Lịch sử hình thành</a></li>
-                    <li><a href="../Gioithieu/lienhe/lienhe.html" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Liên hệ</a></li>
-                    <li><a href="../Gioithieu/Camket/camket.html" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Cam kết chất lượng</a></li>
+                    <li><a [routerLink]="['/history']" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Lịch sử hình thành</a></li>
+                    <li><a [routerLink]="['/contact']" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Liên hệ</a></li>
+                    <li><a [routerLink]="['/commitment']" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Cam kết chất lượng</a></li>
                 </ul>
             </li>
             <li class="relative group">
-                <a href="#" class="text-gray-700 hover:text-[#F8BC3B] relative group">
+                <a [routerLink]="['/product']" class="text-gray-700 hover:text-[#F8BC3B] relative group">
                     Sản phẩm
-                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
+                    <span class="absolute left-0 bottom-0 translate-y-2 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
                   </a>
                 <ul class="absolute left-0 hidden bg-white shadow-lg group-hover:block w-72 transition-all duration-300">
-                    <li><a href="#" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Rượu Tây Bắc</a></li>
-                    <li><a href="#" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Phụ kiện</a></li>
-                    <li><a href="#" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Set quà rượu</a></li>
-                    <li><a href="#" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Đồ ngâm rượu</a></li>
+                    <li><a [routerLink]="['/product-wine']" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Rượu Tây Bắc</a></li>
+                    <li><a [routerLink]="['/product-asset']" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Phụ kiện</a></li>
+                    <li><a [routerLink]="['/product-set']" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Set quà rượu</a></li>
+                    <li><a [routerLink]="['/product-infuse']" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Đồ ngâm rượu</a></li>
                 </ul>
             </li>
             <li class="relative group">
-                <a href="#" class="text-gray-700 hover:text-[#F8BC3B] relative group">
+                <a [routerLink]="['/blog']" class="text-gray-700 hover:text-[#F8BC3B] relative group">
                     Blogs
-                    <span class="absolute left-0 bottom-0 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
+                    <span class="absolute left-0 bottom-0 translate-y-2 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
                   </a>
                 <ul class="absolute left-0 hidden bg-white shadow-lg group-hover:block w-72 transition-all duration-300">
-                    <li><a href="#" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Kiến thức về rượu Tây Bắc</a></li>
-                    <li><a href="#" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Câu chuyện khách hàng</a></li>
-                    <li><a href="#" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Mẹo hữu ích</a></li>
+                    <li><a [routerLink]="['/blog-know']" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Kiến thức về rượu Tây Bắc</a></li>
+                    <li><a [routerLink]="['/blog-story']" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Câu chuyện khách hàng</a></li>
+                    <li><a [routerLink]="['/blog-tip']" class="block p-3 text-gray-700 hover:bg-[#F8BC3B]">Mẹo hữu ích</a></li>
                 </ul>
             </li>
-            <li>  <a href="#" class="text-gray-700 hover:text-[#F8BC3B] relative group">
+            <li>  <a [routerLink]="['/faqs']" class="text-gray-700 hover:text-[#F8BC3B] relative group">
                 FAQs
-                <span class="absolute left-0 bottom-0 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
+                <span class="absolute left-0 bottom-0 translate-y-2 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
               </a></li>
         </ul>
 
@@ -76,9 +76,9 @@
         
         <!-- Search bar end -->
 
-            <a href="../anhthu/cart/cartmanagepage.html"><i class="fa-solid fa-cart-shopping text-xl cursor-pointer hover:text-[#F8BC3B]"></i></a>
-            <a href="../anhthu/sosanh/compare.html"><i class="fa-solid fa-arrows-left-right text-xl cursor-pointer hover:text-[#F8BC3B]"></i></a>
-            <a href="../anhthu/accountmange/account.html"><i class="fa-solid fa-user text-xl cursor-pointer hover:text-[#F8BC3B]"></i></a>
+            <a [routerLink]="['/cart']"><i class="fa-solid fa-cart-shopping text-xl cursor-pointer hover:text-[#F8BC3B]"></i></a>
+            <a [routerLink]="['/compare']"><i class="fa-solid fa-arrows-left-right text-xl cursor-pointer hover:text-[#F8BC3B]"></i></a>
+            <a [routerLink]="['/account']"><i class="fa-solid fa-user text-xl cursor-pointer hover:text-[#F8BC3B]"></i></a>
         </div>
     </nav> 
-</div>
+</header>

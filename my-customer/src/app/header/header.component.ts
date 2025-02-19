@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit  } from '@angular/core';
 
 @Component({
   selector: 'app-header',
@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent {
+export class HeaderComponent{
+
   // Hàm toggle menu khi nhấn vào menu icon
   toggleMenu() {
     const menu = document.getElementById("nav-links");
