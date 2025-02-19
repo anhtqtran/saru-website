@@ -7,6 +7,16 @@
     --highlight-color: #FF0000;
     --focus-border: #E2BF9E;
 }
+body {
+    font-family: 'inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Đảm bảo chiều cao trang luôn đầy đủ */
+}
+
+main {
+    flex-grow: 1; /* Nội dung sẽ chiếm không gian còn lại */
+}
 
 input:focus {
     border-color: var(--focus-border) !important;
@@ -16,6 +26,7 @@ input:focus {
 button:hover {
     cursor: pointer;
 }
+
 button {
     color: white;
     font-weight: bold;

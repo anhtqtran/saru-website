@@ -13,6 +13,7 @@ import { SendcodeComponent } from './sendcode/sendcode.component';
 import { NewpassComponent } from './newpass/newpass.component';
 import { SuccessresetpassComponent } from './successresetpass/successresetpass.component';
 import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { HeaderComponent } from './header/header.component';
     NewpassComponent,
     SuccessresetpassComponent,
     HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
