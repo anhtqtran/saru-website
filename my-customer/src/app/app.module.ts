@@ -18,6 +18,8 @@ import { FeatureIntroComponent } from './feature-intro/feature-intro.component';
 import { HistoryComponent } from './history/history.component';
 import { ContactComponent } from './contact/contact.component';
 import { CommitmentComponent } from './commitment/commitment.component';
+import { BlogComponent } from './blog/blog.component';
+import { ProductComponent } from './product/product.component';
 
 
 @NgModule({
@@ -34,6 +36,8 @@ import { CommitmentComponent } from './commitment/commitment.component';
     HistoryComponent,
     ContactComponent,
     CommitmentComponent,
+    BlogComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,

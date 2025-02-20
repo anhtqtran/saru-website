@@ -9,7 +9,8 @@ import { FeatureIntroComponent } from './feature-intro/feature-intro.component';
 import { CommitmentComponent } from './commitment/commitment.component';
 import { ContactComponent } from './contact/contact.component';
 import { HistoryComponent } from './history/history.component';
-
+import { BlogComponent } from './blog/blog.component';
+import { ProductComponent } from './product/product.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,9 @@ const routes: Routes = [
   { path: 'commitment', component: CommitmentComponent},
   { path: 'contact', component: ContactComponent},
   { path: 'history', component: HistoryComponent},
+  { path: 'blog', component: BlogComponent},
+  { path: 'product', component: ProductComponent},
+
 
 
 ];
