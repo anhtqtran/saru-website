@@ -7,6 +7,9 @@ import { FormsModule } from '@angular/forms'; // Thêm dòng này
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { WritereviewComponent } from './writereview/writereview.component';
+import { ReviewpageComponent } from './reviewpage/reviewpage.component';
+
 import { CartmanageComponent } from './cartmanage/cartmanage.component';
 import { EmptycartComponent } from './emptycart/emptycart.component';
 
@@ -26,9 +29,13 @@ import { BlogComponent } from './blog/blog.component';
 import { ProductComponent } from './product/product.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
+    WritereviewComponent,
+    ReviewpageComponent,
+    
     CartmanageComponent,
     EmptycartComponent,
 
@@ -46,7 +53,7 @@ import { ProductComponent } from './product/product.component';
     CommitmentComponent,
     BlogComponent,
     ProductComponent,
-    
+
   ],
   imports: [
     BrowserModule,
