@@ -7,6 +7,11 @@ import { FormsModule } from '@angular/forms'; // Thêm dòng này
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { OrdermanageComponent } from './ordermanage/ordermanage.component';
+import { OrderdetailComponent } from './orderdetail/orderdetail.component';
+import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
+
 import { WritereviewComponent } from './writereview/writereview.component';
 import { ReviewpageComponent } from './reviewpage/reviewpage.component';
 
@@ -33,6 +38,11 @@ import { ProductComponent } from './product/product.component';
 @NgModule({
   declarations: [
     AppComponent,
+    
+    OrdermanageComponent,
+    OrderdetailComponent,
+    OrderhistoryComponent,
+
     WritereviewComponent,
     ReviewpageComponent,
     
