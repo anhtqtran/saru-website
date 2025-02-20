@@ -7,6 +7,10 @@ import { NewpassComponent } from './newpass/newpass.component';
 import { SuccessresetpassComponent } from './successresetpass/successresetpass.component';
 import { FeatureIntroComponent } from './feature-intro/feature-intro.component';
 import { CommitmentComponent } from './commitment/commitment.component';
+import { ContactComponent } from './contact/contact.component';
+import { HistoryComponent } from './history/history.component';
+
+
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -16,6 +20,8 @@ const routes: Routes = [
   { path: 'successresetpass', component: SuccessresetpassComponent},
   { path: 'intro', component: FeatureIntroComponent},
   { path: 'commitment', component: CommitmentComponent},
+  { path: 'contact', component: ContactComponent},
+  { path: 'history', component: HistoryComponent},
 
 
 ];
