@@ -7,6 +7,8 @@ import { FormsModule } from '@angular/forms'; // Thêm dòng này
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
+import { AccountmanageComponent } from './accountmanage/accountmanage.component';
 import { LoginComponent } from './login/login.component';
 import { ResetpassComponent } from './resetpass/resetpass.component';
 import { SendcodeComponent } from './sendcode/sendcode.component';
@@ -23,6 +25,7 @@ import { CommitmentComponent } from './commitment/commitment.component';
 @NgModule({
   declarations: [
     AppComponent,
+    AccountmanageComponent,
     LoginComponent,
     ResetpassComponent,
     SendcodeComponent,
