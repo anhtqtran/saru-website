@@ -3,12 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // Thêm dòng này
-
+import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { OrdermanageComponent } from './ordermanage/ordermanage.component';
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
 import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 
@@ -39,7 +38,6 @@ import { ProductComponent } from './product/product.component';
   declarations: [
     AppComponent,
     
-    OrdermanageComponent,
     OrderdetailComponent,
     OrderhistoryComponent,
 
@@ -69,7 +67,8 @@ import { ProductComponent } from './product/product.component';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule 
+    FormsModule,
+    RouterModule 
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

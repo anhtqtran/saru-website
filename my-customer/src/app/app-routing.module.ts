@@ -11,7 +11,11 @@ import { ContactComponent } from './contact/contact.component';
 import { HistoryComponent } from './history/history.component';
 import { BlogComponent } from './blog/blog.component';
 import { ProductComponent } from './product/product.component';
-
+import { AccountmanageComponent } from './accountmanage/accountmanage.component';
+import { CartmanageComponent } from './cartmanage/cartmanage.component';
+import { OrderdetailComponent } from './orderdetail/orderdetail.component';
+import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
+import { ReviewpageComponent } from './reviewpage/reviewpage.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -25,6 +29,12 @@ const routes: Routes = [
   { path: 'history', component: HistoryComponent},
   { path: 'blog', component: BlogComponent},
   { path: 'product', component: ProductComponent},
+  { path: 'account', component: AccountmanageComponent},
+  { path: 'cart', component: CartmanageComponent},
+  { path: 'order-detail', component: OrderdetailComponent},
+  { path: 'order-history', component: OrderhistoryComponent},
+  { path: 'review', component: ReviewpageComponent},
+
 
 
 
