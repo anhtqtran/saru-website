@@ -1,0 +1,273 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* HEADER */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo img {
+    width: 80px;
+}
+
+.nav-menu ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-menu ul li {
+    position: relative;
+}
+
+.nav-menu ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 10px;
+    transition: color 0.3s ease;
+}
+
+.nav-menu ul li a:hover {
+    color: #007bff;
+}
+
+/* Dropdown */
+.nav-menu ul li .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #fff;
+    list-style: none;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    min-width: 250px;
+}
+
+.nav-menu ul li:hover .dropdown {
+    display: block;
+}
+
+/* SIDEBAR */
+.container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.sidebar {
+    width: 250px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profile img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile p {
+    font-size: 14px;
+    color: #555;
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.sidebar-menu li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+}
+
+.sidebar-menu li a:hover {
+    color: #007bff;
+}
+
+/* THÔNG TIN CÁ NHÂN */
+.personal-info {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.avatar img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.details p {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.edit-button,
+.cancel-button {
+    padding: 8px 15px;
+    border-radius: 45px;
+    font-weight: bold;
+    cursor: pointer;
+    border: 2px solid #ffcc00;
+    
+}
+
+.edit-button {
+    background-color: #ffcc00;
+    color: #fff;
+    
+}
+.edit-button-2 {
+    
+        padding: 8px 15px;
+        border: 2px solid #000;
+        background: transparent;
+        color: #000;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+}
+.address-info {
+    flex: 1; /* Chiếm hết khoảng trống bên trái */}
+
+.edit-button:hover {
+    background-color: #ffaa00;
+}
+
+.cancel-button {
+    background-color: #FFF7E1;
+}
+
+.cancel-button:hover {
+    background-color: #ccc;
+}
+
+/* ĐỊA CHỈ NHẬN HÀNG */
+.address-section {
+    margin-top: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.address-list {
+    margin-top: 10px;
+}
+
+.address-card {
+    display: flex;
+    justify-content: space-between; /* Đẩy nút về bên phải */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background: #fff;
+}
+
+.address-card p {
+    font-size: 14px;
+}
+
+.address-container {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    width: 100%;
+    margin-top: 20px;
+}
+
+.add-address-button {
+    padding: 12px 25px;
+    background-color: #ffcc00;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+/* Hiệu ứng hover */
+.add-address-button:hover {
+    background-color: #e6b800;
+}
+
+
+/* FOOTER */
+.footer {
+    background-color: #f3f3f3;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.footer-highlights {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-info {
+    width: 30%;
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.footer-links ul li a:hover {
+    color: #007bff;
+}
