@@ -1,0 +1,90 @@
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cá nhân</title>
+    <link rel="stylesheet" href="accountmanage.component.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="user-avatar.png" alt="User Avatar">
+                <p>Trần Thanh Quế Anh</p>
+                <p>0123456789</p>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#">Thông tin và địa chỉ</a></li>
+                <li><a href="#">Lịch sử đơn hàng</a></li>
+                <li><a href="#">Hạng tài khoản</a></li>
+            </ul>
+        </aside>
+
+        <!-- Thông tin cá nhân -->
+        <section class="personal-info">
+            <h2>Thông tin cá nhân</h2>
+            <div class="info-box">
+                <div class="avatar">
+                    <img src="profile-placeholder.png" alt="Avatar">
+                </div>
+                <div class="details">
+                    <br/>
+                    <p><strong>Tên khách hàng:</strong> Trần Thanh Quế Anh</p>
+                    <p><strong>Giới tính:</strong> <input type="radio" checked> Nam <input type="radio"> Nữ</p>
+                    <p><strong>Số điện thoại:</strong> 0123456789</p>
+                    <p><strong>Ngày sinh:</strong> 25/04/2004</p>
+                    <p><strong>Email:</strong> <a href="mailto:anhtt@stuel.edu.vn">anhtt@stuel.edu.vn</a></p>
+                    <p><strong>Mật khẩu:</strong> ********</p>
+                    <p><strong>Ngày tham gia:</strong> 09/03/2023</p>
+                    <p><strong>Tổng điểm tích lũy:</strong> 485 điểm</p>
+                    <button class="cancel-button">Hủy</button>
+                    <button class="edit-button">Chỉnh sửa</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Danh sách địa chỉ -->
+    <section class="address-section">
+        <h2>Địa chỉ nhận hàng</h2>
+        <div class="address-list">
+            <div class="address-card">
+                <div class="address-info">
+                    <br/>
+                    <p><strong>Trần Thanh Quế Anh</strong> | 0123456789</p>
+                    <p>Số 669, QL1, Khu phố 3, Phường Linh Xuân, Quận Thủ Đức, TP. Hồ Chí Minh</p>
+                    <label><input type="radio" name="default-address" checked> Đặt làm địa chỉ mặc định</label>
+                </div>
+                <button class="edit-button-2">Chỉnh sửa</button>
+            </div>
+
+            <div class="address-card">
+                <div class="address-info">
+                    <p><strong>Trần Thục Doan</strong> | 0324546023</p>
+                    <p>Ký túc xá khu B, khu phố Tân Hòa, TP. Dĩ An, Bình Dương</p>
+                    <label><input type="radio" name="default-address" checked> Đặt làm địa chỉ mặc định</label>
+                </div>
+                <button class="edit-button-2">Chỉnh sửa</button>
+            </div>
+
+            <div class="address-card">
+                <div class="address-info">
+                    <p><strong>Phan Thị Mỹ Kim</strong> | 0294822746</p>
+                    <p>Ký túc xá khu B, khu phố Tân Hòa, TP. Dĩ An, Bình Dương</p>
+                    <label><input type="radio" name="default-address" checked> Đặt làm địa chỉ mặc định</label>
+                </div>
+                <button class="edit-button-2">Chỉnh sửa</button>
+            </div>
+            
+        </div>
+        <div class="address-container">
+            <button class="add-address-button">Thêm địa chỉ</button>
+        </div>
+        
+    </section>
+
+</body>
+</html>
+

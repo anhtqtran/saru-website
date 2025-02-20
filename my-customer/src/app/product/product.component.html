@@ -1,0 +1,36 @@
+<div class="flex">
+    <!-- Sidebar -->
+    <div class="w-64 p-5 bg-white shadow-lg rounded-md mr-8">
+        <h3 class="text-lg font-semibold mb-4">Lọc</h3>
+        <div class="filter-category">
+            <label><input type="checkbox" id="all" checked> All</label>
+
+            <label><input type="checkbox" id="name"> Tên</label>
+            <input type="text" id="name-filter" class="filter-input" placeholder="Nhập tên rượu..." style="display: none;">
+
+            <label><input type="checkbox" id="brand"> Thương hiệu</label>
+            <input type="text" id="brand-filter" class="filter-input" placeholder="Nhập thương hiệu..." style="display: none;">
+
+            <label><input type="checkbox" id="price"> Giá</label>
+            <input type="number" id="min-price" class="filter-input" placeholder="Giá thấp nhất" style="display: none;">
+            <input type="number" id="max-price" class="filter-input" placeholder="Giá cao nhất" style="display: none;">
+
+            <label><input type="checkbox" id="strength" disabled> Độ mạnh</label>
+            <label><input type="checkbox" id="type" disabled> Loại rượu</label>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="flex-grow p-5">
+        <div class="search-bar mb-8 flex items-center gap-4">
+            <select id="category" class="p-2 border border-gray-300 rounded-md">
+                <option value="all">Rượu</option>
+            </select>
+            <input type="text" id="search-box" class="p-2 border border-gray-300 rounded-md w-full" placeholder="Tìm kiếm sản phẩm..." />
+        </div>
+
+        <div class="product-list grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="product-list">
+            <!-- Các sản phẩm sẽ được hiển thị ở đây -->
+        </div>
+    </div>
+</div>
