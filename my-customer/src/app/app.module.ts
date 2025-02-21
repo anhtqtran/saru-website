@@ -29,8 +29,10 @@ import { FeatureIntroComponent } from './feature-intro/feature-intro.component';
 import { HistoryComponent } from './history/history.component';
 import { ContactComponent } from './contact/contact.component';
 import { CommitmentComponent } from './commitment/commitment.component';
-import { BlogComponent } from './blog/blog.component';
 import { ProductComponent } from './product/product.component';
+import { BlogComponent } from './blog/blog.component';
+import { BlogdetailComponent } from './blogdetail/blogdetail.component';
+import { FaqsComponent } from './faqs/faqs.component';
 
 
 
@@ -59,8 +61,10 @@ import { ProductComponent } from './product/product.component';
     HistoryComponent,
     ContactComponent,
     CommitmentComponent,
-    BlogComponent,
     ProductComponent,
+    BlogComponent,
+    BlogdetailComponent,
+    FaqsComponent,
 
   ],
   imports: [

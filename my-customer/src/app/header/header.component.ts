@@ -1,4 +1,4 @@
-import { Component, AfterViewInit  } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild  } from '@angular/core';
 
 
 @Component({
@@ -29,5 +29,6 @@ export class HeaderComponent{
         searchBox.focus(); // Focus vào ô tìm kiếm sau khi mở rộng
       }, 400); // Đảm bảo gọi focus sau khi hiệu ứng mở rộng hoàn thành
     }
-  }
+  };
+
 }
