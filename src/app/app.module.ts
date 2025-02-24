@@ -28,6 +28,8 @@ import { DemoComponent } from './demo/demo.component';
 import { BlogCreateComponent } from './blog-create/blog-create.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
+import { BloglistComponent } from './allblog/bloglist/bloglist.component';
+import { BlogdetailComponent } from './allblog/blogdetail/blogdetail.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { CustomerDetailComponent } from './customer-detail/customer-detail.compo
     DemoComponent,
     BlogCreateComponent,
     CustomerComponent,
-    CustomerDetailComponent
+    CustomerDetailComponent,
+    BloglistComponent,
+    BlogdetailComponent
   ],
   imports: [
     BrowserModule,
