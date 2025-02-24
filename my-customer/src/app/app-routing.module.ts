@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
+import { TrangchuBannerCamketComponent } from './trangchu-banner-camket/trangchu-banner-camket.component';
 import { LoginComponent } from './login/login.component';
 import { ResetpassComponent } from './resetpass/resetpass.component'; 
 import { SendcodeComponent } from './sendcode/sendcode.component';
@@ -36,6 +38,7 @@ const routes: Routes = [
   { path: 'review', component: ReviewpageComponent},
   { path: 'blog', component: BlogComponent},
   { path: 'faqs', component: FaqsComponent},
+  { path: 'trangchu-banner-camket/trangchu-banner-camket.component', component: TrangchuBannerCamketComponent },
 
 ];
 

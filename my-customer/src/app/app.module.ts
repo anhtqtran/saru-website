@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TrangchuBannerCamketComponent } from './trangchu-banner-camket/trangchu-banner-camket.component';
 
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
 import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
@@ -39,7 +40,9 @@ import { FaqsComponent } from './faqs/faqs.component';
 @NgModule({
   declarations: [
     AppComponent,
-    
+
+    TrangchuBannerCamketComponent,
+
     OrderdetailComponent,
     OrderhistoryComponent,
 
