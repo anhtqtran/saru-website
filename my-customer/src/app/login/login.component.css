@@ -32,7 +32,7 @@ input {
   transform: translate(-50%, -50%);
   left: 75%;
   width: 50%;
-  transition: 1s 0.7s ease-in-out;
+  transition: 0.3s 0.3s ease-in-out;
   display: grid;
   grid-template-columns: 1fr;
   z-index: 5;
@@ -44,7 +44,7 @@ form {
   justify-content: center;
   flex-direction: column;
   padding: 0rem 5rem;
-  transition: all 0.2s 0.7s;
+  transition: all 0.1s 0.1s;
   overflow: hidden;
   grid-column: 1 / 2;
   grid-row: 1 / 2;
@@ -170,15 +170,15 @@ a:hover {
 .container:before {
   content: "";
   position: absolute;
-  height: 2400px;
-  width: 3300px;
+  height: 200vh;
+  width: 200vh;
   top: -5%;
-  right: 49%;
+  right: 50%;
   transform: translateY(-50%);
   background-image: url("/assets/images/login-bg.webp");
   background-size: cover;
-  transition: 0.9s ease-in-out;
-  border-radius: 50%;
+  transition: 0.6s ease-in-out;
+  border-radius: 30%;
   z-index: 6;
 }
 
@@ -204,8 +204,8 @@ a:hover {
 
 .panel .content {
   color: #fff;
-  transition: transform 0.9s ease-in-out;
-  transition-delay: 0.6s;
+  transition: transform 0.3s ease-in-out;
+  transition-delay: 0.3s;
 }
 
 .panel h3 {
@@ -284,7 +284,7 @@ a:hover {
     width: 100%;
     top: 95%;
     transform: translate(-50%, -100%);
-    transition: 1s 0.8s ease-in-out;
+    transition: 0.2s 0.8s ease-in-out;
   }
 
   .login-signup,
@@ -315,14 +315,14 @@ a:hover {
 
   .image {
     width: 200px;
-    transition: transform 0.9s ease-in-out;
-    transition-delay: 0.6s;
+    transition: transform 0.3s ease-in-out;
+    transition-delay: 0.3s;
   }
 
   .panel .content {
     padding-right: 15%;
-    transition: transform 0.9s ease-in-out;
-    transition-delay: 0.8s;
+    transition: transform 0.3s ease-in-out;
+    transition-delay: 0.3s;
   }
 
   .panel h3 {
@@ -348,7 +348,7 @@ a:hover {
     bottom: 68%;
     right: initial;
     top: initial;
-    transition: 2s ease-in-out;
+    transition: 0.3s ease-in-out;
   }
 
   .container.sign-up-mode:before {

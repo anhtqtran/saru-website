@@ -18,6 +18,9 @@ import { ReviewpageComponent } from './reviewpage/reviewpage.component';
 import { BlogComponent } from './blog/blog.component';
 import { FaqsComponent } from './faqs/faqs.component';
 
+import { AuthGuard } from './guard/auth.guard'; // Nhập AuthGuard
+
+
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'resetpass', component: ResetpassComponent},
@@ -29,14 +32,18 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent},
   { path: 'history', component: HistoryComponent},
   { path: 'product', component: ProductComponent},
-  { path: 'account', component: AccountmanageComponent},
+  { path: 'account', component: AccountmanageComponent, canActivate:[AuthGuard]},
   { path: 'cart', component: CartmanageComponent},
-  { path: 'order-detail', component: OrderdetailComponent},
-  { path: 'order-history', component: OrderhistoryComponent},
+  { path: 'order-detail', component: OrderdetailComponent, canActivate:[AuthGuard]},
+  { path: 'order-history', component: OrderhistoryComponent, canActivate:[AuthGuard]},
   { path: 'review', component: ReviewpageComponent},
   { path: 'blog', component: BlogComponent},
   { path: 'faqs', component: FaqsComponent},
-
+  {
+    path: '',
+    redirectTo: '/home',
+    pathMatch: 'full',
+  }
 ];
 
 @NgModule({
