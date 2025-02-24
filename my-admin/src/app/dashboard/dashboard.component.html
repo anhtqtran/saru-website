@@ -1,0 +1,66 @@
+<!-- app.component.html -->
+<div class="flex min-h-screen font-inter bg-gray-100 text-gray-800">
+    <!-- Sidebar -->
+    <aside class="w-1/5 bg-white shadow-lg p-6">
+      <div class="flex items-center mb-8 space-x-4">
+        <img src="assets/images/1.2 LOGO ngang nền trắng.png" alt="Logo" class="w-40 h-auto object-contain">
+      </div>
+      <nav>
+        <ul class="space-y-6 text-base">
+          <li *ngFor="let item of [
+            {id: 'home', name: 'TRANG CHỦ', icon: 'home.png'},
+            {id: 'products', name: 'SẢN PHẨM', icon: 'products.png'},
+            {id: 'orders', name: 'ĐƠN HÀNG', icon: 'orders.png'},
+            {id: 'customers', name: 'KHÁCH HÀNG', icon: 'customers.png'},
+            {id: 'news', name: 'TIN TỨC', icon: 'news.png'},
+            {id: 'faqs', name: 'FAQS', icon: 'faqs.png'},
+            {id: 'promotions', name: 'KHUYẾN MÃI', icon: 'promotions.png'},
+            {id: 'consultation', name: 'TƯ VẤN', icon: 'consultation.png'}
+          ]">
+            <a (click)="showSection(item.id)" class="flex items-center px-4 py-2 rounded-md transition-colors duration-300 hover:bg-[#F8BC3B] hover:text-white cursor-pointer">
+              <img [src]="'assets/images/' + item.icon" [alt]="item.name" class="w-6 h-6 mr-2"> {{ item.name }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+  
+    <!-- Main Content -->
+    <main class="flex-1 p-8">
+      <ng-container [ngSwitch]="currentSection">
+        <section *ngSwitchCase="'home'">
+          <h2 class="text-2xl font-semibold">Trang Chủ</h2>
+          <p>Nội dung của Trang Chủ...</p>
+        </section>
+        <section *ngSwitchCase="'products'">
+          <h2 class="text-2xl font-semibold">Sản Phẩm</h2>
+          <p>Nội dung của Sản Phẩm...</p>
+        </section>
+        <section *ngSwitchCase="'orders'">
+          <h2 class="text-2xl font-semibold">Đơn Hàng</h2>
+          <p>Nội dung của Đơn Hàng...</p>
+        </section>
+        <section *ngSwitchCase="'customers'">
+          <h2 class="text-2xl font-semibold">Khách Hàng</h2>
+          <p>Nội dung của Khách hàng...</p>
+        </section>
+        <section *ngSwitchCase="'news'">
+          <h2 class="text-2xl font-semibold">Tin Tức</h2>
+          <p>Nội dung của Tin Tức...</p>
+        </section>
+        <section *ngSwitchCase="'faqs'">
+          <h2 class="text-2xl font-semibold">FAQs</h2>
+          <p>Nội dung của FAQs...</p>
+        </section>
+        <section *ngSwitchCase="'promotions'">
+            <h2 class="text-2xl font-semibold">Khuyến Mãi</h2>
+            <p>Nội dung của Khuyến mãi...</p>
+        </section>
+        <section *ngSwitchCase="'consultation'">
+          <h2 class="text-2xl font-semibold">Tư Vấn</h2>
+          <p>Nội dung của Tư vấn...</p>
+        </section>
+      </ng-container>
+    </main>
+  </div>
+  
