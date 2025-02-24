@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild, AfterViewInit, Renderer2 } from '@ang
 
 @Component({
   selector: 'app-productlist',
+  standalone: false,
   templateUrl: './productlist.component.html',
   styleUrls: ['./productlist.component.css']
 })

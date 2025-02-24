@@ -1,268 +1,119 @@
-/* Reset CSS */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import "tailwindcss";
 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-/* Header admin */
+/* Custom styles với Tailwind */
+
+/* Header */
 .admin-header {
-    display: flex;
-    justify-content: flex-end;
-    padding: 10px;
-    background: #000;
+    @apply flex justify-end p-4 bg-black;
 }
 
 .admin-button {
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
+    @apply bg-white border border-gray-300 px-4 py-2 rounded-lg font-bold cursor-pointer;
 }
 
 /* Container chính */
 .container {
-    max-width: 900px;
-    margin: 40px auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    @apply max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md mt-10;
 }
 
-/* Header sản phẩm */
+/* Tiêu đề */
 .product-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+    @apply flex justify-between items-center mb-6;
+}
+
+.product-header h1 {
+    @apply text-2xl font-bold;
 }
 
 .add-product-button {
-    background: #ffcc00;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: background 0.3s;
+    @apply flex items-center bg-yellow-400 px-4 py-2 rounded-lg font-bold hover:bg-yellow-500 transition;
 }
 
 .add-product-button img {
-    width: 18px;
-    height: 18px;
-}
-
-.add-product-button:hover {
-    background: #e6b800;
+    @apply w-4 h-4 mr-2;
 }
 
 /* Điều kiện lọc & tìm kiếm */
 .product-controls {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-    align-items: center;
+    @apply flex items-center gap-4 mb-5;
+}
+
+/* Bộ lọc */
+.filter-container {
+    @apply relative;
 }
 
 .filter-button {
-    background: #ddd;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    @apply flex items-center border border-black px-4 py-2 rounded-full font-bold;
 }
 
 .filter-button img {
-    width: 18px;
-    height: 18px;
+    @apply w-4 h-4 mr-2;
+}
+
+/* Dropdown */
+.filter-dropdown {
+    @apply absolute left-0 mt-2 w-64 bg-white border border-gray-300 rounded-lg shadow-md p-4 hidden;
 }
 
 /* Thanh tìm kiếm */
 .search-container {
-    position: relative;
-    width: 100%;
+    @apply flex items-center border border-black rounded-full px-4 py-2 w-full;
 }
 
 .search-bar {
-    width: 100%;
-    padding: 8px 35px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+    @apply border-none outline-none flex-grow;
 }
 
 .search-icon {
-    position: absolute;
-    left: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
+    @apply w-4 h-4 mr-2;
 }
 
 /* Bảng sản phẩm */
 .product-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-bottom: 15px;
+    @apply w-full border-collapse;
 }
 
 .product-table thead {
-    background: #e6e6e6;
+    @apply bg-gray-200;
 }
 
-.product-table th, 
+.product-table th,
 .product-table td {
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
+    @apply border border-gray-300 p-4 text-left;
 }
 
 /* Thông tin sản phẩm */
 .product-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    @apply flex items-center gap-4;
 }
 
 .product-info img {
-    width: 50px;
-    height: 50px;
-    border-radius: 5px;
-    background: #ccc;
+    @apply w-10;
 }
 
 /* Hành động */
 .actions {
-    display: flex;
-    gap: 10px;
-    cursor: pointer;
+    @apply flex gap-3 cursor-pointer;
 }
 
 .actions img {
-    width: 20px;
-    height: 20px;
+    @apply w-5;
 }
 
 /* Footer */
 .product-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    @apply flex justify-between mt-5;
 }
 
 .product-footer select {
-    padding: 6px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+    @apply p-2 border border-gray-300 rounded-full;
 }
 
-/* Reset CSS */
-
-
-/* Container */
-.container {
-    max-width: 900px;
-    margin: auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Nút Thêm điều kiện lọc */
-.filter-container {
-    position: relative;
-    display: inline-block;
-}
-
-.filter-button {
-    background: #fff;
-    border: 1px solid #000;
-    padding: 10px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.filter-button img {
-    width: 16px;
-    height: 16px;
-}
-
-/* Hộp dropdown (hiện khi hover) */
-.filter-dropdown {
-    position: absolute;
-    background: #fff;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 250px;
-    top: 40px;
-    left: 0;
-    display: none;
-    z-index: 10;
-}
-
-.filter-container:hover .filter-dropdown {
-    display: block;
-}
-
-.filter-dropdown p {
-    font-size: 14px;
-    margin-bottom: 5px;
-}
-
-/* Dropdown select */
-.filter-dropdown select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-/* Nút Hủy & Thêm điều kiện lọc */
-.filter-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-.cancel-button {
-    background: #ddd;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.apply-button {
-    background: #ffcc00;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s;
-}
-
-.apply-button:hover {
-    background: #e6b800;
+.product-footer p {
+    @apply text-sm text-gray-600;
 }

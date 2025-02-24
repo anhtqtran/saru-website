@@ -1,172 +1,109 @@
-/* Reset mặc định */
-body, input, select, textarea, button {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
+@import "tailwindcss";
+/* Reset CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply font-sans text-sm bg-gray-100;
 }
 
 .container {
-    width: 60%;
-    margin: auto;
+    @apply w-3/5 mx-auto;
 }
 
 .back-link {
-    display: block;
-    margin: 20px 0;
-    text-decoration: none;
-    color: black;
+    @apply block my-5 text-black no-underline;
 }
 
 .product-title {
-    font-size: 22px;
-    font-weight: bold;
+    @apply text-xl font-bold;
 }
 
 .product-form {
-    background: #f5f5f5;
-    padding: 20px;
-    border-radius: 10px;
+    @apply bg-gray-200 p-5 rounded-lg border border-black;
 }
 
 label {
-    font-weight: bold;
-    display: block;
-    margin-top: 10px;
+    @apply font-bold block mt-3;
 }
 
 input, select, textarea {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    @apply w-full p-2 mt-1 border border-black rounded;
 }
 
 textarea {
-    height: 100px;
+    @apply h-24;
 }
 
 .form-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    @apply flex justify-between gap-5;
 }
 
 .form-group {
-    flex: 1;
+    @apply flex-1;
 }
 
 .image-upload {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
+    @apply flex gap-3 mt-3;
 }
 
 .image-box {
-    width: 100px;
-    height: 100px;
-    background: #eee;
-    border-radius: 5px;
+    @apply w-24 h-24 bg-gray-300 rounded border border-black;
 }
 
 .toggle-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Căn cách đều 2 phần */
-    width: 100%;
-    background-color: #f2f2f2;
-    padding: 10px;
-    border-radius: 5px;
+    @apply flex items-center justify-between bg-gray-200 p-3 rounded border-none;
 }
 
 .toggle-row .left-section {
-    width: 70%; /* Chiếm 70% không gian */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    @apply w-3/4 flex flex-col;
 }
 
 .toggle-row .right-section {
-    width: 30%; /* Chiếm 30% không gian */
-    display: flex;
-    justify-content: flex-end; /* Đưa toggle về bên phải */
-    align-items: center;
+    @apply w-1/4 flex justify-end items-center;
 }
 
 .toggle-switch {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 10px;
+    @apply relative flex items-center gap-2;
 }
 
 .toggle-switch input {
-    display: none;
+    @apply hidden;
 }
 
 .slider {
-    position: relative;
-    display: inline-block;
-    width: 50px;
-    height: 25px;
-    background-color: #ccc;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: 0.3s;
+    @apply relative inline-block w-12 h-6 bg-gray-400 rounded-full cursor-pointer transition border border-black;
 }
 
 .slider::before {
-    content: "";
-    position: absolute;
-    width: 21px;
-    height: 21px;
-    background-color: white;
-    border-radius: 50%;
-    top: 2px;
-    left: 2px;
-    transition: 0.3s;
+    @apply content-[''] absolute w-5 h-5 bg-white rounded-full top-0.5 left-1 transition;
 }
 
 .toggle-switch input:checked + .slider {
-    background-color: #ffb400;
+    @apply bg-yellow-400;
 }
 
 .toggle-switch input:checked + .slider::before {
-    transform: translateX(25px);
+    @apply transform translate-x-6;
 }
 
-#toggleText {
-    font-weight: bold;
-    color: #999;
-    transition: color 0.3s;
+#toggleText, #toggleText2 {
+    @apply font-bold text-gray-500 transition;
 }
-
-#toggleText2 {
-    font-weight: bold;
-    color: #999;
-    transition: color 0.3s;
-}
-
 
 .button-group {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-    margin-top: 20px;
+    @apply flex justify-end gap-3 mt-5;
 }
 
 button {
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
+    @apply px-4 py-2 rounded cursor-pointer border border-black;
 }
 
 .cancel-button {
-    background: #ccc;
-    color: black;
+    @apply bg-gray-400 text-black;
 }
 
 .save-button {
-    background: #ffcc00;
-    color: black;
+    @apply bg-yellow-400 text-black;
 }
