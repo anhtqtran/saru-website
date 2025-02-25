@@ -13,11 +13,4 @@ export class DashboardComponent {
     this.currentSection = sectionId;
   }
 
-  changePage(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    const value = selectElement.value;
-    console.log('Changing page to:', value);
-    // Implement your page change logic here
-  }
-  
 }
