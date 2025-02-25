@@ -1,27 +1,26 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
-import { DonhangListComponent } from './donhang-list/donhang-list.component';
+import { KhuyenmaiListComponent } from './khuyenmai-list/khuyenmai-list.component';
+import { KhuyenmaiCreateComponent } from './khuyenmai-create/khuyenmai-create.component';
+import { KhuyenmaiDetailComponent } from './khuyenmai-detail/khuyenmai-detail.component';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { DonhangCreateComponent } from './donhang-create/donhang-create.component';
-import { DonhangDetailComponent } from './donhang-detail/donhang-detail.component';
 import { RouterModule } from '@angular/router';
-
 @NgModule({
   declarations: [
     AppComponent,
-    DonhangCreateComponent,
+    KhuyenmaiCreateComponent,
+    KhuyenmaiDetailComponent,
   ],
   imports: [
+    KhuyenmaiListComponent,
     BrowserModule,
     AppRoutingModule,
-    CommonModule,
     FormsModule,
-    RouterModule,
-    DonhangDetailComponent,
+    CommonModule,
+    RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

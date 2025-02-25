@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DonhangListComponent } from './donhang-list/donhang-list.component';
-import { DonhangCreateComponent } from './donhang-create/donhang-create.component';
-import { DonhangDetailComponent } from './donhang-detail/donhang-detail.component';
+import { KhuyenmaiListComponent } from './khuyenmai-list/khuyenmai-list.component';
+import { KhuyenmaiCreateComponent } from './khuyenmai-create/khuyenmai-create.component';
+import { KhuyenmaiDetailComponent } from './khuyenmai-detail/khuyenmai-detail.component';
 
 const routes: Routes = [
-  { path: '', component: DonhangListComponent},
-  { path: 'donhang-create', component: DonhangCreateComponent },
-  { path: 'donhang-detail/:id', component: DonhangDetailComponent }
+  {path: '', component: KhuyenmaiListComponent},
+  { path: 'khuyenmai-create', component: KhuyenmaiCreateComponent },
+  { path: 'khuyenmai-detail', component: KhuyenmaiDetailComponent }
 ];
 
 @NgModule({
