@@ -43,10 +43,10 @@ const routes: Routes = [
   { path: 'faqs', component: FaqsComponent},
   {
     path: '',
-    redirectTo: '/home',
+    redirectTo: '/homepage',
     pathMatch: 'full',
   },
-  { path: 'trangchu-banner-camket/trangchu-banner-camket.component', component: TrangchuBannerCamketComponent },
+  { path: 'homepage', component: TrangchuBannerCamketComponent },
 
 ];
 
