@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../services/product.service';
+import { Product } from '../classes/\IProduct';
 
 @Component({
   selector: 'app-product',
@@ -8,73 +10,45 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ProductComponent implements OnInit {
-    products: any[] = [];  // Mảng sản phẩm
-    filteredProducts: any[] = [];  // Mảng sản phẩm đã lọc
-  
-    // Các filter
-    searchKeyword: string = '';
-    nameFilter: string = '';
-    brandFilter: string = '';
-    minPrice: number = 0;
-    maxPrice: number = Infinity;
-    priceFilter: boolean = false;
-  
-    constructor() { }
-  
-    ngOnInit(): void {
-      this.loadProducts();
-    }
-  
-    loadProducts() {
-      // Bạn có thể thay thế bằng API hoặc dữ liệu từ tệp JSON
-      this.products = [
-        // Một số dữ liệu sản phẩm mẫu
-        {
-          id: 1,
-          name: 'Rượu Tây Bắc',
-          brand: 'Brand A',
-          price: 200000,
-          link: 'assets/img/ruou1.jpg',
-          status: 'Còn hàng',
-          oldprice: 250000
-        },
-        // Thêm sản phẩm khác ở đây
-      ];
-  
-      this.displayProducts(this.products);
-    }
-  
-    displayProducts(productList: any[]) {
-      this.filteredProducts = productList.filter(product => {
-        let isValid = true;
-  
-        if (this.searchKeyword && !product.name.toLowerCase().includes(this.searchKeyword.toLowerCase())) {
-          isValid = false;
-        }
-  
-        if (this.nameFilter && !product.name.toLowerCase().includes(this.nameFilter.toLowerCase())) {
-          isValid = false;
-        }
-  
-        if (this.brandFilter && !product.brand.toLowerCase().includes(this.brandFilter.toLowerCase())) {
-          isValid = false;
-        }
-  
-        if (this.priceFilter) {
-          const price = parseFloat(product.price.toString());
-          if (price < this.minPrice || price > this.maxPrice) {
-            isValid = false;
-          }
-        }
-  
-        return isValid;
-      });
-    }
-  
-    onSearchInput(event: any) {
-      this.searchKeyword = event.target.value;
-      this.displayProducts(this.products);
-    }
-  
-    // Các phương thức lọc khác có thể được thêm vào đây
+  products: Product[] = [];
+  errorMessage: string = '';
+
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.loadProducts();
   }
+
+  loadProducts(filters: any = {}) {
+    this.productService.getProducts(filters).subscribe({
+      next: (data) => (this.products = data),
+      error: (err) => (this.errorMessage = err)
+    });
+  }
+
+  filterProducts() {
+    const filters = {
+      category: (document.getElementById('category') as HTMLSelectElement)?.value || '',
+      minPrice: (document.getElementById('minPrice') as HTMLInputElement)?.value || '',
+      maxPrice: (document.getElementById('maxPrice') as HTMLInputElement)?.value || '',
+      wineType: (document.getElementById('wineType') as HTMLSelectElement)?.value || '',
+      brand: (document.getElementById('brand') as HTMLSelectElement)?.value || '',
+      wineVolume: (document.getElementById('wineVolume') as HTMLSelectElement)?.value || '',
+      netContent: (document.getElementById('netContent') as HTMLSelectElement)?.value || ''
+    };
+    this.loadProducts(filters);
+  }
+
+  addToCart(product: Product) {
+    // Logic thêm vào giỏ hàng (sẽ triển khai ở bài sau)
+    console.log('Added to cart:', product.productName);
+  }
+
+  addToCompare(product: Product) {
+    if (product.productCategory === 'Rượu Tây Bắc') {
+      console.log('Added to compare:', product.productName);
+    } else {
+      alert('Chỉ sản phẩm Rượu Tây Bắc mới có thể so sánh!');
+    }
+  }
+}
