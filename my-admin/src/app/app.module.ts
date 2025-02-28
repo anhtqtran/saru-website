@@ -8,11 +8,12 @@ import { KhuyenmaiDetailComponent } from './khuyenmai-detail/khuyenmai-detail.co
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
     KhuyenmaiCreateComponent,
-    KhuyenmaiDetailComponent,
+    KhuyenmaiDetailComponent
   ],
   imports: [
     KhuyenmaiListComponent,
@@ -20,7 +21,8 @@ import { RouterModule } from '@angular/router';
     AppRoutingModule,
     FormsModule,
     CommonModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
