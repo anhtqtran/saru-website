@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles với Tailwind */
+
+/* Header */
+.admin-header {
+    @apply flex justify-end p-4 bg-black;
+}
+
+.admin-button {
+    @apply bg-white border border-gray-300 px-4 py-2 rounded-lg font-bold cursor-pointer;
+}
+
+/* Container chính */
+.container {
+    @apply max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md mt-10;
+}
+
+/* Tiêu đề */
+.product-header {
+    @apply flex justify-between items-center mb-6;
+}
+
+.product-header h1 {
+    @apply text-2xl font-bold;
+}
+
+.add-product-button {
+    @apply flex items-center bg-yellow-400 px-4 py-2 rounded-lg font-bold hover:bg-yellow-500 transition;
+}
+
+.add-product-button img {
+    @apply w-4 h-4 mr-2;
+}
+
+/* Điều kiện lọc & tìm kiếm */
+.product-controls {
+    @apply flex items-center gap-4 mb-5;
+}
+
+/* Bộ lọc */
+.filter-container {
+    @apply relative;
+}
+
+.filter-button {
+    @apply flex items-center border border-black px-4 py-2 rounded-full font-bold;
+}
+
+.filter-button img {
+    @apply w-4 h-4 mr-2;
+}
+
+/* Dropdown */
+.filter-dropdown {
+    @apply absolute left-0 mt-2 w-64 bg-white border border-gray-300 rounded-lg shadow-md p-4 hidden;
+}
+
+/* Thanh tìm kiếm */
+.search-container {
+    @apply flex items-center border border-black rounded-full px-4 py-2 w-full;
+}
+
+.search-bar {
+    @apply border-none outline-none flex-grow;
+}
+
+.search-icon {
+    @apply w-4 h-4 mr-2;
+}
+
+/* Bảng sản phẩm */
+.product-table {
+    @apply w-full border-collapse;
+}
+
+.product-table thead {
+    @apply bg-gray-200;
+}
+
+.product-table th,
+.product-table td {
+    @apply border border-gray-300 p-4 text-left;
+}
+
+/* Thông tin sản phẩm */
+.product-info {
+    @apply flex items-center gap-4;
+}
+
+.product-info img {
+    @apply w-10;
+}
+
+/* Hành động */
+.actions {
+    @apply flex gap-3 cursor-pointer;
+}
+
+.actions img {
+    @apply w-5;
+}
+
+/* Footer */
+.product-footer {
+    @apply flex justify-between mt-5;
+}
+
+.product-footer select {
+    @apply p-2 border border-gray-300 rounded-full;
+}
+
+.product-footer p {
+    @apply text-sm text-gray-600;
+}

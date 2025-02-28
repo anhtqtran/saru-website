@@ -1,2 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
 @import "tailwindcss";
+
+:root {
+    --primary-color: #F8BC3B;
+    --primary-hover: #85461F;
+    --text-color: #38312F;
+    --highlight-color: #FF0000;
+    --focus-border: #E2BF9E;
+}
+body {
+    font-family: 'inter', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.main-content {
+    padding-top: px; /* Chiều cao của header */
+  }
+
+
+input:focus {
+    border-color: var(--focus-border) !important;
+    box-shadow: 0 0 0 2px var(--focus-border) !important;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+button {
+    color: white;
+    font-weight: bold;
+}
