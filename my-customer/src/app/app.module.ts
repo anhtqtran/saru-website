@@ -2,12 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { FormsModule } from '@angular/forms'; // Thêm dòng này
-
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { AccountmanageComponent } from './accountmanage/accountmanage.component';
 import { LoginComponent } from './login/login.component';
 import { ResetpassComponent } from './resetpass/resetpass.component';
@@ -43,6 +40,7 @@ import { CommitmentComponent } from './commitment/commitment.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule 
+
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

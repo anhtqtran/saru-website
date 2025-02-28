@@ -1,273 +1,141 @@
 /* Reset CSS */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@import "tailwindcss";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Định dạng chung */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
+    @apply bg-gray-100 font-sans;
 }
 
-/* HEADER */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-}
-
-.logo img {
-    width: 80px;
-}
-
-.nav-menu ul {
-    list-style: none;
-    display: flex;
-    gap: 20px;
-}
-
-.nav-menu ul li {
-    position: relative;
-}
-
-.nav-menu ul li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: bold;
-    padding: 10px;
-    transition: color 0.3s ease;
-}
-
-.nav-menu ul li a:hover {
-    color: #007bff;
-}
-
-/* Dropdown */
-.nav-menu ul li .dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background-color: #fff;
-    list-style: none;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    min-width: 250px;
-}
-
-.nav-menu ul li:hover .dropdown {
-    display: block;
-}
-
-/* SIDEBAR */
+/* Container chính */
 .container {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
+    @apply flex gap-5 p-5;
 }
 
+/* Sidebar */
 .sidebar {
-    width: 250px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    @apply w-64 bg-white p-5 rounded-lg shadow-lg;
 }
 
 .profile {
-    text-align: center;
-    margin-bottom: 20px;
+    @apply text-center mb-5;
 }
 
 .profile img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin-bottom: 10px;
+    @apply w-20 h-20 rounded-full mx-auto mb-2;
 }
 
 .profile p {
-    font-size: 14px;
-    color: #555;
+    @apply text-sm text-gray-600;
 }
 
 .sidebar-menu {
-    list-style: none;
-    padding: 0;
+    @apply list-none p-0;
 }
 
 .sidebar-menu li {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    @apply py-3 border-b border-gray-300;
 }
 
 .sidebar-menu li a {
-    text-decoration: none;
-    color: #333;
-    display: block;
+    @apply text-gray-700 hover:text-blue-500 block;
 }
 
-.sidebar-menu li a:hover {
-    color: #007bff;
-}
-
-/* THÔNG TIN CÁ NHÂN */
+/* Thông tin cá nhân */
 .personal-info {
-    flex: 1;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    @apply flex-1 bg-white p-5 rounded-lg shadow-lg;
 }
 
 .info-box {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+    @apply flex items-center gap-5;
 }
 
 .avatar img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+    @apply w-24 h-24 rounded-full;
 }
 
 .details p {
-    font-size: 16px;
-    margin-bottom: 10px;
+    @apply text-lg mb-2;
 }
 
-.edit-button,
-.cancel-button {
-    padding: 8px 15px;
-    border-radius: 45px;
-    font-weight: bold;
-    cursor: pointer;
-    border: 2px solid #ffcc00;
-    
+/* Button */
+.edit-button, .cancel-button {
+    @apply px-4 py-2 rounded-full border-2;
 }
 
 .edit-button {
-    background-color: #ffcc00;
-    color: #fff;
-    
-}
-.edit-button-2 {
-    
-        padding: 8px 15px;
-        border: 2px solid #000;
-        background: transparent;
-        color: #000;
-        border-radius: 20px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-}
-.address-info {
-    flex: 1; /* Chiếm hết khoảng trống bên trái */}
-
-.edit-button:hover {
-    background-color: #ffaa00;
+    @apply bg-yellow-400 text-white border-yellow-400 hover:bg-yellow-500;
 }
 
 .cancel-button {
-    background-color: #FFF7E1;
+    @apply bg-yellow-100 text-gray-700 border-yellow-300 hover:bg-gray-300;
 }
 
-.cancel-button:hover {
-    background-color: #ccc;
-}
-
-/* ĐỊA CHỈ NHẬN HÀNG */
+/* Địa chỉ nhận hàng */
 .address-section {
-    margin-top: 20px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    @apply mt-5 bg-white p-5 rounded-lg shadow-lg;
 }
 
 .address-list {
-    margin-top: 10px;
+    @apply mt-3;
 }
 
 .address-card {
-    display: flex;
-    justify-content: space-between; /* Đẩy nút về bên phải */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background: #fff;
+    @apply flex justify-between items-center p-4 border border-gray-300 rounded-md mb-3 bg-white;
 }
 
 .address-card p {
-    font-size: 14px;
+    @apply text-sm;
 }
 
 .address-container {
-    display: flex;
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    width: 100%;
-    margin-top: 20px;
+    @apply flex justify-center mt-5;
 }
 
 .add-address-button {
-    padding: 12px 25px;
-    background-color: #ffcc00;
-    color: #fff;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    @apply px-6 py-3 bg-yellow-400 text-white rounded-full text-lg cursor-pointer hover:bg-yellow-500;
 }
 
-/* Hiệu ứng hover */
-.add-address-button:hover {
-    background-color: #e6b800;
+.delete-button {
+    @apply px-3 py-1 bg-yellow-400 text-white rounded-full text-sm cursor-pointer hover:bg-yellow-600;
 }
 
+.input-place {
+    @apply w-2/3 p-2 border rounded-full;
+}
+.text-gray-500 {
+    color: #6b7280;
+}
 
-/* FOOTER */
+.editbtn{
+    @apply px-3 py-1 bg-gray-200 text-black border border-black rounded-full text-sm cursor-pointer hover:bg-gray-400;
+}
+/* Footer */
 .footer {
-    background-color: #f3f3f3;
-    padding: 20px;
-    margin-top: 30px;
+    @apply bg-gray-200 p-5 mt-5;
 }
 
 .footer-highlights {
-    display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
+    @apply flex justify-around mb-5;
 }
 
 .footer-main {
-    display: flex;
-    justify-content: space-between;
+    @apply flex justify-between;
 }
 
 .footer-info {
-    width: 30%;
+    @apply w-1/3;
 }
 
 .footer-links ul {
-    list-style: none;
+    @apply list-none;
 }
 
 .footer-links ul li a {
-    text-decoration: none;
-    color: #333;
+    @apply text-gray-700 hover:text-blue-500;
 }
 
-.footer-links ul li a:hover {
-    color: #007bff;
-}
+
