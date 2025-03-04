@@ -1,111 +1,63 @@
+@import "tailwindcss";
 /* Reset CSS */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    @apply font-sans bg-gray-100 flex justify-center items-center h-screen;
 }
 
 /* Container chính */
 .order-container {
-    width: 600px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
+    @apply w-[600px] bg-white p-5 rounded-lg shadow-md text-center;
 }
 
 /* Tiêu đề */
 .order-title {
-    font-size: 22px;
-    font-weight: bold;
-    background-color: #bfbfbf;
-    padding: 10px;
-    border-radius: 8px;
-    margin-bottom: 20px;
+    @apply text-lg font-bold bg-gray-400 p-3 rounded-md mb-5;
 }
 
 /* Chi tiết đơn hàng và vận chuyển */
 .order-details {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 20px;
+    @apply flex justify-between gap-3 mb-5;
 }
 
 .order-box {
-    width: 48%;
-    background: #f3f3f3;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: left;
+    @apply w-1/2 bg-gray-200 p-4 rounded-md text-left;
 }
 
 .order-box h2 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    @apply text-base font-bold mb-2;
 }
 
 .order-box p {
-    font-size: 14px;
-    margin-bottom: 5px;
+    @apply text-sm mb-1;
 }
 
 /* Hình ảnh sản phẩm */
 .order-box img {
-    width: 80px;
-    height: 80px;
-    background: #ccc;
-    border-radius: 5px;
-    margin: 10px 0;
+    @apply w-20 h-20 bg-gray-300 rounded-md my-2;
 }
 
 /* Tổng chi phí */
 .cost-summary {
-    background: #f3f3f3;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: left;
-    width: 50%;
-    margin: 0 auto;
+    @apply bg-gray-200 p-4 rounded-md text-left w-1/2 mx-auto;
 }
 
 .cost-summary h2 {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
+    @apply text-base font-bold mb-2;
 }
 
 .cost-summary p {
-    font-size: 14px;
-    margin-bottom: 5px;
+    @apply text-sm mb-1;
 }
 
 /* Nút Viết Đánh Giá */
 .review-button {
-    display: block;
-    margin: 20px auto 0;
-    padding: 10px 25px;
-    background-color: #FBBC05;
-    color: #000;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    @apply block mx-auto mt-5 px-6 py-2 bg-yellow-400 text-black font-bold border-none rounded-md text-base cursor-pointer transition;
 }
 
 .review-button:hover {
-    background-color: #e6b800;
+    @apply bg-yellow-500;
 }

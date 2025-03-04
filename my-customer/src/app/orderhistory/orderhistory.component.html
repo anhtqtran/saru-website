@@ -23,7 +23,7 @@
                 <li><a href="#">Hạng tài khoản</a></li>
             </ul>
         </aside>
-
+    
         <!-- Danh sách đơn hàng -->
         <main class="order-list">
             <div class="order-header">
@@ -38,11 +38,13 @@
                     </div>
                 </div>
             </div>
-
+    
             <table class="order-table">
                 <thead>
                     <tr>
-                        <th><input type="checkbox"></th>
+                        <th>
+                            <input type="checkbox" [(ngModel)]="selectAll" (change)="toggleSelectAll()" />
+                        </th>
                         <th>Mã đơn</th>
                         <th>Ngày đặt hàng</th>
                         <th>Tổng tiền</th>
@@ -51,44 +53,28 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Lặp dữ liệu mẫu -->
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>SARUK1234</td>
-                        <td>20/01/2025</td>
-                        <td>100.000đ</td>
-                        <td>Chuyển khoản</td>
-                        <td>Chờ xác nhận</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>SARUK1234</td>
-                        <td>20/01/2025</td>
-                        <td>100.000đ</td>
-                        <td>Chuyển khoản</td>
-                        <td>Chờ xác nhận</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox"></td>
-                        <td>SARUK1234</td>
-                        <td>20/01/2025</td>
-                        <td>100.000đ</td>
-                        <td>Chuyển khoản</td>
-                        <td>Chờ xác nhận</td>
+                    <tr *ngFor="let order of displayedOrders">
+                        <td>
+                            <input type="checkbox" [(ngModel)]="order.selected" (change)="updateSelectAllState()" />
+                        </td>
+                        <td>{{ order.code }}</td>
+                        <td>{{ order.date }}</td>
+                        <td>{{ order.total }}</td>
+                        <td>{{ order.payment }}</td>
+                        <td>{{ order.status }}</td>
                     </tr>
                 </tbody>
             </table>
-
+    
             <div class="order-footer">
-                <select>
-                    <option>Hiển thị 20</option>
-                    <option>Hiển thị 50</option>
-                    <option>Hiển thị 100</option>
+                <select [(ngModel)]="selectedRows" (change)="updateRows()" class="p-2 rounded border border-gray-300">
+                    <option *ngFor="let option of rowOptions" [value]="option">Hiển thị {{ option }}</option>
                 </select>
-                <p>Tổng đơn hàng: 100</p>
+                <p>Tổng đơn hàng: {{ orders.length }}</p>
             </div>
         </main>
     </div>
+    
 
 </body>
 
