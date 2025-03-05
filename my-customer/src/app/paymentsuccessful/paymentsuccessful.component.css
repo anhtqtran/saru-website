@@ -1,73 +1,46 @@
+@import "tailwindcss";
 /* Reset CSS */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    @apply font-sans bg-gray-100 flex justify-center items-center h-screen;
 }
 
 /* Khung thông báo */
 .order-success {
-    width: 400px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    overflow: hidden;
+    @apply w-96 bg-white rounded-lg shadow-md text-center overflow-hidden;
 }
 
 /* Phần tiêu đề */
 .success-header {
-    background-color: #bfbfbf;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 15px;
+    @apply bg-gray-400 text-white text-lg font-bold p-4;
 }
 
 /* Nội dung thông báo */
 .success-content {
-    padding: 20px;
+    @apply p-5;
 }
 
 /* Thông điệp */
 .success-message {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 5px;
+    @apply text-base font-bold mb-2;
 }
 
 /* Nhóm nút */
 .success-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-top: 15px;
+    @apply flex justify-center gap-3 mt-4;
 }
 
 /* Nút bấm */
 .detail-button,
 .back-button {
-    padding: 10px 20px;
-    background-color: #FBBC05;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    @apply px-5 py-2 bg-yellow-400 text-black font-bold border-none rounded-md cursor-pointer transition;
 }
 
 /* Hiệu ứng hover */
 .detail-button:hover,
 .back-button:hover {
-    background-color: #e6b800;
+    @apply bg-yellow-500;
 }

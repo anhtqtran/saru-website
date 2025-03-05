@@ -1,177 +1,110 @@
+@import "tailwindcss";
 /* Reset CSS */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
-    font-family: sans-serif;
-    background-color: #f9f9f9;
+    @apply font-sans bg-gray-100;
 }
 
 /* Container chính */
 .checkout-container {
-    display: flex;
-    justify-content: space-between;
-    max-width: 900px;
-    margin: 40px auto;
-    gap: 30px;
+    @apply flex justify-between max-w-4xl mx-auto mt-10 gap-8;
 }
 
 /* Form Địa chỉ nhận hàng */
 .shipping-info {
-    width: 60%;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    @apply w-3/5 bg-white p-6 rounded-lg shadow-md;
 }
 
 h2 {
-    font-size: 20px;
-    margin-bottom: 15px;
+    @apply text-lg font-bold mb-4;
 }
 
 /* Các nhóm input */
 .input-group {
-    margin-bottom: 15px;
+    @apply mb-4;
 }
 
 .input-group label {
-    font-weight: bold;
-    font-size: 14px;
-    display: block;
-    margin-bottom: 5px;
+    @apply font-bold text-sm block mb-1;
 }
 
 .input-group input,
 .input-group select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 14px;
+    @apply w-full p-2 border border-gray-300 rounded-md text-sm;
 }
 
 /* Định dạng dấu * */
 span {
-    color: black;
+    @apply text-black;
 }
 
 /* Xác nhận */
 .confirm-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #FBBC05;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    @apply w-full p-3 bg-yellow-400 text-black font-bold border-none rounded-md cursor-pointer transition;
 }
 
 .confirm-button:hover {
-    background-color: #e6b800;
+    @apply bg-yellow-500;
 }
 
 /* Đơn hàng */
 .order-summary {
-    width: 35%;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    @apply w-2/5 bg-white p-6 rounded-lg shadow-md;
 }
 
 /* Sản phẩm */
 .order-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid #000; /* Thêm viền đen */
-    padding: 10px;
-    border-radius: 5px; /* Bo góc nhẹ */
-    background: #fff;
+    @apply flex items-center gap-4 border border-black p-3 rounded-md bg-white;
 }
 
 .order-item img {
-    width: 40px;
-    height: 40px;
-    background: #ccc; /* Placeholder màu xám */
-    border-radius: 3px;
+    @apply w-10 h-10 bg-gray-300 rounded;
 }
 
 .order-item p {
-    flex: 1;
-    font-size: 14px;
+    @apply flex-1 text-sm;
 }
 
 .order-item span {
-    font-weight: bold;
+    @apply font-bold;
 }
-
 
 /* Chi tiết đơn hàng */
-.order-details p,h5 {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
+.order-details p,
+.order-details h5 {
+    @apply flex justify-between mb-2;
 }
 
-
 .order-details .total {
-    font-weight: bold;
-    font-size: 16px;
+    @apply font-bold text-lg;
 }
 
 /* Phương thức thanh toán */
 .payment-methods {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
+    @apply flex justify-between mt-3;
 }
 
 .payment-option {
-    flex: 1;
-    padding: 10px;
-    border: 1px solid #000;
-    background: #D9D9D9;
-    border-radius: 6px;
-    font-size: 10px;
-    cursor: pointer;
-    transition: all 0.3s;
-    margin-right: 5px;
+    @apply flex-1 p-3 border border-black bg-gray-300 rounded-md text-xs cursor-pointer transition mr-2;
 }
 
 .payment-option:hover {
-    background-color: #000;
-    color: #fff;
+    @apply bg-black text-white;
 }
 
 /* Nút thanh toán */
 .checkout-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #FBBC05;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 15px;
+    @apply w-full p-3 bg-yellow-400 text-black font-bold border-none rounded-md cursor-pointer transition mt-4;
 }
 
 .checkout-button:hover {
-    background-color: #e6b800;
+    @apply bg-yellow-500;
 }
 
 /* Điều khoản */
 .terms {
-    font-size: 12px;
-    color: #666;
-    margin-top: 10px;
-    text-align: center;
+    @apply text-xs text-gray-600 mt-3 text-center;
 }
