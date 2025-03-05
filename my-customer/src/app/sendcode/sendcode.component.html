@@ -1,0 +1,31 @@
+<div class="overlay">
+    <div class="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
+        <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center">
+                <img src="assets/images/logo-doc.png" alt="Logo" class="w-16 mr-2">
+                <h2 class="text-2xl font-bold text-gray-900">QUÊN MẬT KHẨU</h2>
+            </div>
+            <button (click)="hidePopup()" class="text-gray-600 hover:text-gray-900">✖</button>
+        </div>
+        <p class="text-gray-600 text-left mb-4">
+            Chúng tôi đã gửi mã xác thực đến địa chỉ email  
+            <a href="#" class="text-[var(--primary-color)] font-medium">{{ email }}</a>.
+            <br>Vui lòng nhập mã xác thực bạn đã nhận được!
+        </p>
+
+        <div class="otp-group flex justify-center gap-2 mb-4">
+            <input type="text" maxlength="1" (input)="moveNext($event, 'otp2')">
+            <input type="text" maxlength="1" id="otp2" (input)="moveNext($event, 'otp3')">
+            <input type="text" maxlength="1" id="otp3" (input)="moveNext($event, 'otp4')">
+            <input type="text" maxlength="1" id="otp4" (input)="moveNext($event, 'otp5')">
+            <input type="text" maxlength="1" id="otp5" (input)="moveNext($event, 'otp6')">
+            <input type="text" maxlength="1" id="otp6">
+        </div>
+
+        <button type="button" (click)="nextStep()" class="w-full mt-6 bg-[var(--primary-color)] text-white py-2 rounded-lg hover:bg-[var(--primary-hover)] transition">Tiếp tục</button>
+
+        <p class="text-center mt-4 text-sm text-gray-700">
+            Bạn chưa nhận được mã? <a href="#" class="text-[var(--primary-color)] hover:text-[var(--primary-hover)] font-medium">Gửi lại mã</a>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,103 @@
+/* Reset CSS */
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply bg-gray-100 p-5 ;
+}
+
+/* Header */
+.admin-header {
+    @apply flex justify-end p-4;
+}
+
+.admin-button {
+    @apply bg-white border border-gray-300 px-4 py-2 cursor-pointer font-bold rounded-lg;
+}
+
+/* Container chính */
+.container {
+    @apply p-5 max-w-5xl mx-auto;
+}
+
+/* Tiêu đề trang */
+.page-header {
+    @apply flex justify-between items-center;
+}
+
+.add-button {
+    @apply bg-yellow-400 border border-black px-4 py-2 cursor-pointer font-bold flex items-center rounded-full;
+}
+
+.add-button img {
+    @apply w-4 mr-2;
+}
+
+/* Bộ lọc và tìm kiếm */
+.filters {
+    @apply flex gap-5 mt-5 bg-gray-200 p-4 rounded-lg;
+}
+
+.filter-button {
+    @apply border border-black px-4 py-2 cursor-pointer flex items-center rounded-full;
+}
+
+.filter-button img {
+    @apply w-4 mr-2;
+}
+
+.search-bar {
+    @apply flex items-center border rounded-full px-4 py-2 w-full
+    /*  */
+}
+
+.search-bar input {
+    @apply border-none outline-none flex-grow;
+}
+
+/* Bảng danh sách */
+.product-table {
+    @apply w-full mt-5 border-collapse;
+}
+
+.product-table th, .product-table td {
+    @apply border border-gray-300 p-4 text-center;
+}
+
+.product-table th {
+    @apply bg-gray-200;
+}
+
+/* Sản phẩm */
+.product-info {
+    @apply flex items-center gap-4 justify-center;
+}
+
+.product-info img {
+    @apply w-10;
+}
+
+/* Hành động */
+.actions {
+    @apply flex justify-center space-x-4 items-center border-0;
+}
+
+.actions img {
+    @apply w-4 cursor-pointer;
+}
+
+/* Footer */
+.footer {
+    @apply flex justify-between mt-5;
+}
+
+.footer select {
+    @apply p-2 rounded-full border border-gray-300 bg-gray-200 text-sm cursor-pointer;
+}
+
+.footer p {
+    @apply text-sm text-gray-600;
+}
