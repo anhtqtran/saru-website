@@ -1,11 +1,12 @@
-
 <html lang="vi">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đánh giá sản phẩm</title>
     <link rel="stylesheet" href="writereview.component.css">
 </head>
+
 <body>
 
     <div class="review-container">
@@ -23,15 +24,35 @@
         <div class="rating-section">
             <p>Chất lượng sản phẩm</p>
             <div class="stars">
-                ★ ★ ★ ★ ★ <span class="rating-text">Tuyệt vời</span>
+                <span *ngFor="let star of stars; let i = index" (click)="rateProduct(i + 1)"
+                    (mouseover)="highlightStars(i + 1)" (mouseleave)="resetHighlight()"
+                    [ngClass]="{'filled': i < rating || i < hoverRating}">
+                    ★
+                </span>
             </div>
         </div>
+
 
         <!-- Hộp nhập đánh giá -->
         <textarea placeholder="Hãy chia sẻ cảm nhận của bạn về sản phẩm với những người mua khác nhé!"></textarea>
 
         <!-- Nút tải ảnh -->
-        <button class="upload-button">Thêm Hình ảnh</button>
+        <!-- Nút tải ảnh -->
+        <button class="upload-button" (click)="triggerFileInput()">Thêm Hình ảnh</button>
+        <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" hidden>
+
+        <!-- Hiển thị hình ảnh đã chọn -->
+        <div class="uploaded-images" *ngIf="selectedImages.length > 0">
+            <p>Hình ảnh đã chọn:</p>
+            <div class="image-preview">
+                <div class="image-container" *ngFor="let image of selectedImages; let i = index">
+                    <img [src]="image" alt="Hình đã tải lên">
+                    <button class="remove-image" (click)="removeImage(i)">x</button>
+                </div>
+            </div>
+        </div>
+
+
 
         <!-- Nút điều hướng -->
         <div class="review-buttons">
@@ -41,4 +62,5 @@
     </div>
 
 </body>
+
 </html>

@@ -1,164 +1,119 @@
+@import "tailwindcss";
 /* Reset CSS */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    @apply font-sans bg-gray-100 flex justify-center items-center h-screen;
 }
 
 /* Container chính */
 .review-container {
-    width: 600px;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    @apply w-96 bg-white p-6 rounded-lg shadow-md;
 }
 
 /* Tiêu đề */
 h1 {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 15px;
+    @apply text-2xl font-bold mb-4;
 }
 
 /* Thông tin sản phẩm */
 .product-info {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 15px;
+    @apply flex items-center gap-4 mb-4;
 }
 
 .product-info img {
-    width: 80px;
-    height: 80px;
-    background: #ccc;
-    border-radius: 5px;
+    @apply w-20 h-20 bg-gray-300 rounded-md;
 }
 
 /* Đánh giá sao */
 .rating-section p {
-    font-weight: bold;
-    margin-bottom: 5px;
+    @apply font-bold mb-2;
 }
 
 .stars {
-    font-size: 22px;
-    color: #FBBC05;
-    font-weight: bold;
+    @apply text-2xl flex gap-1 cursor-pointer;
 }
 
+.stars span {
+    @apply text-gray-400 transition duration-200;
+}
+
+.stars span.filled {
+    @apply text-yellow-400;
+}
+
+
 .rating-text {
-    color: #FBBC05;
-    font-size: 16px;
-    margin-left: 8px;
+    @apply text-yellow-400 text-lg ml-2;
 }
 
 /* Hộp nhập đánh giá */
 textarea {
-    width: 100%;
-    height: 100px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    font-size: 14px;
-    margin-top: 10px;
-    resize: none;
+    @apply w-full h-24 border border-gray-300 rounded-md p-3 text-sm resize-none mt-3;
 }
 
 /* Nút tải ảnh */
 .upload-button {
-    display: block;
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #FBBC05;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    @apply block mt-2 px-3 py-1 bg-yellow-400 text-black font-bold border-none rounded-md cursor-pointer transition;
 }
 
 .upload-button:hover {
-    background-color: #FBBC05;
+    @apply bg-yellow-500;
 }
 
+.uploaded-images {
+    @apply mt-4;
+}
+
+.image-preview {
+    @apply flex gap-2 mt-2 flex-wrap;
+}
+
+.image-container {
+    @apply relative w-20 h-20;
+}
+
+.image-container img {
+    @apply w-full h-full object-cover rounded-md border border-gray-300;
+}
+
+.remove-image {
+    @apply absolute top-0 right-0 bg-gray-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center cursor-pointer leading-none;
+}
+
+
+.remove-image:hover {
+    @apply bg-gray-700;
+}
+
+
 /* Nút điều hướng */
-/* Chỉnh lại phần chứa nút */
-/* Chỉnh lại phần chứa nút */
 .review-buttons {
-    display: flex;
-    justify-content: flex-end; /* Đưa các nút về bên phải */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    gap: 20px; /* Khoảng cách giữa hai nút */
-    margin-top: 15px;
+    @apply flex justify-end items-center gap-5 mt-4;
 }
 
 /* Nút trở lại */
 .back-button {
-    color: #000;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 16px;
-    position: relative;
-    padding-bottom: 0px;
+    @apply text-black font-bold text-sm relative pb-0.5 no-underline;
 }
 
+
 .back-button::after {
-    content: "";
-    display: block;
-    width: 100%;
-    height: 2px;
-    background-color: #000;
-    position: absolute;
-    left: 0;
-    bottom: -4px; /* Tạo khoảng cách hợp lý với chữ */
+    @apply content-[''] block w-full h-0.5 bg-black absolute left-0 bottom-[-4px];
 }
 
 .back-button:hover {
-    opacity: 0.7;
+    @apply opacity-70;
 }
 
 /* Nút hoàn thành */
 .submit-button {
-    padding: 10px 25px;
-    background-color: #FBBC05;
-    color: #000;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
+    @apply px-2 py-1 bg-yellow-400 text-black font-bold border-none rounded-md text-sm cursor-pointer transition;
 }
+
 
 .submit-button:hover {
-    background-color: #FBBC05;
-}
-
-
-/* Nút hoàn thành */
-.submit-button {
-    padding: 10px 20px;
-    background-color: #FBBC05;
-    color: black;
-    font-weight: bold;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.submit-button:hover {
-    background-color: #e6b800;
+    @apply bg-yellow-500;
 }
