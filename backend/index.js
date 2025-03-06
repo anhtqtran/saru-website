@@ -35,6 +35,8 @@ async function connectDB() {
     productCollection = database.collection('products');
     imageCollection= database.collection('images');
     categoryCollection= database.collection('productcategories');
+    reviewCollection= database.collection('reviews');
+    orderDetailCollection= database.collection('orderdetails');
 
     // Tạo index để tối ưu truy vấn
     await productCollection.createIndex({ ProductID: 1 }, { unique: true });
@@ -70,21 +72,17 @@ app.get('/api/images/:imageId', async (req, res) => {
 
 //  1. Tìm kiếm sản phẩm theo từ khóa (hỗ trợ gợi ý)
 app.get('/api/products/search', async (req, res) => {
-    const keyword = req.query.q;
-    if (!keyword) return res.status(400).json({ error: "Keyword is required" });
+  const keyword = req.query.q;
+  if (!keyword) return res.status(400).json({ error: "Keyword is required" });
 
-    try {
-        const results = await productCollection.find({
-            $or: [
-                { ProductName: { $regex: keyword, $options: "i" } },
-                { ProductFullDescription: { $regex: keyword, $options: "i" } }
-            ]
-        }).limit(10).toArray();
-
-        res.json(results);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+  try {
+    const suggestions = await productCollection.find({
+      ProductName: { $regex: keyword, $options: "i" }
+    }).limit(5).project({ ProductName: 1, _id: 0 }).toArray();
+    res.json(suggestions.map(s => s.ProductName));
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 app.get('/api/categories', async (req, res) => {
@@ -101,9 +99,9 @@ app.get('/api/categories', async (req, res) => {
 //  2. Lọc sản phẩm theo nhiều tiêu chí
 app.get('/api/products', async (req, res) => {
     try {
-        const page = parseInt(req.query.page) || 1;
-        const limit = parseInt(req.query.limit) || 12;
-        const skip = (page - 1) * limit;
+      const page = Math.max(1, parseInt(req.query.page) || 1);
+      const limit = Math.min(50, Math.max(1, parseInt(req.query.limit) || 12));
+      const skip = (page - 1) * limit;
 
         const filter = {};
         if (req.query.brand) filter.ProductBrand = req.query.brand;
@@ -118,12 +116,18 @@ app.get('/api/products', async (req, res) => {
         if (req.query.wineIngredient) filter.WineIngredient = req.query.wineIngredient;
         if (req.query.wineFlavor) filter.WineFlavor = req.query.wineFlavor;
 
-        const sort = req.query.sort === 'priceAsc' ? { ProductPrice: 1 } : { ProductPrice: -1 };
+        const sortOptions = {
+          'priceAsc': { ProductPrice: 1 },
+          'priceDesc': { ProductPrice: -1 },
+          // 'nameAsc': { ProductName: 1 },
+          // 'nameDesc': { ProductName: -1 }
+        };
+        const sort = sortOptions[req.query.sort] || { ProductPrice: -1 };
 
         const [items, total] = await Promise.all([
-            productCollection.find(filter).sort(sort).skip(skip).limit(limit).toArray(),
-            productCollection.countDocuments(filter)
-        ]); 
+          productCollection.find(filter).skip(skip).limit(limit).toArray(),
+          productCollection.countDocuments(filter)
+        ]);
       // Lấy danh sách CateID duy nhất
         const cateIDs = [...new Set(items.map(p => p.CateID))];
 
@@ -149,6 +153,18 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
+app.get('/api/filters', async (req, res) => {
+  try {
+    const categories = await categoryCollection.find().toArray();
+    const brands = await productCollection.distinct('ProductBrand');
+    const wineVolumes = await productCollection.distinct('WineVolume');
+    const wineTypes = await productCollection.distinct('WineType');
+    res.json({ categories, brands, wineVolumes, wineTypes });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 //  3. Xem sản phẩm đề xuất (bán chạy & khuyến mãi)
 app.get('/api/products/recommendations', async (req, res) => {
     try {
@@ -163,24 +179,77 @@ app.get('/api/products/recommendations', async (req, res) => {
 //  4. Xem chi tiết sản phẩm
 app.get('/api/products/:id', async (req, res) => {
   try {
-      const product = await productCollection.findOne({ _id: new ObjectId(req.params.id) });
-      if (!product) return res.status(404).json({ error: "Product not found" });
+    const product = await productCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!product) return res.status(404).json({ error: "Product not found" });
 
-      // Tìm ảnh từ collection `images` dựa trên `ImageID`
-      const image = await database.collection('images').findOne({ ImageID: product.ImageID });
+    // Lấy ảnh từ collection images
+    const image = await database.collection('images').findOne({ ImageID: product.ImageID });
+    const productWithImages = {
+      ...product,
+      ProductImageCover: image?.ProductImageCover || '',
+      ProductImageSub1: image?.ProductImageSub1 || '',
+      ProductImageSub2: image?.ProductImageSub2 || '',
+      ProductImageSub3: image?.ProductImageSub3 || ''
+    };
 
-      // Gộp ảnh vào product
-      const productWithImages = {
-          ...product,
-          ProductImageCover: image?.ProductImageCover || '',
-          ProductImageSub1: image?.ProductImageSub1 || '',
-          ProductImageSub2: image?.ProductImageSub2 || '',
-          ProductImageSub3: image?.ProductImageSub3 || ''
-      };
+    // Sửa phần xử lý reviews
+    const reviews = await database.collection('reviews')
+      .find({ ProductID: product.ProductID })
+      .project({
+        _id: 0,
+        CustomerID: 1,
+        Rating: 1,
+        Content: 1,
+        DatePosted: 1
+      })
+      .sort({ DatePosted: -1 })
+      .toArray()
+      .catch(() => []);
 
-      res.json(productWithImages);
+    // Format date và validate rating
+    const processedReviews = reviews.map(review => ({
+      ...review,
+      DatePosted: review.DatePosted ? new Date(review.DatePosted).toLocaleDateString('vi-VN') : 'N/A',
+      Rating: Math.min(Math.max(review.Rating || 0, 0), 5)
+    }));
+
+    const validReviews = processedReviews.filter(r => r.Rating > 0);
+    const totalRatings = validReviews.reduce((sum, r) => sum + r.Rating, 0);
+    const averageRating = validReviews.length > 0 
+      ? Number((totalRatings / validReviews.length).toFixed(1))
+      : 0;
+
+    // Sửa phần related products
+    const relatedProducts = await productCollection.find({
+      CateID: product.CateID,
+      _id: { $ne: new ObjectId(req.params.id) }
+    })
+    .limit(4)
+    .project({ 
+      ProductName: 1,
+      ProductPrice: 1,
+      ProductImageCover: 1,
+      _id: 1
+    })
+    .toArray();
+
+    const relatedProductsWithStringId = relatedProducts.map(p => ({
+      ...p,
+      _id: p._id.toHexString()
+    }));
+
+    const response = {
+      ...productWithImages,
+      reviews: processedReviews,
+      averageRating,
+      totalReviewCount: validReviews.length,
+      relatedProducts: relatedProductsWithStringId
+    };
+
+    res.json(response);
   } catch (err) {
-      res.status(500).json({ error: err.message });
+    console.error("Error fetching product detail:", err);
+    res.status(500).json({ error: err.message });
   }
 });
 

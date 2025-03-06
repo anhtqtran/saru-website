@@ -24,7 +24,6 @@ export class ProductService {
 
   // 1. Lấy danh sách sản phẩm (có bộ lọc và phân trang)
   getProducts(filters: any = {}, page: number = 1, limit: number = 12): Observable<{
-    [x: string]: any;
     data: Product[]; 
     pagination: Pagination 
   }> {
@@ -39,11 +38,8 @@ export class ProductService {
       }
     });
 
-    return this.http.get<{ 
-      data: Product[]; 
-      pagination: Pagination 
-    }>(this.apiUrl, { params });
-    }
+    return this.http.get<{ data: Product[]; pagination: Pagination }>(this.apiUrl, { params });
+  }
   
   
     // Hàm lấy ảnh từ API riêng
@@ -60,7 +56,9 @@ export class ProductService {
       );
     }
     
-    
+    getFilters(): Observable<any> {
+      return this.http.get('http://localhost:4000/api/filters').pipe(catchError(this.handleError));
+    }
     
 
   // 2. Lấy chi tiết sản phẩm
@@ -107,7 +105,7 @@ export class ProductService {
   }
 
   // 6. Thêm sản phẩm vào danh sách so sánh
-  addToCompare(productId: string): Observable<any> {
+  addToCompare(productId: string, p0: number): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = { productId };
 

@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
 import { ProductService } from '../services/product.service';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-header',
@@ -7,12 +10,18 @@ import { ProductService } from '../services/product.service';
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   isSearchOpen = false;
-  cartCount = 0;
-  compareCount = 0;
+  cartItemCount: number = 0;
+  compareItemCount: number = 0;
+  cartSubscription?: Subscription;
+  compareSubscription?: Subscription;
 
   constructor(private productService: ProductService) {}
+  ngOnDestroy(): void {
+    this.cartSubscription?.unsubscribe();
+    this.compareSubscription?.unsubscribe();
+  }
 
   ngOnInit(): void {
     this.updateCartAndCompareCount();
@@ -30,14 +39,24 @@ export class HeaderComponent implements OnInit {
     navLinks?.classList.toggle('hidden');
   }
 
-  updateCartAndCompareCount() {
-    this.productService.getCartItems().subscribe({
-      next: (data) => this.cartCount = data.cart.length,
-      error: (err) => console.error('Error fetching cart:', err)
+  updateCartAndCompareCount(): void {
+    this.cartSubscription = this.productService.getCartItems().subscribe({
+      next: (cartItems) => {
+        this.cartItemCount = cartItems?.length || 0; // Sử dụng || 0 để gán 0 nếu cartItems là null/undefined
+      },
+      error: (error) => {
+        console.error('Error fetching cart items:', error);
+      }
     });
-    this.productService.getCompareItems().subscribe({
-      next: (data) => this.compareCount = data.compare.length,
-      error: (err) => console.error('Error fetching compare:', err)
+
+    this.compareSubscription = this.productService.getCompareItems().subscribe({
+      next: (compareItems) => {
+         // Sửa lỗi ở ĐÂY - Thêm optional chaining hoặc nullish coalescing
+        this.compareItemCount = compareItems?.length || 0; // Sử dụng || 0
+      },
+      error: (error) => {
+        console.error('Error fetching compare items:', error);
+      }
     });
   }
 }

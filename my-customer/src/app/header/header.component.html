@@ -77,8 +77,17 @@
         
         <!-- Search bar end -->
 
-            <a [routerLink]="['/cart']"><i class="fa-solid fa-cart-shopping text-xl cursor-pointer hover:text-[#F8BC3B]"></i></a>
-            <a [routerLink]="['/compare']"><i class="fa-solid fa-arrows-left-right text-xl cursor-pointer hover:text-[#F8BC3B]"></i></a>
+        <!-- Cart Icon with Badge -->
+        <a [routerLink]="['/cart']" class="relative">
+            <i class="fa-solid fa-cart-shopping text-xl cursor-pointer hover:text-[#F8BC3B]"></i>
+            <span *ngIf="cartItemCount > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{{cartItemCount}}</span>
+        </a>
+
+        <!-- Compare Icon with Badge -->
+        <a [routerLink]="['/compare']" class="relative">
+            <i class="fa-solid fa-arrows-left-right text-xl cursor-pointer hover:text-[#F8BC3B]"></i>
+            <span *ngIf="compareItemCount > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{{compareItemCount}}</span>
+        </a>
             <div class="relative group">
                 <a [routerLink]="['/account']" class="text-gray-700 hover:text-[#F8BC3B] relative">
                     <i class="fa-solid fa-user text-xl cursor-pointer hover:text-[#F8BC3B]"></i>

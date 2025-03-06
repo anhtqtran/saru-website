@@ -5,6 +5,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // Thêm dòng này
 import { RouterModule } from '@angular/router';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  // Đảm bảo đã import BrowserAnimationsModule
+import { ToastrModule } from 'ngx-toastr';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -76,12 +85,24 @@ import { CompareComponent } from './compare/compare.component';
 
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule 
+    RouterModule ,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatPaginatorModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({   // Cấu hình Toastr
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+      closeButton: true
+    }),
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
