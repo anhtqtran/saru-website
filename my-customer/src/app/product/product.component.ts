@@ -2,6 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { Subscription } from 'rxjs';
 import { Product, Pagination } from '../classes/Product';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router'; // Thêm Router
 
 @Component({
   selector: 'app-product',
@@ -31,18 +33,22 @@ export class ProductComponent implements OnInit, OnDestroy {
     wineVolume: '',
     wineType: '',
     bestSellers: false,
-    onSale: false
+    onSale: false,
+    sort: 'priceDesc'
   };
 
-  constructor(private productService: ProductService) {}
+  constructor(private productService: ProductService, private snackBar: MatSnackBar, private router: Router) {}  
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   ngOnInit(): void {
     this.loadProducts();
     this.loadFilterData();
     this.loadCategories()
+  }
+  goToProductDetail(productId: string): void {
+    this.router.navigate(['/products', productId]);
   }
 
   loadProducts(page: number = 1): void {
@@ -75,46 +81,44 @@ export class ProductComponent implements OnInit, OnDestroy {
   
   
 
-  loadImage(product: Product): void {
-    const sub = this.productService.getImage(product.ImageID).subscribe({
-      next: (imageData) => {
-        product.ProductImageCover = imageData.ProductImageCover || 'https://via.placeholder.com/300';
-      },
-      error: () => {
-        product.ProductImageCover = 'https://via.placeholder.com/300';
-      }
-    });
-    this.subscriptions.push(sub);
-
+loadImage(product: Product): void {
+  if (!product.ImageID) {
+    product.ProductImageCover = 'assets/images/default-product.png';
+    return;
   }
+  const sub = this.productService.getImage(product.ImageID).subscribe({
+    next: (imageData) => {
+      product.ProductImageCover = imageData.ProductImageCover || 'assets/images/default-product.png';
+    },
+    error: (error) => {
+      console.warn(`Failed to load image for ${product.ProductName}: ${error.message}`);
+      product.ProductImageCover = 'assets/images/default-product.png';
+    }
+  });
+  this.subscriptions.push(sub);
+}
 
 
 
 
   loadFilterData(): void {
-    this.productService.getProducts({}, 1, 1000).subscribe({
-      next: (response) => {
-        const uniqueCategories = new Set<string>();
-        const uniqueBrands = new Set<string>();
-        const uniqueWineVolumes = new Set<string>();
-        const uniqueWineTypes = new Set<string>();
-
-        response['product'].forEach((product: { CateID: string; ProductBrand: string; WineVolume: string; WineType: string; }) => {
-          if (product.CateID) uniqueCategories.add(product.CateID);
-          if (product.ProductBrand) uniqueBrands.add(product.ProductBrand);
-          if (product.WineVolume) uniqueWineVolumes.add(product.WineVolume);
-          if (product.WineType) uniqueWineTypes.add(product.WineType);
-        });
-
-        this.categories = Array.from(uniqueCategories).map(cateID => ({ CateID: cateID, CateName: cateID }));
-        this.brands = Array.from(uniqueBrands);
-        this.wineVolumes = Array.from(uniqueWineVolumes);
-        this.wineTypes = Array.from(uniqueWineTypes);
+    this.productService.getCategories().subscribe({
+      next: (categories) => {
+        this.categories = categories; // Lưu danh sách danh mục với CateID và CateName
       },
-      error: (error) => console.error('Error loading filter data:', error.message)
+      error: (error) => console.error('Error loading categories:', error)
+    });
+  
+    // Nếu cần các bộ lọc khác (brands, wineVolumes, wineTypes), dùng API /api/filters ở trên
+    this.productService.getFilters().subscribe({
+      next: (data) => {
+        this.brands = data.brands;
+        this.wineVolumes = data.wineVolumes;
+        this.wineTypes = data.wineTypes;
+      },
+      error: (error) => console.error('Error loading filters:', error)
     });
   }
-
   onFilterChange(): void {
     this.filters = {
       ...this.filters,
@@ -136,25 +140,27 @@ export class ProductComponent implements OnInit, OnDestroy {
 
   addToCart(product: Product): void {
     this.productService.addToCart(product._id, 1).subscribe({
-      next: () => alert('Added to cart successfully!'),
+      next: () => this.snackBar.open('Đã thêm vào giỏ hàng!', 'OK', { duration: 3000 }),
       error: (error) => console.error('Error adding to cart:', error.message)
     });
   }
 
   addToCompare(product: Product): void {
-    this.productService.addToCompare(product._id).subscribe({
-      next: () => alert('Added to compare list successfully!'),
+    this.productService.addToCompare(product._id, 1).subscribe({
+      next: () => this.snackBar.open('Added to compare list successfully!', 'OK', { duration: 3000 }),
       error: (error) => console.error('Error adding to compare:', error.message)
     });
   }
 
+  
   getPageNumbers(): number[] {
-    const pageNumbers: number[] = [];
-    for (let i = Math.max(1, this.pagination.currentPage - 2); 
-         i <= Math.min(this.pagination.totalPages, this.pagination.currentPage + 2); i++) {
-      pageNumbers.push(i);
-    }
-    return pageNumbers;
+    const total = this.pagination.totalPages;
+    const current = this.pagination.currentPage;
+    const maxDisplay = 5;
+    let start = Math.max(1, current - Math.floor(maxDisplay / 2));
+    let end = Math.min(total, start + maxDisplay - 1);
+    if (end - start + 1 < maxDisplay) start = Math.max(1, end - maxDisplay + 1);
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }
   
 }
