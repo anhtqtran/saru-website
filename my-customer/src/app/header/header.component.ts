@@ -1,5 +1,5 @@
-import { Component, AfterViewInit, ElementRef, ViewChild  } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-header',
@@ -7,28 +7,37 @@ import { Component, AfterViewInit, ElementRef, ViewChild  } from '@angular/core'
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent{
-
-  // Hàm toggle menu khi nhấn vào menu icon
-  toggleMenu() {
-    const menu = document.getElementById("nav-links");
-    if (menu) {
-      menu.classList.toggle("hidden");
-    }
-  }
-  // Biến theo dõi trạng thái của ô tìm kiếm (đã mở hay chưa)
+export class HeaderComponent implements OnInit {
   isSearchOpen = false;
+  cartCount = 0;
+  compareCount = 0;
 
-  // Hàm toggle để thay đổi trạng thái mở/đóng ô tìm kiếm
+  constructor(private productService: ProductService) {}
+
+  ngOnInit(): void {
+    this.updateCartAndCompareCount();
+  }
+
   toggleSearchBar(searchBox: HTMLInputElement) {
     this.isSearchOpen = !this.isSearchOpen;
-
-    // Nếu ô tìm kiếm mở rộng, focus vào ô nhập liệu
     if (this.isSearchOpen) {
-      setTimeout(() => {
-        searchBox.focus(); // Focus vào ô tìm kiếm sau khi mở rộng
-      }, 400); // Đảm bảo gọi focus sau khi hiệu ứng mở rộng hoàn thành
+      setTimeout(() => searchBox.focus(), 0); // Focus vào input khi mở
     }
-  };
+  }
 
+  toggleMenu() {
+    const navLinks = document.getElementById('nav-links');
+    navLinks?.classList.toggle('hidden');
+  }
+
+  updateCartAndCompareCount() {
+    this.productService.getCartItems().subscribe({
+      next: (data) => this.cartCount = data.cart.length,
+      error: (err) => console.error('Error fetching cart:', err)
+    });
+    this.productService.getCompareItems().subscribe({
+      next: (data) => this.compareCount = data.compare.length,
+      error: (err) => console.error('Error fetching compare:', err)
+    });
+  }
 }

@@ -35,6 +35,8 @@ import { ProductComponent } from './product/product.component';
 import { BlogComponent } from './blog/blog.component';
 import { BlogdetailComponent } from './blogdetail/blogdetail.component';
 import { FaqsComponent } from './faqs/faqs.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { CompareComponent } from './compare/compare.component';
 
 
 
@@ -69,6 +71,8 @@ import { FaqsComponent } from './faqs/faqs.component';
     BlogComponent,
     BlogdetailComponent,
     FaqsComponent,
+    ProductDetailComponent,
+    CompareComponent,
 
   ],
   imports: [

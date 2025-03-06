@@ -12,6 +12,7 @@ import { CommitmentComponent } from './commitment/commitment.component';
 import { ContactComponent } from './contact/contact.component';
 import { HistoryComponent } from './history/history.component';
 import { ProductComponent } from './product/product.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { AccountmanageComponent } from './accountmanage/accountmanage.component';
 import { CartmanageComponent } from './cartmanage/cartmanage.component';
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
@@ -19,6 +20,7 @@ import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 import { ReviewpageComponent } from './reviewpage/reviewpage.component';
 import { BlogComponent } from './blog/blog.component';
 import { FaqsComponent } from './faqs/faqs.component';
+import { CompareComponent } from './compare/compare.component'; // Giả sử bạn có
 
 import { AuthGuard } from './guard/auth.guard'; // Nhập AuthGuard
 
@@ -34,6 +36,7 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent},
   { path: 'history', component: HistoryComponent},
   { path: 'product', component: ProductComponent},
+  { path: 'products/:id', component: ProductDetailComponent },
   { path: 'account', component: AccountmanageComponent, canActivate:[AuthGuard]},
   { path: 'cart', component: CartmanageComponent},
   { path: 'order-detail', component: OrderdetailComponent, canActivate:[AuthGuard]},
@@ -47,6 +50,8 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   { path: 'homepage', component: TrangchuBannerCamketComponent },
+  { path: 'compare', component: CompareComponent},
+
 
 ];
 
