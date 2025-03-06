@@ -1,4 +1,7 @@
-import { Component, AfterViewInit, ElementRef, ViewChild  } from '@angular/core';
+import { Component, OnInit, OnDestroy  } from '@angular/core';
+import { ProductService } from '../services/product.service';
+import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -7,28 +10,53 @@ import { Component, AfterViewInit, ElementRef, ViewChild  } from '@angular/core'
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
-export class HeaderComponent{
-
-  // Hàm toggle menu khi nhấn vào menu icon
-  toggleMenu() {
-    const menu = document.getElementById("nav-links");
-    if (menu) {
-      menu.classList.toggle("hidden");
-    }
-  }
-  // Biến theo dõi trạng thái của ô tìm kiếm (đã mở hay chưa)
+export class HeaderComponent implements OnInit, OnDestroy {
   isSearchOpen = false;
+  cartItemCount: number = 0;
+  compareItemCount: number = 0;
+  cartSubscription?: Subscription;
+  compareSubscription?: Subscription;
 
-  // Hàm toggle để thay đổi trạng thái mở/đóng ô tìm kiếm
+  constructor(private productService: ProductService) {}
+  ngOnDestroy(): void {
+    this.cartSubscription?.unsubscribe();
+    this.compareSubscription?.unsubscribe();
+  }
+
+  ngOnInit(): void {
+    this.updateCartAndCompareCount();
+  }
+
   toggleSearchBar(searchBox: HTMLInputElement) {
     this.isSearchOpen = !this.isSearchOpen;
-
-    // Nếu ô tìm kiếm mở rộng, focus vào ô nhập liệu
     if (this.isSearchOpen) {
-      setTimeout(() => {
-        searchBox.focus(); // Focus vào ô tìm kiếm sau khi mở rộng
-      }, 400); // Đảm bảo gọi focus sau khi hiệu ứng mở rộng hoàn thành
+      setTimeout(() => searchBox.focus(), 0); // Focus vào input khi mở
     }
-  };
+  }
 
+  toggleMenu() {
+    const navLinks = document.getElementById('nav-links');
+    navLinks?.classList.toggle('hidden');
+  }
+
+  updateCartAndCompareCount(): void {
+    this.cartSubscription = this.productService.getCartItems().subscribe({
+      next: (cartItems) => {
+        this.cartItemCount = cartItems?.length || 0; // Sử dụng || 0 để gán 0 nếu cartItems là null/undefined
+      },
+      error: (error) => {
+        console.error('Error fetching cart items:', error);
+      }
+    });
+
+    this.compareSubscription = this.productService.getCompareItems().subscribe({
+      next: (compareItems) => {
+         // Sửa lỗi ở ĐÂY - Thêm optional chaining hoặc nullish coalescing
+        this.compareItemCount = compareItems?.length || 0; // Sử dụng || 0
+      },
+      error: (error) => {
+        console.error('Error fetching compare items:', error);
+      }
+    });
+  }
 }

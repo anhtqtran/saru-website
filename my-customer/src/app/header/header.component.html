@@ -33,10 +33,10 @@
                     <span class="absolute left-0 bottom-0 translate-y-2 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
                 </a>
                 <ul id="submenu-product" class="absolute left-0 bg-white shadow-lg w-72 submenu">
-                    <li><a [routerLink]="['/blog-know']" class="block p-3 text-gray-700 hover:text-[#F8BC3B]">Rượu Tây Bắc</a></li>
-                    <li><a [routerLink]="['/blog-story']" class="block p-3 text-gray-700 hover:text-[#F8BC3B]">Phụ kiện</a></li>
-                    <li><a [routerLink]="['/blog-tip']" class="block p-3 text-gray-700 hover:text-[#F8BC3B]">Đồ ngâm rượu</a></li>
-                </ul>
+                    <li><a [routerLink]="['/products']" [queryParams]="{ category: 'Rượu Tây Bắc' }" class="block p-3 text-gray-700 hover:text-[#F8BC3B]">Rượu Tây Bắc</a></li>
+                    <li><a [routerLink]="['/products']" [queryParams]="{ category: 'Phụ kiện' }" class="block p-3 text-gray-700 hover:text-[#F8BC3B]">Phụ kiện</a></li>
+                    <li><a [routerLink]="['/products']" [queryParams]="{ category: 'Đồ ngâm rượu' }" class="block p-3 text-gray-700 hover:text-[#F8BC3B]">Đồ ngâm rượu</a></li>
+                  </ul>
             </li>
             
             
@@ -77,8 +77,17 @@
         
         <!-- Search bar end -->
 
-            <a [routerLink]="['/cart']"><i class="fa-solid fa-cart-shopping text-xl cursor-pointer hover:text-[#F8BC3B]"></i></a>
-            <a [routerLink]="['/compare']"><i class="fa-solid fa-arrows-left-right text-xl cursor-pointer hover:text-[#F8BC3B]"></i></a>
+        <!-- Cart Icon with Badge -->
+        <a [routerLink]="['/cart']" class="relative">
+            <i class="fa-solid fa-cart-shopping text-xl cursor-pointer hover:text-[#F8BC3B]"></i>
+            <span *ngIf="cartItemCount > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{{cartItemCount}}</span>
+        </a>
+
+        <!-- Compare Icon with Badge -->
+        <a [routerLink]="['/compare']" class="relative">
+            <i class="fa-solid fa-arrows-left-right text-xl cursor-pointer hover:text-[#F8BC3B]"></i>
+            <span *ngIf="compareItemCount > 0" class="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{{compareItemCount}}</span>
+        </a>
             <div class="relative group">
                 <a [routerLink]="['/account']" class="text-gray-700 hover:text-[#F8BC3B] relative">
                     <i class="fa-solid fa-user text-xl cursor-pointer hover:text-[#F8BC3B]"></i>

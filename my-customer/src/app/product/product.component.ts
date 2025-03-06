@@ -1,54 +1,166 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
-import { Product } from '../classes/\IProduct';
+import { Subscription } from 'rxjs';
+import { Product, Pagination } from '../classes/Product';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router'; // Thêm Router
 
 @Component({
   selector: 'app-product',
   standalone: false,
   templateUrl: './product.component.html',
-  styleUrl: './product.component.css'
+  styleUrls: ['./product.component.css']
 })
-
-export class ProductComponent implements OnInit {
+export class ProductComponent implements OnInit, OnDestroy {
+  private subscriptions: Subscription[] = [];
   products: Product[] = [];
-  errorMessage: string = '';
+  pagination: Pagination = new Pagination();
+  categories: { CateID: string, CateName: string }[] = [];  // Lưu danh sách danh mục từ API
+  brands: string[] = [];      // Lưu danh sách thương hiệu từ API
+  wineVolumes: string[] = []; // Lưu danh sách dung tích rượu từ API
+  wineTypes: string[] = [];   // Lưu danh sách loại rượu từ API
 
-  constructor(private productService: ProductService) {}
+  selectedCategory: string = '';
+  selectedBrand: string = '';
+  selectedWineVolume: string = '';
+  selectedWineType: string = '';
+
+  filters: any = {
+    category: '',
+    minPrice: null,
+    maxPrice: null,
+    brand: '',
+    wineVolume: '',
+    wineType: '',
+    bestSellers: false,
+    onSale: false,
+    sort: 'priceDesc'
+  };
+
+  constructor(private productService: ProductService, private snackBar: MatSnackBar, private router: Router) {}  
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
 
   ngOnInit(): void {
     this.loadProducts();
+    this.loadFilterData();
+    this.loadCategories()
+  }
+  goToProductDetail(productId: string): void {
+    this.router.navigate(['/products', productId]);
   }
 
-  loadProducts(filters: any = {}) {
-    this.productService.getProducts(filters).subscribe({
-      next: (data) => (this.products = data),
-      error: (err) => (this.errorMessage = err)
+  loadProducts(page: number = 1): void {
+    this.productService.getProducts(this.filters, page).subscribe({
+      next: (data) => {
+        console.log("Product data received:", data);
+        this.products = data.data;
+        this.pagination = data.pagination;
+        
+        this.products.forEach(product => {
+          if (product.ImageID) {
+            this.loadImage(product);
+          } else {
+            console.warn(`Product ${product.ProductName} has no ImageID`);
+          }
+        });
+      },
+      error: (error) => console.error('Error loading products:', error)
+    });
+  }
+  loadCategories(): void {
+    this.productService.getCategories().subscribe({
+      next: (data) => {
+        console.log("Categories received:", data);
+        this.categories = data; // Đảm bảo lưu cả CateID và CateName
+      },
+      error: (error) => console.error('Error loading categories:', error)
+    });
+  }
+  
+  
+
+loadImage(product: Product): void {
+  if (!product.ImageID) {
+    product.ProductImageCover = 'assets/images/default-product.png';
+    return;
+  }
+  const sub = this.productService.getImage(product.ImageID).subscribe({
+    next: (imageData) => {
+      product.ProductImageCover = imageData.ProductImageCover || 'assets/images/default-product.png';
+    },
+    error: (error) => {
+      console.warn(`Failed to load image for ${product.ProductName}: ${error.message}`);
+      product.ProductImageCover = 'assets/images/default-product.png';
+    }
+  });
+  this.subscriptions.push(sub);
+}
+
+
+
+
+  loadFilterData(): void {
+    this.productService.getCategories().subscribe({
+      next: (categories) => {
+        this.categories = categories; // Lưu danh sách danh mục với CateID và CateName
+      },
+      error: (error) => console.error('Error loading categories:', error)
+    });
+  
+    // Nếu cần các bộ lọc khác (brands, wineVolumes, wineTypes), dùng API /api/filters ở trên
+    this.productService.getFilters().subscribe({
+      next: (data) => {
+        this.brands = data.brands;
+        this.wineVolumes = data.wineVolumes;
+        this.wineTypes = data.wineTypes;
+      },
+      error: (error) => console.error('Error loading filters:', error)
+    });
+  }
+  onFilterChange(): void {
+    this.filters = {
+      ...this.filters,
+      category: this.selectedCategory,
+      brand: this.selectedBrand,
+      wineVolume: this.selectedWineVolume,
+      wineType: this.selectedWineType
+    };
+    
+    this.loadProducts();
+  }
+  
+  
+  
+
+  onPageChange(page: number): void {
+    this.loadProducts(page);
+  }
+
+  addToCart(product: Product): void {
+    this.productService.addToCart(product._id, 1).subscribe({
+      next: () => this.snackBar.open('Đã thêm vào giỏ hàng!', 'OK', { duration: 3000 }),
+      error: (error) => console.error('Error adding to cart:', error.message)
     });
   }
 
-  filterProducts() {
-    const filters = {
-      category: (document.getElementById('category') as HTMLSelectElement)?.value || '',
-      minPrice: (document.getElementById('minPrice') as HTMLInputElement)?.value || '',
-      maxPrice: (document.getElementById('maxPrice') as HTMLInputElement)?.value || '',
-      wineType: (document.getElementById('wineType') as HTMLSelectElement)?.value || '',
-      brand: (document.getElementById('brand') as HTMLSelectElement)?.value || '',
-      wineVolume: (document.getElementById('wineVolume') as HTMLSelectElement)?.value || '',
-      netContent: (document.getElementById('netContent') as HTMLSelectElement)?.value || ''
-    };
-    this.loadProducts(filters);
+  addToCompare(product: Product): void {
+    this.productService.addToCompare(product._id, 1).subscribe({
+      next: () => this.snackBar.open('Added to compare list successfully!', 'OK', { duration: 3000 }),
+      error: (error) => console.error('Error adding to compare:', error.message)
+    });
   }
 
-  addToCart(product: Product) {
-    // Logic thêm vào giỏ hàng (sẽ triển khai ở bài sau)
-    console.log('Added to cart:', product.productName);
+  
+  getPageNumbers(): number[] {
+    const total = this.pagination.totalPages;
+    const current = this.pagination.currentPage;
+    const maxDisplay = 5;
+    let start = Math.max(1, current - Math.floor(maxDisplay / 2));
+    let end = Math.min(total, start + maxDisplay - 1);
+    if (end - start + 1 < maxDisplay) start = Math.max(1, end - maxDisplay + 1);
+    return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }
-
-  addToCompare(product: Product) {
-    if (product.productCategory === 'Rượu Tây Bắc') {
-      console.log('Added to compare:', product.productName);
-    } else {
-      alert('Chỉ sản phẩm Rượu Tây Bắc mới có thể so sánh!');
-    }
-  }
+  
 }
