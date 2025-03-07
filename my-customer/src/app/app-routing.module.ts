@@ -20,7 +20,7 @@ import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 import { ReviewpageComponent } from './reviewpage/reviewpage.component';
 import { BlogComponent } from './blog/blog.component';
 import { FaqsComponent } from './faqs/faqs.component';
-import { CompareComponent } from './compare/compare.component'; // Giả sử bạn có
+import { CompareComponent } from './compare/compare.component'; 
 
 import { AuthGuard } from './guard/auth.guard'; // Nhập AuthGuard
 

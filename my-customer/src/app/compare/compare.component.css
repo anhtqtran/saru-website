@@ -1,0 +1,25 @@
+/* Responsive design */
+@media (max-width: 640px) {
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  th, td {
+    min-width: 150px;
+  }
+
+  .group {
+    display: block;
+    width: 100%;
+  }
+
+  .group button {
+    display: none !important;
+  }
+
+  /* Căn chỉnh thông báo trống trên mobile */
+  .py-10 {
+    padding: 2rem 1rem;
+  }
+}

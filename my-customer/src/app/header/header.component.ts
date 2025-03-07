@@ -16,15 +16,22 @@ export class HeaderComponent implements OnInit, OnDestroy {
   compareItemCount: number = 0;
   cartSubscription?: Subscription;
   compareSubscription?: Subscription;
+  updateSubscription?: Subscription;
 
   constructor(private productService: ProductService) {}
   ngOnDestroy(): void {
     this.cartSubscription?.unsubscribe();
     this.compareSubscription?.unsubscribe();
+    this.updateSubscription?.unsubscribe();
   }
 
   ngOnInit(): void {
     this.updateCartAndCompareCount();
+    // Lắng nghe sự kiện cập nhật danh sách so sánh
+    this.updateSubscription = this.productService.getCompareListUpdated().subscribe(() => {
+      console.log('Compare list updated, refreshing count...');
+      this.updateCartAndCompareCount();
+    });
   }
 
   toggleSearchBar(searchBox: HTMLInputElement) {
@@ -40,9 +47,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   updateCartAndCompareCount(): void {
+    this.cartSubscription?.unsubscribe();
+    this.compareSubscription?.unsubscribe();
+
     this.cartSubscription = this.productService.getCartItems().subscribe({
       next: (cartItems) => {
-        this.cartItemCount = cartItems?.length || 0; // Sử dụng || 0 để gán 0 nếu cartItems là null/undefined
+        this.cartItemCount = cartItems?.length || 0;
+        console.log('Updated cartItemCount:', this.cartItemCount);
       },
       error: (error) => {
         console.error('Error fetching cart items:', error);
@@ -50,11 +61,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
 
     this.compareSubscription = this.productService.getCompareItems().subscribe({
-      next: (compareItems) => {
-         // Sửa lỗi ở ĐÂY - Thêm optional chaining hoặc nullish coalescing
-        this.compareItemCount = compareItems?.length || 0; // Sử dụng || 0
+      next: (compareItems: string[]) => {
+        this.compareItemCount = compareItems?.length || 0;
+        console.log('Updated compareItemCount:', this.compareItemCount);
       },
-      error: (error) => {
+      error: (error: any) => {
         console.error('Error fetching compare items:', error);
       }
     });

@@ -73,15 +73,20 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
+  // Trong product.component.ts hoặc product-detail.component.ts
   addToCompare(product: Product): void {
-    if (product) {
-      this.productService.addToCompare(product._id, 1).subscribe({
-        next: () => this.snackBar.open('Đã thêm vào danh sách so sánh!', 'OK', { duration: 3000 }),
-        error: (error) => console.error('Error adding to compare:', error.message)
-      });
-    }
+    console.log('Adding to compare, productId:', product._id); // Log để kiểm tra
+    this.productService.addToCompare(product._id.toString()).subscribe({
+      next: (response) => {
+        console.log('Add to compare response:', response); // Log để kiểm tra
+        this.snackBar.open('Đã thêm vào danh sách so sánh!', 'OK', { duration: 3000 });
+      },
+      error: (error) => {
+        console.error('Error adding to compare:', error);
+        this.snackBar.open('Lỗi khi thêm vào danh sách so sánh', 'Close', { duration: 3000 });
+      }
+    });
   }
-
   setActiveTab(tabName: string): void {
     this.activeTab = tabName;
   }

@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, Observable, retry, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, retry, throwError, combineLatest } from 'rxjs';
 import { Product, Pagination } from '../classes/Product';
 
 @Injectable({
@@ -8,8 +8,19 @@ import { Product, Pagination } from '../classes/Product';
 })
 export class ProductService {
   private apiUrl = 'http://localhost:4000/api/products'; // Đúng với backend
+  private compareListUpdated = new BehaviorSubject<void>(undefined); // BehaviorSubject để phát tín hiệu
 
   constructor(private http: HttpClient) {}
+
+  // Phát tín hiệu khi danh sách so sánh thay đổi
+  notifyCompareListUpdated(): void {
+    this.compareListUpdated.next();
+  }
+
+  // Observable để các component lắng nghe thay đổi
+  getCompareListUpdated(): Observable<void> {
+    return this.compareListUpdated.asObservable();
+  }
 
   // Xử lý lỗi chung
   private handleError(error: HttpErrorResponse): Observable<never> {
@@ -105,32 +116,59 @@ export class ProductService {
   }
 
   // 6. Thêm sản phẩm vào danh sách so sánh
-  addToCompare(productId: string, p0: number): Observable<any> {
+  addToCompare(productId: string): Observable<any> {
+    console.log('Calling addToCompare with productId:', productId);
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const body = { productId };
 
-    return this.http.post(`http://localhost:4000/api/compare`, body, { headers })
+    return this.http.post(`http://localhost:4000/api/compare`, body, { headers, withCredentials: true })
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        map(response => {
+          this.notifyCompareListUpdated(); // Phát tín hiệu khi danh sách thay đổi
+          return response;
+        })
       );
   }
-
-  // 7. Xóa sản phẩm khỏi danh sách so sánh
+  
   removeFromCompare(productId: string): Observable<any> {
-    return this.http.delete(`http://localhost:4000/api/compare/${productId}`)
+    return this.http.delete(`http://localhost:4000/api/compare/${productId}`, { withCredentials: true })
       .pipe(
         retry(1),
-        catchError(this.handleError)
+        catchError(this.handleError),
+        map(response => {
+          this.notifyCompareListUpdated(); // Phát tín hiệu khi danh sách thay đổi
+          return response;
+        })
       );
   }
-
-  // 8. Lấy danh sách sản phẩm trong danh sách so sánh
+  removeAllFromCompare(): Observable<any> {
+    return this.http.delete(`http://localhost:4000/api/compare/all`, { withCredentials: true })
+      .pipe(
+        retry(1),
+        catchError(this.handleError),
+        map(response => {
+          this.notifyCompareListUpdated();
+          return response;
+        })
+      );
+  }
+  
   getCompareItems(): Observable<any> {
-    return this.http.get(`http://localhost:4000/api/compare`)
+    return this.http.get(`http://localhost:4000/api/compare`, { withCredentials: true })
       .pipe(
         retry(2),
         catchError(this.handleError)
       );
+  }
+
+
+
+  // Helper để combine nhiều Observable
+  combineLatest(observables: Observable<Product>[]): Observable<Product[]> {
+    return combineLatest(observables).pipe(
+      map(results => results)
+    );
   }
 }

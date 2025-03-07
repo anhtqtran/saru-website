@@ -14,14 +14,18 @@ app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({ 
-  origin: process.env.CORS_ORIGIN || 'http://localhost:4200',
+  origin: ['http://localhost:4001', 'http://localhost:4002'],
   credentials: true // Cho phép gửi cookie qua CORS
 }));
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: process.env.NODE_ENV === 'production' }
+  cookie: { 
+    secure: process.env.NODE_ENV === 'production', // Chỉ secure trong production
+    httpOnly: true,
+    sameSite: 'lax' // Đảm bảo cookie hoạt động với CORS
+  }
 }));
 
 // Kết nối MongoDB
@@ -45,6 +49,11 @@ async function connectDB() {
     console.log('Connected to MongoDB');
 }
 connectDB();
+
+app.get('/', (req, res) => {
+  res.send("Welcome to Saru Website API");
+});
+
 
 // ===================== PRODUCT API =====================
 
@@ -284,24 +293,67 @@ app.delete('/api/cart/:productId', (req, res) => {
 
 //  8. Thêm sản phẩm vào danh sách so sánh
 app.post('/api/compare', (req, res) => {
-    const { productId } = req.body;
-    if (!productId) return res.status(400).json({ error: "Invalid productId" });
+  console.log('POST /api/compare - Session ID:', req.sessionID); // Log session ID
+  console.log('POST /api/compare - Current session:', req.session); // Log toàn bộ session
+  const { productId } = req.body;
+  console.log('POST /api/compare - Received productId:', productId);
 
-    req.session.compareList = req.session.compareList || [];
-    if (!req.session.compareList.includes(productId)) req.session.compareList.push(productId);
+  if (!productId) return res.status(400).json({ error: "Invalid productId" });
 
+  req.session.compareList = req.session.compareList || [];
+  if (!req.session.compareList.includes(productId)) {
+    req.session.compareList.push(productId);
+    console.log('POST /api/compare - Updated compareList:', req.session.compareList);
+  }
+
+  req.session.save((err) => {
+    if (err) {
+      console.error('POST /api/compare - Error saving session:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    console.log('POST /api/compare - Session saved, compareList:', req.session.compareList);
     res.json({ message: "Added to compare list", compareList: req.session.compareList });
+  });
 });
 
-//  9. Lấy danh sách so sánh
 app.get('/api/compare', (req, res) => {
-    res.json(req.session.compareList || []);
+  console.log('GET /api/compare - Session ID:', req.sessionID); // Log session ID
+  console.log('GET /api/compare - Current session:', req.session); // Log toàn bộ session
+  console.log('GET /api/compare - Returning compareList:', req.session.compareList || []);
+  res.json(req.session.compareList || []);
 });
 
-//  10. Xóa sản phẩm khỏi danh sách so sánh
+// Đặt route static trước
+app.delete('/api/compare/all', (req, res) => {
+  console.log('DELETE /api/compare/all - Session ID:', req.sessionID);
+  console.log('DELETE /api/compare/all - Current session before clear:', req.session.compareList);
+
+  req.session.compareList = [];
+  req.session.save((err) => {
+    if (err) {
+      console.error('DELETE /api/compare/all - Error saving session:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    console.log('DELETE /api/compare/all - Session saved, compareList cleared:', req.session.compareList);
+    res.json({ message: "Cleared all compare items", compareList: req.session.compareList });
+  });
+});
+
+// Sau đó mới đến route dynamic
 app.delete('/api/compare/:productId', (req, res) => {
-    req.session.compareList = req.session.compareList.filter(id => id !== req.params.productId);
+  console.log('DELETE /api/compare - Session ID:', req.sessionID);
+  console.log('DELETE /api/compare - Current session:', req.session);
+  console.log('DELETE /api/compare - Removing productId:', req.params.productId);
+
+  req.session.compareList = req.session.compareList.filter(id => id !== req.params.productId);
+  req.session.save((err) => {
+    if (err) {
+      console.error('DELETE /api/compare - Error saving session:', err);
+      return res.status(500).json({ error: err.message });
+    }
+    console.log('DELETE /api/compare - Session saved, compareList:', req.session.compareList);
     res.json({ message: "Removed from compare list", compareList: req.session.compareList });
+  });
 });
 
 // ===================== SERVER START =====================

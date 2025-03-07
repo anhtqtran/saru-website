@@ -16,6 +16,7 @@ export class Product {
     public WineType?: string,
     public WineIngredient?: string,
     public WineFlavor?: string,
+    public condition?: string, // Thêm trường condition
     public ProductImageCover?: string,
     public ProductImageSub1?: string,
     public ProductImageSub2?: string,
