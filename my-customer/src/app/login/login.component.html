@@ -6,30 +6,35 @@
         <div class="flex items-center">
           <img src="/assets/images/logo-doc.png" alt="Logo" class="w-18 mr-7">
           <h2 class="text-3xl font-bold text-gray-900">ĐĂNG NHẬP</h2>
-      </div>
+        </div>
+
         <div class="input-field" [ngClass]="{'error-active': loginForm.get('email')?.invalid && loginForm.get('email')?.touched}">
           <i class="fas fa-user"></i>
           <input id="email" type="email" placeholder="Email" formControlName="email" autocomplete="email" aria-label="Email" />
-        </div>
-        <div class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
-          {{ getErrorMessage('email', loginForm.get('email')?.errors) }}
+          <div class="error" *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+            {{ getErrorMessage('email', loginForm) }}
+          </div>
         </div>
 
         <div class="input-field" [ngClass]="{'error-active': loginForm.get('password')?.invalid && loginForm.get('password')?.touched}">
-          <i class="fas" [ngClass]="passwordVisibility.loginPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility('loginPassword')"></i>
+          <i class="fas" [ngClass]="passwordVisibility.loginPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility('loginPassword')" aria-label="Toggle password visibility"></i>
           <input id="password" [type]="passwordVisibility.loginPassword ? 'text' : 'password'" placeholder="Mật khẩu" formControlName="password" autocomplete="current-password" aria-label="Mật khẩu" />
-        </div>
-        <div class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
-          {{ getErrorMessage('password', loginForm.get('password')?.errors) }}
+          <div class="error" *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+            {{ getErrorMessage('password', loginForm) }}
+          </div>
         </div>
 
         <div class="input">
-          <input id="remember" type="checkbox" formControlName="remember"/>
+          <input id="remember" type="checkbox" formControlName="remember" />
           <label for="remember" class="remember-label">Ghi nhớ đăng nhập</label>
           <a [routerLink]="['/resetpass']">Quên mật khẩu?</a>
         </div>
 
-        <input type="submit" value="Đăng Nhập" class="btn solid" />
+        <button type="submit" class="btn solid" [disabled]="isLoading">
+          {{ isLoading ? 'Đang xử lý...' : 'Đăng Nhập' }}
+          <span *ngIf="isLoading" class="spinner"></span>
+        </button>
+        <div class="error text-center" *ngIf="loginError">{{ loginError }}</div>
       </form>
 
       <!-- Form Đăng Ký -->
@@ -37,40 +42,45 @@
         <div class="flex items-center">
           <img src="/assets/images/logo-doc.png" alt="Logo" class="w-18 mr-7">
           <h2 class="text-3xl font-bold text-gray-900">ĐĂNG KÝ</h2>
-      </div>
+        </div>
 
         <div class="input-field" [ngClass]="{'error-active': signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched}">
           <i class="fas fa-envelope"></i>
           <input id="email-signup" type="email" placeholder="Email" formControlName="email" autocomplete="email" aria-label="Email" />
-        </div>
-        <div class="error" *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
-          {{ getErrorMessage('email', signUpForm.get('email')?.errors) }}
+          <div class="error" *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
+            {{ getErrorMessage('email', signUpForm) }}
+          </div>
         </div>
 
         <div class="input-field" [ngClass]="{'error-active': signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched}">
-          <i class="fas" [ngClass]="passwordVisibility.signUpPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility('signUpPassword')"></i>
+          <i class="fas" [ngClass]="passwordVisibility.signUpPassword ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility('signUpPassword')" aria-label="Toggle password visibility"></i>
           <input id="password-signup" [type]="passwordVisibility.signUpPassword ? 'text' : 'password'" placeholder="Tạo Mật Khẩu" formControlName="password" autocomplete="new-password" aria-label="Tạo mật khẩu" />
-        </div>
-        <div class="error" *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
-          {{ getErrorMessage('password', signUpForm.get('password')?.errors) }}
+          <div class="error" *ngIf="signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched">
+            {{ getErrorMessage('password', signUpForm) }}
+          </div>
         </div>
 
-        <div class="input-field" [ngClass]="{'error-active': signUpForm.get('passwordConfirm')?.invalid && signUpForm.get('passwordConfirm')?.touched}">
-          <i class="fas" [ngClass]="passwordVisibility.passwordConfirm ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility('passwordConfirm')"></i>
+        <div class="input-field" [ngClass]="{'error-active': (signUpForm.get('passwordConfirm')?.invalid || signUpForm.errors?.['notMatching']) && signUpForm.get('passwordConfirm')?.touched}">
+          <i class="fas" [ngClass]="passwordVisibility.passwordConfirm ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility('passwordConfirm')" aria-label="Toggle password visibility"></i>
           <input id="password-confirm" [type]="passwordVisibility.passwordConfirm ? 'text' : 'password'" placeholder="Xác Nhận Mật Khẩu" formControlName="passwordConfirm" autocomplete="new-password" aria-label="Xác nhận mật khẩu" />
-        </div>
-        <div class="error" *ngIf="signUpForm.hasError('notMatching') && signUpForm.get('passwordConfirm')?.touched">
-          Mật khẩu không khớp
+          <div class="error" *ngIf="signUpForm.get('passwordConfirm')?.touched && (signUpForm.get('passwordConfirm')?.invalid || signUpForm.errors?.['notMatching'])">
+            {{ getErrorMessage('passwordConfirm', signUpForm) }}
+          </div>
         </div>
 
         <div class="subscribe-container">
-        <div>
-          <input id="subscribe" type="checkbox" formControlName="subscribe"/>
-          <label for="subscribe">Tôi muốn nhận email về các ưu đãi và thông báo từ Saru</label>
-        </div>
+          <div>
+            <input id="subscribe" type="checkbox" formControlName="subscribe" />
+            <label for="subscribe">Tôi muốn nhận email về các ưu đãi và thông báo từ Saru</label>
+          </div>
           <p>Tôi đã đọc và đồng ý với <a [routerLink]="['/terms']">Điều kiện giao dịch chung</a> và <a [routerLink]="['/privacy-policy']">Chính sách bảo mật</a> của Saru.</p>
         </div>
-        <input type="submit" class="btn" value="Đăng Ký" />
+
+        <button type="submit" class="btn" [disabled]="isLoading">
+          {{ isLoading ? 'Đang xử lý...' : 'Đăng Ký' }}
+          <span *ngIf="isLoading" class="spinner"></span>
+        </button>
+        <div class="error text-center" *ngIf="signUpError">{{ signUpError }}</div>
       </form>
     </div>
   </div>

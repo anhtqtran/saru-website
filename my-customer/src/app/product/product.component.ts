@@ -63,12 +63,17 @@ export class ProductComponent implements OnInit, OnDestroy {
             this.loadImage(product);
           } else {
             console.warn(`Product ${product.ProductName} has no ImageID`);
+            product.ProductImageCover = 'assets/images/default-product.png'; // Đặt mặc định nếu không có ImageID
           }
         });
       },
-      error: (error) => console.error('Error loading products:', error)
+      error: (error) => {
+        console.error('Error loading products:', error);
+        this.snackBar.open('Không thể tải danh sách sản phẩm!', 'OK', { duration: 3000 });
+      }
     });
   }
+  
   loadCategories(): void {
     this.productService.getCategories().subscribe({
       next: (data) => {

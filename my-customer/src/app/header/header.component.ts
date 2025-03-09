@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy  } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../services/product.service';
-import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../services/auth.service';
 import { Subscription } from 'rxjs';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: false,
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   isSearchOpen = false;
@@ -17,27 +17,65 @@ export class HeaderComponent implements OnInit, OnDestroy {
   cartSubscription?: Subscription;
   compareSubscription?: Subscription;
   updateSubscription?: Subscription;
+  loginStatusSubscription?: Subscription;
+  isLoggedIn: boolean = false;
+  currentUser: any = null;
 
-  constructor(private productService: ProductService) {}
-  ngOnDestroy(): void {
-    this.cartSubscription?.unsubscribe();
-    this.compareSubscription?.unsubscribe();
-    this.updateSubscription?.unsubscribe();
-  }
+  constructor(
+    private productService: ProductService,
+    public authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
+    const token = localStorage.getItem('authToken');
+    console.log('Auth token:', token);
     this.updateCartAndCompareCount();
+    this.isLoggedIn = this.authService.isLoggedIn();
+    this.currentUser = this.authService.getCurrentUser();
+
+    // Lắng nghe thay đổi trạng thái đăng nhập
+    this.loginStatusSubscription = this.authService.getLoginStatus().subscribe(status => {
+      this.isLoggedIn = status;
+      this.currentUser = status ? this.authService.getCurrentUser() : null;
+      console.log('Login status changed:', status, 'Current user:', this.currentUser);
+      if (status) {
+        this.updateCartAndCompareCount(); // Làm mới dữ liệu khi đăng nhập
+      } else {
+        this.cartItemCount = 0;
+        this.compareItemCount = 0;
+      }
+    });
+
     // Lắng nghe sự kiện cập nhật danh sách so sánh
     this.updateSubscription = this.productService.getCompareListUpdated().subscribe(() => {
       console.log('Compare list updated, refreshing count...');
       this.updateCartAndCompareCount();
     });
+
+    // Sử dụng cart$ và compare$ từ ProductService để đồng bộ realtime
+    this.cartSubscription = this.productService.cart$.subscribe(cart => {
+      this.cartItemCount = cart?.length || 0;
+      console.log('Cart updated via Observable:', this.cartItemCount);
+    });
+
+    this.compareSubscription = this.productService.compare$.subscribe(compare => {
+      this.compareItemCount = compare?.length || 0;
+      console.log('Compare updated via Observable:', this.compareItemCount);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.cartSubscription?.unsubscribe();
+    this.compareSubscription?.unsubscribe();
+    this.updateSubscription?.unsubscribe();
+    this.loginStatusSubscription?.unsubscribe();
   }
 
   toggleSearchBar(searchBox: HTMLInputElement) {
     this.isSearchOpen = !this.isSearchOpen;
     if (this.isSearchOpen) {
-      setTimeout(() => searchBox.focus(), 0); // Focus vào input khi mở
+      setTimeout(() => searchBox.focus(), 0);
     }
   }
 
@@ -69,5 +107,13 @@ export class HeaderComponent implements OnInit, OnDestroy {
         console.error('Error fetching compare items:', error);
       }
     });
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.isLoggedIn = false;
+    this.currentUser = null;
+    this.cartItemCount = 0;
+    this.compareItemCount = 0;
   }
 }

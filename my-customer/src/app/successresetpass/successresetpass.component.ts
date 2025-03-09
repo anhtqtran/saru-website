@@ -11,6 +11,6 @@ export class SuccessresetpassComponent {
   constructor(private router: Router) {}
 
   goHome() {
-    this.router.navigate(['/home']); // Chuyển hướng đến trang chủ
+    this.router.navigate(['/homepage']); // Chuyển hướng đến trang chủ
 }
 }

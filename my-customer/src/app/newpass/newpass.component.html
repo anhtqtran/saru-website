@@ -3,7 +3,7 @@
         <div class="flex items-center justify-between mb-4">
             <div class="flex items-center">
                 <img src="assets/images/logo-doc.png" alt="Logo" class="w-16 mr-2">
-                <h2 class="text-2xl font-bold text-gray-900">QUÊN MẬT KHẨU</h2>
+                <h2 class="text-2xl font-bold text-gray-900">ĐẶT LẠI MẬT KHẨU</h2>
             </div>
             <button (click)="hidePopup()" class="text-gray-600 hover:text-gray-900">✖</button>
         </div>
@@ -13,21 +13,28 @@
         </p>
 
         <form [formGroup]="createPasswordForm" (ngSubmit)="onCreatePasswordSubmit()">
-            <label for="new-password" class="block mb-2 text-sm font-medium text-gray-900">Tạo Password <span class="text-[var(--highlight-color)]">*</span></label>
-            <input type="password" id="new-password" formControlName="newPassword" class="w-full px-4 py-2 border rounded-lg focus:outline-none" [type]="passwordVisibility['newPassword'] ? 'text' : 'password'" required>
-            <button type="button" (click)="togglePasswordVisibility('newPassword')" class="text-sm text-gray-500">Hiện/Ẩn</button>
-            <div *ngIf="createPasswordForm.get('newPassword')?.touched && createPasswordForm.get('newPassword')?.invalid" class="text-red-500 text-xs">
-                {{ getErrorMessage('newPassword', createPasswordForm.get('newPassword')?.errors) }}
+            <div class="relative mb-4">
+                <label for="new-password" class="block mb-2 text-sm font-medium text-gray-900">Mật khẩu mới <span class="text-[var(--highlight-color)]">*</span></label>
+                <input id="new-password" formControlName="newPassword" class="w-full px-4 py-2 border rounded-lg focus:outline-none" [type]="passwordVisibility['newPassword'] ? 'text' : 'password'" required>
+                <i class="fas absolute right-3 top-11 cursor-pointer" [ngClass]="passwordVisibility['newPassword'] ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility('newPassword')"></i>
+                <div *ngIf="createPasswordForm.get('newPassword')?.touched && createPasswordForm.get('newPassword')?.invalid" class="text-red-500 text-xs mt-1">
+                    {{ getErrorMessage('newPassword', createPasswordForm.get('newPassword')?.errors) }}
+                </div>
             </div>
 
-            <label for="confirm-password" class="block mt-4 mb-2 text-sm font-medium text-gray-900">Nhập lại Password <span class="text-[var(--highlight-color)]">*</span></label>
-            <input type="password" id="confirm-password" formControlName="newPasswordConfirm" class="w-full px-4 py-2 border rounded-lg focus:outline-none" [type]="passwordVisibility['newPasswordConfirm'] ? 'text' : 'password'" required>
-            <button type="button" (click)="togglePasswordVisibility('newPasswordConfirm')" class="text-sm text-gray-500">Hiện/Ẩn</button>
-            <div *ngIf="createPasswordForm.get('newPasswordConfirm')?.touched && createPasswordForm.get('newPasswordConfirm')?.invalid" class="text-red-500 text-xs">
-                {{ getErrorMessage('newPasswordConfirm', createPasswordForm.get('newPasswordConfirm')?.errors) }}
+            <div class="relative mb-4">
+                <label for="confirm-password" class="block mb-2 text-sm font-medium text-gray-900">Xác nhận mật khẩu <span class="text-[var(--highlight-color)]">*</span></label>
+                <input id="confirm-password" formControlName="newPasswordConfirm" class="w-full px-4 py-2 border rounded-lg focus:outline-none" [type]="passwordVisibility['newPasswordConfirm'] ? 'text' : 'password'" required>
+                <i class="fas absolute right-3 top-11 cursor-pointer" [ngClass]="passwordVisibility['newPasswordConfirm'] ? 'fa-eye-slash' : 'fa-eye'" (click)="togglePasswordVisibility('newPasswordConfirm')"></i>
+                <div *ngIf="createPasswordForm.get('newPasswordConfirm')?.touched && (createPasswordForm.get('newPasswordConfirm')?.invalid || createPasswordForm.hasError('notMatching'))" class="text-red-500 text-xs mt-1">
+                    {{ getErrorMessage('newPasswordConfirm', createPasswordForm.get('newPasswordConfirm')?.errors) }}
+                </div>
             </div>
 
-            <button type="submit" class="w-full mt-6 bg-[var(--primary-color)] text-white py-2 rounded-lg hover:bg-[var(--primary-hover)] transition">Tiếp tục</button>
+            <div class="text-red-500 text-center mb-4" *ngIf="errorMessage">{{ errorMessage }}</div>
+            <div class="text-center mb-4" *ngIf="isLoading">Đang xử lý...</div>
+
+            <button type="submit" class="w-full mt-6 bg-[var(--primary-color)] text-white py-2 rounded-lg hover:bg-[var(--primary-hover)] transition" [disabled]="isLoading">Xác nhận</button>
         </form>
     </div>
 </div>

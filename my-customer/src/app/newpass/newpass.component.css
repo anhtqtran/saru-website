@@ -12,3 +12,14 @@
     z-index: 1000;
 }
 
+.relative {
+    position: relative;
+  }
+  
+  .fas {
+    color: #666;
+  }
+  
+  .fas:hover {
+    color: #333;
+  }

@@ -4,7 +4,6 @@ import { Product } from '../classes/Product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-product-detail',
   standalone: false,
@@ -30,6 +29,7 @@ export class ProductDetailComponent implements OnInit {
       if (id) {
         this.loadProductDetail(id);
       } else {
+        this.snackBar.open('Không tìm thấy ID sản phẩm', 'OK', { duration: 3000 });
         this.isLoading = false;
       }
     });
@@ -38,27 +38,27 @@ export class ProductDetailComponent implements OnInit {
   loadProductDetail(id: string): void {
     this.isLoading = true;
     this.productService.getProductDetail(id).subscribe({
-        next: (data: Product) => {
-          if (!data.reviews) data.reviews = [];
-          console.log('Review data:', data.reviews);
-            console.log('Product data from API:', data);
-            console.log('Related products _id:', data.relatedProducts?.map(rp => rp._id) || []);
-            // **Thêm LOG kiểu dữ liệu _id của sản phẩm liên quan VÀO ĐÂY:**
-            if (data.relatedProducts && data.relatedProducts.length > 0) {
-                console.log('Kiểu dữ liệu _id sản phẩm liên quan đầu tiên:', typeof data.relatedProducts[0]._id);
-                console.log('Constructor name _id sản phẩm liên quan đầu tiên:', data.relatedProducts[0]._id.constructor.name);
-            }
-
-            this.product = { ...data };
-            this.selectedImage = this.product.ProductImageCover || 'assets/images/default-product.png';
-            this.isLoading = false;
-        },
-        error: (error) => {
-            console.error('Error loading product detail:', error.message);
-            this.isLoading = false;
+      next: (data: Product) => {
+        if (!data.reviews) data.reviews = [];
+        console.log('Review data:', data.reviews);
+        console.log('Product data from API:', data);
+        console.log('Related products _id:', data.relatedProducts?.map(rp => rp._id) || []);
+        if (data.relatedProducts && data.relatedProducts.length > 0) {
+          console.log('Kiểu dữ liệu _id sản phẩm liên quan đầu tiên:', typeof data.relatedProducts[0]._id);
+          console.log('Constructor name _id sản phẩm liên quan đầu tiên:', data.relatedProducts[0]._id.constructor.name);
         }
+
+        this.product = { ...data };
+        this.selectedImage = this.product.ProductImageCover || 'assets/images/default-product.png';
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading product detail:', error.message);
+        this.snackBar.open('Không thể tải chi tiết sản phẩm. Vui lòng thử lại sau.', 'OK', { duration: 3000 });
+        this.isLoading = false;
+      }
     });
-}
+  }
 
   selectImage(image: string): void {
     this.selectedImage = image || 'assets/images/default-product.png';
@@ -68,17 +68,19 @@ export class ProductDetailComponent implements OnInit {
     if (product) {
       this.productService.addToCart(product._id, 1).subscribe({
         next: () => this.snackBar.open('Đã thêm vào giỏ hàng!', 'OK', { duration: 3000 }),
-        error: (error) => console.error('Error adding to cart:', error.message)
+        error: (error) => {
+          console.error('Error adding to cart:', error.message);
+          this.snackBar.open('Lỗi khi thêm vào giỏ hàng', 'OK', { duration: 3000 });
+        }
       });
     }
   }
 
-  // Trong product.component.ts hoặc product-detail.component.ts
   addToCompare(product: Product): void {
-    console.log('Adding to compare, productId:', product._id); // Log để kiểm tra
+    console.log('Adding to compare, productId:', product._id);
     this.productService.addToCompare(product._id.toString()).subscribe({
       next: (response) => {
-        console.log('Add to compare response:', response); // Log để kiểm tra
+        console.log('Add to compare response:', response);
         this.snackBar.open('Đã thêm vào danh sách so sánh!', 'OK', { duration: 3000 });
       },
       error: (error) => {
@@ -87,6 +89,7 @@ export class ProductDetailComponent implements OnInit {
       }
     });
   }
+
   setActiveTab(tabName: string): void {
     this.activeTab = tabName;
   }
@@ -101,25 +104,22 @@ export class ProductDetailComponent implements OnInit {
     return Array(5 - (roundedRating > 5 ? 5 : roundedRating)).fill(0);
   }
 
-// Phương thức điều hướng đến trang chi tiết sản phẩm
-goToProductDetail(event: Event, productId: string): void {
-  event.stopPropagation(); // Dừng lan truyền sự kiện
-  console.log('Clicked product ID:', productId); // Thêm log này
-  
-  if (!productId) {
-    console.error('Invalid productId:', productId);
-    return;
-  }
+  goToProductDetail(event: Event, productId: string): void {
+    event.stopPropagation();
+    console.log('Clicked product ID:', productId);
 
-  // Thêm dòng này để ngăn sự kiện click lan ra các phần tử cha
-  event.stopPropagation(); 
-  
-  this.router.navigate(['/products', productId]).then(navigationResult => {
-    console.log('Navigation success:', navigationResult);
-    if (!navigationResult) {
-      console.error('Navigation failed, check route config');
+    if (!productId) {
+      console.error('Invalid productId:', productId);
+      this.snackBar.open('ID sản phẩm không hợp lệ', 'OK', { duration: 3000 });
+      return;
     }
-  });
-}
 
+    this.router.navigate(['/products', productId]).then(navigationResult => {
+      console.log('Navigation success:', navigationResult);
+      if (!navigationResult) {
+        console.error('Navigation failed, check route config');
+        this.snackBar.open('Không thể điều hướng. Kiểm tra cấu hình route.', 'OK', { duration: 3000 });
+      }
+    });
+  }
 }
