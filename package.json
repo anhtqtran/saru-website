@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "ngx-quill": "^27.0.1"
+  }
+}
