@@ -1,0 +1,95 @@
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách đơn hàng</title>
+    <link rel="stylesheet" href="orderhistory.component.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="user-avatar.png" alt="User Avatar">
+                <p class="username">Trần Thanh Quế Anh</p>
+                <p class="phone">0123456789</p>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="#">Thông tin và địa chỉ</a></li>
+                <li><a href="#">Lịch sử đơn hàng</a></li>
+                <li><a href="#">Hạng tài khoản</a></li>
+            </ul>
+        </aside>
+
+        <!-- Danh sách đơn hàng -->
+        <main class="order-list">
+            <div class="order-header">
+                <h2>Danh sách đơn hàng</h2>
+                <div class="order-controls">
+                    <button class="filter-button">
+                        <img src="images/filter-icon.png" alt="Thêm điều kiện lọc"> Thêm điều kiện lọc
+                    </button>
+                    <div class="search-box">
+                        <img src="images/search-icon.png" alt="Tìm kiếm">
+                        <input type="text" placeholder="Tìm kiếm">
+                    </div>
+                </div>
+            </div>
+
+            <table class="order-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th>Mã đơn</th>
+                        <th>Ngày đặt hàng</th>
+                        <th>Tổng tiền</th>
+                        <th>Hình thức thanh toán</th>
+                        <th>Trạng thái đơn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Lặp dữ liệu mẫu -->
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>SARUK1234</td>
+                        <td>20/01/2025</td>
+                        <td>100.000đ</td>
+                        <td>Chuyển khoản</td>
+                        <td>Chờ xác nhận</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>SARUK1234</td>
+                        <td>20/01/2025</td>
+                        <td>100.000đ</td>
+                        <td>Chuyển khoản</td>
+                        <td>Chờ xác nhận</td>
+                    </tr>
+                    <tr>
+                        <td><input type="checkbox"></td>
+                        <td>SARUK1234</td>
+                        <td>20/01/2025</td>
+                        <td>100.000đ</td>
+                        <td>Chuyển khoản</td>
+                        <td>Chờ xác nhận</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="order-footer">
+                <select>
+                    <option>Hiển thị 20</option>
+                    <option>Hiển thị 50</option>
+                    <option>Hiển thị 100</option>
+                </select>
+                <p>Tổng đơn hàng: 100</p>
+            </div>
+        </main>
+    </div>
+
+</body>
+
+</html>
