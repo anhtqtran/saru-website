@@ -7,7 +7,8 @@ import { DonhangDetailComponent } from './donhang-detail/donhang-detail.componen
 const routes: Routes = [
   { path: '', component: DonhangListComponent},
   { path: 'donhang-create', component: DonhangCreateComponent },
-  { path: 'donhang-detail/:id', component: DonhangDetailComponent }
+  { path: 'donhang-detail/:id', component: DonhangDetailComponent },
+  { path: '', redirectTo: '/donhang-list', pathMatch: 'full' }
 ];
 
 @NgModule({

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-
+import { Router } from '@angular/router';
+import { OrderService } from '../order-service.service';
 @Component({
   selector: 'app-donhang-create',
   standalone: false,
@@ -27,6 +28,8 @@ export class DonhangCreateComponent {
   popupMessage: string = '';
   popupAction!: () => void;
 
+  constructor(private orderService: OrderService, private router: Router) {}
+
   addProduct() {
     this.products.push({ name: '', quantity: 1, price: 0, total: 0 });
   }
@@ -45,11 +48,28 @@ export class DonhangCreateComponent {
   }
 
   submitOrder() {
+    const orderData = {
+      customer: this.customer,
+      products: this.products,
+      paymentMethod: this.paymentMethod,
+      totalPrice: this.totalPrice
+    };
+
     console.log('Customer Info:', this.customer);
     console.log('Products:', this.products);
     console.log('Payment Method:', this.paymentMethod);
     console.log('Total Price:', this.totalPrice);
-    alert('Đơn hàng đã được xác nhận!');
+
+    this.orderService.addOrder(orderData).subscribe(
+      response => {
+        alert('Đơn hàng đã được tạo thành công!');
+        this.router.navigate(['/donhang-list']); // Chuyển về trang danh sách đơn hàng
+      },
+      error => {
+        alert('Có lỗi xảy ra khi tạo đơn hàng!');
+        console.error(error);
+      }
+    );
   }
 
   resetForm() {

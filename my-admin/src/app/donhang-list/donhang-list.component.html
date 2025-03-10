@@ -19,31 +19,49 @@
   
     <div class="bg-[#F2E8DA] p-4 rounded-md mb-6">
       <div class="flex space-x-4">
-        <input type="text" [(ngModel)]="searchKeyword" placeholder="Tìm kiếm đơn hàng" class="w-1/3 p-4 border rounded-md" />
+        <input type="text" [(ngModel)]="searchKeyword" (ngModel)="onSearch()" placeholder="Tìm kiếm đơn hàng" class="w-1/3 p-4 border rounded-md" />
         <button class="bg-[#F8BC3B] text-white px-4 py-2 rounded-md hover:opacity-90 cursor-pointer" (click)="onSearch()">Tìm kiếm</button>
   
         <select [(ngModel)]="statusFilter" class="p-4 border rounded-md" (change)="onSearch()">
-          <option value="">Lọc theo trạng thái đơn</option>
-          <option value="chờ xác nhận">Chờ xác nhận</option>
-          <option value="hoàn thành">Hoàn thành</option>
-          <option value="hủy">Hủy</option>
-        </select>
-  
-        <select [(ngModel)]="shippingFilter" class="p-4 border rounded-md" (change)="onSearch()">
-          <option value="">Lọc theo trạng thái giao hàng</option>
-          <option value="chờ giao hàng">Chờ giao hàng</option>
-          <option value="đang giao">Đang giao</option>
-          <option value="đã giao">Đã giao</option>
+          <option value="">Lọc theo trạng thái đơn hàng</option>
+          <option value="Chờ xác nhận">Chờ xác nhận</option>
+          <option value="Đã xác nhận">Đã xác nhận</option>
+          <option value="Đang vận chuyển">Đang vận chuyển</option>
+          <option value="Giao hàng thành công">Giao hàng thành công</option>
+          <option value="Đã hủy đơn">Đã hủy đơn</option>
         </select>
   
         <select [(ngModel)]="paymentFilter" class="p-4 border rounded-md" (change)="onSearch()">
           <option value="">Lọc theo thanh toán</option>
-          <option value="đã thanh toán">Đã thanh toán</option>
-          <option value="chưa thanh toán">Chưa thanh toán</option>
+          <option value="Đã thanh toán">Đã thanh toán</option>
+          <option value="Chưa thanh toán">Chưa thanh toán</option>
         </select>
+
+        <button (click)="clearFilters()" class="bg-[#F8BC3B] text-white px-4 py-2 rounded-md hover:opacity-90 cursor-pointer">
+          Hủy bộ lọc
+        </button>
       </div>
     </div>
   
+    <!-- Điều hướng phân trang -->
+    <div class="flex justify-between mb-4">
+      <div>
+        <label for="itemsPerPage">Số đơn hàng mỗi trang: </label>
+        <select [(ngModel)]="itemsPerPage" (change)="changeItemsPerPage()" id="itemsPerPage" class="p-2 border rounded-md bg-white">
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+        </select>
+      </div>
+      
+      <div>
+        <button (click)="previousPage()" [disabled]="currentPage === 1"
+                class="px-4 py-2 bg-gray-300 text-black rounded-md">Trang trước</button>
+        <span class="mx-4 text-lg font-bold">Trang {{ currentPage }} / {{ getTotalPages() }}</span>
+        <button (click)="nextPage()" [disabled]="currentPage >= getTotalPages()"
+                class="px-4 py-2 bg-gray-300 text-black rounded-md">Trang sau</button>
+      </div>
+    </div>
 
     <div class="flex justify-left mb-4">
       <!-- Dropdown chọn hành động -->
@@ -73,52 +91,42 @@
           <th><input type="checkbox" [(ngModel)]="selectAllChecked" (change)="toggleSelectAll()" /></th>
           <th>STT</th>
           <th>Mã Đơn</th>
-          <th>Tên</th>
+          <th>Mã khách hàng</th>
           <th>Ngày Tạo</th>
-          <th>Tình Trạng</th>
-          <th>Trạng Thái Giao Hàng</th>
+          <th>Tình Trạng Đơn hàng</th>
           <th>Trạng Thái Thanh Toán</th>
           <th>Tổng Tiền</th>
           <th>Hành Động</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let order of filteredOrders; let i = index" class="bg-white hover:bg-gray-100 text-center cursor-pointer">
+        <tr *ngFor="let order of displayedOrders; let i = index" class="bg-white hover:bg-gray-100 text-center cursor-pointer">
           <td><input type="checkbox" [(ngModel)]="order.selected" /></td>
-          <td>{{ i + 1 }}</td> <!-- Sử dụng `let i = index` để lấy số thứ tự -->
-          <td>{{ order.code }}</td>
-          <td>{{ order.name }}</td>
-          <td>{{ order.date }}</td>
+          <td>{{ i + 1 }}</td> 
+          <td>{{ order.OrderID }}</td>
+          <td>{{ order.CustomerID }}</td>
+          <td>{{ order.OrderDate }}</td>
           <td>
             <span [ngClass]="{
-              'text-green-500': order.status === 'Đã xác nhận',
-              'text-yellow-500': order.status === 'Chưa xác nhận',
-              'text-red-500': order.status === 'Đã hủy đơn'
+              'text-green-500': order.OrderStatusText === 'Giao hàng thành công',
+              'text-yellow-500': order.OrderStatusText === 'Chờ xác nhận',
+              'text-red-500': order.OrderStatusText === 'Đã hủy đơn',
+              'text-blue-500': order.OrderStatusText === 'Đang vận chuyển'
             }">
-              {{ order.status }}
-            </span>
-          </td>          
-          <td>
-            <span [ngClass]="{
-              'text-green-500': order.shippingStatus === 'Đã giao',
-              'text-yellow-500': order.shippingStatus === 'Đang giao',
-              'text-red-500': order.shippingStatus === 'Chưa nhận hàng'
-            }">
-              {{ order.shippingStatus }}
+              {{ order.OrderStatusText }}
             </span>
           </td>
           
           <td>
             <span [ngClass]="{
-              'text-green-500': order.paymentStatus === 'Đã thanh toán',
-              'text-yellow-500': order.paymentStatus === 'Thanh toán một nửa',
-              'text-red-500': order.paymentStatus === 'Chưa thanh toán'
+              'text-green-500': order.PaymentStatusText === 'Đã thanh toán',
+              'text-red-500': order.PaymentStatusText === 'Chưa thanh toán'
             }">
-              {{ order.paymentStatus }}
+              {{ order.PaymentStatusText}}
             </span>
           </td>
           
-          <td>{{ order.total | currency:'VND' }}</td>
+          <td>{{ order.Amount | currency:'VND' }}</td>
           <td class="px-6 py-4" (click)="$event.stopPropagation()">
             <div class="flex justify-center space-x-4 items-center">
               <img src="assets/images/trash icon.png" alt="Xóa" class="w-6 h-6 cursor-pointer" (click)="confirmDelete($event, order)" />
@@ -129,15 +137,22 @@
         </tr>
       </tbody>      
     </table>
+
+    <div class="flex justify-end mb-4">
+      <p class="text-sm text-gray-700">Tổng đơn hàng: {{ getTotalOrders() }}</p>
+    </div>
   
     <div class="fixed inset-0 bg-[#F2E8DA] bg-opacity-50 flex items-center justify-center" [class.hidden]="!isPopupVisible">
       <div class="bg-white p-6 rounded-md shadow-lg">
-        <p class="mb-4 text-center">Xác nhận xóa đơn hàng <span class="font-bold">{{ orderToDelete?.code }}</span> này?</p>
+        <p class="mb-4 text-center">Xác nhận xóa đơn hàng <span class="font-bold">{{ orderToDelete?.OrderID }}</span> này?</p>
         <div class="flex justify-center space-x-4">
+          <!-- Nút Xóa -->
           <button class="px-4 py-2 bg-[#F8BC3B] text-white rounded-md" (click)="deleteOrder()">Xóa</button>
+          <!-- Nút Hủy -->
           <button class="px-4 py-2 bg-gray-300 rounded-md" (click)="closePopup()">Hủy</button>
         </div>
       </div>
     </div>
+    
   </div>
   

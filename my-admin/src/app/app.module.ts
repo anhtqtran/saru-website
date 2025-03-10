@@ -9,7 +9,8 @@ import { CommonModule } from '@angular/common';
 import { DonhangCreateComponent } from './donhang-create/donhang-create.component';
 import { DonhangDetailComponent } from './donhang-detail/donhang-detail.component';
 import { RouterModule } from '@angular/router';
-
+import { HttpClientModule } from '@angular/common/http';
+import { CurrencyPipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +23,8 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     RouterModule,
     DonhangDetailComponent,
+    HttpClientModule,
+    CurrencyPipe
   ],
   providers: [],
   bootstrap: [AppComponent]
