@@ -711,7 +711,8 @@ app.post('/api/register', authLimiter, [
       AccountID: `acc_${timestamp}`,
       CustomerID: `cus_${timestamp}`,
       CustomerEmail: email,
-      CustomerPassword: hashedPassword
+      CustomerPassword: hashedPassword,
+      createdAt: new Date(),
     };
     await accountCollection.insertOne(newAccount);
 
@@ -843,6 +844,492 @@ app.post('/api/logout', authenticateToken, (req, res) => {
 app.get('/api/verify-token', authenticateToken, (req, res) => {
   res.json({ message: 'Token hợp lệ', account: req.account });
 });
+
+
+
+//============API Dashboard Overview===========
+
+app.get('/api/dashboard/overview', authenticateToken, async (req, res) => {
+  try {
+    const totalProducts = await productCollection.countDocuments();
+    const totalOrders = await database.collection('orderss').countDocuments();
+    const totalCustomers = await customerCollection.countDocuments();
+
+    const totalRevenue = await database.collection('orderdetailss').aggregate([
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'ProductID',
+          foreignField: 'ProductID',
+          as: 'product',
+        },
+      },
+      { $unwind: '$product' },
+      {
+        $lookup: {
+          from: 'promotions',
+          localField: 'product.PromotionID',
+          foreignField: 'PromotionID',
+          as: 'promotion',
+        },
+      },
+      { $unwind: { path: '$promotion', preserveNullAndEmptyArrays: true } },
+      {
+        $lookup: {
+          from: 'orderss',
+          localField: 'OrderID',
+          foreignField: 'OrderID',
+          as: 'order',
+        },
+      },
+      { $unwind: '$order' },
+      {
+        $lookup: {
+          from: 'Vouchers',
+          localField: 'order.VoucherID',
+          foreignField: 'VoucherID',
+          as: 'voucher',
+        },
+      },
+      { $unwind: { path: '$voucher', preserveNullAndEmptyArrays: true } },
+      {
+        $project: {
+          product: 1,
+          Quantity: 1,
+          promotion: 1,
+          voucher: 1,
+          order: 1,
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          total: {
+            $sum: {
+              $subtract: [
+                {
+                  $multiply: [
+                    { $toDouble: '$Quantity' },
+                    {
+                      $cond: [
+                        { $eq: [{ $type: "$product.ProductPrice" }, "string"] },
+                        { $toDouble: "$product.ProductPrice" },
+                        "$product.ProductPrice"
+                      ]
+                    },
+                  ],
+                },
+                {
+                  $add: [
+                    {
+                      $cond: [
+                        { $ne: [{ $ifNull: ["$promotion.PromotionType", "fixed"] }, "percent"] },
+                        { $ifNull: [{ $toDouble: "$promotion.PromotionValue" }, 0] },
+                        {
+                          $multiply: [
+                            { $ifNull: [{ $toDouble: "$promotion.PromotionValue" }, 0] },
+                            { $divide: [{ $toDouble: "$product.ProductPrice" }, 100] }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      $cond: [
+                        { $ne: [{ $ifNull: ["$voucher.VoucherType", "fixed"] }, "percent"] },
+                        { $ifNull: [{ $toDouble: "$voucher.VoucherValue" }, 0] },
+                        {
+                          $multiply: [
+                            { $ifNull: [{ $toDouble: "$voucher.VoucherValue" }, 0] },
+                            {
+                              $divide: [
+                                {
+                                  $multiply: [
+                                    { $toDouble: "$Quantity" },
+                                    { $toDouble: "$product.ProductPrice" }
+                                  ]
+                                },
+                                100
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+            },
+          },
+        },
+      },
+      { $project: { total: 1, _id: 0 } }
+    ]).toArray();
+
+    console.log("Total Revenue Result:", totalRevenue);
+
+    res.json({
+      totalProducts,
+      totalOrders,
+      totalCustomers,
+      totalRevenue: totalRevenue.length > 0 ? totalRevenue[0].total : 0,
+    });
+  } catch (error) {
+    logger.error('Error in /api/dashboard/overview', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+// =============API Sales Performance===========
+
+app.get('/api/dashboard/sales', authenticateToken, async (req, res) => {
+  try {
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - 7);
+
+    const weeklyRevenuePipeline = [
+      {
+        $addFields: {
+          convertedDate: { $toDate: "$OrderDate" } // Chuyển chuỗi ISO thành Date
+        }
+      },
+      {
+        $match: {
+          convertedDate: { $gte: startDate, $lte: new Date() },
+          convertedDate: { $exists: true }
+        }
+      },
+      {
+        $lookup: {
+          from: "orderdetailss",
+          let: { orderId: { $toUpper: "$OrderID" } },
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: [
+                    { $toUpper: "$$orderId" },
+                    { $toUpper: "$OrderID" }
+                  ]
+                }
+              }
+            },
+            {
+              $lookup: {
+                from: 'products',
+                localField: 'ProductID',
+                foreignField: 'ProductID',
+                as: 'product',
+              },
+            },
+            { $unwind: '$product' },
+            {
+              $lookup: {
+                from: 'promotions',
+                localField: 'product.PromotionID',
+                foreignField: 'PromotionID',
+                as: 'promotion',
+              },
+            },
+            { $unwind: { path: '$promotion', preserveNullAndEmptyArrays: true } },
+          ],
+          as: "orderDetails"
+        }
+      },
+      { $unwind: "$orderDetails" },
+      {
+        $lookup: {
+          from: 'orderss',
+          localField: 'orderDetails.OrderID',
+          foreignField: 'OrderID',
+          as: 'order',
+        },
+      },
+      { $unwind: '$order' },
+      {
+        $lookup: {
+          from: 'Vouchers',
+          localField: 'order.VoucherID',
+          foreignField: 'VoucherID',
+          as: 'orderDetails.voucher',
+        },
+      },
+      { $unwind: { path: '$orderDetails.voucher', preserveNullAndEmptyArrays: true } },
+      {
+        $project: {
+          orderDetails: 1,
+          convertedDate: 1,
+        },
+      },
+      {
+        $group: {
+          _id: null,
+          totalRevenue: {
+            $sum: {
+              $subtract: [
+                {
+                  $multiply: [
+                    { $toDouble: "$orderDetails.Quantity" },
+                    {
+                      $cond: [
+                        { $eq: [{ $type: "$orderDetails.product.ProductPrice" }, "string"] },
+                        { $toDouble: "$orderDetails.product.ProductPrice" },
+                        "$orderDetails.product.ProductPrice"
+                      ]
+                    },
+                  ],
+                },
+                {
+                  $add: [
+                    {
+                      $cond: [
+                        { $ne: [{ $ifNull: ["$orderDetails.promotion.PromotionType", "fixed"] }, "percent"] },
+                        { $ifNull: [{ $toDouble: "$orderDetails.promotion.PromotionValue" }, 0] },
+                        {
+                          $multiply: [
+                            { $ifNull: [{ $toDouble: "$orderDetails.promotion.PromotionValue" }, 0] },
+                            { $divide: [{ $toDouble: "$orderDetails.product.ProductPrice" }, 100] }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      $cond: [
+                        { $ne: [{ $ifNull: ["$orderDetails.voucher.VoucherType", "fixed"] }, "percent"] },
+                        { $ifNull: [{ $toDouble: "$orderDetails.voucher.VoucherValue" }, 0] },
+                        {
+                          $multiply: [
+                            { $ifNull: [{ $toDouble: "$orderDetails.voucher.VoucherValue" }, 0] },
+                            {
+                              $divide: [
+                                {
+                                  $multiply: [
+                                    { $toDouble: "$orderDetails.Quantity" },
+                                    { $toDouble: "$orderDetails.product.ProductPrice" }
+                                  ]
+                                },
+                                100
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+            },
+          },
+          totalOrders: { $sum: 1 },
+          debugDates: { $push: "$convertedDate" },
+          debugOrderIDs: { $push: "$OrderID" }
+        }
+      }
+    ];
+
+    const bestSellingProductsPipeline = [
+      {
+        $lookup: {
+          from: "products",
+          let: { pid: "$ProductID" },
+          pipeline: [
+            { $match: { $expr: { $eq: ["$ProductID", "$$pid"] } } }
+          ],
+          as: "product"
+        }
+      },
+      { $unwind: "$product" },
+      {
+        $group: {
+          _id: "$ProductID",
+          productName: { $first: "$product.ProductName" },
+          totalQuantity: { $sum: "$Quantity" }
+        }
+      },
+      { $sort: { totalQuantity: -1 } },
+      { $limit: 5 }
+    ];
+
+    const bestSellingCategoriesPipeline = [
+      {
+        $lookup: {
+          from: "products",
+          let: { pid: "$ProductID" },
+          pipeline: [
+            { $match: { $expr: { $eq: ["$ProductID", "$$pid"] } } }
+          ],
+          as: "product"
+        }
+      },
+      { $unwind: "$product" },
+      {
+        $lookup: {
+          from: "productcategories",
+          let: { cateId: "$product.CateID" },
+          pipeline: [
+            { $match: { $expr: { $eq: ["$CateID", "$$cateId"] } } }
+          ],
+          as: "category"
+        }
+      },
+      { $unwind: "$category" },
+      {
+        $group: {
+          _id: "$category.CateID",
+          categoryName: { $first: "$category.CateName" },
+          totalQuantity: { $sum: "$Quantity" }
+        }
+      },
+      { $sort: { totalQuantity: -1 } },
+      { $limit: 5 }
+    ];
+
+    const [weeklyRevenueResult, bestSellingProducts, bestSellingCategories] = await Promise.all([
+      database.collection('orderss').aggregate(weeklyRevenuePipeline).toArray(),
+      database.collection('orderdetailss').aggregate(bestSellingProductsPipeline).toArray(),
+      database.collection('orderdetailss').aggregate(bestSellingCategoriesPipeline).toArray()
+    ]);
+
+    console.log("Weekly Revenue Debug:", {
+      dates: weeklyRevenueResult[0]?.debugDates,
+      orderIDs: weeklyRevenueResult[0]?.debugOrderIDs,
+      totalOrders: weeklyRevenueResult[0]?.totalOrders
+    });
+
+    res.json({
+      weeklyRevenue: weeklyRevenueResult[0]?.totalRevenue || 0,
+      weeklyOrders: weeklyRevenueResult[0]?.totalOrders || 0,
+      bestSellingProducts,
+      bestSellingCategories
+    });
+
+  } catch (error) {
+    console.error("Error fetching sales data:", error);
+    res.status(500).json({
+      error: "Internal server error",
+      details: error.message
+    });
+  }
+});
+//============API Orders Statistics===============
+app.get('/api/dashboard/orders', authenticateToken, async (req, res) => {
+  try {
+    const newOrdersPipeline = [
+      {
+        $addFields: {
+          convertedDate: { $toDate: "$OrderDate" }
+        }
+      },
+      {
+        $match: {
+          convertedDate: { $gte: new Date(Date.now() - 24 * 60 * 60 * 1000) }
+        }
+      },
+      {
+        $count: "newOrders"
+      }
+    ];
+
+    const processingOrders = await database.collection('orderss').countDocuments({ OrderStatusID: 2 });
+    const completedOrders = await database.collection('orderss').countDocuments({ OrderStatusID: 4 });
+    const cancelledOrders = await database.collection('orderss').countDocuments({ OrderStatusID: 5 });
+
+    const newOrdersResult = await database.collection('orderss').aggregate(newOrdersPipeline).toArray();
+
+    res.json({
+      newOrders: newOrdersResult[0]?.newOrders || 0,
+      processingOrders,
+      completedOrders,
+      cancelledOrders,
+    });
+  } catch (error) {
+    logger.error('Error in /api/dashboard/orders', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+//=========API Customers Statistics============
+app.get('/api/dashboard/customers', authenticateToken, async (req, res) => {
+  try {
+    const newCustomers = await accountCollection.countDocuments({
+      createdAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) }
+    });
+
+    const topCustomers = await database.collection('orderss').aggregate([
+      {
+        $lookup: {
+          from: 'orderdetailss',
+          localField: 'OrderID',
+          foreignField: 'OrderID',
+          as: 'orderDetails'
+        }
+      },
+      { $unwind: '$orderDetails' },
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'orderDetails.ProductID',
+          foreignField: 'ProductID',
+          as: 'product'
+        }
+      },
+      { $unwind: '$product' },
+      {
+        $group: {
+          _id: '$CustomerID',
+          totalAmount: {
+            $sum: { $multiply: ['$orderDetails.Quantity', '$product.ProductPrice'] }
+          }
+        }
+      },
+      { $sort: { totalAmount: -1 } },
+      { $limit: 5 },
+      {
+        $lookup: {
+          from: 'customers',
+          localField: '_id',
+          foreignField: 'CustomerID',
+          as: 'customer'
+        }
+      },
+      { $unwind: '$customer' },
+      { $project: { _id: 0, customerName: '$customer.CustomerName', totalAmount: 1 } }
+    ]).toArray();
+
+    const recentCustomers = await database.collection('orderss').aggregate([
+      {
+        $addFields: {
+          convertedDate: { $toDate: "$OrderDate" }
+        }
+      },
+      { $sort: { convertedDate: -1 } },
+      { $limit: 5 },
+      {
+        $lookup: {
+          from: 'customers',
+          localField: 'CustomerID',
+          foreignField: 'CustomerID',
+          as: 'customer'
+        }
+      },
+      { $unwind: '$customer' },
+      {
+        $project: {
+          _id: 0,
+          customerName: '$customer.CustomerName',
+          OrderDate: "$OrderDate"
+        }
+      }
+    ]).toArray();
+
+    res.json({
+      newCustomers,
+      topCustomers,
+      recentCustomers,
+    });
+  } catch (error) {
+    logger.error('Error in /api/dashboard/customers', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
 
 // ===================== SERVER START =====================
 
