@@ -852,10 +852,10 @@ app.get('/api/verify-token', authenticateToken, (req, res) => {
 app.get('/api/dashboard/overview', authenticateToken, async (req, res) => {
   try {
     const totalProducts = await productCollection.countDocuments();
-    const totalOrders = await database.collection('orderss').countDocuments();
+    const totalOrders = await database.collection('orders').countDocuments();
     const totalCustomers = await customerCollection.countDocuments();
 
-    const totalRevenue = await database.collection('orderdetailss').aggregate([
+    const totalRevenue = await database.collection('orderdetails').aggregate([
       {
         $lookup: {
           from: 'products',
@@ -876,7 +876,7 @@ app.get('/api/dashboard/overview', authenticateToken, async (req, res) => {
       { $unwind: { path: '$promotion', preserveNullAndEmptyArrays: true } },
       {
         $lookup: {
-          from: 'orderss',
+          from: 'orders',
           localField: 'OrderID',
           foreignField: 'OrderID',
           as: 'order',
@@ -999,7 +999,7 @@ app.get('/api/dashboard/sales', authenticateToken, async (req, res) => {
       },
       {
         $lookup: {
-          from: "orderdetailss",
+          from: "orderdetails",
           let: { orderId: { $toUpper: "$OrderID" } },
           pipeline: [
             {
@@ -1037,7 +1037,7 @@ app.get('/api/dashboard/sales', authenticateToken, async (req, res) => {
       { $unwind: "$orderDetails" },
       {
         $lookup: {
-          from: 'orderss',
+          from: 'orders',
           localField: 'orderDetails.OrderID',
           foreignField: 'OrderID',
           as: 'order',
@@ -1183,9 +1183,9 @@ app.get('/api/dashboard/sales', authenticateToken, async (req, res) => {
     ];
 
     const [weeklyRevenueResult, bestSellingProducts, bestSellingCategories] = await Promise.all([
-      database.collection('orderss').aggregate(weeklyRevenuePipeline).toArray(),
-      database.collection('orderdetailss').aggregate(bestSellingProductsPipeline).toArray(),
-      database.collection('orderdetailss').aggregate(bestSellingCategoriesPipeline).toArray()
+      database.collection('orders').aggregate(weeklyRevenuePipeline).toArray(),
+      database.collection('orderdetails').aggregate(bestSellingProductsPipeline).toArray(),
+      database.collection('orderdetails').aggregate(bestSellingCategoriesPipeline).toArray()
     ]);
 
     console.log("Weekly Revenue Debug:", {
@@ -1228,11 +1228,11 @@ app.get('/api/dashboard/orders', authenticateToken, async (req, res) => {
       }
     ];
 
-    const processingOrders = await database.collection('orderss').countDocuments({ OrderStatusID: 2 });
-    const completedOrders = await database.collection('orderss').countDocuments({ OrderStatusID: 4 });
-    const cancelledOrders = await database.collection('orderss').countDocuments({ OrderStatusID: 5 });
+    const processingOrders = await database.collection('orders').countDocuments({ OrderStatusID: 2 });
+    const completedOrders = await database.collection('orders').countDocuments({ OrderStatusID: 4 });
+    const cancelledOrders = await database.collection('orders').countDocuments({ OrderStatusID: 5 });
 
-    const newOrdersResult = await database.collection('orderss').aggregate(newOrdersPipeline).toArray();
+    const newOrdersResult = await database.collection('orders').aggregate(newOrdersPipeline).toArray();
 
     res.json({
       newOrders: newOrdersResult[0]?.newOrders || 0,
@@ -1252,10 +1252,10 @@ app.get('/api/dashboard/customers', authenticateToken, async (req, res) => {
       createdAt: { $gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) }
     });
 
-    const topCustomers = await database.collection('orderss').aggregate([
+    const topCustomers = await database.collection('orders').aggregate([
       {
         $lookup: {
-          from: 'orderdetailss',
+          from: 'orderdetails',
           localField: 'OrderID',
           foreignField: 'OrderID',
           as: 'orderDetails'
@@ -1293,7 +1293,7 @@ app.get('/api/dashboard/customers', authenticateToken, async (req, res) => {
       { $project: { _id: 0, customerName: '$customer.CustomerName', totalAmount: 1 } }
     ]).toArray();
 
-    const recentCustomers = await database.collection('orderss').aggregate([
+    const recentCustomers = await database.collection('orders').aggregate([
       {
         $addFields: {
           convertedDate: { $toDate: "$OrderDate" }
