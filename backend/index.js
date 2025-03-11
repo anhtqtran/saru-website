@@ -203,7 +203,7 @@ app.get('/api/products', async (req, res) => {
     if (req.query.wineIngredient) filter.WineIngredient = req.query.wineIngredient;
     if (req.query.wineFlavor) filter.WineFlavor = req.query.wineFlavor;
     if (req.query.bestSellers === 'true') filter.isBestSeller = true;
-    if (req.query.onSale === 'true') filter.isPromotion = true;
+    if (req.query.onSale === 'true') filter.PromotionID = { $ne: null };
 
     const sortOptions = {
       'priceAsc': { ProductPrice: 1 },
@@ -216,6 +216,46 @@ app.get('/api/products', async (req, res) => {
       productCollection.countDocuments(filter)
     ]);
 
+    const productIDs = items.map(p => p.ProductID);
+    const promotionIDs = items.map(p => p.PromotionID).filter(id => id !== null);
+
+    // Lấy dữ liệu từ productstocks
+    const stocks = await database.collection('productstocks').find({ ProductID: { $in: productIDs } }).toArray();
+    const stockMap = stocks.reduce((acc, stock) => {
+      acc[stock.ProductID] = stock.StockQuantity;
+      return acc;
+    }, {});
+
+    // Lấy dữ liệu từ promotions
+    const promotions = await database.collection('promotions').find({ PromotionID: { $in: promotionIDs } }).toArray();
+    const promotionMap = promotions.reduce((acc, promo) => {
+      acc[promo.PromotionID] = {
+        startDate: new Date(promo.PromotionStartDate),
+        expiredDate: new Date(promo.PromotionExpiredDate),
+        value: promo.PromotionValue
+      };
+      return acc;
+    }, {});
+
+    // Lấy dữ liệu đánh giá từ reviews
+    const reviewsAgg = await reviewCollection.aggregate([
+      { $match: { ProductID: { $in: productIDs } } },
+      {
+        $group: {
+          _id: "$ProductID",
+          averageRating: { $avg: { $min: [{ $max: ["$Rating", 0] }, 5] } },
+          totalReviewCount: { $sum: 1 }
+        }
+      }
+    ]).toArray();
+    const reviewMap = reviewsAgg.reduce((acc, r) => {
+      acc[r._id] = {
+        averageRating: Number(r.averageRating.toFixed(1)) || null,
+        totalReviewCount: r.totalReviewCount || 0
+      };
+      return acc;
+    }, {});
+
     const cateIDs = [...new Set(items.map(p => p.CateID))];
     const categories = await categoryCollection.find({ CateID: { $in: cateIDs } }).toArray();
     const cateMap = categories.reduce((acc, cur) => {
@@ -223,12 +263,51 @@ app.get('/api/products', async (req, res) => {
       return acc;
     }, {});
 
-    const productsWithCategories = items.map(p => ({
-      ...p,
-      CateName: cateMap[p.CateID] || 'Unknown'
-    }));
+    const currentDate = new Date('2025-03-11'); // Ngày hiện tại (11/03/2025)
+
+    const productsWithDetails = items.map(p => {
+      const stockQuantity = stockMap[p.ProductID] || 0;
+      const stockStatus = stockQuantity > 0 ? 'In Stock' : 'Out of Stock';
+
+      let isOnSale = false;
+      let currentPrice = p.ProductPrice || 0;
+      let discountPercentage = 0;
+
+      // Kiểm tra khuyến mãi
+      if (p.PromotionID !== null) {
+        const promo = promotionMap[p.PromotionID];
+        if (promo) {
+          const startDate = promo.startDate;
+          const expiredDate = promo.expiredDate;
+          const promotionValue = promo.value;
+
+          if (currentDate >= startDate && currentDate <= expiredDate) {
+            const discountMultiplier = 1 - (promotionValue / 100); // Giả định % giảm
+            currentPrice = p.ProductPrice * discountMultiplier;
+            isOnSale = true;
+            discountPercentage = promotionValue;
+          }
+        }
+      }
+
+      // Lấy thông tin đánh giá
+      const reviewData = reviewMap[p.ProductID] || { averageRating: null, totalReviewCount: 0 };
+
+      return {
+        ...p,
+        CateName: cateMap[p.CateID] || 'Unknown',
+        currentPrice: currentPrice,
+        originalPrice: p.ProductPrice || 0,
+        stockStatus: stockStatus,
+        isOnSale: isOnSale,
+        discountPercentage: discountPercentage,
+        averageRating: reviewData.averageRating,
+        totalReviewCount: reviewData.totalReviewCount
+      };
+    });
+
     res.json({
-      data: productsWithCategories,
+      data: productsWithDetails,
       pagination: { currentPage: page, totalPages: Math.ceil(total / limit), totalItems: total }
     });
   } catch (err) {
@@ -236,6 +315,7 @@ app.get('/api/products', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 app.get('/api/filters', async (req, res) => {
   try {
@@ -263,7 +343,6 @@ app.get('/api/products/recommendations', async (req, res) => {
 
 app.get('/api/products/:id', async (req, res) => {
   try {
-    // Kiểm tra tính hợp lệ của ObjectId
     if (!ObjectId.isValid(req.params.id)) {
       logger.warn('Invalid ObjectId provided', { id: req.params.id, correlationId: req.correlationId });
       return res.status(400).json({ message: 'ID sản phẩm không hợp lệ.' });
@@ -276,17 +355,47 @@ app.get('/api/products/:id', async (req, res) => {
       return res.status(404).json({ message: 'Sản phẩm không tồn tại.' });
     }
 
-    // Lấy hình ảnh (nếu không có thì trả về giá trị mặc định)
+    // Lấy dữ liệu từ productstocks
+    const stock = await database.collection('productstocks').findOne({ ProductID: product.ProductID });
+    const stockQuantity = stock ? stock.StockQuantity : 0;
+    const stockStatus = stockQuantity > 0 ? 'In Stock' : 'Out of Stock';
+
+    // Lấy dữ liệu từ promotions
+    let isOnSale = false;
+    let currentPrice = product.ProductPrice || 0;
+    let discountPercentage = 0;
+    const currentDate = new Date('2025-03-11'); // Ngày hiện tại
+
+    if (product.PromotionID) {
+      const promo = await database.collection('promotions').findOne({ PromotionID: product.PromotionID });
+      if (promo) {
+        const startDate = new Date(promo.PromotionStartDate);
+        const expiredDate = new Date(promo.PromotionExpiredDate);
+        const promotionValue = promo.PromotionValue;
+
+        if (currentDate >= startDate && currentDate <= expiredDate) {
+          const discountMultiplier = 1 - (promotionValue / 100); // Giả định % giảm
+          currentPrice = product.ProductPrice * discountMultiplier;
+          isOnSale = true;
+          discountPercentage = promotionValue;
+        }
+      }
+    }
+
     const image = await imageCollection.findOne({ ImageID: product.ImageID }) || {};
     const productWithImages = {
       ...product,
       ProductImageCover: image.ProductImageCover || '',
       ProductImageSub1: image.ProductImageSub1 || '',
       ProductImageSub2: image.ProductImageSub2 || '',
-      ProductImageSub3: image.ProductImageSub3 || ''
+      ProductImageSub3: image.ProductImageSub3 || '',
+      currentPrice: currentPrice,
+      originalPrice: product.ProductPrice || 0,
+      stockStatus: stockStatus,
+      isOnSale: isOnSale,
+      discountPercentage: discountPercentage
     };
 
-    // Xử lý reviews với kiểm tra DatePosted
     const reviewsAgg = await reviewCollection.aggregate([
       { $match: { ProductID: product.ProductID } },
       { $sort: { DatePosted: -1 } },
@@ -306,13 +415,13 @@ app.get('/api/products/:id', async (req, res) => {
                     $cond: {
                       if: { $eq: [{ $type: "$$convertedDate" }, "date"] },
                       then: { $dateToString: { format: "%d/%m/%Y", date: "$$convertedDate" } },
-                      else: "N/A" // Giá trị mặc định nếu chuỗi không hợp lệ
+                      else: "N/A"
                     }
                   }
                 }
               },
               else: { $dateToString: { format: "%d/%m/%Y", date: "$DatePosted" } }
-           }
+            }
           }
         }
       }
@@ -323,7 +432,6 @@ app.get('/api/products/:id', async (req, res) => {
       ? Number((validReviews.reduce((sum, r) => sum + r.Rating, 0) / validReviews.length).toFixed(1))
       : 0;
 
-    // Lấy sản phẩm liên quan
     const relatedProducts = await productCollection.find({
       CateID: product.CateID,
       _id: { $ne: productId }
@@ -354,7 +462,6 @@ app.get('/api/products/:id', async (req, res) => {
     res.status(500).json({ message: 'Lỗi hệ thống, vui lòng thử lại sau.', error: err.message });
   }
 });
-
 // ===================== COMPARE API =====================
 
 app.post('/api/compare', authenticateToken, async (req, res) => {

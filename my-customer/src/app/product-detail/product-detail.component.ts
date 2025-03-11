@@ -44,12 +44,22 @@ export class ProductDetailComponent implements OnInit {
           console.log('Review data:', data.reviews);
           console.log('Product data from API:', data);
           console.log('Related products _id:', data.relatedProducts?.map(rp => rp._id) || []);
+
           if (data.relatedProducts && data.relatedProducts.length > 0) {
             console.log('Kiểu dữ liệu _id sản phẩm liên quan đầu tiên:', typeof data.relatedProducts[0]._id);
             console.log('Constructor name _id sản phẩm liên quan đầu tiên:', data.relatedProducts[0]._id.constructor.name);
           }
 
-          this.product = { ...data };
+          this.product = {
+            ...data,
+            currentPrice: data.currentPrice ?? data.ProductPrice ?? 0,
+            originalPrice: data.originalPrice ?? data.ProductPrice ?? 0,
+            stockStatus: data.stockStatus ?? 'In Stock',
+            isOnSale: !!data.isOnSale,
+            discountPercentage: data.discountPercentage ?? 0,
+            averageRating: data.averageRating ?? 0,
+            totalReviewCount: data.totalReviewCount ?? 0
+          };
           this.selectedImage = this.product.ProductImageCover || 'assets/images/default-product.png';
         } else {
           console.error('Product data is null');

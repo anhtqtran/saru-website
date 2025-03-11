@@ -4068,3 +4068,827 @@
 {"level":"info","message":"GET /api/compare 200 2 - 59.148 ms - correlationId: 0ee671f5-c0a2-4eec-8249-c89917a4d7b2","timestamp":"2025-03-11T13:35:12.193Z"}
 {"AccountID":"acc_1741507487684","compareList":[],"correlationId":"64aae269-859b-4367-96d6-a656d2cb15d1","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-11T13:35:12.566Z"}
 {"level":"info","message":"GET /api/compare 304 - - 372.659 ms - correlationId: 64aae269-859b-4367-96d6-a656d2cb15d1","timestamp":"2025-03-11T13:35:12.568Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-11T14:20:16.708Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-11T14:20:18.091Z"}
+{"level":"info","message":"GET /api/verify-token 304 - - 5.371 ms - correlationId: 30666bd8-7a57-4bb3-8616-42622198d186","timestamp":"2025-03-11T14:20:18.404Z"}
+{"AccountID":"acc_1741507487684","cart":[{"productId":"67cedd78aaf7ee8b1e4bf2e2","quantity":1}],"correlationId":"4efcd131-5194-4f54-9d5c-f5684dde951b","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-11T14:20:18.467Z"}
+{"level":"info","message":"GET /api/cart 200 55 - 79.914 ms - correlationId: 4efcd131-5194-4f54-9d5c-f5684dde951b","timestamp":"2025-03-11T14:20:18.470Z"}
+{"level":"info","message":"GET /api/cart - - - - ms - correlationId: cc766f7d-b209-4210-8cb3-f86e0136a512","timestamp":"2025-03-11T14:20:18.580Z"}
+{"level":"info","message":"GET /api/verify-token 304 - - 4.216 ms - correlationId: 0a2abfa4-5bf9-4682-86e1-cf533c0951fc","timestamp":"2025-03-11T14:20:18.587Z"}
+{"AccountID":"acc_1741507487684","cart":[{"productId":"67cedd78aaf7ee8b1e4bf2e2","quantity":1}],"correlationId":"cc766f7d-b209-4210-8cb3-f86e0136a512","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-11T14:20:18.593Z"}
+{"level":"info","message":"GET /api/categories 200 1412 - 173.943 ms - correlationId: b3f4018f-dd04-41ef-a90e-60463a24bcf8","timestamp":"2025-03-11T14:20:18.723Z"}
+{"AccountID":"acc_1741507487684","cart":[{"productId":"67cedd78aaf7ee8b1e4bf2e2","quantity":1}],"correlationId":"3260030c-090e-4afa-b9e8-27681dc2f968","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-11T14:20:18.876Z"}
+{"level":"info","message":"GET /api/cart 200 55 - 287.074 ms - correlationId: 3260030c-090e-4afa-b9e8-27681dc2f968","timestamp":"2025-03-11T14:20:18.877Z"}
+{"level":"info","message":"GET /api/categories 304 - - 211.857 ms - correlationId: 5bdf5b30-153b-4d80-ac87-b65709d15f52","timestamp":"2025-03-11T14:20:18.942Z"}
+{"level":"info","message":"GET /api/filters 200 1948 - 578.096 ms - correlationId: 55b54717-dfa0-4e07-8030-7a0f48a91474","timestamp":"2025-03-11T14:20:19.130Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 17560 - 588.957 ms - correlationId: 29e59669-54e1-446b-a79a-ffb39453de8b","timestamp":"2025-03-11T14:20:19.134Z"}
+{"AccountID":"acc_1741507487684","cart":[{"productId":"67cedd78aaf7ee8b1e4bf2e2","quantity":1}],"correlationId":"e7b6d295-11aa-4872-96e8-b49d962dd902","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-11T14:20:19.377Z"}
+{"level":"info","message":"GET /api/cart 304 - - 494.911 ms - correlationId: e7b6d295-11aa-4872-96e8-b49d962dd902","timestamp":"2025-03-11T14:20:19.381Z"}
+{"AccountID":"acc_1741507487684","compareList":[],"correlationId":"05d3d1b9-b84a-4aba-8505-d20a742994d1","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-11T14:20:19.466Z"}
+{"level":"info","message":"GET /api/compare 200 2 - 1060.610 ms - correlationId: 05d3d1b9-b84a-4aba-8505-d20a742994d1","timestamp":"2025-03-11T14:20:19.468Z"}
+{"AccountID":"acc_1741507487684","compareList":[],"correlationId":"90340700-d475-4c8b-a97b-ad6b3f20948f","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-11T14:20:19.852Z"}
+{"level":"info","message":"GET /api/compare 304 - - 381.945 ms - correlationId: 90340700-d475-4c8b-a97b-ad6b3f20948f","timestamp":"2025-03-11T14:20:19.854Z"}
+{"AccountID":"acc_1741507487684","compareList":[],"correlationId":"d4984dce-a52b-4526-ba5d-7b7693236db0","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-11T14:20:19.932Z"}
+{"level":"info","message":"GET /api/compare 304 - - 78.580 ms - correlationId: d4984dce-a52b-4526-ba5d-7b7693236db0","timestamp":"2025-03-11T14:20:19.935Z"}
+{"AccountID":"acc_1741507487684","cart":[{"productId":"67cedd78aaf7ee8b1e4bf2e2","quantity":1}],"correlationId":"47ed351a-af94-4e9b-87f0-7997c95bb194","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-11T14:20:19.970Z"}
+{"level":"info","message":"GET /api/cart 304 - - 79.004 ms - correlationId: 47ed351a-af94-4e9b-87f0-7997c95bb194","timestamp":"2025-03-11T14:20:19.972Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 66.405 ms - correlationId: 8a423833-41b7-4469-a4d3-d7b26931e95a","timestamp":"2025-03-11T14:20:19.975Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 91.168 ms - correlationId: f709f751-da92-404c-b6e5-1234f86a9703","timestamp":"2025-03-11T14:20:20.007Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 128.474 ms - correlationId: 4f1abc65-04c5-4c90-9d4e-0a1250e88b29","timestamp":"2025-03-11T14:20:20.046Z"}
+{"AccountID":"acc_1741507487684","compareList":[],"correlationId":"3e53b623-7799-4b38-bd3d-560c7ce8176b","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-11T14:20:20.047Z"}
+{"level":"info","message":"GET /api/compare 304 - - 111.275 ms - correlationId: 3e53b623-7799-4b38-bd3d-560c7ce8176b","timestamp":"2025-03-11T14:20:20.049Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 128.180 ms - correlationId: 0dbf46b5-9e96-40f4-aeb3-6dad04484771","timestamp":"2025-03-11T14:20:20.106Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 99.200 ms - correlationId: 2b59685a-bf74-426c-b949-5a7f54c15cad","timestamp":"2025-03-11T14:20:20.108Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 57.205 ms - correlationId: bb43e2d0-187c-4d2e-8e1c-5bfbd8c91187","timestamp":"2025-03-11T14:20:20.110Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 81.816 ms - correlationId: ddf80ec1-42ee-4526-a1fe-0b7dc340ae14","timestamp":"2025-03-11T14:20:20.194Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 82.619 ms - correlationId: 293b3de3-560a-41c9-bce8-0d3ccaa6c80a","timestamp":"2025-03-11T14:20:20.196Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 83.778 ms - correlationId: 7dec54d2-5647-4cfb-a311-d2b3e86e25b0","timestamp":"2025-03-11T14:20:20.198Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 390.534 ms - correlationId: 86ca4473-eef5-4217-9882-f2d9495bf4f0","timestamp":"2025-03-11T14:20:20.297Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-11T14:20:20.381Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 1138.558 ms - correlationId: 7c7f0a8e-fbf2-46c6-9dbd-6f01d6d26ac7","timestamp":"2025-03-11T14:20:21.049Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 1956.744 ms - correlationId: 07d66526-cd8d-43f1-ac7f-84418e8a03a8","timestamp":"2025-03-11T14:20:21.870Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-11T14:32:58.637Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-11T14:32:59.756Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-11T14:33:02.129Z"}
+{"level":"info","message":"GET /api/verify-token 304 - - 4.736 ms - correlationId: ee10a275-373d-48b0-9249-6d536785e84e","timestamp":"2025-03-11T14:36:07.565Z"}
+{"AccountID":"acc_1741507487684","cart":[{"productId":"67cedd78aaf7ee8b1e4bf2e2","quantity":1}],"correlationId":"a22cf3be-a516-43d1-b777-9be2e0e21a32","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-11T14:36:07.625Z"}
+{"level":"info","message":"GET /api/cart 304 - - 77.379 ms - correlationId: a22cf3be-a516-43d1-b777-9be2e0e21a32","timestamp":"2025-03-11T14:36:07.627Z"}
+{"level":"info","message":"GET /api/cart - - - - ms - correlationId: 44635334-acd3-44b5-bbf3-5f5f2d5a185e","timestamp":"2025-03-11T14:36:07.665Z"}
+{"level":"info","message":"GET /api/verify-token 304 - - 1.759 ms - correlationId: 4d906d4c-e777-40eb-9eab-0da0715bb251","timestamp":"2025-03-11T14:36:07.673Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 18632 - 670.604 ms - correlationId: 2deaf68a-1aec-4758-aa94-4bcf0c8958e9","timestamp":"2025-03-11T14:36:08.281Z"}
+{"level":"info","message":"GET /api/categories 304 - - 690.871 ms - correlationId: 7b8e7db1-1dce-4b70-bfad-8cebd90af768","timestamp":"2025-03-11T14:36:08.296Z"}
+{"level":"info","message":"GET /api/categories 304 - - 79.105 ms - correlationId: 67d37742-7b31-4b70-b72b-56001d78d3ce","timestamp":"2025-03-11T14:36:08.378Z"}
+{"level":"info","message":"GET /api/filters 304 - - 889.926 ms - correlationId: b3bdddcd-88c7-4404-94a0-ebd37c6f18aa","timestamp":"2025-03-11T14:36:08.503Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 68.233 ms - correlationId: df87e478-c866-4176-a6f1-a542431bed3b","timestamp":"2025-03-11T14:36:08.561Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 68.819 ms - correlationId: 8d899df5-65a2-45c6-99c2-50324ac80ef3","timestamp":"2025-03-11T14:36:08.564Z"}
+{"AccountID":"acc_1741507487684","compareList":[],"correlationId":"0b3da63f-48c0-46df-84fe-fda6adbf1352","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-11T14:36:08.595Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1028.268 ms - correlationId: 0b3da63f-48c0-46df-84fe-fda6adbf1352","timestamp":"2025-03-11T14:36:08.597Z"}
+{"AccountID":"acc_1741507487684","cart":[{"productId":"67cedd78aaf7ee8b1e4bf2e2","quantity":1}],"correlationId":"44635334-acd3-44b5-bbf3-5f5f2d5a185e","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-11T14:36:08.632Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 128.020 ms - correlationId: 567ca7a6-4c58-4a26-affc-d90d7974e95d","timestamp":"2025-03-11T14:36:08.635Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 139.392 ms - correlationId: c11515a9-a481-4a12-9674-a4572c7d089d","timestamp":"2025-03-11T14:36:08.638Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 154.962 ms - correlationId: 98d42ba5-8e75-456d-ba05-264561c72906","timestamp":"2025-03-11T14:36:08.664Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 175.037 ms - correlationId: 58010267-3329-4c69-aeb9-ba97220a589a","timestamp":"2025-03-11T14:36:08.743Z"}
+{"AccountID":"acc_1741507487684","compareList":[],"correlationId":"7a64d346-9f7c-4e39-8273-5db2fbfe8b92","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-11T14:36:08.746Z"}
+{"level":"info","message":"GET /api/compare 304 - - 147.179 ms - correlationId: 7a64d346-9f7c-4e39-8273-5db2fbfe8b92","timestamp":"2025-03-11T14:36:08.747Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 108.366 ms - correlationId: 0257bd1a-1864-482a-991d-3683ef783b58","timestamp":"2025-03-11T14:36:08.750Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 177.790 ms - correlationId: b1c37cb1-4449-4259-95e7-de625a181c9e","timestamp":"2025-03-11T14:36:08.820Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 155.149 ms - correlationId: 5af02fc8-922b-45ab-8be3-02427301b084","timestamp":"2025-03-11T14:36:08.824Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 74.188 ms - correlationId: 878528fa-3e45-48a9-a6c3-aa6edeff291a","timestamp":"2025-03-11T14:36:08.826Z"}
+{"AccountID":"acc_1741507487684","compareList":[],"correlationId":"0053afc2-3a81-4aa9-955b-95b2e9cc39e7","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-11T14:36:08.892Z"}
+{"level":"info","message":"GET /api/compare 304 - - 140.080 ms - correlationId: 0053afc2-3a81-4aa9-955b-95b2e9cc39e7","timestamp":"2025-03-11T14:36:08.894Z"}
+{"AccountID":"acc_1741507487684","compareList":[],"correlationId":"728500b1-de66-41e2-959d-5d4b0ba200ba","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-11T14:36:08.967Z"}
+{"level":"info","message":"GET /api/compare 304 - - 70.812 ms - correlationId: 728500b1-de66-41e2-959d-5d4b0ba200ba","timestamp":"2025-03-11T14:36:08.968Z"}
+{"AccountID":"acc_1741507487684","cart":[{"productId":"67cedd78aaf7ee8b1e4bf2e2","quantity":1}],"correlationId":"4d3ab923-d3a5-40bd-89a0-0a9c155d1e33","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-11T14:36:09.056Z"}
+{"level":"info","message":"GET /api/cart 200 55 - 1389.115 ms - correlationId: 4d3ab923-d3a5-40bd-89a0-0a9c155d1e33","timestamp":"2025-03-11T14:36:09.057Z"}
+{"AccountID":"acc_1741507487684","cart":[{"productId":"67cedd78aaf7ee8b1e4bf2e2","quantity":1}],"correlationId":"569a50a3-9b92-4d33-8c12-ea7b9066f39b","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-11T14:36:09.150Z"}
+{"level":"info","message":"GET /api/cart 304 - - 92.854 ms - correlationId: 569a50a3-9b92-4d33-8c12-ea7b9066f39b","timestamp":"2025-03-11T14:36:09.152Z"}
+{"AccountID":"acc_1741507487684","cart":[{"productId":"67cedd78aaf7ee8b1e4bf2e2","quantity":1}],"correlationId":"81d4f708-adaf-4379-8f4f-3637af57f2c8","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-11T14:36:09.214Z"}
+{"level":"info","message":"GET /api/cart 304 - - 60.030 ms - correlationId: 81d4f708-adaf-4379-8f4f-3637af57f2c8","timestamp":"2025-03-11T14:36:09.216Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 734.175 ms - correlationId: 44798d84-2f57-4ea1-8a08-6c0cd0bc73d0","timestamp":"2025-03-11T14:36:09.301Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 842.772 ms - correlationId: 32ed42d5-d55a-4c19-a20e-bfd49c77c4d4","timestamp":"2025-03-11T14:36:09.340Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-11T18:00:01.857Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-11T18:11:45.625Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-11T18:11:47.483Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-11T18:11:49.014Z"}
+{"correlationId":"304efce3-fd64-48d9-8f69-b11f08ec0279","error":"jwt expired","level":"warn","message":"Invalid token","path":"/api/cart","timestamp":"2025-03-11T18:16:47.532Z"}
+{"level":"info","message":"GET /api/cart 403 38 - 14.492 ms - correlationId: 304efce3-fd64-48d9-8f69-b11f08ec0279","timestamp":"2025-03-11T18:16:47.541Z"}
+{"correlationId":"f5fedfa8-9729-43a6-ac82-b3e134d67b9c","error":"jwt expired","level":"warn","message":"Invalid token","path":"/api/cart","timestamp":"2025-03-11T18:16:50.859Z"}
+{"level":"info","message":"GET /api/cart 403 38 - 7.729 ms - correlationId: f5fedfa8-9729-43a6-ac82-b3e134d67b9c","timestamp":"2025-03-11T18:16:50.863Z"}
+{"correlationId":"ffbf55cf-c651-491d-8f9c-14ab45b8359b","error":"jwt expired","level":"warn","message":"Invalid token","path":"/api/verify-token","timestamp":"2025-03-11T18:16:50.872Z"}
+{"level":"info","message":"GET /api/verify-token 403 38 - 7.781 ms - correlationId: ffbf55cf-c651-491d-8f9c-14ab45b8359b","timestamp":"2025-03-11T18:16:50.875Z"}
+{"correlationId":"bd32ead3-7cdf-405d-b21a-c35b138e5bfe","error":"jwt expired","level":"warn","message":"Invalid token","path":"/api/compare","timestamp":"2025-03-11T18:16:50.881Z"}
+{"level":"info","message":"GET /api/compare 403 38 - 2.829 ms - correlationId: bd32ead3-7cdf-405d-b21a-c35b138e5bfe","timestamp":"2025-03-11T18:16:50.883Z"}
+{"correlationId":"016f1574-f9d3-42e1-a90f-9608b47dd77a","error":"jwt expired","level":"warn","message":"Invalid token","path":"/api/cart","timestamp":"2025-03-11T18:16:50.900Z"}
+{"level":"info","message":"GET /api/cart 403 38 - 11.574 ms - correlationId: 016f1574-f9d3-42e1-a90f-9608b47dd77a","timestamp":"2025-03-11T18:16:50.902Z"}
+{"correlationId":"ff33903d-1d21-4208-b7c0-59175b5b1a0e","error":"jwt expired","level":"warn","message":"Invalid token","path":"/api/compare","timestamp":"2025-03-11T18:16:50.913Z"}
+{"level":"info","message":"GET /api/compare 403 38 - 10.257 ms - correlationId: ff33903d-1d21-4208-b7c0-59175b5b1a0e","timestamp":"2025-03-11T18:16:50.915Z"}
+{"correlationId":"43f01a8a-3f08-4493-83e3-e14f8d353b2e","error":"jwt expired","level":"warn","message":"Invalid token","path":"/api/cart","timestamp":"2025-03-11T18:16:50.954Z"}
+{"correlationId":"e7a687ef-3062-45fc-abaa-837b14cb97c3","error":"jwt expired","level":"warn","message":"Invalid token","path":"/api/compare","timestamp":"2025-03-11T18:16:50.957Z"}
+{"level":"info","message":"GET /api/cart 403 38 - 2.592 ms - correlationId: 43f01a8a-3f08-4493-83e3-e14f8d353b2e","timestamp":"2025-03-11T18:16:50.962Z"}
+{"level":"info","message":"GET /api/compare 403 38 - 2.593 ms - correlationId: e7a687ef-3062-45fc-abaa-837b14cb97c3","timestamp":"2025-03-11T18:16:50.963Z"}
+{"correlationId":"b409b32b-0014-4cfd-b0cb-b24302bc4413","error":"jwt expired","level":"warn","message":"Invalid token","path":"/api/cart","timestamp":"2025-03-11T18:16:50.973Z"}
+{"level":"info","message":"GET /api/cart 403 38 - 11.052 ms - correlationId: b409b32b-0014-4cfd-b0cb-b24302bc4413","timestamp":"2025-03-11T18:16:50.976Z"}
+{"correlationId":"0f77e866-a19a-4534-b7b5-3c3447c90dbf","error":"jwt expired","level":"warn","message":"Invalid token","path":"/api/compare","timestamp":"2025-03-11T18:16:50.986Z"}
+{"level":"info","message":"GET /api/compare 403 38 - 9.938 ms - correlationId: 0f77e866-a19a-4534-b7b5-3c3447c90dbf","timestamp":"2025-03-11T18:16:50.987Z"}
+{"level":"info","message":"GET /api/filters 304 - - 641.152 ms - correlationId: f4736144-2d5f-49f1-8ed6-aca0c0fdfcb9","timestamp":"2025-03-11T18:16:51.589Z"}
+{"level":"info","message":"GET /api/categories 304 - - 850.293 ms - correlationId: c03e1f60-105e-463a-a19c-cc6b5fdb03f5","timestamp":"2025-03-11T18:16:51.794Z"}
+{"level":"info","message":"GET /api/categories 304 - - 300.027 ms - correlationId: d3c69f3a-39c4-41bd-a272-26f23ce97beb","timestamp":"2025-03-11T18:16:52.101Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 18629 - 1344.232 ms - correlationId: 5efb66d5-cfab-42fa-984f-1d3d288a8132","timestamp":"2025-03-11T18:16:52.268Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 129.900 ms - correlationId: 82be7a42-9d55-48c2-b7cc-2ad40c6e3bd2","timestamp":"2025-03-11T18:16:52.408Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 127.487 ms - correlationId: 7584dfad-3784-4cbd-b22b-38b751337a5c","timestamp":"2025-03-11T18:16:52.411Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 132.655 ms - correlationId: 4d174f62-8f36-4265-8f25-5f4dca3aa76c","timestamp":"2025-03-11T18:16:52.414Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 320.700 ms - correlationId: ec4a8313-1a98-44c0-94f4-849e90f57344","timestamp":"2025-03-11T18:16:52.612Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 194.853 ms - correlationId: 1fe26b91-13a4-476d-a065-e6578dfe7680","timestamp":"2025-03-11T18:16:52.616Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 208.074 ms - correlationId: 93ddd7ba-9af0-43da-9b4a-4999fecb478c","timestamp":"2025-03-11T18:16:52.628Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 394.222 ms - correlationId: 0a1f75d0-890b-456b-8cf4-4990c4890df6","timestamp":"2025-03-11T18:16:52.817Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 190.756 ms - correlationId: 43e390c7-3edd-4081-9310-dca7fb2ecb79","timestamp":"2025-03-11T18:16:52.822Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 191.369 ms - correlationId: 1be1e75c-6db0-4868-b777-3c1b7d0a3e47","timestamp":"2025-03-11T18:16:52.825Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 281.763 ms - correlationId: fd4b9982-a909-40be-90b4-d729ea601c90","timestamp":"2025-03-11T18:16:52.921Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 696.118 ms - correlationId: d55a5246-1861-4f2a-9361-cf5bc4db27b4","timestamp":"2025-03-11T18:16:52.985Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 758.093 ms - correlationId: b3da2553-7fef-4524-b5b8-dcf345d12855","timestamp":"2025-03-11T18:16:53.044Z"}
+{"level":"info","message":"GET /api/products?page=3&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 20463 - 625.101 ms - correlationId: d0509034-fd21-4d8c-a4fa-3bd77fa74441","timestamp":"2025-03-11T18:17:04.378Z"}
+{"level":"info","message":"GET /api/images/image60 200 497 - 105.682 ms - correlationId: f8d03373-27f5-4a6c-a458-7de8fdc49d81","timestamp":"2025-03-11T18:17:04.491Z"}
+{"level":"info","message":"GET /api/images/image18 200 246 - 106.942 ms - correlationId: 435928b0-deb1-49a3-b271-2d2573d8e025","timestamp":"2025-03-11T18:17:04.495Z"}
+{"level":"info","message":"GET /api/images/image20 200 179 - 106.363 ms - correlationId: e4caca80-12cf-4039-8b3d-7fdb17e62554","timestamp":"2025-03-11T18:17:04.497Z"}
+{"level":"info","message":"GET /api/images/image25 200 181 - 110.992 ms - correlationId: 0006d815-1d97-4967-8e27-da50b33ae667","timestamp":"2025-03-11T18:17:04.500Z"}
+{"level":"info","message":"GET /api/images/image9 200 557 - 111.523 ms - correlationId: 354dc5d3-fd03-4eaf-b9c8-65fbf4f159c8","timestamp":"2025-03-11T18:17:04.504Z"}
+{"level":"info","message":"GET /api/images/image35 200 295 - 74.548 ms - correlationId: 9ea73132-3526-40ef-b0fb-a274dc1f2cf1","timestamp":"2025-03-11T18:17:04.593Z"}
+{"level":"info","message":"GET /api/images/image55 200 347 - 86.859 ms - correlationId: bc0eeb63-b4b8-413e-abd3-ed263dfe28d1","timestamp":"2025-03-11T18:17:04.597Z"}
+{"level":"info","message":"GET /api/images/image43 200 191 - 87.101 ms - correlationId: 1488bca5-5843-4e03-b2bb-56eee4846aad","timestamp":"2025-03-11T18:17:04.602Z"}
+{"level":"info","message":"GET /api/images/image39 200 192 - 90.934 ms - correlationId: 196810a9-a111-4727-a144-372f1bebf9b5","timestamp":"2025-03-11T18:17:04.607Z"}
+{"level":"info","message":"GET /api/images/image26 200 183 - 99.315 ms - correlationId: 88f7228d-f657-4af7-951a-3d2d50d5b665","timestamp":"2025-03-11T18:17:04.612Z"}
+{"level":"info","message":"GET /api/images/image2 304 - - 53.001 ms - correlationId: bd630b1b-bd5e-4eb6-af1d-00843c8bcb46","timestamp":"2025-03-11T18:17:04.680Z"}
+{"level":"info","message":"GET /api/images/image38 200 349 - 507.712 ms - correlationId: 0c8e696e-8cd4-495a-81ac-17deb1e7b685","timestamp":"2025-03-11T18:17:04.901Z"}
+{"level":"info","message":"GET /api/categories 304 - - 67.720 ms - correlationId: bd11e193-d368-4592-bb56-8c9bd427e831","timestamp":"2025-03-11T18:17:12.612Z"}
+{"level":"info","message":"GET /api/categories 304 - - 52.935 ms - correlationId: b6792936-fde9-438e-a7fe-664ea8584bb9","timestamp":"2025-03-11T18:17:12.667Z"}
+{"level":"info","message":"GET /api/filters 304 - - 243.480 ms - correlationId: f76fca09-b24f-46aa-ab10-284a8be060fa","timestamp":"2025-03-11T18:17:12.789Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 269.645 ms - correlationId: c9948283-d5c6-48bd-bbdc-53ae6a4698cf","timestamp":"2025-03-11T18:17:12.810Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 45.146 ms - correlationId: 675994da-1abe-4790-b453-1c5cdec5f3e2","timestamp":"2025-03-11T18:17:12.866Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 50.273 ms - correlationId: f836f5d6-f836-419c-9a9e-a413f1c37807","timestamp":"2025-03-11T18:17:12.868Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 45.752 ms - correlationId: d7c21e04-c5e4-4af9-8fe6-6592a6f21cb2","timestamp":"2025-03-11T18:17:12.871Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 54.011 ms - correlationId: 57c2f77b-f1e7-41a0-9376-154e2fc015fe","timestamp":"2025-03-11T18:17:12.873Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 54.322 ms - correlationId: ec5f0ad7-59b0-49a3-b029-1d3bb5eb0dac","timestamp":"2025-03-11T18:17:12.878Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 67.337 ms - correlationId: 5f6c64e2-644a-4637-bf73-034670ba3e31","timestamp":"2025-03-11T18:17:12.892Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 43.868 ms - correlationId: 898654d4-19fe-4889-998c-fb62856831a8","timestamp":"2025-03-11T18:17:12.914Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 59.463 ms - correlationId: ec80f359-11bc-4474-9189-eeeaba26c063","timestamp":"2025-03-11T18:17:12.935Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 58.669 ms - correlationId: 3cbda821-0de1-41a9-aa42-99e51864a99f","timestamp":"2025-03-11T18:17:12.939Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 59.187 ms - correlationId: a6661c5a-dddd-41c3-ab3e-bad36527e7ca","timestamp":"2025-03-11T18:17:12.942Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 65.322 ms - correlationId: eebaf2ec-dda8-4124-804d-d183c0a14100","timestamp":"2025-03-11T18:17:12.947Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 56.760 ms - correlationId: 897f5c0c-878c-4aea-b25b-211028df3f72","timestamp":"2025-03-11T18:17:12.951Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&category=CATE1&bestSellers=false&onSale=false&sort=priceDesc 200 45182 - 389.669 ms - correlationId: 5f0ae6d7-5021-47d5-a05c-ea5023adb3f2","timestamp":"2025-03-11T18:17:16.336Z"}
+{"level":"info","message":"GET /api/images/image18 304 - - 46.752 ms - correlationId: 0896b879-4c62-4838-9bcb-b3ead90f8092","timestamp":"2025-03-11T18:17:16.402Z"}
+{"level":"info","message":"GET /api/images/image1 200 601 - 49.677 ms - correlationId: 00595458-3ede-4ab0-91cd-2b15bdfb9e90","timestamp":"2025-03-11T18:17:16.403Z"}
+{"level":"info","message":"GET /api/images/image5 200 434 - 46.348 ms - correlationId: b910cbdb-47c5-4000-899e-4e73addf9848","timestamp":"2025-03-11T18:17:16.405Z"}
+{"level":"info","message":"GET /api/images/image12 200 211 - 79.687 ms - correlationId: 999bb1fa-f7b8-444a-9c37-db0d8c0d6a7f","timestamp":"2025-03-11T18:17:16.437Z"}
+{"level":"info","message":"GET /api/images/image2 304 - - 90.558 ms - correlationId: f11a2a9e-8397-42bc-b246-8daf07d7f0b6","timestamp":"2025-03-11T18:17:16.439Z"}
+{"level":"info","message":"GET /api/images/image9 304 - - 90.372 ms - correlationId: bacfd5f5-2a6c-44ea-a030-242a414a6e75","timestamp":"2025-03-11T18:17:16.441Z"}
+{"level":"info","message":"GET /api/images/image6 200 245 - 67.565 ms - correlationId: 041a3bf1-f0b7-4735-93a4-c801fd12d145","timestamp":"2025-03-11T18:17:16.476Z"}
+{"level":"info","message":"GET /api/images/image3 200 452 - 68.263 ms - correlationId: 4b294ce0-d08c-409c-bfd2-b33c3f19a5cc","timestamp":"2025-03-11T18:17:16.478Z"}
+{"level":"info","message":"GET /api/images/image8 200 320 - 94.364 ms - correlationId: 7754ca8f-2e06-4532-8c2a-d86a40e8cab0","timestamp":"2025-03-11T18:17:16.506Z"}
+{"level":"info","message":"GET /api/images/image7 200 323 - 65.653 ms - correlationId: 58fee2a1-6b6a-4772-b44e-b140a864ec83","timestamp":"2025-03-11T18:17:16.509Z"}
+{"level":"info","message":"GET /api/images/image11 200 268 - 72.868 ms - correlationId: e83aa54a-36de-448b-9fd1-6e231ecb4c61","timestamp":"2025-03-11T18:17:16.518Z"}
+{"level":"info","message":"GET /api/images/image14 200 505 - 79.717 ms - correlationId: b57f07cd-3d5c-4ceb-9117-4a6a3f49962f","timestamp":"2025-03-11T18:17:16.526Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&category=CATE3&bestSellers=false&onSale=false&sort=priceDesc 200 9703 - 455.714 ms - correlationId: 6bd5739e-976c-40c6-91c3-b52bf6e0f0cd","timestamp":"2025-03-11T18:17:18.791Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 70.221 ms - correlationId: f27c82fb-6489-4410-a317-64a8f2179279","timestamp":"2025-03-11T18:17:18.870Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 88.777 ms - correlationId: 6cb40c89-b51b-460d-a289-afbac0778265","timestamp":"2025-03-11T18:17:18.890Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 95.653 ms - correlationId: 187f9339-7bdc-460c-815f-5efcebb6d3a5","timestamp":"2025-03-11T18:17:18.894Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 96.521 ms - correlationId: 44297cae-ae1e-43d7-8642-a781bf970410","timestamp":"2025-03-11T18:17:18.897Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 125.299 ms - correlationId: debc066f-3a4f-4d35-9923-709cd74cc5c9","timestamp":"2025-03-11T18:17:18.929Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 128.268 ms - correlationId: 9a0a955d-bc91-4b51-b4d9-4f24771f5b0c","timestamp":"2025-03-11T18:17:18.933Z"}
+{"level":"info","message":"GET /api/images/image41 200 187 - 63.314 ms - correlationId: 9f5f3939-e598-42ac-9f8b-b1858956f147","timestamp":"2025-03-11T18:17:18.937Z"}
+{"level":"info","message":"GET /api/images/image51 200 199 - 102.146 ms - correlationId: bb4487d9-ee56-45be-b43e-7b196f1fee27","timestamp":"2025-03-11T18:17:19.006Z"}
+{"level":"info","message":"GET /api/images/image44 200 197 - 105.811 ms - correlationId: be9d974f-7c8a-44f1-8578-4f417022ffe2","timestamp":"2025-03-11T18:17:19.011Z"}
+{"level":"info","message":"GET /api/images/image52 200 196 - 115.278 ms - correlationId: a763d645-5765-47f5-ad07-69fd5c1b5af4","timestamp":"2025-03-11T18:17:19.016Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 81.315 ms - correlationId: 52f66e2a-b0e4-4dbc-a654-28e3e16a66b5","timestamp":"2025-03-11T18:17:19.021Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 161.330 ms - correlationId: d13380df-f656-4b8c-8a2e-7e233af0eb74","timestamp":"2025-03-11T18:17:19.105Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&category=CATE4&bestSellers=false&onSale=false&sort=priceDesc 200 29379 - 432.160 ms - correlationId: 79e30099-2cd5-4222-b4b5-122cbece1860","timestamp":"2025-03-11T18:17:21.321Z"}
+{"level":"info","message":"GET /api/images/image58 200 268 - 66.760 ms - correlationId: ecd1cd34-9d67-4213-bbc0-b8df3e57751b","timestamp":"2025-03-11T18:17:21.402Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 92.135 ms - correlationId: 36c48d5d-fb04-4471-b478-fa1047b85676","timestamp":"2025-03-11T18:17:21.432Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 95.065 ms - correlationId: 79ab6a56-0376-420f-90cf-92fb8de14b1f","timestamp":"2025-03-11T18:17:21.434Z"}
+{"level":"info","message":"GET /api/images/image59 200 195 - 98.754 ms - correlationId: 6c53843d-3e72-40f6-9750-8dd9624705bc","timestamp":"2025-03-11T18:17:21.436Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 109.979 ms - correlationId: 12fdda85-1911-4701-a6a7-bd05f2076091","timestamp":"2025-03-11T18:17:21.451Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 122.868 ms - correlationId: 758517a1-e90c-4b98-84d1-1c4e3b75ab8e","timestamp":"2025-03-11T18:17:21.455Z"}
+{"level":"info","message":"GET /api/images/image54 200 369 - 62.187 ms - correlationId: e4362765-f11c-4dab-9c4f-76af290cae45","timestamp":"2025-03-11T18:17:21.468Z"}
+{"level":"info","message":"GET /api/images/image61 200 1699 - 66.081 ms - correlationId: 1e4af8b8-67d5-4cf6-8c20-307a5d532a21","timestamp":"2025-03-11T18:17:21.504Z"}
+{"level":"info","message":"GET /api/images/image60 304 - - 99.764 ms - correlationId: 2dd7ca6b-fad3-458f-a316-de586dac28cc","timestamp":"2025-03-11T18:17:21.539Z"}
+{"level":"info","message":"GET /api/images/image55 304 - - 101.899 ms - correlationId: 14df77d7-c5a1-4729-9bea-5f14194eacf8","timestamp":"2025-03-11T18:17:21.545Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&category=CATE1&bestSellers=false&onSale=false&sort=priceDesc 304 - - 562.229 ms - correlationId: 90c2e4b6-12e9-4057-b3b9-807ff158495e","timestamp":"2025-03-11T18:17:23.481Z"}
+{"level":"info","message":"GET /api/images/image12 304 - - 83.970 ms - correlationId: 32ceea1f-4835-4358-afc7-d3ee1faeb4eb","timestamp":"2025-03-11T18:17:23.577Z"}
+{"level":"info","message":"GET /api/images/image5 304 - - 120.210 ms - correlationId: d5dc6d83-a60f-4249-b0ea-e7c8ab0942fa","timestamp":"2025-03-11T18:17:23.614Z"}
+{"level":"info","message":"GET /api/images/image18 304 - - 125.076 ms - correlationId: 2a5121ca-33dd-4068-8f01-dc46a44d82d0","timestamp":"2025-03-11T18:17:23.617Z"}
+{"level":"info","message":"GET /api/images/image2 304 - - 129.985 ms - correlationId: b4f7c473-7cc2-4ec3-b46e-3bff432013fa","timestamp":"2025-03-11T18:17:23.619Z"}
+{"level":"info","message":"GET /api/images/image9 304 - - 130.848 ms - correlationId: e7775858-a7a9-46d8-ac1b-61c2541f2f22","timestamp":"2025-03-11T18:17:23.622Z"}
+{"level":"info","message":"GET /api/images/image1 304 - - 138.996 ms - correlationId: 8e0fadfd-9e6a-45ea-962a-8d3f168327a3","timestamp":"2025-03-11T18:17:23.632Z"}
+{"level":"info","message":"GET /api/images/image6 304 - - 111.604 ms - correlationId: c5069f8e-d4f0-44bf-85e3-884d073f2ce9","timestamp":"2025-03-11T18:17:23.691Z"}
+{"level":"info","message":"GET /api/images/image14 304 - - 59.177 ms - correlationId: 10643e64-2124-456a-baae-9ea9f2d579fa","timestamp":"2025-03-11T18:17:23.693Z"}
+{"level":"info","message":"GET /api/images/image3 304 - - 87.869 ms - correlationId: 840a8385-793e-467b-97fe-28d6049ab784","timestamp":"2025-03-11T18:17:23.713Z"}
+{"level":"info","message":"GET /api/images/image8 304 - - 88.471 ms - correlationId: c0c58c73-5664-4c21-ad32-aed6d2875c34","timestamp":"2025-03-11T18:17:23.715Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 89.006 ms - correlationId: b9d1925a-99fd-48e3-85bd-cb11dc92eeea","timestamp":"2025-03-11T18:17:23.717Z"}
+{"level":"info","message":"GET /api/images/image11 304 - - 111.072 ms - correlationId: b906ec0a-60d7-4ba4-b3a8-a7ee26c54d8a","timestamp":"2025-03-11T18:17:23.740Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&category=CATE3&bestSellers=false&onSale=false&sort=priceDesc 304 - - 300.799 ms - correlationId: cb2265f2-c677-4c74-8ae4-dcfd73b7dbc1","timestamp":"2025-03-11T18:17:25.361Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 89.157 ms - correlationId: 3dac6f95-aa95-4e26-89f6-38cc2f48a96c","timestamp":"2025-03-11T18:17:25.455Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 84.407 ms - correlationId: 0822d0e4-dc60-464e-9aa9-031abe0a4e43","timestamp":"2025-03-11T18:17:25.457Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 89.642 ms - correlationId: e9f194f2-e1d8-42e4-bdc0-d7d4d3805aad","timestamp":"2025-03-11T18:17:25.459Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 90.333 ms - correlationId: e10640cc-4f22-4cd3-a637-8d22cdf5c8ef","timestamp":"2025-03-11T18:17:25.461Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 104.954 ms - correlationId: 94bcf6ef-0711-4ed1-bddb-a09645c1e19b","timestamp":"2025-03-11T18:17:25.473Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 103.782 ms - correlationId: 94e9075e-cd54-4153-a3aa-f9a8fe364fa3","timestamp":"2025-03-11T18:17:25.475Z"}
+{"level":"info","message":"GET /api/images/image51 304 - - 52.102 ms - correlationId: 4c44c04c-4c53-413c-889d-6d29e368c77d","timestamp":"2025-03-11T18:17:25.530Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 87.492 ms - correlationId: de21f89e-f1ad-4b8b-b1de-ad6e2ff3aa03","timestamp":"2025-03-11T18:17:25.550Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 89.139 ms - correlationId: c8725fb3-f9f5-4bc8-b13a-9d483795e369","timestamp":"2025-03-11T18:17:25.553Z"}
+{"level":"info","message":"GET /api/images/image41 304 - - 90.413 ms - correlationId: ac86ace6-d173-4c60-b2db-2c16b73621c7","timestamp":"2025-03-11T18:17:25.555Z"}
+{"level":"info","message":"GET /api/images/image52 304 - - 92.367 ms - correlationId: cb398cb5-c507-45d4-85b3-0461379ccf9c","timestamp":"2025-03-11T18:17:25.557Z"}
+{"level":"info","message":"GET /api/images/image44 304 - - 96.579 ms - correlationId: bb0347c0-fef8-4962-a6b4-16012cdaf6e0","timestamp":"2025-03-11T18:17:25.577Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2e6 200 1495 - 309.038 ms - correlationId: 7fd9319e-0d69-432f-9a8d-c5cf6b0595b2","timestamp":"2025-03-11T18:17:29.352Z"}
+{"level":"info","message":"GET /api/categories 304 - - 73.505 ms - correlationId: fb200a3b-824b-4240-bc34-7e0b1f4dbc6a","timestamp":"2025-03-11T18:17:33.047Z"}
+{"level":"info","message":"GET /api/categories 304 - - 56.263 ms - correlationId: 7182ffea-9fe3-437b-affc-76ac310a9476","timestamp":"2025-03-11T18:17:33.107Z"}
+{"level":"info","message":"GET /api/filters 304 - - 257.261 ms - correlationId: 60def01a-3c0a-45f3-b4c1-5d4318712095","timestamp":"2025-03-11T18:17:33.233Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 286.738 ms - correlationId: e9b3618f-2fb7-41d0-a583-095910c3aa26","timestamp":"2025-03-11T18:17:33.256Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 54.038 ms - correlationId: 16100414-a872-46d6-a6f9-83c919de4a67","timestamp":"2025-03-11T18:17:33.316Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 54.364 ms - correlationId: 8c81e9bf-69f9-4954-b24c-786b0abba9f1","timestamp":"2025-03-11T18:17:33.319Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 56.020 ms - correlationId: 357f38bf-a520-42d0-9e32-1d2fbfc80b56","timestamp":"2025-03-11T18:17:33.322Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 60.803 ms - correlationId: fdb0f4a9-b7db-4647-b86c-4d72ecf7cc65","timestamp":"2025-03-11T18:17:33.324Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 59.274 ms - correlationId: 04013b61-451e-4f44-99c1-cd4ba7d2dfbb","timestamp":"2025-03-11T18:17:33.326Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 64.450 ms - correlationId: 7a037b48-1f3b-4d52-931f-faaf42ba0067","timestamp":"2025-03-11T18:17:33.332Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 45.838 ms - correlationId: 3369aa05-0f07-4cb7-b95e-23226cf298da","timestamp":"2025-03-11T18:17:33.376Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 47.451 ms - correlationId: 92b1180f-f9f6-4028-837c-ce15c2f02179","timestamp":"2025-03-11T18:17:33.378Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 59.115 ms - correlationId: b3e24a28-10ba-427d-809f-5e2b9b55813f","timestamp":"2025-03-11T18:17:33.389Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 62.596 ms - correlationId: 0fae9c72-17d3-4a0d-8202-c10550ac61fb","timestamp":"2025-03-11T18:17:33.391Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 59.326 ms - correlationId: 11e90b74-4127-489d-a0bb-2fc7b3772a5b","timestamp":"2025-03-11T18:17:33.398Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 86.540 ms - correlationId: 377e17a6-fcce-48e8-86a4-c22c6ec55f9e","timestamp":"2025-03-11T18:17:33.421Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&category=CATE1&bestSellers=false&onSale=false&sort=priceDesc 200 45186 - 869.968 ms - correlationId: bfab0259-4c1c-4b12-a7ca-78bebfef6481","timestamp":"2025-03-11T18:18:24.227Z"}
+{"level":"info","message":"GET /api/images/image2 304 - - 78.635 ms - correlationId: 1a6d279a-c879-4e53-bb67-8307fb8a4565","timestamp":"2025-03-11T18:18:24.316Z"}
+{"level":"info","message":"GET /api/images/image9 304 - - 78.381 ms - correlationId: fa9ecbf7-4032-4aeb-a489-d21e5ccd3872","timestamp":"2025-03-11T18:18:24.318Z"}
+{"level":"info","message":"GET /api/images/image1 304 - - 111.461 ms - correlationId: b7d7139a-0977-457b-98cf-2327e14c7cab","timestamp":"2025-03-11T18:18:24.355Z"}
+{"level":"info","message":"GET /api/images/image18 304 - - 114.786 ms - correlationId: 0541da26-8026-42f8-aea0-9b8fc1ca6003","timestamp":"2025-03-11T18:18:24.357Z"}
+{"level":"info","message":"GET /api/images/image12 304 - - 114.370 ms - correlationId: 5ba08f38-85c0-490f-a59a-ef5a7170377a","timestamp":"2025-03-11T18:18:24.359Z"}
+{"level":"info","message":"GET /api/images/image5 304 - - 115.855 ms - correlationId: b149cba9-c8c9-4c41-8cfd-9fb0b70e8f44","timestamp":"2025-03-11T18:18:24.361Z"}
+{"level":"info","message":"GET /api/images/image3 304 - - 80.093 ms - correlationId: 29adac97-bb6f-4654-8978-39127191a18a","timestamp":"2025-03-11T18:18:24.402Z"}
+{"level":"info","message":"GET /api/images/image6 304 - - 112.335 ms - correlationId: a329d724-9e79-4299-825d-39e930bfb113","timestamp":"2025-03-11T18:18:24.433Z"}
+{"level":"info","message":"GET /api/images/image14 304 - - 78.671 ms - correlationId: 17d2f287-a2b8-493f-82e1-d96d023f5831","timestamp":"2025-03-11T18:18:24.445Z"}
+{"level":"info","message":"GET /api/images/image11 304 - - 81.820 ms - correlationId: 6a0c6599-621e-4875-b77b-063fe7e0058b","timestamp":"2025-03-11T18:18:24.448Z"}
+{"level":"info","message":"GET /api/images/image8 304 - - 85.765 ms - correlationId: 7bd3f89e-af32-44be-84cb-b6d591918168","timestamp":"2025-03-11T18:18:24.450Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 86.701 ms - correlationId: bdbebf68-b860-4863-a412-e32ae757825e","timestamp":"2025-03-11T18:18:24.452Z"}
+{"correlationId":"c5563427-e28f-4ced-84ee-fe5d1002cb59","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T18:18:58.826Z"}
+{"cart":[],"correlationId":"c5563427-e28f-4ced-84ee-fe5d1002cb59","level":"info","message":"Fetched cart from session","sessionId":"YhXRlKUJe6mvrOWOtNEykjfagZk3zBRw","timestamp":"2025-03-11T18:18:58.829Z"}
+{"level":"info","message":"GET /api/cart 200 2 - 5.046 ms - correlationId: c5563427-e28f-4ced-84ee-fe5d1002cb59","timestamp":"2025-03-11T18:18:58.832Z"}
+{"correlationId":"dfa5b148-4192-47a3-b408-7d6e0b9951fc","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T18:18:58.835Z"}
+{"compareList":[],"correlationId":"dfa5b148-4192-47a3-b408-7d6e0b9951fc","level":"info","message":"Fetched compare list from session","sessionId":"8Cy_V6Q-G0Wxd0Jz7a9Xeyno8sZJ_PUX","timestamp":"2025-03-11T18:18:58.853Z"}
+{"level":"info","message":"GET /api/compare 200 2 - 34.064 ms - correlationId: dfa5b148-4192-47a3-b408-7d6e0b9951fc","timestamp":"2025-03-11T18:18:58.869Z"}
+{"correlationId":"2f70fb1b-1986-4db2-9923-c54dd1f5bd2a","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T18:18:58.871Z"}
+{"cart":[],"correlationId":"2f70fb1b-1986-4db2-9923-c54dd1f5bd2a","level":"info","message":"Fetched cart from session","sessionId":"B1ccnMR9AooWStIbZwGj4A_rZ7jztC82","timestamp":"2025-03-11T18:18:58.872Z"}
+{"level":"info","message":"GET /api/cart 304 - - 2.426 ms - correlationId: 2f70fb1b-1986-4db2-9923-c54dd1f5bd2a","timestamp":"2025-03-11T18:18:58.874Z"}
+{"correlationId":"34b5cf7b-300f-460b-b0ce-9d6fe4167f68","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T18:18:58.876Z"}
+{"compareList":[],"correlationId":"34b5cf7b-300f-460b-b0ce-9d6fe4167f68","level":"info","message":"Fetched compare list from session","sessionId":"ZnuYHPQ0P0WyrO13yi4UVthqo0TVl-aB","timestamp":"2025-03-11T18:18:58.877Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.724 ms - correlationId: 34b5cf7b-300f-460b-b0ce-9d6fe4167f68","timestamp":"2025-03-11T18:18:58.878Z"}
+{"correlationId":"66aff53d-b72f-4633-8a6c-f8e86352a621","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T18:18:58.880Z"}
+{"cart":[],"correlationId":"66aff53d-b72f-4633-8a6c-f8e86352a621","level":"info","message":"Fetched cart from session","sessionId":"qa6DZhe05ZVa4vxvPaOPdd4u201dw8fY","timestamp":"2025-03-11T18:18:58.881Z"}
+{"level":"info","message":"GET /api/cart 304 - - 1.726 ms - correlationId: 66aff53d-b72f-4633-8a6c-f8e86352a621","timestamp":"2025-03-11T18:18:58.882Z"}
+{"correlationId":"c29d9c35-105a-40e1-b074-00b4d6738352","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T18:18:58.884Z"}
+{"compareList":[],"correlationId":"c29d9c35-105a-40e1-b074-00b4d6738352","level":"info","message":"Fetched compare list from session","sessionId":"ShC6_Rbb8LMqwFeoNOupRdzolq516xfu","timestamp":"2025-03-11T18:18:58.885Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.693 ms - correlationId: c29d9c35-105a-40e1-b074-00b4d6738352","timestamp":"2025-03-11T18:18:58.886Z"}
+{"level":"info","message":"GET /api/categories 304 - - 49.344 ms - correlationId: fdfcc725-e752-4eb2-8e60-3a7f08750d21","timestamp":"2025-03-11T18:18:58.995Z"}
+{"level":"info","message":"GET /api/categories 304 - - 83.833 ms - correlationId: 7c6b7ac4-6643-4d67-a8f8-65ef3598d899","timestamp":"2025-03-11T18:18:59.087Z"}
+{"level":"info","message":"GET /api/filters 304 - - 264.354 ms - correlationId: 9683a5a3-83f8-4b71-ab1d-538c668b5701","timestamp":"2025-03-11T18:18:59.212Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 286.074 ms - correlationId: 0f091696-d939-4be2-9e99-7452ecd54302","timestamp":"2025-03-11T18:18:59.227Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 56.412 ms - correlationId: fa32c295-d8ce-483b-a7f7-d6e3b8df91e7","timestamp":"2025-03-11T18:18:59.546Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 59.064 ms - correlationId: d83d0f26-39c0-46cb-b840-e2351556d3c7","timestamp":"2025-03-11T18:18:59.550Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 78.087 ms - correlationId: fbb1cd39-ca8a-4fe6-af53-ed65e1f36b61","timestamp":"2025-03-11T18:18:59.556Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 78.515 ms - correlationId: 784323a5-73b3-41e0-9df5-411d7deef0b7","timestamp":"2025-03-11T18:18:59.559Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 75.350 ms - correlationId: 46e35bf5-ed76-4441-b246-1970017f9bae","timestamp":"2025-03-11T18:18:59.561Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 84.953 ms - correlationId: 0a3e0c7a-9785-4239-9723-1824696cd025","timestamp":"2025-03-11T18:18:59.568Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 73.439 ms - correlationId: 48ad3e2d-3935-4b9c-9d36-03fef1e8903e","timestamp":"2025-03-11T18:18:59.626Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 74.414 ms - correlationId: 341ec040-e4cd-4238-94fa-c2a63b67acfa","timestamp":"2025-03-11T18:18:59.628Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 51.580 ms - correlationId: 8fda780f-c890-42ef-8641-bd17c89dfd65","timestamp":"2025-03-11T18:18:59.631Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 59.401 ms - correlationId: a7e51964-5115-49bd-a780-08a06883845e","timestamp":"2025-03-11T18:18:59.642Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 68.045 ms - correlationId: 5bdec83f-7635-4843-b0bc-2ca82667c70a","timestamp":"2025-03-11T18:18:59.645Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 80.855 ms - correlationId: eb78ba70-ab3c-48e5-8934-268304abcb11","timestamp":"2025-03-11T18:18:59.662Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2f0 200 3980 - 250.471 ms - correlationId: 17708f4a-e604-457a-9dc3-fff7548abb4c","timestamp":"2025-03-11T18:19:06.460Z"}
+{"level":"info","message":"GET /api/categories 304 - - 62.653 ms - correlationId: 8e099e0e-893f-4f57-b0d2-d78167c2dcf3","timestamp":"2025-03-11T18:19:08.057Z"}
+{"level":"info","message":"GET /api/categories 304 - - 76.049 ms - correlationId: df87985f-8232-4f16-98f7-5b48782d52e3","timestamp":"2025-03-11T18:19:08.137Z"}
+{"level":"info","message":"GET /api/filters 304 - - 252.915 ms - correlationId: 6adc3c83-9374-46a0-bc21-d78ade890d39","timestamp":"2025-03-11T18:19:08.250Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 471.646 ms - correlationId: 02611498-b1e1-4749-9342-8b49ba06a1dd","timestamp":"2025-03-11T18:19:08.462Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 67.075 ms - correlationId: a6ab1f54-e0cc-437d-ab43-5a284dd3d164","timestamp":"2025-03-11T18:19:08.585Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 65.635 ms - correlationId: 1f11711b-98ba-4738-8eda-1da45bedb3fd","timestamp":"2025-03-11T18:19:08.588Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 101.536 ms - correlationId: 5dcf8a98-978d-4cde-b6ce-c8868d385a34","timestamp":"2025-03-11T18:19:08.632Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 120.758 ms - correlationId: b8fd304a-fa1e-4ec6-b2d0-e7eeb8c0023c","timestamp":"2025-03-11T18:19:08.636Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 114.978 ms - correlationId: 5f54a907-bb8b-4f37-a2d0-7457a4506792","timestamp":"2025-03-11T18:19:08.640Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 147.908 ms - correlationId: c2765f35-abb5-451b-af65-7f5ed417b1f6","timestamp":"2025-03-11T18:19:08.683Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 95.311 ms - correlationId: b626299e-a88e-47ee-8873-ba513919f6cc","timestamp":"2025-03-11T18:19:08.687Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 100.902 ms - correlationId: 847d9959-a17a-4fcd-9668-a927004c6eff","timestamp":"2025-03-11T18:19:08.691Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 71.459 ms - correlationId: 4efc3243-4baf-4c70-87dd-b598fe07c0b3","timestamp":"2025-03-11T18:19:08.721Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 97.198 ms - correlationId: fe203157-4e46-420e-9e2e-2ef34a1ec270","timestamp":"2025-03-11T18:19:08.744Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 103.926 ms - correlationId: 9c8d2013-e308-4483-9f4d-e3252014568f","timestamp":"2025-03-11T18:19:08.748Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 94.789 ms - correlationId: aae7cf10-050c-472a-9403-a591fe90b074","timestamp":"2025-03-11T18:19:08.789Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-11T18:23:38.234Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-11T18:23:40.830Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-11T18:23:42.006Z"}
+{"level":"info","message":"GET /api/filters 304 - - 464.312 ms - correlationId: 476c1533-27bb-49a1-b6b6-f0f46821b9a2","timestamp":"2025-03-11T18:23:46.933Z"}
+{"level":"info","message":"GET /api/categories 304 - - 635.132 ms - correlationId: 472f43d1-cd4a-41c0-a438-f31aee377e74","timestamp":"2025-03-11T18:23:47.106Z"}
+{"level":"info","message":"GET /api/categories 304 - - 117.048 ms - correlationId: 39ec0b89-f693-47c0-ae59-179f523b233c","timestamp":"2025-03-11T18:23:47.231Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 18907 - 1062.604 ms - correlationId: f3a54f18-d07a-4abf-be38-29ba4a74d501","timestamp":"2025-03-11T18:23:47.541Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 87.786 ms - correlationId: e1aeacff-2dff-4923-9649-d03c068e918f","timestamp":"2025-03-11T18:23:47.642Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 90.947 ms - correlationId: 2b3b7377-79ee-4dc1-a9f0-c607d10ad885","timestamp":"2025-03-11T18:23:47.649Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 94.807 ms - correlationId: c797796b-e88f-4dc7-a0c4-4d29c0fbc96f","timestamp":"2025-03-11T18:23:47.654Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 274.863 ms - correlationId: 723bff89-5358-4408-83a6-95d95c3b704f","timestamp":"2025-03-11T18:23:47.846Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 191.495 ms - correlationId: e6c4601e-c40b-4044-a581-3b38ea1ac1a9","timestamp":"2025-03-11T18:23:47.859Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 201.370 ms - correlationId: a24fb678-eee8-42cd-b00d-be10b419dcf6","timestamp":"2025-03-11T18:23:47.865Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 227.535 ms - correlationId: 50ee3536-f390-4ee9-afb2-fd9694375261","timestamp":"2025-03-11T18:23:47.900Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 141.794 ms - correlationId: c3bf1723-8f08-40bf-9976-f2186906734f","timestamp":"2025-03-11T18:23:48.020Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 140.026 ms - correlationId: 34c5b430-1915-4476-a5ad-ecd6a2bc2460","timestamp":"2025-03-11T18:23:48.026Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 142.200 ms - correlationId: 42f74414-1549-4ebb-bc0d-8bad989b4b16","timestamp":"2025-03-11T18:23:48.031Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 691.895 ms - correlationId: 70c3b3b9-892d-4dd9-b639-955b6a1e864d","timestamp":"2025-03-11T18:23:48.254Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 691.633 ms - correlationId: c0615d2e-67fb-4de6-8bd3-9c343e1bde9e","timestamp":"2025-03-11T18:23:48.258Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ea 200 1447 - 398.771 ms - correlationId: a97f433a-cecc-4c3e-a0cf-2b83b4549a58","timestamp":"2025-03-11T18:23:54.297Z"}
+{"level":"info","message":"GET /api/categories 304 - - 81.802 ms - correlationId: 02c168ae-c24c-4c8e-8f5e-efce93d8c163","timestamp":"2025-03-11T18:23:55.322Z"}
+{"level":"info","message":"GET /api/categories 304 - - 54.769 ms - correlationId: 6d5a6f1b-92c1-4f87-91fd-9ce959cf0e56","timestamp":"2025-03-11T18:23:55.383Z"}
+{"level":"info","message":"GET /api/filters 304 - - 385.967 ms - correlationId: a8f4e5f6-789f-43c9-99a4-b55457f8cd19","timestamp":"2025-03-11T18:23:55.630Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 599.844 ms - correlationId: fb97ccdb-2d9c-4d39-9eea-bd3f2de7cc92","timestamp":"2025-03-11T18:23:55.833Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 71.504 ms - correlationId: e64b3830-6b4c-4ff5-9edf-ebf75555a3c1","timestamp":"2025-03-11T18:23:55.916Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 69.611 ms - correlationId: 3863db37-79c9-466e-a82b-cf303eafaa36","timestamp":"2025-03-11T18:23:55.922Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 77.801 ms - correlationId: f2c7d9b2-0c7d-4a09-a537-ba5cafdf68b1","timestamp":"2025-03-11T18:23:55.928Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 73.893 ms - correlationId: d64d67f1-c702-4a71-a5a2-55a7f26fd851","timestamp":"2025-03-11T18:23:55.932Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 74.914 ms - correlationId: a8cde54b-27ba-471c-9d4f-c69c2c7d3306","timestamp":"2025-03-11T18:23:55.936Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 117.542 ms - correlationId: 0bc71a24-29f3-4a01-8e94-65529900885e","timestamp":"2025-03-11T18:23:56.037Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 89.013 ms - correlationId: 368acd04-a689-4b09-93d6-9272b2496138","timestamp":"2025-03-11T18:23:56.040Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 96.437 ms - correlationId: 93a16677-ea94-4168-b5b8-32abf58381d7","timestamp":"2025-03-11T18:23:56.043Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 94.128 ms - correlationId: 09dbd5ec-eb07-4154-baf4-b9d40c36f2e2","timestamp":"2025-03-11T18:23:56.047Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 106.316 ms - correlationId: bd1dbe42-6b97-46d0-9458-95aff05597fa","timestamp":"2025-03-11T18:23:56.050Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 189.933 ms - correlationId: b782f2f4-d74d-4274-8dc4-5ebe53bcbe45","timestamp":"2025-03-11T18:23:56.245Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 791.193 ms - correlationId: 358c7ede-db93-43a9-b7ab-b7517fb89029","timestamp":"2025-03-11T18:23:56.653Z"}
+{"correlationId":"eb182f18-0e90-4c3e-92cf-cd55f5b6f123","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T18:24:00.907Z"}
+{"compareList":["67cedd78aaf7ee8b1e4bf2f1"],"correlationId":"eb182f18-0e90-4c3e-92cf-cd55f5b6f123","level":"info","message":"Added to compare list in session","sessionId":"OE1V-OPqPXbFTwNro06pVIZiX0Q6OfaJ","timestamp":"2025-03-11T18:24:01.032Z"}
+{"level":"info","message":"POST /api/compare 200 78 - 127.829 ms - correlationId: eb182f18-0e90-4c3e-92cf-cd55f5b6f123","timestamp":"2025-03-11T18:24:01.036Z"}
+{"correlationId":"fa8e70d7-fa30-4040-9030-c03e93cfbe99","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T18:24:01.047Z"}
+{"compareList":["67cedd78aaf7ee8b1e4bf2f1"],"correlationId":"fa8e70d7-fa30-4040-9030-c03e93cfbe99","level":"info","message":"Fetched compare list from session","sessionId":"OE1V-OPqPXbFTwNro06pVIZiX0Q6OfaJ","timestamp":"2025-03-11T18:24:01.049Z"}
+{"level":"info","message":"GET /api/compare 200 28 - 3.197 ms - correlationId: fa8e70d7-fa30-4040-9030-c03e93cfbe99","timestamp":"2025-03-11T18:24:01.053Z"}
+{"correlationId":"9ce27400-c81d-4f69-a8b9-f47b631460e8","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T18:24:01.054Z"}
+{"cart":[],"correlationId":"9ce27400-c81d-4f69-a8b9-f47b631460e8","level":"info","message":"Fetched cart from session","sessionId":"OE1V-OPqPXbFTwNro06pVIZiX0Q6OfaJ","timestamp":"2025-03-11T18:24:01.056Z"}
+{"level":"info","message":"GET /api/cart 304 - - 3.512 ms - correlationId: 9ce27400-c81d-4f69-a8b9-f47b631460e8","timestamp":"2025-03-11T18:24:01.060Z"}
+{"correlationId":"45979642-d2ad-432a-b7ad-61178bf4df51","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T18:24:01.062Z"}
+{"compareList":["67cedd78aaf7ee8b1e4bf2f1"],"correlationId":"45979642-d2ad-432a-b7ad-61178bf4df51","level":"info","message":"Fetched compare list from session","sessionId":"OE1V-OPqPXbFTwNro06pVIZiX0Q6OfaJ","timestamp":"2025-03-11T18:24:01.062Z"}
+{"level":"info","message":"GET /api/compare 304 - - 2.473 ms - correlationId: 45979642-d2ad-432a-b7ad-61178bf4df51","timestamp":"2025-03-11T18:24:01.065Z"}
+{"level":"info","message":"GET /api/products?page=2&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 16898 - 431.575 ms - correlationId: 6f089b91-a7cd-437b-833a-5c8a4a39d3d9","timestamp":"2025-03-11T18:24:02.723Z"}
+{"level":"info","message":"GET /api/images/image30 200 176 - 66.125 ms - correlationId: 476da3e5-4591-44ad-8f0f-8b46648f9e36","timestamp":"2025-03-11T18:24:02.795Z"}
+{"level":"info","message":"GET /api/images/image41 304 - - 66.578 ms - correlationId: 4397f08b-7f8f-4dc5-bc49-47bedbe9bef7","timestamp":"2025-03-11T18:24:02.800Z"}
+{"level":"info","message":"GET /api/images/image51 304 - - 69.294 ms - correlationId: 929442dd-95b1-4199-934b-2b8b25451741","timestamp":"2025-03-11T18:24:02.804Z"}
+{"level":"info","message":"GET /api/images/image40 200 200 - 72.519 ms - correlationId: ce3dc2a1-1797-4551-b54d-42c5f0110f51","timestamp":"2025-03-11T18:24:02.810Z"}
+{"level":"info","message":"GET /api/images/image33 200 351 - 73.825 ms - correlationId: 250c44ed-2f5b-47e6-b7c2-fd3d1356aa7a","timestamp":"2025-03-11T18:24:02.812Z"}
+{"level":"info","message":"GET /api/images/image28 200 189 - 75.332 ms - correlationId: 7e135fe0-4969-4715-872a-be053b100df5","timestamp":"2025-03-11T18:24:02.815Z"}
+{"level":"info","message":"GET /api/images/image44 304 - - 44.742 ms - correlationId: 14ea8f9d-9bc7-4e3d-93e2-0dc3eec933d9","timestamp":"2025-03-11T18:24:02.869Z"}
+{"level":"info","message":"GET /api/images/image52 304 - - 50.677 ms - correlationId: fd9fff55-35b7-40a7-85a6-b708ff2bd95c","timestamp":"2025-03-11T18:24:02.872Z"}
+{"level":"info","message":"GET /api/images/image36 200 349 - 111.929 ms - correlationId: 73196bdb-c303-4bc9-83f2-fa68faa99d23","timestamp":"2025-03-11T18:24:02.930Z"}
+{"level":"info","message":"GET /api/images/image58 304 - - 107.895 ms - correlationId: b5b50be5-edc7-4015-9790-ba95f0f247f8","timestamp":"2025-03-11T18:24:02.934Z"}
+{"level":"info","message":"GET /api/images/image54 304 - - 108.531 ms - correlationId: 16d0d25b-0557-4d3b-881f-f3bd32763287","timestamp":"2025-03-11T18:24:02.938Z"}
+{"level":"info","message":"GET /api/images/image59 304 - - 119.539 ms - correlationId: 22f41ade-21b2-43b0-89de-f61baa9b0638","timestamp":"2025-03-11T18:24:02.948Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2d6 200 1416 - 176.762 ms - correlationId: 07a3fb46-4027-43c1-b93b-8d95aa63629f","timestamp":"2025-03-11T18:24:06.745Z"}
+{"level":"info","message":"GET /api/categories 304 - - 64.319 ms - correlationId: 7873b1c1-348e-4fc6-9ec1-2ea4b1a61638","timestamp":"2025-03-11T18:24:08.015Z"}
+{"level":"info","message":"GET /api/categories 304 - - 49.535 ms - correlationId: 2a70ecf3-006a-4de1-887a-f47ff62d9bc3","timestamp":"2025-03-11T18:24:08.070Z"}
+{"level":"info","message":"GET /api/filters 304 - - 221.032 ms - correlationId: 06729129-4070-4c18-abce-83415b742f4b","timestamp":"2025-03-11T18:24:08.174Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 273.064 ms - correlationId: b09039f3-149e-42d1-a124-5155700184cc","timestamp":"2025-03-11T18:24:08.221Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 47.526 ms - correlationId: 3984e4f8-bf28-404e-81ec-e9095995a25c","timestamp":"2025-03-11T18:24:08.280Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 46.010 ms - correlationId: 203a4551-3f1a-4074-9c50-58686275bceb","timestamp":"2025-03-11T18:24:08.284Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 51.541 ms - correlationId: f260df04-3fba-4117-a1a2-1af0995237f6","timestamp":"2025-03-11T18:24:08.287Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 60.616 ms - correlationId: f5f9cc07-1510-477b-ab76-7ff5353b1b57","timestamp":"2025-03-11T18:24:08.305Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 66.977 ms - correlationId: c4ded230-273d-4972-a809-bfeed3a4582b","timestamp":"2025-03-11T18:24:08.310Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 72.602 ms - correlationId: 11ab9d87-33e6-453e-9ece-3d585b0067df","timestamp":"2025-03-11T18:24:08.314Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 49.511 ms - correlationId: cf35ca25-e6de-4ce9-a736-2c917fc7a0d1","timestamp":"2025-03-11T18:24:08.352Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 64.852 ms - correlationId: 22de4c81-15e3-4856-91e7-9916f8aa75c6","timestamp":"2025-03-11T18:24:08.356Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 64.472 ms - correlationId: 1f76e82d-207c-46c0-b744-9286c6cdc21e","timestamp":"2025-03-11T18:24:08.361Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 49.383 ms - correlationId: dc2e3c92-a904-4b95-b13a-6f3a87cfc68b","timestamp":"2025-03-11T18:24:08.368Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 53.181 ms - correlationId: 5de3537f-f198-4f65-95c4-644eb392b7c6","timestamp":"2025-03-11T18:24:08.374Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 61.706 ms - correlationId: 0a7331c3-1d7c-45fd-a45f-2d3b346ccfd5","timestamp":"2025-03-11T18:24:08.378Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&category=CATE1&bestSellers=false&onSale=false&sort=priceDesc 200 45464 - 460.752 ms - correlationId: 93643c94-833f-4a68-9da3-c888244d2700","timestamp":"2025-03-11T18:24:12.385Z"}
+{"level":"info","message":"GET /api/images/image12 304 - - 120.143 ms - correlationId: 86759b82-f578-46e5-bf52-9f316a1ef7b0","timestamp":"2025-03-11T18:24:12.523Z"}
+{"level":"info","message":"GET /api/images/image18 304 - - 126.007 ms - correlationId: 04e173b5-8ef2-4968-8563-2628b6488b9b","timestamp":"2025-03-11T18:24:12.526Z"}
+{"level":"info","message":"GET /api/images/image9 304 - - 131.640 ms - correlationId: 14a93fbc-f748-432b-aa43-4a30a3b01e8d","timestamp":"2025-03-11T18:24:12.531Z"}
+{"level":"info","message":"GET /api/images/image2 304 - - 138.625 ms - correlationId: 93d4c5eb-0067-4516-a48e-5f7b581358ed","timestamp":"2025-03-11T18:24:12.535Z"}
+{"level":"info","message":"GET /api/images/image1 304 - - 137.232 ms - correlationId: 1dcb7020-efaf-4ad9-b4ea-8ec4690acb33","timestamp":"2025-03-11T18:24:12.539Z"}
+{"level":"info","message":"GET /api/images/image5 304 - - 138.591 ms - correlationId: 8f99a0f5-8e9a-4208-a35d-875aaffb7379","timestamp":"2025-03-11T18:24:12.542Z"}
+{"level":"info","message":"GET /api/images/image6 304 - - 182.510 ms - correlationId: 888803c8-521a-4cb4-bb8e-d5fe8fb2b49c","timestamp":"2025-03-11T18:24:12.728Z"}
+{"level":"info","message":"GET /api/images/image3 304 - - 181.387 ms - correlationId: 1a9bcff4-ede7-459c-9cf9-ce151aa38899","timestamp":"2025-03-11T18:24:12.731Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 179.725 ms - correlationId: 3d2ffe5d-3734-4c4e-a847-9d391ff0dc23","timestamp":"2025-03-11T18:24:12.734Z"}
+{"level":"info","message":"GET /api/images/image11 304 - - 179.176 ms - correlationId: 34a66682-20a7-4ab0-813b-674aa37aab8d","timestamp":"2025-03-11T18:24:12.736Z"}
+{"level":"info","message":"GET /api/images/image8 304 - - 187.772 ms - correlationId: ae6acd22-3cfd-4bb5-ae8d-010d29c38acc","timestamp":"2025-03-11T18:24:12.740Z"}
+{"level":"info","message":"GET /api/images/image14 304 - - 184.797 ms - correlationId: 23e0ec64-9222-484b-a27e-4d367d8ac769","timestamp":"2025-03-11T18:24:12.745Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2c0 200 3729 - 387.009 ms - correlationId: e4dce268-145c-45de-999a-81e8ea795dde","timestamp":"2025-03-11T18:24:17.438Z"}
+{"correlationId":"f5668f02-9f5f-447c-b716-6d7d905ec9f6","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T18:25:11.154Z"}
+{"cart":[],"correlationId":"f5668f02-9f5f-447c-b716-6d7d905ec9f6","level":"info","message":"Fetched cart from session","sessionId":"OE1V-OPqPXbFTwNro06pVIZiX0Q6OfaJ","timestamp":"2025-03-11T18:25:11.156Z"}
+{"level":"info","message":"GET /api/cart 304 - - 3.716 ms - correlationId: f5668f02-9f5f-447c-b716-6d7d905ec9f6","timestamp":"2025-03-11T18:25:11.158Z"}
+{"correlationId":"e1cef6d6-f7ad-472a-9192-29770f251c26","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T18:25:11.159Z"}
+{"compareList":["67cedd78aaf7ee8b1e4bf2f1"],"correlationId":"e1cef6d6-f7ad-472a-9192-29770f251c26","level":"info","message":"Fetched compare list from session","sessionId":"OE1V-OPqPXbFTwNro06pVIZiX0Q6OfaJ","timestamp":"2025-03-11T18:25:11.161Z"}
+{"level":"info","message":"GET /api/compare 304 - - 2.988 ms - correlationId: e1cef6d6-f7ad-472a-9192-29770f251c26","timestamp":"2025-03-11T18:25:11.162Z"}
+{"correlationId":"a982c20d-8c31-4bb2-b952-966a89b3ea59","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T18:25:11.209Z"}
+{"cart":[],"correlationId":"a982c20d-8c31-4bb2-b952-966a89b3ea59","level":"info","message":"Fetched cart from session","sessionId":"OE1V-OPqPXbFTwNro06pVIZiX0Q6OfaJ","timestamp":"2025-03-11T18:25:11.210Z"}
+{"level":"info","message":"GET /api/cart 304 - - 1.586 ms - correlationId: a982c20d-8c31-4bb2-b952-966a89b3ea59","timestamp":"2025-03-11T18:25:11.211Z"}
+{"correlationId":"ac3227bf-8f8b-4980-aa91-a8ebf59d148a","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T18:25:11.212Z"}
+{"compareList":["67cedd78aaf7ee8b1e4bf2f1"],"correlationId":"ac3227bf-8f8b-4980-aa91-a8ebf59d148a","level":"info","message":"Fetched compare list from session","sessionId":"OE1V-OPqPXbFTwNro06pVIZiX0Q6OfaJ","timestamp":"2025-03-11T18:25:11.213Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.589 ms - correlationId: ac3227bf-8f8b-4980-aa91-a8ebf59d148a","timestamp":"2025-03-11T18:25:11.215Z"}
+{"correlationId":"578bd840-00f0-4717-b153-3dbf896072e8","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T18:25:11.216Z"}
+{"cart":[],"correlationId":"578bd840-00f0-4717-b153-3dbf896072e8","level":"info","message":"Fetched cart from session","sessionId":"OE1V-OPqPXbFTwNro06pVIZiX0Q6OfaJ","timestamp":"2025-03-11T18:25:11.217Z"}
+{"level":"info","message":"GET /api/cart 304 - - 1.492 ms - correlationId: 578bd840-00f0-4717-b153-3dbf896072e8","timestamp":"2025-03-11T18:25:11.219Z"}
+{"correlationId":"26540814-71e0-4696-9d5b-d1a05a9c63e2","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T18:25:11.220Z"}
+{"compareList":["67cedd78aaf7ee8b1e4bf2f1"],"correlationId":"26540814-71e0-4696-9d5b-d1a05a9c63e2","level":"info","message":"Fetched compare list from session","sessionId":"OE1V-OPqPXbFTwNro06pVIZiX0Q6OfaJ","timestamp":"2025-03-11T18:25:11.221Z"}
+{"level":"info","message":"GET /api/compare 304 - - 2.869 ms - correlationId: 26540814-71e0-4696-9d5b-d1a05a9c63e2","timestamp":"2025-03-11T18:25:11.224Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2c0 304 - - 525.262 ms - correlationId: 2ef840d3-5122-4056-804b-bf38497103df","timestamp":"2025-03-11T18:25:11.811Z"}
+{"level":"info","message":"GET /api/categories 304 - - 77.436 ms - correlationId: 17a1ace5-bbf7-4551-9034-b0c774edaa8b","timestamp":"2025-03-11T18:26:10.591Z"}
+{"level":"info","message":"GET /api/categories 304 - - 98.404 ms - correlationId: 53c9751b-0381-4fbb-a61a-a33532f2c29d","timestamp":"2025-03-11T18:26:10.695Z"}
+{"level":"info","message":"GET /api/filters 304 - - 379.542 ms - correlationId: a7d9c7b7-c1c9-4e0b-bddc-62677c56e51e","timestamp":"2025-03-11T18:26:10.898Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 447.413 ms - correlationId: 6b1140a0-b735-4afc-83c8-4ce080e39c3c","timestamp":"2025-03-11T18:26:10.963Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 121.710 ms - correlationId: a16905d8-db0b-4b16-a79a-c98d29a002a6","timestamp":"2025-03-11T18:26:11.102Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 127.546 ms - correlationId: ea69ca6d-66f8-4f40-bd59-6b63a5055401","timestamp":"2025-03-11T18:26:11.103Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 123.787 ms - correlationId: be162de8-55d8-404f-b64b-5bb635bee3e4","timestamp":"2025-03-11T18:26:11.105Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 130.311 ms - correlationId: 902aa5e6-37ac-4f33-b051-d244e4393ac9","timestamp":"2025-03-11T18:26:11.108Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 135.655 ms - correlationId: 18621664-1367-417c-8ff9-18bb7a8e3e21","timestamp":"2025-03-11T18:26:11.110Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 129.408 ms - correlationId: 2387048b-9ff4-4a97-8d75-23ea7b766073","timestamp":"2025-03-11T18:26:11.112Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 86.560 ms - correlationId: 9b07979e-3c53-4d2d-8a59-9c5bde2d5d4b","timestamp":"2025-03-11T18:26:11.205Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 88.337 ms - correlationId: 5d6d272c-668c-4930-b351-99b0bf5552bc","timestamp":"2025-03-11T18:26:11.209Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 94.873 ms - correlationId: 309942e9-9a52-456a-87b7-b891860869a5","timestamp":"2025-03-11T18:26:11.212Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 94.787 ms - correlationId: 753ede5f-a859-424b-a314-27e495e94d9b","timestamp":"2025-03-11T18:26:11.216Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 97.782 ms - correlationId: b5a3fbca-a0e2-4ead-a4ac-b15fee7921b3","timestamp":"2025-03-11T18:26:11.220Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 111.528 ms - correlationId: d8e142c7-fca1-4e55-b268-949836cea154","timestamp":"2025-03-11T18:26:11.226Z"}
+{"level":"info","message":"GET /api/products?page=3&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 20740 - 414.826 ms - correlationId: 325f88f2-2cfb-4a85-8b43-b39c68e2d9ed","timestamp":"2025-03-11T18:26:24.211Z"}
+{"level":"info","message":"GET /api/images/image25 304 - - 104.149 ms - correlationId: 682bf804-bf74-4ba4-baa8-aa36253fea52","timestamp":"2025-03-11T18:26:24.331Z"}
+{"level":"info","message":"GET /api/images/image20 304 - - 105.281 ms - correlationId: a7002db8-e0a9-42fd-8ab6-ed71c1e55fa1","timestamp":"2025-03-11T18:26:24.334Z"}
+{"level":"info","message":"GET /api/images/image9 304 - - 106.719 ms - correlationId: 945e4e8f-9b33-4de4-b287-006eea08e1d7","timestamp":"2025-03-11T18:26:24.339Z"}
+{"level":"info","message":"GET /api/images/image38 304 - - 138.810 ms - correlationId: f5e03a54-3e30-46e9-b744-cc6dda046e25","timestamp":"2025-03-11T18:26:24.371Z"}
+{"level":"info","message":"GET /api/images/image2 304 - - 143.609 ms - correlationId: 2dfca934-33a8-475b-abf4-238cb05748cc","timestamp":"2025-03-11T18:26:24.374Z"}
+{"level":"info","message":"GET /api/images/image60 304 - - 153.273 ms - correlationId: d2be561d-3815-43f0-b4b8-d9caa43a8e57","timestamp":"2025-03-11T18:26:24.377Z"}
+{"level":"info","message":"GET /api/images/image26 304 - - 170.763 ms - correlationId: 8b695cff-ba45-462d-9d09-2cd385a689b5","timestamp":"2025-03-11T18:26:24.516Z"}
+{"level":"info","message":"GET /api/images/image18 304 - - 177.622 ms - correlationId: 79bd8591-828c-4a0a-9906-9baa4a9b096a","timestamp":"2025-03-11T18:26:24.519Z"}
+{"level":"info","message":"GET /api/images/image55 304 - - 178.800 ms - correlationId: a14f9573-bd10-407c-b90a-079fd17b8410","timestamp":"2025-03-11T18:26:24.523Z"}
+{"level":"info","message":"GET /api/images/image43 304 - - 146.644 ms - correlationId: 71f96777-97d2-41d7-9b6a-bcf3bffae0f0","timestamp":"2025-03-11T18:26:24.527Z"}
+{"level":"info","message":"GET /api/images/image35 304 - - 148.070 ms - correlationId: 5017d854-8a26-4cea-a91b-47e7d8c66acb","timestamp":"2025-03-11T18:26:24.532Z"}
+{"level":"info","message":"GET /api/images/image39 304 - - 153.606 ms - correlationId: 015ddb1b-6a5a-4921-b26a-25b724b0025d","timestamp":"2025-03-11T18:26:24.536Z"}
+{"level":"info","message":"GET /api/products?page=4&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 31665 - 512.772 ms - correlationId: d505278b-224b-4fe1-948b-489c584c44b7","timestamp":"2025-03-11T18:28:59.964Z"}
+{"level":"info","message":"GET /api/images/image27 200 187 - 181.855 ms - correlationId: 7aa49888-2f20-4d99-a7d2-00eb7e18d93d","timestamp":"2025-03-11T18:29:00.167Z"}
+{"level":"info","message":"GET /api/images/image1 304 - - 187.975 ms - correlationId: d34225e4-a7c1-4745-8747-3bb3a1f50cb8","timestamp":"2025-03-11T18:29:00.171Z"}
+{"level":"info","message":"GET /api/images/image12 304 - - 189.426 ms - correlationId: d6adbf0b-5c28-4e25-a39b-f631c2f3dd41","timestamp":"2025-03-11T18:29:00.176Z"}
+{"level":"info","message":"GET /api/images/image24 200 182 - 187.912 ms - correlationId: 8867419a-a65b-400f-aa54-31ced4997c9f","timestamp":"2025-03-11T18:29:00.179Z"}
+{"level":"info","message":"GET /api/images/image22 200 185 - 193.741 ms - correlationId: 54caefc0-5843-42d1-ab75-882f9f818d79","timestamp":"2025-03-11T18:29:00.183Z"}
+{"level":"info","message":"GET /api/images/image29 200 181 - 198.221 ms - correlationId: e365a611-2b60-4806-bae8-ee400dce63ee","timestamp":"2025-03-11T18:29:00.189Z"}
+{"level":"info","message":"GET /api/images/image3 304 - - 62.767 ms - correlationId: e10e8125-adb8-43f7-9e6a-4f88224e6da1","timestamp":"2025-03-11T18:29:00.267Z"}
+{"level":"info","message":"GET /api/images/image6 304 - - 71.464 ms - correlationId: 3638a544-743a-4f7a-9219-0a5c02bb478f","timestamp":"2025-03-11T18:29:00.271Z"}
+{"level":"info","message":"GET /api/images/image21 200 179 - 84.277 ms - correlationId: 4a979a92-a29f-49ec-9bee-1a4bb6fef37c","timestamp":"2025-03-11T18:29:00.277Z"}
+{"level":"info","message":"GET /api/images/image5 304 - - 84.786 ms - correlationId: ce4ba272-7bd7-4ffc-8fa6-97054c9aca08","timestamp":"2025-03-11T18:29:00.282Z"}
+{"level":"info","message":"GET /api/images/image8 304 - - 78.751 ms - correlationId: b9f9f752-8ae0-4cd6-a85b-5b6784278a2f","timestamp":"2025-03-11T18:29:00.286Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 81.946 ms - correlationId: e2f95bf4-ae2a-4595-97c6-ef89c09e63a8","timestamp":"2025-03-11T18:29:00.291Z"}
+{"level":"info","message":"GET /api/products?page=5&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 30301 - 995.509 ms - correlationId: 58dfe721-d739-4479-9f7a-6fa7eed0e278","timestamp":"2025-03-11T18:29:01.582Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 76.750 ms - correlationId: e917f27c-4456-4425-bcaa-69100b2b7a9d","timestamp":"2025-03-11T18:29:01.669Z"}
+{"level":"info","message":"GET /api/images/image11 304 - - 79.132 ms - correlationId: 5260c8bf-8c35-4069-953a-881311a9febf","timestamp":"2025-03-11T18:29:01.673Z"}
+{"level":"info","message":"GET /api/images/image13 200 426 - 80.084 ms - correlationId: 634935b0-825a-48f6-a7d8-5dd877928486","timestamp":"2025-03-11T18:29:01.678Z"}
+{"level":"info","message":"GET /api/images/image10 200 347 - 82.951 ms - correlationId: ae27e5b9-f640-4e09-977a-2d35e3888408","timestamp":"2025-03-11T18:29:01.682Z"}
+{"level":"info","message":"GET /api/images/image17 200 268 - 93.935 ms - correlationId: 4e2de399-13a6-4ced-b3bb-75c6921f8ca3","timestamp":"2025-03-11T18:29:01.694Z"}
+{"level":"info","message":"GET /api/images/image15 200 249 - 96.803 ms - correlationId: 0812401c-062f-4a4a-8c55-d493c3c88208","timestamp":"2025-03-11T18:29:01.698Z"}
+{"level":"info","message":"GET /api/images/image32 200 293 - 81.102 ms - correlationId: 0138d249-ece0-4f0d-a92e-955d83c1e9d7","timestamp":"2025-03-11T18:29:01.787Z"}
+{"level":"info","message":"GET /api/images/image14 304 - - 113.499 ms - correlationId: 62246c74-e155-4218-a949-976df53cffcd","timestamp":"2025-03-11T18:29:01.814Z"}
+{"level":"info","message":"GET /api/images/image23 200 176 - 155.188 ms - correlationId: 52b09526-03d1-44a8-80ff-ebd938fd3528","timestamp":"2025-03-11T18:29:01.843Z"}
+{"level":"info","message":"GET /api/images/image61 304 - - 154.255 ms - correlationId: f9d0b997-4135-4ef3-a74b-de33dea25a18","timestamp":"2025-03-11T18:29:01.845Z"}
+{"level":"info","message":"GET /api/images/image37 200 349 - 136.063 ms - correlationId: f5442171-33d6-4ca4-bdb8-37a9f6ea7c32","timestamp":"2025-03-11T18:29:01.847Z"}
+{"level":"info","message":"GET /api/images/image34 200 349 - 139.780 ms - correlationId: a22a838c-64fb-46d5-9d5a-d173204e62f8","timestamp":"2025-03-11T18:29:01.849Z"}
+{"level":"info","message":"GET /api/products?page=6&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 8535 - 184.989 ms - correlationId: ee73c5fd-8b13-4a7d-8a20-2487d18a650d","timestamp":"2025-03-11T18:29:05.032Z"}
+{"level":"info","message":"GET /api/images/image16 200 182 - 40.954 ms - correlationId: 9e88e7a1-f440-4d6f-8f70-ddf21742da26","timestamp":"2025-03-11T18:29:05.079Z"}
+{"level":"info","message":"GET /api/images/image4 304 - - 41.923 ms - correlationId: 3f8feda5-1051-49be-8b93-180692a88284","timestamp":"2025-03-11T18:29:05.081Z"}
+{"level":"info","message":"GET /api/images/image19 200 189 - 47.231 ms - correlationId: 1d6e6fe2-7d74-4a58-bc42-1e28087742e8","timestamp":"2025-03-11T18:29:05.084Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2cb 200 3219 - 212.610 ms - correlationId: f4ae8aa5-a92c-42a6-997c-3c108c617c04","timestamp":"2025-03-11T18:29:09.544Z"}
+{"level":"info","message":"GET /api/categories 304 - - 54.119 ms - correlationId: af0ef597-4670-4910-90ee-e1bed1935ef3","timestamp":"2025-03-11T18:29:10.473Z"}
+{"level":"info","message":"GET /api/categories 304 - - 44.453 ms - correlationId: ff10c00c-0350-44d9-ad07-61fdfdadcbd3","timestamp":"2025-03-11T18:29:10.523Z"}
+{"level":"info","message":"GET /api/filters 304 - - 195.638 ms - correlationId: 2d4c9075-33e7-4810-aff5-fba701d9937a","timestamp":"2025-03-11T18:29:10.613Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 260.690 ms - correlationId: 9b4bbbc6-674f-45dd-b0f5-0e5d55a76425","timestamp":"2025-03-11T18:29:10.676Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 56.208 ms - correlationId: f1d8a600-8b15-4ea6-85c4-c92ee03f24e0","timestamp":"2025-03-11T18:29:10.750Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 103.573 ms - correlationId: 58ac7f8e-4f46-42a9-9919-e91b92bf46de","timestamp":"2025-03-11T18:29:10.789Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 104.799 ms - correlationId: bf32fa7e-947a-47ff-bd55-dfaaf0dd0fab","timestamp":"2025-03-11T18:29:10.792Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 106.506 ms - correlationId: 5d66ed56-d2e5-4db8-8eaf-eaa420175f0a","timestamp":"2025-03-11T18:29:10.795Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 108.421 ms - correlationId: 39d89441-efc0-418c-9498-e702b06484cc","timestamp":"2025-03-11T18:29:10.800Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 107.746 ms - correlationId: e2f13459-7561-404e-a8ed-e18942cfa0ab","timestamp":"2025-03-11T18:29:10.803Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 104.259 ms - correlationId: f86bc6f4-55fe-435f-a3ba-a311d709a2f1","timestamp":"2025-03-11T18:29:10.856Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 68.757 ms - correlationId: 8b671bdb-0ce2-474e-aad5-0de08e3237dd","timestamp":"2025-03-11T18:29:10.875Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 69.876 ms - correlationId: 7bbf542d-ee4b-4b46-8ca5-d0c278513403","timestamp":"2025-03-11T18:29:10.879Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 67.918 ms - correlationId: e134c504-b306-45b5-8ccb-a08b0062991a","timestamp":"2025-03-11T18:29:10.881Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 72.925 ms - correlationId: fc9db12e-7ac0-44d3-bfdb-5793a7468b79","timestamp":"2025-03-11T18:29:10.884Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 97.630 ms - correlationId: c63edf74-5ceb-472c-b9ce-f9f3744a3902","timestamp":"2025-03-11T18:29:10.913Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2e9 200 1432 - 314.286 ms - correlationId: b179eac0-8c66-417d-b588-569374729a54","timestamp":"2025-03-11T18:31:31.913Z"}
+{"level":"info","message":"GET /api/categories 304 - - 101.846 ms - correlationId: 18b878f5-8d12-4a5c-ba37-db25140c4950","timestamp":"2025-03-11T18:31:33.151Z"}
+{"level":"info","message":"GET /api/categories 304 - - 102.389 ms - correlationId: 202fd0c6-fdec-4ad8-a059-f5492598d9cb","timestamp":"2025-03-11T18:31:33.256Z"}
+{"level":"info","message":"GET /api/filters 304 - - 408.985 ms - correlationId: a5ab808a-c85a-4d22-b36d-8d96ccd80f2d","timestamp":"2025-03-11T18:31:33.460Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 517.031 ms - correlationId: faf01d81-472d-4204-80be-ffd028218aae","timestamp":"2025-03-11T18:31:33.562Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 154.570 ms - correlationId: 89199e35-2611-4e71-a797-347406b7ff7f","timestamp":"2025-03-11T18:31:33.767Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 158.072 ms - correlationId: ed9cef98-3696-45d5-a685-a810da56be6b","timestamp":"2025-03-11T18:31:33.773Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 160.701 ms - correlationId: 327a236f-3bdf-40c3-905e-1b5d936dea17","timestamp":"2025-03-11T18:31:33.777Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 169.447 ms - correlationId: 76886dda-bcd9-467f-aa7d-e8fcbc3b31f4","timestamp":"2025-03-11T18:31:33.779Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 168.847 ms - correlationId: 07ed23a5-f3d3-460c-88c8-6477bdaad1df","timestamp":"2025-03-11T18:31:33.783Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 169.316 ms - correlationId: 4b36b5fc-c6ad-4cff-b7cc-640c5241fad2","timestamp":"2025-03-11T18:31:33.786Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 181.585 ms - correlationId: 4547edf3-8f03-4bfe-b8c6-46e47bd8d030","timestamp":"2025-03-11T18:31:33.971Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 182.565 ms - correlationId: 41160bdf-1588-45cd-9597-8fb0693fd563","timestamp":"2025-03-11T18:31:33.975Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 179.965 ms - correlationId: 1cfdb130-e292-4785-b500-7726d7620fcf","timestamp":"2025-03-11T18:31:33.978Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 180.920 ms - correlationId: d9cac277-f6b3-4b52-a0c2-64b677a9bfb7","timestamp":"2025-03-11T18:31:33.982Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 179.633 ms - correlationId: f48b77b7-de27-4871-9633-4cb99967aeff","timestamp":"2025-03-11T18:31:33.984Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 183.915 ms - correlationId: 5fee226b-faaf-47b8-9338-874a0d957240","timestamp":"2025-03-11T18:31:33.987Z"}
+{"level":"info","message":"GET /api/products?page=2&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 592.152 ms - correlationId: 3aa166d3-ed6e-4a91-967d-bec291a82115","timestamp":"2025-03-11T18:32:26.514Z"}
+{"level":"info","message":"GET /api/images/image51 304 - - 175.963 ms - correlationId: e481177a-bb11-4d68-ab06-28956a41580a","timestamp":"2025-03-11T18:32:26.709Z"}
+{"level":"info","message":"GET /api/images/image58 304 - - 174.210 ms - correlationId: cb53ce3e-24ef-47ed-b078-62373d59038a","timestamp":"2025-03-11T18:32:26.712Z"}
+{"level":"info","message":"GET /api/images/image30 304 - - 187.174 ms - correlationId: 48a45e3f-3018-4f79-a47c-a7fa2c48826d","timestamp":"2025-03-11T18:32:26.715Z"}
+{"level":"info","message":"GET /api/images/image41 304 - - 187.224 ms - correlationId: e39ff4d1-1785-4406-ac32-434b064af96c","timestamp":"2025-03-11T18:32:26.718Z"}
+{"level":"info","message":"GET /api/images/image44 304 - - 185.405 ms - correlationId: 90129fb9-8a4e-472e-a29e-2befc67b0806","timestamp":"2025-03-11T18:32:26.722Z"}
+{"level":"info","message":"GET /api/images/image52 304 - - 189.887 ms - correlationId: b8efa765-0807-4a6b-ad84-5010ce3d96c3","timestamp":"2025-03-11T18:32:26.725Z"}
+{"level":"info","message":"GET /api/images/image54 304 - - 168.513 ms - correlationId: 06ef3691-08c0-4af5-82fa-675ee30df8a4","timestamp":"2025-03-11T18:32:26.912Z"}
+{"level":"info","message":"GET /api/images/image36 304 - - 176.507 ms - correlationId: 442c0289-3850-4395-80eb-d285cad24b28","timestamp":"2025-03-11T18:32:26.915Z"}
+{"level":"info","message":"GET /api/images/image59 304 - - 186.043 ms - correlationId: 7973b53c-6b3a-4363-bbb3-a5d31c7b749b","timestamp":"2025-03-11T18:32:26.918Z"}
+{"level":"info","message":"GET /api/images/image33 304 - - 187.507 ms - correlationId: b9ddb1e1-c2a7-4968-a20f-93a46ead86b5","timestamp":"2025-03-11T18:32:26.922Z"}
+{"level":"info","message":"GET /api/images/image28 304 - - 190.010 ms - correlationId: dbf8cf83-0f9f-40fe-8df1-02b907fe6a5a","timestamp":"2025-03-11T18:32:26.927Z"}
+{"level":"info","message":"GET /api/images/image40 304 - - 202.405 ms - correlationId: e0b48351-59b2-41e9-a34e-7a6f5ec750be","timestamp":"2025-03-11T18:32:26.932Z"}
+{"level":"info","message":"GET /api/products?page=4&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 775.601 ms - correlationId: 95887eea-58b8-47f7-83d4-b8d297eb1203","timestamp":"2025-03-11T18:32:34.494Z"}
+{"level":"info","message":"GET /api/images/image1 304 - - 84.672 ms - correlationId: 025fefa4-6619-4d03-b35d-26ba0ddacdd9","timestamp":"2025-03-11T18:32:34.591Z"}
+{"level":"info","message":"GET /api/images/image27 304 - - 84.796 ms - correlationId: 96c64fe5-9f16-47fb-a768-bbcde2090f04","timestamp":"2025-03-11T18:32:34.594Z"}
+{"level":"info","message":"GET /api/images/image6 304 - - 81.724 ms - correlationId: 12e2ad68-76f1-4900-aae7-ddfa0b082102","timestamp":"2025-03-11T18:32:34.596Z"}
+{"level":"info","message":"GET /api/images/image3 304 - - 83.093 ms - correlationId: 0ceadbc0-2df7-4a0e-95ab-767292b08cb3","timestamp":"2025-03-11T18:32:34.599Z"}
+{"level":"info","message":"GET /api/images/image12 304 - - 107.552 ms - correlationId: cc973eb6-4888-4fa7-ac30-c34e06e5c040","timestamp":"2025-03-11T18:32:34.618Z"}
+{"level":"info","message":"GET /api/images/image5 304 - - 109.639 ms - correlationId: 21b97612-732c-488a-80ff-971569a48a5a","timestamp":"2025-03-11T18:32:34.623Z"}
+{"level":"info","message":"GET /api/images/image29 304 - - 88.874 ms - correlationId: 57dd4fd1-33db-43ef-9e19-802723ab67ca","timestamp":"2025-03-11T18:32:34.695Z"}
+{"level":"info","message":"GET /api/images/image22 304 - - 95.415 ms - correlationId: 166eb0cb-3103-4e52-8384-8d4af7f9a0de","timestamp":"2025-03-11T18:32:34.698Z"}
+{"level":"info","message":"GET /api/images/image24 304 - - 99.877 ms - correlationId: 7812dc2a-cc67-4160-bf6a-02e2ba2fbfc2","timestamp":"2025-03-11T18:32:34.711Z"}
+{"level":"info","message":"GET /api/images/image21 304 - - 101.053 ms - correlationId: 1e4b94de-234f-4b08-b7d5-ab1dadb520c7","timestamp":"2025-03-11T18:32:34.714Z"}
+{"level":"info","message":"GET /api/images/image8 304 - - 91.649 ms - correlationId: 880094f6-386a-46a7-b2f7-a8908d6d04f7","timestamp":"2025-03-11T18:32:34.718Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 97.353 ms - correlationId: ee66a355-5887-4375-be60-38414afd7b47","timestamp":"2025-03-11T18:32:34.726Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-11T19:00:00.354Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-11T19:05:21.860Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-11T19:05:22.987Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-11T19:05:23.438Z"}
+{"correlationId":"6908511b-bf19-4b68-8889-51ef631bd0fb","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:06:16.231Z"}
+{"cart":[],"correlationId":"6908511b-bf19-4b68-8889-51ef631bd0fb","level":"info","message":"Fetched cart from session","sessionId":"TfzILSQiv4KaLh4Qr7nkifFTm0rwhjy_","timestamp":"2025-03-11T19:06:16.233Z"}
+{"level":"info","message":"GET /api/cart 304 - - 6.750 ms - correlationId: 6908511b-bf19-4b68-8889-51ef631bd0fb","timestamp":"2025-03-11T19:06:16.240Z"}
+{"correlationId":"2cb206b5-0e42-45a0-8617-39d305847faf","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:06:16.244Z"}
+{"compareList":[],"correlationId":"2cb206b5-0e42-45a0-8617-39d305847faf","level":"info","message":"Fetched compare list from session","sessionId":"HnLK1FQoDCV2NSNE59n6Byyw9396hXOc","timestamp":"2025-03-11T19:06:16.245Z"}
+{"level":"info","message":"GET /api/compare 200 2 - 2.279 ms - correlationId: 2cb206b5-0e42-45a0-8617-39d305847faf","timestamp":"2025-03-11T19:06:16.247Z"}
+{"correlationId":"9a7fbbed-b9bd-4c19-961d-180f90822ce1","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:06:16.280Z"}
+{"cart":[],"correlationId":"9a7fbbed-b9bd-4c19-961d-180f90822ce1","level":"info","message":"Fetched cart from session","sessionId":"oOjs3RCejHVyygN6IP8mMDtvJuyluw3p","timestamp":"2025-03-11T19:06:16.281Z"}
+{"level":"info","message":"GET /api/cart 304 - - 2.243 ms - correlationId: 9a7fbbed-b9bd-4c19-961d-180f90822ce1","timestamp":"2025-03-11T19:06:16.282Z"}
+{"correlationId":"59e65e37-7a5c-4b21-aedc-0cca2d138a60","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:06:16.285Z"}
+{"compareList":[],"correlationId":"59e65e37-7a5c-4b21-aedc-0cca2d138a60","level":"info","message":"Fetched compare list from session","sessionId":"YMfaoV676BJLrjQLApnlZ7wQ_WTA4_yY","timestamp":"2025-03-11T19:06:16.287Z"}
+{"level":"info","message":"GET /api/compare 304 - - 2.451 ms - correlationId: 59e65e37-7a5c-4b21-aedc-0cca2d138a60","timestamp":"2025-03-11T19:06:16.288Z"}
+{"correlationId":"aefbe050-e6cd-480d-a39f-f89529b7f233","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:06:16.289Z"}
+{"cart":[],"correlationId":"aefbe050-e6cd-480d-a39f-f89529b7f233","level":"info","message":"Fetched cart from session","sessionId":"MmarOBm_edwpr81e8-5LEaUgnEgzTFvJ","timestamp":"2025-03-11T19:06:16.290Z"}
+{"level":"info","message":"GET /api/cart 304 - - 1.485 ms - correlationId: aefbe050-e6cd-480d-a39f-f89529b7f233","timestamp":"2025-03-11T19:06:16.291Z"}
+{"correlationId":"8e21165b-17bc-47b1-8c57-91cefd0723fe","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:06:16.293Z"}
+{"compareList":[],"correlationId":"8e21165b-17bc-47b1-8c57-91cefd0723fe","level":"info","message":"Fetched compare list from session","sessionId":"8-AY6ou3Vbmw_A3n7hlchNYDlwFW4kxx","timestamp":"2025-03-11T19:06:16.293Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.366 ms - correlationId: 8e21165b-17bc-47b1-8c57-91cefd0723fe","timestamp":"2025-03-11T19:06:16.294Z"}
+{"level":"info","message":"GET /api/filters 304 - - 288.030 ms - correlationId: b89a3560-14f5-4ef4-af21-fb1f30f191c6","timestamp":"2025-03-11T19:06:16.661Z"}
+{"level":"info","message":"GET /api/categories 304 - - 347.362 ms - correlationId: 5af361b1-1af8-4a0d-81a7-1ae97246d2be","timestamp":"2025-03-11T19:06:16.717Z"}
+{"level":"info","message":"GET /api/categories 304 - - 44.590 ms - correlationId: 18b2e69a-7692-4d28-a0d7-df706ffa4c04","timestamp":"2025-03-11T19:06:16.768Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 19411 - 487.214 ms - correlationId: d5777935-7733-44ff-ad78-2d14cfb2f568","timestamp":"2025-03-11T19:06:16.849Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 42.257 ms - correlationId: f2189c13-1c9f-42c3-8305-55a628eff07e","timestamp":"2025-03-11T19:06:18.093Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 42.727 ms - correlationId: 59b9acf9-1790-47dc-96ba-a6ddad8f3b41","timestamp":"2025-03-11T19:06:18.096Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 45.274 ms - correlationId: a1b2ec62-2890-4218-b4cf-d7a4d08b1c07","timestamp":"2025-03-11T19:06:18.100Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 74.924 ms - correlationId: f2394008-1d35-42e4-97f6-2cc1da22547a","timestamp":"2025-03-11T19:06:18.136Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 48.906 ms - correlationId: 11a9ae7d-2728-49e6-ae8b-6f9cd4c09c27","timestamp":"2025-03-11T19:06:18.147Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 47.956 ms - correlationId: 1a3e8463-9628-4863-9725-c5428cd05ed1","timestamp":"2025-03-11T19:06:18.150Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 90.096 ms - correlationId: 49289c7e-9f99-4543-a3cc-04efe09d89f0","timestamp":"2025-03-11T19:06:18.194Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 70.853 ms - correlationId: e1c6a884-dd3e-4653-acbd-062ee41b2c52","timestamp":"2025-03-11T19:06:18.209Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 59.127 ms - correlationId: e9ae119e-361c-4033-8788-f9549a1e2bb8","timestamp":"2025-03-11T19:06:18.211Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 83.721 ms - correlationId: c4e23635-e5f2-436a-b577-b7095d9e90ef","timestamp":"2025-03-11T19:06:18.237Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 319.003 ms - correlationId: a386e5af-dd1b-4e25-a8be-c9e1ec3b056a","timestamp":"2025-03-11T19:06:18.378Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 325.927 ms - correlationId: ebf8c284-5aa6-4e60-8d81-1bbf16837dc4","timestamp":"2025-03-11T19:06:18.382Z"}
+{"level":"info","message":"GET /api/products?page=4&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 32151 - 701.754 ms - correlationId: f74eac71-e050-437e-ac5c-8ecde0e8a703","timestamp":"2025-03-11T19:07:04.207Z"}
+{"level":"info","message":"GET /api/images/image12 304 - - 60.328 ms - correlationId: e0242ee5-0604-4269-8fce-bc7a10e53dfa","timestamp":"2025-03-11T19:07:04.282Z"}
+{"level":"info","message":"GET /api/images/image5 304 - - 93.407 ms - correlationId: 15ae7007-8547-4f87-9699-35fc754cd7d3","timestamp":"2025-03-11T19:07:04.316Z"}
+{"level":"info","message":"GET /api/images/image1 304 - - 99.910 ms - correlationId: 3aa9f0a9-b266-498b-8066-b35754648979","timestamp":"2025-03-11T19:07:04.318Z"}
+{"level":"info","message":"GET /api/images/image6 304 - - 134.170 ms - correlationId: 16f2a420-3f21-4702-afef-e3670b4c4738","timestamp":"2025-03-11T19:07:04.357Z"}
+{"level":"info","message":"GET /api/images/image27 304 - - 139.816 ms - correlationId: 7fc2617d-58e2-4c46-8f28-1044f4997d56","timestamp":"2025-03-11T19:07:04.359Z"}
+{"level":"info","message":"GET /api/images/image29 304 - - 96.974 ms - correlationId: d2815b36-057f-4100-aaf1-037f6fd10f85","timestamp":"2025-03-11T19:07:04.382Z"}
+{"level":"info","message":"GET /api/images/image22 304 - - 123.184 ms - correlationId: c6f11ead-f4dc-4a59-8b38-0bc325444b1c","timestamp":"2025-03-11T19:07:04.445Z"}
+{"level":"info","message":"GET /api/images/image24 304 - - 127.428 ms - correlationId: f51f20ca-ce4f-453d-b36d-39de9539b304","timestamp":"2025-03-11T19:07:04.448Z"}
+{"level":"info","message":"GET /api/images/image21 304 - - 67.317 ms - correlationId: 9fab95cd-9361-4e1d-9969-c6121d0eb112","timestamp":"2025-03-11T19:07:04.451Z"}
+{"level":"info","message":"GET /api/images/image8 304 - - 125.392 ms - correlationId: be2f8e86-ca3e-44a6-90e5-41498e2bc19b","timestamp":"2025-03-11T19:07:04.486Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 125.759 ms - correlationId: 3a602a91-73ec-4a6e-9445-9258ac856a11","timestamp":"2025-03-11T19:07:04.488Z"}
+{"level":"info","message":"GET /api/images/image3 304 - - 584.308 ms - correlationId: 741c5d84-0a19-404a-b5b6-6709bb6930f7","timestamp":"2025-03-11T19:07:04.808Z"}
+{"level":"info","message":"GET /api/products?page=4&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 648.025 ms - correlationId: 8ba9dcb0-2ff8-4f85-ac99-af03a58296aa","timestamp":"2025-03-11T19:07:05.443Z"}
+{"level":"info","message":"GET /api/images/image27 304 - - 49.034 ms - correlationId: 0673e00b-15ee-4743-b441-2c335dcbe072","timestamp":"2025-03-11T19:07:05.498Z"}
+{"level":"info","message":"GET /api/images/image1 304 - - 51.636 ms - correlationId: a1aea45c-5ac8-466e-b65f-522410322b7c","timestamp":"2025-03-11T19:07:05.500Z"}
+{"level":"info","message":"GET /api/images/image6 304 - - 48.002 ms - correlationId: ec5174b9-94cf-4f0b-bcbd-befe3173497a","timestamp":"2025-03-11T19:07:05.501Z"}
+{"level":"info","message":"GET /api/images/image12 304 - - 58.577 ms - correlationId: 055aac3b-e8c4-4b9f-aacb-c1116e29461c","timestamp":"2025-03-11T19:07:05.509Z"}
+{"level":"info","message":"GET /api/images/image5 304 - - 59.471 ms - correlationId: 6a363d3f-897e-4fea-adf6-73ce2b8c5fbd","timestamp":"2025-03-11T19:07:05.511Z"}
+{"level":"info","message":"GET /api/images/image3 304 - - 82.015 ms - correlationId: 919026b9-641e-4e32-9601-ea6fb70b2bed","timestamp":"2025-03-11T19:07:05.537Z"}
+{"level":"info","message":"GET /api/images/image22 304 - - 48.529 ms - correlationId: f0fe48f5-6bfc-4426-8fbd-8ff040b17747","timestamp":"2025-03-11T19:07:05.552Z"}
+{"level":"info","message":"GET /api/images/image24 304 - - 66.767 ms - correlationId: 210d2bc2-4440-4f4b-ac52-e64b1f432c1e","timestamp":"2025-03-11T19:07:05.573Z"}
+{"level":"info","message":"GET /api/images/image29 304 - - 69.725 ms - correlationId: 7c361f43-4c9f-41be-ac86-34a57beae444","timestamp":"2025-03-11T19:07:05.574Z"}
+{"level":"info","message":"GET /api/images/image21 304 - - 63.047 ms - correlationId: 479cd9e9-1c55-4305-bc23-a46a4a9cb4ca","timestamp":"2025-03-11T19:07:05.576Z"}
+{"level":"info","message":"GET /api/images/image8 304 - - 64.038 ms - correlationId: 9dc4f5c7-1cb8-45f3-8d30-1e397be55311","timestamp":"2025-03-11T19:07:05.578Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 81.713 ms - correlationId: 5f51cb04-eb4d-40fd-8878-4c658acc92de","timestamp":"2025-03-11T19:07:05.620Z"}
+{"level":"info","message":"GET /api/products?page=6&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 8655 - 228.468 ms - correlationId: cfc8ab10-3e44-40dc-ac6c-3a3bd038032a","timestamp":"2025-03-11T19:07:16.451Z"}
+{"level":"info","message":"GET /api/images/image16 304 - - 40.821 ms - correlationId: 7457ed2b-3c41-413d-9ec9-24764e58ce9f","timestamp":"2025-03-11T19:07:16.498Z"}
+{"level":"info","message":"GET /api/images/image4 304 - - 41.869 ms - correlationId: 2d59233b-6e3d-45d9-9123-1bbb0dc855e3","timestamp":"2025-03-11T19:07:16.500Z"}
+{"level":"info","message":"GET /api/images/image19 304 - - 44.798 ms - correlationId: f2c7574d-c55a-4a17-acfb-6af45c51a9b9","timestamp":"2025-03-11T19:07:16.501Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2c8 200 3115 - 175.857 ms - correlationId: bee77a06-81ed-4438-b8c3-9b249591e71d","timestamp":"2025-03-11T19:07:19.510Z"}
+{"level":"info","message":"GET /api/categories 304 - - 68.465 ms - correlationId: 226577f3-0b72-4081-a80e-99a25c87191e","timestamp":"2025-03-11T19:07:22.544Z"}
+{"level":"info","message":"GET /api/categories 304 - - 93.073 ms - correlationId: 3f9ff44a-d0af-4b7a-8239-9660670dea5f","timestamp":"2025-03-11T19:07:22.639Z"}
+{"level":"info","message":"GET /api/filters 304 - - 226.252 ms - correlationId: 5aebec79-e064-421d-b600-f3d00ea718ef","timestamp":"2025-03-11T19:07:22.703Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 342.180 ms - correlationId: 61db79fd-2966-4296-9929-c80a2ad317e8","timestamp":"2025-03-11T19:07:22.815Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 42.610 ms - correlationId: b4b65f89-eaee-4c8a-a64e-728d50147668","timestamp":"2025-03-11T19:07:22.868Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 42.953 ms - correlationId: bd421f1f-42a1-4319-a97d-fffc1c2f55cb","timestamp":"2025-03-11T19:07:22.869Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 44.681 ms - correlationId: ae435cf7-b389-484c-a471-d0b30bc6d0ff","timestamp":"2025-03-11T19:07:22.872Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 51.656 ms - correlationId: 3e574894-c62a-49bb-8a2e-d826e802fa38","timestamp":"2025-03-11T19:07:22.876Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 49.130 ms - correlationId: 098ff40f-cfb9-45a7-8b1a-b499116daf97","timestamp":"2025-03-11T19:07:22.878Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 50.452 ms - correlationId: 77ce9e89-cf23-45f0-bd50-1dd82df1bb78","timestamp":"2025-03-11T19:07:22.880Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 42.827 ms - correlationId: dd6bae94-8f8d-40f9-a6ea-b3dedf6deb6a","timestamp":"2025-03-11T19:07:22.917Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 42.831 ms - correlationId: a80123c0-fcc1-4a63-b11b-149dda6e5923","timestamp":"2025-03-11T19:07:22.925Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 43.022 ms - correlationId: 475b5125-8e2b-47bc-95db-95094daf9782","timestamp":"2025-03-11T19:07:22.926Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 45.766 ms - correlationId: 82e384ab-cf14-46bf-a267-3ddf79f4f617","timestamp":"2025-03-11T19:07:22.931Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 48.634 ms - correlationId: ff2ab97c-c8a7-4c24-95f5-76c3768805fc","timestamp":"2025-03-11T19:07:22.933Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 49.213 ms - correlationId: fdf229b0-db60-4468-be0c-fa799a1d402f","timestamp":"2025-03-11T19:07:22.935Z"}
+{"level":"info","message":"GET /api/products?page=5&limit=12&bestSellers=false&onSale=false&sort=priceDesc 200 30784 - 292.225 ms - correlationId: 85a05f2d-1723-411e-8566-8e0c692de404","timestamp":"2025-03-11T19:07:28.326Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 42.499 ms - correlationId: 7d387052-4fdf-4d36-bcbc-299b0d61cdd1","timestamp":"2025-03-11T19:07:28.376Z"}
+{"level":"info","message":"GET /api/images/image14 304 - - 41.558 ms - correlationId: 518b0ac7-ca1a-4a04-b2b4-110392db536a","timestamp":"2025-03-11T19:07:28.379Z"}
+{"level":"info","message":"GET /api/images/image61 304 - - 44.469 ms - correlationId: bdbc0b0b-9054-462d-aea4-84ba76a429eb","timestamp":"2025-03-11T19:07:28.381Z"}
+{"level":"info","message":"GET /api/images/image11 304 - - 47.821 ms - correlationId: bce1c028-1ce2-464b-ba9c-2d76f48c041b","timestamp":"2025-03-11T19:07:28.383Z"}
+{"level":"info","message":"GET /api/images/image13 304 - - 45.872 ms - correlationId: 484ba8c6-2c9c-47ba-8912-eb8fd30ab984","timestamp":"2025-03-11T19:07:28.385Z"}
+{"level":"info","message":"GET /api/images/image10 304 - - 47.850 ms - correlationId: 468e740e-64e7-4c2e-85d6-7235089b6743","timestamp":"2025-03-11T19:07:28.388Z"}
+{"level":"info","message":"GET /api/images/image17 304 - - 43.378 ms - correlationId: 365b4354-8e9e-4cfc-b048-6517c3ddf285","timestamp":"2025-03-11T19:07:28.421Z"}
+{"level":"info","message":"GET /api/images/image15 304 - - 41.070 ms - correlationId: 9a8ab292-043b-49b5-ba23-fd8e08742864","timestamp":"2025-03-11T19:07:28.427Z"}
+{"level":"info","message":"GET /api/images/image23 304 - - 41.822 ms - correlationId: 706b105d-228a-44b7-a15e-1047a05b6546","timestamp":"2025-03-11T19:07:28.431Z"}
+{"level":"info","message":"GET /api/images/image34 304 - - 44.727 ms - correlationId: 83be5171-17f7-4b4c-af6e-519058e60442","timestamp":"2025-03-11T19:07:28.438Z"}
+{"level":"info","message":"GET /api/images/image32 304 - - 47.619 ms - correlationId: 034c4c99-ecd4-437d-b911-9bfb81b00932","timestamp":"2025-03-11T19:07:28.439Z"}
+{"level":"info","message":"GET /api/images/image37 304 - - 47.043 ms - correlationId: c4c82e52-51af-416b-940a-0f485a67c8c3","timestamp":"2025-03-11T19:07:28.441Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2bf 200 3647 - 162.984 ms - correlationId: e220fab6-bac5-41df-8b24-033a1a3750bb","timestamp":"2025-03-11T19:07:57.537Z"}
+{"level":"info","message":"GET /api/categories 304 - - 138.148 ms - correlationId: 5a9da1c5-16c9-43df-9380-76475040e55e","timestamp":"2025-03-11T19:08:03.054Z"}
+{"level":"info","message":"GET /api/categories 304 - - 43.964 ms - correlationId: 3e03eb27-80e8-47c7-83b9-7bbd24d88317","timestamp":"2025-03-11T19:08:03.103Z"}
+{"level":"info","message":"GET /api/filters 304 - - 265.854 ms - correlationId: 3154bb44-3214-449f-b81a-cbf98f6adfcb","timestamp":"2025-03-11T19:08:03.183Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 355.194 ms - correlationId: 5fac1e0f-4e86-4ab1-b468-6edaa44a48e4","timestamp":"2025-03-11T19:08:03.261Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 40.562 ms - correlationId: c46850d8-abc0-4577-8806-5473e059c46b","timestamp":"2025-03-11T19:08:03.308Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 43.183 ms - correlationId: 58eae7e7-3169-4014-b0ed-4daf8a73e89f","timestamp":"2025-03-11T19:08:03.310Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 43.878 ms - correlationId: 3939bcaf-2767-4a4e-9a60-84aa8a7f98f9","timestamp":"2025-03-11T19:08:03.312Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 51.359 ms - correlationId: a10895dc-6959-4aa3-b90f-5a2dc59f61f8","timestamp":"2025-03-11T19:08:03.320Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 50.427 ms - correlationId: 43d1cbc8-1370-411c-b15d-db970fab987d","timestamp":"2025-03-11T19:08:03.322Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 54.433 ms - correlationId: 7e778927-51de-475b-8b01-eb4e1604dd82","timestamp":"2025-03-11T19:08:03.326Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 42.034 ms - correlationId: c871a990-3c1b-4e81-8bf5-4135c90065f1","timestamp":"2025-03-11T19:08:03.355Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 41.541 ms - correlationId: f8c357ab-b251-4dfe-9794-809e0eac9bd6","timestamp":"2025-03-11T19:08:03.357Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 44.401 ms - correlationId: b51f5b33-8545-477d-93ee-e262e7cbfb99","timestamp":"2025-03-11T19:08:03.359Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 42.288 ms - correlationId: 47eb0ea3-c007-4ecc-bdbf-61e497da08b3","timestamp":"2025-03-11T19:08:03.366Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 42.823 ms - correlationId: af4951db-4ad0-4a51-8b2a-b9d1cfa3ec05","timestamp":"2025-03-11T19:08:03.370Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 42.699 ms - correlationId: 462cd59c-53d6-4f10-938e-d9d09220f2eb","timestamp":"2025-03-11T19:08:03.373Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ed 200 1469 - 207.500 ms - correlationId: 582fafa2-d5cf-4b97-885d-8f8f1775f595","timestamp":"2025-03-11T19:08:05.689Z"}
+{"level":"info","message":"GET /api/categories 304 - - 46.090 ms - correlationId: c21fe8bb-20d3-4a3f-a393-2bf4a46234cf","timestamp":"2025-03-11T19:08:06.521Z"}
+{"level":"info","message":"GET /api/categories 304 - - 44.268 ms - correlationId: c449d867-352d-4b21-a817-87e552d0c5ce","timestamp":"2025-03-11T19:08:06.567Z"}
+{"level":"info","message":"GET /api/filters 304 - - 180.975 ms - correlationId: b32ca425-86ef-4128-a293-a2ec89f5c60c","timestamp":"2025-03-11T19:08:06.657Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 317.932 ms - correlationId: 142cab23-3b6a-4f20-bad5-a45d2d7bbe8c","timestamp":"2025-03-11T19:08:06.788Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 43.975 ms - correlationId: e34c8128-e6c6-4b32-92bf-bb9aecc9c7c9","timestamp":"2025-03-11T19:08:06.840Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 43.666 ms - correlationId: d5c22292-4ae4-4596-bc1f-66f51b0af4d0","timestamp":"2025-03-11T19:08:06.842Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 43.300 ms - correlationId: 086430a1-c184-497c-a486-6641eb6d9dd5","timestamp":"2025-03-11T19:08:06.845Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 50.070 ms - correlationId: b4b34697-ea00-4329-afb8-1790279ab41f","timestamp":"2025-03-11T19:08:06.850Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 50.589 ms - correlationId: e656a9d0-d234-47f9-978e-e6d85219f325","timestamp":"2025-03-11T19:08:06.851Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 50.737 ms - correlationId: fe204b05-f955-4328-9397-4bb8739aade8","timestamp":"2025-03-11T19:08:06.853Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 42.110 ms - correlationId: edd7a9f2-dadf-4a23-9bc2-005c03f83d28","timestamp":"2025-03-11T19:08:06.885Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 41.077 ms - correlationId: 363868b3-db27-4d09-9d70-98fedc79dfae","timestamp":"2025-03-11T19:08:06.889Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 45.788 ms - correlationId: bce13947-aa25-4fe9-8167-01b7a62caaec","timestamp":"2025-03-11T19:08:06.901Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 46.531 ms - correlationId: 2d85b922-3946-435b-92f9-3d015c1b1733","timestamp":"2025-03-11T19:08:06.903Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 47.776 ms - correlationId: 6683734d-4de3-4398-bccc-dcca2d37a9e3","timestamp":"2025-03-11T19:08:06.904Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 49.428 ms - correlationId: d5167f8f-8f05-4b3d-b5f6-6c78cad54952","timestamp":"2025-03-11T19:08:06.907Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ed 304 - - 189.855 ms - correlationId: 019ddd94-3e27-41b9-884f-5c679d9efcf6","timestamp":"2025-03-11T19:08:10.352Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-11T19:11:32.986Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-11T19:11:34.378Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-11T19:11:36.069Z"}
+{"correlationId":"55ed5cf4-5d50-4cdf-af07-2a35d749bdc2","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:12:02.139Z"}
+{"cart":[],"correlationId":"55ed5cf4-5d50-4cdf-af07-2a35d749bdc2","level":"info","message":"Fetched cart from session","sessionId":"scwsMryTJcOTu_JX9pvWNQN-04kQWmjm","timestamp":"2025-03-11T19:12:02.142Z"}
+{"level":"info","message":"GET /api/cart 304 - - 7.489 ms - correlationId: 55ed5cf4-5d50-4cdf-af07-2a35d749bdc2","timestamp":"2025-03-11T19:12:02.148Z"}
+{"correlationId":"5ece6580-cc25-49c9-95dd-44f88454cd0b","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:12:02.153Z"}
+{"compareList":[],"correlationId":"5ece6580-cc25-49c9-95dd-44f88454cd0b","level":"info","message":"Fetched compare list from session","sessionId":"NZlguUFhnJcawFGL87saXm7X5qicC-nS","timestamp":"2025-03-11T19:12:02.155Z"}
+{"level":"info","message":"GET /api/compare 304 - - 3.024 ms - correlationId: 5ece6580-cc25-49c9-95dd-44f88454cd0b","timestamp":"2025-03-11T19:12:02.156Z"}
+{"correlationId":"a9e51314-3f77-4211-a757-30df63a2e8dd","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:12:02.216Z"}
+{"cart":[],"correlationId":"a9e51314-3f77-4211-a757-30df63a2e8dd","level":"info","message":"Fetched cart from session","sessionId":"w-dptL0NW4ovD2LD5rQFHuZIYt2NNkBu","timestamp":"2025-03-11T19:12:02.217Z"}
+{"level":"info","message":"GET /api/cart 304 - - 2.086 ms - correlationId: a9e51314-3f77-4211-a757-30df63a2e8dd","timestamp":"2025-03-11T19:12:02.218Z"}
+{"correlationId":"4b44c7b4-9987-43b8-b36e-e29b319aa0ab","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:12:02.220Z"}
+{"compareList":[],"correlationId":"4b44c7b4-9987-43b8-b36e-e29b319aa0ab","level":"info","message":"Fetched compare list from session","sessionId":"JKs7wZCJUdfiD1y1kJ45ai9aQHxyvKo3","timestamp":"2025-03-11T19:12:02.220Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.176 ms - correlationId: 4b44c7b4-9987-43b8-b36e-e29b319aa0ab","timestamp":"2025-03-11T19:12:02.221Z"}
+{"correlationId":"d8759adb-8055-43e6-afea-82199f957e53","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:12:02.223Z"}
+{"cart":[],"correlationId":"d8759adb-8055-43e6-afea-82199f957e53","level":"info","message":"Fetched cart from session","sessionId":"7AoF1gUkUVxr8S_9tTtjK2X808mLPFOj","timestamp":"2025-03-11T19:12:02.223Z"}
+{"level":"info","message":"GET /api/cart 304 - - 1.255 ms - correlationId: d8759adb-8055-43e6-afea-82199f957e53","timestamp":"2025-03-11T19:12:02.224Z"}
+{"correlationId":"e42561a8-0aae-4349-9ea4-8b8b3358be6e","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:12:02.229Z"}
+{"compareList":[],"correlationId":"e42561a8-0aae-4349-9ea4-8b8b3358be6e","level":"info","message":"Fetched compare list from session","sessionId":"afdBiFkkmzO48ugyrshXCNgM__fR104V","timestamp":"2025-03-11T19:12:02.230Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.678 ms - correlationId: e42561a8-0aae-4349-9ea4-8b8b3358be6e","timestamp":"2025-03-11T19:12:02.231Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ed 200 1492 - 460.632 ms - correlationId: 3e99c9e8-2578-4cbe-b80c-ccb14d3695cc","timestamp":"2025-03-11T19:12:02.770Z"}
+{"correlationId":"43883ee7-6836-49c9-8c9c-b9be0fcfca17","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:12:49.818Z"}
+{"cart":[],"correlationId":"43883ee7-6836-49c9-8c9c-b9be0fcfca17","level":"info","message":"Fetched cart from session","sessionId":"sc3pDARFkoh2b_q_u4tY6hVGGcyvYlc7","timestamp":"2025-03-11T19:12:49.819Z"}
+{"level":"info","message":"GET /api/cart 304 - - 1.575 ms - correlationId: 43883ee7-6836-49c9-8c9c-b9be0fcfca17","timestamp":"2025-03-11T19:12:49.820Z"}
+{"correlationId":"aed075dc-762c-479d-8754-4cbe50f3d8fe","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:12:49.822Z"}
+{"compareList":[],"correlationId":"aed075dc-762c-479d-8754-4cbe50f3d8fe","level":"info","message":"Fetched compare list from session","sessionId":"WZdMCpo5nJOYECJvkDNGJFz-G22mjQoB","timestamp":"2025-03-11T19:12:49.822Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.676 ms - correlationId: aed075dc-762c-479d-8754-4cbe50f3d8fe","timestamp":"2025-03-11T19:12:49.824Z"}
+{"correlationId":"7aac6c33-7913-457c-b3e7-7098bb3018a0","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:12:49.838Z"}
+{"cart":[],"correlationId":"7aac6c33-7913-457c-b3e7-7098bb3018a0","level":"info","message":"Fetched cart from session","sessionId":"3_oB9qEWv5G08pbAIJoSFVMee_GJ7igp","timestamp":"2025-03-11T19:12:49.839Z"}
+{"level":"info","message":"GET /api/cart 304 - - 2.223 ms - correlationId: 7aac6c33-7913-457c-b3e7-7098bb3018a0","timestamp":"2025-03-11T19:12:49.841Z"}
+{"correlationId":"9b6ef8c4-c641-4712-b602-a5e70e07841f","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:12:49.843Z"}
+{"compareList":[],"correlationId":"9b6ef8c4-c641-4712-b602-a5e70e07841f","level":"info","message":"Fetched compare list from session","sessionId":"TwC9hkFTDQP9m38Om5Zbicf31LYyGygR","timestamp":"2025-03-11T19:12:49.843Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.361 ms - correlationId: 9b6ef8c4-c641-4712-b602-a5e70e07841f","timestamp":"2025-03-11T19:12:49.845Z"}
+{"correlationId":"43bfb373-5816-404b-9f0e-67d44f5a4ca5","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:12:49.847Z"}
+{"cart":[],"correlationId":"43bfb373-5816-404b-9f0e-67d44f5a4ca5","level":"info","message":"Fetched cart from session","sessionId":"P64su0mFvY9ZHyaFLmVG6bhlS2kS9NPO","timestamp":"2025-03-11T19:12:49.848Z"}
+{"level":"info","message":"GET /api/cart 304 - - 1.845 ms - correlationId: 43bfb373-5816-404b-9f0e-67d44f5a4ca5","timestamp":"2025-03-11T19:12:49.849Z"}
+{"correlationId":"4b146e3d-5e49-4724-ba6b-cdbc7bde1816","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:12:49.852Z"}
+{"compareList":[],"correlationId":"4b146e3d-5e49-4724-ba6b-cdbc7bde1816","level":"info","message":"Fetched compare list from session","sessionId":"LGa-NvxWKSc-CK-EvW7jo2eZsLq2e2GO","timestamp":"2025-03-11T19:12:49.853Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.740 ms - correlationId: 4b146e3d-5e49-4724-ba6b-cdbc7bde1816","timestamp":"2025-03-11T19:12:49.854Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ed 304 - - 329.405 ms - correlationId: caadd58c-57fe-4f9b-8821-ff819f51160b","timestamp":"2025-03-11T19:12:50.190Z"}
+{"level":"info","message":"GET /api/filters 304 - - 299.501 ms - correlationId: 59b18602-20d6-45fc-adc8-6635ab967ebc","timestamp":"2025-03-11T19:12:55.926Z"}
+{"level":"info","message":"GET /api/categories 304 - - 382.383 ms - correlationId: 1806342e-dfc3-4271-8aa9-bbd6b21cec3e","timestamp":"2025-03-11T19:12:56.005Z"}
+{"level":"info","message":"GET /api/categories 304 - - 41.390 ms - correlationId: 1a92a1d5-901f-4794-931c-185fa2884358","timestamp":"2025-03-11T19:12:56.048Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 570.539 ms - correlationId: 49fc0498-4e75-4a06-9c9c-d312b8bdc3cf","timestamp":"2025-03-11T19:12:56.183Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 40.601 ms - correlationId: d34474ec-1e0e-4d6a-b94d-1a3d1789ef91","timestamp":"2025-03-11T19:12:56.230Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 41.959 ms - correlationId: 562c9cf1-05d8-439a-ae80-8a5aa6269769","timestamp":"2025-03-11T19:12:56.233Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 43.886 ms - correlationId: 93a3efa0-b901-4573-9aee-71ecbc895e12","timestamp":"2025-03-11T19:12:56.236Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 82.117 ms - correlationId: 73a830b8-0117-469c-9cc0-6d4821199ce6","timestamp":"2025-03-11T19:12:56.281Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 50.022 ms - correlationId: 4d469ff8-cb33-44db-86c1-42816f1c709b","timestamp":"2025-03-11T19:12:56.284Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 50.504 ms - correlationId: 1bd38676-a905-4f31-8d1e-0c9bcc4f3648","timestamp":"2025-03-11T19:12:56.286Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 84.824 ms - correlationId: c2a364d4-1721-411e-81f1-4491e268a432","timestamp":"2025-03-11T19:12:56.323Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 42.274 ms - correlationId: 96e813d3-df69-4794-91d7-16c18223b86b","timestamp":"2025-03-11T19:12:56.329Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 44.598 ms - correlationId: bdc55aaf-34c3-4aed-88e0-970b5a169542","timestamp":"2025-03-11T19:12:56.333Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 73.852 ms - correlationId: ebde0848-b3ae-42a1-b4c4-8208aac85d48","timestamp":"2025-03-11T19:12:56.363Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 284.765 ms - correlationId: b00be667-032c-4b8b-8ebb-1c6f40ec5e5d","timestamp":"2025-03-11T19:12:56.480Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 315.314 ms - correlationId: b1c281ba-32b0-4ee0-846a-0c1c4141754b","timestamp":"2025-03-11T19:12:56.513Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2e7 200 1500 - 269.777 ms - correlationId: f8236774-f8a3-4c20-a5dd-8bb856b58f87","timestamp":"2025-03-11T19:13:00.235Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2e0 200 1460 - 260.976 ms - correlationId: 88137f34-1006-4d16-a60f-a222adbbb396","timestamp":"2025-03-11T19:13:46.915Z"}
+{"level":"info","message":"GET /api/categories 304 - - 134.235 ms - correlationId: 1239958a-5e22-47f2-bf39-334e045fe886","timestamp":"2025-03-11T19:13:54.974Z"}
+{"level":"info","message":"GET /api/categories 304 - - 137.288 ms - correlationId: 2359a494-2464-43de-87ab-b95a1252f5d0","timestamp":"2025-03-11T19:13:55.115Z"}
+{"level":"info","message":"GET /api/filters 304 - - 357.299 ms - correlationId: c8b21686-68d5-4520-bf10-eefeadd6661a","timestamp":"2025-03-11T19:13:55.201Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 646.999 ms - correlationId: 4273c8cb-9852-48a3-b873-7917e88b7a7f","timestamp":"2025-03-11T19:13:55.484Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 105.332 ms - correlationId: 4a556831-9bba-4bee-b68b-43074d8fb019","timestamp":"2025-03-11T19:13:55.602Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 109.806 ms - correlationId: a546e009-c4d1-4182-9c53-e2f5b00239b3","timestamp":"2025-03-11T19:13:55.603Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 116.124 ms - correlationId: c9d867e6-c474-4966-8c5b-6e5aa1e6008e","timestamp":"2025-03-11T19:13:55.605Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 149.394 ms - correlationId: 352ebf2e-b0ba-4b26-b13b-4c49ff50192f","timestamp":"2025-03-11T19:13:55.641Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 152.481 ms - correlationId: ff4f4cfd-0d4e-4b10-8b25-eeca233ef847","timestamp":"2025-03-11T19:13:55.646Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 116.111 ms - correlationId: 801e18ba-8d1e-436c-b287-87f6760b48b3","timestamp":"2025-03-11T19:13:55.726Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 119.587 ms - correlationId: f1366657-9fa6-499f-8fd8-a6f7f3b2c3a3","timestamp":"2025-03-11T19:13:55.728Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 122.922 ms - correlationId: 049d3aea-d1b9-4ef8-95e9-965e04758898","timestamp":"2025-03-11T19:13:55.730Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 120.955 ms - correlationId: 10f6f39b-1d3d-41d3-b3ea-ad4f19fae11b","timestamp":"2025-03-11T19:13:55.771Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 166.673 ms - correlationId: 10f02440-61c2-4f46-b8ba-488189beb0f7","timestamp":"2025-03-11T19:13:55.815Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 119.086 ms - correlationId: 23cac621-f9ed-4013-b6a9-79acd7889162","timestamp":"2025-03-11T19:13:55.851Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 610.682 ms - correlationId: 5c083a50-085c-4fc3-8001-529e1bdbbf38","timestamp":"2025-03-11T19:13:56.109Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&category=CATE1&bestSellers=false&onSale=false&sort=priceDesc 200 45950 - 982.719 ms - correlationId: 03ce6eff-43ff-41ab-9fc2-f0c44ea9d42c","timestamp":"2025-03-11T19:13:58.761Z"}
+{"level":"info","message":"GET /api/images/image2 304 - - 51.545 ms - correlationId: b15305b0-35ee-4a1a-b008-3a4982986bd6","timestamp":"2025-03-11T19:13:58.820Z"}
+{"level":"info","message":"GET /api/images/image12 304 - - 72.703 ms - correlationId: 7ba0e673-e886-43a8-8f50-682a5f711c76","timestamp":"2025-03-11T19:13:58.846Z"}
+{"level":"info","message":"GET /api/images/image5 304 - - 73.159 ms - correlationId: e4d6117e-7611-4776-87fb-6b44963d35e1","timestamp":"2025-03-11T19:13:58.847Z"}
+{"level":"info","message":"GET /api/images/image9 304 - - 79.806 ms - correlationId: deebb982-afe7-4da9-a57f-3f4842cc5239","timestamp":"2025-03-11T19:13:58.849Z"}
+{"level":"info","message":"GET /api/images/image1 304 - - 79.152 ms - correlationId: f5abf131-9502-433e-b9d5-5e0675c24522","timestamp":"2025-03-11T19:13:58.851Z"}
+{"level":"info","message":"GET /api/images/image18 304 - - 101.737 ms - correlationId: 20e173f9-043b-49e5-8f56-bb178204efae","timestamp":"2025-03-11T19:13:58.872Z"}
+{"level":"info","message":"GET /api/images/image3 304 - - 52.298 ms - correlationId: f4a3d7ff-94f6-4c08-84f4-c72044733265","timestamp":"2025-03-11T19:13:58.874Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 73.196 ms - correlationId: abafa03c-b4fa-4209-83ca-789e401637f7","timestamp":"2025-03-11T19:13:58.930Z"}
+{"level":"info","message":"GET /api/images/image8 304 - - 108.595 ms - correlationId: 1ad0d2fb-0959-4ef2-9253-e5bb53ba35ad","timestamp":"2025-03-11T19:13:58.961Z"}
+{"level":"info","message":"GET /api/images/image14 304 - - 107.093 ms - correlationId: fbc25d40-38a8-4abb-8411-f90ef9d0c035","timestamp":"2025-03-11T19:13:58.962Z"}
+{"level":"info","message":"GET /api/images/image6 304 - - 109.946 ms - correlationId: 72adb804-bf3b-4a34-9ad5-042145606f36","timestamp":"2025-03-11T19:13:58.964Z"}
+{"level":"info","message":"GET /api/images/image11 304 - - 90.267 ms - correlationId: c32bf803-806c-4748-a125-c3503f2226b4","timestamp":"2025-03-11T19:13:58.965Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ba 200 3960 - 346.360 ms - correlationId: a93fa272-6ae6-4846-8047-ad5e7aaa3a26","timestamp":"2025-03-11T19:14:15.970Z"}
+{"correlationId":"551f457e-8119-409f-bf1d-33210c5b4fee","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:18:41.029Z"}
+{"cart":[],"correlationId":"551f457e-8119-409f-bf1d-33210c5b4fee","level":"info","message":"Fetched cart from session","sessionId":"92_eRw-xDViwUK6-eKSrmQQG-IwvP3tq","timestamp":"2025-03-11T19:18:41.037Z"}
+{"level":"info","message":"GET /api/cart 304 - - 11.166 ms - correlationId: 551f457e-8119-409f-bf1d-33210c5b4fee","timestamp":"2025-03-11T19:18:41.040Z"}
+{"correlationId":"8ec5456c-df94-45df-b94a-8d0ac4d1443d","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:18:41.050Z"}
+{"cart":[],"correlationId":"8ec5456c-df94-45df-b94a-8d0ac4d1443d","level":"info","message":"Fetched cart from session","sessionId":"Xtqftr-G32ww3XCkU9MWvqr0NCMrvezU","timestamp":"2025-03-11T19:18:41.051Z"}
+{"level":"info","message":"GET /api/cart 304 - - 1.993 ms - correlationId: 8ec5456c-df94-45df-b94a-8d0ac4d1443d","timestamp":"2025-03-11T19:18:41.053Z"}
+{"correlationId":"30d0b756-26b9-48b7-876f-4bcada07f1dc","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:18:41.055Z"}
+{"compareList":[],"correlationId":"30d0b756-26b9-48b7-876f-4bcada07f1dc","level":"info","message":"Fetched compare list from session","sessionId":"Hir-N5VRN4frp8sZiR6WblmPTLf37lKv","timestamp":"2025-03-11T19:18:41.056Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.978 ms - correlationId: 30d0b756-26b9-48b7-876f-4bcada07f1dc","timestamp":"2025-03-11T19:18:41.057Z"}
+{"correlationId":"af34d87e-740b-4976-a6a2-57abe2662325","level":"debug","message":"No token provided","path":"/api/cart","timestamp":"2025-03-11T19:18:41.059Z"}
+{"cart":[],"correlationId":"af34d87e-740b-4976-a6a2-57abe2662325","level":"info","message":"Fetched cart from session","sessionId":"452Oe-K5AGKSMg-xUKMZj2R6LD90XsS8","timestamp":"2025-03-11T19:18:41.059Z"}
+{"level":"info","message":"GET /api/cart 304 - - 1.751 ms - correlationId: af34d87e-740b-4976-a6a2-57abe2662325","timestamp":"2025-03-11T19:18:41.061Z"}
+{"correlationId":"5f02d1ea-6105-4f73-a54a-9f5e36c643ab","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:18:41.064Z"}
+{"compareList":[],"correlationId":"5f02d1ea-6105-4f73-a54a-9f5e36c643ab","level":"info","message":"Fetched compare list from session","sessionId":"lxbikft95Gz-kEzpG8CZ-Dp_bZbnXMpq","timestamp":"2025-03-11T19:18:41.065Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.505 ms - correlationId: 5f02d1ea-6105-4f73-a54a-9f5e36c643ab","timestamp":"2025-03-11T19:18:41.066Z"}
+{"correlationId":"9ba645e3-d356-40dc-adf7-91ed05e76cbb","level":"debug","message":"No token provided","path":"/api/compare","timestamp":"2025-03-11T19:18:41.072Z"}
+{"compareList":[],"correlationId":"9ba645e3-d356-40dc-adf7-91ed05e76cbb","level":"info","message":"Fetched compare list from session","sessionId":"MxjysfukD4GZ0pssLFKpNZT3Ds_rZcK8","timestamp":"2025-03-11T19:18:41.072Z"}
+{"level":"info","message":"GET /api/compare 304 - - 1.916 ms - correlationId: 9ba645e3-d356-40dc-adf7-91ed05e76cbb","timestamp":"2025-03-11T19:18:41.075Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ba 304 - - 257.642 ms - correlationId: 8be5f3d9-b3b4-4bd3-a196-d86d7a7185a6","timestamp":"2025-03-11T19:18:41.303Z"}
+{"level":"info","message":"GET /api/categories 304 - - 60.442 ms - correlationId: 6ec0899b-1007-400b-9652-f38b47b0fdc8","timestamp":"2025-03-11T19:20:16.263Z"}
+{"level":"info","message":"GET /api/categories 304 - - 42.979 ms - correlationId: 6ef07c5d-17e8-4de5-afef-51b815d7b30c","timestamp":"2025-03-11T19:20:16.310Z"}
+{"level":"info","message":"GET /api/filters 304 - - 186.471 ms - correlationId: 105d306e-004f-4d4f-b906-291fd57553b3","timestamp":"2025-03-11T19:20:16.392Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 288.034 ms - correlationId: 6091f3b1-c34e-4124-8a7d-d333feb84792","timestamp":"2025-03-11T19:20:16.482Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 41.141 ms - correlationId: 8d20d767-1843-4d9b-abcb-1ffc45c46cac","timestamp":"2025-03-11T19:20:16.530Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 41.217 ms - correlationId: cb592453-f6ec-4fe9-91b7-68ca7f995cae","timestamp":"2025-03-11T19:20:16.532Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 45.725 ms - correlationId: 9a43cfb6-3d56-40ef-889f-d3b6525faf07","timestamp":"2025-03-11T19:20:16.537Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 45.783 ms - correlationId: ae19d761-9f62-41fb-b376-28b7857f1a95","timestamp":"2025-03-11T19:20:16.539Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 49.218 ms - correlationId: a15e5690-1d57-4731-a69d-55d21a15305e","timestamp":"2025-03-11T19:20:16.542Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 53.015 ms - correlationId: 5c6a9a9f-b027-4352-b55a-f46de7c78e48","timestamp":"2025-03-11T19:20:16.549Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 43.150 ms - correlationId: da615ae1-021e-41dc-b708-42d9cddbfb3f","timestamp":"2025-03-11T19:20:16.577Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 45.673 ms - correlationId: ee532736-9e34-4f04-9418-e6906aad8eb4","timestamp":"2025-03-11T19:20:16.581Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 42.119 ms - correlationId: 7bd89ceb-894c-419a-ae06-928938a6f3f8","timestamp":"2025-03-11T19:20:16.588Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 47.198 ms - correlationId: d4e4e50f-8b50-4ea3-838e-9d8c991bd2e6","timestamp":"2025-03-11T19:20:16.592Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 42.527 ms - correlationId: cc49f15e-7c37-43c6-89f0-4b63b9ed1508","timestamp":"2025-03-11T19:20:16.594Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 42.610 ms - correlationId: 4630b568-94ac-4272-805a-b48488344690","timestamp":"2025-03-11T19:20:16.596Z"}
+{"level":"info","message":"GET /api/products?page=4&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 282.091 ms - correlationId: 3a13f757-e184-4e07-a818-8ec0da592d8c","timestamp":"2025-03-11T19:20:22.284Z"}
+{"level":"info","message":"GET /api/images/image27 304 - - 41.467 ms - correlationId: 41b8d88a-df43-4ceb-8320-da3db4774a11","timestamp":"2025-03-11T19:20:22.339Z"}
+{"level":"info","message":"GET /api/images/image1 304 - - 44.915 ms - correlationId: c9f18f25-5ab2-406b-b197-b59450252600","timestamp":"2025-03-11T19:20:22.341Z"}
+{"level":"info","message":"GET /api/images/image12 304 - - 44.983 ms - correlationId: 93e15f0a-60b0-4095-a9eb-b3805d485d1f","timestamp":"2025-03-11T19:20:22.346Z"}
+{"level":"info","message":"GET /api/images/image5 304 - - 44.024 ms - correlationId: e7418f19-f5aa-42d1-94f1-de336ef9630a","timestamp":"2025-03-11T19:20:22.347Z"}
+{"level":"info","message":"GET /api/images/image3 304 - - 46.335 ms - correlationId: 45bc1ab4-e77c-47d3-8279-b9c496d23e6e","timestamp":"2025-03-11T19:20:22.352Z"}
+{"level":"info","message":"GET /api/images/image22 304 - - 45.828 ms - correlationId: 13e448d2-26e4-43e1-93e3-8df72c579c79","timestamp":"2025-03-11T19:20:22.354Z"}
+{"level":"info","message":"GET /api/images/image6 304 - - 40.018 ms - correlationId: 079cc401-4131-4575-b32b-d69bc6900e6d","timestamp":"2025-03-11T19:20:22.383Z"}
+{"level":"info","message":"GET /api/images/image24 304 - - 43.303 ms - correlationId: 6f49967a-8a11-445e-8632-a6566d311f7b","timestamp":"2025-03-11T19:20:22.387Z"}
+{"level":"info","message":"GET /api/images/image21 304 - - 41.596 ms - correlationId: 676163e4-4419-444e-8f9b-5ee9dde6c36b","timestamp":"2025-03-11T19:20:22.391Z"}
+{"level":"info","message":"GET /api/images/image29 304 - - 43.203 ms - correlationId: 9f226ff5-9e92-4534-a6d4-4a25f4e6cbe8","timestamp":"2025-03-11T19:20:22.394Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 41.015 ms - correlationId: f9409288-5ab1-49e4-a16f-477b5e855576","timestamp":"2025-03-11T19:20:22.397Z"}
+{"level":"info","message":"GET /api/images/image8 304 - - 42.288 ms - correlationId: 812763e8-3374-4d2e-92b0-b63feb123106","timestamp":"2025-03-11T19:20:22.399Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2c0 200 3752 - 278.792 ms - correlationId: dc8e48a5-c191-418d-aaff-2d829c24fecc","timestamp":"2025-03-11T19:20:23.539Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2bb 200 3973 - 307.638 ms - correlationId: f736050b-30a8-481c-9aed-19cc5fcc9679","timestamp":"2025-03-11T19:20:45.760Z"}
+{"level":"info","message":"GET /api/categories 304 - - 51.108 ms - correlationId: 47a66f0c-9092-48e8-9212-f8505a229691","timestamp":"2025-03-11T19:22:42.312Z"}
+{"level":"info","message":"GET /api/categories 304 - - 85.769 ms - correlationId: 78a46362-25da-40a4-9cad-cb6ef7d4c8ed","timestamp":"2025-03-11T19:22:42.400Z"}
+{"level":"info","message":"GET /api/filters 304 - - 337.982 ms - correlationId: 4fda49b9-550d-487b-ae96-11ed676c8153","timestamp":"2025-03-11T19:22:42.600Z"}
+{"level":"info","message":"GET /api/products?page=1&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 449.746 ms - correlationId: 9e04ec3d-693e-4ad0-a246-de846c76d78e","timestamp":"2025-03-11T19:22:42.705Z"}
+{"level":"info","message":"GET /api/images/image63 304 - - 59.326 ms - correlationId: 43a7b26a-c826-466b-a30d-eac805009eea","timestamp":"2025-03-11T19:22:42.778Z"}
+{"level":"info","message":"GET /api/images/image42 304 - - 68.099 ms - correlationId: 0af298e6-0f66-4dc3-a312-93b9a9c40c2a","timestamp":"2025-03-11T19:22:42.781Z"}
+{"level":"info","message":"GET /api/images/image46 304 - - 101.191 ms - correlationId: 195f7c5a-1c62-47a5-abd1-b4d94d6c9325","timestamp":"2025-03-11T19:22:42.818Z"}
+{"level":"info","message":"GET /api/images/image47 304 - - 104.103 ms - correlationId: 220631f8-9937-4f1e-bc1a-c3650c4f574f","timestamp":"2025-03-11T19:22:42.820Z"}
+{"level":"info","message":"GET /api/images/image53 304 - - 109.628 ms - correlationId: 30691b74-05c0-4646-8973-e4692c92667f","timestamp":"2025-03-11T19:22:42.821Z"}
+{"level":"info","message":"GET /api/images/image49 304 - - 105.090 ms - correlationId: 2ef9e3f0-65ef-42c1-b767-c63158e6ea71","timestamp":"2025-03-11T19:22:42.823Z"}
+{"level":"info","message":"GET /api/images/image45 304 - - 75.736 ms - correlationId: e2afbe83-7d79-4293-8419-9b5ec710045d","timestamp":"2025-03-11T19:22:42.860Z"}
+{"level":"info","message":"GET /api/images/image62 304 - - 116.400 ms - correlationId: 5b734b82-b11d-4b75-bf18-89431459ed73","timestamp":"2025-03-11T19:22:42.899Z"}
+{"level":"info","message":"GET /api/images/image50 304 - - 109.141 ms - correlationId: a035de80-1bbe-4588-9748-29eae18a0ecd","timestamp":"2025-03-11T19:22:42.941Z"}
+{"level":"info","message":"GET /api/images/image56 304 - - 113.982 ms - correlationId: dc9c4787-96d6-4402-8c71-4726bcd23554","timestamp":"2025-03-11T19:22:42.943Z"}
+{"level":"info","message":"GET /api/images/image57 304 - - 131.321 ms - correlationId: 6cbd6533-3389-4ad5-a6e9-49871a582fb8","timestamp":"2025-03-11T19:22:42.959Z"}
+{"level":"info","message":"GET /api/images/image48 304 - - 134.904 ms - correlationId: 9eca2c19-85f7-4e56-8b1a-34f17075a37a","timestamp":"2025-03-11T19:22:42.961Z"}
+{"level":"info","message":"GET /api/products?page=4&limit=12&bestSellers=false&onSale=false&sort=priceDesc 304 - - 654.458 ms - correlationId: 3c61f88a-3117-4e39-bcd7-c31612ae15a6","timestamp":"2025-03-11T19:22:48.323Z"}
+{"level":"info","message":"GET /api/images/image22 304 - - 66.884 ms - correlationId: 74d84fba-6978-40b7-93d6-f790fdd06ee6","timestamp":"2025-03-11T19:22:48.406Z"}
+{"level":"info","message":"GET /api/images/image3 304 - - 70.907 ms - correlationId: 6a03d981-4a6c-4f7b-b947-8049c35103fe","timestamp":"2025-03-11T19:22:48.408Z"}
+{"level":"info","message":"GET /api/images/image1 304 - - 119.416 ms - correlationId: b0a73423-5dc2-458f-9b4c-d1d9251fc57c","timestamp":"2025-03-11T19:22:48.449Z"}
+{"level":"info","message":"GET /api/images/image27 304 - - 117.654 ms - correlationId: 4d25dda7-eb3d-42f5-a403-17af738a3f5c","timestamp":"2025-03-11T19:22:48.450Z"}
+{"level":"info","message":"GET /api/images/image5 304 - - 115.692 ms - correlationId: 29eb9e9a-92bc-463d-a997-f8820af5e27d","timestamp":"2025-03-11T19:22:48.451Z"}
+{"level":"info","message":"GET /api/images/image12 304 - - 118.769 ms - correlationId: c67df51a-bcfe-40d1-afc5-bb0a83278339","timestamp":"2025-03-11T19:22:48.453Z"}
+{"level":"info","message":"GET /api/images/image29 304 - - 82.171 ms - correlationId: bb2f5178-e36a-4a88-91e5-161cf263b5f3","timestamp":"2025-03-11T19:22:48.495Z"}
+{"level":"info","message":"GET /api/images/image6 304 - - 125.563 ms - correlationId: c4e51b73-516d-42af-b857-965d9f975d56","timestamp":"2025-03-11T19:22:48.537Z"}
+{"level":"info","message":"GET /api/images/image8 304 - - 118.783 ms - correlationId: d9490b2a-78a4-425d-b0be-709a0d15a1ea","timestamp":"2025-03-11T19:22:48.574Z"}
+{"level":"info","message":"GET /api/images/image24 304 - - 122.850 ms - correlationId: 9474f261-43b9-43be-885e-ec667cdf6b5d","timestamp":"2025-03-11T19:22:48.577Z"}
+{"level":"info","message":"GET /api/images/image21 304 - - 128.015 ms - correlationId: 78380a0b-61a1-4d02-a99f-fc84c07f0ac4","timestamp":"2025-03-11T19:22:48.585Z"}
+{"level":"info","message":"GET /api/images/image7 304 - - 127.306 ms - correlationId: f37a78ec-ec7a-491f-b834-915d4ad701d8","timestamp":"2025-03-11T19:22:48.587Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2c0 304 - - 261.609 ms - correlationId: 8080fd7f-12bf-43e5-861e-e7517a9976c6","timestamp":"2025-03-11T19:22:50.199Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ba 304 - - 258.649 ms - correlationId: d281e7d4-d797-4d9a-9ffd-355a7e343934","timestamp":"2025-03-11T19:22:57.819Z"}

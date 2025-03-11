@@ -10,11 +10,30 @@
       <!-- Hình ảnh sản phẩm -->
       <div class="w-full md:w-1/2">
         <div class="relative">
+          <!-- Nhãn sale với % giảm -->
+          <div *ngIf="prod?.isOnSale" class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+            {{ prod.discountPercentage }}% OFF
+          </div>
           <img [src]="selectedImage" alt="{{prod.ProductName}}" class="w-full h-auto object-cover rounded-lg shadow-md">
-          <div class="flex mt-4 space-x-2">
-            <img *ngIf="prod.ProductImageSub1" [src]="prod.ProductImageSub1" (click)="selectImage(prod.ProductImageSub1)" class="w-16 h-16 object-cover rounded cursor-pointer border-2 hover:border-blue-500 transition duration-200" [ngClass]="{'border-blue-500': selectedImage === prod.ProductImageSub1}">
-            <img *ngIf="prod.ProductImageSub2" [src]="prod.ProductImageSub2" (click)="selectImage(prod.ProductImageSub2)" class="w-16 h-16 object-cover rounded cursor-pointer border-2 hover:border-blue-500 transition duration-200" [ngClass]="{'border-blue-500': selectedImage === prod.ProductImageSub2}">
-            <img *ngIf="prod.ProductImageSub3" [src]="prod.ProductImageSub3" (click)="selectImage(prod.ProductImageSub3)" class="w-16 h-16 object-cover rounded cursor-pointer border-2 hover:border-blue-500 transition duration-200" [ngClass]="{'border-blue-500': selectedImage === prod.ProductImageSub3}">
+          <div class="flex mt-4 space-x-2 overflow-x-auto">
+            <!-- Ảnh bìa -->
+            <div *ngIf="prod.ProductImageCover" class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden">
+              <img [src]="prod.ProductImageCover" (click)="selectImage(prod.ProductImageCover)" class="max-w-full max-h-full object-contain cursor-pointer transition duration-200" [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageCover, 'hover:border-blue-500': selectedImage !== prod.ProductImageCover}">
+            </div>
+            <!-- Ảnh phụ -->
+            <div *ngIf="prod.ProductImageSub1" class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden">
+              <img [src]="prod.ProductImageSub1" (click)="selectImage(prod.ProductImageSub1)" class="max-w-full max-h-full object-contain cursor-pointer transition duration-200" [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageSub1, 'hover:border-blue-500': selectedImage !== prod.ProductImageSub1}">
+            </div>
+            <div *ngIf="prod.ProductImageSub2" class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden">
+              <img [src]="prod.ProductImageSub2" (click)="selectImage(prod.ProductImageSub2)" class="max-w-full max-h-full object-contain cursor-pointer transition duration-200" [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageSub2, 'hover:border-blue-500': selectedImage !== prod.ProductImageSub2}">
+            </div>
+            <div *ngIf="prod.ProductImageSub3" class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden">
+              <img [src]="prod.ProductImageSub3" (click)="selectImage(prod.ProductImageSub3)" class="max-w-full max-h-full object-contain cursor-pointer transition duration-200" [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageSub3, 'hover:border-blue-500': selectedImage !== prod.ProductImageSub3}">
+            </div>
+            <!-- Placeholder nếu không đủ ảnh -->
+            <div *ngIf="!(prod.ProductImageSub1 || prod.ProductImageSub2 || prod.ProductImageSub3)" class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-500">
+              No Image
+            </div>
           </div>
         </div>
       </div>
@@ -29,7 +48,13 @@
           </div>
           <span class="ml-2 text-gray-600">{{prod.totalReviewCount || 0}} Đánh giá</span>
         </div>
-        <p class="text-2xl font-bold text-red-600 mt-2">{{prod.ProductPrice | currency:'VND'}}</p>
+        <!-- Giá hiện tại (màu đỏ) và giá gốc (dòng kẻ) -->
+        <div class="flex items-center gap-2 mt-2">
+          <p class="text-2xl font-bold text-red-600" *ngIf="prod?.currentPrice != null">{{ prod.currentPrice | currency:'VND' }}</p>
+          <p *ngIf="prod?.isOnSale && prod?.originalPrice != null && prod?.currentPrice != null && prod.originalPrice > prod.currentPrice" class="text-lg text-gray-500 line-through">{{ prod.originalPrice | currency:'VND' }}</p>
+        </div>
+        <!-- Tình trạng kho -->
+        <p class="text-sm text-green-600 mt-2" *ngIf="prod?.stockStatus">{{prod.stockStatus === 'In Stock' ? 'Còn hàng' : 'Hết hàng'}}</p>
         <p class="text-gray-600 mt-2 italic">{{prod.ProductShortDescription}}</p>
 
         <!-- Bảng thông tin chi tiết -->
@@ -53,8 +78,8 @@
     <div class="mt-8">
       <div class="border-b border-gray-200">
         <nav class="flex space-x-8">
-          <button (click)="setActiveTab('description')" [ngClass]="{'border-b-2 border-blue-600 text-blue-600': activeTab === 'description', 'text-gray-500 hover:text-black-700700': activeTab !== 'description'}" class="py-2 px-4 font-medium text-lg transition duration-200 bg-red-600">Mô tả</button>
-          <button (click)="setActiveTab('reviews')" [ngClass]="{'border-b-2 border-blue-600 text-blue-600': activeTab === 'reviews', 'text-gray-500 hover:text-black-700': activeTab !== 'reviews'}" class="py-2 px-4 font-medium text-lg transition duration-200 bg-red-600  ">Đánh giá</button>
+          <button (click)="setActiveTab('description')" [ngClass]="{'border-b-2 border-blue-600 text-blue-600': activeTab === 'description', 'text-gray-500 hover:text-black-700': activeTab !== 'description'}" class="py-2 px-4 font-medium text-lg transition duration-200">Mô tả</button>
+          <button (click)="setActiveTab('reviews')" [ngClass]="{'border-b-2 border-blue-600 text-blue-600': activeTab === 'reviews', 'text-gray-500 hover:text-black-700': activeTab !== 'reviews'}" class="py-2 px-4 font-medium text-lg transition duration-200">Đánh giá</button>
         </nav>
       </div>
 
