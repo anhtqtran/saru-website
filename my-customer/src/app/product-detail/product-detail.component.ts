@@ -38,18 +38,23 @@ export class ProductDetailComponent implements OnInit {
   loadProductDetail(id: string): void {
     this.isLoading = true;
     this.productService.getProductDetail(id).subscribe({
-      next: (data: Product) => {
-        if (!data.reviews) data.reviews = [];
-        console.log('Review data:', data.reviews);
-        console.log('Product data from API:', data);
-        console.log('Related products _id:', data.relatedProducts?.map(rp => rp._id) || []);
-        if (data.relatedProducts && data.relatedProducts.length > 0) {
-          console.log('Kiểu dữ liệu _id sản phẩm liên quan đầu tiên:', typeof data.relatedProducts[0]._id);
-          console.log('Constructor name _id sản phẩm liên quan đầu tiên:', data.relatedProducts[0]._id.constructor.name);
-        }
+      next: (data: Product | null) => {
+        if (data) {
+          if (!data.reviews) data.reviews = [];
+          console.log('Review data:', data.reviews);
+          console.log('Product data from API:', data);
+          console.log('Related products _id:', data.relatedProducts?.map(rp => rp._id) || []);
+          if (data.relatedProducts && data.relatedProducts.length > 0) {
+            console.log('Kiểu dữ liệu _id sản phẩm liên quan đầu tiên:', typeof data.relatedProducts[0]._id);
+            console.log('Constructor name _id sản phẩm liên quan đầu tiên:', data.relatedProducts[0]._id.constructor.name);
+          }
 
-        this.product = { ...data };
-        this.selectedImage = this.product.ProductImageCover || 'assets/images/default-product.png';
+          this.product = { ...data };
+          this.selectedImage = this.product.ProductImageCover || 'assets/images/default-product.png';
+        } else {
+          console.error('Product data is null');
+          this.snackBar.open('Không thể tải chi tiết sản phẩm. Vui lòng thử lại sau.', 'OK', { duration: 3000 });
+        }
         this.isLoading = false;
       },
       error: (error) => {
