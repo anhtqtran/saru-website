@@ -103,6 +103,9 @@ async function connectDB() {
     orderDetailCollection = database.collection('orderdetails');
     accountCollection = database.collection('accounts');
     customerCollection = database.collection('customers');
+    productstockCollection = database.collection('productstocks');
+
+
 
     await productCollection.createIndex({ ProductID: 1 }, { unique: true });
     await accountCollection.createIndex({ CustomerEmail: 1 }, { unique: true });
@@ -141,6 +144,178 @@ function authenticateToken(req, res, next) {
 
 // ===================== PRODUCT API =====================
 
+// Best Selling Products Pipeline (dùng chung cho danh sách và chi tiết)
+const bestSellingProductsPipeline = (productId) => [
+  // Bước 1: Nhóm theo ProductID và tính tổng Quantity (chỉ áp dụng nếu không có productId cụ thể)
+  ...(productId ? [] : [{ $group: { _id: "$ProductID", totalQuantity: { $sum: "$Quantity" } } }]),
+  ...(productId ? [{ $match: { _id: productId } }] : []),
+  // Bước 2: Sắp xếp theo totalQuantity giảm dần (chỉ áp dụng cho danh sách)
+  ...(productId ? [] : [{ $sort: { totalQuantity: -1 } }]),
+  // Bước 3: Giới hạn 5 sản phẩm (chỉ áp dụng cho danh sách)
+  ...(productId ? [] : [{ $limit: 5 }]),
+  // Bước 4: Liên kết với products bằng ProductID
+  {
+    $lookup: {
+      from: "products",
+      let: { pid: "$_id" }, // $_id ở đây là ProductID (string)
+      pipeline: [
+        { $match: { $expr: { $eq: ["$ProductID", "$$pid"] } } },
+        // Liên kết với images
+        {
+          $lookup: {
+            from: "images",
+            let: { imageId: "$ImageID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$ImageID", "$$imageId"] } } },
+              { $project: { _id: 0, ProductImageCover: 1 } }
+            ],
+            as: "image"
+          }
+        },
+        { $unwind: { path: "$image", preserveNullAndEmptyArrays: true } },
+        // Liên kết với productcategories
+        {
+          $lookup: {
+            from: "productcategories",
+            let: { cateId: "$CateID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$CateID", "$$cateId"] } } },
+              { $project: { _id: 0, CateName: 1 } }
+            ],
+            as: "category"
+          }
+        },
+        { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } },
+        // Liên kết với reviews để tính trung bình Rating
+        {
+          $lookup: {
+            from: "reviews",
+            let: { productId: "$ProductID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$ProductID", "$$productId"] } } },
+              {
+                $group: {
+                  _id: null,
+                  averageRating: { $avg: "$Rating" },
+                  reviewCount: { $sum: 1 }
+                }
+              }
+            ],
+            as: "reviews"
+          }
+        },
+        { $unwind: { path: "$reviews", preserveNullAndEmptyArrays: true } },
+        {
+          $project: {
+            _id: 1, // Thêm _id để sử dụng cho chi tiết
+            ProductID: 1,
+            ProductName: 1,
+            ProductPrice: 1,
+            ProductImageCover: { $ifNull: ["$image.ProductImageCover", "default-image-url"] },
+            CateName: { $ifNull: ["$category.CateName", "Không có danh mục"] },
+            averageRating: { $ifNull: ["$reviews.averageRating", 0] },
+            reviewCount: { $ifNull: ["$reviews.reviewCount", 0] },
+            description: 1, // Thêm description nếu có trong schema
+            relatedProducts: 1 // Thêm relatedProducts nếu có trong schema
+          }
+        }
+      ],
+      as: "product"
+    }
+  },
+  // Bước 5: Loại bỏ các bản ghi không có product
+  { $match: { "product": { $ne: [] } } },
+  // Bước 6: Mở rộng mảng product
+  { $unwind: { path: "$product", preserveNullAndEmptyArrays: false } },
+  // Bước 7: Định dạng kết quả
+  {
+    $project: {
+      _id: "$product._id", // Sử dụng _id từ products collection
+      productId: "$_id", // Giữ ProductID (string) cho danh sách
+      productName: "$product.ProductName",
+      productPrice: "$product.ProductPrice",
+      productImageCover: "$product.ProductImageCover",
+      categoryName: "$product.CateName",
+      totalQuantity: { $ifNull: ["$totalQuantity", 0] }, // Chỉ áp dụng cho danh sách
+      averageRating: "$product.averageRating",
+      reviewCount: "$product.reviewCount",
+      description: "$product.description",
+      relatedProducts: "$product.relatedProducts"
+    }
+  }
+];
+
+app.get('/api/products/best-selling', async (req, res) => {
+  try {
+    console.log('Request received:', req.method, req.url, req.query);
+
+    if (Object.keys(req.query).length > 0) {
+      console.log('Query params not supported:', req.query);
+      return res.status(400).json({ message: 'This endpoint does not accept query parameters' });
+    }
+
+    const bestSellingProducts = await orderDetailCollection.aggregate(bestSellingProductsPipeline()).toArray();
+    console.log('Aggregation result:', bestSellingProducts);
+
+    if (!bestSellingProducts.length) {
+      console.log('No best-selling products found');
+      return res.status(200).json([]);
+    }
+
+    res.status(200).json(bestSellingProducts);
+  } catch (err) {
+    console.error('Aggregation error:', err.stack);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+});
+
+app.get('/api/products/map-id/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    console.log('Request received for mapping ProductID to _id:', req.method, req.url, { productId });
+
+    // Tìm sản phẩm trong products collection bằng ProductID
+    const product = await productCollection.findOne(
+      { ProductID: productId },
+      { projection: { _id: 1 } }
+    );
+
+    if (!product) {
+      console.log('Product not found for ProductID:', productId);
+      return res.status(404).json({ message: 'Sản phẩm không tồn tại.' });
+    }
+
+    res.status(200).json({ _id: product._id.toHexString() });
+  } catch (err) {
+    console.error('Error mapping ProductID to _id:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
+});
+
+// New endpoint for best seller detail
+app.get('/api/products/best-seller-detail/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    console.log('Request received for best-seller-detail:', req.method, req.url, { productId });
+
+    const pipeline = bestSellingProductsPipeline(productId);
+    const result = await orderDetailCollection.aggregate(pipeline).toArray();
+
+    if (!result.length) {
+      console.log('No best seller detail found for productId:', productId);
+      return res.status(404).json({ message: 'Sản phẩm không tồn tại.' });
+    }
+
+    console.log('Best seller detail result:', result[0]);
+    res.status(200).json(result[0]);
+  } catch (err) {
+    console.error('Aggregation error for best seller detail:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
+});
+
+
+//get imageid
 app.get('/api/images/:imageId', async (req, res) => {
   try {
     const image = await imageCollection.findOne({ ImageID: req.params.imageId });
@@ -353,12 +528,11 @@ app.get('/api/products/:id', async (req, res) => {
     });
     res.status(500).json({ message: 'Lỗi hệ thống, vui lòng thử lại sau.', error: err.message });
   }
-});
-
+})
 // ===================== COMPARE API =====================
 
 app.post('/api/compare', authenticateToken, async (req, res) => {
-  const { productId } = req.body;
+  const { productId, isBestSeller = false } = req.body; // Thêm tham số isBestSeller để phân biệt
   if (!productId) return res.status(400).json({ error: "Invalid productId" });
 
   try {
@@ -368,23 +542,31 @@ app.post('/api/compare', authenticateToken, async (req, res) => {
       let compare = await compareCollection.findOne({ AccountID });
 
       if (!compare) {
-        compare = { AccountID, items: [productId] };
+        compare = { AccountID, items: [{ productId, isBestSeller }] };
         await compareCollection.insertOne(compare);
-      } else if (!compare.items.includes(productId)) {
+      } else if (!compare.items.some(item => item.productId === productId && item.isBestSeller === isBestSeller)) {
         await compareCollection.updateOne(
           { AccountID },
-          { $push: { items: productId } }
+          { $push: { items: { productId, isBestSeller } } }
         );
       }
       const updatedCompare = await compareCollection.findOne({ AccountID });
-      logger.info('Added to compare list in MongoDB', { AccountID, compareList: updatedCompare.items, correlationId: req.correlationId });
+      logger.info('Added to compare list in MongoDB', {
+        AccountID,
+        compareList: updatedCompare.items,
+        correlationId: req.correlationId
+      });
       res.json({ message: "Added to compare list", compareList: updatedCompare.items });
     } else {
       req.session.compareList = req.session.compareList || [];
-      if (!req.session.compareList.includes(productId)) {
-        req.session.compareList.push(productId);
+      if (!req.session.compareList.some(item => item.productId === productId && item.isBestSeller === isBestSeller)) {
+        req.session.compareList.push({ productId, isBestSeller });
       }
-      logger.info('Added to compare list in session', { sessionId: req.sessionID, compareList: req.session.compareList, correlationId: req.correlationId });
+      logger.info('Added to compare list in session', {
+        sessionId: req.sessionID,
+        compareList: req.session.compareList,
+        correlationId: req.correlationId
+      });
       res.json({ message: "Added to compare list", compareList: req.session.compareList });
     }
   } catch (err) {
@@ -407,11 +589,19 @@ app.get('/api/compare', authenticateToken, async (req, res) => {
         logger.info('Synchronized compare list from session to MongoDB', { AccountID, correlationId: req.correlationId });
       }
 
-      logger.info('Fetched compare list from MongoDB', { AccountID, compareList: compare ? compare.items : [], correlationId: req.correlationId });
+      logger.info('Fetched compare list from MongoDB', {
+        AccountID,
+        compareList: compare ? compare.items : [],
+        correlationId: req.correlationId
+      });
       res.json(compare ? compare.items : []);
     } else {
       const compareList = req.session.compareList || [];
-      logger.info('Fetched compare list from session', { sessionId: req.sessionID, compareList, correlationId: req.correlationId });
+      logger.info('Fetched compare list from session', {
+        sessionId: req.sessionID,
+        compareList,
+        correlationId: req.correlationId
+      });
       res.json(compareList);
     }
   } catch (err) {
@@ -447,6 +637,7 @@ app.delete('/api/compare/all', authenticateToken, async (req, res) => {
 
 app.delete('/api/compare/:productId', authenticateToken, async (req, res) => {
   const productId = req.params.productId;
+  const isBestSeller = req.query.isBestSeller === 'true'; // Thêm tham số isBestSeller từ query
 
   try {
     if (req.isAuthenticated) {
@@ -454,19 +645,27 @@ app.delete('/api/compare/:productId', authenticateToken, async (req, res) => {
       const compareCollection = database.collection('compares');
       await compareCollection.updateOne(
         { AccountID },
-        { $pull: { items: productId } }
+        { $pull: { items: { productId, isBestSeller } } }
       );
       const updatedCompare = await compareCollection.findOne({ AccountID });
-      logger.info('Removed from compare list in MongoDB', { AccountID, compareList: updatedCompare ? updatedCompare.items : [], correlationId: req.correlationId });
+      logger.info('Removed from compare list in MongoDB', {
+        AccountID,
+        compareList: updatedCompare ? updatedCompare.items : [],
+        correlationId: req.correlationId
+      });
       res.json({ message: "Removed from compare list", compareList: updatedCompare ? updatedCompare.items : [] });
     } else {
-      req.session.compareList = (req.session.compareList || []).filter(id => id !== productId);
+      req.session.compareList = (req.session.compareList || []).filter(item => !(item.productId === productId && item.isBestSeller === isBestSeller));
       req.session.save((err) => {
         if (err) {
           logger.error('Error saving session in DELETE /api/compare/:productId', { error: err.message, correlationId: req.correlationId });
           return res.status(500).json({ error: err.message });
         }
-        logger.info('Removed from compare list in session', { sessionId: req.sessionID, compareList: req.session.compareList, correlationId: req.correlationId });
+        logger.info('Removed from compare list in session', {
+          sessionId: req.sessionID,
+          compareList: req.session.compareList,
+          correlationId: req.correlationId
+        });
         res.json({ message: "Removed from compare list", compareList: req.session.compareList });
       });
     }

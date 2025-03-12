@@ -24,7 +24,9 @@ export class Product {
     public averageRating?: number, // Thêm trường đánh giá trung bình
     public totalReviewCount?: number, // Thêm tổng số đánh giá
     public reviews?: Array<any>, // Thêm danh sách đánh giá (tùy chọn chi tiết)
-    public relatedProducts?: Array<any> // Thêm danh sách sản phẩm liên quan
+    public relatedProducts?: Array<any>,
+    public CateName?: string,  // Thêm danh sách sản phẩm liên quan
+    public reviewCount?: number
   ) {}
 }
 
