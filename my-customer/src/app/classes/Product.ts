@@ -26,7 +26,8 @@ export class Product {
     public reviews?: Array<any>, // Thêm danh sách đánh giá (tùy chọn chi tiết)
     public relatedProducts?: Array<any>,
     public CateName?: string,  // Thêm danh sách sản phẩm liên quan
-    public reviewCount?: number
+    public reviewCount?: number,
+    public description?: string
   ) {}
 }
 

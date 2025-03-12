@@ -152,10 +152,10 @@ loadImage(product: Product): void {
 
   // Trong product.component.ts hoặc product-detail.component.ts
   addToCompare(product: Product): void {
-    console.log('Adding to compare, productId:', product._id); // Log để kiểm tra
+    console.log('Adding to compare, productId:', product._id);
     this.productService.addToCompare(product._id.toString()).subscribe({
       next: (response) => {
-        console.log('Add to compare response:', response); // Log để kiểm tra
+        console.log('Add to compare response:', response);
         this.snackBar.open('Đã thêm vào danh sách so sánh!', 'OK', { duration: 3000 });
       },
       error: (error) => {

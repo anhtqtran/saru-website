@@ -532,51 +532,54 @@ app.get('/api/products/:id', async (req, res) => {
 // ===================== COMPARE API =====================
 
 app.post('/api/compare', authenticateToken, async (req, res) => {
-  const { productId, isBestSeller = false } = req.body; // Thêm tham số isBestSeller để phân biệt
-  if (!productId) return res.status(400).json({ error: "Invalid productId" });
+  const { productId } = req.body;
+  if (!productId || !ObjectId.isValid(productId)) {
+    logger.warn('Invalid productId provided', { productId, correlationId: req.correlationId });
+    return res.status(400).json({ error: "Invalid or missing productId" });
+  }
 
   try {
+    // Kiểm tra xem sản phẩm có tồn tại không
+    const productExists = await productCollection.findOne({ _id: new ObjectId(productId) });
+    if (!productExists) {
+      logger.warn('Product not found for compare', { productId, correlationId: req.correlationId });
+      return res.status(404).json({ error: "Product not found" });
+    }
+
     if (req.isAuthenticated) {
       const AccountID = req.account.AccountID;
       const compareCollection = database.collection('compares');
       let compare = await compareCollection.findOne({ AccountID });
 
       if (!compare) {
-        compare = { AccountID, items: [{ productId, isBestSeller }] };
+        compare = { AccountID, items: [productId] };
         await compareCollection.insertOne(compare);
-      } else if (!compare.items.some(item => item.productId === productId && item.isBestSeller === isBestSeller)) {
+      } else if (!compare.items.includes(productId)) {
         await compareCollection.updateOne(
           { AccountID },
-          { $push: { items: { productId, isBestSeller } } }
+          { $push: { items: productId } }
         );
       }
       const updatedCompare = await compareCollection.findOne({ AccountID });
-      logger.info('Added to compare list in MongoDB', {
-        AccountID,
-        compareList: updatedCompare.items,
-        correlationId: req.correlationId
-      });
+      logger.info('Added to compare list in MongoDB', { AccountID, compareList: updatedCompare.items, correlationId: req.correlationId });
       res.json({ message: "Added to compare list", compareList: updatedCompare.items });
     } else {
       req.session.compareList = req.session.compareList || [];
-      if (!req.session.compareList.some(item => item.productId === productId && item.isBestSeller === isBestSeller)) {
-        req.session.compareList.push({ productId, isBestSeller });
+      if (!req.session.compareList.includes(productId)) {
+        req.session.compareList.push(productId);
       }
-      logger.info('Added to compare list in session', {
-        sessionId: req.sessionID,
-        compareList: req.session.compareList,
-        correlationId: req.correlationId
-      });
+      logger.info('Added to compare list in session', { sessionId: req.sessionID, compareList: req.session.compareList, correlationId: req.correlationId });
       res.json({ message: "Added to compare list", compareList: req.session.compareList });
     }
   } catch (err) {
     logger.error('Error in POST /api/compare', { error: err.message, correlationId: req.correlationId });
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
 app.get('/api/compare', authenticateToken, async (req, res) => {
   try {
+    let compareList = [];
     if (req.isAuthenticated) {
       const AccountID = req.account.AccountID;
       const compareCollection = database.collection('compares');
@@ -588,25 +591,16 @@ app.get('/api/compare', authenticateToken, async (req, res) => {
         req.session.compareList = [];
         logger.info('Synchronized compare list from session to MongoDB', { AccountID, correlationId: req.correlationId });
       }
-
-      logger.info('Fetched compare list from MongoDB', {
-        AccountID,
-        compareList: compare ? compare.items : [],
-        correlationId: req.correlationId
-      });
-      res.json(compare ? compare.items : []);
+      compareList = compare ? compare.items : [];
+      logger.info('Fetched compare list from MongoDB', { AccountID, compareList, correlationId: req.correlationId });
     } else {
-      const compareList = req.session.compareList || [];
-      logger.info('Fetched compare list from session', {
-        sessionId: req.sessionID,
-        compareList,
-        correlationId: req.correlationId
-      });
-      res.json(compareList);
+      compareList = req.session.compareList || [];
+      logger.info('Fetched compare list from session', { sessionId: req.sessionID, compareList, correlationId: req.correlationId });
     }
+    res.json(compareList);
   } catch (err) {
     logger.error('Error in GET /api/compare', { error: err.message, correlationId: req.correlationId });
-    res.status(500).json({ message: 'Lỗi hệ thống khi lấy danh sách so sánh.', error: err.message });
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
@@ -616,28 +610,33 @@ app.delete('/api/compare/all', authenticateToken, async (req, res) => {
       const AccountID = req.account.AccountID;
       const compareCollection = database.collection('compares');
       await compareCollection.deleteOne({ AccountID });
-      logger.info('Cleared compare list in MongoDB', { AccountID, correlationId: req.correlationId });
+      req.session.compareList = []; // Xóa luôn session để tránh đồng bộ ngược
+      logger.info('Cleared compare list in MongoDB and session', { AccountID, correlationId: req.correlationId });
       res.json({ message: "Cleared all compare items", compareList: [] });
     } else {
       req.session.compareList = [];
-      req.session.save((err) => {
-        if (err) {
-          logger.error('Error saving session in DELETE /api/compare/all', { error: err.message, correlationId: req.correlationId });
-          return res.status(500).json({ error: err.message });
-        }
-        logger.info('Cleared compare list in session', { sessionId: req.sessionID, correlationId: req.correlationId });
-        res.json({ message: "Cleared all compare items", compareList: req.session.compareList });
+      await new Promise((resolve, reject) => {
+        req.session.save((err) => {
+          if (err) reject(err);
+          else resolve();
+        });
       });
+      logger.info('Cleared compare list in session', { sessionId: req.sessionID, correlationId: req.correlationId });
+      res.json({ message: "Cleared all compare items", compareList: [] });
     }
   } catch (err) {
     logger.error('Error in DELETE /api/compare/all', { error: err.message, correlationId: req.correlationId });
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
+
 app.delete('/api/compare/:productId', authenticateToken, async (req, res) => {
   const productId = req.params.productId;
-  const isBestSeller = req.query.isBestSeller === 'true'; // Thêm tham số isBestSeller từ query
+  if (!productId || !ObjectId.isValid(productId)) {
+    logger.warn('Invalid productId provided', { productId, correlationId: req.correlationId });
+    return res.status(400).json({ error: "Invalid or missing productId" });
+  }
 
   try {
     if (req.isAuthenticated) {
@@ -645,33 +644,29 @@ app.delete('/api/compare/:productId', authenticateToken, async (req, res) => {
       const compareCollection = database.collection('compares');
       await compareCollection.updateOne(
         { AccountID },
-        { $pull: { items: { productId, isBestSeller } } }
+        { $pull: { items: productId } }
       );
       const updatedCompare = await compareCollection.findOne({ AccountID });
-      logger.info('Removed from compare list in MongoDB', {
-        AccountID,
-        compareList: updatedCompare ? updatedCompare.items : [],
-        correlationId: req.correlationId
-      });
+      logger.info('Removed from compare list in MongoDB', { AccountID, compareList: updatedCompare ? updatedCompare.items : [], correlationId: req.correlationId });
       res.json({ message: "Removed from compare list", compareList: updatedCompare ? updatedCompare.items : [] });
     } else {
-      req.session.compareList = (req.session.compareList || []).filter(item => !(item.productId === productId && item.isBestSeller === isBestSeller));
-      req.session.save((err) => {
-        if (err) {
-          logger.error('Error saving session in DELETE /api/compare/:productId', { error: err.message, correlationId: req.correlationId });
-          return res.status(500).json({ error: err.message });
-        }
-        logger.info('Removed from compare list in session', {
-          sessionId: req.sessionID,
-          compareList: req.session.compareList,
-          correlationId: req.correlationId
+      req.session.compareList = (req.session.compareList || []).filter(id => id !== productId);
+      await new Promise((resolve, reject) => {
+        req.session.save((err) => {
+          if (err) {
+            logger.error('Error saving session in DELETE /api/compare/:productId', { error: err.message, correlationId: req.correlationId });
+            reject(err);
+          } else {
+            logger.info('Removed from compare list in session', { sessionId: req.sessionID, compareList: req.session.compareList, correlationId: req.correlationId });
+            resolve();
+          }
         });
-        res.json({ message: "Removed from compare list", compareList: req.session.compareList });
       });
+      res.json({ message: "Removed from compare list", compareList: req.session.compareList });
     }
   } catch (err) {
     logger.error('Error in DELETE /api/compare/:productId', { error: err.message, correlationId: req.correlationId });
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
