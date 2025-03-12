@@ -104,7 +104,8 @@ async function connectDB() {
     accountCollection = database.collection('accounts');
     customerCollection = database.collection('customers');
     productstockCollection = database.collection('productstocks');
-
+    blogCollection = database.collection('blogs');
+    blogCategoryCollection = database.collection('blogcategories');
 
 
     await productCollection.createIndex({ ProductID: 1 }, { unique: true });
@@ -1048,4 +1049,99 @@ process.on('SIGTERM', async () => {
   await client.close();
   logger.info('MongoDB connection closed', { correlationId: 'system' });
   process.exit(0);
+});
+
+// =====================BLOG NỔI BẬT API ====================
+app.get('/api/blogs/random', async (req, res) => {
+  try {
+    const cateblogId = req.query.cateblogId || 'cateblog1'; // Mặc định là cateblog1 nếu không có query
+    console.log('Request received for random blogs:', req.method, req.url, { cateblogId });
+
+    const pipeline = [
+      // Bước 1: Liên kết với blogcategories để lấy danh mục
+      {
+        $lookup: {
+          from: 'blogcategories',
+          localField: 'categoryID',
+          foreignField: '_id',
+          as: 'category'
+        }
+      },
+      // Bước 2: Mở rộng mảng category
+      { $unwind: { path: '$category', preserveNullAndEmptyArrays: true } },
+      // Bước 3: Lọc theo CateblogID
+      { $match: { 'category.CateblogID': cateblogId } },
+      // Bước 4: Chọn ngẫu nhiên 2 bài viết
+      { $sample: { size: 2 } },
+      // Bước 5: Định dạng kết quả
+      {
+        $project: {
+          id: '$_id',
+          _id: 0,
+          title: '$BlogTitle',
+          image: '$BlogImage',
+          summary: { $substr: ['$BlogContent', 0, 150] }, // Lấy 150 ký tự đầu của nội dung làm tóm tắt
+          categoryName: '$category.CateblogName'
+        }
+      }
+    ];
+
+    const blogs = await blogCollection.aggregate(pipeline).toArray();
+    console.log('Random blogs result:', blogs);
+
+    if (!blogs.length) {
+      console.log('No blogs found for category:', cateblogId);
+      return res.status(200).json([]);
+    }
+
+    res.status(200).json(blogs);
+  } catch (err) {
+    console.error('Error fetching random blogs:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
+});
+//lấy blog theo id
+app.get('/api/blogs/:id', async (req, res) => {
+  try {
+    const blogId = req.params.id;
+    console.log('Request received for blog detail:', req.method, req.url, { blogId });
+
+    const blog = await blogCollection.findOne({ _id: new ObjectId(blogId) });
+    if (!blog) {
+      console.log('Blog not found:', blogId);
+      return res.status(404).json({ message: 'Bài viết không tồn tại.' });
+    }
+
+    const pipeline = [
+      { $match: { _id: new ObjectId(blogId) } },
+      {
+        $lookup: {
+          from: 'blogcategories',
+          localField: 'categoryID',
+          foreignField: '_id',
+          as: 'category'
+        }
+      },
+      { $unwind: { path: '$category', preserveNullAndEmptyArrays: true } },
+      {
+        $project: {
+          id: '$_id',
+          _id: 0,
+          title: '$BlogTitle',
+          image: '$BlogImage',
+          content: '$BlogContent',
+          categoryName: '$category.CateblogName',
+          datePosted: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } } // Thêm nếu có trường createdAt
+        }
+      }
+    ];
+
+    const detailedBlog = await blogCollection.aggregate(pipeline).toArray();
+    console.log('Blog detail result:', detailedBlog);
+
+    res.status(200).json(detailedBlog[0]);
+  } catch (err) {
+    console.error('Error fetching blog detail:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
 });

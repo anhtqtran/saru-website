@@ -5,7 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BestSellingProduct } from '../classes/BestSellingProduct';
 import { ProductService } from '../services/product.service';
-
+import { Blog } from '../classes/Blogs';
+import { BlogapiService } from '../services/blogapi.service';
 @Component({
   selector: 'app-trangchu-banner-camket',
   templateUrl: './trangchu-banner-camket.component.html',
@@ -14,10 +15,9 @@ import { ProductService } from '../services/product.service';
 })
 export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
-  blogs = [
-    { id: 1, title: 'Lịch sử rượu Tây Bắc - Tinh hoa vùng núi rừng', image: 'Blog 1.png', summary: 'Rượu Tây Bắc không chỉ là một loại thức uống mà còn là nét văn hóa truyền thống đặc sắc của các dân tộc vùng cao...' },
-    { id: 2, title: 'Những loại rượu nổi tiếng ở Tây Bắc', image: 'Blog 2.png', summary: 'Tây Bắc nổi tiếng với nhiều loại rượu đặc trưng, mỗi loại mang một hương vị riêng biệt và gắn liền với đặc điểm tự nhiên của từng vùng...' }
-  ];
+  blogs: Blog[] = []; // Mảng chứa danh sách bài viết
+  isLoading = true; // Trạng thái loading
+  errorMessage: string | null = null; // Thông báo lỗi nếu có
 
   bestSellers: BestSellingProduct[] = [];
   bestSellerIds: string[] = [];
@@ -26,10 +26,36 @@ export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private bestSellerService: HomepageProductsService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private BlogService: BlogapiService,
   ) {}
 
   ngOnInit(): void {
+
+    this.loadRandomBlogs();
+  }
+
+  loadRandomBlogs(): void {
+    this.isLoading = true;
+    this.errorMessage = null;
+    this.BlogService.getRandomBlogs('cateblog1').subscribe({
+      next: (blogs) => {
+        this.blogs = blogs;
+        this.isLoading = false;
+        console.log('Loaded blogs:', this.blogs);
+      },
+      error: (error) => {
+        this.errorMessage = 'Không thể tải bài viết. Vui lòng thử lại sau.';
+        this.isLoading = false;
+        console.error('Error loading blogs:', error);
+      }
+    });
+  }
+
+  // Phương thức để chuyển hướng đến blog-detail
+  navigateToBlogDetail(id: string): void {
+    this.router.navigate(['/blog-detail', id]);
+
     // Lấy danh sách sản phẩm bán chạy
     const bestSellersSub = this.bestSellerService.getBestSellers().subscribe({
       next: (products) => {
