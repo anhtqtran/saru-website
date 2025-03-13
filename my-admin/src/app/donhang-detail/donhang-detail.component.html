@@ -1,8 +1,8 @@
 <div class="order-detail-container">
   <!-- Tiêu đề -->
   <div class="order-header">
-    <span class="order-id">#{{ order.OrderID }}</span>
-    <span class="order-date">{{ order.OrderDate | date:'dd/MM/yyyy' }}</span>
+    <span class="order-id">#{{ order?.OrderID }}</span>
+    <span class="order-date">{{ order?.OrderDate | date:'dd/MM/yyyy' }}</span>
   </div>
 
   <!-- Trạng thái -->
@@ -25,7 +25,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of order.items">
+        <tr *ngFor="let item of order?.items">
           <td>{{ item.ProductName }}</td>
           <td>{{ item.Quantity }}</td>
           <td>{{ item.Price | currency:'VND' }}</td>
@@ -33,7 +33,7 @@
         </tr>
         <tr>
           <td colspan="3"><strong>Tổng thành tiền</strong></td>
-          <td><strong>{{ order.TotalOrderAmount | currency:'VND' }}</strong></td>
+          <td><strong>{{ order?.TotalOrderAmount | currency:'VND' }}</strong></td>
         </tr>
       </tbody>
     </table>
@@ -43,9 +43,9 @@
   <!-- Thông tin người nhận -->
   <div class="recipient-info">
     <h3>Thông tin người mua</h3>
-    <p><strong>Tên:</strong> {{ order.CustomerName }}</p>
-    <p><strong>Địa chỉ:</strong> {{ order.CustomerAdd.address }}, {{ order.CustomerAdd.city }}, {{ order.CustomerAdd.state }}</p>
-    <p><strong>Số điện thoại:</strong> {{ order.CustomerPhone }}</p>
+    <p><strong>Tên:</strong> {{ order?.CustomerName }}</p>
+    <p><strong>Địa chỉ:</strong> {{ order?.CustomerAdd?.address }}, {{ order?.CustomerAdd?.city }}, {{ order?.CustomerAdd?.state }}</p>
+    <p><strong>Số điện thoại:</strong> {{ order?.CustomerPhone }}</p>
   </div>
 
   <!-- Nút xác thực -->
@@ -55,10 +55,10 @@
   <div class="payment-info">
     <h3>Đăng ký thanh toán</h3>
     <div class="payment-details">
-      <p><strong>Số lượng sản phẩm:</strong> {{ order.items.length }}</p>
-      <p><strong>Tổng tiền hàng:</strong> {{ order.TotalOrderAmount | currency:'VND' }}</p>
+      <p><strong>Số lượng sản phẩm:</strong> {{ order?.items?.length }}</p>
+      <p><strong>Tổng tiền hàng:</strong> {{ order?.TotalOrderAmount | currency:'VND' }}</p>
       <p><strong>Giảm giá:</strong> 5.000đ</p>
-      <p><strong>Thành tiền:</strong> {{ order.TotalOrderAmount - 5000 | currency:'VND' }}</p>
+      <p><strong>Thành tiền:</strong> {{ (order?.TotalOrderAmount || 0) - 5000 | currency }}</p>
       <p><strong>Phương thức thanh toán:</strong> COD</p>
     </div>
     <button class="update-btn" [ngStyle]="{'background-color': '#F2E8DA'}">Cập nhật</button>
