@@ -14,7 +14,6 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  // Đảm bảo đã import BrowserAnimationsModule
 import { ToastrModule } from 'ngx-toastr';
 import { LightboxModule } from 'ngx-lightbox';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TrangchuBannerCamketComponent } from './trangchu-banner-camket/trangchu-banner-camket.component';

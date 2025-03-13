@@ -1,3 +1,4 @@
+
 require('dotenv').config();
 const express = require('express');
 const port = 4000;
@@ -107,6 +108,12 @@ async function connectDB() {
     productstockCollection = database.collection('productstocks');
     blogCollection = database.collection('blogs');
     blogCategoryCollection = database.collection('blogcategories');
+    const promotionsCollection = database.collection("promotions");
+    const vouchersCollection = database.collection("Vouchers");
+    const promotionStatusesCollection = database.collection("promotionstatuses");
+    const voucherStatusesCollection = database.collection("VoucherConditions");
+    const ordersCollection = database.collection("orders");
+    const categoriesCollection = database.collection("categories");
 
     await productCollection.createIndex({ ProductID: 1 }, { unique: true });
     await accountCollection.createIndex({ CustomerEmail: 1 }, { unique: true });
@@ -143,7 +150,7 @@ function authenticateToken(req, res, next) {
   }
 }
 
-// ===================== PRODUCT API =====================
+//     PRODUCT API    
 
 const bestSellingProductsPipeline = (productId) => [
   ...(productId ? [] : [{ $group: { _id: "$ProductID", totalQuantity: { $sum: "$Quantity" } } }]),
@@ -616,7 +623,7 @@ app.get('/api/products/:id', async (req, res) => {
   }
 });
 
-// ===================== COMPARE API =====================
+//     COMPARE API    
 
 app.post('/api/compare', authenticateToken, async (req, res) => {
   const { productId } = req.body;
@@ -662,6 +669,24 @@ app.post('/api/compare', authenticateToken, async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+
+
+
+
+
+// GET /promotions (Lấy tất cả promotions)
+app.get("/promotions", cors(), async (req, res) => {
+  try {
+    const promotions = await promotionsCollection.find({}).toArray();
+    res.status(200).json(promotions);
+  } catch (error) {
+    console.error("❌ Lỗi khi lấy danh sách promotions:", error);
+
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 
 app.get('/api/compare', authenticateToken, async (req, res) => {
   try {
@@ -755,7 +780,7 @@ app.delete('/api/compare/:productId', authenticateToken, async (req, res) => {
   }
 });
 
-// ===================== CART API =====================
+//     CART API    
 
 app.post('/api/cart', authenticateToken, async (req, res) => {
   const { productId, quantity } = req.body;
@@ -853,7 +878,7 @@ app.delete('/api/cart/:productId', authenticateToken, async (req, res) => {
   }
 });
 
-// ===================== LOGIN, SIGNUP, RESETPASS =====================
+//     LOGIN, SIGNUP, RESETPASS    
 
 cron.schedule('0 * * * *', async () => {
   await accountCollection.deleteMany({
@@ -1120,7 +1145,7 @@ app.get('/api/verify-token', authenticateToken, (req, res) => {
   res.json({ message: 'Token hợp lệ', account: req.account });
 });
 
-// ===================== SERVER START =====================
+//     SERVER START    
 
 app.listen(port, () => {
   logger.info(`Server running on port ${port}`, { correlationId: 'system' });
@@ -1132,7 +1157,7 @@ process.on('SIGTERM', async () => {
   process.exit(0);
 });
 
-// ===================== BLOG NỔI BẬT API ====================
+//     BLOG NỔI BẬT API   ======
 
 app.get('/api/blogs/random', async (req, res) => {
   try {
@@ -1222,3 +1247,251 @@ app.get('/api/blogs/:id', async (req, res) => {
     res.status(500).json({ message: 'Lỗi server', error: err.message });
   }
 });
+
+  // GET /promotions/:id
+  app.get("/promotions/:id", cors(), async (req, res) => {
+    try {
+      const o_id = new ObjectId(req.params["id"]);
+      const promotion = await promotionsCollection.findOne({ _id: o_id });
+      if (promotion) {
+        res.status(200).json(promotion);
+      } else {
+        res.status(404).json({ message: "Promotion not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  // GET /vouchers (Lấy tất cả vouchers)
+  app.get("/vouchers", cors(), async (req, res) => {
+    try {
+      const vouchers = await vouchersCollection.find({}).toArray();
+      res.status(200).json(vouchers);
+    } catch (error) {
+      console.error("❌ Lỗi khi lấy danh sách vouchers:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  // GET /vouchers/:id
+  app.get("/vouchers/:id", cors(), async (req, res) => {
+    try {
+      const o_id = new ObjectId(req.params["id"]);
+      const voucher = await vouchersCollection.findOne({ _id: o_id });
+      if (voucher) {
+        const usedCount = await ordersCollection.countDocuments({ VoucherID: voucher.VoucherID });
+        res.status(200).json({
+          ...voucher,
+          UsedCount: usedCount,
+          RemainingQuantity: voucher.VoucherQuantity - usedCount,
+        });
+      } else {
+        res.status(404).json({ message: "Voucher not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  // Đảm bảo endpoint /combined-data được định nghĩa
+  app.get("/combined-data", cors(), async (req, res) => {
+    try {
+      const promotions = await promotionsCollection.find({}).toArray();
+      const vouchers = await vouchersCollection.find({}).toArray();
+      const promotionStatuses = await promotionStatusesCollection.find({}).toArray();
+      const voucherStatuses = await voucherStatusesCollection.find({}).toArray();
+      const categories = await categoriesCollection.find({}).toArray();
+
+      const vouchersWithUsage = await Promise.all(vouchers.map(async (voucher) => {
+        const usedCount = await ordersCollection.countDocuments({ VoucherID: voucher.VoucherID });
+        return {
+          ...voucher,
+          UsedCount: usedCount,
+          RemainingQuantity: voucher.VoucherQuantity - usedCount
+        };
+      }));
+
+      const combinedItems = [
+        ...promotions.map(p => ({ ...p, type: 'promotion' })),
+        ...vouchersWithUsage.map(v => ({ ...v, type: 'voucher' }))
+      ].sort((a, b) => {
+        const dateA = new Date(a.type === 'promotion' ? a.PromotionStartDate : a.VoucherStartDate).getTime();
+        const dateB = new Date(b.type === 'promotion' ? b.PromotionStartDate : b.VoucherStartDate).getTime();
+        if (dateA !== dateB) {
+          return dateB - dateA;
+        }
+        return a.type === 'promotion' && b.type === 'voucher' ? -1 : 1;
+      });
+
+      const combinedData = {
+        promotions: combinedItems.filter(item => item.type === 'promotion'),
+        vouchers: combinedItems.filter(item => item.type === 'voucher'),
+        promotionStatuses: promotionStatuses,
+        voucherStatuses: voucherStatuses,
+        categories: categories,
+        total: {
+          promotions: combinedItems.filter(item => item.type === 'promotion').length,
+          vouchers: combinedItems.filter(item => item.type === 'voucher').length
+        }
+      };
+
+      res.status(200).json(combinedData);
+    } catch (error) {
+      console.error("❌ Lỗi khi xử lý /combined-data:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.delete("/promotions/:id", cors(), async (req, res) => {
+    try {
+      var o_id = new ObjectId(req.params["id"]);
+      const result = await promotionsCollection.deleteOne({ _id: o_id });
+      if (result.deletedCount === 1) {
+        res.status(200).json({ message: "Promotion deleted successfully" });
+      } else {
+        res.status(404).json({ message: "Promotion not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.delete("/vouchers/:id", cors(), async (req, res) => {
+    try {
+      var o_id = new ObjectId(req.params["id"]);
+      const result = await vouchersCollection.deleteOne({ _id: o_id });
+      if (result.deletedCount === 1) {
+        res.status(200).json({ message: "Voucher deleted successfully" });
+      } else {
+        res.status(404).json({ message: "Voucher not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.put("/promotions/:id/end", cors(), async (req, res) => {
+    try {
+      const o_id = new ObjectId(req.params["id"]);
+      const today = new Date().toISOString();
+      const result = await promotionsCollection.updateOne(
+        { _id: o_id },
+        { $set: { PromotionExpiredDate: today } }
+      );
+      if (result.matchedCount === 1) {
+        res.status(200).json({ message: "Promotion ended successfully" });
+      } else {
+        res.status(404).json({ message: "Promotion not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.put("/vouchers/:id/end", cors(), async (req, res) => {
+    try {
+      const o_id = new ObjectId(req.params["id"]);
+      const today = new Date().toISOString();
+      const result = await vouchersCollection.updateOne(
+        { _id: o_id },
+        { $set: { VoucherExpiredDate: today } }
+      );
+      if (result.matchedCount === 1) {
+        res.status(200).json({ message: "Voucher ended successfully" });
+      } else {
+        res.status(404).json({ message: "Voucher not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.put("/promotions/:id", cors(), async (req, res) => {
+    try {
+      const o_id = new ObjectId(req.params["id"]);
+      const updateData = req.body;
+      const result = await promotionsCollection.updateOne(
+        { _id: o_id },
+        {
+          $set: {
+            PromotionID: updateData.PromotionID,
+            PromotionStartDate: updateData.PromotionStartDate,
+            PromotionExpiredDate: updateData.PromotionExpiredDate,
+            PromotionConditionID: updateData.PromotionConditionID,
+            PromotionValue: updateData.PromotionValue,
+            ApplicableScope: updateData.ApplicableScope
+          }
+        }
+      );
+      if (result.matchedCount === 1) {
+        res.status(200).json({ message: "Promotion updated successfully" });
+      } else {
+        res.status(404).json({ message: "Promotion not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.put("/vouchers/:id", cors(), async (req, res) => {
+    try {
+      const o_id = new ObjectId(req.params["id"]);
+      const updateData = req.body;
+      const result = await vouchersCollection.updateOne(
+        { _id: o_id },
+        {
+          $set: {
+            VoucherID: updateData.VoucherID,
+            VoucherStartDate: updateData.VoucherStartDate,
+            VoucherExpiredDate: updateData.VoucherExpiredDate,
+            VoucherConditionID: updateData.VoucherConditionID,
+            VoucherQuantity: updateData.VoucherQuantity,
+            VoucherValue: updateData.VoucherValue,
+            RemainingQuantity: updateData.RemainingQuantity,
+            ApplicableScope: updateData.ApplicableScope
+          }
+        }
+      );
+      if (result.matchedCount === 1) {
+        res.status(200).json({ message: "Voucher updated successfully" });
+      } else {
+        res.status(404).json({ message: "Voucher not found" });
+      }
+
+      // POST /promotions
+      app.post("/promotions", cors(), async (req, res) => {
+        try {
+          const newPromotion = req.body;
+          const result = await promotionsCollection.insertOne(newPromotion);
+          res.status(201).json({ message: "Promotion created successfully", id: result.insertedId });
+        } catch (error) {
+          console.error("❌ Lỗi khi tạo mới promotion:", error);
+          res.status(500).json({ error: "Internal server error" });
+        }
+      });
+
+      // POST /vouchers
+      app.post("/vouchers", cors(), async (req, res) => {
+        try {
+          const newVoucher = req.body;
+          const result = await vouchersCollection.insertOne(newVoucher);
+          res.status(201).json({ message: "Voucher created successfully", id: result.insertedId });
+        } catch (error) {
+          console.error("❌ Lỗi khi tạo mới voucher:", error);
+          res.status(500).json({ error: "Internal server error" });
+        }
+      });
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  })

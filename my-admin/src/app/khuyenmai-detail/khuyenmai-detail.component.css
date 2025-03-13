@@ -1,0 +1,42 @@
+input.ng-invalid.ng-touched {
+    border-color: #ef4444;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+  }
+  
+  input:focus {
+    outline: none;
+  }
+  
+  /* Style cho thông báo */
+  .text-red-500 {
+    font-size: 0.875rem;
+  }
+  
+  .text-green-500 {
+    font-size: 0.875rem;
+  }
+  
+  .list-disc {
+    margin-top: 0.5rem;
+    color: #ef4444;
+  }
+  
+  /* Style cho trạng thái */
+  p.bg-gray-100 {
+    color: #4b5563;
+  }
+  
+  /* Đảm bảo giao diện responsive */
+  @media (max-width: 640px) {
+    .max-w-2xl {
+      max-width: 100%;
+    }
+  
+    .space-x-2 > * + * {
+      margin-left: 0.5rem;
+    }
+  
+    .space-x-4 > * + * {
+      margin-left: 1rem;
+    }
+  }

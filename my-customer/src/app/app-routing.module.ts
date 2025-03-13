@@ -22,6 +22,7 @@ import { BlogComponent } from './blog/blog.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { CompareComponent } from './compare/compare.component'; 
 
+
 import { AuthGuard } from './guard/auth.guard'; // Nhập AuthGuard
 
 
@@ -58,8 +59,7 @@ const routes: Routes = [
   { path: 'compare', component: CompareComponent},
   { path: 'product-detail/:id', component: ProductDetailComponent },
 
-];
-
+]
 @NgModule({
   imports: [RouterModule.forRoot(routes, {
     scrollPositionRestoration: 'top', // Tự động cuộn lên đầu
