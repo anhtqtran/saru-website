@@ -1,7 +1,17 @@
-{
+[{
+
     "context": ["/promotions"],
     "target": "http://localhost:4002",
     "secure": true,
     "changeOrigin":true,
     "logLevel":"debug"
+},
+
+{ "/api": {
+      "target": "http://localhost:4000",
+      "secure": false,
+      "changeOrigin": true,
+      "logLevel": "debug"
     }
+}]
+  
