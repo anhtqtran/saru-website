@@ -1,0 +1,62 @@
+<div class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-lg mt-8">
+    <h2 class="text-3xl font-bold text-center mb-6 text-[#B16628]">THÊM KHUYẾN MÃI MỚI</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-4">
+        <input type="text" [(ngModel)]="promotion.name" name="name" placeholder="Tên khuyến mãi" required class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]">
+      </div>
+      <div class="mb-4">
+        <input type="text" [(ngModel)]="promotion.code" name="code" placeholder="Mã khuyến mãi" required class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]">
+      </div>
+      <div class="mb-4 flex space-x-4">
+        <div class="w-1/2">
+          <label for="promotionTimeStart" class="block text-base font-semibold mt-2 text-[#B16628]">Thời gian khuyến mãi từ</label>
+          <input type="date" [(ngModel)]="promotion.startDate" name="startDate" required class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B] mb-4">
+        </div>
+        <div class="w-1/2">
+          <label for="promotionTimeEnd" class="block text-base font-semibold mt-2 text-[#B16628]">Đến</label>
+          <input type="date" [(ngModel)]="promotion.endDate" name="endDate" required class="w-full px-4 py-2 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B] mb-4">
+        </div>
+      </div>
+      <div class="mb-4">
+        <span class="block text-base font-semibold mt-2 text-[#B16628]">Loại khuyến mãi</span>
+        <div class="space-x-4">
+          <label><input type="radio" [(ngModel)]="promotion.discountType" name="discountType" value="percent" class="mr-2"> Theo phần trăm</label>
+          <label><input type="radio" [(ngModel)]="promotion.discountType" name="discountType" value="value" class="mr-2"> Theo giá</label>
+        </div>
+      </div>
+      <div class="mb-4">
+        <input type="number" [(ngModel)]="promotion.minAmount" name="minAmount" placeholder="Số tiền chi tối thiểu" required class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]">
+      </div>
+      <div class="mb-4">
+        <input type="number" [(ngModel)]="promotion.discountAmount" name="discountAmount" placeholder="Số tiền chiết khấu" required class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]">
+      </div>
+      <div class="mb-4">
+        <input type="number" [(ngModel)]="promotion.quantity" name="quantity" placeholder="Số lượng phiếu giảm giá có thể nhận" required class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]">
+      </div>
+      <div class="mb-4">
+        <input type="number" [(ngModel)]="promotion.targetAmount" name="targetAmount" placeholder="Số tiền chi tiêu ước tính" required class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]">
+      </div>
+      <div class="mb-4 flex items-center space-x-4">
+        <label for="limitPerUser" class="text-base font-semibold mt-2 text-[#B16628]">Giới hạn nhận cho mỗi người mua:</label>
+        <button type="button" (click)="decreaseLimit()" class="px-4 py-2 bg-[#F2E8DA] text-black rounded-md shadow-md">-</button>
+        <div class="flex items-center justify-center">
+          <input type="number" [(ngModel)]="promotion.limitPerUser" name="limitPerUser" class="w-14 text-center border rounded-md shadow-sm" readonly>
+        </div>
+        <button type="button" (click)="increaseLimit()" class="px-4 py-2 bg-[#F2E8DA] text-black rounded-md shadow-md">+</button>
+      </div>
+      <div class="flex justify-between mt-4 space-x-4">
+        <button type="button" (click)="showCancelPopup()" class="bg-[#F8BC3B] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#f0a826]">Hủy thay đổi</button>
+        <button type="submit" class="bg-[#F8BC3B] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#f0a826]">Lưu</button>
+      </div>
+    </form>
+  </div>
+  
+  <!-- Pop-up xác nhận hủy -->
+  <div *ngIf="isCancelPopupVisible" class="fixed inset-0 bg-[#F2E8DA] bg-opacity-50 flex justify-center items-center">
+    <div class="bg-white p-6 rounded-lg text-center">
+      <p class="text-lg font-semibold mb-4">Bạn chắc chắn muốn hủy thay đổi?</p>
+      <button (click)="confirmCancel()" class="bg-[#F8BC3B] text-white px-6 py-2 rounded-md shadow-md mr-2">Xác nhận</button>
+      <button (click)="closeCancelPopup()" class="bg-[#F8BC3B] text-white px-6 py-2 rounded-md shadow-md">Hủy</button>
+    </div>
+  </div>
+  
