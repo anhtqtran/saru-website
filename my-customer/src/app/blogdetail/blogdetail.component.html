@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="flex justify-center pt-5 font-Regular text-xl">
     <div class="flex-col w-3/4 ml-20 mr-10 px font-Regular text-justify">
       <!-- Hiển thị trạng thái loading -->
@@ -50,3 +51,79 @@
       </ul>
     </div>
   </div>
+=======
+<div class="flex justify-center pt-10 font-Regular text-lg">
+    <div class="flex-col w-2/3 max-w-4xl px-6 py-8 font-Regular text-justify bg-white shadow-md rounded-lg">
+        
+        <!-- Breadcrumb -->
+        <nav class="text-sm text-gray-600 my-4 flex items-center">
+            <a routerLink="/blog" class="hover:text-[#85461F]">Blog</a>
+            <span class="mx-2">
+                <img src="assets/right_arrow.png" alt="Arrow" class="w-3 h-3"/>
+            </span>
+            <a *ngIf="blog?.categoryName !== 'Không có danh mục'" routerLink="/category/{{ blog?.categoryID[0]?._id }}" class="hover:text-[#85461F]">
+                {{ blog?.categoryName }}
+            </a>
+            <span class="mx-2">
+                <img src="assets/right_arrow.png" alt="Arrow" class="w-3 h-3"/>
+            </span>
+            <span class="text-gray-900">{{ blog?.BlogTitle }}</span>
+        </nav>
+        
+        <!-- Tiêu đề bài viết -->
+        <h1 class="block font-Header text-3xl font-bold text-black mb-4 text-justify leading-snug">{{ blog?.BlogTitle }}</h1>
+
+        <!-- Ảnh bài viết -->
+        <div class="flex justify-center">
+            <img class="w-full h-[320px] max-h-[400px] object-cover rounded-md mt-5 shadow-lg" [src]="blog?.BlogImage" alt="Blog Image">
+        </div>
+
+        <!-- Nội dung bài viết -->
+        <div *ngIf="blog?.BlogContent" class="mt-6 text-gray-800 leading-relaxed">
+            <p class="indent-8 mb-4 text-justify" *ngFor="let paragraph of blog.BlogContent.split('\n')">
+                <span *ngIf="paragraph.startsWith('#')" class="block text-[#85461F] font-bold text-xl mb-2">
+                    {{ paragraph.replace('#', '') }}
+                </span>
+                {{ paragraph.startsWith('#') ? '' : paragraph }}
+            </p>
+        </div>
+
+        <hr class="my-6 border-gray-300">
+
+        <!-- Bình luận -->
+        <form action="#" method="post">
+            <fieldset>
+                <legend class="font-Header text-2xl mb-3 text-center font-semibold">Bình luận</legend>
+                <textarea id="comment" name="comment" placeholder="Nhập bình luận..." aria-required="true"
+                    spellcheck="false" class="w-full h-32 p-3 bg-gray-100 border border-gray-300 rounded-md focus:ring-2 focus:ring-[#F8BC3B] focus:outline-none">
+                </textarea>
+                <p class="text-center">
+                    <input type="submit" value="Gửi" class="bg-[#F8BC3B] hover:bg-[#85461F] text-white 
+                    flex w-fit mx-auto h-10 rounded-md text-center px-8 my-2 font-bold cursor-pointer transition-all">
+                </p>
+            </fieldset>
+        </form>
+    </div>
+
+    <!-- Sidebar: Tin tức liên quan -->
+    <div class="w-1/4 ml-5 sticky top-20">
+        <div class="font-Header text-xl text-center mb-4 font-semibold border-b-2 pb-2">Tin tức liên quan</div>
+
+        <ul class="space-y-3">
+            <li *ngFor="let related of relatedBlogs" class="bg-gray-50 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+                <!-- ✅ Đảm bảo mỗi bài viết liên quan link đến đúng ID -->
+                <a [routerLink]="['/blog', related._id]" class="block hover:bg-gray-100 transition">
+                    <div class="flex p-3">
+                        <div class="flex-shrink-0">
+                            <img class="w-20 h-16 object-cover rounded-md" [src]="related.BlogImage[0]" alt="Related Image">
+                        </div>
+                        <div class="ml-3 flex flex-col justify-center">
+                            <h3 class="text-gray-800 font-bold text-md leading-snug">{{ related.BlogTitle }}</h3>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>                
+    </div>
+</div>
+>>>>>>> cus_blog

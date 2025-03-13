@@ -28,7 +28,14 @@ button:hover {
     cursor: pointer;
 }
 
+<<<<<<< HEAD
 button {
     color: white;
     font-weight: bold;
 }
+=======
+/* button {
+    color: white;
+    font-weight: bold;
+} */
+>>>>>>> cus_blog

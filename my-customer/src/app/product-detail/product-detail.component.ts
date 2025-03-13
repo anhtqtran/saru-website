@@ -3,9 +3,12 @@ import { ProductService } from '../services/product.service';
 import { Product } from '../classes/Product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+<<<<<<< HEAD
 import { HomepageProductsService } from '../services/homepage-products.service'; // Từ HEAD
 import { BestSellingProduct } from '../classes/BestSellingProduct'; // Từ HEAD
 import { Lightbox } from 'ngx-lightbox'; // Từ main
+=======
+>>>>>>> cus_blog
 
 @Component({
   selector: 'app-product-detail',
@@ -21,15 +24,22 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+<<<<<<< HEAD
     private bestSellerIdService: HomepageProductsService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
     private lightbox: Lightbox
+=======
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
+>>>>>>> cus_blog
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+<<<<<<< HEAD
       const productId = params['id'];
       if (productId) {
         this.bestSellerIdService.getBestSellerIds().subscribe({
@@ -65,6 +75,11 @@ export class ProductDetailComponent implements OnInit {
             });
           }
         });
+=======
+      const id = params['id'];
+      if (id) {
+        this.loadProductDetail(id);
+>>>>>>> cus_blog
       } else {
         this.snackBar.open('Không tìm thấy ID sản phẩm', 'OK', { duration: 3000 });
         this.isLoading = false;
@@ -72,6 +87,7 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   loadBestSellerDetail(productId: string): void {
     this.isLoading = true;
     this.bestSellerIdService.getBestSellerDetail(productId).subscribe({
@@ -121,16 +137,26 @@ export class ProductDetailComponent implements OnInit {
           this.isLoading = false;
           return;
         }
+=======
+  loadProductDetail(id: string): void {
+    this.isLoading = true;
+    this.productService.getProductDetail(id).subscribe({
+      next: (data: Product) => {
+>>>>>>> cus_blog
         if (!data.reviews) data.reviews = [];
         console.log('Review data:', data.reviews);
         console.log('Product data from API:', data);
         console.log('Related products _id:', data.relatedProducts?.map(rp => rp._id) || []);
+<<<<<<< HEAD
 
+=======
+>>>>>>> cus_blog
         if (data.relatedProducts && data.relatedProducts.length > 0) {
           console.log('Kiểu dữ liệu _id sản phẩm liên quan đầu tiên:', typeof data.relatedProducts[0]._id);
           console.log('Constructor name _id sản phẩm liên quan đầu tiên:', data.relatedProducts[0]._id.constructor.name);
         }
 
+<<<<<<< HEAD
         this.product = {
           ...data,
           currentPrice: data.currentPrice ?? data.ProductPrice ?? 0,
@@ -141,6 +167,9 @@ export class ProductDetailComponent implements OnInit {
           averageRating: data.averageRating ?? 0,
           totalReviewCount: data.totalReviewCount ?? 0
         };
+=======
+        this.product = { ...data };
+>>>>>>> cus_blog
         this.selectedImage = this.product.ProductImageCover || 'assets/images/default-product.png';
         this.isLoading = false;
       },
@@ -152,10 +181,13 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
+<<<<<<< HEAD
   openLightbox(image: string) {
     this.lightbox.open([{ src: image, thumb: image }]);
   }
 
+=======
+>>>>>>> cus_blog
   selectImage(image: string): void {
     this.selectedImage = image || 'assets/images/default-product.png';
   }

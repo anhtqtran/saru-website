@@ -1,0 +1,7 @@
+/* Cập nhật CSS cho sidebar */
+.sidebar {
+    position: sticky;
+    top: 20px; /* Điều chỉnh khoảng cách từ trên cùng của cửa sổ */
+    max-height: calc(100vh - 100px); /* Giới hạn chiều cao của sidebar khi cuộn */
+    overflow-y: auto; /* Cho phép cuộn trong sidebar */
+}

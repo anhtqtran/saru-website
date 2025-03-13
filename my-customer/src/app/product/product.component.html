@@ -79,6 +79,7 @@
     <!-- Danh sách sản phẩm -->
     <div class="w-full md:w-3/4">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+<<<<<<< HEAD
         <div *ngFor="let product of products" (click)="goToProductDetail(product._id)" class="border rounded-lg p-4 shadow-md bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer relative">
   <!-- Nhãn sale với % giảm chính xác -->
   <div *ngIf="product?.isOnSale" class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
@@ -108,6 +109,17 @@
           <p class="text-sm text-gray-500" *ngIf="product?.ProductBrand">Thương hiệu: {{product.ProductBrand}}</p>
 
           <!-- Nút Thêm vào giỏ và So sánh -->
+=======
+        <div *ngFor="let product of products" (click)="goToProductDetail(product._id)" class="border rounded-lg p-4 shadow-md bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
+          <div class="w-full h-48 flex justify-center items-center overflow-hidden rounded-lg">
+            <img *ngIf="product.ProductImageCover" [src]="product.ProductImageCover" alt="{{product.ProductName}}" class="w-full h-full object-contain transition-all duration-300 hover:scale-105">
+            <img *ngIf="!product.ProductImageCover" src="assets/images/default-product.png" alt="No image" class="w-32 h-32 object-contain">
+          </div>
+          <h3 class="text-lg font-semibold mt-3 text-gray-800 truncate">{{product.ProductName}}</h3>
+          <p class="text-xl font-bold text-red-600 mt-1">{{product.ProductPrice | currency:'VND'}}</p>
+          <p class="text-sm text-gray-500">Thương hiệu: {{product.ProductBrand}}</p>
+          <!-- Ngăn sự kiện click trên nút lan ra thẻ cha -->
+>>>>>>> cus_blog
           <button (click)="$event.stopPropagation(); addToCart(product)" class="mt-3 w-full bg-blue-600 text-white p-2 rounded-lg hover:bg-blue-700 transition-all duration-300">Thêm vào giỏ</button>
           <button (click)="$event.stopPropagation(); addToCompare(product)" class="mt-2 w-full bg-green-600 text-white p-2 rounded-lg hover:bg-green-700 transition-all duration-300">So sánh</button>
         </div>

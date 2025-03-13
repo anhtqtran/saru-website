@@ -13,7 +13,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';  // Đảm bảo đã import BrowserAnimationsModule
 import { ToastrModule } from 'ngx-toastr';
+
 import { LightboxModule } from 'ngx-lightbox';
+
+
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TrangchuBannerCamketComponent } from './trangchu-banner-camket/trangchu-banner-camket.component';
@@ -44,7 +49,13 @@ import { BlogComponent } from './blog/blog.component';
 import { BlogdetailComponent } from './blogdetail/blogdetail.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+
 import { CompareComponent } from './compare/compare.component';
+
+// import { CompareComponent } from './compare/compare.component';
+import { BlogcategoryComponent } from './blogcategory/blogcategory.component';
+import { MessageComponent } from './message/message.component';
+
 
 
 
@@ -80,7 +91,13 @@ import { CompareComponent } from './compare/compare.component';
     BlogdetailComponent,
     FaqsComponent,
     ProductDetailComponent,
+
     CompareComponent,
+
+    // CompareComponent,
+    BlogcategoryComponent,
+    MessageComponent,
+
 
   ],
   imports: [
@@ -97,7 +114,10 @@ import { CompareComponent } from './compare/compare.component';
     MatToolbarModule,
     MatPaginatorModule,
     BrowserAnimationsModule,
+
     LightboxModule,
+
+
     ToastrModule.forRoot({   // Cấu hình Toastr
       positionClass: 'toast-bottom-right',
       preventDuplicates: true,

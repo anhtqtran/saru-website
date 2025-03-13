@@ -10,6 +10,7 @@
       <!-- Hình ảnh sản phẩm -->
       <div class="w-full md:w-1/2">
         <div class="relative">
+<<<<<<< HEAD
           <!-- Nhãn sale với % giảm -->
           <div *ngIf="prod?.isOnSale" class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full z-10">
             {{ prod.discountPercentage }}% OFF
@@ -68,6 +69,13 @@
             <div *ngIf="!(prod.ProductImageCover || prod.ProductImageSub1 || prod.ProductImageSub2 || prod.ProductImageSub3)" class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-500">
               No Image
             </div>
+=======
+          <img [src]="selectedImage" alt="{{prod.ProductName}}" class="w-full h-auto object-cover rounded-lg shadow-md">
+          <div class="flex mt-4 space-x-2">
+            <img *ngIf="prod.ProductImageSub1" [src]="prod.ProductImageSub1" (click)="selectImage(prod.ProductImageSub1)" class="w-16 h-16 object-cover rounded cursor-pointer border-2 hover:border-blue-500 transition duration-200" [ngClass]="{'border-blue-500': selectedImage === prod.ProductImageSub1}">
+            <img *ngIf="prod.ProductImageSub2" [src]="prod.ProductImageSub2" (click)="selectImage(prod.ProductImageSub2)" class="w-16 h-16 object-cover rounded cursor-pointer border-2 hover:border-blue-500 transition duration-200" [ngClass]="{'border-blue-500': selectedImage === prod.ProductImageSub2}">
+            <img *ngIf="prod.ProductImageSub3" [src]="prod.ProductImageSub3" (click)="selectImage(prod.ProductImageSub3)" class="w-16 h-16 object-cover rounded cursor-pointer border-2 hover:border-blue-500 transition duration-200" [ngClass]="{'border-blue-500': selectedImage === prod.ProductImageSub3}">
+>>>>>>> cus_blog
           </div>
         </div>
       </div>
@@ -82,6 +90,7 @@
           </div>
           <span class="ml-2 text-gray-600">{{prod.totalReviewCount || 0}} Đánh giá</span>
         </div>
+<<<<<<< HEAD
         <!-- Giá hiện tại (màu đỏ) và giá gốc (dòng kẻ) -->
         <div class="flex items-center gap-2 mt-2">
           <p class="text-2xl font-bold text-red-600" *ngIf="prod?.currentPrice != null">{{ prod.currentPrice | currency:'VND' }}</p>
@@ -89,6 +98,9 @@
         </div>
         <!-- Tình trạng kho -->
         <p class="text-sm text-green-600 mt-2" *ngIf="prod?.stockStatus">{{prod.stockStatus === 'In Stock' ? 'Còn hàng' : 'Hết hàng'}}</p>
+=======
+        <p class="text-2xl font-bold text-red-600 mt-2">{{prod.ProductPrice | currency:'VND'}}</p>
+>>>>>>> cus_blog
         <p class="text-gray-600 mt-2 italic">{{prod.ProductShortDescription}}</p>
 
         <!-- Bảng thông tin chi tiết -->
@@ -112,8 +124,13 @@
     <div class="mt-8">
       <div class="border-b border-gray-200">
         <nav class="flex space-x-8">
+<<<<<<< HEAD
           <button (click)="setActiveTab('description')" [ngClass]="{'border-b-2 border-blue-600 text-blue-600': activeTab === 'description', 'text-gray-500 hover:text-black-700': activeTab !== 'description'}" class="py-2 px-4 font-medium text-lg transition duration-200">Mô tả</button>
           <button (click)="setActiveTab('reviews')" [ngClass]="{'border-b-2 border-blue-600 text-blue-600': activeTab === 'reviews', 'text-gray-500 hover:text-black-700': activeTab !== 'reviews'}" class="py-2 px-4 font-medium text-lg transition duration-200">Đánh giá</button>
+=======
+          <button (click)="setActiveTab('description')" [ngClass]="{'border-b-2 border-blue-600 text-blue-600': activeTab === 'description', 'text-gray-500 hover:text-black-700700': activeTab !== 'description'}" class="py-2 px-4 font-medium text-lg transition duration-200 bg-red-600">Mô tả</button>
+          <button (click)="setActiveTab('reviews')" [ngClass]="{'border-b-2 border-blue-600 text-blue-600': activeTab === 'reviews', 'text-gray-500 hover:text-black-700': activeTab !== 'reviews'}" class="py-2 px-4 font-medium text-lg transition duration-200 bg-red-600  ">Đánh giá</button>
+>>>>>>> cus_blog
         </nav>
       </div>
 
@@ -144,7 +161,11 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         <div *ngFor="let relatedProduct of prod.relatedProducts" (click)="goToProductDetail($event, relatedProduct._id)" class="border rounded-lg p-4 shadow-md bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
           <div class="w-full h-48 flex justify-center items-center overflow-hidden rounded-lg">
+<<<<<<< HEAD
             <img *ngIf="relatedProduct.ProductImageCover" [src]="relatedProduct.ProductImageCover" alt="{{relatedProduct.ProductName}}" class="w-full h-full object-contain transition-transform duration-300 ease-in-out hover:scale-105">
+=======
+            <img *ngIf="relatedProduct.ProductImageCover" [src]="relatedProduct.ProductImageCover" alt="{{relatedProduct.ProductName}}" class="w-full h-full object-contain transition-all duration-300 hover:scale-105">
+>>>>>>> cus_blog
             <img *ngIf="!relatedProduct.ProductImageCover" src="assets/images/default-product.png" alt="No image" class="w-32 h-32 object-contain">
           </div>
           <h3 class="text-lg font-semibold mt-3 text-gray-800 truncate">{{relatedProduct.ProductName}}</h3>
@@ -154,4 +175,8 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
 </ng-template>
+=======
+</ng-template>
+>>>>>>> cus_blog

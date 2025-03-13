@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import { Account } from '../classes/Account';
 import { ProductService } from './product.service';
 
+<<<<<<< HEAD
+=======
+// Interface cho từng loại response từ backend
+>>>>>>> cus_blog
 interface LoginResponse {
   message: string;
   token: string;
@@ -45,6 +49,7 @@ export class AuthService {
   ) {
     const token = this.getToken();
     if (token) {
+<<<<<<< HEAD
       this.verifyToken().subscribe({
         next: (isValid) => {
           if (isValid) {
@@ -71,11 +76,38 @@ export class AuthService {
             this.loginStatus.next(false);
             this.productService.notifyLoginStatusChanged(); // Thông báo khi token không hợp lệ
           }
+=======
+      this.verifyToken().subscribe(isValid => {
+        if (isValid) {
+          this.refreshUserData();
+          this.http.get<{ message: string; account: Account }>(`${this.apiUrl}/verify-token`, {
+            headers: new HttpHeaders({ Authorization: `Bearer ${token}` })
+          }).subscribe({
+            next: (response) => { // Sửa từ 'account' thành 'response' để khớp với type
+              this._currentUser = response.account; // Sửa lỗi: dùng 'response' thay vì 'account'
+              this.currentUserSubject.next(response.account);
+              this.loginStatus.next(true);
+            },
+            error: () => {
+              this.removeToken();
+              this.currentUserSubject.next(null);
+              this.loginStatus.next(false);
+            }
+          });
+        } else {
+          this.removeToken();
+          this.currentUserSubject.next(null);
+          this.loginStatus.next(false);
+>>>>>>> cus_blog
         }
       });
     }
   }
 
+<<<<<<< HEAD
+=======
+  // Xử lý lỗi chi tiết hơn dựa trên mã HTTP status
+>>>>>>> cus_blog
   private handleError(error: any): Observable<never> {
     let errorMessage = 'Đã xảy ra lỗi, vui lòng thử lại sau.';
     if (error.error instanceof ErrorEvent) {
@@ -106,6 +138,10 @@ export class AuthService {
     return throwError(() => new Error(errorMessage));
   }
 
+<<<<<<< HEAD
+=======
+  // Đăng nhập
+>>>>>>> cus_blog
   private currentUserSubject = new BehaviorSubject<Account | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
@@ -117,8 +153,12 @@ export class AuthService {
           this._currentUser = response.account;
           this.currentUserSubject.next(response.account);
           this.loginStatus.next(true);
+<<<<<<< HEAD
           this.refreshUserData();
           this.productService.notifyLoginStatusChanged(); // Thông báo thay đổi trạng thái
+=======
+          this.refreshUserData(); // Tải lại dữ liệu sau đăng nhập
+>>>>>>> cus_blog
           this.router.navigate(['/homepage']);
         }
       }),
@@ -126,14 +166,22 @@ export class AuthService {
     );
   }
 
+<<<<<<< HEAD
+=======
+  // Đăng ký
+>>>>>>> cus_blog
   signUp(credentials: { email: string; password: string; subscribe?: boolean }): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, credentials).pipe(
       tap((response) => {
         if (response.token) {
           this.storeToken(response.token);
           this.loginStatus.next(true);
+<<<<<<< HEAD
           this.refreshUserData();
           this.productService.notifyLoginStatusChanged(); // Thông báo thay đổi trạng thái
+=======
+          this.refreshUserData(); // Tải lại dữ liệu sau đăng ký
+>>>>>>> cus_blog
           this.router.navigate(['/homepage']);
         }
       }),
@@ -141,24 +189,40 @@ export class AuthService {
     );
   }
 
+<<<<<<< HEAD
+=======
+  // Quên mật khẩu
+>>>>>>> cus_blog
   forgotPassword(email: string): Observable<ForgotPasswordResponse> {
     return this.http.post<ForgotPasswordResponse>(`${this.apiUrl}/forgot-password`, { email }).pipe(
       catchError(this.handleError)
     );
   }
 
+<<<<<<< HEAD
+=======
+  // Xác minh OTP
+>>>>>>> cus_blog
   verifyOtp(email: string, otp: string): Observable<VerifyOtpResponse> {
     return this.http.post<VerifyOtpResponse>(`${this.apiUrl}/verify-otp`, { email, otp }).pipe(
       catchError(this.handleError)
     );
   }
 
+<<<<<<< HEAD
+=======
+  // Đặt lại mật khẩu
+>>>>>>> cus_blog
   resetPassword(email: string, newPassword: string): Observable<ResetPasswordResponse> {
     return this.http.post<ResetPasswordResponse>(`${this.apiUrl}/reset-password`, { email, newPassword }).pipe(
       catchError(this.handleError)
     );
   }
 
+<<<<<<< HEAD
+=======
+  // Tải lại dữ liệu giỏ hàng và danh sách so sánh
+>>>>>>> cus_blog
   private refreshUserData(): void {
     this.productService.getCartItems().subscribe({
       next: (cart) => {
@@ -176,20 +240,36 @@ export class AuthService {
     });
   }
 
+<<<<<<< HEAD
+=======
+  // Lưu token
+>>>>>>> cus_blog
   storeToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
   }
 
+<<<<<<< HEAD
+=======
+  // Lấy token
+>>>>>>> cus_blog
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
 
+<<<<<<< HEAD
+=======
+  // Xóa token
+>>>>>>> cus_blog
   removeToken(): void {
     localStorage.removeItem(this.tokenKey);
     this._currentUser = null;
     this.loginStatus.next(false);
   }
 
+<<<<<<< HEAD
+=======
+  // Kiểm tra trạng thái đăng nhập
+>>>>>>> cus_blog
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
@@ -206,39 +286,64 @@ export class AuthService {
     );
   }
 
+<<<<<<< HEAD
+=======
+  // Đăng xuất
+>>>>>>> cus_blog
   logout(): void {
     const token = this.getToken();
     if (token) {
       this.http.post(`${this.apiUrl}/logout`, {}, {
+<<<<<<< HEAD
         headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
         withCredentials: true // Đảm bảo gửi cookie session nếu có
+=======
+        headers: new HttpHeaders({ Authorization: `Bearer ${token}` })
+>>>>>>> cus_blog
       }).subscribe({
         next: () => {
           this.removeToken();
           this.currentUserSubject.next(null);
+<<<<<<< HEAD
           this.productService.notifyLoginStatusChanged(); // Thông báo thay đổi trạng thái
+=======
+>>>>>>> cus_blog
           this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error('Logout API error:', err);
           this.removeToken();
           this.currentUserSubject.next(null);
+<<<<<<< HEAD
           this.productService.notifyLoginStatusChanged(); // Thông báo ngay cả khi lỗi
+=======
+>>>>>>> cus_blog
           this.router.navigate(['/login']);
         }
       });
     } else {
       this.removeToken();
       this.currentUserSubject.next(null);
+<<<<<<< HEAD
       this.productService.notifyLoginStatusChanged(); // Thông báo thay đổi trạng thái
+=======
+>>>>>>> cus_blog
       this.router.navigate(['/login']);
     }
   }
 
+<<<<<<< HEAD
+=======
+  // Lấy thông tin user hiện tại
+>>>>>>> cus_blog
   getCurrentUser(): Account | null {
     return this._currentUser;
   }
 
+<<<<<<< HEAD
+=======
+  // Theo dõi trạng thái đăng nhập
+>>>>>>> cus_blog
   getLoginStatus(): Observable<boolean> {
     return this.loginStatus.asObservable();
   }
