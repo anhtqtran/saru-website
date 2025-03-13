@@ -1,0 +1,19 @@
+.layout {
+    display: flex;
+    height: 100vh; /* Đảm bảo chiều cao full màn hình */
+}
+
+.sidebar {
+    width: 250px; /* Hoặc điều chỉnh theo thiết kế */
+    min-width: 200px;
+    background-color: #f8f9fa; /* Màu nền có thể thay đổi */
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Căn giữa theo chiều ngang */
+    justify-content: flex-start; /* Bắt đầu từ trên xuống */
+    padding: 20px;
+}

@@ -1,0 +1,158 @@
+@import "tailwindcss";
+/* Reset CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply font-sans bg-gray-100;
+}
+
+/* Container chính */
+.checkout-container {
+    @apply flex justify-between max-w-4xl mx-auto mt-10 gap-8;
+}
+
+/* Form Địa chỉ nhận hàng */
+.shipping-info {
+    @apply w-3/5 bg-white p-6 rounded-lg shadow-md;
+}
+
+h2 {
+    @apply text-lg font-bold mb-4;
+}
+
+/* Các nhóm input */
+.input-group {
+    @apply mb-4;
+}
+
+.input-group label {
+    @apply font-bold text-sm block mb-1;
+}
+
+.input-group input,
+.input-group select {
+    @apply w-full p-2 border border-gray-300 rounded-md text-sm;
+}
+
+/* Định dạng dấu * */
+span {
+    @apply text-black;
+}
+
+/* Xác nhận */
+.confirm-button {
+    @apply w-full p-3 bg-yellow-400 text-black font-bold border-none rounded-md cursor-pointer transition;
+}
+
+.confirm-button:hover {
+    @apply bg-yellow-500;
+}
+
+/* Đơn hàng */
+.order-summary {
+    @apply w-2/5 bg-white p-6 rounded-lg shadow-md;
+}
+
+/* Sản phẩm */
+.order-item {
+    @apply flex items-center gap-4 border border-black p-3 rounded-md bg-white;
+}
+
+.order-item img {
+    @apply w-10 h-10 bg-gray-300 rounded;
+}
+
+.order-item p {
+    @apply flex-1 text-sm;
+}
+
+.order-item span {
+    @apply font-bold;
+}
+
+/* Chi tiết đơn hàng */
+.order-details p,
+.order-details h5 {
+    @apply flex justify-between mb-2;
+}
+
+.order-details .total {
+    @apply font-bold text-lg;
+}
+
+/* Phương thức thanh toán */
+.payment-methods {
+    @apply flex justify-between mt-3;
+}
+
+.payment-option {
+    @apply flex-1 p-1 border border-black bg-gray-300 rounded-md text-xs cursor-pointer transition mr-2;
+}
+
+.payment-option:hover {
+    @apply bg-black text-white;
+}
+.payment-option.selected {
+    @apply bg-black text-white;
+}
+
+/* Nếu phương thức được chọn, đổi màu sang đen */
+.selected-method {
+    @apply bg-black text-white font-bold;
+}
+
+/* 🔥 Hiển thị danh sách ví điện tử */
+.e-wallet-options {
+    @apply mt-3;
+}
+
+.wallet-label {
+    @apply font-bold text-sm block mb-1;
+}
+
+.wallet-select {
+    @apply w-full p-2 border border-gray-300 rounded-md text-sm bg-white;
+}
+
+/* Cảnh báo khi chưa chọn phương thức */
+.payment-error {
+    @apply text-red-600 text-sm mt-2 text-center font-bold;
+}
+
+/* Nút thanh toán */
+.checkout-button {
+    @apply w-full p-3 bg-yellow-400 text-black font-bold border-none rounded-md cursor-pointer transition mt-4;
+}
+
+.checkout-button:hover {
+    @apply bg-yellow-500;
+}
+
+/* Điều khoản */
+.terms {
+    @apply text-xs text-gray-600 mt-3 text-center;
+}
+
+.error-message {
+    @apply text-red-500 text-sm mt-1;
+}
+
+/* Dấu * màu đỏ */
+.required {
+    @apply text-red-500;
+}
+
+.form-container {
+    @apply space-y-4;
+}
+
+.input {
+    @apply w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none bg-white;
+}
+
+/* Select dropdown có border */
+.select {
+    @apply w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none bg-white;
+}

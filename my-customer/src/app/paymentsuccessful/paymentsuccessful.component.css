@@ -1,0 +1,46 @@
+@import "tailwindcss";
+/* Reset CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply font-sans bg-gray-100 flex justify-center items-center h-screen;
+}
+
+/* Khung thông báo */
+.order-success {
+    @apply w-96 bg-white rounded-lg shadow-md text-center overflow-hidden;
+}
+
+/* Phần tiêu đề */
+.success-header {
+    @apply bg-gray-400 text-white text-lg font-bold p-4;
+}
+
+/* Nội dung thông báo */
+.success-content {
+    @apply p-5;
+}
+
+/* Thông điệp */
+.success-message {
+    @apply text-base font-bold mb-2;
+}
+
+/* Nhóm nút */
+.success-buttons {
+    @apply flex justify-center gap-3 mt-4;
+}
+
+/* Nút bấm */
+.detail-button,
+.back-button {
+    @apply px-5 py-2 bg-yellow-400 text-black font-bold border-none rounded-md cursor-pointer transition;
+}
+
+/* Hiệu ứng hover */
+.detail-button:hover,
+.back-button:hover {
+    @apply bg-yellow-500;
+}

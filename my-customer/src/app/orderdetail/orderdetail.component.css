@@ -1,0 +1,63 @@
+@import "tailwindcss";
+/* Reset CSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply font-sans bg-gray-100 flex justify-center items-center h-screen;
+}
+
+/* Container chính */
+.order-container {
+    @apply w-[600px] bg-white p-5 rounded-lg shadow-md text-center;
+}
+
+/* Tiêu đề */
+.order-title {
+    @apply text-lg font-bold bg-gray-400 p-3 rounded-md mb-5;
+}
+
+/* Chi tiết đơn hàng và vận chuyển */
+.order-details {
+    @apply flex justify-between gap-3 mb-5;
+}
+
+.order-box {
+    @apply w-1/2 bg-gray-200 p-4 rounded-md text-left;
+}
+
+.order-box h2 {
+    @apply text-base font-bold mb-2;
+}
+
+.order-box p {
+    @apply text-sm mb-1;
+}
+
+/* Hình ảnh sản phẩm */
+.order-box img {
+    @apply w-20 h-20 bg-gray-300 rounded-md my-2;
+}
+
+/* Tổng chi phí */
+.cost-summary {
+    @apply bg-gray-200 p-4 rounded-md text-left w-1/2 mx-auto;
+}
+
+.cost-summary h2 {
+    @apply text-base font-bold mb-2;
+}
+
+.cost-summary p {
+    @apply text-sm mb-1;
+}
+
+/* Nút Viết Đánh Giá */
+.review-button {
+    @apply block mx-auto mt-5 px-6 py-2 bg-yellow-400 text-black font-bold border-none rounded-md text-base cursor-pointer transition;
+}
+
+.review-button:hover {
+    @apply bg-yellow-500;
+}

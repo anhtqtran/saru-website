@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng</title>
+    <link rel="stylesheet" href="cartmanage.component.css">
+</head>
+<body>
+    
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <div>
+            <h1 class="p-5"><strong>Giỏ hàng ({{ cartItems.length }})</strong></h1>
+        </div>
+    
+        <div class="cart-container">
+            <!-- Cart Items -->
+            <div class="cart-items">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>SẢN PHẨM</th>
+                            <th>ĐƠN GIÁ</th>
+                            <th>SỐ LƯỢNG</th>
+                            <th>SỐ TIỀN</th>
+                            <th>XÓA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of cartItems; let i = index">
+                            <td>
+                                <div class="product-info">
+                                    <img [src]="item.image" alt="{{ item.name }}">
+                                    <p>{{ item.name }}</p>
+                                </div>
+                            </td>
+                            <td>{{ item.price | number:'1.0-0' }} đ</td>
+                            <td>
+                                <div class="quantity-control">
+                                    <button (click)="decreaseQuantity(i)">-</button>
+                                    <input type="text" [value]="item.quantity" readonly>
+                                    <button (click)="increaseQuantity(i)">+</button>
+                                </div>
+                            </td>
+                            <td>{{ (item.price * item.quantity) | number:'1.0-0' }} đ</td>
+                            <td>
+                                <button class="delete-button" (click)="removeItem(i)">
+                                    <img src="assets/images/delete.png" alt="Xóa">
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+    
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <h2>Đơn hàng</h2>
+                <p><span>Tổng tiền:</span> {{ getTotalPrice() | number:'1.0-0' }} đ</p>
+                <p><span>Phí vận chuyển:</span> Được miễn phí</p>
+                <p><span>Giảm giá:</span> Không áp dụng</p>
+                <p class="total"><span>Thành tiền:</span> {{ getTotalPrice() | number }}đ</p>
+                <button class="order-button" (click)="placeOrder()">Đặt hàng</button>
+            </div>
+        </div>
+    </section>
+    
+    <!-- POPUP ĐẶT HÀNG THÀNH CÔNG -->
+    <div *ngIf="showPopup" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-header">
+                <h3>ĐẶT HÀNG THÀNH CÔNG</h3>
+            </div>
+            <div class="popup-body">
+                <p class="font-bold text-lg">Đặt hàng thành công!</p>
+                <p>Vui lòng theo dõi tình trạng đơn hàng</p>
+                <div class="flex justify-center gap-4 mt-4">
+                    <button class="popup-button">Xem chi tiết</button>
+                    <button class="popup-button" (click)="closePopup()">Trở lại</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+
+    <!-- Related Products Section -->
+    <section class="related-products">
+        <h2>Sản phẩm liên quan</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <img src="placeholder.png" alt="Sản phẩm">
+            </div>
+            <div class="product-card">
+                <img src="placeholder.png" alt="Sản phẩm">
+            </div>
+            <div class="product-card">
+                <img src="placeholder.png" alt="Sản phẩm">
+            </div>
+            <div class="product-card">
+                <img src="placeholder.png" alt="Sản phẩm">
+            </div>
+        </div>
+    </section>
+
+    
+</body>
+</html>

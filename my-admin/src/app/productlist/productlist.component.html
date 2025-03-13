@@ -1,0 +1,183 @@
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách sản phẩm</title>
+    <link rel="stylesheet" href="productlist.component.css">
+</head>
+
+<body class="bg-gray-100">
+
+    <header class="admin-header">
+        <button class="admin-button">ADMIN ▼</button>
+    </header>
+
+    <div class="container">
+        <div class="product-header">
+            <h1>Danh sách sản phẩm</h1>
+            <button class="add-product-button" (click)="navigateToEditProduct()">
+                <img src="/assets/images/add_circle.png" alt="Thêm sản phẩm"> Thêm sản phẩm
+            </button>
+            
+        </div>
+
+        <div class="product-controls">
+            <div class="relative filter-container">
+                <!-- Nút Thêm điều kiện lọc -->
+                <button
+                    class="flex items-center gap-2 border border-black px-4 py-2 rounded-full bg-white hover:bg-gray-200"
+                    (click)="toggleFilterDropdown()">
+                    <img src="/assets/images/stock.png" alt="icon" class="w-5 h-5">
+                    Thêm điều kiện lọc
+                </button>
+
+                <!-- Dropdown điều kiện lọc -->
+                <div *ngIf="isFilterDropdownOpen"
+                    class="absolute left-0 mt-2 bg-white shadow-xl rounded-lg p-4 w-64 border border-gray-300">
+                    <p class="font-semibold text-gray-700 mb-2">Hiển thị sản phẩm theo:</p>
+                    <select
+                        class="w-full border border-gray-400 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+                        [(ngModel)]="selectedFilter">
+                        <option value="stock">Tình trạng tồn kho</option>
+                        <option value="brand">Nhà cung cấp</option>
+                        <option value="price">Giá sản phẩm</option>
+                    </select>
+
+                    <p class="font-semibold text-gray-700 mt-3 mb-2">Là:</p>
+                    <select
+                        class="w-full border border-gray-400 rounded-lg px-3 py-2 focus:ring-2 focus:ring-blue-400 outline-none"
+                        [(ngModel)]="selectedValue">
+
+                        <!-- Lọc theo tồn kho -->
+                        <option *ngIf="selectedFilter === 'stock'" value="lowStock">Hàng hóa cần bổ sung</option>
+                        <option *ngIf="selectedFilter === 'stock'" value="sufficientStock">Hàng hóa ổn</option>
+
+                        <!-- Lọc theo nhà cung cấp -->
+                        <ng-container *ngIf="selectedFilter === 'brand'">
+                            <ng-container *ngFor="let option of filterOptions.brand">
+                                <option [value]="option">{{ option }}</option>
+                            </ng-container>
+                        </ng-container>
+
+                        <!-- Lọc theo giá -->
+                        <ng-container *ngIf="selectedFilter === 'price'">
+                            <ng-container *ngFor="let option of filterOptions.price">
+                                <option [value]="option">{{ option }}</option>
+                            </ng-container>
+                        </ng-container>
+
+                    </select>
+
+
+
+                    <div class="flex justify-between mt-4">
+                        <button
+                            class="w-1/2 mr-2 px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
+                            (click)="cancelFilter()">Hủy</button>
+
+                        <button
+                            class="w-1/2 ml-2 px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition"
+                            (click)="applyFilter()">Lọc</button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="search-container">
+                <img src="/assets/images/Search.png" alt="Tìm kiếm" class="search-icon">
+                <div class="relative w-full">
+                    <input input type="text"
+                        class="w-full border border-gray-300 px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-400 outline-none"
+                        placeholder="Tìm kiếm sản phẩm..." [(ngModel)]="searchQuery"
+                        (input)="searchSubject.next(searchQuery)" (keyup.enter)="applySearch()">
+
+                    <!-- Danh sách gợi ý -->
+                    <ul *ngIf="searchSuggestions.length"
+                        class="absolute top-full left-0 w-full mt-1 bg-white border border-gray-300 shadow-lg rounded-lg z-50 overflow-y-auto max-h-60">
+                        <li *ngFor="let suggestion of searchSuggestions"
+                            class="px-3 py-2 cursor-pointer hover:bg-gray-100" (click)="selectSuggestion(suggestion)">
+                            {{ suggestion }}
+                        </li>
+                    </ul>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th>
+                        <input type="checkbox" [(ngModel)]="selectAll" (change)="toggleSelectAll()">
+                    </th>
+                    <th>Tên sản phẩm</th>
+                    <th>Tồn kho</th>
+                    <th>Loại</th>
+                    <th>Nhà cung cấp</th>
+                    <th>Giá</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of displayedProducts">
+                    <td>
+                        <input type="checkbox" [(ngModel)]="product.selected">
+                    </td>
+                    <td class="product-info">
+                        <img [src]="product.ProductImageCover" alt="Hình ảnh sản phẩm" width="50" height="50">
+                        <div>
+                            <p>{{ product.ProductName }}</p>
+                            <small>{{ product.ProductSKU }}</small>
+                        </div>
+                    </td>
+                    <td [ngClass]="{'text-red-600 font-bold': product.StockQuantity < 50}">
+                        {{ product.StockQuantity }}
+                        <span *ngIf="product.StockQuantity < 50" class="block text-xs text-red-500 font-medium">
+                            Số lượng hàng còn ít, cần bổ sung
+                        </span>
+                    </td>
+
+
+                    <td>{{ product.CateName}}</td>
+                    <td>{{ product.ProductBrand }}</td>
+                    <td class="text-right font-semibold text-blue-600">
+                        {{ product.ProductPrice | number:'1.0-0' }}
+                    </td> <!-- ✅ Hiển thị Giá -->
+                    <td class="actions">
+                        <img src="assets/images/eye.png" alt="Xem">
+                        <img src="assets/images/pen.png" alt="Chỉnh sửa">
+                        <img src="assets/images/trash.png" alt="Xóa" (click)="deleteProduct(product.ProductID)">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+        <div class="product-footer">
+            <select (change)="onItemsPerPageChange($event)">
+                <option value="10" [selected]="itemsPerPage === 10">Hiển thị 10</option>
+                <option value="50" [selected]="itemsPerPage === 50">Hiển thị 50</option>
+                <option value="100" [selected]="itemsPerPage === 100">Hiển thị 100</option>
+            </select>
+            <p>Tổng sản phẩm: {{ products.length }}</p>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">❮ Trước</button>
+        <span>Trang {{ currentPage }} / {{ totalPages }}</span>
+
+        <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage * itemsPerPage >= products.length">Sau
+            ❯</button>
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+{"code":"EAUTH","correlationId":"system","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-09T17:58:08.502Z"}
+{"code":"EAUTH","correlationId":"system","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-09T18:00:26.974Z"}
+{"code":"EAUTH","correlationId":"system","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-09T18:02:06.303Z"}
+{"code":"EAUTH","correlationId":"system","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-09T18:03:23.584Z"}
+{"code":"EAUTH","correlationId":"system","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-09T18:03:33.482Z"}
+{"code":"EAUTH","correlationId":"system","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-09T18:13:10.039Z"}
+{"code":"EAUTH","correlationId":"system","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-09T18:14:09.841Z"}
+{"code":"EAUTH","correlationId":"system","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-09T18:14:16.625Z"}
+{"code":"EAUTH","correlationId":"system","error":"Missing credentials for \"PLAIN\"","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-09T18:16:36.223Z"}
+{"code":"ESOCKET","correlationId":"system","error":"connect ETIMEDOUT 142.251.175.108:587","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-11T06:28:43.744Z"}
+{"correlationId":"system","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Failed to connect to MongoDB","timestamp":"2025-03-11T06:28:53.073Z"}
+{"code":"ESOCKET","correlationId":"system","error":"connect ETIMEDOUT 142.251.175.108:587","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-11T06:29:14.343Z"}
+{"correlationId":"system","error":"connect ETIMEDOUT 18.166.248.0:27017","level":"error","message":"Failed to connect to MongoDB","timestamp":"2025-03-11T06:29:28.173Z"}
+{"code":"ESOCKET","correlationId":"system","error":"connect ETIMEDOUT 142.251.175.108:587","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-11T06:33:21.489Z"}
+{"correlationId":"system","error":"connect ETIMEDOUT 18.166.248.0:27017","level":"error","message":"Failed to connect to MongoDB","timestamp":"2025-03-11T06:33:34.450Z"}
+{"code":"ESOCKET","correlationId":"system","error":"connect ETIMEDOUT 142.251.175.109:587","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-11T06:37:34.887Z"}
+{"correlationId":"system","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Failed to connect to MongoDB","timestamp":"2025-03-11T06:37:43.840Z"}
+{"correlationId":"2fe0bc0f-6934-4f7d-ac99-6f02e55e69bc","error":"Cannot read properties of undefined (reading 'find')","level":"error","message":"Error in GET /api/products","timestamp":"2025-03-11T22:34:39.957Z"}
+{"correlationId":"4f5d20dc-a9ab-495b-b32e-5063f6b30ed6","error":"Cannot read properties of undefined (reading 'find')","level":"error","message":"Error in GET /api/products","timestamp":"2025-03-11T22:34:40.285Z"}
+{"correlationId":"6969c51d-ba36-46c2-9b8b-adfc6f93779f","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:15:52.462Z"}
+{"correlationId":"ace5ca7d-1fc2-4421-90dc-977d4ada63e1","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/filters","timestamp":"2025-03-12T06:15:52.469Z"}
+{"correlationId":"3ce1a312-0ac3-48fa-862f-ecd4d794aee1","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:16:12.455Z"}
+{"correlationId":"7ea76f76-aea5-4ad3-8940-ca5f5332cb48","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:18:29.689Z"}
+{"correlationId":"869c2025-d06e-4edd-9c27-164376e69d62","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/filters","timestamp":"2025-03-12T06:18:29.693Z"}
+{"correlationId":"d65850be-6097-49f4-b86c-196ad0467996","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:18:31.330Z"}
+{"correlationId":"efa71857-7560-4605-b078-41d45cf4a4f3","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/filters","timestamp":"2025-03-12T06:18:31.350Z"}
+{"correlationId":"f828b82e-45c2-4a98-8116-87b15602b213","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:18:31.982Z"}
+{"correlationId":"09616e47-b2c0-4c52-8eec-6868ac6f1f97","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/filters","timestamp":"2025-03-12T06:18:31.985Z"}
+{"correlationId":"494a568d-0427-4552-90db-6bb34ad3951f","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/filters","timestamp":"2025-03-12T06:18:32.613Z"}
+{"correlationId":"4728fe0b-c78f-4953-b11e-074324887165","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:18:32.623Z"}
+{"correlationId":"4861818b-acc1-4274-8672-b52b3215e7df","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:18:32.787Z"}
+{"correlationId":"76fa0455-b49b-4eb8-93fe-644f2d259cae","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/filters","timestamp":"2025-03-12T06:18:32.790Z"}
+{"correlationId":"eacb3ba6-40e0-46da-a607-d0b76406e3aa","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:18:32.962Z"}
+{"correlationId":"18307733-ad9f-4ddd-a3eb-127a8f614abd","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/filters","timestamp":"2025-03-12T06:18:32.965Z"}
+{"correlationId":"cde9bac8-8bbf-4fc4-8df3-4d19cbe6140d","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:18:41.007Z"}
+{"correlationId":"c706aab2-8e48-43b7-a55d-4fda141fbea3","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/filters","timestamp":"2025-03-12T06:18:41.013Z"}
+{"correlationId":"7bf6ea5f-fb22-4faf-a70f-af18b4f85c77","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:18:43.036Z"}
+{"correlationId":"540b5fd5-fd4a-44e3-ba56-23b4d15fb83f","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/filters","timestamp":"2025-03-12T06:18:43.037Z"}
+{"correlationId":"4a38b19c-23c4-4f12-8697-1b401ac3654d","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:18:49.140Z"}
+{"correlationId":"71c7050d-00f0-45fa-a30e-5683d04a164c","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/filters","timestamp":"2025-03-12T06:18:49.147Z"}
+{"correlationId":"252bd896-a1af-4438-9f54-25ebcb2e6815","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Error in GET /api/categories","timestamp":"2025-03-12T06:19:09.137Z"}
+{"correlationId":"8da62895-79af-49a9-8c58-d90f25340b85","error":"Cannot read properties of undefined (reading 'find')","level":"error","message":"Error in GET /api/filters","timestamp":"2025-03-12T16:27:08.819Z"}

@@ -1,0 +1,139 @@
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin cá nhân</title>
+    <link rel="stylesheet" href="accountmanage.component.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="profile">
+                <img src="assets/images/thuthu 1.png" alt="User Avatar">
+                <p>Trần Thanh Quế Anh</p>
+                <p>0123456789</p>
+            </div>
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="#">
+                        <div class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-200">
+                            <img src="assets/images/user_idcard.png" alt="Thông tin" class="w-4 h-4 mr-3">
+                            <p>Thông tin và địa chỉ</p>
+                        </div>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-200">
+                            <img src="assets/images/Union.png" alt="Lịch sử đơn hàng" class="w-4 h-4 mr-3">
+                            <p>Lịch sử đơn hàng</p>
+                        </div>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-200">
+                            <img src="assets/images/Group 42.png" alt="Hạng tài khoản" class="w-4 h-4 mr-3">
+                            <p>Hạng tài khoản</p>
+                        </div>
+
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Thông tin cá nhân -->
+        <section class="personal-info">
+            <h2>Thông tin cá nhân</h2>
+            <div class="info-box">
+                <div class="avatar">
+                    <img src="assets/images/img.png" alt="Avatar">
+                </div>
+                <div class="details">
+                    <br/>
+                    <p><strong>Tên khách hàng:</strong> Trần Thanh Quế Anh</p>
+                    <p><strong>Giới tính:</strong> <input type="radio" checked> Nam <input type="radio"> Nữ</p>
+                    <p><strong>Số điện thoại:</strong> 0123456789</p>
+                    <p><strong>Ngày sinh:</strong> 25/04/2004</p>
+                    <p><strong>Email:</strong> <a href="mailto:anhtt@stuel.edu.vn">anhtt&#64;st.uel.edu.vn</a></p>
+                    <p><strong>Mật khẩu:</strong> ********</p>
+                    <p><strong>Ngày tham gia:</strong> 09/03/2023</p>
+                    <p><strong>Tổng điểm tích lũy:</strong> 485 điểm</p>
+                    <button class="cancel-button">Hủy</button>
+                    <button class="edit-button">Chỉnh sửa</button>
+
+                    <br />
+                    <p><strong>Tên khách hàng: </strong> Trần Thanh Quế Anh</p>
+                    <p><strong>Giới tính: </strong> <input type="radio" checked> Nam <input type="radio"> Nữ</p>
+                    <p><strong>Số điện thoại: </strong> 0123456789</p>
+                    <p><strong>Ngày sinh: </strong> 25/04/2004</p>
+                    <p><strong>Email: </strong> <a [href]="'mailto:' + email">{{ email }}</a></p>
+                    <p><strong>Mật khẩu: </strong> ********</p>
+                    <p><strong>Ngày tham gia: </strong> 09/03/2023</p>
+                    <p><strong>Tổng điểm tích lũy: </strong> 485 điểm</p>
+                    <div class="flex space-x-5">
+                        <button class="cancel-button">Hủy</button>
+                        <button class="edit-button">Chỉnh sửa</button>
+                    </div>
+
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Danh sách địa chỉ -->
+    <div class="address-section bg-white p-5 rounded-full shadow-lg">
+        <h2 class="text-xl font-bold mb-4">Địa chỉ nhận hàng</h2>
+    
+        <!-- Danh sách địa chỉ -->
+        <div *ngFor="let address of addresses; let i = index" class="flex justify-between items-center p-4 border border-gray-300 rounded-md bg-white mb-3">
+            <div class="flex-1 space-y-1">
+                <p *ngIf="!address.isEditing"><strong>{{ address.name }}</strong></p>
+                <input *ngIf="address.isEditing" id="name-{{i}}" type="text" [(ngModel)]="address.name" placeholder="Họ và tên" class="input-place">
+    
+                <p *ngIf="!address.isEditing">{{ address.phone }}</p>
+                <input *ngIf="address.isEditing" type="text" [(ngModel)]="address.phone" placeholder="Số điện thoại" class="input-place">
+    
+                <p *ngIf="!address.isEditing">{{ address.address }}</p>
+                <input *ngIf="address.isEditing" type="text" [(ngModel)]="address.address" placeholder="Địa chỉ cụ thể" class="input-place">
+    
+                <!-- Radio button để chọn địa chỉ mặc định -->
+                <label class="flex items-center space-x-2 cursor-pointer" [class.text-gray-500]="address.isDefault">
+                    <input type="radio" name="default-address" [checked]="address.isDefault" (click)="setDefaultAddress(i)">
+                    <span>Đặt làm địa chỉ mặc định</span>
+                </label>
+            </div>
+    
+            <button *ngIf="!address.isEditing" class="editbtn mr-3" (click)="enableEdit(i)">
+                Chỉnh sửa
+            </button>
+            <button *ngIf="address.isEditing" class="editbtn mr-3" (click)="saveEdit(i)">
+                Lưu
+            </button>
+    
+            <button (click)="removeAddress(i)" class="delete-button">
+                Xóa
+            </button>
+        </div>
+    
+        <!-- Nút Thêm địa chỉ -->
+        <div class="flex justify-center mt-5">
+            <button (click)="addAddress()" class="px-6 py-3 bg-yellow-400 text-white font-bold rounded-full text-lg cursor-pointer hover:bg-yellow-500">
+                Thêm địa chỉ
+            </button>
+        </div>
+    </div>
+    
+    
+    
+
+</body>
+
+</html>

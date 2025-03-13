@@ -1,0 +1,66 @@
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết đơn hàng</title>
+    <link rel="stylesheet" href="orderdetail.component.css">
+</head>
+<body>
+
+    <div class="order-container">
+        <!-- Tiêu đề -->
+        <h1 class="order-title">CHI TIẾT ĐƠN HÀNG</h1>
+
+        <!-- Kiểm tra nếu có dữ liệu -->
+        <div *ngIf="orderData; else noOrder">
+            <!-- Thông tin đơn hàng & Thông tin vận chuyển -->
+            <div class="order-details">
+                <div class="order-box">
+                    <h2>Thông tin đơn hàng</h2>
+                    <p><strong>Order ID:</strong> {{ orderData.orderId }}</p>
+                    <p><strong>Ngày đặt hàng:</strong> {{ orderData.orderDate }}</p>
+                    
+                    <div *ngFor="let item of orderData.cartItems">
+                        <p><strong>Sản phẩm:</strong> {{ item.name }} x{{ item.quantity }}</p>
+                        <img [src]="item.image" alt="{{ item.name }}">
+                    </div>
+                    
+                    <p><strong>Trạng thái đơn hàng:</strong> Đang vận chuyển</p>
+                </div>
+
+                <div class="order-box">
+                    <h2>Thông tin vận chuyển</h2>
+                    <p><strong>Họ tên nhận hàng:</strong> {{ orderData.shippingInfo.fullName }}</p>
+                    <p><strong>Số điện thoại:</strong> {{ orderData.shippingInfo.phoneNumber }}</p>
+                    <p><strong>Địa chỉ nhận hàng:</strong> {{ orderData.shippingInfo.address }}</p>
+                    <p><strong>Ghi chú:</strong> Giao lúc trưa</p>
+                </div>
+            </div>
+
+            <!-- Tổng chi phí -->
+            <div class="cost-summary">
+                <h2>Tổng chi phí</h2>
+                <p><strong>Tổng đơn:</strong> {{ orderData.totalPrice | number }}đ</p>
+                <p><strong>Phí vận chuyển:</strong> 
+                    <span>{{ orderData.shippingFee | number }}đ</span>
+                </p>
+                <p><strong>Giảm giá:</strong> 
+                    <span>{{ orderData.discount | number }}đ</span>
+                </p>
+                <p><strong>Thành tiền:</strong> 
+                    {{ (orderData.totalPrice + orderData.shippingFee - orderData.discount) | number }}đ
+                </p>
+            </div>
+
+            <!-- Nút Viết Đánh Giá -->
+            <button class="review-button" (click)="goToWriteReview()">Viết đánh giá</button>
+        </div>
+
+        <!-- Nếu không có dữ liệu đơn hàng -->
+        <ng-template #noOrder>
+            <p class="text-red-500">Không tìm thấy đơn hàng!</p>
+        </ng-template>
+    </div>
+
+</body>
+</html>
