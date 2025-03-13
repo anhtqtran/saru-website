@@ -20,9 +20,12 @@ import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 import { ReviewpageComponent } from './reviewpage/reviewpage.component';
 import { BlogComponent } from './blog/blog.component';
 import { FaqsComponent } from './faqs/faqs.component';
-import { CompareComponent } from './compare/compare.component'; 
+// import { CompareComponent } from './compare/compare.component'; 
 
 import { AuthGuard } from './guard/auth.guard'; // Nhập AuthGuard
+import { BlogdetailComponent } from './blogdetail/blogdetail.component';
+import { BlogcategoryComponent } from './blogcategory/blogcategory.component';
+import { MessageComponent } from './message/message.component';
 
 
 const routes: Routes = [
@@ -41,7 +44,10 @@ const routes: Routes = [
   { path: 'order-history', component: OrderhistoryComponent, canActivate:[AuthGuard]},
   { path: 'review', component: ReviewpageComponent},
   { path: 'blog', component: BlogComponent},
+  { path: 'blog/:id', component: BlogdetailComponent },
+  { path: 'category/:id', component: BlogcategoryComponent },
   { path: 'faqs', component: FaqsComponent},
+  { path: 'boxchat', component: MessageComponent},
   { path: '', redirectTo: '/homepage', pathMatch: 'full' }, // Route mặc định
   { path: 'product', component: ProductComponent }, // Route cho danh sách sản phẩm
   { 
@@ -55,7 +61,7 @@ const routes: Routes = [
     redirectTo: 'homepage', 
     pathMatch: 'full' 
   },
-  { path: 'compare', component: CompareComponent},
+  // { path: 'compare', component: CompareComponent},
 
 
 ];

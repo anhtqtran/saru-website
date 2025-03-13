@@ -45,7 +45,9 @@ import { BlogComponent } from './blog/blog.component';
 import { BlogdetailComponent } from './blogdetail/blogdetail.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
-import { CompareComponent } from './compare/compare.component';
+// import { CompareComponent } from './compare/compare.component';
+import { BlogcategoryComponent } from './blogcategory/blogcategory.component';
+import { MessageComponent } from './message/message.component';
 
 
 
@@ -81,7 +83,9 @@ import { CompareComponent } from './compare/compare.component';
     BlogdetailComponent,
     FaqsComponent,
     ProductDetailComponent,
-    CompareComponent,
+    // CompareComponent,
+    BlogcategoryComponent,
+    MessageComponent,
 
   ],
   imports: [
