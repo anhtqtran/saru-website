@@ -1,0 +1,59 @@
+/* Box chat (ẩn lúc đầu) */
+#chatbox {
+    position: fixed;
+    bottom: 100px;
+    right: 50px;
+    width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Header của chatbox */
+#chat-header {
+    background: #F8BC3B;
+    color: black;
+    padding: 10px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Nút đóng chat */
+#close-chat {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Nội dung chat */
+#chat-content {
+    padding: 10px;
+    height: 150px;
+    overflow-y: auto;
+}
+
+/* Ô nhập tin nhắn */
+#chat-input {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+#chat-input input {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    outline: none;
+}
+
+#chat-input button {
+    background: #F8BC3B;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+}

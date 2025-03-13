@@ -1,0 +1,256 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f3f3f3;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Logo */
+.logo img {
+    width: 60px;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Navigation Menu */
+.nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+}
+
+.nav-menu a:hover {
+    color: #007bff;
+    background-color: #e9e9e9;
+    border-radius: 5px;
+}
+
+/* Dropdown Menu */
+.dropdown {
+    display: none;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    list-style: none;
+}
+
+.dropdown li {
+    width: 300px;
+}
+
+.dropdown a {
+    display: block;
+    padding: 10px 15px;
+    color: #333;
+    white-space: nowrap;
+}
+
+.dropdown a:hover {
+    background-color: #f7f7f7;
+}
+
+/* Show Dropdown on Hover */
+.nav-menu li:hover .dropdown {
+    display: block;
+}
+
+/* Icons */
+.icons {
+    display: flex;
+    gap: 15px;
+}
+
+.icons a img {
+    width: 25px;
+    height: 25px;
+    transition: transform 0.2s ease;
+}
+
+.icons a:hover img {
+    transform: scale(1.1);
+}
+
+
+
+/* Container cho giỏ hàng */
+.cart-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Tiêu đề Giỏ hàng */
+h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Bảng sản phẩm */
+.cart-items {
+    flex: 2;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.product-info img {
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+    object-fit: cover;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-control button {
+    background-color: #ddd;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.quantity-control input {
+    width: 40px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.delete-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-button img {
+    width: 20px;
+    height: 20px;
+}
+
+/* Thông tin Đơn hàng */
+.order-summary {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.order-summary p {
+    margin-bottom: 10px;
+}
+
+.order-summary .total {
+    font-weight: bold;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+.order-button {
+    width: 100%;
+    padding: 10px 20px;
+    background-color: #ffcc00;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order-button:hover {
+    background-color: #ffaa00;
+}
+
+/* Sản phẩm liên quan */
+.related-products {
+    margin-top: 40px;
+}
+
+.related-products h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.products-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.product-card {
+    width: 150px;
+    height: 150px;
+    background-color: #ddd;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-card img {
+    width: 80%;
+    height: 80%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+

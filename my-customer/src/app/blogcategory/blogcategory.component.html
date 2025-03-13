@@ -1,0 +1,80 @@
+<div class="container mx-auto px-6 sm:px-8 lg:px-12 py-16">
+  <!-- Tiêu đề danh mục -->
+  <div class="mb-16 text-center">
+    <h1 class="text-4xl font-bold text-gray-900 mb-6 animate-fade-in tracking-tight">
+      {{ category?.CateblogName || 'Đang tải...' }}
+    </h1>
+    <div class="w-32 h-1 bg-gradient-to-r from-[#F8BC3B] to-[#85461F] mx-auto rounded-full"></div>
+  </div>
+
+  <!-- Danh sách bài viết -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div
+      *ngFor="let blog of blogs"
+      class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group"
+    >
+      <!-- Ảnh bài viết -->
+      <div class="relative overflow-hidden">
+        <img
+          [src]="blog.image"
+          [alt]="blog.title"
+          class="w-full h-48 object-cover transition-transform duration-500 group-hover:scale-110"
+          onerror="this.src='https://via.placeholder.com/400x200'"
+        />
+        <div
+          class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        ></div>
+        <div
+          class="absolute top-3 right-3 bg-[#F8BC3B] text-black px-2 py-1 rounded-full text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          {{ blog.categoryName }}
+        </div>
+      </div>
+
+      <!-- Nội dung -->
+      <div class="p-4">
+        <h2
+          class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#85461F] transition-colors duration-200 line-clamp-2"
+        >
+          {{ blog.title }}
+        </h2>
+        <p class="text-gray-600 text-sm line-clamp-2 mb-4 leading-relaxed">
+          {{ blog.summary }}
+        </p>
+        <a
+          [routerLink]="['/blog', blog.id]"
+          class="inline-flex items-center text-[#F8BC3B] hover:text-indigo-800 font-semibold transition-colors duration-200 group"
+        >
+          Đọc thêm
+          <svg
+            class="w-4 h-4 ml-2 transform transition-transform duration-200 group-hover:translate-x-1"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            ></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="!blogs.length && !error" class="text-center py-20">
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-indigo-600 mx-auto mb-6"></div>
+    <p class="text-gray-500 text-lg font-medium">Đang tải bài viết...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="text-center py-20">
+    <div class="bg-red-100 text-red-600 px-8 py-4 rounded-xl inline-block shadow-md">
+      <p class="font-medium">{{ error }}</p>
+    </div>
+  </div>
+</div>

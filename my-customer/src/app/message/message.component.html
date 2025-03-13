@@ -1,0 +1,56 @@
+<!-- Nút message icon -->
+<div class="fixed bottom-10 right-12 z-50">
+  <img src="assets/message-icon.jpg" 
+       id="boxchat"
+       class="w-14 h-14 rounded-full shadow-lg cursor-pointer transition-transform duration-300 hover:scale-110 hover:shadow-xl"
+       (click)="toggleChat()">
+</div>
+
+<!-- Box chat -->
+<div *ngIf="isChatOpen" 
+   class="fixed bottom-28 right-12 w-[400px] bg-white rounded-xl shadow-2xl flex flex-col overflow-hidden border border-[#F8BC3B]/20 animate-slide-up z-50">
+
+<!-- Header chat -->
+<div class="bg-[#F8BC3B] text-white px-5 py-3 flex justify-between items-center">
+  <div class="flex items-center gap-2">
+    <span class="font-semibold text-lg tracking-tight">Hỗ trợ khách hàng</span>
+  </div>
+  <button (click)="toggleChat()" 
+          class="w-8 h-8 flex items-center justify-center text-white rounded-full bg-[#85461F]/10 hover:bg-[#85461F] transition-colors duration-200">
+    ×
+  </button>
+</div>
+
+<!-- Nội dung chat -->
+<div class="p-5 h-[340px] overflow-y-auto bg-[#F8BC3B]/5 flex flex-col gap-4">
+  <div *ngFor="let msg of messages" class="flex items-center gap-3" 
+       [ngClass]="{'flex-row-reverse': msg.user === customerName}">
+    <!-- Avatar (chỉ hiển thị cho Admin) -->
+    <div *ngIf="msg.user !== customerName" class="flex-shrink-0">
+      <img src="assets/images/footer-cusservice.png" 
+           class="w-10 h-10 rounded-full border-2 border-[#F8BC3B]/50 shadow-sm">
+    </div>
+
+    <!-- Tin nhắn -->
+    <div class="px-4 py-2 rounded-xl text-sm shadow-md transition-all duration-200 max-w-[75%]"
+         [ngClass]="{
+           'bg-[#F8BC3B] text-white self-end': msg.user === customerName,
+           'bg-white text-[#85461F] self-start border border-[#F8BC3B]/30': msg.user !== customerName
+         }">
+      {{ msg.message }}
+    </div>
+  </div>
+</div>
+
+<!-- Ô nhập tin nhắn -->
+<div class="flex border-t border-[#F8BC3B]/20 bg-white p-4 gap-3">
+  <input type="text" 
+         [(ngModel)]="message" 
+         placeholder="Nhập tin nhắn..." 
+         class="flex-1 px-4 py-2 rounded-full border border-[#F8BC3B]/50 text-sm outline-none focus:ring-2 focus:ring-[#F8BC3B] focus:border-[#F8BC3B] transition-all duration-200 placeholder-[#85461F]/70">
+  <button (click)="sendMessage()" 
+          class="px-6 py-2 bg-[#F8BC3B] text-white font-semibold rounded-full transition-all duration-300 hover:bg-[#85461F] hover:shadow-md">
+    Gửi
+  </button>
+</div>
+</div>
