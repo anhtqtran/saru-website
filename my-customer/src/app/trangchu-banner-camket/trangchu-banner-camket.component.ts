@@ -7,6 +7,7 @@ import { BestSellingProduct } from '../classes/BestSellingProduct';
 import { ProductService } from '../services/product.service';
 import { Blog } from '../classes/Blogs';
 import { BlogapiService } from '../services/blogapi.service';
+
 @Component({
   selector: 'app-trangchu-banner-camket',
   templateUrl: './trangchu-banner-camket.component.html',
@@ -31,8 +32,14 @@ export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-
+    // Tải danh sách bài viết ngẫu nhiên
     this.loadRandomBlogs();
+
+    // Tải danh sách sản phẩm bán chạy
+    this.loadBestSellers();
+
+    // Tải danh sách productId của sản phẩm bán chạy
+    this.loadBestSellerIds();
   }
 
   loadRandomBlogs(): void {
@@ -52,11 +59,7 @@ export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
     });
   }
 
-  // Phương thức để chuyển hướng đến blog-detail
-  navigateToBlogDetail(id: string): void {
-    this.router.navigate(['/blog-detail', id]);
-
-    // Lấy danh sách sản phẩm bán chạy
+  loadBestSellers(): void {
     const bestSellersSub = this.bestSellerService.getBestSellers().subscribe({
       next: (products) => {
         this.bestSellers = products;
@@ -68,8 +71,9 @@ export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
       }
     });
     this.subscriptions.push(bestSellersSub);
+  }
 
-    // Lấy danh sách productId của sản phẩm bán chạy từ service mới
+  loadBestSellerIds(): void {
     const bestSellerIdsSub = this.bestSellerService.getBestSellerIds().subscribe({
       next: (ids) => {
         this.bestSellerIds = ids;
@@ -81,6 +85,11 @@ export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
       }
     });
     this.subscriptions.push(bestSellerIdsSub);
+  }
+
+  // Phương thức để chuyển hướng đến blog-detail
+  navigateToBlogDetail(id: string): void {
+    this.router.navigate(['/blog-detail', id]);
   }
 
   ngOnDestroy(): void {
@@ -102,6 +111,10 @@ export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
           this.snackBar.open('ID sản phẩm không hợp lệ sau ánh xạ.', 'Đóng', { duration: 3000 });
         }
       },
+      error: (error) => {
+        console.error('Error mapping productId to ObjectId:', error);
+        this.snackBar.open('Không thể ánh xạ ID sản phẩm.', 'Đóng', { duration: 3000 });
+      }
     });
   }
 
@@ -125,7 +138,7 @@ export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
     this.subscriptions.push(subscription); // Quản lý subscription
   }
 
-//So sánh sản phẩm
+  // So sánh sản phẩm
   addToCompare(product: BestSellingProduct): void {
     if (!product.productId) {
       console.error('Product ID is missing:', product);
