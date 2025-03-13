@@ -10,6 +10,12 @@ interface Order {
   OrderID: string;
   CustomerID: string;
   CustomerName?: string;
+  CustomerAdd?: {
+    address: string;
+    city: string;
+    state: string;
+  };
+  CustomerPhone?: string;
   OrderDate: string;
   OrderStatusID: number;
   OrderStatusText?: string;
@@ -17,13 +23,32 @@ interface Order {
   PaymentStatusText?: string;
   PaymentMethodID: string;
   PaymentMethodText?: string;
-  items: { ProductID: string; Quantity: number; ProductName?: string; Price?: number; TotalPrice?: number }[];
+  items: {
+    ProductID: string;
+    Quantity: number;
+    ProductName?: string;
+    ProductCategory?: string;
+    ProductImageCover?: string;
+    Price?: number;
+    TotalPrice?: number;
+  }[];
+  TotalOrderAmount?: number;
 }
 
 interface Customer {
   _id: string;
   CustomerID: string;
   CustomerName: string;
+  MemberID: string;
+  CustomerAdd: {
+    address: string;
+    city: string;
+    state: string;
+  };
+  CustomerPhone: string;
+  CustomerBirth: string;
+  CustomerAvatar: string;
+  ReceiveEmail: boolean;
 }
 
 interface OrderStatus {
@@ -80,7 +105,6 @@ export class DonhangDetailComponent implements OnInit {
   ngOnInit(): void {
     const orderId = this.route.snapshot.paramMap.get('id');
     if (orderId) {
-      // Kiểm tra dữ liệu từ route state (truyền từ donhang-list)
       const orderFromState = history.state.order;
       if (orderFromState) {
         this.order = { ...orderFromState };
@@ -102,6 +126,8 @@ export class DonhangDetailComponent implements OnInit {
           OrderID: data.OrderID,
           CustomerID: data.CustomerID,
           CustomerName: data.CustomerName || 'Không xác định',
+          CustomerAdd: data.CustomerAdd || { address: '', city: '', state: '' },
+          CustomerPhone: data.CustomerPhone || '',
           OrderDate: new Date(data.OrderDate).toISOString().split('T')[0],
           OrderStatusID: parseInt(data.OrderStatusID, 10) || 0,
           OrderStatusText: data.Status || 'Không xác định',
@@ -113,9 +139,12 @@ export class DonhangDetailComponent implements OnInit {
             ProductID: item.ProductID || '',
             Quantity: item.Quantity || 0,
             ProductName: item.ProductName || 'Không xác định',
-            Price: item.ProductPrice || 0,
+            ProductCategory: item.ProductCategory || 'Không xác định',
+            ProductImageCover: item.ProductImageCover || '',
+            Price: item.Price || 0,
             TotalPrice: item.TotalPrice || 0,
           })),
+          TotalOrderAmount: data.TotalOrderAmount || 0,
         };
         console.log('Chi tiết đơn hàng:', this.order);
       },
@@ -127,31 +156,31 @@ export class DonhangDetailComponent implements OnInit {
   }
 
   loadData(): void {
-    // Lấy danh sách khách hàng
     this.http.get<Customer[]>('http://localhost:4002/customers').subscribe({
-      next: (data) => (this.customers = data),
+      next: (data) => {
+        this.customers = data;
+        if (this.order) {
+          this.updateCustomerInfo();
+        }
+      },
       error: (err) => (this.errMessage = `Lỗi khi tải danh sách khách hàng: ${err.message}`),
     });
 
-    // Lấy danh sách trạng thái đơn hàng
     this.http.get<OrderStatus[]>('http://localhost:4002/order-status').subscribe({
       next: (data) => (this.orderStatuses = data),
       error: (err) => (this.errMessage = `Lỗi khi tải trạng thái đơn hàng: ${err.message}`),
     });
 
-    // Lấy danh sách phương thức thanh toán
     this.http.get<PaymentMethod[]>('http://localhost:4002/payment-methods').subscribe({
       next: (data) => (this.paymentMethods = data),
       error: (err) => (this.errMessage = `Lỗi khi tải phương thức thanh toán: ${err.message}`),
     });
 
-    // Lấy danh sách trạng thái thanh toán
     this.http.get<PaymentStatus[]>('http://localhost:4002/payment-status').subscribe({
       next: (data) => (this.paymentStatuses = data),
       error: (err) => (this.errMessage = `Lỗi khi tải trạng thái thanh toán: ${err.message}`),
     });
 
-    // Lấy danh sách sản phẩm
     this.http.get<Product[]>('http://localhost:4002/products').subscribe({
       next: (data) => (this.products = data),
       error: (err) => (this.errMessage = `Lỗi khi tải danh sách sản phẩm: ${err.message}`),
@@ -167,7 +196,15 @@ export class DonhangDetailComponent implements OnInit {
 
   addProduct(): void {
     if (!this.order) return;
-    this.order.items.push({ ProductID: '', Quantity: 1, ProductName: '', Price: 0, TotalPrice: 0 });
+    this.order.items.push({
+      ProductID: '',
+      Quantity: 1,
+      ProductName: '',
+      ProductCategory: '',
+      ProductImageCover: '',
+      Price: 0,
+      TotalPrice: 0,
+    });
   }
 
   removeProduct(index: number): void {
@@ -182,6 +219,10 @@ export class DonhangDetailComponent implements OnInit {
     if (product) {
       item.Price = product.price;
       item.TotalPrice = product.price * item.Quantity;
+      // Cập nhật ProductName và ProductCategory (nếu cần)
+      item.ProductName = product.name || 'Không xác định';
+      // Giả định ProductCategory từ dữ liệu, cần điều chỉnh nếu có collection riêng
+      item.ProductCategory = 'Không xác định'; // Thay bằng logic thực tế nếu có
     }
   }
 
@@ -243,7 +284,7 @@ export class DonhangDetailComponent implements OnInit {
     if (this.editMode) {
       this.showCancelPopup();
     } else {
-      this.router.navigate(['/donhang-list']); // Quay lại donhang-list thay vì '/'
+      this.router.navigate(['/donhang-list']);
     }
   }
 
@@ -272,5 +313,20 @@ export class DonhangDetailComponent implements OnInit {
     this.errMessage = '';
     this.successMessage = '';
     this.validationErrors = [];
+  }
+
+  updateCustomerInfo(): void {
+    if (!this.order || !this.customers.length) return;
+
+    const selectedCustomer = this.customers.find(c => c.CustomerID === this.order!.CustomerID);
+    if (selectedCustomer) {
+      this.order.CustomerName = selectedCustomer.CustomerName;
+      this.order.CustomerAdd = selectedCustomer.CustomerAdd;
+      this.order.CustomerPhone = selectedCustomer.CustomerPhone;
+    } else {
+      this.order.CustomerName = 'Không xác định';
+      this.order.CustomerAdd = { address: '', city: '', state: '' };
+      this.order.CustomerPhone = '';
+    }
   }
 }

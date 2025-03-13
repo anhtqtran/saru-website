@@ -1,61 +1,66 @@
-<div *ngIf="errMessage" class="error">{{ errMessage }}</div>
-<div *ngIf="successMessage" class="success">{{ successMessage }}</div>
-<div *ngIf="order">
-  <h2>Chi tiết đơn hàng: {{ order.OrderID }}</h2>
-  <button *ngIf="!editMode" (click)="enableEditMode()">Edit</button>
-  <div *ngIf="editMode">
-    <label>Khách hàng:</label>
-    <select [(ngModel)]="order.CustomerID" *ngIf="customers.length > 0">
-      <option *ngFor="let customer of customers" [value]="customer.CustomerID">{{ customer.CustomerName }}</option>
-    </select>
-    <label>Ngày đặt hàng:</label>
-    <input [(ngModel)]="order.OrderDate" type="date" />
-    <label>Trạng thái đơn hàng:</label>
-    <select [(ngModel)]="order.OrderStatusID" *ngIf="orderStatuses.length > 0">
-      <option *ngFor="let status of orderStatuses" [value]="status.OrderStatusID">{{ status.Status }}</option>
-    </select>
-    <label>Phương thức thanh toán:</label>
-    <select [(ngModel)]="order.PaymentMethodID" *ngIf="paymentMethods.length > 0">
-      <option *ngFor="let method of paymentMethods" [value]="method.PaymentMethodID">{{ method.PaymentMethod }}</option>
-    </select>
-    <label>Trạng thái thanh toán:</label>
-    <select [(ngModel)]="order.PaymentStatusID" *ngIf="paymentStatuses.length > 0">
-      <option *ngFor="let status of paymentStatuses" [value]="status.PaymentStatusID">{{ status.PaymentStatus }}</option>
-    </select>
-    <h3>Danh sách sản phẩm:</h3>
-    <div *ngFor="let item of order.items; let i = index">
-      <select [(ngModel)]="item.ProductID" (change)="updateProductPrice(i)" *ngIf="products.length > 0">
-        <option *ngFor="let product of products" [value]="product._id">{{ product.name }}</option>
-      </select>
-      <input [(ngModel)]="item.Quantity" type="number" (change)="updateProductPrice(i)" min="1" />
-      <button (click)="removeProduct(i)">Xóa</button>
-    </div>
-    <button (click)="addProduct()">Thêm sản phẩm</button>
-    <p>Tổng tiền: {{ getTotalAmount() }}</p>
-    <button (click)="updateOrder()">Lưu</button>
-    <button (click)="cancelEdit()">Hủy</button>
+<div class="order-detail-container">
+  <!-- Tiêu đề -->
+  <div class="order-header">
+    <span class="order-id">#{{ order.OrderID }}</span>
+    <span class="order-date">{{ order.OrderDate | date:'dd/MM/yyyy' }}</span>
   </div>
-  <div *ngIf="!editMode">
-    <p><strong>Khách hàng:</strong> {{ order.CustomerName }}</p>
-    <p><strong>Ngày đặt hàng:</strong> {{ order.OrderDate }}</p>
-    <p><strong>Trạng thái đơn hàng:</strong> {{ order.OrderStatusText }}</p>
-    <p><strong>Phương thức thanh toán:</strong> {{ order.PaymentMethodText }}</p>
-    <p><strong>Trạng thái thanh toán:</strong> {{ order.PaymentStatusText }}</p>
-    <h3>Danh sách sản phẩm:</h3>
-    <ul>
-      <li *ngFor="let item of order.items">
-        {{ item.ProductName }} - Số lượng: {{ item.Quantity }} - Tổng giá: {{ item.TotalPrice }}
-      </li>
-    </ul>
-    <p><strong>Tổng tiền:</strong> {{ getTotalAmount() }}</p>
-  </div>
-  <button (click)="cancel()">Quay lại</button>
-</div>
 
-<div *ngIf="isCancelPopupVisible" class="popup">
-  <div class="popup-content">
-    <p>Bạn có chắc chắn muốn hủy?</p>
-    <button (click)="confirmCancel()">Có</button>
-    <button (click)="closeCancelPopup()">Không</button>
+  <!-- Trạng thái -->
+  <div class="status-bar">
+    <button class="status-btn" [ngStyle]="{'background-color': '#F8BC3B'}">Trạng thái giao hàng</button>
+    <button class="status-btn" [ngStyle]="{'background-color': '#DDD121'}">Trạng thái thanh toán</button>
+    <button class="status-btn" [ngStyle]="{'background-color': '#85461F'}">Chưa giao hàng</button>
+    <button class="status-btn" [ngStyle]="{'background-color': '#38312F'}">Chờ xử lý</button>
+  </div>
+
+  <!-- Thông tin sản phẩm -->
+  <div class="product-info">
+    <table>
+      <thead>
+        <tr>
+          <th>Tên sản phẩm</th>
+          <th>Số lượng</th>
+          <th>Giá</th>
+          <th>Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of order.items">
+          <td>{{ item.ProductName }}</td>
+          <td>{{ item.Quantity }}</td>
+          <td>{{ item.Price | currency:'VND' }}</td>
+          <td>{{ item.TotalPrice | currency:'VND' }}</td>
+        </tr>
+        <tr>
+          <td colspan="3"><strong>Tổng thành tiền</strong></td>
+          <td><strong>{{ order.TotalOrderAmount | currency:'VND' }}</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="delivery-btn" [ngStyle]="{'background-color': '#F2E8DA'}">Giao hàng</button>
+  </div>
+
+  <!-- Thông tin người nhận -->
+  <div class="recipient-info">
+    <h3>Thông tin người mua</h3>
+    <p><strong>Tên:</strong> {{ order.CustomerName }}</p>
+    <p><strong>Địa chỉ:</strong> {{ order.CustomerAdd.address }}, {{ order.CustomerAdd.city }}, {{ order.CustomerAdd.state }}</p>
+    <p><strong>Số điện thoại:</strong> {{ order.CustomerPhone }}</p>
+  </div>
+
+  <!-- Nút xác thực -->
+  <button class="confirm-btn" [ngStyle]="{'background-color': '#E2BF9E'}">Xác thực đơn hàng</button>
+
+  <!-- Thanh toán -->
+  <div class="payment-info">
+    <h3>Đăng ký thanh toán</h3>
+    <div class="payment-details">
+      <p><strong>Số lượng sản phẩm:</strong> {{ order.items.length }}</p>
+      <p><strong>Tổng tiền hàng:</strong> {{ order.TotalOrderAmount | currency:'VND' }}</p>
+      <p><strong>Giảm giá:</strong> 5.000đ</p>
+      <p><strong>Thành tiền:</strong> {{ order.TotalOrderAmount - 5000 | currency:'VND' }}</p>
+      <p><strong>Phương thức thanh toán:</strong> COD</p>
+    </div>
+    <button class="update-btn" [ngStyle]="{'background-color': '#F2E8DA'}">Cập nhật</button>
   </div>
 </div>
