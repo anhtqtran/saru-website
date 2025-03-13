@@ -189,8 +189,22 @@ export class KhuyenmaiListComponent implements OnInit {
 
   goToPromotionDetail(promotion: Promotion) {
     const promoId = promotion._id;
-    const url = this.router.serializeUrl(this.router.createUrlTree(['/khuyenmai-detail', promoId]));
-    window.open(url, '_blank');
+    const promoType = promotion.type;
+
+    // Kiểm tra promoId và promoType trước khi điều hướng
+    if (!promoId || !promoType) {
+      console.error("❌ Thiếu promoId hoặc promoType:", { promoId, promoType });
+      this.errMessage = "Không thể mở chi tiết khuyến mãi. Thiếu thông tin ID hoặc loại.";
+      return;
+    }
+
+    console.log("Điều hướng tới:", `/khuyenmai-detail/${promoId}/${promoType}`);
+    const url = this.router.serializeUrl(this.router.createUrlTree(['/khuyenmai-detail', promoId, promoType]));
+    window.open(url, '_blank'); // Mở trang mới
+  }
+
+  goToCreate() {
+    this.router.navigate(['/khuyenmai-create']);
   }
 
   deletePromotion() {

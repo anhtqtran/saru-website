@@ -14,6 +14,7 @@ export class PromotionApiService {
 
   constructor(private _http: HttpClient) { }
 
+  //load khuyến mãi
   getCombinedData(): Observable<{
     promotions: Promotion[];
     vouchers: Voucher[];
@@ -39,6 +40,17 @@ export class PromotionApiService {
     );
   }
 
+  // Tạo mới khuyến mãi hoặc voucher
+  createItem(url: string, data: any): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const requestOptions = { headers: headers };
+    return this._http.post(`${this.baseUrl}${url}`, data, requestOptions).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
+  }
+
+  //xóa khuyến mãi
   deleteItem(id: string, type: 'promotion' | 'voucher'): Observable<any> {
     const headers = new HttpHeaders().set("Content-Type", "application/json");
     const requestOptions = { headers: headers };
@@ -50,6 +62,7 @@ export class PromotionApiService {
     );
   }
 
+  //kết thúc khuyến mãi sớm
   endItem(id: string, type: 'promotion' | 'voucher'): Observable<any> {
     const headers = new HttpHeaders().set("Content-Type", "application/json");
     const requestOptions = { headers: headers };
@@ -61,6 +74,31 @@ export class PromotionApiService {
     );
   }
 
+  // Lấy chi tiết một khuyến mãi dựa trên ID và type
+  getItemById(id: string, type: 'promotion' | 'voucher'): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const requestOptions = { headers: headers };
+    const url = type === 'promotion' ? `${this.promotionsDeleteUrl}/${id}` : `${this.vouchersDeleteUrl}/${id}`;
+
+    return this._http.get<any>(url, requestOptions).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
+  }
+
+  // Cập nhật dữ liệu khuyến mãi
+  updateItem(id: string, type: 'promotion' | 'voucher', data: any): Observable<any> {
+    const headers = new HttpHeaders().set('Content-Type', 'application/json');
+    const requestOptions = { headers: headers };
+    const url = type === 'promotion' ? `${this.promotionsDeleteUrl}/${id}` : `${this.vouchersDeleteUrl}/${id}`;
+
+    return this._http.put(url, data, requestOptions).pipe(
+      retry(3),
+      catchError(this.handleError)
+    );
+  }
+
+  //kiểm tra lỗi
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Đã xảy ra lỗi không xác định!';
     if (error.error instanceof ErrorEvent) {

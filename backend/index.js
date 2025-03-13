@@ -29,6 +29,65 @@ const categoriesCollection = database.collection("categories");
 
 connectToDatabase();
 
+// GET /promotions (Lấy tất cả promotions)
+app.get("/promotions", cors(), async (req, res) => {
+  try {
+    const promotions = await promotionsCollection.find({}).toArray();
+    res.status(200).json(promotions);
+  } catch (error) {
+    console.error("❌ Lỗi khi lấy danh sách promotions:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// GET /promotions/:id
+app.get("/promotions/:id", cors(), async (req, res) => {
+  try {
+    const o_id = new ObjectId(req.params["id"]);
+    const promotion = await promotionsCollection.findOne({ _id: o_id });
+    if (promotion) {
+      res.status(200).json(promotion);
+    } else {
+      res.status(404).json({ message: "Promotion not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// GET /vouchers (Lấy tất cả vouchers)
+app.get("/vouchers", cors(), async (req, res) => {
+  try {
+    const vouchers = await vouchersCollection.find({}).toArray();
+    res.status(200).json(vouchers);
+  } catch (error) {
+    console.error("❌ Lỗi khi lấy danh sách vouchers:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// GET /vouchers/:id
+app.get("/vouchers/:id", cors(), async (req, res) => {
+  try {
+    const o_id = new ObjectId(req.params["id"]);
+    const voucher = await vouchersCollection.findOne({ _id: o_id });
+    if (voucher) {
+      const usedCount = await ordersCollection.countDocuments({ VoucherID: voucher.VoucherID });
+      res.status(200).json({
+        ...voucher,
+        UsedCount: usedCount,
+        RemainingQuantity: voucher.VoucherQuantity - usedCount,
+      });
+    } else {
+      res.status(404).json({ message: "Voucher not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
 // Đảm bảo endpoint /combined-data được định nghĩa
 app.get("/combined-data", cors(), async (req, res) => {
   try {
@@ -86,12 +145,12 @@ app.delete("/promotions/:id", cors(), async (req, res) => {
       res.status(200).json({ message: "Promotion deleted successfully" });
     } else {
       res.status(404).json({ message: "Promotion not found" });
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
     }
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
+  });
 
 app.delete("/vouchers/:id", cors(), async (req, res) => {
   try {
@@ -140,6 +199,85 @@ app.put("/vouchers/:id/end", cors(), async (req, res) => {
     } else {
       res.status(404).json({ message: "Voucher not found" });
     }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.put("/promotions/:id", cors(), async (req, res) => {
+  try {
+    const o_id = new ObjectId(req.params["id"]);
+    const updateData = req.body;
+    const result = await promotionsCollection.updateOne(
+      { _id: o_id },
+      { $set: {
+        PromotionID: updateData.PromotionID,
+        PromotionStartDate: updateData.PromotionStartDate,
+        PromotionExpiredDate: updateData.PromotionExpiredDate,
+        PromotionConditionID: updateData.PromotionConditionID,
+        PromotionValue: updateData.PromotionValue,
+        ApplicableScope: updateData.ApplicableScope
+      }}
+    );
+    if (result.matchedCount === 1) {
+      res.status(200).json({ message: "Promotion updated successfully" });
+    } else {
+      res.status(404).json({ message: "Promotion not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.put("/vouchers/:id", cors(), async (req, res) => {
+  try {
+    const o_id = new ObjectId(req.params["id"]);
+    const updateData = req.body;
+    const result = await vouchersCollection.updateOne(
+      { _id: o_id },
+      { $set: {
+        VoucherID: updateData.VoucherID,
+        VoucherStartDate: updateData.VoucherStartDate,
+        VoucherExpiredDate: updateData.VoucherExpiredDate,
+        VoucherConditionID: updateData.VoucherConditionID,
+        VoucherQuantity: updateData.VoucherQuantity,
+        VoucherValue: updateData.VoucherValue,
+        RemainingQuantity: updateData.RemainingQuantity,
+        ApplicableScope: updateData.ApplicableScope
+      }}
+    );
+    if (result.matchedCount === 1) {
+      res.status(200).json({ message: "Voucher updated successfully" });
+    } else {
+      res.status(404).json({ message: "Voucher not found" });
+    }
+
+// POST /promotions
+app.post("/promotions", cors(), async (req, res) => {
+  try {
+    const newPromotion = req.body;
+    const result = await promotionsCollection.insertOne(newPromotion);
+    res.status(201).json({ message: "Promotion created successfully", id: result.insertedId });
+  } catch (error) {
+    console.error("❌ Lỗi khi tạo mới promotion:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// POST /vouchers
+app.post("/vouchers", cors(), async (req, res) => {
+  try {
+    const newVoucher = req.body;
+    const result = await vouchersCollection.insertOne(newVoucher);
+    res.status(201).json({ message: "Voucher created successfully", id: result.insertedId });
+  } catch (error) {
+    console.error("❌ Lỗi khi tạo mới voucher:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });

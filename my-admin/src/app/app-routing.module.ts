@@ -6,7 +6,9 @@ import { KhuyenmaiDetailComponent } from './khuyenmai-detail/khuyenmai-detail.co
 const routes: Routes = [
   {path: '', component: KhuyenmaiListComponent},
   { path: 'khuyenmai-create', component: KhuyenmaiCreateComponent },
-  { path: 'khuyenmai-detail', component: KhuyenmaiDetailComponent }
+  { path: 'khuyenmai-detail', component: KhuyenmaiDetailComponent },
+  {path: 'khuyenmai-detail/:id/:type',component: KhuyenmaiDetailComponent},
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({
