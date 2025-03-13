@@ -56,7 +56,7 @@ const routes: Routes = [
     pathMatch: 'full' 
   },
   { path: 'compare', component: CompareComponent},
-
+  { path: 'product-detail/:id', component: ProductDetailComponent },
 
 ];
 

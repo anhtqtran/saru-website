@@ -13,6 +13,7 @@ const { MongoClient, ObjectId } = require('mongodb');
 const session = require('express-session');
 const rateLimit = require('express-rate-limit');
 const winston = require('winston');
+const cron = require('node-cron');
 
 const app = express();
 
@@ -89,7 +90,7 @@ const authLimiter = rateLimit({
 });
 
 // Kết nối MongoDB
-let client, database, productCollection, imageCollection, categoryCollection, reviewCollection, orderDetailCollection, accountCollection, customerCollection;
+let client, database, productCollection, imageCollection, categoryCollection, reviewCollection, orderArticleCollection, accountCollection, customerCollection, productstockCollection, blogCollection, blogCategoryCollection;
 async function connectDB() {
   const uri = process.env.MONGODB_URI;
   client = new MongoClient(uri);
@@ -103,6 +104,9 @@ async function connectDB() {
     orderDetailCollection = database.collection('orderdetails');
     accountCollection = database.collection('accounts');
     customerCollection = database.collection('customers');
+    productstockCollection = database.collection('productstocks');
+    blogCollection = database.collection('blogs');
+    blogCategoryCollection = database.collection('blogcategories');
 
     await productCollection.createIndex({ ProductID: 1 }, { unique: true });
     await accountCollection.createIndex({ CustomerEmail: 1 }, { unique: true });
@@ -141,6 +145,163 @@ function authenticateToken(req, res, next) {
 
 // ===================== PRODUCT API =====================
 
+const bestSellingProductsPipeline = (productId) => [
+  ...(productId ? [] : [{ $group: { _id: "$ProductID", totalQuantity: { $sum: "$Quantity" } } }]),
+  ...(productId ? [{ $match: { _id: productId } }] : []),
+  ...(productId ? [] : [{ $sort: { totalQuantity: -1 } }]),
+  ...(productId ? [] : [{ $limit: 5 }]),
+  {
+    $lookup: {
+      from: "products",
+      let: { pid: "$_id" },
+      pipeline: [
+        { $match: { $expr: { $eq: ["$ProductID", "$$pid"] } } },
+        {
+          $lookup: {
+            from: "images",
+            let: { imageId: "$ImageID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$ImageID", "$$imageId"] } } },
+              { $project: { _id: 0, ProductImageCover: 1 } }
+            ],
+            as: "image"
+          }
+        },
+        { $unwind: { path: "$image", preserveNullAndEmptyArrays: true } },
+        {
+          $lookup: {
+            from: "productcategories",
+            let: { cateId: "$CateID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$CateID", "$$cateId"] } } },
+              { $project: { _id: 0, CateName: 1 } }
+            ],
+            as: "category"
+          }
+        },
+        { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } },
+        {
+          $lookup: {
+            from: "reviews",
+            let: { productId: "$ProductID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$ProductID", "$$productId"] } } },
+              {
+                $group: {
+                  _id: null,
+                  averageRating: { $avg: "$Rating" },
+                  reviewCount: { $sum: 1 }
+                }
+              }
+            ],
+            as: "reviews"
+          }
+        },
+        { $unwind: { path: "$reviews", preserveNullAndEmptyArrays: true } },
+        {
+          $project: {
+            _id: 1,
+            ProductID: 1,
+            ProductName: 1,
+            ProductPrice: 1,
+            ProductImageCover: { $ifNull: ["$image.ProductImageCover", "default-image-url"] },
+            CateName: { $ifNull: ["$category.CateName", "Không có danh mục"] },
+            averageRating: { $ifNull: ["$reviews.averageRating", 0] },
+            reviewCount: { $ifNull: ["$reviews.reviewCount", 0] },
+            description: 1,
+            relatedProducts: 1
+          }
+        }
+      ],
+      as: "product"
+    }
+  },
+  { $match: { "product": { $ne: [] } } },
+  { $unwind: { path: "$product", preserveNullAndEmptyArrays: false } },
+  {
+    $project: {
+      _id: "$product._id",
+      productId: "$_id",
+      productName: "$product.ProductName",
+      productPrice: "$product.ProductPrice",
+      productImageCover: "$product.ProductImageCover",
+      categoryName: "$product.CateName",
+      totalQuantity: { $ifNull: ["$totalQuantity", 0] },
+      averageRating: "$product.averageRating",
+      reviewCount: "$product.reviewCount",
+      description: "$product.description",
+      relatedProducts: "$product.relatedProducts"
+    }
+  }
+];
+
+app.get('/api/products/best-selling', async (req, res) => {
+  try {
+    console.log('Request received:', req.method, req.url, req.query);
+
+    if (Object.keys(req.query).length > 0) {
+      console.log('Query params not supported:', req.query);
+      return res.status(400).json({ message: 'This endpoint does not accept query parameters' });
+    }
+
+    const bestSellingProducts = await orderDetailCollection.aggregate(bestSellingProductsPipeline()).toArray();
+    console.log('Aggregation result:', bestSellingProducts);
+
+    if (!bestSellingProducts.length) {
+      console.log('No best-selling products found');
+      return res.status(200).json([]);
+    }
+
+    res.status(200).json(bestSellingProducts);
+  } catch (err) {
+    console.error('Aggregation error:', err.stack);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+});
+
+app.get('/api/products/map-id/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    console.log('Request received for mapping ProductID to _id:', req.method, req.url, { productId });
+
+    const product = await productCollection.findOne(
+      { ProductID: productId },
+      { projection: { _id: 1 } }
+    );
+
+    if (!product) {
+      console.log('Product not found for ProductID:', productId);
+      return res.status(404).json({ message: 'Sản phẩm không tồn tại.' });
+    }
+
+    res.status(200).json({ _id: product._id.toHexString() });
+  } catch (err) {
+    console.error('Error mapping ProductID to _id:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
+});
+
+app.get('/api/products/best-seller-detail/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    console.log('Request received for best-seller-detail:', req.method, req.url, { productId });
+
+    const pipeline = bestSellingProductsPipeline(productId);
+    const result = await orderDetailCollection.aggregate(pipeline).toArray();
+
+    if (!result.length) {
+      console.log('No best seller detail found for productId:', productId);
+      return res.status(404).json({ message: 'Sản phẩm không tồn tại.' });
+    }
+
+    console.log('Best seller detail result:', result[0]);
+    res.status(200).json(result[0]);
+  } catch (err) {
+    console.error('Aggregation error for best seller detail:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
+});
+
 app.get('/api/images/:imageId', async (req, res) => {
   try {
     const image = await imageCollection.findOne({ ImageID: req.params.imageId });
@@ -176,7 +337,7 @@ app.get('/api/products/search', async (req, res) => {
 
 app.get('/api/categories', async (req, res) => {
   try {
-    const categories = await database.collection('productcategories').find().toArray();
+    const categories = await categoryCollection.find().toArray();
     res.json(categories);
   } catch (err) {
     logger.error('Error in GET /api/categories', { error: err.message, correlationId: req.correlationId });
@@ -219,14 +380,12 @@ app.get('/api/products', async (req, res) => {
     const productIDs = items.map(p => p.ProductID);
     const promotionIDs = items.map(p => p.PromotionID).filter(id => id !== null);
 
-    // Lấy dữ liệu từ productstocks
-    const stocks = await database.collection('productstocks').find({ ProductID: { $in: productIDs } }).toArray();
+    const stocks = await productstockCollection.find({ ProductID: { $in: productIDs } }).toArray();
     const stockMap = stocks.reduce((acc, stock) => {
       acc[stock.ProductID] = stock.StockQuantity;
       return acc;
     }, {});
 
-    // Lấy dữ liệu từ promotions
     const promotions = await database.collection('promotions').find({ PromotionID: { $in: promotionIDs } }).toArray();
     const promotionMap = promotions.reduce((acc, promo) => {
       acc[promo.PromotionID] = {
@@ -237,7 +396,6 @@ app.get('/api/products', async (req, res) => {
       return acc;
     }, {});
 
-    // Lấy dữ liệu đánh giá từ reviews
     const reviewsAgg = await reviewCollection.aggregate([
       { $match: { ProductID: { $in: productIDs } } },
       {
@@ -263,7 +421,7 @@ app.get('/api/products', async (req, res) => {
       return acc;
     }, {});
 
-    const currentDate = new Date('2025-03-11'); // Ngày hiện tại (11/03/2025)
+    const currentDate = new Date('2025-03-11');
 
     const productsWithDetails = items.map(p => {
       const stockQuantity = stockMap[p.ProductID] || 0;
@@ -273,7 +431,6 @@ app.get('/api/products', async (req, res) => {
       let currentPrice = p.ProductPrice || 0;
       let discountPercentage = 0;
 
-      // Kiểm tra khuyến mãi
       if (p.PromotionID !== null) {
         const promo = promotionMap[p.PromotionID];
         if (promo) {
@@ -282,7 +439,7 @@ app.get('/api/products', async (req, res) => {
           const promotionValue = promo.value;
 
           if (currentDate >= startDate && currentDate <= expiredDate) {
-            const discountMultiplier = 1 - (promotionValue / 100); // Giả định % giảm
+            const discountMultiplier = 1 - (promotionValue / 100);
             currentPrice = p.ProductPrice * discountMultiplier;
             isOnSale = true;
             discountPercentage = promotionValue;
@@ -290,7 +447,6 @@ app.get('/api/products', async (req, res) => {
         }
       }
 
-      // Lấy thông tin đánh giá
       const reviewData = reviewMap[p.ProductID] || { averageRating: null, totalReviewCount: 0 };
 
       return {
@@ -315,7 +471,6 @@ app.get('/api/products', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 app.get('/api/filters', async (req, res) => {
   try {
@@ -355,16 +510,14 @@ app.get('/api/products/:id', async (req, res) => {
       return res.status(404).json({ message: 'Sản phẩm không tồn tại.' });
     }
 
-    // Lấy dữ liệu từ productstocks
-    const stock = await database.collection('productstocks').findOne({ ProductID: product.ProductID });
+    const stock = await productstockCollection.findOne({ ProductID: product.ProductID });
     const stockQuantity = stock ? stock.StockQuantity : 0;
     const stockStatus = stockQuantity > 0 ? 'In Stock' : 'Out of Stock';
 
-    // Lấy dữ liệu từ promotions
     let isOnSale = false;
     let currentPrice = product.ProductPrice || 0;
     let discountPercentage = 0;
-    const currentDate = new Date('2025-03-11'); // Ngày hiện tại
+    const currentDate = new Date('2025-03-11');
 
     if (product.PromotionID) {
       const promo = await database.collection('promotions').findOne({ PromotionID: product.PromotionID });
@@ -374,7 +527,7 @@ app.get('/api/products/:id', async (req, res) => {
         const promotionValue = promo.PromotionValue;
 
         if (currentDate >= startDate && currentDate <= expiredDate) {
-          const discountMultiplier = 1 - (promotionValue / 100); // Giả định % giảm
+          const discountMultiplier = 1 - (promotionValue / 100);
           currentPrice = product.ProductPrice * discountMultiplier;
           isOnSale = true;
           discountPercentage = promotionValue;
@@ -436,9 +589,9 @@ app.get('/api/products/:id', async (req, res) => {
       CateID: product.CateID,
       _id: { $ne: productId }
     })
-    .limit(4)
-    .project({ ProductName: 1, ProductPrice: 1, ProductImageCover: 1, _id: 1 })
-    .toArray();
+      .limit(4)
+      .project({ ProductName: 1, ProductPrice: 1, ProductImageCover: 1, _id: 1 })
+      .toArray();
 
     const relatedProductsWithStringId = relatedProducts.map(p => ({
       ...p,
@@ -462,6 +615,7 @@ app.get('/api/products/:id', async (req, res) => {
     res.status(500).json({ message: 'Lỗi hệ thống, vui lòng thử lại sau.', error: err.message });
   }
 });
+
 // ===================== COMPARE API =====================
 
 app.post('/api/compare', authenticateToken, async (req, res) => {
@@ -472,7 +626,6 @@ app.post('/api/compare', authenticateToken, async (req, res) => {
   }
 
   try {
-    // Kiểm tra xem sản phẩm có tồn tại không
     const productExists = await productCollection.findOne({ _id: new ObjectId(productId) });
     if (!productExists) {
       logger.warn('Product not found for compare', { productId, correlationId: req.correlationId });
@@ -543,7 +696,7 @@ app.delete('/api/compare/all', authenticateToken, async (req, res) => {
       const AccountID = req.account.AccountID;
       const compareCollection = database.collection('compares');
       await compareCollection.deleteOne({ AccountID });
-      req.session.compareList = []; // Xóa luôn session để tránh đồng bộ ngược
+      req.session.compareList = [];
       logger.info('Cleared compare list in MongoDB and session', { AccountID, correlationId: req.correlationId });
       res.json({ message: "Cleared all compare items", compareList: [] });
     } else {
@@ -562,7 +715,6 @@ app.delete('/api/compare/all', authenticateToken, async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
-
 
 app.delete('/api/compare/:productId', authenticateToken, async (req, res) => {
   const productId = req.params.productId;
@@ -602,7 +754,6 @@ app.delete('/api/compare/:productId', authenticateToken, async (req, res) => {
     res.status(500).json({ message: 'Internal server error' });
   }
 });
-
 
 // ===================== CART API =====================
 
@@ -704,8 +855,6 @@ app.delete('/api/cart/:productId', authenticateToken, async (req, res) => {
 
 // ===================== LOGIN, SIGNUP, RESETPASS =====================
 
-const cron = require('node-cron');
-
 cron.schedule('0 * * * *', async () => {
   await accountCollection.deleteMany({
     otpExpiry: { $lt: new Date() }
@@ -764,7 +913,6 @@ app.post('/api/login', authLimiter, [
 
     const token = jwt.sign({ AccountID: account.AccountID }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    // Đồng bộ session với MongoDB
     try {
       const cartCollection = database.collection('carts');
       const compareCollection = database.collection('compares');
@@ -872,7 +1020,7 @@ app.post('/api/forgot-password', authLimiter, [
   try {
     const account = await accountCollection.findOne({ CustomerEmail: email });
     if (!account) {
-      logger.warn('Forgot password attempt with non-existent email', { email, correlationId: req.correlationId });
+      logger.warn('Forgot password attempt with non-existent email', { email, correlationId: reqDeclaringId });
       return res.status(404).json({ message: 'Email không tồn tại.' });
     }
 
@@ -982,4 +1130,95 @@ process.on('SIGTERM', async () => {
   await client.close();
   logger.info('MongoDB connection closed', { correlationId: 'system' });
   process.exit(0);
+});
+
+// ===================== BLOG NỔI BẬT API ====================
+
+app.get('/api/blogs/random', async (req, res) => {
+  try {
+    const cateblogId = req.query.cateblogId || 'cateblog1';
+    console.log('Request received for random blogs:', req.method, req.url, { cateblogId });
+
+    const pipeline = [
+      {
+        $lookup: {
+          from: 'blogcategories',
+          localField: 'categoryID',
+          foreignField: '_id',
+          as: 'category'
+        }
+      },
+      { $unwind: { path: '$category', preserveNullAndEmptyArrays: true } },
+      { $match: { 'category.CateblogID': cateblogId } },
+      { $sample: { size: 2 } },
+      {
+        $project: {
+          id: '$_id',
+          _id: 0,
+          title: '$BlogTitle',
+          image: '$BlogImage',
+          summary: { $substr: ['$BlogContent', 0, 150] },
+          categoryName: '$category.CateblogName'
+        }
+      }
+    ];
+
+    const blogs = await blogCollection.aggregate(pipeline).toArray();
+    console.log('Random blogs result:', blogs);
+
+    if (!blogs.length) {
+      console.log('No blogs found for category:', cateblogId);
+      return res.status(200).json([]);
+    }
+
+    res.status(200).json(blogs);
+  } catch (err) {
+    console.error('Error fetching random blogs:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
+});
+
+app.get('/api/blogs/:id', async (req, res) => {
+  try {
+    const blogId = req.params.id;
+    console.log('Request received for blog detail:', req.method, req.url, { blogId });
+
+    const blog = await blogCollection.findOne({ _id: new ObjectId(blogId) });
+    if (!blog) {
+      console.log('Blog not found:', blogId);
+      return res.status(404).json({ message: 'Bài viết không tồn tại.' });
+    }
+
+    const pipeline = [
+      { $match: { _id: new ObjectId(blogId) } },
+      {
+        $lookup: {
+          from: 'blogcategories',
+          localField: 'categoryID',
+          foreignField: '_id',
+          as: 'category'
+        }
+      },
+      { $unwind: { path: '$category', preserveNullAndEmptyArrays: true } },
+      {
+        $project: {
+          id: '$_id',
+          _id: 0,
+          title: '$BlogTitle',
+          image: '$BlogImage',
+          content: '$BlogContent',
+          categoryName: '$category.CateblogName',
+          datePosted: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } }
+        }
+      }
+    ];
+
+    const detailedBlog = await blogCollection.aggregate(pipeline).toArray();
+    console.log('Blog detail result:', detailedBlog);
+
+    res.status(200).json(detailedBlog[0]);
+  } catch (err) {
+    console.error('Error fetching blog detail:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
 });

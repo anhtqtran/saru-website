@@ -21,17 +21,20 @@ export class Product {
     public ProductImageSub1?: string,
     public ProductImageSub2?: string,
     public ProductImageSub3?: string,
-    public averageRating?: number,
-    public totalReviewCount?: number,
-    public reviews?: Array<any>,
-    public relatedProducts?: Array<any>,
-    public currentPrice: number = 0,
-    public stockStatus?: string,
-    public isOnSale?: boolean,
-    public isPromotion?: boolean,
-    public PromotionValue?: number,
-    public originalPrice: number = 0,
-    public discountPercentage: number = 0 // Thêm trường này
+    public averageRating?: number, // Có trong cả hai nhánh
+    public totalReviewCount?: number, // Có trong cả hai nhánh
+    public reviews?: Array<any>, // Có trong cả hai nhánh
+    public relatedProducts?: Array<any>, // Có trong cả hai nhánh
+    public CateName?: string, // Từ HEAD
+    public reviewCount?: number, // Từ HEAD
+    public description?: string, // Từ HEAD
+    public currentPrice: number = 0, // Từ main
+    public stockStatus?: string, // Từ main
+    public isOnSale?: boolean, // Từ main
+    public isPromotion?: boolean, // Từ main
+    public PromotionValue?: number, // Từ main
+    public originalPrice: number = 0, // Từ main
+    public discountPercentage: number = 0 // Từ main
   ) {}
 }
 

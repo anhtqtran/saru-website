@@ -3,6 +3,9 @@ import { ProductService } from '../services/product.service';
 import { Product } from '../classes/Product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HomepageProductsService } from '../services/homepage-products.service'; // Từ HEAD
+import { BestSellingProduct } from '../classes/BestSellingProduct'; // Từ HEAD
+import { Lightbox } from 'ngx-lightbox'; // Từ main
 
 @Component({
   selector: 'app-product-detail',
@@ -18,18 +21,91 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+    private bestSellerIdService: HomepageProductsService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private lightbox: Lightbox
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      const id = params['id'];
-      if (id) {
-        this.loadProductDetail(id);
+      const productId = params['id'];
+      if (productId) {
+        this.bestSellerIdService.getBestSellerIds().subscribe({
+          next: (bestSellerIds) => {
+            if (bestSellerIds.includes(productId)) {
+              this.loadBestSellerDetail(productId);
+            } else {
+              this.bestSellerIdService.getObjectIdFromProductId(productId).subscribe({
+                next: (_id) => {
+                  console.log('Mapped _id:', _id); // Debug
+                  this.loadProductDetail(_id);
+                },
+                error: (error) => {
+                  console.error('Error mapping productId to _id:', error.message);
+                  this.snackBar.open('Không thể ánh xạ ID sản phẩm.', 'OK', { duration: 3000 });
+                  this.isLoading = false;
+                }
+              });
+            }
+          },
+          error: (error) => {
+            console.error('Error fetching best seller IDs:', error.message);
+            this.bestSellerIdService.getObjectIdFromProductId(productId).subscribe({
+              next: (_id) => {
+                console.log('Mapped _id:', _id); // Debug
+                this.loadProductDetail(_id);
+              },
+              error: (error) => {
+                console.error('Error mapping productId to _id:', error.message);
+                this.snackBar.open('Không thể ánh xạ ID sản phẩm.', 'OK', { duration: 3000 });
+                this.isLoading = false;
+              }
+            });
+          }
+        });
       } else {
         this.snackBar.open('Không tìm thấy ID sản phẩm', 'OK', { duration: 3000 });
+        this.isLoading = false;
+      }
+    });
+  }
+
+  loadBestSellerDetail(productId: string): void {
+    this.isLoading = true;
+    this.bestSellerIdService.getBestSellerDetail(productId).subscribe({
+      next: (data: BestSellingProduct) => {
+        if (!data.reviews) data.reviews = [];
+        // Ánh xạ từ BestSellingProduct sang Product
+        this.product = {
+          _id: data._id,
+          ProductID: data.productId,
+          ProductName: data.productName,
+          ProductPrice: data.productPrice,
+          ProductImageCover: data.productImageCover,
+          CateName: data.categoryName,
+          reviewCount: data.reviewCount,
+          averageRating: data.averageRating,
+          reviews: data.reviews,
+          relatedProducts: data.relatedProducts,
+          CateID: data.CateID,
+          ProductNetContent: data.productNetContent,
+          ProductBrand: data.ProductBrand || '',
+          ProductFullDescription: data.ProductFullDescription || '',
+          ProductShortDescription: data.ProductShortDescription || '',
+          ProductSKU: data.ProductSKU || '',
+          ImageID: data.ImageID || '',
+          currentPrice: data.productPrice,
+          originalPrice: data.productPrice,
+          discountPercentage: 0
+        };
+        this.selectedImage = this.product?.ProductImageCover || 'assets/images/default-product.png';
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading best seller detail:', error.message);
+        this.snackBar.open('Không thể tải chi tiết sản phẩm best seller.', 'OK', { duration: 3000 });
         this.isLoading = false;
       }
     });
@@ -39,32 +115,33 @@ export class ProductDetailComponent implements OnInit {
     this.isLoading = true;
     this.productService.getProductDetail(id).subscribe({
       next: (data: Product | null) => {
-        if (data) {
-          if (!data.reviews) data.reviews = [];
-          console.log('Review data:', data.reviews);
-          console.log('Product data from API:', data);
-          console.log('Related products _id:', data.relatedProducts?.map(rp => rp._id) || []);
-
-          if (data.relatedProducts && data.relatedProducts.length > 0) {
-            console.log('Kiểu dữ liệu _id sản phẩm liên quan đầu tiên:', typeof data.relatedProducts[0]._id);
-            console.log('Constructor name _id sản phẩm liên quan đầu tiên:', data.relatedProducts[0]._id.constructor.name);
-          }
-
-          this.product = {
-            ...data,
-            currentPrice: data.currentPrice ?? data.ProductPrice ?? 0,
-            originalPrice: data.originalPrice ?? data.ProductPrice ?? 0,
-            stockStatus: data.stockStatus ?? 'In Stock',
-            isOnSale: !!data.isOnSale,
-            discountPercentage: data.discountPercentage ?? 0,
-            averageRating: data.averageRating ?? 0,
-            totalReviewCount: data.totalReviewCount ?? 0
-          };
-          this.selectedImage = this.product.ProductImageCover || 'assets/images/default-product.png';
-        } else {
+        if (data === null) {
           console.error('Product data is null');
           this.snackBar.open('Không thể tải chi tiết sản phẩm. Vui lòng thử lại sau.', 'OK', { duration: 3000 });
+          this.isLoading = false;
+          return;
         }
+        if (!data.reviews) data.reviews = [];
+        console.log('Review data:', data.reviews);
+        console.log('Product data from API:', data);
+        console.log('Related products _id:', data.relatedProducts?.map(rp => rp._id) || []);
+
+        if (data.relatedProducts && data.relatedProducts.length > 0) {
+          console.log('Kiểu dữ liệu _id sản phẩm liên quan đầu tiên:', typeof data.relatedProducts[0]._id);
+          console.log('Constructor name _id sản phẩm liên quan đầu tiên:', data.relatedProducts[0]._id.constructor.name);
+        }
+
+        this.product = {
+          ...data,
+          currentPrice: data.currentPrice ?? data.ProductPrice ?? 0,
+          originalPrice: data.originalPrice ?? data.ProductPrice ?? 0,
+          stockStatus: data.stockStatus ?? 'In Stock',
+          isOnSale: !!data.isOnSale,
+          discountPercentage: data.discountPercentage ?? 0,
+          averageRating: data.averageRating ?? 0,
+          totalReviewCount: data.totalReviewCount ?? 0
+        };
+        this.selectedImage = this.product.ProductImageCover || 'assets/images/default-product.png';
         this.isLoading = false;
       },
       error: (error) => {
@@ -73,6 +150,10 @@ export class ProductDetailComponent implements OnInit {
         this.isLoading = false;
       }
     });
+  }
+
+  openLightbox(image: string) {
+    this.lightbox.open([{ src: image, thumb: image }]);
   }
 
   selectImage(image: string): void {
