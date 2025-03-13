@@ -1,0 +1,169 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body {
+    @apply bg-gray-100 p-5;
+}
+
+/* Header */
+.admin-header {
+    @apply flex justify-end mb-5;
+}
+
+.admin-button {
+    @apply bg-white border border-black px-3 py-2 rounded-lg font-bold cursor-pointer;
+}
+
+/* Container chính */
+.container {
+    @apply max-w-3xl mx-auto bg-white p-5 rounded-lg shadow-lg;
+}
+
+.inventory-header {
+    @apply flex justify-between items-center mb-3;
+}
+
+/* Kho quản lý */
+.warehouse-info {
+    @apply flex items-start gap-2 mb-3;
+}
+
+.warehouse-info select {
+    @apply p-1 border border-gray-300 rounded;
+}
+
+/* Xuất dữ liệu */
+.export-button {
+    @apply bg-yellow-400 border-none px-4 py-2 rounded-full font-bold cursor-pointer;
+}
+
+/* Điều kiện lọc & tìm kiếm */
+.product-controls {
+    @apply flex items-center justify-between bg-gray-200 p-3 rounded-lg mb-4;
+}
+
+.filter-button {
+    @apply bg-white border border-black px-4 py-2 rounded-full font-bold cursor-pointer flex items-center gap-2;
+}
+
+.search-container {
+    @apply flex items-center flex-grow max-w-md bg-white border border-black rounded-full p-2 gap-2;
+}
+
+.search-bar {
+    @apply border-none outline-none flex-grow text-sm;
+}
+
+/* Bảng tồn kho */
+.inventory-table {
+    @apply w-full border-collapse mb-4;
+}
+
+.inventory-table th {
+    @apply bg-gray-300 text-center p-3 font-bold;
+}
+
+.inventory-table td {
+    @apply border-b border-gray-300 p-3 text-center;
+}
+
+/* Căn chỉnh các cột */
+.inventory-table th:nth-child(2),
+.inventory-table td:nth-child(2) {
+    @apply w-1/5;
+}
+
+.inventory-table th:nth-child(3),
+.inventory-table td:nth-child(3) {
+    @apply w-1/6;
+}
+
+.inventory-table th:nth-child(4),
+.inventory-table td:nth-child(4) {
+    @apply w-2/3;
+}
+
+/* Hành động */
+.actions {
+    @apply flex justify-center items-center text-center gap-3 w-full;
+}
+
+.actioncompo {
+    @apply flex justify-center items-center gap-3 w-full flex-wrap;
+}
+
+.actions button,
+.actions input,
+.actions span {
+    @apply flex items-center justify-center;
+}
+
+.actions .small-btn, .actions .reset-btn {
+    @apply px-2 py-1 border border-gray-300 cursor-pointer bg-gray-200 rounded;
+}
+
+.actions .quantity-input {
+    @apply w-10 text-center border border-gray-300 rounded p-1;
+}
+
+.save-button {
+    @apply bg-gray-300 border-none px-3 py-2 rounded cursor-pointer;
+}
+
+.save-button:hover {
+    @apply bg-gray-400;
+}
+
+/* Bộ lọc */
+.filter-container {
+    @apply relative inline-block;
+}
+
+.filter-dropdown {
+    @apply absolute bg-white border border-gray-300 p-4 rounded shadow-md w-64 top-10 left-0 hidden;
+}
+
+.filter-container:hover .filter-dropdown {
+    @apply block;
+}
+
+.filter-dropdown p {
+    @apply text-sm mb-2;
+}
+
+.filter-dropdown select {
+    @apply w-full p-2 mb-2 border border-gray-300 rounded;
+}
+
+.filter-buttons {
+    @apply flex justify-between mt-2;
+}
+
+.cancel-button {
+    @apply bg-gray-300 border-none px-3 py-2 rounded cursor-pointer;
+}
+
+.apply-button {
+    @apply bg-yellow-400 border-none px-3 py-2 rounded font-bold cursor-pointer transition;
+}
+
+.apply-button:hover {
+    @apply bg-yellow-500;
+}
+
+/* Footer */
+.product-footer {
+    @apply flex justify-between items-center pt-3;
+}
+
+.product-footer select {
+    @apply p-2 rounded-full border border-gray-300 bg-gray-200 text-sm cursor-pointer;
+}
+
+.product-footer p {
+    @apply text-sm text-gray-600 ml-auto;
+}

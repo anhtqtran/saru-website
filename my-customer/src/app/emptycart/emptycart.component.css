@@ -1,0 +1,66 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    text-align: center;
+}
+
+/* Container giỏ hàng trống */
+.cart-empty {
+    width: 100%;
+    max-width: 600px;
+    margin: 50px auto;
+    text-align: center;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề */
+.cart-empty h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Nội dung giỏ hàng trống */
+.empty-cart-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.empty-cart-content img {
+    width: 120px;
+    margin-bottom: 10px;
+}
+
+.empty-cart-content p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Nút về trang chủ */
+.home-button {
+    background-color: #bfbfbf;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.home-button:hover {
+    background-color: #9e9e9e;
+}

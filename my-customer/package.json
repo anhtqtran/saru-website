@@ -10,17 +10,31 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^19.1.0",
+    "@angular/animations": "^19.2.1",
+    "@angular/cdk": "^19.2.2",
     "@angular/common": "^19.1.0",
     "@angular/compiler": "^19.1.0",
     "@angular/core": "^19.1.0",
     "@angular/forms": "^19.1.0",
+    "@angular/material": "^19.2.2",
     "@angular/platform-browser": "^19.1.0",
     "@angular/platform-browser-dynamic": "^19.1.0",
     "@angular/router": "^19.1.0",
     "@tailwindcss/postcss": "^4.0.6",
+<<<<<<< HEAD
+    "ng2-img-max": "^2.2.9",
+    "ngx-lightbox": "^3.0.0",
+    "ngx-swiper-wrapper": "^10.0.0",
+    "ngx-toastr": "^19.0.0",
     "postcss": "^8.5.2",
     "rxjs": "~7.8.0",
+    "swiper": "^11.2.5",
+=======
+    "ngx-toastr": "^19.0.0",
+    "postcss": "^8.5.2",
+    "rxjs": "~7.8.0",
+    "socket.io-client": "^4.8.1",
+>>>>>>> cus_blog
     "tailwindcss": "^4.0.6",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

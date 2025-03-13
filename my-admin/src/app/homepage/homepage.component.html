@@ -1,0 +1,132 @@
+<div class="min-h-screen p-6 font-inter bg-gray-100">
+  <!-- Header -->
+  <header class="flex justify-between items-center mb-9 rounded-lg bg-white p-4 shadow-md">
+    <h1 class="text-4xl font-bold text-[#85461F]">Trang chủ</h1>
+  </header>
+
+  <!-- Tổng quan -->
+  <section class="mb-8">
+    <p class="font-bold text-xl text-[#85461F] mb-4">Tổng quan</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <h2 class="text-lg font-semibold text-[#38312F]">Tổng số sản phẩm</h2>
+        <p class="text-3xl font-bold text-[#F8BC3B] mt-2">{{ dashboardData.totalProducts }}</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <h2 class="text-lg font-semibold text-[#38312F]">Tổng đơn hàng</h2>
+        <p class="text-3xl font-bold text-[#F8BC3B] mt-2">{{ dashboardData.totalOrders }}</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <h2 class="text-lg font-semibold text-[#38312F]">Tổng khách hàng</h2>
+        <p class="text-3xl font-bold text-[#F8BC3B] mt-2">{{ dashboardData.totalCustomers }}</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <h2 class="text-lg font-semibold text-[#38312F]">Tổng doanh thu</h2>
+        <p class="text-3xl font-bold text-[#F8BC3B] mt-2">{{ dashboardData.totalRevenue | currency:'VND':'symbol':'1.0-0':'vi-VN' }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Doanh thu và đơn hàng tuần này -->
+  <section class="mb-8">
+    <p class="font-bold text-xl text-[#85461F] mb-4">Doanh thu và Đơn hàng tuần này</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <h2 class="text-lg font-semibold text-[#38312F]">Doanh thu</h2>
+        <p class="text-3xl font-bold text-[#F8BC3B] mt-2">{{ dashboardData.weeklyRevenue | currency:'VND':'symbol':'1.0-0':'vi-VN' }}</p>
+            </div>
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <h2 class="text-lg font-semibold text-[#38312F]">Đơn hàng</h2>
+        <p class="text-3xl font-bold text-[#F8BC3B] mt-2">{{ dashboardData.weeklyOrders }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Thống kê đơn hàng -->
+  <section class="mb-8">
+    <p class="font-bold text-xl text-[#85461F] mb-4">Thống kê đơn hàng</p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <h2 class="text-lg font-semibold text-[#38312F]">Đơn hàng mới</h2>
+        <p class="text-3xl font-bold text-[#F8BC3B] mt-2">{{ dashboardData.newOrders }}</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <h2 class="text-lg font-semibold text-[#38312F]">Đang xử lý</h2>
+        <p class="text-3xl font-bold text-[#F8BC3B] mt-2">{{ dashboardData.processingOrders }}</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <h2 class="text-lg font-semibold text-[#38312F]">Hoàn thành</h2>
+        <p class="text-3xl font-bold text-[#F8BC3B] mt-2">{{ dashboardData.completedOrders }}</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition">
+        <h2 class="text-lg font-semibold text-[#38312F]">Đã hủy</h2>
+        <p class="text-3xl font-bold text-[#F8BC3B] mt-2">{{ dashboardData.cancelledOrders }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top bán chạy -->
+  <section class="mb-8">
+    <p class="font-bold text-xl text-[#85461F] mb-4">Top bán chạy</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold text-[#38312F]">Top sản phẩm bán chạy</h2>
+        <ul class="mt-4 space-y-2">
+          <li *ngFor="let product of dashboardData.bestSellingProducts" class="text-[#38312F]">
+            {{ product.productName }} <span class="font-bold text-[#F8BC3B]">({{ product.totalQuantity }} sản phẩm)</span>
+          </li>
+        </ul>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold text-[#38312F]">Top danh mục bán chạy</h2>
+        <ul class="mt-4 space-y-2">
+          <li *ngFor="let category of dashboardData.bestSellingCategories" class="text-[#38312F]">
+            {{ category.categoryName }} <span class="font-bold text-[#F8BC3B]">({{ category.totalQuantity }} sản phẩm)</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Thống kê khách hàng -->
+  <section class="mb-8">
+    <p class="font-bold text-xl text-[#85461F] mb-4">Thống kê khách hàng</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold text-[#38312F]">Khách hàng mới (7 ngày)</h2>
+        <p class="text-3xl font-bold text-[#F8BC3B] mt-2">{{ dashboardData.newCustomers }}</p>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold text-[#38312F]">Top khách hàng chi tiêu</h2>
+        <ul class="mt-4 space-y-2">
+          <li *ngFor="let customer of dashboardData.topCustomers" class="text-[#38312F]">
+            {{ customer.customerName }} <span class="font-bold text-[#F8BC3B]">({{ customer.totalAmount | currency:'VND':'symbol':'1.0-0':'vi-VN' }})</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="bg-white p-6 rounded-lg shadow-md mt-6">
+      <h2 class="text-lg font-semibold text-[#38312F]">Khách hàng gần đây</h2>
+      <ul class="mt-4 space-y-2">
+        <li *ngFor="let customer of dashboardData.recentCustomers" class="text-[#38312F]">
+          {{ customer.customerName }} <span class="font-bold text-[#F8BC3B]">({{ customer.OrderDate }})</span>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Biểu đồ -->
+  <section>
+    <p class="font-bold text-xl text-[#85461F] mb-4">Biểu đồ</p>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold text-[#38312F]">Hiệu suất bán hàng</h2>
+        <canvas id="salesChart" class="w-full" style="max-height: 300px;"></canvas>
+      </div>
+      <div class="bg-white p-6 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold text-[#38312F]">Danh mục phổ biến</h2>
+        <canvas id="categoriesChart" class="w-full" style="max-height: 300px;"></canvas>
+      </div>
+    </div>
+  </section>
+</div>

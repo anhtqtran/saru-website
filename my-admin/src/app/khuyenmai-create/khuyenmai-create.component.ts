@@ -1,3 +1,64 @@
+<<<<<<< HEAD
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-khuyenmai-create',
+  standalone: false,
+  templateUrl: './khuyenmai-create.component.html',
+  styleUrl: './khuyenmai-create.component.css'
+})
+export class KhuyenmaiCreateComponent {
+  promotion = {
+    name: '',
+    code: '',
+    startDate: '',
+    endDate: '',
+    discountType: '',
+    minAmount: null,
+    discountAmount: null,
+    quantity: null,
+    targetAmount: null,
+    limitPerUser: 3
+  };
+
+  isCancelPopupVisible = false;
+
+  showCancelPopup() {
+    this.isCancelPopupVisible = true;
+  }
+
+  closeCancelPopup() {
+    this.isCancelPopupVisible = false;
+  }
+
+  confirmCancel() {
+    this.resetForm();
+    this.closeCancelPopup();
+  }
+
+  resetForm() {
+    this.promotion = {
+      name: '',
+      code: '',
+      startDate: '',
+      endDate: '',
+      discountType: '',
+      minAmount: null,
+      discountAmount: null,
+      quantity: null,
+      targetAmount: null,
+      limitPerUser: 3
+    };
+  }
+
+  increaseLimit() {
+    this.promotion.limitPerUser++;
+  }
+
+  decreaseLimit() {
+    if (this.promotion.limitPerUser > 1) {
+      this.promotion.limitPerUser--;
+=======
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -94,10 +155,17 @@ export class KhuyenmaiCreateComponent implements OnInit {
       this.promotion.applicableScopeDisplay = this.promotion.applicableScope
         .map(catId => this.categoryOptions.find(cat => cat.id === catId)?.name || catId)
         .join(', ');
+>>>>>>> feature_quanlykhuyenmai
     }
   }
 
   onSubmit() {
+<<<<<<< HEAD
+    console.log('Form submitted', this.promotion);
+    // Implement your save logic here
+  }
+}
+=======
     if (!this.validateForm()) {
       this.errMessage = 'Vui lòng sửa các lỗi sau trước khi lưu:';
       return;
@@ -227,3 +295,4 @@ export class KhuyenmaiCreateComponent implements OnInit {
     this.router.navigate(['/']);
   }
 }
+>>>>>>> feature_quanlykhuyenmai

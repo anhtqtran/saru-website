@@ -1,0 +1,77 @@
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách nhóm sản phẩm</title>
+    <link rel="stylesheet" href="inventorybygroup.component.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="admin-header">
+        <button class="admin-button">ADMIN ▼</button>
+    </header>
+
+    <main class="container">
+        <!-- Tiêu đề trang -->
+        <div class="page-header">
+            <h1>Danh sách nhóm sản phẩm</h1>
+            <button class="add-button">
+                <img src="assets/images/add_circle.png" alt="Thêm nhóm sản phẩm"> Thêm nhóm sản phẩm
+            </button>
+        </div>
+
+        <!-- Bộ lọc và tìm kiếm -->
+        <div class="filters">
+            <button class="filter-button">
+                <img src="assets/images/stock.png" alt="Thêm điều kiện lọc"> Thêm điều kiện lọc
+            </button>
+            <div class="search-bar">
+                <img src="assets/images/Search.png" alt="Tìm kiếm">
+                <input type="text" placeholder="Tìm kiếm">
+            </div>
+        </div>
+
+        <!-- Bảng danh sách nhóm sản phẩm -->
+        <table class="product-table">
+            <thead>
+                <tr>
+                    <th><input type="checkbox"></th>
+                    <th>Tên nhóm</th>
+                    <th>Số lượng sản phẩm</th>
+                    <th>Điều kiện nhóm</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let group of displayedGroups">
+                    <td><input type="checkbox"></td>
+                    <td class="product-info">
+                        <img src="assets/images/product-placeholder.png" alt="Sản phẩm">
+                        <span>{{ group.name }}</span>
+                    </td>
+                    <td>{{ group.quantity }}</td>
+                    <td>{{ group.condition }}</td>
+                    <td class="actions">
+                        <img src="assets/images/eye.png" alt="Xem">
+                        <img src="assets/images/pen.png" alt="Chỉnh sửa">
+                        <img src="assets/images/trash.png" alt="Xóa">
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Footer -->
+        <div class="footer">
+            <select [(ngModel)]="selectedRows" (change)="updateTableRows()">
+                <option [value]="10">Hiển thị 10</option>
+                <option [value]="20">Hiển thị 20</option>
+                <option [value]="50">Hiển thị 50</option>
+                <option [value]="100">Hiển thị 100</option>
+            </select>
+            <p>Tổng sản phẩm: {{ allGroups.length }}</p>
+        </div>
+    </main>
+
+</body>
+</html>

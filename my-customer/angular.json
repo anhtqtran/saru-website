@@ -67,6 +67,11 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+                      "port": 4002,
+                      "host": "localhost",
+                      "proxyConfig": "src/proxy.conf.json"         
+                    },
           "configurations": {
             "production": {
               "buildTarget": "my-customer:build:production"

@@ -1,3 +1,16 @@
+<<<<<<< HEAD
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-khuyenmai-detail',
+  standalone: false,
+  templateUrl: './khuyenmai-detail.component.html',
+  styleUrl: './khuyenmai-detail.component.css'
+})
+export class KhuyenmaiDetailComponent {
+
+}
+=======
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -311,3 +324,4 @@ export class KhuyenmaiDetailComponent implements OnInit {
     this.validationErrors = [];
   }
 }
+>>>>>>> feature_quanlykhuyenmai
