@@ -3,6 +3,7 @@ import { ProductService } from '../services/product.service';
 import { Product } from '../classes/Product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Lightbox } from 'ngx-lightbox';
 
 @Component({
   selector: 'app-product-detail',
@@ -20,8 +21,11 @@ export class ProductDetailComponent implements OnInit {
     private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private lightbox: Lightbox) {}
+            openLightbox(image: string) {
+              this.lightbox.open([{ src: image, thumb: image }]); 
+            }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

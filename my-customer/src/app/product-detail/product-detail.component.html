@@ -11,27 +11,61 @@
       <div class="w-full md:w-1/2">
         <div class="relative">
           <!-- Nhãn sale với % giảm -->
-          <div *ngIf="prod?.isOnSale" class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full">
+          <div *ngIf="prod?.isOnSale" class="absolute top-2 left-2 bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full z-10">
             {{ prod.discountPercentage }}% OFF
           </div>
-          <img [src]="selectedImage" alt="{{prod.ProductName}}" class="w-full h-auto object-cover rounded-lg shadow-md">
+          <!-- Hình ảnh chính -->
+          <div class="w-full h-96 bg-gray-100 flex items-center justify-center overflow-hidden rounded-lg shadow-md">
+            <img 
+              [src]="selectedImage" 
+              alt="{{prod.ProductName}}" 
+              class="max-w-full max-h-full object-contain transition-transform duration-300 ease-in-out hover:scale-105 cursor-pointer"
+              (click)="selectedImage && openLightbox(selectedImage)">
+          </div>
+          <!-- Danh sách thumbnail -->
           <div class="flex mt-4 space-x-2 overflow-x-auto">
             <!-- Ảnh bìa -->
-            <div *ngIf="prod.ProductImageCover" class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden">
-              <img [src]="prod.ProductImageCover" (click)="selectImage(prod.ProductImageCover)" class="max-w-full max-h-full object-contain cursor-pointer transition duration-200" [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageCover, 'hover:border-blue-500': selectedImage !== prod.ProductImageCover}">
+            <div 
+              *ngIf="prod.ProductImageCover" 
+              class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-md"
+              (click)="selectImage(prod.ProductImageCover); openLightbox(prod.ProductImageCover)">
+              <img 
+                [src]="prod.ProductImageCover" 
+                class="max-w-full max-h-full object-contain transition-transform duration-200 ease-in-out hover:scale-110"
+                [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageCover}">
             </div>
-            <!-- Ảnh phụ -->
-            <div *ngIf="prod.ProductImageSub1" class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden">
-              <img [src]="prod.ProductImageSub1" (click)="selectImage(prod.ProductImageSub1)" class="max-w-full max-h-full object-contain cursor-pointer transition duration-200" [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageSub1, 'hover:border-blue-500': selectedImage !== prod.ProductImageSub1}">
+            <!-- Ảnh phụ 1 -->
+            <div 
+              *ngIf="prod.ProductImageSub1" 
+              class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-md"
+              (click)="selectImage(prod.ProductImageSub1); openLightbox(prod.ProductImageSub1)">
+              <img 
+                [src]="prod.ProductImageSub1" 
+                class="max-w-full max-h-full object-contain transition-transform duration-200 ease-in-out hover:scale-110"
+                [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageSub1}">
             </div>
-            <div *ngIf="prod.ProductImageSub2" class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden">
-              <img [src]="prod.ProductImageSub2" (click)="selectImage(prod.ProductImageSub2)" class="max-w-full max-h-full object-contain cursor-pointer transition duration-200" [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageSub2, 'hover:border-blue-500': selectedImage !== prod.ProductImageSub2}">
+            <!-- Ảnh phụ 2 -->
+            <div 
+              *ngIf="prod.ProductImageSub2" 
+              class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-md"
+              (click)="selectImage(prod.ProductImageSub2); openLightbox(prod.ProductImageSub2)">
+              <img 
+                [src]="prod.ProductImageSub2" 
+                class="max-w-full max-h-full object-contain transition-transform duration-200 ease-in-out hover:scale-110"
+                [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageSub2}">
             </div>
-            <div *ngIf="prod.ProductImageSub3" class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden">
-              <img [src]="prod.ProductImageSub3" (click)="selectImage(prod.ProductImageSub3)" class="max-w-full max-h-full object-contain cursor-pointer transition duration-200" [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageSub3, 'hover:border-blue-500': selectedImage !== prod.ProductImageSub3}">
+            <!-- Ảnh phụ 3 -->
+            <div 
+              *ngIf="prod.ProductImageSub3" 
+              class="w-16 h-16 flex items-center justify-center bg-gray-100 rounded overflow-hidden cursor-pointer transition-all duration-200 hover:shadow-md"
+              (click)="selectImage(prod.ProductImageSub3); openLightbox(prod.ProductImageSub3)">
+              <img 
+                [src]="prod.ProductImageSub3" 
+                class="max-w-full max-h-full object-contain transition-transform duration-200 ease-in-out hover:scale-110"
+                [ngClass]="{'border-2 border-blue-500': selectedImage === prod.ProductImageSub3}">
             </div>
-            <!-- Placeholder nếu không đủ ảnh -->
-            <div *ngIf="!(prod.ProductImageSub1 || prod.ProductImageSub2 || prod.ProductImageSub3)" class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-500">
+            <!-- Placeholder nếu không có ảnh phụ -->
+            <div *ngIf="!(prod.ProductImageCover || prod.ProductImageSub1 || prod.ProductImageSub2 || prod.ProductImageSub3)" class="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-500">
               No Image
             </div>
           </div>
@@ -110,7 +144,7 @@
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         <div *ngFor="let relatedProduct of prod.relatedProducts" (click)="goToProductDetail($event, relatedProduct._id)" class="border rounded-lg p-4 shadow-md bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
           <div class="w-full h-48 flex justify-center items-center overflow-hidden rounded-lg">
-            <img *ngIf="relatedProduct.ProductImageCover" [src]="relatedProduct.ProductImageCover" alt="{{relatedProduct.ProductName}}" class="w-full h-full object-contain transition-all duration-300 hover:scale-105">
+            <img *ngIf="relatedProduct.ProductImageCover" [src]="relatedProduct.ProductImageCover" alt="{{relatedProduct.ProductName}}" class="w-full h-full object-contain transition-transform duration-300 ease-in-out hover:scale-105">
             <img *ngIf="!relatedProduct.ProductImageCover" src="assets/images/default-product.png" alt="No image" class="w-32 h-32 object-contain">
           </div>
           <h3 class="text-lg font-semibold mt-3 text-gray-800 truncate">{{relatedProduct.ProductName}}</h3>
