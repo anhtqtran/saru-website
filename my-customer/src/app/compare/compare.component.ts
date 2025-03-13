@@ -31,6 +31,13 @@ export class CompareComponent implements OnInit, OnDestroy {
       })
     );
 
+    // Lắng nghe thay đổi trạng thái đăng nhập
+    this.subscriptions.add(
+      this.productService.loginStatusChanged$.subscribe(() => {
+        this.loadCompareProducts();
+      })
+    );
+
     // Tải danh sách so sánh ban đầu
     this.loadCompareProducts();
   }

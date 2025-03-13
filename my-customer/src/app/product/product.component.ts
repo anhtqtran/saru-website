@@ -3,7 +3,7 @@ import { ProductService } from '../services/product.service';
 import { Subscription } from 'rxjs';
 import { Product, Pagination } from '../classes/Product';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router'; // Thêm Router
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -15,10 +15,10 @@ export class ProductComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   products: Product[] = [];
   pagination: Pagination = new Pagination();
-  categories: { CateID: string, CateName: string }[] = [];  // Lưu danh sách danh mục từ API
-  brands: string[] = [];      // Lưu danh sách thương hiệu từ API
-  wineVolumes: string[] = []; // Lưu danh sách dung tích rượu từ API
-  wineTypes: string[] = [];   // Lưu danh sách loại rượu từ API
+  categories: { CateID: string, CateName: string }[] = [];
+  brands: string[] = [];
+  wineVolumes: string[] = [];
+  wineTypes: string[] = [];
 
   selectedCategory: string = '';
   selectedBrand: string = '';
@@ -37,7 +37,8 @@ export class ProductComponent implements OnInit, OnDestroy {
     sort: 'priceDesc'
   };
 
-  constructor(private productService: ProductService, private snackBar: MatSnackBar, private router: Router) {}  
+  constructor(private productService: ProductService, private snackBar: MatSnackBar, private router: Router) {}
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
@@ -45,8 +46,9 @@ export class ProductComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadProducts();
     this.loadFilterData();
-    this.loadCategories()
+    this.loadCategories();
   }
+
   goToProductDetail(productId: string): void {
     this.router.navigate(['/products', productId]);
   }
@@ -55,7 +57,16 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.productService.getProducts(this.filters, page).subscribe({
       next: (data) => {
         console.log("Product data received:", data);
-        this.products = data.data;
+        this.products = data.data.map(product => ({
+          ...product,
+          currentPrice: product.currentPrice ?? product.ProductPrice ?? 0,
+          originalPrice: product.originalPrice ?? product.ProductPrice ?? 0,
+          stockStatus: product.stockStatus ?? 'In Stock',
+          isOnSale: !!product.isOnSale,
+          discountPercentage: product.discountPercentage ?? 0,
+          averageRating: product.averageRating ?? undefined, // Đảm bảo không undefined
+          totalReviewCount: product.totalReviewCount ?? 0 // Đảm bảo không undefined
+        }));
         this.pagination = data.pagination;
         
         this.products.forEach(product => {
@@ -63,7 +74,7 @@ export class ProductComponent implements OnInit, OnDestroy {
             this.loadImage(product);
           } else {
             console.warn(`Product ${product.ProductName} has no ImageID`);
-            product.ProductImageCover = 'assets/images/default-product.png'; // Đặt mặc định nếu không có ImageID
+            product.ProductImageCover = 'assets/images/default-product.png';
           }
         });
       },
@@ -73,57 +84,54 @@ export class ProductComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
+
+
+
   loadCategories(): void {
     this.productService.getCategories().subscribe({
       next: (data) => {
         console.log("Categories received:", data);
-        this.categories = data; // Đảm bảo lưu cả CateID và CateName
+        this.categories = data;
       },
       error: (error) => console.error('Error loading categories:', error)
     });
   }
-  
-  
 
-loadImage(product: Product): void {
-  if (!product.ImageID) {
-    product.ProductImageCover = 'assets/images/default-product.png';
-    return;
-  }
-  const sub = this.productService.getImage(product.ImageID).subscribe({
-    next: (imageData) => {
-      product.ProductImageCover = imageData.ProductImageCover || 'assets/images/default-product.png';
-    },
-    error: (error) => {
-      console.warn(`Failed to load image for ${product.ProductName}: ${error.message}`);
+  loadImage(product: Product): void {
+    if (!product.ImageID) {
       product.ProductImageCover = 'assets/images/default-product.png';
+      return;
     }
-  });
-  this.subscriptions.push(sub);
-}
-
-
-
+    const sub = this.productService.getImage(product.ImageID).subscribe({
+      next: (imageData) => {
+        product.ProductImageCover = imageData.ProductImageCover || 'assets/images/default-product.png';
+      },
+      error: (error) => {
+        console.warn(`Failed to load image for ${product.ProductName}: ${error.message}`);
+        product.ProductImageCover = 'assets/images/default-product.png';
+      }
+    });
+    this.subscriptions.push(sub);
+  }
 
   loadFilterData(): void {
     this.productService.getCategories().subscribe({
       next: (categories) => {
-        this.categories = categories; // Lưu danh sách danh mục với CateID và CateName
+        this.categories = categories;
       },
       error: (error) => console.error('Error loading categories:', error)
     });
-  
-    // Nếu cần các bộ lọc khác (brands, wineVolumes, wineTypes), dùng API /api/filters ở trên
+
     this.productService.getFilters().subscribe({
       next: (data) => {
-        this.brands = data.brands;
-        this.wineVolumes = data.wineVolumes;
-        this.wineTypes = data.wineTypes;
+        this.brands = data.brands || [];
+        this.wineVolumes = data.wineVolumes || [];
+        this.wineTypes = data.wineTypes || [];
       },
       error: (error) => console.error('Error loading filters:', error)
     });
   }
+
   onFilterChange(): void {
     this.filters = {
       ...this.filters,
@@ -132,12 +140,8 @@ loadImage(product: Product): void {
       wineVolume: this.selectedWineVolume,
       wineType: this.selectedWineType
     };
-    
     this.loadProducts();
   }
-  
-  
-  
 
   onPageChange(page: number): void {
     this.loadProducts(page);
@@ -150,7 +154,6 @@ loadImage(product: Product): void {
     });
   }
 
-  // Trong product.component.ts hoặc product-detail.component.ts
   addToCompare(product: Product): void {
     console.log('Adding to compare, productId:', product._id);
     this.productService.addToCompare(product._id.toString()).subscribe({
@@ -165,7 +168,6 @@ loadImage(product: Product): void {
     });
   }
 
-  
   getPageNumbers(): number[] {
     const total = this.pagination.totalPages;
     const current = this.pagination.currentPage;
@@ -175,5 +177,4 @@ loadImage(product: Product): void {
     if (end - start + 1 < maxDisplay) start = Math.max(1, end - maxDisplay + 1);
     return Array.from({ length: end - start + 1 }, (_, i) => start + i);
   }
-  
 }
