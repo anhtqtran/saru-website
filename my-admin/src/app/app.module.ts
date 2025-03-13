@@ -14,7 +14,6 @@ import { CurrencyPipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
-    DonhangCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,6 +22,7 @@ import { CurrencyPipe } from '@angular/common';
     FormsModule,
     RouterModule,
     DonhangDetailComponent,
+    DonhangCreateComponent,
     HttpClientModule,
     CurrencyPipe
   ],

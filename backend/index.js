@@ -13,7 +13,7 @@ const cors = require("cors");
 app.use(cors());
 
 const { MongoClient, ObjectId } = require('mongodb');
-const mongoURI = "mongodb+srv://user1:ry3l1jwj1IJlM1fT@database.nkts1.mongodb.net/?retryWrites=true&w=majority";
+const mongoURI = "mongodb+srv://user1:ry3l1jwj1IJlM1fT@database.nkts1.mongodb.net/?";
 const client = new MongoClient(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -95,71 +95,125 @@ app.listen(port, () => {
   console.log(`Server chạy trên cổng ${port}`);
 });
 
-// show chi tiết đơn hàng (kết hợp dữ liệu từ orders và orderdetails)
 app.get("/orders/:id", async (req, res) => {
   try {
     const orderId = req.params.id;
 
+    // Kiểm tra và log ID nhận được
+    console.log('Order ID nhận từ request:', orderId);
+
+    // Kiểm tra định dạng ID
+    if (!ObjectId.isValid(orderId)) {
+      return res.status(400).json({
+        message: `ID đơn hàng không hợp lệ. Phải là chuỗi hex 24 ký tự. Nhận được: ${orderId}`,
+      });
+    }
+
+    // Chuyển đổi sang ObjectId
+    const objectId = new ObjectId(orderId);
+
     // Lấy thông tin đơn hàng từ collection `orders`
-    const order = await orderCollection.findOne({ _id: new ObjectId(orderId) });
+    const order = await orderCollection.findOne({ _id: objectId });
 
     if (!order) {
       return res.status(404).json({ message: "Đơn hàng không tồn tại" });
     }
 
+    // Log dữ liệu đơn hàng để kiểm tra
+    console.log('Dữ liệu đơn hàng:', order);
+
     // Lấy thông tin khách hàng từ collection `customers`
-    const customer = await customerCollection.findOne({ _id: new ObjectId(order.CustomerID) });
-    if (customer) {
-      order.CustomerName = customer.CustomerName; // Thêm tên khách hàng vào đơn hàng
-    }
+    const customer = await customerCollection.findOne({ CustomerID: order.CustomerID });
+    order.CustomerName = customer ? customer.CustomerName : "Không xác định";
 
     // Lấy thông tin trạng thái thanh toán từ `paymentstatuses`
-    const paymentStatus = await paymentStatusCollection.findOne({ _id: new ObjectId(order.PaymentStatusID) });
-    order.PaymentStatus = paymentStatus ? paymentStatus.Status : "Không xác định";
+    const paymentStatus = await paymentStatusCollection.findOne({ PaymentStatusID: order.PaymentStatusID });
+    order.PaymentStatus = paymentStatus ? paymentStatus.PaymentStatus : "Không xác định";
 
     // Lấy thông tin phương thức thanh toán từ `paymentmethods`
-    const paymentMethod = await paymentMethodCollection.findOne({ _id: new ObjectId(order.PaymentMethodID) });
-    order.PaymentMethod = paymentMethod ? paymentMethod.Method : "Không xác định";
+    const paymentMethod = await paymentMethodCollection.findOne({ PaymentMethodID: order.PaymentMethodID });
+    order.PaymentMethod = paymentMethod ? paymentMethod.PaymentMethod : "Không xác định";
 
     // Lấy thông tin trạng thái đơn hàng từ `orderstatuses`
-    const orderStatus = await orderStatusCollection.findOne({ _id: new ObjectId(order.OrderStatusID) });
+    const orderStatus = await orderStatusCollection.findOne({ OrderStatusID: order.OrderStatusID });
     order.Status = orderStatus ? orderStatus.Status : "Không xác định";
 
     // Lấy thông tin chi tiết đơn hàng từ collection `orderdetails`
-    const orderDetails = await orderdetailsCollection.find({ orderId: order._id }).toArray();
+    const orderDetails = await orderdetailsCollection.find({ orderId: objectId }).toArray();
+    console.log('Dữ liệu orderDetails:', orderDetails);
 
     // Lấy danh sách ProductID từ orderdetails
-    const productIds = orderDetails.map(detail => detail.ProductId);
+    const productIds = [];
+    const detailedOrderItems = orderDetails.map((detail) => {
+      // Kiểm tra ProductId trước khi chuyển đổi
+      if (!detail.ProductId || typeof detail.ProductId !== 'string') {
+        console.warn(`ProductId không hợp lệ trong orderdetails: ${detail.ProductId}`);
+        return {
+          ProductID: detail.ProductId || 'Không xác định',
+          Quantity: detail.Quantity || 0,
+          ProductName: "Không xác định",
+          ProductPrice: 0,
+          TotalPrice: 0,
+        };
+      }
 
-    // Lấy thông tin sản phẩm từ collection `products`
-    const products = await productCollection.find({ _id: { $in: productIds.map(id => new ObjectId(id)) } }).toArray();
+      if (ObjectId.isValid(detail.ProductId)) {
+        productIds.push(new ObjectId(detail.ProductId));
+      } else {
+        console.warn(`ProductId không hợp lệ trong orderdetails: ${detail.ProductId}`);
+      }
 
-    // Ghép thông tin sản phẩm vào orderDetails
-    const detailedOrderItems = orderDetails.map(detail => {
-      const product = products.find(p => p._id.toString() === detail.ProductId.toString());
       return {
         ProductID: detail.ProductId,
-        Quantity: detail.Quantity,
-        ProductName: product ? product.name : "Không xác định",
-        ProductPrice: product ? product.price : 0,
-        TotalPrice: product ? product.price * detail.Quantity : 0
+        Quantity: detail.Quantity || 0,
       };
+    });
+
+    // Lấy thông tin sản phẩm từ collection `products`
+    let products = [];
+    if (productIds.length > 0) {
+      products = await productCollection
+        .find({ _id: { $in: productIds } })
+        .toArray();
+    }
+
+    // Ghép thông tin sản phẩm vào orderDetails
+    detailedOrderItems.forEach((item) => {
+      const product = products.find((p) => p._id.toString() === item.ProductID.toString());
+      if (product) {
+        item.ProductName = product.name || "Không xác định";
+        item.ProductPrice = product.price || 0;
+        item.TotalPrice = (product.price || 0) * item.Quantity;
+      } else {
+        item.ProductName = "Không xác định";
+        item.ProductPrice = 0;
+        item.TotalPrice = 0;
+      }
     });
 
     // Kết hợp tất cả dữ liệu lại và trả về
     const orderWithDetails = {
-      ...order, // Thông tin tổng quan đơn hàng
-      customer: {
-        CustomerID: order.CustomerID,
-        CustomerName: order.CustomerName
-      },
-      items: detailedOrderItems // Danh sách sản phẩm chi tiết
+      _id: order._id.toString(),
+      OrderID: order.OrderID,
+      OrderDate: order.OrderDate,
+      CustomerID: order.CustomerID,
+      CustomerName: order.CustomerName,
+      OrderStatusID: order.OrderStatusID,
+      Status: order.Status,
+      PaymentStatusID: order.PaymentStatusID,
+      PaymentStatus: order.PaymentStatus,
+      PaymentMethodID: order.PaymentMethodID,
+      PaymentMethod: order.PaymentMethod,
+      items: detailedOrderItems,
     };
 
     res.json(orderWithDetails);
   } catch (error) {
-    console.error("Lỗi khi lấy thông tin đơn hàng:", error);
-    res.status(500).json({ message: "Lỗi server khi lấy thông tin đơn hàng" });
+    console.error("Lỗi chi tiết khi lấy thông tin đơn hàng:", error);
+    res.status(500).json({
+      message: "Lỗi server khi lấy thông tin đơn hàng",
+      error: error.message,
+    });
   }
 });
 
@@ -202,5 +256,102 @@ app.post("/orders", async (req, res) => {
   } catch (error) {
     console.error("Lỗi khi tạo đơn hàng:", error);
     res.status(500).json({ message: "Lỗi server khi tạo đơn hàng" });
+  }
+});
+// Cập nhật đơn hàng
+app.put("/orders/:id", async (req, res) => {
+  try {
+    const orderId = req.params.id;
+    const updatedOrder = req.body;
+
+  // Cập nhật đơn hàng trong collection `orders`
+  const result = await orderCollection.updateOne(
+    { _id: new ObjectId(orderId) },
+    { $set: updatedOrder }
+  );
+
+  if (result.matchedCount === 0) {
+    return res.status(404).json({ message: "Không tìm thấy đơn hàng để cập nhật" });
+  }
+
+  res.json({ message: "Cập nhật đơn hàng thành công!" });
+} catch (error) {
+  console.error("Lỗi khi cập nhật đơn hàng:", error);
+  res.status(500).json({ message: "Lỗi server khi cập nhật đơn hàng" });
+}
+});
+
+// API gộp dữ liệu liên quan đến đơn hàng
+app.get("/combined-data", cors(), async (req, res) => {
+  try {
+    // Lấy dữ liệu từ các collection
+    const orders = await orderCollection.find({}).toArray();
+    const orderStatuses = await orderStatusCollection.find({}).toArray();
+    const paymentMethods = await paymentMethodCollection.find({}).toArray();
+    const paymentStatuses = await paymentStatusCollection.find({}).toArray();
+    const customers = await customerCollection.find({}).toArray();
+
+    // Log dữ liệu để debug
+    console.log('Dữ liệu paymentMethods:', paymentMethods);
+    console.log('Dữ liệu paymentStatuses:', paymentStatuses);
+
+    // Gộp thông tin trạng thái, phương thức thanh toán, trạng thái thanh toán và khách hàng vào đơn hàng
+    const combinedOrders = orders.map(order => {
+      // Tìm thông tin trạng thái đơn hàng
+      const orderStatus = orderStatuses.find(status => status.OrderStatusID === order.OrderStatusID);
+      const orderStatusText = orderStatus ? orderStatus.Status : "Không xác định";
+
+      // Tìm thông tin phương thức thanh toán
+      const paymentMethod = paymentMethods.find(method => method.PaymentMethodID === order.PaymentMethodID);
+      const paymentMethodText = paymentMethod ? paymentMethod.PaymentMethod : "Không xác định";
+
+      // Tìm thông tin trạng thái thanh toán
+      const paymentStatus = paymentStatuses.find(status => status.PaymentStatusID === order.PaymentStatusID);
+      const paymentStatusText = paymentStatus ? paymentStatus.PaymentStatus : "Không xác định";
+
+      // Tìm thông tin khách hàng
+      const customer = customers.find(cust => cust.CustomerID === order.CustomerID);
+      const customerName = customer ? customer.CustomerName : "Không xác định";
+
+      // Log để kiểm tra từng đơn hàng
+      console.log(`Đơn hàng ${order.OrderID}:`, {
+        PaymentMethodID: order.PaymentMethodID,
+        PaymentMethodText: paymentMethodText,
+        PaymentStatusID: order.PaymentStatusID,
+        PaymentStatusText: paymentStatusText
+      });
+
+      return {
+        ...order,
+        OrderStatusText: orderStatusText,
+        PaymentMethodText: paymentMethodText,
+        PaymentStatusText: paymentStatusText,
+        CustomerName: customerName,
+      };
+    });
+
+    // Sắp xếp đơn hàng theo ngày đặt hàng (mới nhất trước)
+    combinedOrders.sort((a, b) => {
+      const dateA = new Date(a.OrderDate).getTime();
+      const dateB = new Date(b.OrderDate).getTime();
+      return dateB - dateA;
+    });
+
+    // Tạo đối tượng dữ liệu gộp
+    const combinedData = {
+      orders: combinedOrders,
+      orderStatuses,
+      paymentMethods,
+      paymentStatuses,
+      customers,
+      total: {
+        orders: combinedOrders.length,
+      },
+    };
+
+    res.status(200).json(combinedData);
+  } catch (error) {
+    console.error("❌ Lỗi khi xử lý /combined-data:", error);
+    res.status(500).json({ error: "Internal server error", details: error.message });
   }
 });

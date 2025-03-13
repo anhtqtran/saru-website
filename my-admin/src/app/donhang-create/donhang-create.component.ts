@@ -1,117 +1,198 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { OrderService } from '../order-service.service';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
+interface Order {
+  CustomerID: string;
+  OrderDate: string;
+  OrderStatusID: number;
+  PaymentMethodID: string;
+  PaymentStatusID: string;
+  items: { ProductID: string; Quantity: number; Price?: number }[];
+}
+
+interface Customer {
+  _id: string;
+  CustomerName: string;
+}
+
+interface OrderStatus {
+  OrderStatusID: number;
+  Status: string;
+}
+
+interface PaymentMethod {
+  _id: string;
+  Method: string;
+}
+
+interface PaymentStatus {
+  _id: string;
+  Status: string;
+}
+
+interface Product {
+  _id: string;
+  name: string;
+  price: number;
+}
+
 @Component({
   selector: 'app-donhang-create',
-  standalone: false,
   templateUrl: './donhang-create.component.html',
-  styleUrls: ['./donhang-create.component.css']
+  styleUrls: ['./donhang-create.component.css'],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
 })
-export class DonhangCreateComponent {
-  customer = {
-    name: '',
-    phone: '',
-    email: '',
-    address: '',
-    city: ''
+export class DonhangCreateComponent implements OnInit {
+  order: Order = {
+    CustomerID: '',
+    OrderDate: '',
+    OrderStatusID: 0,
+    PaymentMethodID: '',
+    PaymentStatusID: '',
+    items: [],
   };
+  customers: Customer[] = [];
+  orderStatuses: OrderStatus[] = [];
+  paymentMethods: PaymentMethod[] = [];
+  paymentStatuses: PaymentStatus[] = [];
+  products: Product[] = [];
+  isSubmitting: boolean = false;
+  isCancelPopupVisible: boolean = false;
+  errMessage: string = '';
+  successMessage: string = '';
 
-  products = [
-    { name: '', quantity: 1, price: 0, total: 0 }
-  ];
+  constructor(
+    private orderService: OrderService,
+    private router: Router,
+    private http: HttpClient
+  ) {}
 
-  paymentMethod: string = 'cash';
-  totalPrice: number = 0;
+  ngOnInit() {
+    this.loadData();
+    this.addProduct(); // Thêm một sản phẩm mặc định
+  }
 
-  // Pop-up confirmation state
-  isPopupVisible: boolean = false;
-  popupMessage: string = '';
-  popupAction!: () => void;
+  loadData() {
+    // Lấy danh sách khách hàng
+    this.http.get<Customer[]>('http://localhost:4002/customers').subscribe({
+      next: (data) => (this.customers = data),
+      error: (err) => (this.errMessage = 'Lỗi khi tải danh sách khách hàng: ' + err.message),
+    });
 
-  constructor(private orderService: OrderService, private router: Router) {}
+    // Lấy danh sách trạng thái đơn hàng
+    this.http.get<OrderStatus[]>('http://localhost:4002/order-status').subscribe({
+      next: (data) => (this.orderStatuses = data),
+      error: (err) => (this.errMessage = 'Lỗi khi tải trạng thái đơn hàng: ' + err.message),
+    });
+
+    // Lấy danh sách phương thức thanh toán
+    this.http.get<PaymentMethod[]>('http://localhost:4002/payment-methods').subscribe({
+      next: (data) => (this.paymentMethods = data),
+      error: (err) => (this.errMessage = 'Lỗi khi tải phương thức thanh toán: ' + err.message),
+    });
+
+    // Lấy danh sách trạng thái thanh toán
+    this.http.get<PaymentStatus[]>('http://localhost:4002/payment-status').subscribe({
+      next: (data) => (this.paymentStatuses = data),
+      error: (err) => (this.errMessage = 'Lỗi khi tải trạng thái thanh toán: ' + err.message),
+    });
+
+    // Lấy danh sách sản phẩm
+    this.http.get<Product[]>('http://localhost:4002/products').subscribe({
+      next: (data) => (this.products = data),
+      error: (err) => (this.errMessage = 'Lỗi khi tải danh sách sản phẩm: ' + err.message),
+    });
+  }
 
   addProduct() {
-    this.products.push({ name: '', quantity: 1, price: 0, total: 0 });
+    this.order.items.push({ ProductID: '', Quantity: 1 });
   }
 
   removeProduct(index: number) {
-    this.products.splice(index, 1);
-    this.updateTotalPrice();
+    if (this.order.items.length > 1) {
+      this.order.items.splice(index, 1);
+    }
   }
 
-  updateTotalPrice() {
-    this.totalPrice = 0;
-    this.products.forEach(product => {
-      product.total = product.quantity * product.price;
-      this.totalPrice += product.total;
-    });
+  updateProductPrice(index: number) {
+    const item = this.order.items[index];
+    const product = this.products.find(p => p._id === item.ProductID);
+    if (product) {
+      item.Price = product.price;
+    }
   }
 
-  submitOrder() {
-    const orderData = {
-      customer: this.customer,
-      products: this.products,
-      paymentMethod: this.paymentMethod,
-      totalPrice: this.totalPrice
+  getTotalAmount(): number {
+    return this.order.items.reduce((sum, item) => {
+      const product = this.products.find(p => p._id === item.ProductID);
+      return sum + (product ? product.price * item.Quantity : 0);
+    }, 0);
+  }
+
+  validateForm(): boolean {
+    const errors: string[] = [];
+
+    if (!this.order.CustomerID) errors.push('Khách hàng không được để trống.');
+    if (!this.order.OrderDate) errors.push('Ngày đặt hàng không được để trống.');
+    if (!this.order.OrderStatusID) errors.push('Trạng thái đơn hàng không được để trống.');
+    if (!this.order.PaymentMethodID) errors.push('Phương thức thanh toán không được để trống.');
+    if (!this.order.PaymentStatusID) errors.push('Trạng thái thanh toán không được để trống.');
+    if (this.order.items.length === 0 || this.order.items.some(item => !item.ProductID || item.Quantity <= 0)) {
+      errors.push('Phải có ít nhất một sản phẩm với số lượng hợp lệ.');
+    }
+
+    this.errMessage = errors.join('\n');
+    return errors.length === 0;
+  }
+
+  onSubmit() {
+    if (!this.validateForm()) {
+      return;
+    }
+
+    this.isSubmitting = true;
+    const newOrder = {
+      CustomerID: this.order.CustomerID,
+      OrderDate: this.order.OrderDate,
+      OrderStatusID: this.order.OrderStatusID,
+      PaymentMethodID: this.order.PaymentMethodID,
+      PaymentStatusID: this.order.PaymentStatusID,
+      products: this.order.items.map(item => ({
+        ProductId: item.ProductID,
+        Quantity: item.Quantity,
+      })),
     };
 
-    console.log('Customer Info:', this.customer);
-    console.log('Products:', this.products);
-    console.log('Payment Method:', this.paymentMethod);
-    console.log('Total Price:', this.totalPrice);
-
-    this.orderService.addOrder(orderData).subscribe(
-      response => {
-        alert('Đơn hàng đã được tạo thành công!');
-        this.router.navigate(['/donhang-list']); // Chuyển về trang danh sách đơn hàng
+    this.orderService.addOrder(newOrder).subscribe({
+      next: (response) => {
+        this.successMessage = 'Tạo đơn hàng thành công!';
+        this.errMessage = '';
+        this.isSubmitting = false;
+        setTimeout(() => this.router.navigate(['/']), 2000);
       },
-      error => {
-        alert('Có lỗi xảy ra khi tạo đơn hàng!');
-        console.error(error);
-      }
-    );
-  }
-
-  resetForm() {
-    this.customer = { name: '', phone: '', email: '', address: '', city: '' };
-    this.products = [{ name: '', quantity: 1, price: 0, total: 0 }];
-    this.paymentMethod = 'cash';
-    this.totalPrice = 0;
-  }
-
-  // Show confirmation pop-up
-  showPopup(message: string, action: () => void) {
-    this.popupMessage = message;
-    this.popupAction = action;
-    this.isPopupVisible = true;
-  }
-  
-  confirmPopup() {
-    if (this.popupAction) {
-      this.popupAction();
-    }
-    this.isPopupVisible = false;
-  }
-  
-  cancelPopup() {
-    this.isPopupVisible = false;
-  }
-
-  removeProductWithConfirmation(index: number) {
-    this.showPopup(`Bạn có xác nhận xóa sản phẩm này?`, () => {
-      this.removeProduct(index);
+      error: (err) => {
+        this.errMessage = 'Lỗi khi tạo đơn hàng: ' + err.message;
+        this.successMessage = '';
+        this.isSubmitting = false;
+      },
     });
   }
 
-  submitOrderWithConfirmation() {
-    this.showPopup('Bạn có xác nhận đơn hàng này?', () => {
-      this.submitOrder();
-    });
+  showCancelPopup() {
+    this.isCancelPopupVisible = true;
   }
 
-  resetFormWithConfirmation() {
-    this.showPopup('Bạn có xác nhận hủy thay đổi?', () => {
-      this.resetForm();
-    });
+  closeCancelPopup() {
+    this.isCancelPopupVisible = false;
+  }
+
+  confirmCancel() {
+    this.isCancelPopupVisible = false;
+    this.router.navigate(['/']);
   }
 }

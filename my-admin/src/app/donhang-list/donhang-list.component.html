@@ -131,7 +131,7 @@
             <div class="flex justify-center space-x-4 items-center">
               <img src="assets/images/trash icon.png" alt="Xóa" class="w-6 h-6 cursor-pointer" (click)="confirmDelete($event, order)" />
               <img src="assets/images/print icon.png" alt="In" class="w-6 h-6 cursor-pointer" (click)="printOrder($event)" />
-              <img src="assets/images/edit icon.png" alt="Sửa" class="w-10 h-10 cursor-pointer" (click)="goToDetail(order)" />
+              <img src="assets/images/edit icon.png" alt="Sửa" class="w-10 h-10 cursor-pointer" (click)="onEdit(order._id)" />
             </div>
           </td>
         </tr>

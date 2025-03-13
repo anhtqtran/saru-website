@@ -5,10 +5,10 @@ import { DonhangCreateComponent } from './donhang-create/donhang-create.componen
 import { DonhangDetailComponent } from './donhang-detail/donhang-detail.component';
 
 const routes: Routes = [
-  { path: '', component: DonhangListComponent},
-  { path: 'donhang-create', component: DonhangCreateComponent },
+  { path: '', component: DonhangListComponent },
   { path: 'donhang-detail/:id', component: DonhangDetailComponent },
-  { path: '', redirectTo: '/donhang-list', pathMatch: 'full' }
+  { path: 'donhang-create', component: DonhangCreateComponent },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

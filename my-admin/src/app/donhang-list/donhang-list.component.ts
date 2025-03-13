@@ -169,10 +169,9 @@ export class DonhangListComponent implements OnInit {
     window.open(url, '_blank');
   }
 
-  goToDetail(order: Order) {
-    const url = this.router.serializeUrl(this.router.createUrlTree(['/donhang-detail', order._id]));
-    window.open(url, '_blank');
-  }  
+  onEdit(orderId: string): void {
+    this.router.navigate([`/donhang-detail/${orderId}`]);
+  }
     
   selectedAction: string = ''; // Lưu giá trị hành động được chọn
 
