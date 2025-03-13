@@ -1,58 +1,64 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FaqComponent } from './faq/faq.component';
-import { FaqCreateComponent } from './faq-create/faq-create.component';
-// import { ProductsComponent } from './products/products.component';
-import { ProductFormComponent } from './product-form/product-form.component';
-import { ConsultantComponent } from './consultant/consultant.component';
-import { CategoriesComponent } from './categories/categories.component';
-import { CategoryFormComponent } from './category-form/category-form.component';
-// import { BlogComponent } from './blog/blog.component';
-import { DemoComponent } from './demo/demo.component';
-// import { BlogCreateComponent } from './blog-create/blog-create.component';
-import { CustomerComponent } from './customer/customer.component';
-import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
-import { BloglistComponent } from './allblog/bloglist/bloglist.component';
 import { BlogdetailComponent } from './allblog/blogdetail/blogdetail.component';
+import { CategoriesComponent } from './allblog/categories/categories.component';
+import { CategoryFormComponent } from './allblog/category-form/category-form.component';
+import { BloglistComponent } from './allblog/bloglist/bloglist.component';
+import { FaqdetailComponent } from './allfaq/faqdetail/faqdetail.component';
+import { FaqlistComponent } from './allfaq/faqlist/faqlist.component';
+import { CustomerlistComponent } from './allcustomer/customerlist/customerlist.component';
+import { CustomerdetailComponent } from './allcustomer/customerdetail/customerdetail.component';
+import { ConsultantMessageComponent } from './consultant-message/consultant-message.component';
 
 const routes: Routes = [
-  { path: 'faq', component: FaqComponent }, // Route cho trang FAQ
-  { path: 'faq-create', component: FaqCreateComponent },
-  { path: 'consultant', component: ConsultantComponent},
-  { path: 'admin/create new blog', component: BlogdetailComponent},
-  { path: 'admin/customer-list', component: CustomerComponent},
-  { path: 'admin/customer-detail', component: CustomerDetailComponent},
-  // {
-  //   path:'admin/products',
-  //   component:ProductsComponent,
-  // },
-  {
-    path:"admin/products/add",
-    component:ProductFormComponent,
+  { 
+    path: 'admin/faqs', 
+    component: FaqlistComponent 
+  }, // Route cho trang FAQ
+  { 
+    path: 'admin/faqs/add', 
+    component: FaqdetailComponent 
   },
   {
-    path:"admin/products/:id",
-    component:ProductFormComponent,
+    path:"admin/faqs/:id",
+    component:FaqdetailComponent,
   },
+  { path: 'consultant', component: ConsultantMessageComponent},
   {
-    path:'admin/categories',
-    component:CategoriesComponent,
-  },
-  {
-    path:"admin/categories/add",
-    component:CategoryFormComponent,
-  },
-  {
-    path:"admin/categories/:id",
-    component:CategoryFormComponent,
-  },
-  {
-    path:'admin/blog',
+    path:'admin/blogs',
     component:BloglistComponent,
   },
   {
-    path:'admin/demo',
-    component:DemoComponent,
+    path:"admin/blogs/add",
+    component:BlogdetailComponent,
+  },
+  {
+    path:"admin/blogs/:id",
+    component:BlogdetailComponent,
+  },
+  {
+    path:'admin/categories-blog',
+    component:CategoriesComponent,
+  },
+  {
+    path:"admin/categories-blog/add",
+    component:CategoryFormComponent,
+  },
+  {
+    path:"admin/categories-blog/:id",
+    component:CategoryFormComponent,
+  },
+  {
+    path:'admin/customers',
+    component:CustomerlistComponent,
+  },
+  {
+    path:"admin/customers/add",
+    component:CustomerdetailComponent,
+  },
+  {
+    path:"admin/customers/:id",
+    component:CustomerdetailComponent,
   },
 ];
 

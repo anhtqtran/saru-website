@@ -1,4 +1,6 @@
 @import "tailwindcss";
+
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -27,3 +29,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     color: white !important;
     fill: white !important;
 }
+.button-group {
+    display: flex;
+    gap: 16px; /* Hoặc 20px tùy theo mong muốn */
+  }
+  
+  

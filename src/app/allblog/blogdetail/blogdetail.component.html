@@ -1,65 +1,75 @@
-<div class="font-Inter w-full h-full flex justify-center items-center">
-    <div class="bg-white shadow-lg rounded-xl p-6 w-[900px]">
-      <h2 class="text-3xl font-bold text-[#85461F] text-center mb-9">Thông tin bài viết</h2>
-  
-      <table class="w-full border-collapse">
-        <tr class="py-5">
-          <td class="py-5 text-[#38312F] font-semibold">Hình tiêu đề bài viết:</td>
-          <td>
-            <input
-              type="file"
-              class="form-control w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#85461F]"
-              name="blog_image"
-              id="blog_image"
-            />
-          </td>
-        </tr>
-  
-        <tr class="py-5">
-          <td class="py-5 text-[#38312F] font-semibold">Tiêu đề bài viết:</td>
-          <td>
-            <input
-              type="text"
-              class="form-control w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#85461F]"
-              name="blog_title"
-              id="blog_title"
-              placeholder="Nhập tiêu đề"
-            />
-          </td>
-        </tr>
-  
-        <tr class="py-5">
-          <td class="py-5 text-[#38312F] font-semibold">Nội dung bài viết:</td>
-          <td>
-            <textarea
-              class="form-control w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#85461F] h-32"
-              name="blog_content"
-              id="blog_content"
-              placeholder="Nhập nội dung"
-            ></textarea>
-          </td>
-        </tr>
-  
-        <tr class="py-5">
-          <td class="py-5 text-[#38312F] font-semibold">Danh mục bài viết:</td>
-          <td>
-            <input
-              type="text"
-              class="form-control w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#85461F]"
-              name="blog_category"
-              id="blog_category"
-              placeholder="Chọn danh mục có sẵn"
-            />
-          </td>
-        </tr>
-  
-      </table>
-  
-      <div class="flex justify-center mt-6">
-        <button class="bg-[#F8BC3B] hover:bg-[#85461F] text-black hover:text-white py-2 px-6 rounded-full text-lg font-semibold transition-all duration-300">
-          Lưu bài viết
-        </button>
+<div class="flex flex-col px-40 mt-10">
+  @if(id){
+    <h1 class="text-3xl font-bold text-[#85461F]">Cập nhật bài viết</h1>
+  } @else {
+    <h1 class="text-3xl font-bold text-[#85461F]">Tạo bài viết mới</h1>
+  }
+  <form class="shadow p-4 mt-10" [formGroup]="blogForm">
+    <div class="flex flex-wrap">
+
+      <div class="w-full flex flex-col" formArrayName="BlogImage">
+        <div class="flex justify-between items-center">
+          <p class="py-5 text-[#38312F] font-semibold text-xl">Hình bài viết: </p>
+          <div class="button-group">
+            <button class="flex items-center bg-[#F8BC3B] text-black font-medium py-4 px-4 rounded-full h-10 transition hover:bg-[#85461F] hover:text-white" (click)="addBlogImage()">Thêm ảnh</button>
+            <button class="flex items-center bg-[#F8BC3B] text-black font-medium py-4 px-4 rounded-full h-10 transition hover:bg-[#85461F] hover:text-white" (click)="removeBlogImage()">Xóa ảnh</button>
+          </div>
+        </div>
+        @for (item of BlogImage.controls; track $index) {
+        <mat-form-field class="w-full">
+          <mat-label class="text-s">Hình {{$index}}</mat-label>
+          <input matInput type="text" [formControlName]="$index"/>
+        </mat-form-field>
+        }
       </div>
+
+      <div class="w-full">
+        <p class="py-5 text-[#38312F] font-semibold text-xl">
+          ID bài viết: 
+        </p>
+        <mat-form-field class="w-full">
+          <mat-label class="text-s">Nhập ID...</mat-label>
+          <input matInput type="text" formControlName="BlogID">
+        </mat-form-field>
+      </div>
+
+      <div class="w-full">
+        <p class="py-5 text-[#38312F] font-semibold text-xl">
+          Tiêu đề bài viết: 
+        </p>
+        <mat-form-field class="w-full">
+          <mat-label class="text-s">Nhập tiêu đề...</mat-label>
+          <input matInput type="text" formControlName="BlogTitle">
+        </mat-form-field>
+      </div>
+
+      <div class="w-full">
+        <p class="py-5 text-[#38312F] font-semibold text-xl">
+          Nội dung bài viết: 
+        </p>
+        <quill-editor
+          formControlName="BlogContent"
+          placeholder="Nhập nội dung bài viết tại đây...">
+        </quill-editor>      
+      </div>
+
+      <mat-form-field class="w-full">
+        <mat-label>Danh mục</mat-label>
+        <mat-select formControlName="categoryID">
+            <mat-option *ngFor="let item of categories" [value]="item._id">
+                {{ item.CateblogName }}  <!-- ✅ Hiển thị tên danh mục, nhưng lưu `_id` -->
+            </mat-option>
+        </mat-select>
+      </mat-form-field>    
+
     </div>
-  </div>
-  
+
+    <div class="w-full flex justify-center">
+      @if(id){
+        <button class="flex items-center bg-[#F8BC3B] text-black font-medium py-2 px-4 rounded-full transition hover:bg-[#85461F] hover:text-white"(click)="updateBlog()">Cập nhật</button>
+      }@else{
+        <button class="flex items-center bg-[#F8BC3B] text-black font-medium py-2 px-4 rounded-full transition hover:bg-[#85461F] hover:text-white" (click)="addBlog()">Lưu</button>
+      }
+    </div>
+  </form>
+</div>

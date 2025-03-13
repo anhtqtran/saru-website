@@ -1,14 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule, Title } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { FaqComponent } from './faq/faq.component';
-import { FaqCreateComponent } from './faq-create/faq-create.component';
-// import { ProductsComponent } from './products/products.component';
-import { ProductFormComponent } from './product-form/product-form.component';
-import { ConsultantComponent } from './consultant/consultant.component';
 import { RouterLink, RouterModule } from '@angular/router';
 
 import { HttpClientModule } from '@angular/common/http';
@@ -19,35 +12,40 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { CategoriesComponent } from './categories/categories.component';
-import { CategoryFormComponent } from './category-form/category-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule } from '@angular/forms';
-import { BlogComponent } from './blog/blog.component';
-import { DemoComponent } from './demo/demo.component';
-import { BlogCreateComponent } from './blog-create/blog-create.component';
-import { CustomerComponent } from './customer/customer.component';
-import { CustomerDetailComponent } from './customer-detail/customer-detail.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { QuillModule } from 'ngx-quill';
+
 import { BloglistComponent } from './allblog/bloglist/bloglist.component';
 import { BlogdetailComponent } from './allblog/blogdetail/blogdetail.component';
+import { CategoriesComponent } from './allblog/categories/categories.component';
+import { CategoryFormComponent } from './allblog/category-form/category-form.component';
+import { FaqlistComponent } from './allfaq/faqlist/faqlist.component';
+import { FaqdetailComponent } from './allfaq/faqdetail/faqdetail.component';
+// import { AllcustomerComponent } from './allcustomer/allcustomer.component';
+import { CustomerlistComponent } from './allcustomer/customerlist/customerlist.component';
+import { CustomerdetailComponent } from './allcustomer/customerdetail/customerdetail.component';
+import { ConsultantMessageComponent } from './consultant-message/consultant-message.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FaqComponent,
-    FaqCreateComponent,
-    // ProductsComponent,
-    ProductFormComponent,
-    ConsultantComponent,
+    BloglistComponent,
+    BlogdetailComponent,
+    FaqlistComponent,
+    FaqdetailComponent,
+    ConsultantMessageComponent,
+    // AllcustomerComponent,
+    CustomerlistComponent,
+    CustomerdetailComponent,
     CategoriesComponent,
     CategoryFormComponent,
-    BlogComponent,
-    DemoComponent,
-    BlogCreateComponent,
-    CustomerComponent,
-    CustomerDetailComponent,
-    BloglistComponent,
-    BlogdetailComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +60,25 @@ import { BlogdetailComponent } from './allblog/blogdetail/blogdetail.component';
     MatButtonModule,
     RouterLink,
     FormsModule,
+    ReactiveFormsModule,
+    MatSelectModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    MatDatepickerModule, 
+    MatNativeDateModule,
+    QuillModule.forRoot({
+      theme: 'snow',
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'], // Chữ đậm, nghiêng, gạch chân, gạch ngang
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }], // Tiêu đề (H1-H6)
+          [{ 'list': 'ordered' }, { 'list': 'bullet' }], // Danh sách số & chấm
+          [{ 'align': [] }], // Căn chỉnh văn bản
+          ['link', 'image', 'video'], // Chèn link, ảnh, video
+          ['clean'] // Xóa định dạng
+        ]
+      }
+    })
   ],
   providers: [Title],
   bootstrap: [AppComponent]

@@ -2,8 +2,8 @@ import { Component, AfterViewInit, ViewChild, inject } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { CategoryService } from '../services/category.service';
-import { Category } from '../types/category';
+import { CategoryService } from '../../services/category.service';
+import { Category } from '../../classes/category';
 
 @Component({
   selector: 'app-categories',
@@ -12,7 +12,7 @@ import { Category } from '../types/category';
   styleUrl: './categories.component.css'
 })
 export class CategoriesComponent implements AfterViewInit {
-    displayedColumns: string[] = ['id', 'name', 'action'];
+    displayedColumns: string[] = ['id', 'CateblogID', 'CateblogName', 'action'];
     dataSource: MatTableDataSource<Category>;
   
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -48,7 +48,7 @@ export class CategoriesComponent implements AfterViewInit {
     delete(id:string){
       console.log(id);
       this.categoryService.deleteCategoryById(id).subscribe((result:any) => {
-        alert('Category deleted successfully');
+        alert('Xóa danh mục thành công');
         this.getServerData();
       })
     }
