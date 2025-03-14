@@ -48,6 +48,8 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { CompareComponent } from './compare/compare.component';
 import { BlogcategoryComponent } from './blogcategory/blogcategory.component';
 import { MessageComponent } from './message/message.component';
+import { PaymentdetailComponent } from './paymentdetail/paymentdetail.component';
+import { PaymentsuccessfulComponent } from './paymentsuccessful/paymentsuccessful.component';
 
 
 
@@ -86,6 +88,8 @@ import { MessageComponent } from './message/message.component';
     CompareComponent,
     BlogcategoryComponent,
     MessageComponent,
+    PaymentdetailComponent,
+    PaymentsuccessfulComponent,
 
   ],
   imports: [

@@ -12,7 +12,10 @@ import { CommitmentComponent } from './commitment/commitment.component';
 import { ContactComponent } from './contact/contact.component';
 import { HistoryComponent } from './history/history.component';
 import { ProductComponent } from './product/product.component';
+import { WritereviewComponent } from './writereview/writereview.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { PaymentsuccessfulComponent } from './paymentsuccessful/paymentsuccessful.component';
+import { PaymentdetailComponent } from './paymentdetail/paymentdetail.component';
 import { AccountmanageComponent } from './accountmanage/accountmanage.component';
 import { CartmanageComponent } from './cartmanage/cartmanage.component';
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
@@ -62,7 +65,17 @@ const routes: Routes = [
   },
   { path: 'compare', component: CompareComponent},
   { path: 'product-detail/:id', component: ProductDetailComponent },
-
+  { path: 'account', component: AccountmanageComponent, canActivate:[AuthGuard]},
+  { path: 'cart', component: CartmanageComponent},
+  { path: 'orderdetail', component: OrderdetailComponent},
+  { path: 'order-history', component: OrderhistoryComponent, canActivate:[AuthGuard]},
+  { path: 'review', component: ReviewpageComponent},
+  { path: 'blog', component: BlogComponent},
+  { path: 'faqs', component: FaqsComponent},
+  { path: 'paymentdetail', component: PaymentdetailComponent }, // Thêm route cho trang thanh toán
+  // { path: '**', redirectTo: 'cart' }, // Mặc định chuyển về giỏ hàng nếu đường dẫn không tồn tại
+  { path: 'paymentsuccessful', component: PaymentsuccessfulComponent },
+  { path: 'writereview', component: WritereviewComponent }
 ];
 
 @NgModule({
