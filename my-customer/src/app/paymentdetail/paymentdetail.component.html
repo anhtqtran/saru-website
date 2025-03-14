@@ -1,0 +1,145 @@
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán</title>
+    <link rel="stylesheet" href="paymentdetail.component.css">
+</head>
+
+<body>
+
+    <div class="checkout-container">
+        <!-- Form Địa chỉ nhận hàng -->
+        <section class="shipping-info">
+            <h2>Địa chỉ nhận hàng</h2>
+            <form class="form-container">
+                <!-- Họ và tên -->
+                <div class="flex flex-col">
+                    <label for="full-name" class="label">
+                        Họ và tên <span class="required">*</span>
+                    </label>
+                    <input type="text" id="full-name" [(ngModel)]="paymentInfo.fullName" name="fullName" class="input">
+                    <p *ngIf="paymentInfo.errorMessages.fullName" class="error-message">
+                        {{ paymentInfo.errorMessages.fullName }}
+                    </p>
+                </div>
+
+                <!-- Số điện thoại -->
+                <div class="flex flex-col">
+                    <label for="phone-number" class="label">
+                        Số điện thoại <span class="required">*</span>
+                    </label>
+                    <input type="text" id="phone-number" [(ngModel)]="paymentInfo.phoneNumber" name="phoneNumber"
+                        class="input">
+                    <p *ngIf="paymentInfo.errorMessages.phoneNumber" class="error-message">
+                        {{ paymentInfo.errorMessages.phoneNumber }}
+                    </p>
+                </div>
+
+                <!-- Địa điểm -->
+                <div class="flex flex-col">
+                    <label for="location" class="label">
+                        Địa điểm <span class="required">*</span>
+                    </label>
+                    <select id="location" [(ngModel)]="paymentInfo.selectedProvince" name="selectedProvince"
+                        class="select">
+                        <option value="">Tỉnh/ Thành phố, Quận/Huyện, Phường/Xã</option>
+                        <option *ngFor="let province of provinces" [value]="province">{{ province }}</option>
+                    </select>
+                    <p *ngIf="paymentInfo.errorMessages.selectedProvince" class="error-message">
+                        {{ paymentInfo.errorMessages.selectedProvince }}
+                    </p>
+                </div>
+
+                <!-- Địa chỉ cụ thể -->
+                <div class="flex flex-col">
+                    <label for="address" class="label">
+                        Địa chỉ cụ thể <span class="required">*</span>
+                    </label>
+                    <input type="text" id="address" [(ngModel)]="paymentInfo.address" name="address" class="input">
+                    <p *ngIf="paymentInfo.errorMessages.address" class="error-message">
+                        {{ paymentInfo.errorMessages.address }}
+                    </p>
+                </div>
+
+                <!-- <button type="button" (click)="confirmOrder()" class="confirm-button">Xác nhận</button> -->
+            </form>
+        </section>
+
+        <!-- Đơn hàng -->
+        <section class="order-summary">
+            <h2>Đơn hàng</h2>
+
+            <!-- Hiển thị danh sách sản phẩm -->
+            <div *ngFor="let item of cartItems" class="order-item">
+                <img [src]="item.image" alt="{{ item.name }}">
+                <p>{{ item.name }} x{{ item.quantity }}</p>
+                <span>{{ item.price * item.quantity | number }}đ</span>
+            </div>
+
+            <div class="order-details">
+                <br />
+                <p><span>Tổng tiền:</span> <span>{{ totalPrice | number }}đ</span></p>
+                <p><span>Phí vận chuyển:</span> <span>Được miễn phí</span></p>
+                <p><span>Giảm giá:</span> <span>Không áp dụng</span></p>
+
+                <hr />
+                <br />
+                <h5 class="total"><span>Thành tiền:</span> <span>{{ totalPrice | number }}đ</span></h5>
+                <br />
+                <hr />
+                <br />
+            </div>
+
+            <h5 class="text-lg font-bold mt-4">Phương thức thanh toán</h5>
+            <!-- <div class="payment-methods">
+                <button class="payment-option" [ngClass]="{'selected': selectedPaymentMethod === 'cod'}"
+                    (click)="selectPaymentMethod('cod')">Thanh toán khi nhận hàng</button>
+
+                <button class="payment-option" [ngClass]="{'selected': selectedPaymentMethod === 'bank'}"
+                    (click)="selectPaymentMethod('bank')">Ngân hàng</button>
+
+                <button class="payment-option" [ngClass]="{'selected': selectedPaymentMethod === 'wallet'}"
+                    (click)="selectPaymentMethod('wallet')">Ví điện tử</button>
+            </div> -->
+
+            <div class="payment-methods">
+                <button *ngFor="let method of paymentMethods" (click)="selectedPaymentMethod = method"
+                    [ngClass]="{'selected-method': selectedPaymentMethod === method}" class="payment-option">
+                    {{ method }}
+                </button>
+
+                <!-- <button *ngFor="let method of paymentMethods" (click)="selectedPaymentMethod = method"
+                    [class.active]="selectedPaymentMethod === method" class="payment-option">
+                    {{ method }}
+                </button> -->
+            </div>
+
+
+
+            <!--  Hiển thị danh sách ví điện tử nếu chọn "Ví điện tử" -->
+            <div *ngIf="showEWalletOptions()">
+                <label for="eWallet">Chọn ví điện tử:</label>
+                <select id="eWallet" [(ngModel)]="selectedEWallet" name="eWallet" class="wallet-select">
+                    <option value="">-- Chọn ví điện tử --</option>
+                    <option *ngFor="let wallet of eWallets" [value]="wallet">{{ wallet }}</option>
+                </select>
+            </div>
+            <!-- Thông báo lỗi nếu chưa chọn phương thức -->
+            <p *ngIf="!isPaymentValid()" class="text-red-600 text-sm">
+                Bạn phải chọn một phương thức thanh toán trước khi đặt hàng!
+            </p>
+
+
+            <!-- Nút Thanh toán -->
+            <button class="checkout-button" (click)="processPayment()">Thanh toán</button>
+
+            <p class="terms">Nhấn "Thanh toán" đồng nghĩa với việc bạn đồng ý tuân theo Điều khoản của Saru</p>
+        </section>
+
+    </div>
+
+</body>
+
+</html>

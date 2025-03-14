@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
+import { CartService } from '../services/cart.service'; // Thêm CartService
 import { Subscription } from 'rxjs';
 import { Product, Pagination } from '../classes/Product';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -37,11 +38,12 @@ export class ProductComponent implements OnInit, OnDestroy {
     sort: 'priceDesc'
   };
 
-  constructor(private productService: ProductService, private snackBar: MatSnackBar, private router: Router) {}
-
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
-  }
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService, // Thêm CartService
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadProducts();
@@ -49,14 +51,18 @@ export class ProductComponent implements OnInit, OnDestroy {
     this.loadCategories();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
   goToProductDetail(productId: string): void {
     this.router.navigate(['/products', productId]);
   }
 
   loadProducts(page: number = 1): void {
-    this.productService.getProducts(this.filters, page).subscribe({
+    const sub = this.productService.getProducts(this.filters, page).subscribe({
       next: (data) => {
-        console.log("Product data received:", data);
+        console.log('Product data received:', data);
         this.products = data.data.map(product => ({
           ...product,
           currentPrice: product.currentPrice ?? product.ProductPrice ?? 0,
@@ -64,11 +70,11 @@ export class ProductComponent implements OnInit, OnDestroy {
           stockStatus: product.stockStatus ?? 'In Stock',
           isOnSale: !!product.isOnSale,
           discountPercentage: product.discountPercentage ?? 0,
-          averageRating: product.averageRating ?? undefined, // Đảm bảo không undefined
-          totalReviewCount: product.totalReviewCount ?? 0 // Đảm bảo không undefined
+          averageRating: product.averageRating ?? undefined,
+          totalReviewCount: product.totalReviewCount ?? 0
         }));
         this.pagination = data.pagination;
-        
+
         this.products.forEach(product => {
           if (product.ImageID) {
             this.loadImage(product);
@@ -83,18 +89,18 @@ export class ProductComponent implements OnInit, OnDestroy {
         this.snackBar.open('Không thể tải danh sách sản phẩm!', 'OK', { duration: 3000 });
       }
     });
+    this.subscriptions.push(sub);
   }
 
-
-
   loadCategories(): void {
-    this.productService.getCategories().subscribe({
+    const sub = this.productService.getCategories().subscribe({
       next: (data) => {
-        console.log("Categories received:", data);
+        console.log('Categories received:', data);
         this.categories = data;
       },
       error: (error) => console.error('Error loading categories:', error)
     });
+    this.subscriptions.push(sub);
   }
 
   loadImage(product: Product): void {
@@ -104,7 +110,7 @@ export class ProductComponent implements OnInit, OnDestroy {
     }
     const sub = this.productService.getImage(product.ImageID).subscribe({
       next: (imageData) => {
-        product.ProductImageCover = imageData.ProductImageCover || 'assets/images/default-product.png';
+        product.ProductImageCover = imageData?.ProductImageCover || 'assets/images/default-product.png';
       },
       error: (error) => {
         console.warn(`Failed to load image for ${product.ProductName}: ${error.message}`);
@@ -115,14 +121,11 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   loadFilterData(): void {
-    this.productService.getCategories().subscribe({
-      next: (categories) => {
-        this.categories = categories;
-      },
+    const subCategories = this.productService.getCategories().subscribe({
+      next: (categories) => this.categories = categories,
       error: (error) => console.error('Error loading categories:', error)
     });
-
-    this.productService.getFilters().subscribe({
+    const subFilters = this.productService.getFilters().subscribe({
       next: (data) => {
         this.brands = data.brands || [];
         this.wineVolumes = data.wineVolumes || [];
@@ -130,6 +133,7 @@ export class ProductComponent implements OnInit, OnDestroy {
       },
       error: (error) => console.error('Error loading filters:', error)
     });
+    this.subscriptions.push(subCategories, subFilters);
   }
 
   onFilterChange(): void {
@@ -148,15 +152,27 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   addToCart(product: Product): void {
+    const cartItem = {
+      id: product._id,
+      name: product.ProductName,
+      price: product.currentPrice || product.ProductPrice,
+      image: product.ProductImageCover,
+      quantity: 1
+    };
+    this.cartService.addToCart(cartItem); // Thêm vào giỏ hàng cục bộ
+    this.snackBar.open(`${product.ProductName} đã được thêm vào giỏ hàng!`, 'OK', { duration: 3000 });
+    console.log('🛒 Đã thêm vào giỏ hàng:', cartItem);
+
+    // Tùy chọn: Gọi API nếu cần đồng bộ với server
     this.productService.addToCart(product._id, 1).subscribe({
-      next: () => this.snackBar.open('Đã thêm vào giỏ hàng!', 'OK', { duration: 3000 }),
-      error: (error) => console.error('Error adding to cart:', error.message)
+      next: () => console.log('Added to cart on server'),
+      error: (error) => console.error('Error adding to cart on server:', error)
     });
   }
 
   addToCompare(product: Product): void {
     console.log('Adding to compare, productId:', product._id);
-    this.productService.addToCompare(product._id.toString()).subscribe({
+    const sub = this.productService.addToCompare(product._id.toString()).subscribe({
       next: (response) => {
         console.log('Add to compare response:', response);
         this.snackBar.open('Đã thêm vào danh sách so sánh!', 'OK', { duration: 3000 });
@@ -166,6 +182,7 @@ export class ProductComponent implements OnInit, OnDestroy {
         this.snackBar.open('Lỗi khi thêm vào danh sách so sánh', 'Close', { duration: 3000 });
       }
     });
+    this.subscriptions.push(sub);
   }
 
   getPageNumbers(): number[] {
