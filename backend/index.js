@@ -4,7 +4,6 @@ const port = 4000;
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
@@ -15,7 +14,7 @@ const rateLimit = require('express-rate-limit');
 const winston = require('winston');
 const cron = require('node-cron');
 const multer = require('multer'); // Thêm dòng này
-
+const mail = require('./node-mailer');
 const app = express();
 
 // Cấu hình Winston Logger
@@ -88,7 +87,6 @@ const authLimiter = rateLimit({
 let client;
 let database;
 let productCollection, imageCollection, categoryCollection, reviewCollection, orderDetailCollection, accountCollection, customerCollection, productstockCollection, blogCollection, blogCategoryCollection, faqCollection, membershipCollection, orderCollection, messageCollection;
-
 
 async function connectDB() {
   const uri = process.env.MONGODB_URI;
@@ -932,18 +930,7 @@ cron.schedule('0 * * * *', async () => {
   logger.info('Cleaned up expired OTPs', { correlationId: 'system' });
 });
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
+
 
 (async () => {
   try {
@@ -1373,8 +1360,8 @@ app.get('/blogs/:id', async (req, res) => {
     if (!blog) {
       return res.status(404).json({ message: "Không tìm thấy bài viết" });
     }
-    const category = blog.categoryID 
-      ? await blogCategoryCollection.findOne({ _id: new ObjectId(blog.categoryID) }) 
+    const category = blog.categoryID
+      ? await blogCategoryCollection.findOne({ _id: new ObjectId(blog.categoryID) })
       : null;
     res.json({
       ...blog,
@@ -1411,12 +1398,13 @@ app.put('/blogs/:id', async (req, res) => {
     const { BlogTitle, BlogContent, categoryID, BlogImage } = req.body;
     const result = await blogCollection.updateOne(
       { _id: new ObjectId(req.params.id) },
-      { $set: { 
-          BlogTitle, 
-          BlogContent, 
-          categoryID: categoryID ? new ObjectId(categoryID) : null, 
-          BlogImage 
-        } 
+      {
+        $set: {
+          BlogTitle,
+          BlogContent,
+          categoryID: categoryID ? new ObjectId(categoryID) : null,
+          BlogImage
+        }
       }
     );
     if (result.matchedCount === 0) {
@@ -1809,7 +1797,7 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
-    
+
     // Giả sử bạn upload lên Cloudinary hoặc Firebase ở đây
     const imageUrl = `https://your-cloud.com/${req.file.filename}`;
 
@@ -1961,6 +1949,16 @@ app.get('/api/productstocks', async (req, res) => {
   } catch (err) {
     console.error("❌ Lỗi khi lấy dữ liệu tồn kho:", err);
     res.status(500).json({ error: 'Lỗi server!' });
+  }
+});
+
+app.post('/api/send-email', async (req, res) => {
+  try {
+    await mail.sendNotificationEmail(req.body)
+    return res.status(200).json({ message: 'Tin nhắn của bạn đã được gửi đi.' });
+  } catch (err) {
+    console.error("❌ Lỗi khi gửi tin nhắn liên hệ:", err);
+    res.status(500).json({ error: err.message });
   }
 });
 
