@@ -7881,3 +7881,38 @@
 {"level":"info","message":"GET /api/images/image57 304 - - 292.490 ms - correlationId: cc446a54-4b5d-4dff-a003-b086c9d6f261","timestamp":"2025-03-15T16:33:15.168Z"}
 {"level":"info","message":"GET /api/images/image49 304 - - 1073.447 ms - correlationId: 0fa47d55-96cf-4fbc-b9b4-6423bf727f66","timestamp":"2025-03-15T16:33:15.570Z"}
 {"level":"info","message":"GET /api/images/image63 304 - - 1066.549 ms - correlationId: bf48d0d2-3064-4097-a4da-cac6482190af","timestamp":"2025-03-15T16:33:15.574Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T23:13:21.710Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T23:13:21.738Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T23:13:21.888Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c68a8106sm49284865ad.89 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-15T23:13:22.195Z"}
+{"level":"info","message":"GET /api/verify-token 304 - - 6.214 ms - correlationId: 9a5bb9e9-7a1f-49fb-97ed-7d6dca97c46c","timestamp":"2025-03-15T23:13:38.088Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"4e3ec1e7-e9af-4a13-8ccf-4aa749290b4b","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:13:38.160Z"}
+{"level":"info","message":"GET /api/cart 304 - - 96.861 ms - correlationId: 4e3ec1e7-e9af-4a13-8ccf-4aa749290b4b","timestamp":"2025-03-15T23:13:38.163Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"7565a004-d0a8-43ca-8aa0-6efca095af2f","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:13:38.175Z"}
+{"level":"info","message":"GET /api/compare 304 - - 86.101 ms - correlationId: 7565a004-d0a8-43ca-8aa0-6efca095af2f","timestamp":"2025-03-15T23:13:38.177Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"dce682ed-161e-4a63-bd05-63bfe10d8ea2","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:13:38.226Z"}
+{"level":"info","message":"GET /api/cart 304 - - 61.404 ms - correlationId: dce682ed-161e-4a63-bd05-63bfe10d8ea2","timestamp":"2025-03-15T23:13:38.228Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"c48de3a6-cc25-4505-ba51-669499e12396","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:13:38.258Z"}
+{"level":"info","message":"GET /api/compare 304 - - 79.379 ms - correlationId: c48de3a6-cc25-4505-ba51-669499e12396","timestamp":"2025-03-15T23:13:38.260Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"c4e31b97-4cdc-4379-ad5c-2d0b5d653d93","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:13:38.293Z"}
+{"level":"info","message":"GET /api/cart 304 - - 64.129 ms - correlationId: c4e31b97-4cdc-4379-ad5c-2d0b5d653d93","timestamp":"2025-03-15T23:13:38.295Z"}
+{"level":"info","message":"GET /api/compare - - - - ms - correlationId: 2baa44cd-4ef8-4172-a60f-7c68c38ac5c6","timestamp":"2025-03-15T23:13:38.308Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"2baa44cd-4ef8-4172-a60f-7c68c38ac5c6","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:13:38.345Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"38e225be-30ef-4303-8583-b7b12e98d19e","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:13:38.358Z"}
+{"level":"info","message":"GET /api/cart 304 - - 62.205 ms - correlationId: 38e225be-30ef-4303-8583-b7b12e98d19e","timestamp":"2025-03-15T23:13:38.360Z"}
+{"level":"info","message":"GET /api/verify-token 304 - - 2.634 ms - correlationId: 17f7a2bd-35d1-4937-af16-d846d588b94b","timestamp":"2025-03-15T23:13:38.373Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"1ca77ac9-c0f9-4390-8f92-fb34bb2eb7ac","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:13:38.430Z"}
+{"level":"info","message":"GET /api/cart 304 - - 66.897 ms - correlationId: 1ca77ac9-c0f9-4390-8f92-fb34bb2eb7ac","timestamp":"2025-03-15T23:13:38.432Z"}
+{"level":"info","message":"GET /faqs 304 - - 404.111 ms - correlationId: fad19efd-35d6-4f6e-af78-e2f1f53bef4c","timestamp":"2025-03-15T23:13:38.596Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"67eb419d-2f6b-4f31-8a4c-f90337bd2038","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:13:38.651Z"}
+{"level":"info","message":"GET /api/cart 304 - - 66.747 ms - correlationId: 67eb419d-2f6b-4f31-8a4c-f90337bd2038","timestamp":"2025-03-15T23:13:38.653Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"cb4bc64c-aaa5-4779-b8bd-844c47a3bfcb","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:13:38.713Z"}
+{"level":"info","message":"GET /api/compare 200 2 - 404.277 ms - correlationId: cb4bc64c-aaa5-4779-b8bd-844c47a3bfcb","timestamp":"2025-03-15T23:13:38.716Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"8e01b3db-9371-44c9-8a91-382202255ddd","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:13:38.718Z"}
+{"level":"info","message":"GET /api/cart 304 - - 65.481 ms - correlationId: 8e01b3db-9371-44c9-8a91-382202255ddd","timestamp":"2025-03-15T23:13:38.721Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"1057a199-1140-4880-895c-981cd26a421d","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:13:38.789Z"}
+{"level":"info","message":"GET /api/compare 304 - - 67.355 ms - correlationId: 1057a199-1140-4880-895c-981cd26a421d","timestamp":"2025-03-15T23:13:38.793Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"a1c0c767-7783-4dbf-a0be-59e377bbcfb7","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:13:38.862Z"}
+{"level":"info","message":"GET /api/compare 304 - - 69.249 ms - correlationId: a1c0c767-7783-4dbf-a0be-59e377bbcfb7","timestamp":"2025-03-15T23:13:38.866Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"e98d79f2-d99e-4926-a6a6-e618d00fec8b","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:13:38.940Z"}
+{"level":"info","message":"GET /api/compare 304 - - 75.366 ms - correlationId: e98d79f2-d99e-4926-a6a6-e618d00fec8b","timestamp":"2025-03-15T23:13:38.949Z"}
