@@ -177,20 +177,20 @@ export class HomepageProductsService {
     return this.loading;
   }
 
-  // Compare functions
-  getCompareItems(): Observable<string[]> {
-    return this.http.get<string[]>(`${this.apiUrl}/compare-items`).pipe(
-      map(items => {
-        if (!Array.isArray(items)) {
-          console.warn('Invalid response from compare-items: Expected array, got:', items);
-          return [];
-        }
-        return items.filter(item => typeof item === 'string' && item.trim() !== '');
-      }),
-      tap(items => console.log('Compare items loaded:', items)),
-      catchError(this.handleError('getCompareItems', 'Không thể lấy danh sách compare', []))
-    );
-  }
+  // // Compare functions
+  // getCompareItems(): Observable<string[]> {
+  //   return this.http.get<string[]>(`${this.apiUrl}/compare-items`).pipe(
+  //     map(items => {
+  //       if (!Array.isArray(items)) {
+  //         console.warn('Invalid response from compare-items: Expected array, got:', items);
+  //         return [];
+  //       }
+  //       return items.filter(item => typeof item === 'string' && item.trim() !== '');
+  //     }),
+  //     tap(items => console.log('Compare items loaded:', items)),
+  //     catchError(this.handleError('getCompareItems', 'Không thể lấy danh sách compare', []))
+  //   );
+  // }
 
   getProductDetail(id: string): Observable<Product | null> {
     if (!id || !/^[0-9a-fA-F]{24}$/.test(id)) {
