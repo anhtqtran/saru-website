@@ -6856,3 +6856,9 @@
 {"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-13T10:30:42.850Z"}
 {"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-13T10:30:43.913Z"}
 {"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-13T10:30:44.461Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T06:58:36.223Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T06:58:39.339Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T06:58:39.505Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T06:58:44.920Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T06:58:47.414Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T06:58:47.739Z"}
