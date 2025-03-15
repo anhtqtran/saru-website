@@ -7660,3 +7660,12 @@
 {"level":"info","message":"GET /api/compare 304 - - 3.452 ms - correlationId: 6f3fe704-a4cc-4ba6-8491-b433ae98e41c","timestamp":"2025-03-14T00:05:26.724Z"}
 {"level":"info","message":"GET /api/products/best-selling 200 1554 - 78.910 ms - correlationId: 22968552-ae15-4d7a-92c6-5b0a5664b2fc","timestamp":"2025-03-14T00:05:26.836Z"}
 {"level":"info","message":"GET /api/blogs/random?cateblogId=cateblog1 200 843 - 90.465 ms - correlationId: 7233ab96-664e-4514-94f5-efbc99271ca5","timestamp":"2025-03-14T00:05:26.844Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T08:14:49.947Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T08:14:49.966Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T08:14:50.320Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T08:14:50.804Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T08:15:02.390Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T08:15:42.567Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T08:15:42.586Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T08:15:42.872Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T08:15:43.026Z"}
