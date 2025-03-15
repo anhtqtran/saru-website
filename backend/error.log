@@ -867,3 +867,10 @@
 {"correlationId":"system","error":"connect ETIMEDOUT 16.163.168.139:27017","level":"error","message":"Failed to connect to MongoDB","timestamp":"2025-03-12T08:12:24.753Z"}
 {"correlationId":"system","error":"Socket 'secureConnect' timed out after 38675ms (connectTimeoutMS: 30000)","level":"error","message":"Failed to connect to MongoDB","timestamp":"2025-03-12T08:16:19.269Z"}
 {"code":"ESOCKET","correlationId":"system","error":"read ECONNRESET","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-12T08:35:29.828Z"}
+<<<<<<< HEAD
+=======
+{"correlationId":"3e2d02e8-c2e0-4e41-8159-2dd52c68da3e","error":"Cast to ObjectId failed for value \"id:\" (type string) at path \"_id\" for model \"blogs\"","level":"error","message":"Error in GET /blogs/:id","timestamp":"2025-03-13T15:50:35.308Z"}
+{"correlationId":"042bbda8-a93d-416a-be2f-e647fc8dd1b0","error":"blog.categoryID.map is not a function","level":"error","message":"Error in GET /blogs","timestamp":"2025-03-13T16:43:26.809Z"}
+{"correlationId":"9343b88b-dbce-46d5-abe8-8a2839339567","error":"input must be a 24 character hex string, 12 byte Uint8Array, or an integer","level":"error","message":"Error in GET /blogs/category/:categoryID","timestamp":"2025-03-13T16:52:42.620Z"}
+{"correlationId":"c492d54a-6646-463f-b993-d91e164ef53a","error":"input must be a 24 character hex string, 12 byte Uint8Array, or an integer","level":"error","message":"Error in GET /blogs/category/:categoryID","timestamp":"2025-03-13T16:54:51.680Z"}
+>>>>>>> customer-main

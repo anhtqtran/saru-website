@@ -1,0 +1,7 @@
+export * from './lib/img-exif.service';
+export * from './lib/img-max-size.service';
+export * from './lib/img-maxpx-size.service';
+export * from './lib/ng2-img-max.service';
+export * from './lib/ng2-pica.service';
+export * from './lib/ng2-img-max.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy9wdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWMsd0JBQXdCLENBQUM7QUFDdkMsY0FBYyw0QkFBNEIsQ0FBQztBQUMzQyxjQUFjLDhCQUE4QixDQUFDO0FBQzdDLGNBQWMsMkJBQTJCLENBQUM7QUFDMUMsY0FBYyx3QkFBd0IsQ0FBQztBQUN2QyxjQUFjLDBCQUEwQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0ICogZnJvbSAnLi9saWIvaW1nLWV4aWYuc2VydmljZSc7XHJcbmV4cG9ydCAqIGZyb20gJy4vbGliL2ltZy1tYXgtc2l6ZS5zZXJ2aWNlJztcclxuZXhwb3J0ICogZnJvbSAnLi9saWIvaW1nLW1heHB4LXNpemUuc2VydmljZSc7XHJcbmV4cG9ydCAqIGZyb20gJy4vbGliL25nMi1pbWctbWF4LnNlcnZpY2UnO1xyXG5leHBvcnQgKiBmcm9tICcuL2xpYi9uZzItcGljYS5zZXJ2aWNlJztcclxuZXhwb3J0ICogZnJvbSAnLi9saWIvbmcyLWltZy1tYXgubW9kdWxlJztcclxuIl19

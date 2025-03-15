@@ -11,14 +11,38 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="profile">
-                <img src="user-avatar.png" alt="User Avatar">
+                <img src="assets/images/thuthu 1.png" alt="User Avatar">
                 <p>Trần Thanh Quế Anh</p>
                 <p>0123456789</p>
             </div>
             <ul class="sidebar-menu">
-                <li><a href="#">Thông tin và địa chỉ</a></li>
-                <li><a href="#">Lịch sử đơn hàng</a></li>
-                <li><a href="#">Hạng tài khoản</a></li>
+                <li>
+                    <a href="#">
+                        <div class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-200">
+                            <img src="assets/images/user_idcard.png" alt="Thông tin" class="w-4 h-4 mr-3">
+                            <p>Thông tin và địa chỉ</p>
+                        </div>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-200">
+                            <img src="assets/images/Union.png" alt="Lịch sử đơn hàng" class="w-4 h-4 mr-3">
+                            <p>Lịch sử đơn hàng</p>
+                        </div>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="flex items-center px-4 py-3 rounded-lg hover:bg-gray-200">
+                            <img src="assets/images/Group 42.png" alt="Hạng tài khoản" class="w-4 h-4 mr-3">
+                            <p>Hạng tài khoản</p>
+                        </div>
+
+                    </a>
+                </li>
             </ul>
         </aside>
 
@@ -27,7 +51,7 @@
             <h2>Thông tin cá nhân</h2>
             <div class="info-box">
                 <div class="avatar">
-                    <img src="profile-placeholder.png" alt="Avatar">
+                    <img src="assets/images/img.png" alt="Avatar">
                 </div>
                 <div class="details">
                     <br/>
@@ -41,50 +65,73 @@
                     <p><strong>Tổng điểm tích lũy:</strong> 485 điểm</p>
                     <button class="cancel-button">Hủy</button>
                     <button class="edit-button">Chỉnh sửa</button>
+
+                    <br />
+                    <p><strong>Tên khách hàng: </strong> Trần Thanh Quế Anh</p>
+                    <p><strong>Giới tính: </strong> <input type="radio" checked> Nam <input type="radio"> Nữ</p>
+                    <p><strong>Số điện thoại: </strong> 0123456789</p>
+                    <p><strong>Ngày sinh: </strong> 25/04/2004</p>
+                    <p><strong>Email: </strong> <a [href]="'mailto:' + email">{{ email }}</a></p>
+                    <p><strong>Mật khẩu: </strong> ********</p>
+                    <p><strong>Ngày tham gia: </strong> 09/03/2023</p>
+                    <p><strong>Tổng điểm tích lũy: </strong> 485 điểm</p>
+                    <div class="flex space-x-5">
+                        <button class="cancel-button">Hủy</button>
+                        <button class="edit-button">Chỉnh sửa</button>
+                    </div>
+
+
                 </div>
             </div>
         </section>
     </div>
 
     <!-- Danh sách địa chỉ -->
-    <section class="address-section">
-        <h2>Địa chỉ nhận hàng</h2>
-        <div class="address-list">
-            <div class="address-card">
-                <div class="address-info">
-                    <br/>
-                    <p><strong>Trần Thanh Quế Anh</strong> | 0123456789</p>
-                    <p>Số 669, QL1, Khu phố 3, Phường Linh Xuân, Quận Thủ Đức, TP. Hồ Chí Minh</p>
-                    <label><input type="radio" name="default-address" checked> Đặt làm địa chỉ mặc định</label>
-                </div>
-                <button class="edit-button-2">Chỉnh sửa</button>
+    <div class="address-section bg-white p-5 rounded-full shadow-lg">
+        <h2 class="text-xl font-bold mb-4">Địa chỉ nhận hàng</h2>
+    
+        <!-- Danh sách địa chỉ -->
+        <div *ngFor="let address of addresses; let i = index" class="flex justify-between items-center p-4 border border-gray-300 rounded-md bg-white mb-3">
+            <div class="flex-1 space-y-1">
+                <p *ngIf="!address.isEditing"><strong>{{ address.name }}</strong></p>
+                <input *ngIf="address.isEditing" id="name-{{i}}" type="text" [(ngModel)]="address.name" placeholder="Họ và tên" class="input-place">
+    
+                <p *ngIf="!address.isEditing">{{ address.phone }}</p>
+                <input *ngIf="address.isEditing" type="text" [(ngModel)]="address.phone" placeholder="Số điện thoại" class="input-place">
+    
+                <p *ngIf="!address.isEditing">{{ address.address }}</p>
+                <input *ngIf="address.isEditing" type="text" [(ngModel)]="address.address" placeholder="Địa chỉ cụ thể" class="input-place">
+    
+                <!-- Radio button để chọn địa chỉ mặc định -->
+                <label class="flex items-center space-x-2 cursor-pointer" [class.text-gray-500]="address.isDefault">
+                    <input type="radio" name="default-address" [checked]="address.isDefault" (click)="setDefaultAddress(i)">
+                    <span>Đặt làm địa chỉ mặc định</span>
+                </label>
             </div>
-
-            <div class="address-card">
-                <div class="address-info">
-                    <p><strong>Trần Thục Doan</strong> | 0324546023</p>
-                    <p>Ký túc xá khu B, khu phố Tân Hòa, TP. Dĩ An, Bình Dương</p>
-                    <label><input type="radio" name="default-address" checked> Đặt làm địa chỉ mặc định</label>
-                </div>
-                <button class="edit-button-2">Chỉnh sửa</button>
-            </div>
-
-            <div class="address-card">
-                <div class="address-info">
-                    <p><strong>Phan Thị Mỹ Kim</strong> | 0294822746</p>
-                    <p>Ký túc xá khu B, khu phố Tân Hòa, TP. Dĩ An, Bình Dương</p>
-                    <label><input type="radio" name="default-address" checked> Đặt làm địa chỉ mặc định</label>
-                </div>
-                <button class="edit-button-2">Chỉnh sửa</button>
-            </div>
-            
+    
+            <button *ngIf="!address.isEditing" class="editbtn mr-3" (click)="enableEdit(i)">
+                Chỉnh sửa
+            </button>
+            <button *ngIf="address.isEditing" class="editbtn mr-3" (click)="saveEdit(i)">
+                Lưu
+            </button>
+    
+            <button (click)="removeAddress(i)" class="delete-button">
+                Xóa
+            </button>
         </div>
-        <div class="address-container">
-            <button class="add-address-button">Thêm địa chỉ</button>
+    
+        <!-- Nút Thêm địa chỉ -->
+        <div class="flex justify-center mt-5">
+            <button (click)="addAddress()" class="px-6 py-3 bg-yellow-400 text-white font-bold rounded-full text-lg cursor-pointer hover:bg-yellow-500">
+                Thêm địa chỉ
+            </button>
         </div>
-        
-    </section>
+    </div>
+    
+    
+    
 
 </body>
-</html>
 
+</html>

@@ -1,207 +1,62 @@
-<div class="bg-BG py-5 font-Regular">
-    <div class="mx-[40px] mb-3 flex justify-between w-[1500px] h-[500px] rounded-[10px] bg-[#EDEDED]">
-        <img class="w-[750px] h-[500px] rounded-l-[10px] float-left" src="assets\ruou_man.png">
-        <div class="px-[20px] py-[40px]">
-            <p class="text-left font-Header font-bold text-[35px] text-[#262626] mb-[10px]">Rượu Mận <br/>Đặc sản tình yêu và kí ức vùng trời Tây Bắc</p>
-            <p class="text-left text-[18px] text-[#4D4D4D]">Tôi là một chàng trai trẻ đầy đam mê với các chuyến đi khám phá. Sau khi hoàn thành một vài dự án quan trọng trong công việc, tôi quyết định dành thời gian để du lịch và tìm hiểu thêm về những vùng đất mới. Tây Bắc, với những núi rừng hùng vĩ, là một trong những điểm đến mà tôi luôn mong muốn trải nghiệm. Tây Bắc không chỉ thu hút bởi vẻ đẹp thiên nhiên mà còn bởi nền văn hóa độc đáo của các dân tộc thiểu số sinh sống tại đây.</p>
-            <div class="div-read-this mt-[20px] pt-2 text-center bg-[#EDEDEC] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[150px]" 
-            id="btnReadThis1" (mouseenter)="changeBackground('btnReadThis1')" (mouseleave)="resetBackground('btnReadThis1')">
-                <button class="btn-read-this text-[25px] cursor-pointer bg-[#EDEDEC] border-none text-lg pb-1 text-[#757575] font-['Inter'] font-bold" >Xem thêm</button>
-            </div>
-        </div>
+<div class="bg-gray-50 py-12 font-regular max-w-screen-xl mx-auto px-6 sm:px-8 lg:px-12">
+  <!-- Banner đầu trang -->
+  <div class="mx-4 mb-12 flex flex-col md:flex-row justify-between w-full md:w-[98%] h-auto md:h-[600px] rounded-xl bg-gradient-to-r from-gray-100 to-gray-200 shadow-xl overflow-hidden">
+    <img class="w-full md:w-1/2 h-[300px] md:h-[600px] rounded-t-xl md:rounded-l-xl object-cover transition-transform duration-500 hover:scale-105" src="assets/ruou_man.png" alt="Rượu Mận">
+    <div class="px-6 py-8 md:px-10 md:py-12 flex flex-col justify-center">
+      <h1 class="text-left font-bold text-[32px] md:text-[40px] text-[#1A1A1A] mb-4 tracking-tight leading-tight animate-fade-in">Rượu Mận<br />Đặc sản tình yêu và kí ức vùng trời Tây Bắc</h1>
+      <p class="text-left text-[16px] md:text-[18px] text-[#4D4D4D] mb-6 leading-relaxed line-clamp-3">Tôi là một chàng trai trẻ đầy đam mê với các chuyến đi khám phá...</p>
+      <a [routerLink]="['/blog', '67c7d4f6cdd6907abf6544bf']"
+        class="mt-5 px-8 py-4 text-[18px] md:text-[20px] bg-[#F8BC3B] text-black font-bold rounded-lg transition duration-300 hover:bg-[#85461F] hover:text-white self-start shadow-md hover:shadow-lg">
+        Xem thêm
+      </a>
     </div>
-    <div class="flex justify-between ">
-        <div class="mt-[20px] ml-[40px] pt-2 text-center bg-[#757575] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[310px]"
-        id="btnInfor" (mouseenter)="changeBackground1('btnInfor')" (mouseleave)="resetBackground1('btnInfor')">
-            <button class="text-[25px] cursor-pointer bg-[#757575] border-none text-lg pb-1 text-[#FFFFFF] font-['Inter'] font-bold">Kiến thức về rượu Tây Bắc</button>
-        </div>
-        <div class="div-read-this mt-[20px] mr-[40px] pt-2 text-center bg-[#EDEDEC] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[150px]" 
-        id="btnReadThis2" (mouseenter)="changeBackground('btnReadThis2')" (mouseleave)="resetBackground('btnReadThis2')">
-            <button class="btn-read-this text-[25px] cursor-pointer bg-[#EDEDEC] border-none text-lg pb-1 text-[#757575] font-['Inter'] font-bold" >Xem thêm</button>
-        </div>
+  </div>
+
+  <!-- Danh sách danh mục và bài viết -->
+  <div *ngFor="let category of categories" class="mb-16">
+    <!-- Tiêu đề danh mục và nút Xem thêm -->
+    <div class="flex flex-col md:flex-row justify-between items-center mx-4 mb-8">
+      <h2 class="text-[28px] md:text-[32px] font-bold text-[#1A1A1A] tracking-tight">{{ category.CateblogName }}</h2>
+      <a [routerLink]="['/category', category._id]" class="mt-4 md:mt-0 px-5 py-2 text-[18px] md:text-[20px] bg-[#F8BC3B] text-black rounded-lg transition duration-300 hover:bg-[#85461F] hover:text-white shadow-md hover:shadow-lg">Xem thêm</a>
     </div>
-    <div  class="flex justify-between mx-[40px] mt-[20px]">
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\LSTB.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Lịch sử rượu Tây Bắc - Tinh hoa vùng núi rừng</b><br/> Rượu Tây Bắc không chỉ là một loại thức uống mà còn là nét văn hóa truyền thống đặc sắc...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Ruou-noi_tieng.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Những loại rượu nổi tiếng ở Tây Bắc</b><br/> Tây Bắc nổi tiếng với nhiều loại rượu đặc trưng, mỗi loại mang một hương vị riêng biệt...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Ruou_Tay_Bac_truyen_Thong.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Quy trình làm rượu Tây Bắc truyền thống</b><br/> Quy trình làm rượu Tây Bắc là sự kết hợp hài hòa giữa thiên nhiên và bàn tay khéo léo...</p>
-            </button>
-        </div>
+
+    <!-- Danh sách 3 bài viết thuộc danh mục -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mx-4">
+      <div *ngIf="getBlogsByCategory(category._id).length === 0" class="text-center col-span-3">
+        <p class="text-gray-500 text-lg font-medium">Không có bài viết nào trong danh mục này.</p>
+      </div>
+      <div *ngFor="let blog of getBlogsByCategory(category._id)" class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group">
+        <a [routerLink]="['/blog', blog.id]" class="block">
+          <div class="relative overflow-hidden">
+            <img class="rounded-t-xl w-full h-[200px] md:h-[247px] object-cover transition-transform duration-500 group-hover:scale-110" [src]="blog.image" [alt]="blog.title">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div class="absolute top-4 right-4 bg-[#F8BC3B] text-black px-3 py-1 rounded-full text-sm font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">{{ category.CateblogName }}</div>
+          </div>
+          <div class="p-6">
+            <h3 class="text-[20px] md:text-[22px] font-bold text-[#1A1A1A] mb-4 group-hover:text-[#F8BC3B] transition-colors duration-200 line-clamp-2">{{ blog.title }}</h3>
+            <p class="text-gray-600 text-[16px] line-clamp-2 mb-4 leading-relaxed">{{ blog.summary }}</p>
+            <span class="inline-flex items-center text-[#F8BC3B] hover:text-[#85461F] font-semibold transition-colors duration-200 group">
+              Đọc thêm
+              <svg class="w-5 h-5 ml-2 transform transition-transform duration-200 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </span>
+          </div>
+        </a>
+      </div>
     </div>
-    <div class="flex justify-between">
-        <div class="mt-[20px] ml-[40px] pt-2 text-center bg-[#757575] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[280px]"
-        id="btnStory" (mouseenter)="changeBackground1('btnStory')" (mouseleave)="resetBackground1('btnStory')">
-            <button class="text-[25px] cursor-pointer bg-[#757575] border-none text-lg pb-1 text-[#FFFFFF] font-['Inter'] font-bold">Câu chuyện khách hàng</button>
-        </div>
-        <div class="div-read-this mt-[20px] pt-2 text-center bg-[#EDEDEC] mr-[40px] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[150px]" 
-        id="btnReadThis3" (mouseenter)="changeBackground('btnReadThis3')" (mouseleave)="resetBackground('btnReadThis3')">
-            <button class="btn-read-this text-[25px] cursor-pointer bg-[#EDEDEC] border-none text-lg pb-1 text-[#757575] font-['Inter'] font-bold" >Xem thêm</button>
-        </div>
+  </div>
+
+  <!-- Loading state -->
+  <div *ngIf="!categories.length && !error" class="text-center py-20">
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#F8BC3B] mx-auto mb-6"></div>
+    <p class="text-gray-500 text-lg font-medium">Đang tải danh mục...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="text-center py-20">
+    <div class="bg-red-100 text-red-600 px-8 py-4 rounded-xl inline-block shadow-md">
+      <p class="font-medium">{{ error }}</p>
     </div>
-    <div  class="flex justify-between mx-[40px] mt-[20px]">
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Cau_chuyen_Ha_Giang.webp">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Chuyến đi Hà Giang và cuộc gặp gỡ định mệnh với rượu cam Hà Giang</b><br/> Hà Giang, mảnh đất địa đầu Tổ quốc...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Ruou_Mo.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Hương vị tuổi thơ trong từng ly rượu mơ</b><br/> Tôi sinh ra và lớn lên ở một vùng quê nghèo, nơi những đồi mơ bạt ngàn trải dài khắp...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Ruou_nho_rung.webp">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Rượu nho rừng SARU - Chuyến phiêu lưu đặc biệt trong bộ sưu tập của tôi</b><br/> Tôi là một người đam mê khám phá thế giới...</p>
-            </button>
-        </div>
-    </div>
-    <div class="flex justify-between">
-        <div class="mt-[20px] ml-[40px] pt-2 text-center bg-[#757575] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[170px]"
-        id="btntip" (mouseenter)="changeBackground1('btntip')" (mouseleave)="resetBackground1('btntip')">
-            <button class="text-[25px] cursor-pointer bg-[#757575] border-none text-lg pb-1 text-[#FFFFFF] font-['Inter'] font-bold">Mẹo hữu ích</button>
-        </div>
-        <div class="div-read-this mt-[20px] pt-2 text-center bg-[#EDEDEC] mr-[40px] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[150px]" 
-        id="btnReadThis4" (mouseenter)="changeBackground('btnReadThis4')" (mouseleave)="resetBackground('btnReadThis4')">
-            <button class="btn-read-this text-[25px] cursor-pointer bg-[#EDEDEC] border-none text-lg pb-1 text-[#757575] font-['Inter'] font-bold" >Xem thêm</button>
-        </div>
-    </div>
-    <div  class="flex justify-between mx-[40px] mt-[20px]">
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Cach_het_say_ruou.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Cách hết say rượu, 15 cách giải rượu hiệu quả, an toàn và nhanh nhất sau khi uống rượu</b><br/> Uống rượu là một thói quen hay sở thích...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Top_7_meo.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Top 7 mẹo uống rượu mà không say</b><br/> Hôm qua đã định không uống say rồi, nhưng đối tác nói chuyện hợp quá, lại mở ra nhiều...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Bi_kip_chon_ruou_ngon.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Bí kíp chọn rượu ngon, uống rượu sành điệu như một chuyên gia</b><br/> Rượu Tây Bắc không chỉ là thức uống, mà...</p>
-            </button>
-        </div>
-    </div>
+  </div>
 </div>
-<div class="bg-BG py-5 font-Regular">
-    <div class="mx-[40px] mb-3 flex justify-between w-[1500px] h-[500px] rounded-[10px] bg-[#EDEDED]">
-        <img class="w-[750px] h-[500px] rounded-l-[10px] float-left" src="assets\ruou_man.png">
-        <div class="px-[20px] py-[40px]">
-            <p class="text-left font-Header font-bold text-[35px] text-[#262626] mb-[10px]">Rượu Mận <br/>Đặc sản tình yêu và kí ức vùng trời Tây Bắc</p>
-            <p class="text-left text-[18px] text-[#4D4D4D]">Tôi là một chàng trai trẻ đầy đam mê với các chuyến đi khám phá. Sau khi hoàn thành một vài dự án quan trọng trong công việc, tôi quyết định dành thời gian để du lịch và tìm hiểu thêm về những vùng đất mới. Tây Bắc, với những núi rừng hùng vĩ, là một trong những điểm đến mà tôi luôn mong muốn trải nghiệm. Tây Bắc không chỉ thu hút bởi vẻ đẹp thiên nhiên mà còn bởi nền văn hóa độc đáo của các dân tộc thiểu số sinh sống tại đây.</p>
-            <div class="div-read-this mt-[20px] pt-2 text-center bg-[#EDEDEC] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[150px]" 
-            id="btnReadThis1" (mouseenter)="changeBackground('btnReadThis1')" (mouseleave)="resetBackground('btnReadThis1')">
-                <button class="btn-read-this text-[25px] cursor-pointer bg-[#EDEDEC] border-none text-lg pb-1 text-[#757575] font-['Inter'] font-bold" >Xem thêm</button>
-            </div>
-        </div>
-    </div>
-    <div class="flex justify-between ">
-        <div class="mt-[20px] ml-[40px] pt-2 text-center bg-[#757575] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[310px]"
-        id="btnInfor" (mouseenter)="changeBackground1('btnInfor')" (mouseleave)="resetBackground1('btnInfor')">
-            <button class="text-[25px] cursor-pointer bg-[#757575] border-none text-lg pb-1 text-[#FFFFFF] font-['Inter'] font-bold">Kiến thức về rượu Tây Bắc</button>
-        </div>
-        <div class="div-read-this mt-[20px] mr-[40px] pt-2 text-center bg-[#EDEDEC] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[150px]" 
-        id="btnReadThis2" (mouseenter)="changeBackground('btnReadThis2')" (mouseleave)="resetBackground('btnReadThis2')">
-            <button class="btn-read-this text-[25px] cursor-pointer bg-[#EDEDEC] border-none text-lg pb-1 text-[#757575] font-['Inter'] font-bold" >Xem thêm</button>
-        </div>
-    </div>
-    <div  class="flex justify-between mx-[40px] mt-[20px]">
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\LSTB.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Lịch sử rượu Tây Bắc - Tinh hoa vùng núi rừng</b><br/> Rượu Tây Bắc không chỉ là một loại thức uống mà còn là nét văn hóa truyền thống đặc sắc...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Ruou-noi_tieng.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Những loại rượu nổi tiếng ở Tây Bắc</b><br/> Tây Bắc nổi tiếng với nhiều loại rượu đặc trưng, mỗi loại mang một hương vị riêng biệt...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Ruou_Tay_Bac_truyen_Thong.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Quy trình làm rượu Tây Bắc truyền thống</b><br/> Quy trình làm rượu Tây Bắc là sự kết hợp hài hòa giữa thiên nhiên và bàn tay khéo léo...</p>
-            </button>
-        </div>
-    </div>
-    <div class="flex justify-between">
-        <div class="mt-[20px] ml-[40px] pt-2 text-center bg-[#757575] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[280px]"
-        id="btnStory" (mouseenter)="changeBackground1('btnStory')" (mouseleave)="resetBackground1('btnStory')">
-            <button class="text-[25px] cursor-pointer bg-[#757575] border-none text-lg pb-1 text-[#FFFFFF] font-['Inter'] font-bold">Câu chuyện khách hàng</button>
-        </div>
-        <div class="div-read-this mt-[20px] pt-2 text-center bg-[#EDEDEC] mr-[40px] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[150px]" 
-        id="btnReadThis3" (mouseenter)="changeBackground('btnReadThis3')" (mouseleave)="resetBackground('btnReadThis3')">
-            <button class="btn-read-this text-[25px] cursor-pointer bg-[#EDEDEC] border-none text-lg pb-1 text-[#757575] font-['Inter'] font-bold" >Xem thêm</button>
-        </div>
-    </div>
-    <div  class="flex justify-between mx-[40px] mt-[20px]">
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Cau_chuyen_Ha_Giang.webp">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Chuyến đi Hà Giang và cuộc gặp gỡ định mệnh với rượu cam Hà Giang</b><br/> Hà Giang, mảnh đất địa đầu Tổ quốc...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Ruou_Mo.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Hương vị tuổi thơ trong từng ly rượu mơ</b><br/> Tôi sinh ra và lớn lên ở một vùng quê nghèo, nơi những đồi mơ bạt ngàn trải dài khắp...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Ruou_nho_rung.webp">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Rượu nho rừng SARU - Chuyến phiêu lưu đặc biệt trong bộ sưu tập của tôi</b><br/> Tôi là một người đam mê khám phá thế giới...</p>
-            </button>
-        </div>
-    </div>
-    <div class="flex justify-between">
-        <div class="mt-[20px] ml-[40px] pt-2 text-center bg-[#757575] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[170px]"
-        id="btntip" (mouseenter)="changeBackground1('btntip')" (mouseleave)="resetBackground1('btntip')">
-            <button class="text-[25px] cursor-pointer bg-[#757575] border-none text-lg pb-1 text-[#FFFFFF] font-['Inter'] font-bold">Mẹo hữu ích</button>
-        </div>
-        <div class="div-read-this mt-[20px] pt-2 text-center bg-[#EDEDEC] mr-[40px] text-[#757575] border border-[3px] border-[#757575] rounded-[10px] cursor-pointer h-12 w-[150px]" 
-        id="btnReadThis4" (mouseenter)="changeBackground('btnReadThis4')" (mouseleave)="resetBackground('btnReadThis4')">
-            <button class="btn-read-this text-[25px] cursor-pointer bg-[#EDEDEC] border-none text-lg pb-1 text-[#757575] font-['Inter'] font-bold" >Xem thêm</button>
-        </div>
-    </div>
-    <div  class="flex justify-between mx-[40px] mt-[20px]">
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Cach_het_say_ruou.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Cách hết say rượu, 15 cách giải rượu hiệu quả, an toàn và nhanh nhất sau khi uống rượu</b><br/> Uống rượu là một thói quen hay sở thích...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Top_7_meo.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Top 7 mẹo uống rượu mà không say</b><br/> Hôm qua đã định không uống say rồi, nhưng đối tác nói chuyện hợp quá, lại mở ra nhiều...</p>
-            </button>
-        </div>
-        <div class=" bg-[#EDEDED] w-[450px] h-[386px] border-0 rounded-[10px]">
-            <button>
-            <img class="m-0 rounded-t-[10px] w-[450px] h-[247px]" src="assets\Bi_kip_chon_ruou_ngon.jpg">
-            <p class="text-center font-['Inter'] text-[20px] text-[#262626] mt-[20px] mx-[20px]"><b>Bí kíp chọn rượu ngon, uống rượu sành điệu như một chuyên gia</b><br/> Rượu Tây Bắc không chỉ là thức uống, mà...</p>
-            </button>
-        </div>
-    </div>
-</div>
-        

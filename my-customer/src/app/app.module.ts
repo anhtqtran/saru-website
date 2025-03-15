@@ -46,6 +46,10 @@ import { BlogdetailComponent } from './blogdetail/blogdetail.component';
 import { FaqsComponent } from './faqs/faqs.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { CompareComponent } from './compare/compare.component';
+import { BlogcategoryComponent } from './blogcategory/blogcategory.component';
+import { MessageComponent } from './message/message.component';
+import { PaymentdetailComponent } from './paymentdetail/paymentdetail.component';
+import { PaymentsuccessfulComponent } from './paymentsuccessful/paymentsuccessful.component';
 
 
 
@@ -82,6 +86,10 @@ import { CompareComponent } from './compare/compare.component';
     FaqsComponent,
     ProductDetailComponent,
     CompareComponent,
+    BlogcategoryComponent,
+    MessageComponent,
+    PaymentdetailComponent,
+    PaymentsuccessfulComponent,
 
   ],
   imports: [

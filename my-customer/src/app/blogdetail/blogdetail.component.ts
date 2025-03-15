@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Title } from '@angular/platform-browser';
-import { Blog, BlogDetail } from '../classes/Blogs';
-import { BlogapiService } from '../services/blogapi.service';
+import { BlogService } from '../services/blog.service';
+import { Blog, BlogDetail } from '../classes/Blogs'; // Chỉ dùng Blog và BlogDetail
 
 @Component({
   selector: 'app-blogdetail',
@@ -13,53 +12,69 @@ import { BlogapiService } from '../services/blogapi.service';
 export class BlogdetailComponent implements OnInit {
   blog: BlogDetail | null = null;
   relatedBlogs: Blog[] = [];
-  isLoading = true;
-  errorMessage: string | null = null;
+  isLoading: boolean = true;
+  errorMessage: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private blogService: BlogapiService, // Sử dụng BlogapiService thay vì BlogService
-    private titleService: Title
-  ) {}
+  constructor(private route: ActivatedRoute, private blogService: BlogService) {}
 
   ngOnInit(): void {
-    this.loadBlogDetail();
-  }
-
-  loadBlogDetail(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (!id) {
-      this.errorMessage = 'ID bài viết không hợp lệ';
-      this.isLoading = false;
-      return;
-    }
-
-    this.isLoading = true;
-    this.blogService.getBlogDetail(id).subscribe({
-      next: (blog) => {
-        this.blog = blog;
-        this.titleService.setTitle(`${blog.title} - SARU`);
+    this.route.paramMap.subscribe(params => {
+      const blogID = params.get('id');
+      if (blogID) {
+        this.fetchBlog(blogID);
+      } else {
+        this.errorMessage = "Không tìm thấy ID bài viết";
         this.isLoading = false;
-        console.log('Loaded blog detail:', this.blog);
-        this.loadRelatedBlogs();
-      },
-      error: (error) => {
-        this.errorMessage = 'Không thể tải chi tiết bài viết. Vui lòng thử lại sau.';
-        this.isLoading = false;
-        console.error('Error loading blog detail:', error);
       }
     });
   }
 
-  loadRelatedBlogs(): void {
-    if (!this.blog) return;
-    this.blogService.getRelatedBlogs('cateblog1', this.blog.id, 4).subscribe({
-      next: (blogs) => {
-        this.relatedBlogs = blogs;
-        console.log('Loaded related blogs:', this.relatedBlogs);
+  fetchBlog(blogID: string): void {
+    this.isLoading = true;
+    this.blogService.getBlogById(blogID).subscribe({
+      next: (data) => {
+        this.blog = {
+          id: data._id,
+          title: data.BlogTitle,
+          image: data.BlogImage,
+          summary: data.BlogContent.substring(0, 150) + '...',
+          categoryName: data.categoryName,
+          content: data.BlogContent
+        };
+        this.isLoading = false;
+
+        if (!this.blog) {
+          this.errorMessage = "Bài viết không tồn tại hoặc đã bị xóa.";
+          return;
+        }
+
+        if (data.categoryID) {
+          this.getRelatedBlogs(data.categoryID, data._id);
+        }
       },
-      error: (error) => {
-        console.error('Error loading related blogs:', error);
+      error: (err) => {
+        console.error('Lỗi khi lấy bài viết:', err);
+        this.errorMessage = "Đã xảy ra lỗi khi tải bài viết.";
+        this.isLoading = false;
+      }
+    });
+  }
+
+  getRelatedBlogs(categoryID: string, currentBlogID: string): void {
+    this.blogService.getBlogsByCategory(categoryID).subscribe({
+      next: (data) => {
+        this.relatedBlogs = data
+          .filter(b => b._id !== currentBlogID)
+          .map(b => ({
+            id: b._id,
+            title: b.BlogTitle,
+            image: b.BlogImage,
+            summary: b.BlogContent.substring(0, 150) + '...',
+            categoryName: b.categoryName
+          }));
+      },
+      error: (err) => {
+        console.error('Lỗi khi lấy bài viết liên quan:', err);
       }
     });
   }

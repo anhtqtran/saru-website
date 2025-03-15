@@ -14,6 +14,7 @@ const session = require('express-session');
 const rateLimit = require('express-rate-limit');
 const winston = require('winston');
 const cron = require('node-cron');
+const multer = require('multer'); // Thêm dòng này
 
 const app = express();
 
@@ -31,22 +32,6 @@ const logger = winston.createLogger({
   ]
 });
 
-
-
-// Phần comment về Redis từ mã gốc của bạn
-// const { RedisStore } = require('connect-redis');
-// const redis = require('redis');
-// const redisClient = redis.createClient({
-//     host: '172.24.81.243',
-//     port: 6379
-// });
-// redisClient.on('error', (err) => {
-//   logger.error('Redis Client Error', { error: err.message });
-// });
-// redisClient.connect().catch(err => {
-//   logger.error('Failed to connect to Redis', { error: err.message });
-// });
-
 // Cấu hình express-session với maxAge từ biến môi trường
 const sessionMaxAge = parseInt(process.env.SESSION_MAX_AGE) || 24 * 60 * 60 * 1000; // Mặc định 24 giờ
 app.use(session({
@@ -62,13 +47,16 @@ app.use(session({
 }));
 
 // Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.json());
+app.use(bodyParser.json({ limit: '50mb' })); // Cập nhật từ đoạn code ngắn
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true })); // Cập nhật từ đoạn code ngắn
+app.use(express.json({ limit: '50mb' })); // Cập nhật từ đoạn code ngắn
+app.use(express.urlencoded({ limit: '50mb', extended: true })); // Thêm từ đoạn code ngắn
 
 app.use(cors({
   origin: ['http://localhost:4001', 'http://localhost:4002', 'http://localhost:4200'],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Thêm từ đoạn code ngắn
+  allowedHeaders: ['Content-Type', 'Authorization'] // Thêm từ đoạn code ngắn
 }));
 
 // Middleware để gán correlationId cho mỗi request
@@ -76,6 +64,10 @@ app.use((req, res, next) => {
   req.correlationId = uuidv4();
   next();
 });
+
+// Cấu hình Multer
+const storage = multer.memoryStorage(); // Lưu ảnh vào bộ nhớ trước khi xử lý
+const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } }); // Giới hạn 5MB
 
 // Cấu hình morgan
 morgan.token('correlationId', (req) => req.correlationId);
@@ -368,6 +360,8 @@ app.get('/api/categories', async (req, res) => {
 
 app.get('/api/products', async (req, res) => {
   try {
+    console.log("📢 API `/api/products` đã được gọi!"); // Thêm log từ đoạn code ngắn
+
     const page = Math.max(1, parseInt(req.query.page) || 1);
     const limit = Math.min(50, Math.max(1, parseInt(req.query.limit) || 12));
     const skip = (page - 1) * limit;
@@ -400,6 +394,48 @@ app.get('/api/products', async (req, res) => {
 
     const productIDs = items.map(p => p.ProductID);
     const promotionIDs = items.map(p => p.PromotionID).filter(id => id !== null);
+
+    // Gộp với collection images từ đoạn code ngắn
+    const productsWithImages = await database.collection('products').aggregate([
+      { $match: { ProductID: { $in: productIDs } } },
+      {
+        $lookup: {
+          from: 'images',
+          localField: 'ImageID',
+          foreignField: 'ImageID',
+          as: 'imageData'
+        }
+      },
+      {
+        $unwind: {
+          path: '$imageData',
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          ProductID: 1,
+          ProductName: 1,
+          ProductSKU: 1,
+          CateID: 1,
+          ProductBrand: 1,
+          ImageID: 1,
+          ProductPrice: 1,
+          PromotionID: 1,
+          ProductImageCover: { $ifNull: ['$imageData.ProductImageCover', ''] },
+          ProductImageSub1: { $ifNull: ['$imageData.ProductImageSub1', ''] },
+          ProductImageSub2: { $ifNull: ['$imageData.ProductImageSub2', ''] },
+          ProductImageSub3: { $ifNull: ['$imageData.ProductImageSub3', ''] }
+        }
+      }
+    ]).toArray();
+
+    // Map sản phẩm với ảnh vào items
+    const productMap = productsWithImages.reduce((acc, p) => {
+      acc[p.ProductID] = p;
+      return acc;
+    }, {});
 
     const stocks = await productstockCollection.find({ ProductID: { $in: productIDs } }).toArray();
     const stockMap = stocks.reduce((acc, stock) => {
@@ -469,6 +505,7 @@ app.get('/api/products', async (req, res) => {
       }
 
       const reviewData = reviewMap[p.ProductID] || { averageRating: null, totalReviewCount: 0 };
+      const productWithImage = productMap[p.ProductID] || {};
 
       return {
         ...p,
@@ -479,15 +516,26 @@ app.get('/api/products', async (req, res) => {
         isOnSale: isOnSale,
         discountPercentage: discountPercentage,
         averageRating: reviewData.averageRating,
-        totalReviewCount: reviewData.totalReviewCount
+        totalReviewCount: reviewData.totalReviewCount,
+        ProductImageCover: productWithImage.ProductImageCover || '',
+        ProductImageSub1: productWithImage.ProductImageSub1 || '',
+        ProductImageSub2: productWithImage.ProductImageSub2 || '',
+        ProductImageSub3: productWithImage.ProductImageSub3 || ''
       };
     });
+
+    if (!productsWithDetails.length) {
+      console.log('⚠️ Không tìm thấy dữ liệu'); // Thêm log từ đoạn code ngắn
+    }
+
+    console.log("📢 Dữ liệu trả về:", JSON.stringify(productsWithDetails, null, 2)); // Thêm log từ đoạn code ngắn
 
     res.json({
       data: productsWithDetails,
       pagination: { currentPage: page, totalPages: Math.ceil(total / limit), totalItems: total }
     });
   } catch (err) {
+    console.error('❌ Lỗi chi tiết:', err.stack); // Thêm log lỗi chi tiết từ đoạn code ngắn
     logger.error('Error in GET /api/products', { error: err.message, correlationId: req.correlationId });
     res.status(500).json({ error: err.message });
   }
@@ -1753,6 +1801,170 @@ app.get("/messages", async (req, res) => {
   }
 });
 
+
+//=====anhthucode
+app.post('/api/upload', upload.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+    
+    // Giả sử bạn upload lên Cloudinary hoặc Firebase ở đây
+    const imageUrl = `https://your-cloud.com/${req.file.filename}`;
+
+    res.json({ message: "Upload thành công!", url: imageUrl });
+  } catch (err) {
+    console.error("❌ Lỗi upload ảnh:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/products-full-details', async (req, res) => {
+  try {
+    const productsWithDetails = await database.collection('products').aggregate([
+      {
+        $lookup: {
+          from: "productstocks",
+          localField: "ProductID",
+          foreignField: "ProductID",
+          as: "stockData"
+        }
+      },
+      {
+        $unwind: {
+          path: "$stockData",
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $lookup: {
+          from: "images",
+          localField: "ImageID",
+          foreignField: "ImageID",
+          as: "imageData"
+        }
+      },
+      {
+        $unwind: {
+          path: "$imageData",
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $lookup: {
+          from: "productcategories",
+          localField: "CateID",
+          foreignField: "CateID",
+          as: "categoryData"
+        }
+      },
+      {
+        $unwind: {
+          path: "$categoryData",
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          ProductID: 1,
+          ProductName: 1,
+          ProductPrice: 1,
+          ProductBrand: 1,
+          StockQuantity: { $ifNull: ["$stockData.StockQuantity", 0] },
+          ProductImageCover: { $ifNull: ["$imageData.ProductImageCover", ""] },
+          ProductImageSub1: { $ifNull: ["$imageData.ProductImageSub1", ""] },
+          ProductImageSub2: { $ifNull: ["$imageData.ProductImageSub2", ""] },
+          ProductImageSub3: { $ifNull: ["$imageData.ProductImageSub3", ""] },
+          CateID: 1,
+          CateName: { $ifNull: ["$categoryData.CateName", "Chưa phân loại"] }
+        }
+      }
+    ]).toArray();
+
+    res.json({ data: productsWithDetails });
+  } catch (err) {
+    console.error('❌ Lỗi trong API /api/products-full-details:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.post('/api/reviews', async (req, res) => {
+  try {
+    const { ProductID, CustomerID, Content, Rating, DatePosted, Images } = req.body;
+
+    if (!ProductID || !CustomerID || !Rating || !Content) {
+      return res.status(400).json({ error: "Thiếu thông tin đánh giá!" });
+    }
+
+    const newReview = {
+      ReviewID: `review_${new Date().getTime()}`,
+      ProductID,
+      CustomerID,
+      Content,
+      Rating: Math.min(Math.max(Rating, 1), 5),
+      DatePosted: new Date().toISOString(),
+      Images: Images || []
+    };
+
+    await reviewCollection.insertOne(newReview);
+    res.json({ message: "Đánh giá đã được lưu thành công!", review: newReview });
+  } catch (err) {
+    console.error("Lỗi khi lưu đánh giá:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/reviews/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    if (!productId) {
+      return res.status(400).json({ error: "Thiếu ID sản phẩm!" });
+    }
+
+    const reviews = await reviewCollection.find({ ProductID: productId })
+      .sort({ DatePosted: -1 })
+      .toArray();
+
+    res.json(reviews);
+  } catch (err) {
+    console.error("Lỗi khi lấy đánh giá của sản phẩm:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get('/api/productstocks', async (req, res) => {
+  try {
+    const stocks = await database.collection('productstocks').aggregate([
+      {
+        $lookup: {
+          from: "products",
+          localField: "ProductID",
+          foreignField: "ProductID",
+          as: "productInfo"
+        }
+      },
+      { $unwind: "$productInfo" },
+      {
+        $project: {
+          _id: 1,
+          ProductID: 1,
+          StockQuantity: 1,
+          ProductName: "$productInfo.ProductName",
+          ProductSKU: "$productInfo.ProductSKU"
+        }
+      }
+    ]).toArray();
+
+    res.json(stocks);
+  } catch (err) {
+    console.error("❌ Lỗi khi lấy dữ liệu tồn kho:", err);
+    res.status(500).json({ error: 'Lỗi server!' });
+  }
+});
+
+
+
 // Khởi động server sau khi kết nối MongoDB
 async function startServer() {
   await connectDB();
@@ -1771,3 +1983,5 @@ process.on('SIGTERM', async () => {
   logger.info('MongoDB connection closed', { correlationId: 'system' });
   process.exit(0);
 });
+
+

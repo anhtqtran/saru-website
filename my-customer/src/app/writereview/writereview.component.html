@@ -1,5 +1,5 @@
+<!-- <html lang="vi">
 
-<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,35 +10,77 @@
 
     <div class="review-container">
         <h1>Đánh giá sản phẩm</h1>
-
-        <!-- Thông tin sản phẩm -->
         <div class="product-info">
             <img src="product-placeholder.png" alt="Rượu mơ má đào Mộc Châu">
             <div>
                 <h5>Rượu mơ má đào Mộc Châu</h5>
             </div>
         </div>
-
-        <!-- Đánh giá sao -->
         <div class="rating-section">
             <p>Chất lượng sản phẩm</p>
             <div class="stars">
-                ★ ★ ★ ★ ★ <span class="rating-text">Tuyệt vời</span>
+                <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" 
+                    (click)="rateProduct(i + 1)" 
+                    (mouseover)="highlightStars(i + 1)" 
+                    (mouseleave)="resetHighlight()"
+                    [ngClass]="{'filled': i < rating || i < hoverRating}">
+                    ★
+                </span>
             </div>
         </div>
-
-        <!-- Hộp nhập đánh giá -->
-        <textarea placeholder="Hãy chia sẻ cảm nhận của bạn về sản phẩm với những người mua khác nhé!"></textarea>
-
-        <!-- Nút tải ảnh -->
-        <button class="upload-button">Thêm Hình ảnh</button>
-
-        <!-- Nút điều hướng -->
+        <textarea [(ngModel)]="reviewContent" placeholder="Hãy chia sẻ cảm nhận của bạn về sản phẩm với những người mua khác nhé!"></textarea>
+        <button class="upload-button" (click)="triggerFileInput()">Thêm Hình ảnh</button>
+        <input type="file" #fileInput (change)="onFileSelected($event)" accept="image/*" hidden>
+        <div class="uploaded-images" *ngIf="selectedImages.length > 0">
+            <p>Hình ảnh đã chọn:</p>
+            <div class="image-preview">
+                <div class="image-container" *ngFor="let image of selectedImages; let i = index">
+                    <img [src]="image" alt="Hình đã tải lên">
+                    <button class="remove-image" (click)="removeImage(i)">x</button>
+                </div>
+            </div>
+        </div>
         <div class="review-buttons">
             <a href="#" class="back-button">Trở lại</a>
-            <button class="submit-button">Hoàn thành</button>
+            <button class="submit-button" (click)="submitReview()">Hoàn thành</button>
         </div>
     </div>
 
 </body>
-</html>
+
+</html> -->
+
+
+
+<div class="review-container">
+    <h1>Đánh giá sản phẩm</h1>
+
+    <!-- Duyệt qua danh sách sản phẩm -->
+    <div *ngFor="let product of orderProducts" class="product-info">
+        <img [src]="product.image || 'placeholder.jpg'" alt="{{ product.name }}">
+        <div>
+            <h5>{{ product.name }}</h5>
+        </div>
+
+        <!-- Chất lượng sản phẩm -->
+        <div class="rating-section">
+            <p>Chất lượng sản phẩm</p>
+            <div class="stars">
+                <span *ngFor="let star of [1, 2, 3, 4, 5]; let i = index" 
+                    (click)="product.rating = i + 1" 
+                    (mouseover)="highlightStars(product, i + 1)" 
+                    (mouseleave)="resetHighlight(product)"
+                    [ngClass]="{'filled': i < product.rating || i < product.hoverRating}">
+                    ★
+                </span>
+            </div>
+        </div>
+
+        <textarea [(ngModel)]="product.reviewContent" placeholder="Hãy chia sẻ cảm nhận của bạn..."></textarea>
+    </div>
+
+    <div class="review-buttons">
+        <button class="back-button" (click)="router.navigate(['/orderdetail'], { queryParams: { orderId: orderId } })">Trở lại</button>
+        <button class="submit-button" (click)="submitReview()">Hoàn thành</button>
+    </div>
+</div>
