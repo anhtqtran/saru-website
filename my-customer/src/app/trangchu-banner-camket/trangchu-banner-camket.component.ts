@@ -1,13 +1,15 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HomepageProductsService } from '../services/homepage-products.service';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { BestSellingProduct } from '../classes/BestSellingProduct';
 import { ProductService } from '../services/product.service';
 import { Blog } from '../classes/Blogs';
 import { BlogapiService } from '../services/blogapi.service';
-
+import { CartService } from '../services/cart.service';
+import { FeedbacksapiService } from '../services/feedbacksapi.service';
+import { Feedback } from '../classes/Feedbacks';
 @Component({
   selector: 'app-trangchu-banner-camket',
   templateUrl: './trangchu-banner-camket.component.html',
@@ -22,6 +24,7 @@ export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
 
   bestSellers: BestSellingProduct[] = [];
   bestSellerIds: string[] = [];
+  feedbacks: Feedback[] = [];
 
   constructor(
     private productService: ProductService,
@@ -29,6 +32,8 @@ export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
     private router: Router,
     private snackBar: MatSnackBar,
     private BlogService: BlogapiService,
+    private cartService: CartService,
+    private feedbackService: FeedbacksapiService,
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +45,9 @@ export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
 
     // Tải danh sách productId của sản phẩm bán chạy
     this.loadBestSellerIds();
+
+    //tải danh sách feedbacks
+    this.loadFeedbacks();
   }
 
   loadRandomBlogs(): void {
@@ -119,45 +127,83 @@ export class TrangchuBannerCamketComponent implements OnInit, OnDestroy {
   }
 
   // Thêm vào giỏ hàng
-  addToCart(product: BestSellingProduct): void {
-    if (!product.productId) {
-      console.error('Product ID is missing:', product);
-      this.snackBar.open('Lỗi: Không tìm thấy ID sản phẩm.', 'Đóng', { duration: 3000 });
-      return;
-    }
-    const subscription = this.productService.addToCart(product.productId, 1).subscribe({
-      next: (response) => {
-        console.log('Cart response:', response);
-        this.snackBar.open('Đã thêm vào giỏ hàng!', 'OK', { duration: 3000 });
+addToCart(product: BestSellingProduct): void {
+  if (!product.productId) {
+    console.error('Product ID is missing:', product);
+    this.snackBar.open('Lỗi: Không tìm thấy ID sản phẩm.', 'Đóng', { duration: 3000 });
+    return;
+  }
+
+  // Định dạng sản phẩm để phù hợp với CartService
+  const productToAdd = {
+    id: product.productId, // Sử dụng productId làm id
+    name: product.productName,    // Giả sử BestSellingProduct có name
+    price: product.productPrice,
+    image: product.productImageCover  // Giả sử BestSellingProduct có price
+    // Thêm các thuộc tính khác nếu cần (image, description, v.v.)
+  };
+
+  // Gọi phương thức addToCart từ CartService
+  this.cartService.addToCart(productToAdd);
+
+  // Hiển thị thông báo thành công
+  console.log('Cart updated:', this.cartService.getCart());
+  this.snackBar.open('Đã thêm vào giỏ hàng!', 'OK', { duration: 3000 });
+}
+
+  loadFeedbacks(): void {
+    const feedbacksSub = this.feedbackService.getFeedbacks().subscribe({
+      next: (feedbacks) => {
+        this.feedbacks = feedbacks;
+        console.log('Feedbacks loaded:', feedbacks);
       },
       error: (error) => {
-        console.error('Error adding to cart:', error.message);
-        this.snackBar.open(`Lỗi khi thêm vào giỏ hàng: ${error.message}`, 'Đóng', { duration: 3000 });
+        console.error('Error fetching feedbacks:', error);
+        this.snackBar.open('Không thể tải phản hồi. Vui lòng thử lại!', 'Đóng', { duration: 3000 });
       }
     });
-    this.subscriptions.push(subscription); // Quản lý subscription
+    this.subscriptions.push(feedbacksSub);
   }
 
   // So sánh sản phẩm
   addToCompare(product: BestSellingProduct): void {
-    if (!product.productId) {
-      console.error('Product ID is missing:', product);
-      this.snackBar.open('Lỗi: Không tìm thấy ID sản phẩm.', 'Đóng', { duration: 3000 });
+    console.log('Product to compare:', product); // Log toàn bộ object product
+    console.log('Product ID:', product.productId); // Log riêng productId
+  
+    if (!product.productId || typeof product.productId !== 'string' || product.productId.trim() === '') {
+      console.error('Invalid or missing productId:', product.productId);
+      this.snackBar.open('Lỗi: ID sản phẩm không hợp lệ.', 'Đóng', { duration: 3000 });
       return;
     }
-    const subscription = this.bestSellerService.addToCompare(product.productId).subscribe({
-      next: (response) => {
-        console.log('Add to compare response:', response);
-        this.snackBar.open('Đã thêm vào danh sách so sánh!', 'OK', { duration: 3000 });
-        if (response.success) {
-          this.bestSellerService.notifyCompareListUpdated();
+  
+    // Ánh xạ productId sang ObjectId
+    this.bestSellerService.getObjectIdFromProductId(product.productId).subscribe({
+      next: (objectId) => {
+        if (objectId && /^[0-9a-fA-F]{24}$/.test(objectId)) {
+          const subscription = this.productService.addToCompare(objectId).subscribe({
+            next: (response) => {
+              console.log('Add to compare response:', response);
+              this.snackBar.open('Đã thêm vào danh sách so sánh!', 'OK', { duration: 3000 });
+              if (response.success) {
+                this.productService.notifyCompareListUpdated();
+              }
+            },
+            error: (error) => {
+              console.error('Error adding to compare:', error.message);
+              this.snackBar.open(`Lỗi khi thêm vào danh sách so sánh: ${error.message}`, 'Đóng', { duration: 3000 });
+            }
+          });
+          this.subscriptions.push(subscription);
+        } else {
+          console.error('Invalid ObjectId after mapping:', objectId);
+          this.snackBar.open('ID sản phẩm không hợp lệ sau khi ánh xạ.', 'Đóng', { duration: 3000 });
         }
       },
       error: (error) => {
-        console.error('Error adding to compare:', error.message);
-        this.snackBar.open(`Lỗi khi thêm vào danh sách so sánh: ${error.message}`, 'Đóng', { duration: 3000 });
+        console.error('Error mapping productId to ObjectId:', error);
+        this.snackBar.open('Lỗi khi ánh xạ ID sản phẩm.', 'Đóng', { duration: 3000 });
       }
     });
-    this.subscriptions.push(subscription);
   }
+
 }
