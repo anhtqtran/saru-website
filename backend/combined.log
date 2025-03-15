@@ -7881,3 +7881,23 @@
 {"level":"info","message":"GET /api/images/image57 304 - - 292.490 ms - correlationId: cc446a54-4b5d-4dff-a003-b086c9d6f261","timestamp":"2025-03-15T16:33:15.168Z"}
 {"level":"info","message":"GET /api/images/image49 304 - - 1073.447 ms - correlationId: 0fa47d55-96cf-4fbc-b9b4-6423bf727f66","timestamp":"2025-03-15T16:33:15.570Z"}
 {"level":"info","message":"GET /api/images/image63 304 - - 1066.549 ms - correlationId: bf48d0d2-3064-4097-a4da-cac6482190af","timestamp":"2025-03-15T16:33:15.574Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T19:12:32.338Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T19:12:32.342Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T19:12:32.815Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-73711559fbdsm4906868b3a.59 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-15T19:12:33.137Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T19:14:52.293Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T19:14:52.299Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T19:14:52.556Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c6888a02sm47802795ad.40 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-15T19:14:52.911Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T19:28:40.010Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T19:28:40.021Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T19:28:40.478Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-301539d4037sm3070694a91.6 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-15T19:28:41.583Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T19:29:03.203Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T19:29:03.209Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T19:29:03.317Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c6888653sm47729085ad.22 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-15T19:29:03.763Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T19:32:33.117Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T19:32:33.122Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T19:32:33.440Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T19:32:33.773Z"}
