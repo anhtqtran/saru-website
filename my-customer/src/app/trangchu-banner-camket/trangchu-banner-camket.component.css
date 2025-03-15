@@ -1,0 +1,58 @@
+/* src/app/trangchu-banner-camket.component.css */
+.feedback-section {
+    margin: 20px 0;
+  }
+  
+  .feedback-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+  }
+  
+  .feedback-container::-webkit-scrollbar {
+    display: none; /* Ẩn thanh cuộn trên Chrome, Safari */
+  }
+  
+  .feedback-container {
+    -ms-overflow-style: none; /* IE và Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .feedback-list {
+    display: flex;
+    gap: 16px;
+    padding: 0 8px;
+  }
+  
+  .feedback-item {
+    width: 4000px; /* Độ rộng cố định để tránh tràn */
+    min-height: 200px; /* Chiều cao tối thiểu */
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .feedback-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .feedback-item img {
+    border-radius: 50%; /* Đảm bảo ảnh luôn tròn */
+    object-fit: cover; /* Giữ tỷ lệ ảnh */
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

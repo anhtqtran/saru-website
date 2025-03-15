@@ -7916,3 +7916,69 @@
 {"level":"info","message":"GET /api/compare 304 - - 69.249 ms - correlationId: a1c0c767-7783-4dbf-a0be-59e377bbcfb7","timestamp":"2025-03-15T23:13:38.866Z"}
 {"AccountID":"acc_1742078356312","compareList":[],"correlationId":"e98d79f2-d99e-4926-a6a6-e618d00fec8b","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:13:38.940Z"}
 {"level":"info","message":"GET /api/compare 304 - - 75.366 ms - correlationId: e98d79f2-d99e-4926-a6a6-e618d00fec8b","timestamp":"2025-03-15T23:13:38.949Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T23:15:47.321Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T23:15:47.336Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T23:15:47.792Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T23:15:47.858Z"}
+{"level":"info","message":"GET /api/verify-token 304 - - 8.560 ms - correlationId: e0cf4df1-7240-4df9-9af2-a5331fb03504","timestamp":"2025-03-15T23:15:49.926Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"8d81094b-5ae8-47cd-bda8-95d21ddcf5b9","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:15:49.997Z"}
+{"level":"info","message":"GET /api/compare 304 - - 69.561 ms - correlationId: 8d81094b-5ae8-47cd-bda8-95d21ddcf5b9","timestamp":"2025-03-15T23:15:50.000Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"f4e812a0-db24-41f1-a99c-603011cbc84b","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:15:50.002Z"}
+{"level":"info","message":"GET /api/cart 304 - - 106.744 ms - correlationId: f4e812a0-db24-41f1-a99c-603011cbc84b","timestamp":"2025-03-15T23:15:50.006Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"5de551b4-8eff-49bd-bb86-e2ca2deacf31","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:15:50.077Z"}
+{"level":"info","message":"GET /api/cart 304 - - 62.234 ms - correlationId: 5de551b4-8eff-49bd-bb86-e2ca2deacf31","timestamp":"2025-03-15T23:15:50.079Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"f4c6b265-d96f-4247-8db4-7d0c6b2077a2","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:15:50.092Z"}
+{"level":"info","message":"GET /api/compare 304 - - 82.848 ms - correlationId: f4c6b265-d96f-4247-8db4-7d0c6b2077a2","timestamp":"2025-03-15T23:15:50.094Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"ab1bf067-5cbf-4040-a322-cfdcee2789d4","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:15:50.144Z"}
+{"level":"info","message":"GET /api/cart 304 - - 64.730 ms - correlationId: ab1bf067-5cbf-4040-a322-cfdcee2789d4","timestamp":"2025-03-15T23:15:50.147Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"b4c8f0da-395c-48c8-b54e-1276e0d24d0f","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:15:50.175Z"}
+{"level":"info","message":"GET /api/compare 304 - - 80.624 ms - correlationId: b4c8f0da-395c-48c8-b54e-1276e0d24d0f","timestamp":"2025-03-15T23:15:50.178Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"4ad3d3ca-3e15-443b-b772-3c04583e08c7","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:15:50.218Z"}
+{"level":"info","message":"GET /api/cart 304 - - 71.840 ms - correlationId: 4ad3d3ca-3e15-443b-b772-3c04583e08c7","timestamp":"2025-03-15T23:15:50.222Z"}
+{"level":"info","message":"GET /api/verify-token 304 - - 2.893 ms - correlationId: ea671827-013b-4cc4-8951-d38b5b400d29","timestamp":"2025-03-15T23:15:50.248Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"086ee342-ae1e-40bf-b979-63e033e5e129","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:15:50.266Z"}
+{"level":"info","message":"GET /api/compare 200 2 - 85.367 ms - correlationId: 086ee342-ae1e-40bf-b979-63e033e5e129","timestamp":"2025-03-15T23:15:50.270Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"0993984b-d617-4be9-8d20-bf670c19d603","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:15:50.300Z"}
+{"level":"info","message":"GET /api/cart 304 - - 63.601 ms - correlationId: 0993984b-d617-4be9-8d20-bf670c19d603","timestamp":"2025-03-15T23:15:50.303Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"d5a5493f-e426-40ba-aee3-b66b635cfde4","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:15:50.354Z"}
+{"level":"info","message":"GET /api/compare 304 - - 83.181 ms - correlationId: d5a5493f-e426-40ba-aee3-b66b635cfde4","timestamp":"2025-03-15T23:15:50.357Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"686df026-8abc-4615-ba3a-eff01e8c2a69","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:15:50.406Z"}
+{"level":"info","message":"GET /api/cart 304 - - 65.475 ms - correlationId: 686df026-8abc-4615-ba3a-eff01e8c2a69","timestamp":"2025-03-15T23:15:50.409Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"926075e4-3bfa-4005-9b94-3e90ea02fb40","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:15:50.444Z"}
+{"level":"info","message":"GET /api/compare 304 - - 86.010 ms - correlationId: 926075e4-3bfa-4005-9b94-3e90ea02fb40","timestamp":"2025-03-15T23:15:50.446Z"}
+{"level":"info","message":"GET /faqs 304 - - 407.306 ms - correlationId: 80f8232b-93a8-4b3f-8106-ab2734895748","timestamp":"2025-03-15T23:15:50.460Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"f0dedabb-82e3-4890-b47e-1af946158fb1","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:15:50.474Z"}
+{"level":"info","message":"GET /api/cart 304 - - 64.712 ms - correlationId: f0dedabb-82e3-4890-b47e-1af946158fb1","timestamp":"2025-03-15T23:15:50.477Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"0f803882-2d91-4622-b5b7-f9bfed69e2e9","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:15:50.525Z"}
+{"level":"info","message":"GET /api/compare 304 - - 64.529 ms - correlationId: 0f803882-2d91-4622-b5b7-f9bfed69e2e9","timestamp":"2025-03-15T23:15:50.527Z"}
+{"level":"info","message":"GET /api/verify-token 304 - - 3.134 ms - correlationId: 7a5d4039-f4dd-4e9d-90a5-899ef1785174","timestamp":"2025-03-15T23:16:03.272Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"7f0a6e28-23fc-424c-9be4-e4e6e298cceb","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:16:03.316Z"}
+{"level":"info","message":"GET /api/cart 304 - - 66.285 ms - correlationId: 7f0a6e28-23fc-424c-9be4-e4e6e298cceb","timestamp":"2025-03-15T23:16:03.318Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"69ba28f4-80aa-4a5a-9b46-8dbb459cf5a2","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:16:03.324Z"}
+{"level":"info","message":"GET /api/compare 304 - - 67.799 ms - correlationId: 69ba28f4-80aa-4a5a-9b46-8dbb459cf5a2","timestamp":"2025-03-15T23:16:03.327Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"1c580383-7be8-47f0-b631-f1d66b507fb7","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:16:03.411Z"}
+{"level":"info","message":"GET /api/cart 304 - - 62.440 ms - correlationId: 1c580383-7be8-47f0-b631-f1d66b507fb7","timestamp":"2025-03-15T23:16:03.413Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"1e59e2a7-9715-49b2-9a30-4eea72485cbc","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:16:03.427Z"}
+{"level":"info","message":"GET /api/compare 304 - - 74.510 ms - correlationId: 1e59e2a7-9715-49b2-9a30-4eea72485cbc","timestamp":"2025-03-15T23:16:03.429Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"2e473c61-6f3c-422c-ba67-b193a77504ed","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:16:03.505Z"}
+{"level":"info","message":"GET /api/cart 304 - - 76.579 ms - correlationId: 2e473c61-6f3c-422c-ba67-b193a77504ed","timestamp":"2025-03-15T23:16:03.515Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"d187c83e-dea6-4bf8-bc8f-a418473c9d5c","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:16:03.553Z"}
+{"level":"info","message":"GET /api/compare 304 - - 77.212 ms - correlationId: d187c83e-dea6-4bf8-bc8f-a418473c9d5c","timestamp":"2025-03-15T23:16:03.561Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"0b5846c1-5676-40a4-b762-e50a8ab3cddf","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:16:03.596Z"}
+{"level":"info","message":"GET /api/cart 304 - - 63.472 ms - correlationId: 0b5846c1-5676-40a4-b762-e50a8ab3cddf","timestamp":"2025-03-15T23:16:03.598Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"baffcd88-126c-4464-9495-08714ccae22b","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:16:03.643Z"}
+{"level":"info","message":"GET /api/compare 304 - - 66.621 ms - correlationId: baffcd88-126c-4464-9495-08714ccae22b","timestamp":"2025-03-15T23:16:03.645Z"}
+{"level":"info","message":"GET /api/verify-token 304 - - 2.390 ms - correlationId: 0e57d569-a7b0-4350-a94a-d8143e9f4344","timestamp":"2025-03-15T23:16:03.731Z"}
+{"level":"info","message":"GET /faqs 304 - - 69.546 ms - correlationId: 66571c4e-9927-4fe3-ad49-d3051faab916","timestamp":"2025-03-15T23:16:03.733Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"0a31a6e9-aa8b-42e0-9d15-6415e9eca563","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:16:03.784Z"}
+{"level":"info","message":"GET /api/cart 304 - - 68.728 ms - correlationId: 0a31a6e9-aa8b-42e0-9d15-6415e9eca563","timestamp":"2025-03-15T23:16:03.787Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"a1d350cb-6faa-4c3c-84b3-3c25db91e216","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:16:03.802Z"}
+{"level":"info","message":"GET /api/compare 304 - - 82.002 ms - correlationId: a1d350cb-6faa-4c3c-84b3-3c25db91e216","timestamp":"2025-03-15T23:16:03.805Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"af36303d-5bbc-4ad4-8d21-e3aa35f24569","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:16:03.930Z"}
+{"level":"info","message":"GET /api/compare 304 - - 70.279 ms - correlationId: af36303d-5bbc-4ad4-8d21-e3aa35f24569","timestamp":"2025-03-15T23:16:03.932Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"94be1533-5903-4559-bf6e-72c08b1d0280","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:16:03.940Z"}
+{"level":"info","message":"GET /api/cart 304 - - 87.957 ms - correlationId: 94be1533-5903-4559-bf6e-72c08b1d0280","timestamp":"2025-03-15T23:16:03.941Z"}
+{"AccountID":"acc_1742078356312","compareList":[],"correlationId":"8a75bb36-4a8c-4dae-939d-4349a585469a","level":"info","message":"Fetched compare list from MongoDB","timestamp":"2025-03-15T23:16:03.996Z"}
+{"level":"info","message":"GET /api/compare 304 - - 63.909 ms - correlationId: 8a75bb36-4a8c-4dae-939d-4349a585469a","timestamp":"2025-03-15T23:16:03.999Z"}
+{"AccountID":"acc_1742078356312","cart":[],"correlationId":"329631a6-8746-4611-b3f2-b410fb43c2f2","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-15T23:16:04.028Z"}
+{"level":"info","message":"GET /api/cart 304 - - 85.421 ms - correlationId: 329631a6-8746-4611-b3f2-b410fb43c2f2","timestamp":"2025-03-15T23:16:04.029Z"}

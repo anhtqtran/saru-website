@@ -1,33 +1,34 @@
 <!--Gioithieu-->
-<section class="bg-[#38312F] text-white font-poppins">
-  <div class="container mx-auto flex flex-col md:flex-row items-center justify-between py-20 px-6 md:px-12">
-   <div class="text-left md:w-1/2">
-    <h1 class="text-[#F8BC3B] text-4xl font-[Miniver] mb-4">
-     Best Wine in Town
-    </h1>
-    <h2 class="text-4xl font-semibold mb-4">
-     Make your day great with our special wine!
-    </h2>
-    <p class="text-lg mb-8">
-     Welcome to our coffee paradise, where every bean tells a story and every cup sparks joy.
-    </p>
-    <div class="flex space-x-4">
-      <button class="bg-[#F8BC3B] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#F2E8DA] hover:text-black transition-all duration-300" [routerLink]="['/product']">
-        Order Now
-      </button>
-      <button class="border border-white px-6 py-3 rounded-full font-semibold hover:bg-[#F2E8DA] hover:text-black transition-all duration-300" [routerLink]="['/contact']">
-        Contact Us
-      </button>
+<section class="bg-white text-[#38312F] font-poppins h-100%">
+  <div class="container mx-auto flex flex-col md:flex-row items-center justify-between py-0 px-6 md:px-12">
+    <div class="text-left md:w-1/2 flex flex-col justify-center">
+      <h1 class="text-[#F8BC3B] text-4xl font-[Miniver] mb-4">
+        Best Wine in Town
+      </h1>
+      <h2 class="text-4xl font-semibold mb-4">
+        Chào bạn đến với SARU!
+      </h2>
+      <p class="text-lg mb-8">
+        Hãy khám phá hương vị đặc trưng, nơi hội tụ sự tinh hoa của thiên nhiên và con người.
+      </p>
+      <div class="flex space-x-4">
+        <button class="bg-[#F8BC3B] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#85461F] hover:text-white transition-all duration-300" [routerLink]="['/product']">
+          Đặt hàng ngay
+        </button>
+        <button class="bg-[#F8BC3B] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#85461F] hover:text-white transition-all duration-300" [routerLink]="['/contact']">
+          Liên hệ
+        </button>      
+      </div>
     </div>
-   </div>
-   <div class="md:w-1/2 mt-10 md:mt-0">
-    <img alt="Wine" class="w-full" src="assets/images/wine.png" width="2000"/>
-   </div>
+    <div class="md:w-1/2 mt-10 md:mt-0">
+      <img alt="Wine" class="w-full h-full object-cover" src="assets/images/wine.png"/>
+    </div>
   </div>
 </section>
+
 <!--Cam kết chất lượng-->
-<section class="flex flex-col md:flex-row items-center justify-center md:p-8 bg-[#F2E8DA] p-4">
-    <div class="w-full md:w-1/3 flex justify-center">
+<section class="flex flex-col md:flex-row items-center justify-center md:p-8 bg-white p-4">
+    <div class=" md:w-1/3 flex w-full h-full object-cover">
       <img src="assets/images/chung nhan.png" alt="Certificates" class="w-full h-auto">
     </div>
     <div class="w-full md:w-1/2 mt-6 md:mt-0 md:ml-12 text-center md:text-left">
@@ -102,8 +103,37 @@
   </div>  
 </section>
 
+<!-- Sản phẩm mới -->
+<section class="py-8 mt-0 bg-white">
+  <div class="text-center">
+    <h3 class="text-[#85461F] text-4xl font-bold">SẢN PHẨM MỚI</h3>
+    <a routerLink="/product" class="text-[#B16628] text-xl hover:text-[#38312F] block mt-2">Xem tất cả ></a>
+  </div>
+
+  <div class="container mx-auto p-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <!-- Bên trái: Video -->
+      <div class="w-full">
+        <video controls class="w-full h-auto rounded-lg shadow-md" poster="assets/images/video-poster.png">
+          <source src="assets/videos/new-product.mp4" type="video/mp4">
+          Trình duyệt của bạn không hỗ trợ thẻ video.
+        </video>
+      </div>
+      <!-- Bên phải: Mô tả -->
+      <div class="text-left">
+        <h2 class="text-[#85461F] text-2xl font-bold mb-4">Khám phá sản phẩm mới của SARU</h2>
+        <p class="text-[#B16628] text-lg mb-6">
+          Trải nghiệm hương vị mới lạ từ dòng sản phẩm mới nhất của chúng tôi. Được tạo nên từ sự kết hợp tinh tế giữa thiên nhiên và nghệ thuật, mỗi chai rượu đều mang đến cảm giác đặc biệt cho mọi khoảnh khắc của bạn.
+        </p>
+        <button class="bg-[#F8BC3B] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#85461F] hover:text-white transition-all duration-300" [routerLink]="['/product']">
+          Tìm hiểu thêm
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
 <!--Bài viết-->
-<section class="py-8 mt-0 bg-[#F2E8DA]">
+<section class="py-8 mt-0 bg-white">
   <div class="text-center">
     <h3 class="text-[#85461F] text-4xl font-bold">BÀI VIẾT MỚI</h3>
     <a routerLink="/blog" class="text-[#B16628] text-xl hover:text-[#38312F] block mt-2">Xem tất cả ></a>
@@ -158,45 +188,33 @@
     <h3 class="text-[#85461F] text-4xl font-bold">PHẢN HỒI TỪ KHÁCH HÀNG</h3>
   </div>
 
-  <div class="w-full mx-auto flex justify-center items-center px-4">
+  <!-- <div class="w-full mx-auto flex justify-center items-center px-4">
     <a routerLink="/all-feedbacks" class="flex items-center space-x-0">
       <a routerLink="/all-feedbacks" class="text-[#B16628] text-xl hover:text-[#38312F] block mt-2">Xem tất cả &gt;</a>
     </a>
-  </div>
+  </div> -->
 
-  <div class="container mx-auto p-6">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-      <!-- Card 1 -->
-      <div class="bg-[#38312F] text-white p-6 rounded-lg flex flex-col justify-between">
-        <p class="text-lg font-medium">
-          “Rượu Tây Bắc mang đến hương vị đậm đà, thơm mát từ thiên nhiên, khiến mình như được quay về với núi rừng hùng vĩ. Uống một chén mà cảm nhận được sự kỳ công và tâm huyết của người làm rượu.”
-        </p>
-        <div class="mt-4">
-          <p class="font-bold">Anh Trần Minh</p>
-          <p class="text-sm">Sản phẩm: Rượu Nàng Mơ</p>
+  <div class="container mx-auto py-8">
+    <section class="feedback-section">
+      <div class="feedback-container overflow-x-auto whitespace-nowrap pb-4 scrollbar-hide">
+        <div class="feedback-list flex gap-6">
+          <div class="feedback-item bg-white rounded-lg shadow-md p-4 w-72 inline-block transform transition duration-300 hover:shadow-lg" *ngFor="let feedback of feedbacks">
+            <div class="flex items-center mb-3">
+              <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center overflow-hidden mr-3">
+                <img [src]="feedback.customerAvatar" alt="{{ feedback.customerName }}" class="w-full h-full object-cover rounded-full" width="48" height="48" />
+              </div>
+              <div class="flex-1">
+                <p class="text-gray-900 font-bold text-xl">{{ feedback.customerName }}</p>
+                <p class="text-gray-600 text-30px truncate">Đã mua: {{ feedback.productName }}</p>
+              </div>
+            </div>
+            <p class="text-gray-700 text-50px mb-3 line-clamp-3" title="{{ feedback.content }}">{{ feedback.content }}</p>
+            <div class="flex items-center justify-end">
+              <div class="text-yellow-500">
+                <i class="fas fa-star" *ngFor="let star of [1, 2, 3, 4, 5]" [class.text-gray-300]="star > feedback.rating" [class.text-yellow-500]="star <= feedback.rating"></i>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-  
-      <!-- Card 2 -->
-      <div class="rounded-lg overflow-hidden">
-        <img src="assets/images/fb1.jpg" alt="Anh Trần Minh" class="w-full h-full object-cover transition duration-300 ease-in-out hover:scale-106">
-      </div>
-  
-      <!-- Card 3 -->
-      <div class="rounded-lg overflow-hidden">
-        <img src="assets/images/fb2.png" alt="Wine bottle image" class="w-full h-full object-cover transition duration-300 ease-in-out hover:scale-106">
-      </div>
-  
-      <!-- Card 4 -->
-      <div class="bg-[#F8BC3B] text-white p-6 rounded-lg flex flex-col justify-between">
-        <p class="text-lg font-medium">
-          “Mua rượu tại shop mà cảm giác như được trải nghiệm cả văn hóa Tây Bắc. Rượu thơm ngon, đúng chuẩn vị, giá cả hợp lý. Dịch vụ chăm sóc khách hàng chu đáo nữa, rất đáng tin cậy!”
-        </p>
-        <div class="mt-4">
-          <p class="font-bold">Chị Thục Vy</p>
-          <p class="text-sm">Sản phẩm: Rượu Nàng Mận</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
