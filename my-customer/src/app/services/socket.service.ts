@@ -10,6 +10,7 @@ export interface Message {
   message: string;
   targetUser: string; // Bắt buộc theo backend
   timestamp?: string; // Từ API GET /messages
+  image?: string | null; // Thêm trường image
 }
 
 // Interface cho dữ liệu gửi tin nhắn (chỉ các trường bắt buộc)
@@ -17,6 +18,7 @@ export interface SendMessageData {
   user: string;
   message: string;
   targetUser: string; // Bắt buộc
+  image?: string | null; // Thêm trường image
 }
 
 @Injectable({

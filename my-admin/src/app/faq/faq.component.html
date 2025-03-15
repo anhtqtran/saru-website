@@ -1,0 +1,50 @@
+<!-- <div class="px-40 mt-10">
+  <div class="flex justify-between">
+      <h1 class="text-3xl font-bold text-[#85461F]">Tất cả</h1>
+      <button class="flex items-center bg-[#F8BC3B] text-black font-medium py-2 px-4 rounded-full transition hover:bg-[#85461F] hover:text-white">
+          <img src="assets\images\add_circle.png" alt="Add" class="w-5 h-5 inline-block mr-2 transition hover:invert">
+          Tạo FAQ mới
+      </button>
+  </div>
+  <div class="shadow mt-4 bg-white">
+      <mat-form-field class="w-full">
+          <mat-label><img src="assets\images\Search.png" alt="Search" class="w-5 h-5 inline-block mr-2">Tìm kiếm</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Nhập tìm kiếm" #input>
+      </mat-form-field>
+      <table mat-table [dataSource]="dataSource" matSort class="w-full border border-gray-300 rounded-lg mt-4">
+
+<!--           
+          <ng-container matColumnDef="number">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> STT </th>
+              <td mat-cell *matCellDef="let row" class="p-3 border"> {{row.number}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> ID </th>
+              <td mat-cell *matCellDef="let row" class="p-3 border"> {{row._id}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="question">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Câu hỏi </th>
+              <td mat-cell *matCellDef="let row" class="p-3 border"> {{row.question}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="header-cell"> Hành động </th>
+              <td mat-cell *matCellDef="let row" class="p-3 border">
+                  <button class="bg-blue-500 text-white px-3 py-1 rounded mr-2 hover:bg-blue-700">Edit</button>
+                  <button class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700" (click)="delete(row._id)">Delete</button>    
+              </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header-row"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+
+          <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select"></mat-paginator>
+  </div>
+</div> --> 

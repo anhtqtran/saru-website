@@ -1736,8 +1736,9 @@ const { Server } = require('socket.io');
 const server = require('http').createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:4200", "http://localhost:4002"],
+    origin: ["http://localhost:4001", "http://localhost:4002", "http://localhost:4200"], // Thêm localhost:4200 nếu cần
     methods: ["GET", "POST"],
+    credentials: true // Thêm dòng này
   },
 });
 
@@ -1752,7 +1753,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendMessage", async (data) => {
-    console.log("📥 Tin nhắn nhận được:", data);
+    console.log("Tin nhắn nhận được:", data);
     if (!data.targetUser) {
       logger.warn("Thiếu targetUser trong dữ liệu gửi đến server", { correlationId: 'socket' });
       return;
@@ -1814,7 +1815,7 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
 
     res.json({ message: "Upload thành công!", url: imageUrl });
   } catch (err) {
-    console.error("❌ Lỗi upload ảnh:", err);
+    console.error("Lỗi upload ảnh:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -1884,7 +1885,7 @@ app.get('/api/products-full-details', async (req, res) => {
 
     res.json({ data: productsWithDetails });
   } catch (err) {
-    console.error('❌ Lỗi trong API /api/products-full-details:', err);
+    console.error('Lỗi trong API /api/products-full-details:', err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -1958,7 +1959,7 @@ app.get('/api/productstocks', async (req, res) => {
 
     res.json(stocks);
   } catch (err) {
-    console.error("❌ Lỗi khi lấy dữ liệu tồn kho:", err);
+    console.error("Lỗi khi lấy dữ liệu tồn kho:", err);
     res.status(500).json({ error: 'Lỗi server!' });
   }
 });

@@ -29,6 +29,7 @@ import { AuthGuard } from './guard/auth.guard'; // Nhập AuthGuard
 import { BlogdetailComponent } from './blogdetail/blogdetail.component';
 import { BlogcategoryComponent } from './blogcategory/blogcategory.component';
 import { MessageComponent } from './message/message.component';
+import { BlogrssComponent } from './blogrss/blogrss.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
   { path: 'blog', component: BlogComponent},
   { path: 'blog/:id', component: BlogdetailComponent },
   { path: 'category/:id', component: BlogcategoryComponent },
+  { path: 'blogrss', component: BlogrssComponent },
   { path: 'faqs', component: FaqsComponent},
   { path: 'boxchat', component: MessageComponent},
   { path: '', redirectTo: '/homepage', pathMatch: 'full' }, // Route mặc định

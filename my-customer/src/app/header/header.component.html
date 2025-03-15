@@ -46,9 +46,17 @@
                     <span class="absolute left-0 bottom-0 translate-y-2 w-full h-0.5 bg-[#F8BC3B] transition-all duration-300 transform scale-x-0 group-hover:scale-x-100"></span>
                 </a>
                 <ul id="submenu-blog" class="absolute left-0 bg-white shadow-lg w-72 submenu">
-                    <li><a [routerLink]="['/blog-know']" class="block p-3 text-gray-700 hover:text-[#F8BC3B]">Kiến thức về rượu Tây Bắc</a></li>
-                    <li><a [routerLink]="['/blog-story']" class="block p-3 text-gray-700 hover:text-[#F8BC3B]">Câu chuyện khách hàng</a></li>
-                    <li><a [routerLink]="['/blog-tip']" class="block p-3 text-gray-700 hover:text-[#F8BC3B]">Mẹo hữu ích</a></li>
+                    <!-- Thêm mục "Kiến thức chung" -->
+                    <li>
+                        <a [routerLink]="['/blogrss']" class="block p-3 text-gray-700 hover:text-[#F8BC3B]">
+                        Kiến thức chung
+                        </a>
+                    </li>
+                    <li *ngFor="let category of blogCategories">
+                        <a [routerLink]="['/category', category._id]" class="block p-3 text-gray-700 hover:text-[#F8BC3B]">
+                            {{ category.CateblogName }}
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li>  <a [routerLink]="['/faqs']" class="text-gray-700 hover:text-[#F8BC3B] relative group">

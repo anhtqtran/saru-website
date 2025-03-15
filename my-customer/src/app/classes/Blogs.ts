@@ -10,6 +10,7 @@ export interface Blog {
     title: string;
     image: string;
     summary: string;
+    categoryID: string;
     categoryName: string;
     content: string;
   }

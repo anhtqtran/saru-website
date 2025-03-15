@@ -105,7 +105,7 @@
 <!--Bài viết-->
 <section class="py-8 mt-0 bg-[#F2E8DA]">
   <div class="text-center">
-    <h3 class="text-[#85461F] text-4xl font-bold">BÀI VIẾT MỚI</h3>
+    <h3 class="text-[#85461F] text-4xl font-bold">BÀI VIẾT NỔI BẬT</h3>
     <a routerLink="/blog" class="text-[#B16628] text-xl hover:text-[#38312F] block mt-2">Xem tất cả ></a>
   </div>
 
@@ -124,7 +124,7 @@
 
     <!-- Hiển thị danh sách bài viết -->
     <div *ngIf="!isLoading && !errorMessage" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      <a *ngFor="let blog of blogs" [routerLink]="['/blog-detail', blog.id]" class="block">
+      <a *ngFor="let blog of blogs" [routerLink]="['/blog', blog.id]" class="block">
         <div class="bg-white overflow-hidden">
           <img [src]="blog.image" [alt]="blog.title" class="w-full h-100 object-cover transform transition duration-300 ease-in-out hover:scale-106" height="400" width="600">
           <div class="p-4">

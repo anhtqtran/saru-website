@@ -7,9 +7,9 @@
             <span class="mx-2">
                 <img src="assets/right_arrow.png" alt="Arrow" class="w-3 h-3"/>
             </span>
-            <a *ngIf="blog?.categoryName !== 'Không có danh mục'" routerLink="/category/{{ blog?.id }}" class="hover:text-[#85461F]">
+            <a *ngIf="blog?.categoryName !== 'Không có danh mục'" routerLink="/category/{{ blog?.categoryID }}" class="hover:text-[#85461F]">
                 {{ blog?.categoryName }}
-            </a>
+            </a>                            
             <span class="mx-2">
                 <img src="assets/right_arrow.png" alt="Arrow" class="w-3 h-3"/>
             </span>

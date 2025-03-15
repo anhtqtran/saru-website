@@ -27,8 +27,3 @@ input:focus {
 button:hover {
     cursor: pointer;
 }
-
-button {
-    color: white;
-    font-weight: bold;
-}
