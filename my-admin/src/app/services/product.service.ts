@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { Observable, of, catchError } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Product } from '../classes/Product';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +10,7 @@ import { Observable, map } from 'rxjs';
 export class ProductService {
   private productsUrl = 'http://localhost:4000/api/products-full-details';
   private filtersUrl = 'http://localhost:4000/api/filters';
-
+  private apiUrl = 'http://localhost:4000/api';
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<any[]> {
@@ -20,8 +22,20 @@ export class ProductService {
     );
   }
 
+  // getProducts(): Observable<any[]> {
+  //   return this.http.get<any>(`${this.apiUrl}/products`).pipe(
+  //     map((data: any) => {
+  //       console.log('Raw data from API:', data); // Log dữ liệu thô từ API
+  //       return Array.isArray(data) ? data : [];
+  //     }),
+  //     catchError((error) => {
+  //       console.error('Error fetching products:', error); // Log lỗi chi tiết
+  //       return of([]); // Trả về mảng rỗng nếu có lỗi
+  //     })
+  //   );
+  // }
   deleteProduct(productId: string): Observable<void> {
-    const deleteUrl = `http://localhost:4000/api/products/${productId}`; // Đúng URL
+    const deleteUrl = `http://localhost:4000/api/products/${productId}`;
     console.log("🛑 Gọi API xóa:", deleteUrl);
     return this.http.delete<void>(deleteUrl);
   }
@@ -34,6 +48,22 @@ export class ProductService {
 
   getSearchSuggestions(query: string): Observable<string[]> {
     return this.http.get<string[]>(`http://localhost:4000/api/products/search?q=${query}`);
+  }
+
+  getProductById(productId: string): Observable<any> {
+    const url = `${this.apiUrl}/products/${productId}`;
+    return this.http.get<any>(url).pipe(
+      map(response => response),
+      catchError((error) => {
+        console.error('Error fetching product details:', error);
+        throw error;
+      })
+    );
+  }
+
+  getProductsFullDetails(): Observable<{ data: Product[] }> {
+    const url = `${this.apiUrl}/products-full-details`;
+    return this.http.get<{ data: Product[] }>(url);
   }
   
 }
