@@ -143,7 +143,7 @@ function authenticateToken(req, res, next) {
   }
 }
 
-// ===================== PRODUCT API =====================
+//  PRODUCT API 
 
 const bestSellingProductsPipeline = (productId) => [
   ...(productId ? [] : [{ $group: { _id: "$ProductID", totalQuantity: { $sum: "$Quantity" } } }]),
@@ -496,6 +496,7 @@ app.get('/api/products/recommendations', async (req, res) => {
   }
 });
 
+
 app.get('/api/products/:id', async (req, res) => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
@@ -580,10 +581,40 @@ app.get('/api/products/:id', async (req, res) => {
       }
     ]).toArray();
 
-    const validReviews = reviewsAgg.filter(r => r.Rating > 0);
-    const averageRating = validReviews.length > 0
-      ? Number((validReviews.reduce((sum, r) => sum + r.Rating, 0) / validReviews.length).toFixed(1))
-      : 0;
+// app.get('/api/products/:id', async (req, res) => {
+//   try {
+//     const product = await productCollection.findOne({ _id: new ObjectId(req.params.id) });
+//     if (!product) return res.status(404).json({ message: "Sản phẩm không tồn tại." });
+
+//     const image = await imageCollection.findOne({ ImageID: product.ImageID });
+//     const productWithImages = {
+//       ...product,
+//       ProductImageCover: image?.ProductImageCover || '',
+//       ProductImageSub1: image?.ProductImageSub1 || '',
+//       ProductImageSub2: image?.ProductImageSub2 || '',
+//       ProductImageSub3: image?.ProductImageSub3 || ''
+//     };
+
+//     const reviewsAgg = await reviewCollection.aggregate([
+//       { $match: { ProductID: product.ProductID } },
+//       { $sort: { DatePosted: -1 } },
+//       {
+//         $project: {
+//           _id: 0,
+//           CustomerID: 1,
+//           Rating: { $min: [{ $max: ["$Rating", 0] }, 5] },
+//           Content: 1,
+//           DatePosted: { $dateToString: { format: "%d/%m/%Y", date: "$DatePosted" } }
+//         }
+//       }
+//     ]).toArray();
+
+
+//     const validReviews = reviewsAgg.filter(r => r.Rating > 0);
+//     const averageRating = validReviews.length > 0
+//       ? Number((validReviews.reduce((sum, r) => sum + r.Rating, 0) / validReviews.length).toFixed(1))
+//       : 0;
+
 
     const relatedProducts = await productCollection.find({
       CateID: product.CateID,
@@ -593,10 +624,20 @@ app.get('/api/products/:id', async (req, res) => {
       .project({ ProductName: 1, ProductPrice: 1, ProductImageCover: 1, _id: 1 })
       .toArray();
 
-    const relatedProductsWithStringId = relatedProducts.map(p => ({
-      ...p,
-      _id: p._id.toHexString()
-    }));
+//     const relatedProducts = await productCollection.find({
+//       CateID: product.CateID,
+//       _id: { $ne: new ObjectId(req.params.id) }
+//     })
+//       .limit(4)
+//       .project({ ProductName: 1, ProductPrice: 1, ProductImageCover: 1, _id: 1 })
+//       .toArray();
+
+
+//     const relatedProductsWithStringId = relatedProducts.map(p => ({
+//       ...p,
+//       _id: p._id.toHexString()
+//     }));
+
 
     res.json({
       ...productWithImages,
@@ -616,7 +657,21 @@ app.get('/api/products/:id', async (req, res) => {
   }
 });
 
-// ===================== COMPARE API =====================
+//     res.json({
+//       ...productWithImages,
+//       reviews: reviewsAgg,
+//       averageRating,
+//       totalReviewCount: validReviews.length,
+//       relatedProducts: relatedProductsWithStringId
+//     });
+//   } catch (err) {
+//     logger.error('Error fetching product detail', { error: err.message, correlationId: req.correlationId });
+//     res.status(500).json({ message: 'Lỗi hệ thống, vui lòng thử lại sau.' });
+//   }
+// });
+
+
+//  COMPARE API 
 
 app.post('/api/compare', authenticateToken, async (req, res) => {
   const { productId } = req.body;
@@ -755,7 +810,7 @@ app.delete('/api/compare/:productId', authenticateToken, async (req, res) => {
   }
 });
 
-// ===================== CART API =====================
+//  CART API 
 
 app.post('/api/cart', authenticateToken, async (req, res) => {
   const { productId, quantity } = req.body;
@@ -853,7 +908,7 @@ app.delete('/api/cart/:productId', authenticateToken, async (req, res) => {
   }
 });
 
-// ===================== LOGIN, SIGNUP, RESETPASS =====================
+//  LOGIN, SIGNUP, RESETPASS 
 
 cron.schedule('0 * * * *', async () => {
   await accountCollection.deleteMany({
@@ -1120,7 +1175,644 @@ app.get('/api/verify-token', authenticateToken, (req, res) => {
   res.json({ message: 'Token hợp lệ', account: req.account });
 });
 
-// ===================== SERVER START =====================
+
+
+
+//  API lưu đánh giá sản phẩm
+app.post('/api/reviews', async (req, res) => {
+  try {
+    const { ReviewID, ProductID, CustomerID, Content, Rating, DatePosted, Images } = req.body;
+
+    if (!ProductID || !CustomerID || !Rating || !Content) {
+      return res.status(400).json({ error: "Thiếu thông tin đánh giá!" });
+    }
+
+    const newReview = {
+      ReviewID,
+      ProductID,
+      CustomerID,
+      Content,
+      Rating: Math.min(Math.max(Rating, 1), 5), // Đảm bảo rating nằm trong khoảng 1-5
+      DatePosted: new Date(DatePosted).toISOString(),
+      Images: Images || []
+    };
+
+    await reviewCollection.insertOne(newReview);
+    res.json({ message: "Đánh giá đã được lưu thành công!", review: newReview });
+  } catch (err) {
+    console.error("Lỗi khi lưu đánh giá:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+//  API lấy đánh giá sản phẩm
+app.get('/api/reviews', async (req, res) => {
+  try {
+    const reviews = await reviewCollection.find().sort({ DatePosted: -1 }).toArray();
+    res.json(reviews);
+  } catch (err) {
+    console.error("Lỗi khi lấy danh sách đánh giá:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+/**
+ * API lấy đánh giá của một sản phẩm cụ thể
+ * Method: GET
+ * URL: /api/reviews/:productId
+ */
+app.get('/api/reviews/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    if (!productId) {
+      return res.status(400).json({ error: "Thiếu ID sản phẩm!" });
+    }
+
+    // 🔹 Tìm các đánh giá của sản phẩm theo ProductID
+    const reviews = await reviewCollection.find({ ProductID: productId })
+      .sort({ DatePosted: -1 }) // Sắp xếp theo ngày mới nhất
+      .toArray();
+
+    res.json(reviews);
+  } catch (err) {
+    console.error("Lỗi khi lấy đánh giá của sản phẩm:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+/**
+ * API lưu đánh giá sản phẩm
+ * Method: POST
+ * URL: /api/reviews
+ */
+app.post('/api/reviews', async (req, res) => {
+  try {
+    const { ReviewID, ProductID, CustomerID, Content, Rating, DatePosted, Images } = req.body;
+
+    if (!ProductID || !CustomerID || !Rating || !Content) {
+      return res.status(400).json({ error: "Thiếu thông tin đánh giá!" });
+    }
+
+    const newReview = {
+      ReviewID: `review_${new Date().getTime()}`,  // Tạo ID tự động nếu không có
+      ProductID,
+      CustomerID,
+      Content,
+      Rating: Math.min(Math.max(Rating, 1), 5), // Giữ rating trong khoảng 1-5
+      DatePosted: new Date().toISOString(), // 🔹 Lưu ngày theo chuẩn ISO
+      Images: Images || []
+    };
+
+    await reviewCollection.insertOne(newReview);
+    res.json({ message: "Đánh giá đã được lưu thành công!", review: newReview });
+  } catch (err) {
+    console.error("Lỗi khi lưu đánh giá:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// app.get('/api/productstocks', async (req, res) => {
+//   try {
+//     const stocks = await database.collection('productstocks').find().toArray();
+//     res.json(stocks);
+//   } catch (err) {
+//     console.error("❌ Lỗi khi lấy dữ liệu tồn kho:", err);
+//     res.status(500).json({ error: 'Lỗi server!' });
+//   }
+// });
+
+app.get('/api/productstocks', async (req, res) => {
+  try {
+    const stocks = await database.collection('productstocks').aggregate([
+      {
+        $lookup: {
+          from: "products",
+          localField: "ProductID",
+          foreignField: "ProductID",
+          as: "productInfo"
+        }
+      },
+      { $unwind: "$productInfo" },
+      {
+        $project: {
+          _id: 1,
+          ProductID: 1,
+          StockQuantity: 1,
+          ProductName: "$productInfo.ProductName",// ✅ Lấy tên sản phẩm
+          ProductSKU: "$productInfo.ProductSKU"
+        }
+      }
+    ]).toArray();
+
+    res.json(stocks);
+  } catch (err) {
+    console.error("❌ Lỗi khi lấy dữ liệu tồn kho:", err);
+    res.status(500).json({ error: 'Lỗi server!' });
+  }
+});
+///Connect images với products
+app.get('/api/products', async (req, res) => {
+
+  try {
+    console.log("📢 API `/api/products` đã được gọi!");
+
+    const productsWithImages = await database.collection('products').aggregate([
+      {
+        $lookup: {
+          from: 'images',
+          localField: 'ImageID',
+          foreignField: 'ImageID',
+          as: 'imageData'
+        }
+      },
+      {
+        $unwind: {
+          path: '$imageData',
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          ProductID: 1,
+          ProductName: 1,
+          ProductSKU: 1,
+          CateID: 1,
+          CateName: 1,
+          ProductBrand: 1,
+          ImageID: 1,
+          ProductImageCover: {
+            $ifNull: ['$imageData.ProductImageCover', '']
+          }
+        }
+      },
+      // Thêm limit nếu cần
+      { $limit: 100 }
+    ]).toArray();
+
+    if (!productsWithImages.length) {
+      console.log('⚠️ Không tìm thấy dữ liệu');
+    }
+
+    console.log("📢 Dữ liệu trả về:", JSON.stringify(productsWithImages, null, 2));
+    res.json({ data: productsWithImages });
+  } catch (err) {
+    console.error('❌ Lỗi chi tiết:', err.stack);
+    res.status(500).json({
+      error: 'Lỗi server!',
+      details: err.message
+    });
+  }
+});
+
+// app.delete('/api/products?limit=100', (req, res) => {
+//   const productId = req.params.id;
+//   // Code xử lý xóa sản phẩm ở đây
+//   res.json({ message: `Đã xóa sản phẩm ${productId}` });
+// });
+
+app.delete('/api/products/:id', async (req, res) => {
+  try {
+    const productId = req.params.id;
+    if (!ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: "ID sản phẩm không hợp lệ." });
+    }
+
+    const result = await productCollection.deleteOne({ _id: new ObjectId(productId) });
+
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Sản phẩm không tồn tại." });
+    }
+
+    res.json({ message: `Đã xóa sản phẩm với _id ${productId}` });
+  } catch (err) {
+    console.error("❌ Lỗi khi xóa sản phẩm:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+app.get('/api/products-with-stock', async (req, res) => {
+  try {
+    // Lấy danh sách sản phẩm
+    const products = await database.collection('products').find({}).toArray();
+    
+    // Lấy danh sách tồn kho
+    const stocks = await database.collection('productstocks').find({}).toArray();
+
+    // Tạo một Map từ stocks để truy xuất nhanh
+    const stockMap = stocks.reduce((acc, stock) => {
+      acc[stock.ProductID] = stock.StockQuantity;
+      return acc;
+    }, {});
+
+    // Gán tồn kho vào sản phẩm
+    const productsWithStock = products.map(product => ({
+      ...product,
+      StockQuantity: stockMap[product.ProductID] || 0
+    }));
+
+    res.json({ data: productsWithStock });
+  } catch (err) {
+    console.error('Lỗi trong API /api/products-with-stock:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+app.get('/api/products-full-details', async (req, res) => {
+  try {
+    const productsWithDetails = await database.collection('products').aggregate([
+      // Gộp với collection `productstocks` để lấy tồn kho
+      {
+        $lookup: {
+          from: "productstocks",
+          localField: "ProductID",
+          foreignField: "ProductID",
+          as: "stockData"
+        }
+      },
+      {
+        $unwind: {
+          path: "$stockData",
+          preserveNullAndEmptyArrays: true
+        }
+      },
+
+      // Gộp với collection `images` để lấy ảnh sản phẩm
+      {
+        $lookup: {
+          from: "images",
+          localField: "ImageID",
+          foreignField: "ImageID",
+          as: "imageData"
+        }
+      },
+      {
+        $unwind: {
+          path: "$imageData",
+          preserveNullAndEmptyArrays: true
+        }
+      },
+
+      // Gộp với collection `categories` để lấy thông tin danh mục sản phẩm
+      {
+        $lookup: {
+          from: "productcategories",
+          localField: "CateID",
+          foreignField: "CateID",
+          as: "categoryData"
+        }
+      },
+      {
+        $unwind: {
+          path: "$categoryData",
+          preserveNullAndEmptyArrays: true
+        }
+      },
+
+      // Chọn các trường cần trả về
+      {
+        $project: {
+          _id: 1,
+          ProductID: 1,
+          ProductName: 1,
+          ProductPrice: 1,
+          ProductBrand: 1,
+          StockQuantity: { $ifNull: ["$stockData.StockQuantity", 0] },
+          ProductImageCover: { $ifNull: ["$imageData.ProductImageCover", ""] },
+          ProductImageSub1: { $ifNull: ["$imageData.ProductImageSub1", ""] },
+          ProductImageSub2: { $ifNull: ["$imageData.ProductImageSub2", ""] },
+          ProductImageSub3: { $ifNull: ["$imageData.ProductImageSub3", ""] },
+          CateID: 1,
+          CateName: { $ifNull: ["$categoryData.CateName", "Chưa phân loại"] }
+        }
+      }
+    ]).toArray();
+
+    res.json({ data: productsWithDetails });
+  } catch (err) {
+    console.error('❌ Lỗi trong API /api/products-full-details:', err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+///Thêm nhật sản phẩm
+// app.post('/api/products', async (req, res) => {
+//   try {
+//     const { ProductID, ImageID, CateID, ProductName, ProductPrice, ProductBrand, 
+//             ProductFullDescription, ProductShortDescription, ProductSKU, ProductImages, StockQuantity } = req.body;
+
+//     // Kiểm tra nếu ImageID chưa tồn tại trong `images` thì thêm mới
+//     const existingImage = await imageCollection.findOne({ ImageID });
+//     if (!existingImage) {
+//       const imageData = {
+//         ImageID,
+//         ProductImageCover: ProductImages[0] || "", // Ảnh chính
+//         ProductImageSub1: ProductImages[1] || "",
+//         ProductImageSub2: ProductImages[2] || "",
+//         ProductImageSub3: ProductImages[3] || "",
+//       };
+//       await imageCollection.insertOne(imageData);
+//     }
+
+//     // Thêm sản phẩm vào `products`
+//     const newProduct = {
+//       ProductID,
+//       ImageID,
+//       CateID,
+//       ProductName,
+//       ProductPrice: Number(ProductPrice) || 0,
+//       ProductBrand,
+//       ProductFullDescription,
+//       ProductShortDescription,
+//       ProductSKU,
+//       CreatedAt: new Date()
+//     };
+
+//     await productCollection.insertOne(newProduct);
+
+//     // ✅ Cập nhật số lượng tồn kho vào `productstocks`
+//     await database.collection('productstocks').updateOne(
+//       { ProductID },
+//       { $set: { StockQuantity: Number(StockQuantity) || 0 } },
+//       { upsert: true }
+//     );
+
+//     res.json({ message: "Sản phẩm đã được thêm!", product: newProduct });
+//   } catch (err) {
+//     console.error("❌ Lỗi khi thêm sản phẩm:", err);
+//     res.status(500).json({ error: err.message });
+//   }
+// });
+
+
+
+
+
+
+
+
+
+
+// API xử lý upload ảnh
+app.post('/api/upload', upload.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+    
+    // Giả sử bạn upload lên Cloudinary hoặc Firebase ở đây
+    const imageUrl = `https://your-cloud.com/${req.file.filename}`;
+
+    res.json({ message: "Upload thành công!", url: imageUrl });
+  } catch (err) {
+    console.error("❌ Lỗi upload ảnh:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// API cập nhật sản phẩm:
+// app.put('/api/products/:id', async (req, res) => {
+//   try {
+//     const productId = req.params.id;
+//     const updatedData = req.body;
+
+//     const result = await productCollection.updateOne(
+//       { ProductID: productId },
+//       { $set: updatedData }
+//     );
+
+//     if (result.matchedCount === 0) {
+//       return res.status(404).json({ message: "Sản phẩm không tồn tại." });
+//     }
+
+//     res.json({ message: `Sản phẩm ${productId} đã được cập nhật!` });
+//   } catch (err) {
+//     console.error("❌ Lỗi khi cập nhật sản phẩm:", err);
+//     res.status(500).json({ error: err.message });
+//   }
+// });
+
+// app.put('/api/products/:id', async (req, res) => {
+//   try {
+//     const productId = req.params.id;
+//     const updatedData = req.body;
+
+//     // Xóa các trường không cần thiết để tránh ghi đè
+//     delete updatedData._id; // Không cho phép cập nhật _id
+//     delete updatedData.ProductID; // Không cho phép cập nhật ProductID
+
+//     // Chuyển đổi productId thành ObjectID
+//     let query = { _id: new ObjectId(productId) };
+//     const result = await productCollection.updateOne(query, { $set: updatedData });
+
+//     if (result.matchedCount === 0) {
+//       return res.status(404).json({ message: "Sản phẩm không tồn tại." });
+//     }
+
+//     // Cập nhật số lượng tồn kho nếu có
+//     if (updatedData.StockQuantity !== undefined) {
+//       await database.collection('productstocks').updateOne(
+//         { ProductID: updatedData.ProductID || req.body.ProductID }, // Sử dụng ProductID từ dữ liệu
+//         { $set: { StockQuantity: Number(updatedData.StockQuantity) || 0 } },
+//         { upsert: true }
+//       );
+//     }
+
+//     res.json({ message: `Sản phẩm ${productId} đã được cập nhật!` });
+//   } catch (err) {
+//     console.error("❌ Lỗi khi cập nhật sản phẩm:", err);
+//     res.status(500).json({ error: err.message, stack: err.stack });
+//   }
+// });
+
+
+///API get
+// GET /api/products/:id
+app.get('/api/products/:id', async (req, res) => {
+  try {
+    const productId = req.params.id;
+    // Kiểm tra nếu id không phải là ObjectID hợp lệ
+    if (!ObjectId.isValid(productId)) {
+      return res.status(400).json({ message: "ID sản phẩm không hợp lệ." });
+    }
+
+    const product = await productCollection.findOne({ _id: new ObjectId(productId) });
+    if (!product) {
+      return res.status(404).json({ message: "Sản phẩm không tồn tại." });
+    }
+
+    const image = await imageCollection.findOne({ ImageID: product.ImageID });
+    const stock = await database.collection('productstocks').findOne({ ProductID: product.ProductID });
+
+    const productWithDetails = {
+      _id: product._id.toString(),
+      ProductID: product.ProductID,
+      CateID: product.CateID,
+      ProductName: product.ProductName || "",
+      ProductPrice: product.ProductPrice || 0,
+      ProductBrand: product.ProductBrand || "",
+      ProductShortDescription: product.ProductShortDescription || "",
+      ProductFullDescription: product.ProductFullDescription || "",
+      ProductSKU: product.ProductSKU || "",
+      StockQuantity: stock ? stock.StockQuantity || 0 : 0,
+      IsPromotion: product.IsPromotion || false,
+      AllowOutOfStock: product.AllowOutOfStock || false,
+      WineType: product.WineType || "",
+      WineVolume: product.WineVolume || "",
+      ComparePrice: product.ComparePrice || 0,
+      ProductImageCover: image?.ProductImageCover || "",
+      ProductImageSub1: image?.ProductImageSub1 || "",
+      ProductImageSub2: image?.ProductImageSub2 || "",
+      ProductImageSub3: image?.ProductImageSub3 || ""
+    };
+
+    res.json(productWithDetails);
+  } catch (err) {
+    console.error('Error fetching product detail:', err);
+    res.status(500).json({ message: 'Lỗi hệ thống', error: err.message });
+  }
+});
+
+app.get('/api/products', async (req, res) => {
+  try {
+    const products = await productCollection.find().toArray();
+    const productsWithDetails = await Promise.all(products.map(async (product) => {
+      const image = await imageCollection.findOne({ ImageID: product.ImageID });
+      const stock = await database.collection('productstocks').findOne({ ProductID: product.ProductID });
+
+      return {
+        _id: product._id.toString(), // Đảm bảo trả về _id
+        ProductID: product.ProductID,
+        CateID: product.CateID,
+        ProductName: product.ProductName || "",
+        ProductPrice: product.ProductPrice || 0,
+        ProductBrand: product.ProductBrand || "",
+        ProductShortDescription: product.ProductShortDescription || "",
+        ProductFullDescription: product.ProductFullDescription || "",
+        ProductSKU: product.ProductSKU || "",
+        StockQuantity: stock ? stock.StockQuantity || 0 : 0,
+        IsPromotion: product.IsPromotion || false,
+        AllowOutOfStock: product.AllowOutOfStock || false,
+        WineType: product.WineType || "",
+        WineVolume: product.WineVolume || "",
+        ComparePrice: product.ComparePrice || 0,
+        ProductImageCover: image?.ProductImageCover || "",
+        ProductImageSub1: image?.ProductImageSub1 || "",
+        ProductImageSub2: image?.ProductImageSub2 || "",
+        ProductImageSub3: image?.ProductImageSub3 || ""
+      };
+    }));
+
+    res.json(productsWithDetails);
+  } catch (err) {
+    console.error('Error fetching products:', err);
+    res.status(500).json({ message: 'Lỗi hệ thống', error: err.message });
+  }
+});
+// PUT /api/products/:id
+app.post('/api/products', async (req, res) => {
+  try {
+    const newProduct = req.body;
+
+    // Kiểm tra xem sản phẩm với ProductID đã tồn tại chưa
+    const existingProduct = await productCollection.findOne({ ProductID: newProduct.ProductID });
+    if (existingProduct) {
+      return res.status(400).json({ message: "Sản phẩm với ProductID này đã tồn tại." });
+    }
+
+    const result = await productCollection.insertOne(newProduct);
+
+    // Thêm ảnh nếu có
+    if (newProduct.ProductImages && newProduct.ProductImages.length > 0) {
+      await imageCollection.insertOne({
+        ImageID: newProduct.ImageID,
+        ProductImageCover: newProduct.ProductImages[0] || "",
+        ProductImageSub1: newProduct.ProductImages[1] || "",
+        ProductImageSub2: newProduct.ProductImages[2] || "",
+        ProductImageSub3: newProduct.ProductImages[3] || ""
+      });
+    }
+
+    // Thêm số lượng tồn kho
+    await database.collection('productstocks').insertOne({
+      ProductID: newProduct.ProductID,
+      StockQuantity: Number(newProduct.StockQuantity) || 0
+    });
+
+    res.status(201).json({ message: "Sản phẩm đã được thêm thành công!", productId: result.insertedId });
+  } catch (err) {
+    console.error("❌ Lỗi khi thêm sản phẩm:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.put('/api/products/:id', async (req, res) => {
+  try {
+    const productId = req.params.id;
+    const updatedData = req.body;
+
+    delete updatedData._id;
+
+    const result = await productCollection.updateOne(
+      { _id: new ObjectId(productId) },
+      { $set: {
+        ProductID: updatedData.ProductID,
+        CateID: updatedData.CateID,
+        ProductName: updatedData.ProductName,
+        ProductPrice: Number(updatedData.ProductPrice) || 0,
+        ProductBrand: updatedData.ProductBrand,
+        ProductShortDescription: updatedData.ProductShortDescription,
+        ProductFullDescription: updatedData.ProductFullDescription,
+        ProductSKU: updatedData.ProductSKU,
+        StockQuantity: Number(updatedData.StockQuantity) || 0,
+        IsPromotion: updatedData.IsPromotion,
+        AllowOutOfStock: updatedData.AllowOutOfStock,
+        WineType: updatedData.WineType,
+        WineVolume: updatedData.WineVolume,
+        ComparePrice: Number(updatedData.ComparePrice) || 0
+      }}
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Sản phẩm không tồn tại." });
+    }
+
+    if (updatedData.ProductImages && updatedData.ProductImages.length > 0) {
+      await imageCollection.updateOne(
+        { ImageID: updatedData.ImageID },
+        { $set: {
+          ProductImageCover: updatedData.ProductImages[0] || "",
+          ProductImageSub1: updatedData.ProductImages[1] || "",
+          ProductImageSub2: updatedData.ProductImages[2] || "",
+          ProductImageSub3: updatedData.ProductImages[3] || ""
+        }},
+        { upsert: true }
+      );
+    }
+
+    await database.collection('productstocks').updateOne(
+      { ProductID: updatedData.ProductID },
+      { $set: { StockQuantity: Number(updatedData.StockQuantity) || 0 } },
+      { upsert: true }
+    );
+
+    res.json({ message: `Sản phẩm ${productId} đã được cập nhật!` });
+  } catch (err) {
+    console.error("❌ Lỗi khi cập nhật sản phẩm:", err);
+    res.status(500).json({ error: err.message, stack: err.stack });
+  }
+});
+
+
+
+
+
+
+//  SERVER START 
 
 app.listen(port, () => {
   logger.info(`Server running on port ${port}`, { correlationId: 'system' });
@@ -1132,7 +1824,7 @@ process.on('SIGTERM', async () => {
   process.exit(0);
 });
 
-// ===================== BLOG NỔI BẬT API ====================
+//  BLOG NỔI BẬT API ======
 
 app.get('/api/blogs/random', async (req, res) => {
   try {
