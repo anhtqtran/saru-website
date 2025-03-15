@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     public authService: AuthService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     const token = localStorage.getItem('authToken');
@@ -107,6 +107,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
         console.error('Error fetching compare items:', error);
       }
     });
+  }
+
+  handleOpenSubmenu(category: string): void {
+    this.router.navigate(['/product'], { queryParams: { category } });
   }
 
   logout(): void {
