@@ -92,6 +92,7 @@ let productCollection, imageCollection, categoryCollection, reviewCollection, or
 
 async function connectDB() {
   const uri = process.env.MONGODB_URI;
+  // const uri = process.env.mongoConnection;
   client = new MongoClient(uri);
   try {
     await client.connect();
