@@ -40,8 +40,37 @@
               "@angular/material/prebuilt-themes/azure-blue.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
+<<<<<<< HEAD
           ],
           "scripts": []
+=======
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1.5MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+>>>>>>> 2e3a27ad7160e6445b3e9e5dcae31a62cdbaa76d
         },
         "configurations": {
           "production": {
