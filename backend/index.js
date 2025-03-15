@@ -1801,6 +1801,40 @@ app.get("/messages", async (req, res) => {
   }
 });
 
+//=================================FEEDBACKS API=================================//
+// API lấy danh sách feedback gộp thông tin
+app.get('/api/feedbacks', async (req, res) => {
+  try {
+    // Lấy tất cả reviews
+    const reviews = await reviewCollection.find().toArray();
+
+    // Gộp dữ liệu từ products và customers
+    const feedbacks = await Promise.all(
+      reviews.map(async (review) => {
+        // Tìm product liên quan dựa trên ProductID
+        const product = await productCollection.findOne({ ProductID: review.ProductID });
+        // Tìm customer liên quan dựa trên CustomerID
+        const customer = await customerCollection.findOne({ CustomerID: review.CustomerID });
+
+        return {
+          reviewID: review.ReviewID,
+          productName: product ? product.ProductName : 'Unknown Product',
+          customerName: customer ? customer.CustomerName : 'Unknown Customer',
+          customerAvatar: customer ? customer.CustomerAvatar || 'https://dummyjson.com/icon/default/128' : 'https://dummyjson.com/icon/default/128', // Ảnh mặc định nếu không có
+          content: review.Content,
+          rating: review.Rating,
+          datePosted: review.DatePosted,
+        };
+      })
+    );
+
+    logger.info('Fetched feedbacks successfully', { count: feedbacks.length, correlationId: req.correlationId });
+    res.status(200).json(feedbacks);
+  } catch (error) {
+    logger.error('Error fetching feedbacks', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 
 //=====anhthucode
 app.post('/api/upload', upload.single('image'), async (req, res) => {
