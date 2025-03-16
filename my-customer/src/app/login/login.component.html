@@ -44,7 +44,7 @@
           <h2 class="text-3xl font-bold text-gray-900">ĐĂNG KÝ</h2>
         </div>
 
-        <div class="input-field" [ngClass]="{'error-active': signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched}">
+        <div class="input-field no-focus" [ngClass]="{'error-active': signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched}">
           <i class="fas fa-envelope"></i>
           <input id="email-signup" type="email" placeholder="Email" formControlName="email" autocomplete="email" aria-label="Email" />
           <div class="error" *ngIf="signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched">
