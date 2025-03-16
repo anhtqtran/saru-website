@@ -37,9 +37,7 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
-              "src/styles.css",
-              "node_modules/quill/dist/quill.snow.css"
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -69,6 +67,10 @@
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "port": 4001,
+            "host": "localhost"
+          },
           "configurations": {
             "production": {
               "buildTarget": "my-admin:build:production"
@@ -97,9 +99,7 @@
               }
             ],
             "styles": [
-              "@angular/material/prebuilt-themes/azure-blue.css",
-              "src/styles.css",
-              "node_modules/quill/dist/quill.snow.css"
+              "src/styles.css"
             ],
             "scripts": []
           }

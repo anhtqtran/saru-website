@@ -137,6 +137,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
+  handleOpenSubmenu(category: string): void {
+    this.router.navigate(['/product'], { queryParams: { category } });
+  }
+
   logout(): void {
     this.authService.logout();
     this.isLoggedIn = false;

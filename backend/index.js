@@ -4,7 +4,6 @@ const port = 4000;
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const nodemailer = require('nodemailer');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
@@ -15,7 +14,8 @@ const rateLimit = require('express-rate-limit');
 const winston = require('winston');
 const cron = require('node-cron');
 const multer = require('multer'); // Thêm dòng này
-
+const nodemailer = require('nodemailer');
+const mail = require('./node-mailer');
 const app = express();
 
 // Cấu hình Winston Logger
@@ -89,9 +89,9 @@ let client;
 let database;
 let productCollection, imageCollection, categoryCollection, reviewCollection, orderDetailCollection, accountCollection, customerCollection, productstockCollection, blogCollection, blogCategoryCollection, faqCollection, membershipCollection, orderCollection, messageCollection;
 
-
 async function connectDB() {
   const uri = process.env.MONGODB_URI;
+  // const uri = process.env.mongoConnection;
   client = new MongoClient(uri);
   try {
     await client.connect();
@@ -931,6 +931,8 @@ cron.schedule('0 * * * *', async () => {
   logger.info('Cleaned up expired OTPs', { correlationId: 'system' });
 });
 
+
+
 const transporter = nodemailer.createTransport({
   host: 'smtp.gmail.com',
   port: 587,
@@ -944,14 +946,26 @@ const transporter = nodemailer.createTransport({
   }
 });
 
+
+console.log(transporter); // Kiểm tra khởi tạo
+
 (async () => {
   try {
+    console.log('Đang xác minh Nodemailer...'); // Kiểm tra luồng thực thi
     await transporter.verify();
     logger.info("Kết nối Nodemailer thành công!", { correlationId: 'system' });
   } catch (error) {
     logger.error('Lỗi cấu hình Nodemailer', { error: error.message, code: error.code, correlationId: 'system' });
   }
 })();
+// (async () => {
+//   try {
+//     await transporter.verify();
+//     logger.info("Kết nối Nodemailer thành công!", { correlationId: 'system' });
+//   } catch (error) {
+//     logger.error('Lỗi cấu hình Nodemailer', { error: error.message, code: error.code, correlationId: 'system' });
+//   }
+// })();
 
 app.post('/api/login', authLimiter, [
   body('email').isEmail().normalizeEmail(),
@@ -1372,8 +1386,8 @@ app.get('/blogs/:id', async (req, res) => {
     if (!blog) {
       return res.status(404).json({ message: "Không tìm thấy bài viết" });
     }
-    const category = blog.categoryID 
-      ? await blogCategoryCollection.findOne({ _id: new ObjectId(blog.categoryID) }) 
+    const category = blog.categoryID
+      ? await blogCategoryCollection.findOne({ _id: new ObjectId(blog.categoryID) })
       : null;
     res.json({
       ...blog,
@@ -1410,12 +1424,13 @@ app.put('/blogs/:id', async (req, res) => {
     const { BlogTitle, BlogContent, categoryID, BlogImage } = req.body;
     const result = await blogCollection.updateOne(
       { _id: new ObjectId(req.params.id) },
-      { $set: { 
-          BlogTitle, 
-          BlogContent, 
-          categoryID: categoryID ? new ObjectId(categoryID) : null, 
-          BlogImage 
-        } 
+      {
+        $set: {
+          BlogTitle,
+          BlogContent,
+          categoryID: categoryID ? new ObjectId(categoryID) : null,
+          BlogImage
+        }
       }
     );
     if (result.matchedCount === 0) {
@@ -1802,6 +1817,40 @@ app.get("/messages", async (req, res) => {
   }
 });
 
+//=================================FEEDBACKS API=================================//
+// API lấy danh sách feedback gộp thông tin
+app.get('/api/feedbacks', async (req, res) => {
+  try {
+    // Lấy tất cả reviews
+    const reviews = await reviewCollection.find().toArray();
+
+    // Gộp dữ liệu từ products và customers
+    const feedbacks = await Promise.all(
+      reviews.map(async (review) => {
+        // Tìm product liên quan dựa trên ProductID
+        const product = await productCollection.findOne({ ProductID: review.ProductID });
+        // Tìm customer liên quan dựa trên CustomerID
+        const customer = await customerCollection.findOne({ CustomerID: review.CustomerID });
+
+        return {
+          reviewID: review.ReviewID,
+          productName: product ? product.ProductName : 'Unknown Product',
+          customerName: customer ? customer.CustomerName : 'Unknown Customer',
+          customerAvatar: customer ? customer.CustomerAvatar || 'https://dummyjson.com/icon/default/128' : 'https://dummyjson.com/icon/default/128', // Ảnh mặc định nếu không có
+          content: review.Content,
+          rating: review.Rating,
+          datePosted: review.DatePosted,
+        };
+      })
+    );
+
+    logger.info('Fetched feedbacks successfully', { count: feedbacks.length, correlationId: req.correlationId });
+    res.status(200).json(feedbacks);
+  } catch (error) {
+    logger.error('Error fetching feedbacks', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 
 //=====anhthucode
 app.post('/api/upload', upload.single('image'), async (req, res) => {
@@ -1809,7 +1858,7 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
     if (!req.file) {
       return res.status(400).json({ error: "No file uploaded" });
     }
-    
+
     // Giả sử bạn upload lên Cloudinary hoặc Firebase ở đây
     const imageUrl = `https://your-cloud.com/${req.file.filename}`;
 
@@ -1961,6 +2010,16 @@ app.get('/api/productstocks', async (req, res) => {
   } catch (err) {
     console.error("Lỗi khi lấy dữ liệu tồn kho:", err);
     res.status(500).json({ error: 'Lỗi server!' });
+  }
+});
+
+app.post('/api/send-email', async (req, res) => {
+  try {
+    await mail.sendNotificationEmail(req.body)
+    return res.status(200).json({ message: 'Tin nhắn của bạn đã được gửi đi.' });
+  } catch (err) {
+    console.error("❌ Lỗi khi gửi tin nhắn liên hệ:", err);
+    res.status(500).json({ error: err.message });
   }
 });
 
