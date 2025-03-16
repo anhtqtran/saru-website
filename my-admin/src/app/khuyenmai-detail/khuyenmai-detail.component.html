@@ -1,1 +1,191 @@
-<p>khuyenmai-detail works!</p>
+<div class="font-inter bg-gray-100 text-gray-800 p-6 min-h-screen">
+  <header class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-[#B16628]">
+      {{ editMode ? 'Chỉnh sửa Khuyến mãi' : 'Chi tiết Khuyến mãi' }}
+    </h1>
+    <div class="space-x-2">
+      <button
+        *ngIf="!editMode && promotion?.status === 'Đang diễn ra'"
+        (click)="endPromotion()"
+        class="bg-red-500 text-white px-6 py-2 rounded-md hover:bg-red-600 transition"
+      >
+        Kết thúc sớm
+      </button>
+      <button
+        *ngIf="!editMode"
+        (click)="enableEditMode()"
+        class="bg-[#F8BC3B] text-white px-6 py-2 rounded-md hover:bg-[#f0a826] transition"
+      >
+        Chỉnh sửa
+      </button>
+      <button
+        (click)="cancel()"
+        class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition"
+      >
+        Quay lại
+      </button>
+    </div>
+  </header>
+
+  <div *ngIf="errMessage" class="text-center text-red-500 mb-4">
+    {{ errMessage }}
+    <ul *ngIf="validationErrors.length > 0" class="list-disc list-inside text-left">
+      <li *ngFor="let error of validationErrors">{{ error }}</li>
+    </ul>
+  </div>
+
+  <div *ngIf="successMessage" class="text-center text-green-500 mb-4">
+    {{ successMessage }}
+  </div>
+
+  <div *ngIf="promotion" class="bg-white p-6 rounded-md shadow-md max-w-2xl mx-auto space-y-6">
+    <form (ngSubmit)="saveChanges()" class="space-y-6">
+      <div>
+        <label class="block text-base font-semibold mt-2 text-[#B16628]">Mã <span class="text-red-500">*</span></label>
+        <input
+          *ngIf="editMode"
+          type="text"
+          [(ngModel)]="promotion.id"
+          name="id"
+          class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-[#F8BC3B] transition"
+          required
+        />
+        <p *ngIf="!editMode" class="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-gray-100">
+          {{ promotion.id }}
+        </p>
+      </div>
+
+      <div>
+        <label class="block text-base font-semibold mt-2 text-[#B16628]">Từ <span class="text-red-500">*</span></label>
+        <input
+          *ngIf="editMode"
+          type="date"
+          [(ngModel)]="promotion.startDate"
+          name="startDate"
+          class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-[#F8BC3B] transition"
+          required
+        />
+        <p *ngIf="!editMode" class="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-gray-100">
+          {{ promotion.startDate | date: 'dd/MM/yyyy' }}
+        </p>
+      </div>
+
+      <div>
+        <label class="block text-base font-semibold mt-2 text-[#B16628]">Đến <span class="text-red-500">*</span></label>
+        <input
+          *ngIf="editMode"
+          type="date"
+          [(ngModel)]="promotion.endDate"
+          name="endDate"
+          class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-[#F8BC3B] transition"
+          required
+        />
+        <p *ngIf="!editMode" class="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-gray-100">
+          {{ promotion.endDate | date: 'dd/MM/yyyy' }}
+        </p>
+      </div>
+
+      <div>
+        <label class="block text-base font-semibold mt-2 text-[#B16628]">Giá trị (%) <span class="text-red-500">*</span></label>
+        <input
+          *ngIf="editMode"
+          type="number"
+          [(ngModel)]="promotion.value"
+          name="value"
+          class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-[#F8BC3B] transition"
+          required
+        />
+        <p *ngIf="!editMode" class="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-gray-100">
+          {{ promotion.value }}%
+        </p>
+      </div>
+
+      <div *ngIf="promotion.type === 'voucher'">
+        <label class="block text-base font-semibold mt-2 text-[#B16628]">Số lượng <span class="text-red-500">*</span></label>
+        <input
+          *ngIf="editMode"
+          type="number"
+          [(ngModel)]="promotion.quantity"
+          name="quantity"
+          class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-[#F8BC3B] transition"
+          required
+        />
+        <p *ngIf="!editMode" class="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-gray-100">
+          {{ promotion.quantity }}
+        </p>
+      </div>
+
+      <div *ngIf="promotion.type === 'voucher'">
+        <label class="block text-base font-semibold mt-2 text-[#B16628]">Số lượng còn lại</label>
+        <input
+          *ngIf="editMode"
+          type="number"
+          [(ngModel)]="promotion.remainingQuantity"
+          name="remainingQuantity"
+          class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-[#F8BC3B] transition"
+          required
+        />
+        <p *ngIf="!editMode" class="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-gray-100">
+          {{ promotion.remainingQuantity }}
+        </p>
+      </div>
+
+      <div>
+        <label class="block text-base font-semibold mt-2 text-[#B16628]">Phạm vi áp dụng</label>
+        <select
+          *ngIf="editMode"
+          [(ngModel)]="promotion.SCOPEID"
+          name="SCOPEID"
+          class="mt-1 block w-full border-gray-300 rounded-md p-2 focus:ring focus:ring-[#F8BC3B] transition"
+          (ngModelChange)="updateScopeName()"
+        >
+          <option *ngFor="let scope of promotionScopes" [value]="scope.SCOPEID">
+            {{ scope.SCOPE }}
+          </option>
+        </select>
+        <p *ngIf="!editMode" class="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-gray-100">
+          {{ promotion.ScopeName || 'Toàn ngành hàng' }}
+        </p>
+      </div>
+
+      <div>
+        <label class="block text-base font-semibold mt-2 text-[#B16628]">Trạng thái</label>
+        <p class="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-gray-100">
+          {{ promotion.status }}
+        </p>
+      </div>
+
+      <div *ngIf="editMode" class="flex justify-end space-x-4 mt-4">
+        <button
+          type="button"
+          (click)="cancelEdit()"
+          class="bg-gray-500 text-white px-6 py-2 rounded-md hover:bg-gray-600 transition"
+        >
+          Hủy chỉnh sửa
+        </button>
+        <button
+          type="submit"
+          class="bg-[#F8BC3B] text-white px-6 py-2 rounded-md hover:bg-[#f0a826] transition"
+        >
+          Lưu thay đổi
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="!promotion && !errMessage" class="text-center text-gray-500 mt-4">
+    <p>Đang tải...</p>
+  </div>
+
+  <div *ngIf="isCancelPopupVisible" class="fixed inset-0 bg-[#F2E8DA] bg-opacity-50 flex justify-center items-center z-50">
+    <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+      <p class="text-lg font-semibold mb-4 text-gray-800">Bạn chắc chắn muốn hủy thay đổi?</p>
+      <button (click)="confirmCancel()" class="bg-[#F8BC3B] text-white px-6 py-2 rounded-md shadow-md mr-2 hover:bg-[#f0a826]">
+        Xác nhận
+      </button>
+      <button (click)="closeCancelPopup()" class="border border-[#F8BC3B] text-[#F8BC3B] px-6 py-2 rounded-md shadow-md hover:bg-[#F8BC3B] hover:text-white transition">
+        Hủy
+      </button>
+    </div>
+  </div>
+</div>

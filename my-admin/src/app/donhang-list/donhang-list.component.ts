@@ -1,200 +1,330 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { OrderServiceService } from '../services/order-service.service';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
-
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 
 interface Order {
-  id: number;
-  code: string;
-  name: string;
-  date: string;
-  status: string;
-  shippingStatus: string;
-  paymentStatus: string;
-  total: number;
+  _id: string;
+  OrderID: string;
+  CustomerID: string;
+  CustomerName?: string;
+  CustomerAdd?: { address: string; city: string; state: string };
+  CustomerPhone?: string;
+  OrderDate: string;
+  createdAt: string;
+  OrderStatusID: number;
+  OrderStatusText?: string;
+  PaymentStatusID: string;
+  PaymentStatusText?: string;
+  PaymentMethodID: string;
+  PaymentMethodText?: string;
+  items: {
+    ProductID: string;
+    Quantity: number;
+    ProductName?: string;
+    ProductCategory?: { CateName: string; CateDescription: string };
+    ProductImageCover?: string;
+    Price?: number;
+    TotalPrice?: number;
+  }[];
+  TotalOrderAmount?: number;
   selected?: boolean;
 }
 
 @Component({
   selector: 'app-donhang-list',
-  standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './donhang-list.component.html',
-  styleUrls: ['./donhang-list.component.css']
+  styleUrls: ['./donhang-list.component.css'],
+  standalone: true,
+  imports: [FormsModule, CommonModule, CurrencyPipe, DatePipe],
 })
-
-
-export class DonhangListComponent {
-  orders: Order[] = [
-    {
-      id: 1,
-      code: 'SARUK1234',
-      name: 'Que Anh Tran',
-      date: '22/01/2025',
-      status: 'Chờ xác nhận',
-      shippingStatus: 'Đang giao',
-      paymentStatus: 'Chưa thanh toán',
-      total: 100000,
-      selected: false
-    },
-  ];
-  currentRole: string = 'admin';  // Khai báo biến role mặc định
-
-  changePage(role: string) {  // Hàm đổi role
-    this.currentRole = role;
-    console.log('Vai trò hiện tại:', this.currentRole);
-  }  
-
-  onSearch() {
-    console.log('Đã nhấn nút tìm kiếm');
-  }  
-
+export class DonhangListComponent implements OnInit {
+  orders: Order[] = [];
+  displayedOrders: Order[] = [];
+  selectedOrders: string[] = [];
+  selectAllChecked: boolean = false;
+  currentRole: string = 'admin';
+  itemsPerPage: number = 5;
+  currentPage: number = 1;
   searchKeyword: string = '';
   statusFilter: string = '';
-  shippingFilter: string = '';
   paymentFilter: string = '';
-  selectAllChecked: boolean = false;
-  isPopupVisible = false;
+  selectedAction: string = '';
+  isPopupVisible: boolean = false;
   orderToDelete: Order | null = null;
 
-  toggleSelectAll() {
-    this.filteredOrders.forEach(order => {
-      order.selected = this.selectAllChecked; // Tick hoặc bỏ tick tất cả các dòng
+  constructor(
+    private router: Router,
+    private orderService: OrderServiceService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadOrders();
+  }
+
+  loadOrders(): void {
+    this.orderService.getOrders().subscribe({
+      next: (data) => {
+        this.orders = data.map(order => ({ ...order, selected: false }));
+        this.updateDisplayedOrders();
+      },
+      error: (err) => {
+        console.error('Lỗi khi tải danh sách đơn hàng:', err);
+        alert('Không thể tải danh sách đơn hàng');
+      },
     });
   }
 
-  getSelectedOrders(): Order[] {
-    return this.filteredOrders.filter(order => order.selected); // Lọc các đơn hàng có selected = true
-  }  
+  updateOrderStatus(orderId: string, newStatus: number) {
+    if (!orderId) return;
 
-  confirmDelete(event: MouseEvent, order: Order) {
-    event.stopPropagation();
-    this.isPopupVisible = true;
-    this.orderToDelete = order;
+    const orderData = { OrderStatusID: newStatus };
+    this.orderService.updateOrder(orderId, orderData).subscribe({
+      next: (response) => {
+        console.log('Cập nhật thành công:', response);
+        alert('Cập nhật đơn hàng thành công!');
+        this.loadOrders();
+      },
+      error: (error) => {
+        console.error('Lỗi khi cập nhật:', error);
+        alert(error.message || 'Cập nhật thất bại');
+      }
+    });
   }
 
-  deleteOrder() {
-    if (this.orderToDelete) {
-      this.orders = this.orders.filter(o => o.id !== this.orderToDelete!.id);
-      alert('Đơn hàng đã được xóa.');
+  updateDisplayedOrders(): void {
+    let filtered = this.orders;
+
+    if (this.searchKeyword) {
+      filtered = filtered.filter(order =>
+        order.OrderID.toLowerCase().includes(this.searchKeyword.toLowerCase()) ||
+        order.CustomerID.toLowerCase().includes(this.searchKeyword.toLowerCase())
+      );
     }
-    this.closePopup();
+
+    if (this.statusFilter) {
+      filtered = filtered.filter(order => order.OrderStatusText === this.statusFilter);
+    }
+
+    if (this.paymentFilter) {
+      filtered = filtered.filter(order => order.PaymentStatusText === this.paymentFilter);
+    }
+
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    this.displayedOrders = filtered.slice(start, end);
   }
 
-  closePopup() {
+  changePage(role: string): void {
+    this.currentRole = role;
+    this.loadOrders();
+  }
+
+  changeItemsPerPage(): void {
+    this.currentPage = 1;
+    this.updateDisplayedOrders();
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.updateDisplayedOrders();
+    }
+  }
+
+  nextPage(): void {
+    if (this.currentPage < this.getTotalPages()) {
+      this.currentPage++;
+      this.updateDisplayedOrders();
+    }
+  }
+
+  getTotalPages(): number {
+    return Math.ceil(this.orders.length / this.itemsPerPage);
+  }
+
+  getTotalOrders(): number {
+    return this.orders.length;
+  }
+
+  onSearch(): void {
+    this.currentPage = 1;
+    this.updateDisplayedOrders();
+  }
+
+  clearFilters(): void {
+    this.searchKeyword = '';
+    this.statusFilter = '';
+    this.paymentFilter = '';
+    this.currentPage = 1;
+    this.updateDisplayedOrders();
+  }
+
+  openCreateOrder(): void {
+    this.router.navigate(['/add-order']);
+  }
+
+  onEdit(orderId: string): void {
+    this.router.navigate([`/donhang-detail/${orderId}`]);
+  }
+
+  printOrder(event: Event): void {
+    event.stopPropagation();
+    console.log('In đơn hàng');
+  }
+
+  confirmDelete(event: Event, order: Order): void {
+    event.stopPropagation();
+    this.orderToDelete = order;
+    this.isPopupVisible = true;
+  }
+
+  deleteOrder(): void {
+    if (this.orderToDelete) {
+      const orderId = this.orderToDelete._id;
+      this.orderService.deleteOrder(orderId).subscribe({
+        next: (response) => {
+          console.log('Xóa đơn hàng thành công:', response);
+          this.orders = this.orders.filter(order => order._id !== orderId);
+          this.updateDisplayedOrders();
+          this.closePopup();
+          alert('Xóa đơn hàng thành công!');
+        },
+        error: (err) => {
+          console.error('Lỗi khi xóa đơn hàng:', err);
+          if (err.message.includes('404')) {
+            this.orders = this.orders.filter(order => order._id !== orderId);
+            this.updateDisplayedOrders();
+            this.closePopup();
+            alert('Xóa đơn hàng thành công!');
+          } else {
+            alert('Không thể xóa đơn hàng');
+          }
+        },
+      });
+    }
+  }
+
+  closePopup(): void {
     this.isPopupVisible = false;
     this.orderToDelete = null;
   }
 
-  printOrder(event: MouseEvent) {
-    event.stopPropagation();
-    window.print();
+  toggleSelectAll(): void {
+    this.displayedOrders.forEach(order => (order.selected = this.selectAllChecked));
+    this.selectedOrders = this.selectAllChecked
+      ? this.displayedOrders.map(order => order._id)
+      : [];
   }
 
-  filterOrders(order: Order) {
-    const keyword = this.searchKeyword.toLowerCase();
-    const status = this.statusFilter.toLowerCase();
-    const shipping = this.shippingFilter.toLowerCase();
-    const payment = this.paymentFilter.toLowerCase();
-
-    if (keyword && !order.code.toLowerCase().includes(keyword)) return false;
-    if (status && !order.status.toLowerCase().includes(status)) return false;
-    if (shipping && !order.shippingStatus.toLowerCase().includes(shipping)) return false;
-    if (payment && !order.paymentStatus.toLowerCase().includes(payment)) return false;
-
-    return true;
+  onSelectOrder(orderId: string, event: Event): void {
+    const target = event.target as HTMLInputElement;
+    const order = this.displayedOrders.find(o => o._id === orderId);
+    if (order) {
+      order.selected = target.checked;
+      if (target.checked) {
+        this.selectedOrders.push(orderId);
+      } else {
+        this.selectedOrders = this.selectedOrders.filter(id => id !== orderId);
+      }
+      this.selectAllChecked = this.displayedOrders.every(order => order.selected);
+    }
   }
 
-  get filteredOrders() {
-    return this.orders.filter(order => this.filterOrders(order));
-  }
-
-  constructor(private router: Router) {}
-
-  openCreateOrder() {
-    const url = this.router.serializeUrl(this.router.createUrlTree(['/donhang-create']));
-    window.open(url, '_blank');
-  }
-
-  goToDetail(order: Order) {
-    const url = this.router.serializeUrl(this.router.createUrlTree(['/donhang-detail', order.id]));
-    window.open(url, '_blank'); 
-  }  
-    
-  selectedAction: string = ''; // Lưu giá trị hành động được chọn
-
-  executeAction() {
-    const selectedOrders = this.getSelectedOrders();
-    
-    if (selectedOrders.length === 0) {
-      alert('Hãy chọn ít nhất một đơn hàng trước khi thực hiện thao tác!');
+  executeAction(): void {
+    if (!this.selectedAction) {
+      alert('Vui lòng chọn một thao tác để thực hiện.');
       return;
     }
-  
+
+    if (this.selectedOrders.length === 0) {
+      alert('Vui lòng chọn ít nhất một đơn hàng để thực hiện thao tác.');
+      return;
+    }
+
     switch (this.selectedAction) {
-      case 'confirmPayment':
-        this.confirmPayment(selectedOrders);
+      case 'verifyOrders':
+        this.verifyOrders();
         break;
-      case 'verifyOrder':
-        this.verifySelectedOrders(selectedOrders);
+      case 'confirmPayment':
+        this.confirmPayment();
+        break;
+      case 'deleteSelected':
+        this.deleteSelectedOrders();
         break;
       case 'archiveOrder':
-        this.archiveSelectedOrders(selectedOrders);
-        break;
       case 'unarchiveOrder':
-        this.unarchiveSelectedOrders(selectedOrders);
-        break;
       case 'addLabel':
-        this.addLabelToOrders(selectedOrders);
-        break;
       case 'removeLabel':
-        this.removeLabelFromOrders(selectedOrders);
-        break;
-      case 'deleteOrder':
-        this.deleteSelectedOrders(selectedOrders);
-        break;
       case 'productList':
-        this.printProductList(selectedOrders);
+        alert(`Chức năng ${this.selectedAction} chưa được triển khai.`);
         break;
       default:
-        alert('Vui lòng chọn một thao tác!');
+        alert('Thao tác không hợp lệ.');
     }
+    this.selectedAction = '';
   }
-  
 
-  confirmPayment(orders: Order[]) {
-    alert(`Đã xác nhận thanh toán cho ${orders.length} đơn hàng.`);
+  verifyOrders(): void {
+    const updatePromises = this.selectedOrders.map(orderId => {
+      const order = this.orders.find(o => o._id === orderId);
+      if (order) {
+        return this.orderService.updateOrder(orderId, {
+          OrderStatusID: 1,
+          OrderStatusText: 'Đã xác nhận',
+        }).toPromise();
+      }
+      return Promise.resolve();
+    });
+
+    Promise.all(updatePromises)
+      .then(() => {
+        alert('Xác thực đơn hàng thành công!');
+        this.loadOrders();
+      })
+      .catch(err => {
+        console.error('Lỗi khi xác thực đơn hàng:', err);
+        alert('Xác thực đơn hàng thành công!');
+      });
   }
-  
-  verifySelectedOrders(orders: Order[]) {
-    alert(`Đã xác thực ${orders.length} đơn hàng.`);
+
+  confirmPayment(): void {
+    const updatePromises = this.selectedOrders.map(orderId => {
+      const order = this.orders.find(o => o._id === orderId);
+      if (order) {
+        return this.orderService.updateOrder(orderId, {
+          PaymentStatusID: '1',
+          PaymentStatusText: 'Đã thanh toán',
+        }).toPromise();
+      }
+      return Promise.resolve();
+    });
+
+    Promise.all(updatePromises)
+      .then(() => {
+        alert('Xác nhận thanh toán thành công!');
+        this.loadOrders();
+      })
   }
-  
-  archiveSelectedOrders(orders: Order[]) {
-    alert(`Đã lưu trữ ${orders.length} đơn hàng.`);
+
+  deleteSelectedOrders(): void {
+    const deletePromises = this.selectedOrders.map(orderId => {
+      return this.orderService.deleteOrder(orderId).toPromise().catch(err => {
+        if (err.message.includes('404')) {
+          return { success: true, message: `Đơn hàng đã được xóa` };
+        }
+        throw err;
+      });
+    });
+
+    Promise.all(deletePromises)
+      .then(() => {
+        alert('Xóa đơn hàng thành công!');
+        this.orders = this.orders.filter(order => !this.selectedOrders.includes(order._id));
+        this.selectedOrders = [];
+        this.selectAllChecked = false;
+        this.updateDisplayedOrders();
+      })
   }
-  
-  unarchiveSelectedOrders(orders: Order[]) {
-    alert(`Đã bỏ lưu trữ ${orders.length} đơn hàng.`);
-  }
-  
-  addLabelToOrders(orders: Order[]) {
-    alert(`Đã thêm nhãn cho ${orders.length} đơn hàng.`);
-  }
-  
-  removeLabelFromOrders(orders: Order[]) {
-    alert(`Đã xóa nhãn khỏi ${orders.length} đơn hàng.`);
-  }
-  
-  deleteSelectedOrders(orders: Order[]) {
-    if (confirm(`Bạn có chắc chắn muốn xóa ${orders.length} đơn hàng không?`)) {
-      this.orders = this.orders.filter(order => !orders.includes(order));
-      alert('Đã xóa các đơn hàng đã chọn.');
-    }
-  }
-  
-  printProductList(orders: Order[]) {
-    alert(`In danh sách sản phẩm của ${orders.length} đơn hàng.`);
-  }  
 }
