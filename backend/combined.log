@@ -3627,3 +3627,1029 @@
 {"level":"info","message":"GET /api/productstocks 304 - - 55.419 ms - correlationId: eb101d88-b59e-4d2e-9fe6-a3bb42e8157f","timestamp":"2025-03-15T08:44:46.130Z"}
 {"level":"info","message":"GET /api/filters 304 - - 208.302 ms - correlationId: 61a56b9b-01f3-4e5b-bf7d-5086a0d8a090","timestamp":"2025-03-15T08:44:46.945Z"}
 {"level":"info","message":"GET /api/products-full-details 304 - - 322.450 ms - correlationId: 4ed612f0-2354-4cbe-8841-c0e3506b2373","timestamp":"2025-03-15T08:44:47.056Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T16:50:44.870Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T16:50:45.915Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T16:50:46.571Z"}
+{"level":"info","message":"GET /api/productstocks 200 8996 - 100.329 ms - correlationId: db316915-46ad-450e-8fbd-d6b3aa0cbf62","timestamp":"2025-03-15T16:52:04.505Z"}
+{"level":"info","message":"GET /api/products-full-details 200 390496 - 344.991 ms - correlationId: c10e35ed-318e-4add-a8a3-c70b5052a293","timestamp":"2025-03-15T16:52:06.252Z"}
+{"level":"info","message":"GET /api/filters 304 - - 573.197 ms - correlationId: 3ab6fa45-65ea-404f-9808-515fdb1c01fe","timestamp":"2025-03-15T16:52:06.487Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 62.722 ms - correlationId: 2f6fbf74-c957-4d1d-bf11-2bb7c7b58dc3","timestamp":"2025-03-15T16:52:11.768Z"}
+{"level":"info","message":"GET /api/filters 304 - - 194.182 ms - correlationId: 338048c8-4216-436b-b822-e6d34e3bf41a","timestamp":"2025-03-15T16:52:14.361Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 387.013 ms - correlationId: c33a98fa-5f26-415a-8090-7897f9792c67","timestamp":"2025-03-15T16:52:14.550Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 63.854 ms - correlationId: d00ee26a-afda-45ec-9f94-7cd959f45e2c","timestamp":"2025-03-15T16:52:26.558Z"}
+{"level":"info","message":"GET /api/filters 304 - - 211.268 ms - correlationId: 05af76fe-69d3-4743-9697-17f816b643f7","timestamp":"2025-03-15T16:52:27.908Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 301.803 ms - correlationId: d06944af-c359-4f61-97ad-75cd59553132","timestamp":"2025-03-15T16:52:28.004Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 56.802 ms - correlationId: 8a467e2e-8d19-4e11-b278-d2df137b8f9f","timestamp":"2025-03-15T16:52:29.254Z"}
+{"level":"info","message":"GET /api/filters 304 - - 228.212 ms - correlationId: 2c0f41ad-4167-41a6-85c0-336c4bf775c0","timestamp":"2025-03-15T16:52:30.476Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 295.843 ms - correlationId: c3ea652b-bfa5-4657-a47d-21348a8edb73","timestamp":"2025-03-15T16:52:30.540Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 69.229 ms - correlationId: ddc4105a-b0df-4ad9-b4c1-2444a8493f6f","timestamp":"2025-03-15T16:53:10.233Z"}
+{"level":"info","message":"GET /api/filters 304 - - 208.437 ms - correlationId: 204c8d14-9da0-44b3-b363-076e161ae9ac","timestamp":"2025-03-15T16:53:12.275Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 293.001 ms - correlationId: 1d71cfb5-1552-4c22-be63-05ce030de892","timestamp":"2025-03-15T16:53:12.357Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ba 200 3236 - 155.868 ms - correlationId: 3a4a821f-274f-49d6-96d9-70a153bf590e","timestamp":"2025-03-15T16:54:03.608Z"}
+{"level":"info","message":"GET /api/filters 304 - - 192.683 ms - correlationId: 6a474515-64ae-4e83-b0dc-c35635217786","timestamp":"2025-03-15T16:54:08.600Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 305.962 ms - correlationId: 0e645474-4f3f-4c16-9599-ec5c372617e1","timestamp":"2025-03-15T16:54:08.716Z"}
+{"level":"info","message":"GET /api/filters 304 - - 198.127 ms - correlationId: 64da3536-e15a-4726-829e-7ed09a58ca02","timestamp":"2025-03-15T16:56:44.008Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 329.174 ms - correlationId: 9ebcf7ba-d81a-4859-bb86-3807ee4dd944","timestamp":"2025-03-15T16:56:44.137Z"}
+{"level":"info","message":"GET /api/filters 304 - - 198.155 ms - correlationId: 0dea7283-d4a6-4fb4-bdd1-758342774eac","timestamp":"2025-03-15T16:56:48.761Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 308.666 ms - correlationId: 9db75718-588d-4121-90df-70bef5c0355a","timestamp":"2025-03-15T16:56:48.869Z"}
+{"level":"info","message":"GET /api/filters 304 - - 206.736 ms - correlationId: 00b1f0c1-26ad-4554-a286-7d49ac9af54c","timestamp":"2025-03-15T16:56:57.661Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 334.473 ms - correlationId: 9cbf912e-97d8-4ca4-8c6e-f6437ce7ef6f","timestamp":"2025-03-15T16:56:57.786Z"}
+{"level":"info","message":"GET /api/filters 304 - - 201.481 ms - correlationId: 246afd00-5223-4c11-aba4-9ee3d933234c","timestamp":"2025-03-15T16:57:05.675Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 310.414 ms - correlationId: d9ff93bf-3fca-495d-911b-1de71f6fd2e1","timestamp":"2025-03-15T16:57:05.782Z"}
+{"level":"info","message":"GET /api/filters 304 - - 197.404 ms - correlationId: 232f7a72-43b7-403f-bc5f-21a764b6bae1","timestamp":"2025-03-15T16:57:59.899Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 599.895 ms - correlationId: 2c832ac9-f5ce-42a7-aa97-7335d31f8b46","timestamp":"2025-03-15T16:58:00.300Z"}
+{"level":"info","message":"GET /api/filters 304 - - 197.696 ms - correlationId: 2b587c76-c49a-40a6-9d2d-948e858f3564","timestamp":"2025-03-15T16:58:07.768Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 309.871 ms - correlationId: 7c10d0a7-38da-4c31-b356-8a9b7abfc555","timestamp":"2025-03-15T16:58:07.878Z"}
+{"level":"info","message":"GET /api/filters 304 - - 202.707 ms - correlationId: 882f58f6-e865-4519-82ac-f0478bfe2971","timestamp":"2025-03-15T16:58:50.820Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 328.244 ms - correlationId: ab4f6787-fafb-4d56-a1e6-685b959c2206","timestamp":"2025-03-15T16:58:50.944Z"}
+{"level":"info","message":"GET /api/filters 304 - - 194.263 ms - correlationId: f081c7da-0633-488f-a7d8-eada96d761e7","timestamp":"2025-03-15T16:58:56.835Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 313.699 ms - correlationId: 18f86775-b221-4a3e-b94d-4b5b8595d1b7","timestamp":"2025-03-15T16:58:56.952Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-15T17:00:00.594Z"}
+{"level":"info","message":"GET /api/filters 304 - - 236.376 ms - correlationId: 55fe95e3-912d-40aa-9cc4-1252cd823843","timestamp":"2025-03-15T17:26:45.726Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 331.498 ms - correlationId: a6529e3f-1d18-4795-88b8-5ce18b311258","timestamp":"2025-03-15T17:26:45.839Z"}
+{"level":"info","message":"GET /api/filters 304 - - 208.262 ms - correlationId: 9b1c0c5d-794d-497b-91e8-a2afd167c42b","timestamp":"2025-03-15T17:27:04.752Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 309.732 ms - correlationId: ab8e6be7-0cf3-4fb5-8c5d-878b5d87d7ce","timestamp":"2025-03-15T17:27:04.852Z"}
+{"level":"info","message":"GET /api/filters 304 - - 210.020 ms - correlationId: 54ddd269-e337-487d-8eff-7741ffefbc64","timestamp":"2025-03-15T17:27:30.737Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 319.252 ms - correlationId: 274ccd05-4ced-4131-ba88-8f9de90c2063","timestamp":"2025-03-15T17:27:30.843Z"}
+{"level":"info","message":"GET /api/filters 304 - - 195.453 ms - correlationId: dd22f91d-a162-4099-8e54-ec0925f8e1a4","timestamp":"2025-03-15T17:28:00.120Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 337.463 ms - correlationId: 3cfed2ee-2a9f-4695-99f7-6de1809104d6","timestamp":"2025-03-15T17:28:00.263Z"}
+{"level":"info","message":"GET /api/filters 304 - - 226.367 ms - correlationId: 938ecaf6-e89a-4de4-b805-81a75a3797eb","timestamp":"2025-03-15T17:28:23.858Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 320.603 ms - correlationId: f3f315b8-0909-40c3-98dc-b080e8b340a9","timestamp":"2025-03-15T17:28:23.950Z"}
+{"level":"info","message":"GET /api/filters 304 - - 203.229 ms - correlationId: 86f2a75f-632c-467f-8865-6a52f5b5507e","timestamp":"2025-03-15T17:28:51.224Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 358.226 ms - correlationId: baf6183e-9b5e-4a09-8c86-3f8c3ded3e03","timestamp":"2025-03-15T17:28:51.376Z"}
+{"level":"info","message":"GET /api/filters 304 - - 223.099 ms - correlationId: 647859d9-0934-4ca5-bd6d-53a038516b57","timestamp":"2025-03-15T17:29:16.430Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 320.612 ms - correlationId: 69eec6a7-c7d3-4e88-bf66-c9bd37d7dd03","timestamp":"2025-03-15T17:29:16.527Z"}
+{"level":"info","message":"GET /api/filters 304 - - 245.660 ms - correlationId: 816b412f-ec2f-4b38-bcc6-1a2a2d1d57b7","timestamp":"2025-03-15T17:30:48.830Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 515.641 ms - correlationId: df160c78-1f69-4541-ad7f-a4b87793df30","timestamp":"2025-03-15T17:30:49.097Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 110.943 ms - correlationId: 8930434e-331e-435f-9cb6-e1dfb2b07488","timestamp":"2025-03-15T17:30:50.315Z"}
+{"level":"info","message":"GET /faqs 404 143 - 7.329 ms - correlationId: 24a9ecf2-80b8-4cb8-9496-c695ac0f962c","timestamp":"2025-03-15T17:33:01.468Z"}
+{"level":"info","message":"GET /faqs 404 143 - 0.788 ms - correlationId: 4c3cec1e-0212-48e5-8a4d-4c854e1906ce","timestamp":"2025-03-15T17:33:57.772Z"}
+{"level":"info","message":"GET /faqs 404 143 - 1.213 ms - correlationId: 17bba963-b1d8-4411-bd49-790c9a1ee25f","timestamp":"2025-03-15T17:34:02.511Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T17:40:01.010Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T17:40:02.066Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T17:40:02.519Z"}
+{"correlationId":"7167d9cc-e40f-4843-92f7-32375b067a87","error":"faqCollection is not defined","level":"error","message":"Error in GET /faqs","timestamp":"2025-03-15T17:41:26.715Z"}
+{"level":"info","message":"GET /faqs 500 40 - 18.803 ms - correlationId: 7167d9cc-e40f-4843-92f7-32375b067a87","timestamp":"2025-03-15T17:41:26.734Z"}
+{"correlationId":"70bf67e9-32c0-4e1b-951c-7812007429d2","error":"blogCollection is not defined","level":"error","message":"Error in GET /blogs","timestamp":"2025-03-15T17:41:41.707Z"}
+{"level":"info","message":"GET /blogs 500 41 - 5.430 ms - correlationId: 70bf67e9-32c0-4e1b-951c-7812007429d2","timestamp":"2025-03-15T17:41:41.711Z"}
+{"level":"info","message":"GET /favicon.ico 404 150 - 6.504 ms - correlationId: cc3458bf-f48e-4ff2-a420-c16176ba2827","timestamp":"2025-03-15T17:41:41.876Z"}
+{"correlationId":"d2a6d10a-1d74-4057-a4be-e9859d7058f7","error":"blogCategoryCollection is not defined","level":"error","message":"Error in GET /categories","timestamp":"2025-03-15T17:42:48.935Z"}
+{"level":"info","message":"GET /categories 500 49 - 4.075 ms - correlationId: d2a6d10a-1d74-4057-a4be-e9859d7058f7","timestamp":"2025-03-15T17:42:48.941Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T17:44:53.535Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T17:44:54.608Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T17:44:55.939Z"}
+{"level":"info","message":"GET /categories 200 314 - 68.400 ms - correlationId: 54fe091e-3cc3-4657-ab73-69c02f7783ad","timestamp":"2025-03-15T17:45:01.012Z"}
+{"level":"info","message":"GET /faqs 200 1578 - 60.484 ms - correlationId: c4e8dd70-a850-4ead-b8ce-34f60a1554df","timestamp":"2025-03-15T17:45:08.604Z"}
+{"level":"info","message":"GET /faqs/67c7d4f6cdd6907abf6544e5 200 375 - 55.745 ms - correlationId: 9c811407-e922-4d27-a52a-d05d2c151c1b","timestamp":"2025-03-15T17:45:24.512Z"}
+{"level":"info","message":"GET /faqs 304 - - 56.592 ms - correlationId: fac69aef-46f9-4db7-b3a3-52ab6295ee03","timestamp":"2025-03-15T17:45:26.597Z"}
+{"level":"info","message":"DELETE /faqs/67c7d4f6cdd6907abf6544e5 200 27 - 60.718 ms - correlationId: 7646a52c-0b4d-437b-8dd5-360304f655b2","timestamp":"2025-03-15T17:45:29.729Z"}
+{"level":"info","message":"GET /faqs 200 1202 - 52.706 ms - correlationId: ce5afa11-8f59-47e1-b7cd-67be43f3afa0","timestamp":"2025-03-15T17:46:09.835Z"}
+{"level":"info","message":"POST /faqs 201 375 - 63.196 ms - correlationId: 305aa9bd-4fbd-4857-a49a-9848732c39cc","timestamp":"2025-03-15T17:49:27.043Z"}
+{"level":"info","message":"GET /faqs 200 1578 - 51.656 ms - correlationId: 53153f58-4a09-4035-a7d4-57c67f346685","timestamp":"2025-03-15T17:49:28.278Z"}
+{"level":"info","message":"GET /blogs 200 50260 - 204.079 ms - correlationId: da184e4c-f96e-4e74-bde1-0e5a31801022","timestamp":"2025-03-15T17:49:41.256Z"}
+{"level":"info","message":"GET /categories 304 - - 51.632 ms - correlationId: 8dce86dd-9a4c-48bd-af23-b4ac1cb8edf9","timestamp":"2025-03-15T17:49:51.450Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.563 ms - correlationId: 8b176078-4af7-4314-ab00-b85ba31510ca","timestamp":"2025-03-15T17:50:10.617Z"}
+{"level":"info","message":"GET /customers 200 15280 - 100.030 ms - correlationId: 5cfcc46e-96e9-4096-aa2a-7a8bcce5cbf6","timestamp":"2025-03-15T17:50:26.249Z"}
+{"level":"info","message":"GET /memberships 200 224 - 50.750 ms - correlationId: 1a4d7166-e456-41d6-83ab-33ab0466d1b7","timestamp":"2025-03-15T17:50:31.159Z"}
+{"level":"info","message":"GET /customers 304 - - 101.420 ms - correlationId: e7ad89c0-b76c-486c-85d6-8eb4dcf0bb6c","timestamp":"2025-03-15T17:50:34.962Z"}
+{"level":"info","message":"GET /memberships 304 - - 50.923 ms - correlationId: 675b9dcc-408f-4777-920a-f97bcc85f5f8","timestamp":"2025-03-15T17:50:36.829Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544ca 200 459 - 489.125 ms - correlationId: 17104ff3-ab6e-43e2-80b2-0fb1db739372","timestamp":"2025-03-15T17:50:37.269Z"}
+{"level":"info","message":"GET /orders/customer/cus4 200 190 - 49.090 ms - correlationId: 8e2b209d-4189-4d21-8936-d3a1fcc0cdae","timestamp":"2025-03-15T17:50:37.342Z"}
+{"level":"info","message":"GET /customers 304 - - 98.909 ms - correlationId: 3c80d8df-0a1f-41f8-8140-0d04b0842265","timestamp":"2025-03-15T17:51:18.580Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544c7 200 409 - 50.459 ms - correlationId: 6de6ab97-8db8-44e5-af81-2e30f1bd604e","timestamp":"2025-03-15T17:51:27.721Z"}
+{"level":"info","message":"GET /memberships 304 - - 53.663 ms - correlationId: f43a47fc-2958-4e10-b2b3-b0e9d972872e","timestamp":"2025-03-15T17:51:27.725Z"}
+{"level":"info","message":"GET /orders/customer/cus1 200 171 - 50.393 ms - correlationId: 4b0c7d7a-88ac-4227-b2ee-901aeb06cb75","timestamp":"2025-03-15T17:51:27.777Z"}
+{"level":"info","message":"GET /customers 304 - - 98.087 ms - correlationId: ac7f7ec8-9fa4-4004-a8b6-4c6e7ce87720","timestamp":"2025-03-15T17:51:29.442Z"}
+{"level":"info","message":"GET /categories 304 - - 51.388 ms - correlationId: e1d46601-cd0a-4f47-909b-14435302b91b","timestamp":"2025-03-15T17:54:33.142Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 103.792 ms - correlationId: bdffd1a6-24a8-4245-a335-20e15125e94f","timestamp":"2025-03-15T17:54:33.249Z"}
+{"level":"info","message":"GET /blogs 304 - - 210.926 ms - correlationId: ce0c8d31-472c-4a74-bd93-e030946fe26d","timestamp":"2025-03-15T17:54:42.717Z"}
+{"level":"info","message":"GET /categories 304 - - 51.727 ms - correlationId: 45df0c1a-b2fb-4fa4-9ec1-f4bed9830073","timestamp":"2025-03-15T17:54:45.062Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544bc 304 - - 118.558 ms - correlationId: ee4f8b67-887c-410d-88d6-4d7a7b63c3e6","timestamp":"2025-03-15T17:54:45.185Z"}
+{"level":"info","message":"GET /categories 304 - - 50.793 ms - correlationId: 940ea853-f7da-4ec6-8d30-5618a22d7f3f","timestamp":"2025-03-15T17:58:19.433Z"}
+{"level":"info","message":"GET /blogs 304 - - 205.788 ms - correlationId: 1aac6f35-6386-4858-bf34-de3584ccf350","timestamp":"2025-03-15T17:58:32.172Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-15T18:00:00.602Z"}
+{"level":"info","message":"GET /blogs 304 - - 205.737 ms - correlationId: d63267a3-19fe-4fe2-afd4-b0adf134f41d","timestamp":"2025-03-15T18:01:22.102Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T18:04:43.417Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T18:04:44.549Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T18:04:45.543Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T18:05:02.351Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T18:05:03.230Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T18:05:04.447Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T18:05:34.854Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T18:05:35.714Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T18:05:36.305Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T18:05:52.094Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T18:05:53.031Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T18:05:53.608Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T18:06:06.011Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T18:06:06.866Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T18:06:07.511Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T18:06:22.300Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T18:06:23.211Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T18:06:23.854Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-15T18:06:33.387Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-15T18:06:34.254Z"}
+{"correlationId":"system","level":"info","message":"Kết nối Nodemailer thành công!","timestamp":"2025-03-15T18:06:34.884Z"}
+{"level":"info","message":"GET /blogs 200 50288 - 230.132 ms - correlationId: de6c5caa-c160-458f-8b5b-ae59b9a371e6","timestamp":"2025-03-15T18:07:15.055Z"}
+{"level":"info","message":"GET /categories 304 - - 54.232 ms - correlationId: b6b56fce-1ad2-4125-964c-043c996d3334","timestamp":"2025-03-15T18:07:16.192Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 200 2896 - 127.479 ms - correlationId: 15531ba8-7465-4256-995b-79eeed44563d","timestamp":"2025-03-15T18:07:16.326Z"}
+{"level":"info","message":"GET /blogs 304 - - 203.090 ms - correlationId: 9ca58fa0-553a-4374-b276-01fa85b985ce","timestamp":"2025-03-15T18:07:18.712Z"}
+{"level":"info","message":"GET /categories 304 - - 52.097 ms - correlationId: 6553fc9a-bc0c-4192-a65c-c87bfa2f8344","timestamp":"2025-03-15T18:07:20.002Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544bd 200 5515 - 99.993 ms - correlationId: c25116ea-fe66-4f66-af63-fd9f18bd64a2","timestamp":"2025-03-15T18:07:20.107Z"}
+{"level":"info","message":"GET /blogs 304 - - 203.735 ms - correlationId: 9830fae4-ca41-4df8-97e4-da2b36444dac","timestamp":"2025-03-15T18:07:23.157Z"}
+{"level":"info","message":"GET /categories 304 - - 48.561 ms - correlationId: 30f9a3df-590c-4d93-8287-f261ec942aba","timestamp":"2025-03-15T18:07:24.385Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544bd 304 - - 106.077 ms - correlationId: 632dc96f-5085-4ea4-83c8-eba57eaccd86","timestamp":"2025-03-15T18:07:24.497Z"}
+{"level":"info","message":"GET /categories 304 - - 61.760 ms - correlationId: d059b7d9-e199-4bf3-a0ec-267bf0d971d2","timestamp":"2025-03-15T18:14:16.407Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544bd 304 - - 98.953 ms - correlationId: e38a66c7-ce65-4832-aaef-cf119e85ffbc","timestamp":"2025-03-15T18:14:16.539Z"}
+{"level":"info","message":"GET /blogs 304 - - 199.314 ms - correlationId: a4cb7111-7739-4a6e-a99a-eedc0c0eee73","timestamp":"2025-03-15T18:14:33.458Z"}
+{"level":"info","message":"GET /categories 304 - - 47.284 ms - correlationId: 8d538eff-fa80-4fc8-9d52-0371263b0650","timestamp":"2025-03-15T18:14:35.009Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 96.900 ms - correlationId: d8cc2645-4b96-4edc-9162-36247b4dd40b","timestamp":"2025-03-15T18:14:35.110Z"}
+{"level":"info","message":"GET /categories 304 - - 51.833 ms - correlationId: 75f67cd4-f275-4123-ab96-a57e18d755ab","timestamp":"2025-03-15T18:16:57.475Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 102.836 ms - correlationId: 43231c10-df24-483a-8434-23879e3f7dc0","timestamp":"2025-03-15T18:16:57.604Z"}
+{"level":"info","message":"GET /blogs 304 - - 208.085 ms - correlationId: dd6514a5-20e6-4ca2-bcfa-efe4503a79ef","timestamp":"2025-03-15T18:17:07.950Z"}
+{"level":"info","message":"GET /blogs 304 - - 197.334 ms - correlationId: 9e1107ad-479d-48a5-bfeb-30326f61ea0e","timestamp":"2025-03-15T18:17:09.166Z"}
+{"level":"info","message":"GET /categories 304 - - 49.182 ms - correlationId: dd65cf24-b9cd-4dc9-a860-6e34ac93dcbd","timestamp":"2025-03-15T18:17:11.149Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 99.606 ms - correlationId: 52ac9bec-2a10-4740-9912-f98aa828f96b","timestamp":"2025-03-15T18:17:11.252Z"}
+{"level":"info","message":"GET /blogs 304 - - 269.502 ms - correlationId: 6761d9c3-fc0d-4f7b-9ee4-878ccb21cfb1","timestamp":"2025-03-15T18:19:19.430Z"}
+{"level":"info","message":"GET /categories 304 - - 50.389 ms - correlationId: 94e75063-35b6-4c38-b851-556d63df3d42","timestamp":"2025-03-15T18:20:18.973Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 115.495 ms - correlationId: bf566813-6b7a-4230-b8b8-fa85df7dfd80","timestamp":"2025-03-15T18:20:19.106Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-16T02:57:54.799Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-16T02:57:55.954Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c6bd5dadsm50881595ad.256 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-16T02:57:56.732Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-16T03:00:01.047Z"}
+{"level":"info","message":"GET /blogs 304 - - 224.415 ms - correlationId: cc4b9fe1-b26f-4d2d-afda-d524b1e4dca5","timestamp":"2025-03-16T03:01:47.538Z"}
+{"level":"info","message":"GET /faqs 200 1578 - 58.687 ms - correlationId: 54883730-8fd3-426e-8fb4-e7dd67adb141","timestamp":"2025-03-16T03:01:49.012Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.444 ms - correlationId: 0d69276d-6793-4283-ad76-b9541139dcaf","timestamp":"2025-03-16T03:01:50.302Z"}
+{"level":"info","message":"GET /categories 304 - - 50.926 ms - correlationId: 86dccae7-3ae1-421f-a3e6-133882f93ccc","timestamp":"2025-03-16T03:01:59.232Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544ba 200 2960 - 104.088 ms - correlationId: d75dbc02-fb30-44a1-b9ee-3f3700be9776","timestamp":"2025-03-16T03:01:59.343Z"}
+{"level":"info","message":"GET /blogs 304 - - 243.321 ms - correlationId: c12b2461-329f-45c1-a276-7a4e8adb8c3e","timestamp":"2025-03-16T03:02:02.360Z"}
+{"level":"info","message":"GET /categories 304 - - 54.568 ms - correlationId: 2f9fcdd1-f6c5-4c28-9eb7-358c15af4aa1","timestamp":"2025-03-16T03:02:03.886Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544bd 304 - - 105.585 ms - correlationId: 9d26a019-5661-4584-9cb6-5a8597ec8ba4","timestamp":"2025-03-16T03:02:04.000Z"}
+{"level":"info","message":"GET /blogs 304 - - 211.127 ms - correlationId: 80408158-9dbb-47e0-802f-fb13b7d5b251","timestamp":"2025-03-16T03:02:09.673Z"}
+{"level":"info","message":"GET /categories 304 - - 52.685 ms - correlationId: 53085313-2278-4bfb-aad5-aae710d47222","timestamp":"2025-03-16T03:02:10.751Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 100.264 ms - correlationId: e674fc86-0e5b-4408-bb52-cd25adb34ea3","timestamp":"2025-03-16T03:02:10.859Z"}
+{"level":"info","message":"GET /blogs 304 - - 200.489 ms - correlationId: f2aada2f-a793-495c-b5f3-7d6c74a965f2","timestamp":"2025-03-16T03:02:23.845Z"}
+{"level":"info","message":"GET /categories 304 - - 52.913 ms - correlationId: 4b499283-00a7-4ea0-add2-95dad48072cd","timestamp":"2025-03-16T03:02:26.383Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544bb 200 3919 - 98.204 ms - correlationId: df38e989-8b66-4018-9e2c-878b4069c5bf","timestamp":"2025-03-16T03:02:26.487Z"}
+{"level":"info","message":"GET /categories 304 - - 60.085 ms - correlationId: 8c10583b-dc04-497d-bab3-810acea8404a","timestamp":"2025-03-16T03:03:53.848Z"}
+{"level":"info","message":"GET /favicon.ico 404 150 - 4.237 ms - correlationId: 505a8d9f-d446-4cda-b730-db789a8dcf23","timestamp":"2025-03-16T03:03:53.958Z"}
+{"level":"info","message":"GET /blogs 304 - - 203.018 ms - correlationId: f07f3705-c732-4240-b307-3d068ec32e56","timestamp":"2025-03-16T03:04:02.356Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 103.711 ms - correlationId: 4b88770b-5293-4617-9870-730a203c69a5","timestamp":"2025-03-16T03:04:08.694Z"}
+{"level":"info","message":"GET /blogs 304 - - 205.262 ms - correlationId: 592dfcd0-fe23-4323-b2da-5185211317bb","timestamp":"2025-03-16T03:05:06.200Z"}
+{"level":"info","message":"GET /categories 304 - - 48.710 ms - correlationId: a80d0c0a-116e-469c-8998-339b2ac0e090","timestamp":"2025-03-16T03:05:08.394Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544bd 304 - - 102.678 ms - correlationId: 4f433399-e1d7-4770-965e-ebbc5c36f60a","timestamp":"2025-03-16T03:05:08.502Z"}
+{"level":"info","message":"GET /categories 304 - - 51.929 ms - correlationId: 171c9439-cef1-432c-b451-3b492d5daaa5","timestamp":"2025-03-16T03:10:00.351Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544bd 304 - - 119.755 ms - correlationId: 5f7ed557-c496-413b-83b5-1c7d4d230039","timestamp":"2025-03-16T03:10:00.523Z"}
+{"level":"info","message":"GET /blogs 304 - - 203.291 ms - correlationId: a713fbc8-b1d1-4a34-8874-c72447b3d111","timestamp":"2025-03-16T03:10:27.919Z"}
+{"level":"info","message":"GET /categories 304 - - 48.551 ms - correlationId: 64292cc2-cfa2-4aed-aaac-8aa32ceff527","timestamp":"2025-03-16T03:10:29.161Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 98.626 ms - correlationId: c979584f-9ad6-4f1b-9e69-4a411492857e","timestamp":"2025-03-16T03:10:29.266Z"}
+{"level":"info","message":"GET /blogs 304 - - 198.441 ms - correlationId: 83757a40-1e3a-4826-b1f3-395be3cfa0da","timestamp":"2025-03-16T03:10:32.483Z"}
+{"level":"info","message":"GET /categories 304 - - 51.223 ms - correlationId: 373e28b0-c175-41c7-b6d2-bde3d12a5921","timestamp":"2025-03-16T03:10:33.689Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544bd 304 - - 101.674 ms - correlationId: 4b6f589e-601f-48c4-8fcf-4c126bac357d","timestamp":"2025-03-16T03:10:33.797Z"}
+{"level":"info","message":"GET /blogs 304 - - 202.842 ms - correlationId: 6f59bdb0-0cef-4561-8ab1-e77548543f03","timestamp":"2025-03-16T03:10:43.298Z"}
+{"level":"info","message":"GET /categories 304 - - 51.074 ms - correlationId: 3a1792e3-13f6-45fd-8486-4a140ec59c7e","timestamp":"2025-03-16T03:10:46.337Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544c2 200 3127 - 98.279 ms - correlationId: 31da165c-d134-47da-8b1c-9fce50f557a6","timestamp":"2025-03-16T03:10:46.442Z"}
+{"level":"info","message":"GET /blogs 304 - - 202.962 ms - correlationId: a61cec6b-c80e-48f7-96d7-6ce2ca755a4a","timestamp":"2025-03-16T03:10:48.952Z"}
+{"level":"info","message":"GET /blogs 304 - - 213.647 ms - correlationId: 1d9a8c00-2466-4b3d-b89a-aa39682b05b2","timestamp":"2025-03-16T03:21:59.350Z"}
+{"level":"info","message":"GET /faqs 304 - - 50.028 ms - correlationId: 91f27a34-82a7-46a2-b70d-95bbde2670a7","timestamp":"2025-03-16T03:22:02.372Z"}
+{"level":"info","message":"GET /blogs 304 - - 202.516 ms - correlationId: 6148aede-c629-4f44-8a45-f22932b270b3","timestamp":"2025-03-16T03:22:04.687Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 99.597 ms - correlationId: 425d99db-d7d0-4d59-882d-8722bf52bdb0","timestamp":"2025-03-16T03:26:17.944Z"}
+{"level":"info","message":"GET /categories 304 - - 51.347 ms - correlationId: 690cd65e-e151-485e-bd0a-8e6f5bb4f70d","timestamp":"2025-03-16T03:32:25.935Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 97.502 ms - correlationId: 49a598fb-d858-46d0-b606-fde9d2ec74d0","timestamp":"2025-03-16T03:32:26.038Z"}
+{"level":"info","message":"GET /blogs 304 - - 218.597 ms - correlationId: 116a241b-265a-4906-82fe-33f91b2879e2","timestamp":"2025-03-16T03:32:27.446Z"}
+{"level":"info","message":"GET /blogs 304 - - 226.694 ms - correlationId: 3016279d-559f-4090-bf17-6169e466dc2d","timestamp":"2025-03-16T03:40:32.619Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.056 ms - correlationId: 04ed41aa-c450-4ca9-99c6-3da54a0abb22","timestamp":"2025-03-16T03:41:55.565Z"}
+{"level":"info","message":"GET /customers 200 15672 - 97.914 ms - correlationId: c80d04e5-c049-4c81-bc72-c6d364e8c6a1","timestamp":"2025-03-16T03:42:00.222Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.133 ms - correlationId: ed494ff4-931f-46d0-95df-6c250bea3b3c","timestamp":"2025-03-16T03:42:04.934Z"}
+{"level":"info","message":"GET /blogs 304 - - 211.281 ms - correlationId: 6e31cd34-e3f8-4450-a190-20294d26f4ca","timestamp":"2025-03-16T03:42:09.357Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.199 ms - correlationId: 895111a0-25fe-48e8-8d2d-f564325a100a","timestamp":"2025-03-16T03:42:10.493Z"}
+{"level":"info","message":"GET /blogs 304 - - 200.999 ms - correlationId: ad9d2712-39ac-4b5d-bfec-886785ac729b","timestamp":"2025-03-16T03:42:29.276Z"}
+{"level":"info","message":"GET /faqs 304 - - 48.223 ms - correlationId: 487ad5cc-b693-40d6-8d50-266cef54e733","timestamp":"2025-03-16T03:42:30.509Z"}
+{"level":"info","message":"GET /blogs 304 - - 196.988 ms - correlationId: 32ddc8f7-e57f-48d9-ae48-ceb24fbd4bd5","timestamp":"2025-03-16T03:42:31.830Z"}
+{"level":"info","message":"GET /blogs 304 - - 213.407 ms - correlationId: 2f456f57-87b4-455c-9bfc-b210fc1ab780","timestamp":"2025-03-16T03:44:36.496Z"}
+{"level":"info","message":"GET /faqs 304 - - 53.293 ms - correlationId: bc9b1d65-49ca-4e98-8fae-3a2038149501","timestamp":"2025-03-16T03:47:26.381Z"}
+{"level":"info","message":"GET /blogs 304 - - 204.555 ms - correlationId: 69b38252-1766-4baa-a232-cb16cd16d726","timestamp":"2025-03-16T03:47:28.516Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.860 ms - correlationId: 6fab6c09-e228-4c27-ba58-53a14165693e","timestamp":"2025-03-16T03:47:30.177Z"}
+{"level":"info","message":"GET /blogs 304 - - 205.200 ms - correlationId: 628b962a-0b15-49a6-815a-401a2d6632e9","timestamp":"2025-03-16T03:47:31.819Z"}
+{"level":"info","message":"GET /blogs 304 - - 210.528 ms - correlationId: 33150287-5688-4082-b0fc-d56bc609d13c","timestamp":"2025-03-16T03:48:18.266Z"}
+{"level":"info","message":"GET /blogs 304 - - 197.904 ms - correlationId: 90d6d973-fa6a-4c8a-b998-df40ea2b8202","timestamp":"2025-03-16T03:48:26.128Z"}
+{"level":"info","message":"GET /faqs/67c7d4f6cdd6907abf6544b9 404 36 - 49.252 ms - correlationId: 7ddc58d4-1468-435c-876c-e9b742988d5f","timestamp":"2025-03-16T03:50:00.639Z"}
+{"level":"info","message":"GET /blogs 304 - - 204.214 ms - correlationId: ed963032-60eb-457e-9a80-28f1165457cd","timestamp":"2025-03-16T03:50:03.139Z"}
+{"level":"info","message":"GET /categories 304 - - 62.091 ms - correlationId: 38fb9dce-661e-4982-99e8-37f90724c504","timestamp":"2025-03-16T03:50:18.662Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 96.529 ms - correlationId: 68d12e3f-f957-490d-a4cc-5de1ba5d666f","timestamp":"2025-03-16T03:50:18.763Z"}
+{"level":"info","message":"GET /blogs 304 - - 203.872 ms - correlationId: ee07db71-79fd-4b63-b246-a07978941915","timestamp":"2025-03-16T03:50:22.341Z"}
+{"level":"info","message":"GET /blogs 304 - - 217.928 ms - correlationId: 4e302379-4f95-4ffe-8746-d2c889160528","timestamp":"2025-03-16T03:54:54.630Z"}
+{"level":"info","message":"GET /categories 304 - - 57.318 ms - correlationId: 94f9ebc3-1d90-466c-af95-f53b7cd999be","timestamp":"2025-03-16T03:54:58.758Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 103.437 ms - correlationId: dff325a6-fcb0-4d37-aa53-0d873797e91c","timestamp":"2025-03-16T03:54:58.867Z"}
+{"level":"info","message":"GET /blogs 304 - - 214.807 ms - correlationId: d3f897e9-bb10-4d62-aaeb-02b90e834d1b","timestamp":"2025-03-16T03:55:01.684Z"}
+{"level":"info","message":"GET /faqs 304 - - 58.469 ms - correlationId: 0470d895-2f07-44c1-9214-033a3f994915","timestamp":"2025-03-16T03:56:28.847Z"}
+{"level":"info","message":"GET /blogs 304 - - 198.852 ms - correlationId: 330d875c-53f0-4159-8646-cf5093f81713","timestamp":"2025-03-16T03:56:30.940Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.819 ms - correlationId: 89a996cb-cf97-4e4d-bdea-65027454f630","timestamp":"2025-03-16T03:59:25.560Z"}
+{"level":"info","message":"GET /blogs 304 - - 213.717 ms - correlationId: 20185266-49e3-4282-910b-d1070f8d50d5","timestamp":"2025-03-16T03:59:27.469Z"}
+{"level":"info","message":"GET /faqs 304 - - 50.327 ms - correlationId: 060ac6f8-0299-4740-bfcc-1a6302eff46e","timestamp":"2025-03-16T03:59:53.658Z"}
+{"level":"info","message":"GET /blogs 304 - - 202.165 ms - correlationId: c3527168-3ed5-4930-bf54-06c62405bf46","timestamp":"2025-03-16T03:59:56.317Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.539 ms - correlationId: fd0552db-ba9a-47e3-b51e-1017d5ccbec8","timestamp":"2025-03-16T03:59:57.942Z"}
+{"level":"info","message":"GET /blogs 304 - - 200.054 ms - correlationId: f5caa5a4-9363-4ade-b0a8-a04a617efe4e","timestamp":"2025-03-16T03:59:58.960Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-16T04:00:00.691Z"}
+{"level":"info","message":"GET /faqs 304 - - 54.948 ms - correlationId: 08759679-0897-464b-a0c3-3145b3f1dab0","timestamp":"2025-03-16T04:00:17.112Z"}
+{"level":"info","message":"GET /blogs 304 - - 204.629 ms - correlationId: aaf0c8c7-f53d-4138-98c9-405a44dc7c88","timestamp":"2025-03-16T04:00:19.813Z"}
+{"level":"info","message":"GET /faqs 304 - - 48.837 ms - correlationId: ca18ccb1-a551-4152-88ef-22ee288e5652","timestamp":"2025-03-16T04:00:26.963Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.460 ms - correlationId: 882558d9-e418-4b5d-955c-68a6af52633a","timestamp":"2025-03-16T04:00:28.408Z"}
+{"level":"info","message":"GET /faqs 304 - - 47.946 ms - correlationId: c80587d9-4cc8-40e6-b03b-8e2b76c5ec54","timestamp":"2025-03-16T04:01:28.981Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.217 ms - correlationId: f3f63f0a-a0de-440b-a3f1-da881942c953","timestamp":"2025-03-16T04:01:30.143Z"}
+{"level":"info","message":"GET /faqs 304 - - 50.105 ms - correlationId: 212eb96f-380f-48b0-8669-2a2b67eddd49","timestamp":"2025-03-16T04:01:36.702Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.576 ms - correlationId: 3f29d095-6b15-40d9-8119-4e43d6cf663c","timestamp":"2025-03-16T04:01:37.749Z"}
+{"level":"info","message":"GET /categories 304 - - 49.851 ms - correlationId: 1bfefe17-8197-43cc-8dbb-e84844932afe","timestamp":"2025-03-16T04:01:40.410Z"}
+{"level":"info","message":"GET /blogs 304 - - 207.330 ms - correlationId: 9392ca27-8ca9-4333-9d42-cf2ce249da26","timestamp":"2025-03-16T04:01:44.447Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.029 ms - correlationId: 43c32129-6957-4b11-9d1c-42c8fb311876","timestamp":"2025-03-16T04:01:48.018Z"}
+{"level":"info","message":"GET /blogs 304 - - 201.311 ms - correlationId: f25c42df-6481-42a6-9132-b2380cd95e3b","timestamp":"2025-03-16T04:02:22.388Z"}
+{"level":"info","message":"GET /faqs 304 - - 55.886 ms - correlationId: 66ffeb21-8ce6-4f5e-9123-8046fcce0c00","timestamp":"2025-03-16T04:02:24.741Z"}
+{"level":"info","message":"GET /customers 304 - - 102.989 ms - correlationId: 76d70e3c-5467-4605-8c6d-8617dba95f65","timestamp":"2025-03-16T04:03:20.067Z"}
+{"level":"info","message":"GET /blogs 304 - - 207.838 ms - correlationId: 17606946-9a59-41a7-9e4e-db9b27145773","timestamp":"2025-03-16T04:03:26.287Z"}
+{"level":"info","message":"GET /customers 304 - - 52.654 ms - correlationId: 37c46afe-6909-41a7-9ba1-969e06d94053","timestamp":"2025-03-16T04:03:26.659Z"}
+{"level":"info","message":"GET /faqs 304 - - 54.082 ms - correlationId: b4cb8c88-9ae7-4923-8bff-92be99bc1f6a","timestamp":"2025-03-16T04:04:09.454Z"}
+{"level":"info","message":"GET /customers 304 - - 102.189 ms - correlationId: 7f45ce34-45e3-489a-bc3b-0bb464749ba1","timestamp":"2025-03-16T04:04:11.318Z"}
+{"level":"info","message":"GET /faqs 304 - - 54.665 ms - correlationId: 764a319f-7917-44b2-a37c-e4174dd64e0b","timestamp":"2025-03-16T04:04:32.742Z"}
+{"level":"info","message":"GET /customers 304 - - 101.041 ms - correlationId: 397ce687-1d82-4765-a68b-f2c317edd810","timestamp":"2025-03-16T04:04:58.549Z"}
+{"level":"info","message":"GET /blogs 304 - - 208.808 ms - correlationId: c795ea2a-a737-4223-a8fc-86d679afc68c","timestamp":"2025-03-16T04:05:01.648Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.773 ms - correlationId: 62d5eab2-937e-4c15-9ae0-1a546d42ab5f","timestamp":"2025-03-16T04:05:04.632Z"}
+{"level":"info","message":"GET /customers 304 - - 97.788 ms - correlationId: 92c264e1-dbeb-4099-becb-500621ac12c8","timestamp":"2025-03-16T04:05:10.361Z"}
+{"level":"info","message":"GET /blogs 304 - - 209.884 ms - correlationId: e91d285c-387b-43c7-8956-f5674ccb6634","timestamp":"2025-03-16T04:05:11.258Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.130 ms - correlationId: cc35c7be-0bd0-4115-8eb8-bb63192d0e1d","timestamp":"2025-03-16T04:05:12.433Z"}
+{"level":"info","message":"GET /blogs 304 - - 215.916 ms - correlationId: 36bd6912-1cbc-4aec-a084-415632a9f858","timestamp":"2025-03-16T04:05:15.473Z"}
+{"level":"info","message":"GET /customers 304 - - 100.372 ms - correlationId: cc5a2302-dad7-488b-89ac-a988eb64787b","timestamp":"2025-03-16T04:05:17.305Z"}
+{"level":"info","message":"GET /faqs 304 - - 53.807 ms - correlationId: 6163e067-da00-4fd0-91f9-8a2620273106","timestamp":"2025-03-16T04:05:36.266Z"}
+{"level":"info","message":"GET /blogs 304 - - 203.960 ms - correlationId: 050bc69b-e09b-4f04-91c5-3a459ab4c36d","timestamp":"2025-03-16T04:05:40.357Z"}
+{"level":"info","message":"GET /faqs 304 - - 50.843 ms - correlationId: be172c5c-622a-4bcd-9adb-c318f234bbab","timestamp":"2025-03-16T04:05:41.825Z"}
+{"level":"info","message":"GET /blogs 304 - - 216.117 ms - correlationId: 70e17d83-c13b-4030-80df-2497c92d8fd2","timestamp":"2025-03-16T04:05:43.361Z"}
+{"level":"info","message":"GET /customers 304 - - 101.118 ms - correlationId: b29a3786-c90e-4912-97f3-5119ef79d29e","timestamp":"2025-03-16T04:05:44.778Z"}
+{"level":"info","message":"GET /faqs 304 - - 81.417 ms - correlationId: dbe6c7da-7db4-4d7c-8b61-d49cc7d626a3","timestamp":"2025-03-16T04:05:47.567Z"}
+{"level":"info","message":"GET /blogs 304 - - 198.321 ms - correlationId: e8a9cdc4-d371-4bbb-b915-5e35340f0a96","timestamp":"2025-03-16T04:05:49.275Z"}
+{"level":"info","message":"GET /customers 304 - - 117.652 ms - correlationId: cff41c88-8cad-42ce-ac8d-055ceddfaa2f","timestamp":"2025-03-16T04:05:50.957Z"}
+{"level":"info","message":"GET /faqs 304 - - 50.372 ms - correlationId: 256e7dfa-cfb6-45c8-8f02-4b3227292a1c","timestamp":"2025-03-16T04:05:52.773Z"}
+{"level":"info","message":"GET /customers 304 - - 104.967 ms - correlationId: 40f712bd-f858-4bf0-bf7a-f758d3ecaae4","timestamp":"2025-03-16T04:05:55.763Z"}
+{"level":"info","message":"GET /blogs 304 - - 210.824 ms - correlationId: abea752f-ffe6-4b43-86a5-b4890856eaf2","timestamp":"2025-03-16T04:06:07.749Z"}
+{"level":"info","message":"GET /faqs 304 - - 57.023 ms - correlationId: 6428ea45-4725-479d-8cfa-5e5c8a017422","timestamp":"2025-03-16T04:06:09.546Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 69.506 ms - correlationId: 0852a73f-7711-4ef2-85b4-4170ceba1bfe","timestamp":"2025-03-16T04:06:20.352Z"}
+{"level":"info","message":"GET /customers 304 - - 107.428 ms - correlationId: 86ec7349-fa19-409c-808a-a4dc10db9831","timestamp":"2025-03-16T04:06:23.233Z"}
+{"level":"info","message":"GET /blogs 304 - - 201.143 ms - correlationId: a738f1b3-952c-4e6a-af80-c8316f8bc978","timestamp":"2025-03-16T04:06:24.155Z"}
+{"level":"info","message":"GET /customers 304 - - 99.565 ms - correlationId: ee44b78e-fc4e-44dc-b92a-743cc728b924","timestamp":"2025-03-16T04:06:25.266Z"}
+{"level":"info","message":"GET /blogs 304 - - 202.141 ms - correlationId: 705f6cb3-f4a4-4c95-be90-bbb1d6bf210e","timestamp":"2025-03-16T04:06:27.872Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.930 ms - correlationId: 468df0de-1112-4966-a131-39b7ec34af5a","timestamp":"2025-03-16T04:06:30.410Z"}
+{"level":"info","message":"GET /customers 304 - - 97.939 ms - correlationId: 5e3b3127-3855-45ae-926f-2d86ada6e994","timestamp":"2025-03-16T04:06:35.117Z"}
+{"level":"info","message":"GET /customers 304 - - 105.289 ms - correlationId: ea7d1e14-bb48-4496-8284-ff46957c7159","timestamp":"2025-03-16T04:07:29.507Z"}
+{"level":"info","message":"GET /customers 304 - - 101.775 ms - correlationId: 47c38a07-d973-4cb3-97db-3909ff0bfe74","timestamp":"2025-03-16T04:09:10.446Z"}
+{"level":"info","message":"GET /customers 304 - - 97.907 ms - correlationId: af49adbf-9e45-4a43-bfac-be89bc0bad88","timestamp":"2025-03-16T04:09:13.353Z"}
+{"level":"info","message":"GET /customers 304 - - 101.739 ms - correlationId: 7a6c814f-7b22-49f9-a29a-904301e9f156","timestamp":"2025-03-16T04:09:42.973Z"}
+{"level":"info","message":"GET /customers 304 - - 101.073 ms - correlationId: 20819ee1-e397-414a-84d6-9b4cb1d6b6f4","timestamp":"2025-03-16T04:09:48.998Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4anakoq3 404 149 - 3.269 ms - correlationId: fbf47747-d4cb-46c5-898e-c5b432929581","timestamp":"2025-03-16T04:10:11.963Z"}
+{"level":"info","message":"GET /messages 200 3794 - 56.090 ms - correlationId: 0743d48b-5718-4f21-80ce-d230d8f3d6e4","timestamp":"2025-03-16T04:10:12.024Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ao82qps 404 149 - 0.979 ms - correlationId: 68de1a53-79f9-44b6-b0f3-72f967771581","timestamp":"2025-03-16T04:10:13.160Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4aq1p5fh 404 149 - 0.724 ms - correlationId: 96636720-6333-4cb5-af30-bb9dca136c67","timestamp":"2025-03-16T04:10:15.523Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4atxc6r8 404 149 - 0.609 ms - correlationId: 894084c1-848e-4fc8-b0c0-b5ae89dbbda2","timestamp":"2025-03-16T04:10:20.550Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4axskd92 404 149 - 0.884 ms - correlationId: 87c7b3bc-4ca0-4994-ae3a-dee9dfde00e1","timestamp":"2025-03-16T04:10:25.563Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4b1nxot0 404 149 - 0.710 ms - correlationId: f1563d65-1def-4917-88a2-2bc6e8aa5108","timestamp":"2025-03-16T04:10:30.579Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4b65aais 404 149 - 0.596 ms - correlationId: 2c6c4be9-0128-404d-b397-f896f237c0a0","timestamp":"2025-03-16T04:10:36.387Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4bas0yfb 404 149 - 1.470 ms - correlationId: 06ae4d50-7481-449f-b896-3d84162320dc","timestamp":"2025-03-16T04:10:42.392Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4bfei0lx 404 149 - 0.686 ms - correlationId: a8f9b1f4-8d4e-4d59-9942-69d7bbb043e3","timestamp":"2025-03-16T04:10:48.383Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4bj9nxbo 404 149 - 0.717 ms - correlationId: 56a13035-03b8-48ad-ba49-3e9967ccb7da","timestamp":"2025-03-16T04:10:53.392Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4bnvzawm 404 149 - 0.427 ms - correlationId: b5cc854c-3af1-41e1-910e-65447e0ab49f","timestamp":"2025-03-16T04:10:59.378Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4bsiufg9 404 149 - 0.611 ms - correlationId: 7656832b-1895-448a-b2bf-f2f8017859df","timestamp":"2025-03-16T04:11:05.388Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4bx5kz5g 404 149 - 0.673 ms - correlationId: 3dea7d7b-3796-483e-aaf3-6fc06e0caf03","timestamp":"2025-03-16T04:11:11.389Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4c1s30ff 404 149 - 0.520 ms - correlationId: b06d8056-e065-48bc-b27c-59543e6a03d3","timestamp":"2025-03-16T04:11:17.385Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4c6ex342 404 149 - 0.485 ms - correlationId: 70397e2d-9b37-4e0e-8bb3-c21bd1ab18f7","timestamp":"2025-03-16T04:11:23.389Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4cb1o19d 404 149 - 0.485 ms - correlationId: 72bebd7b-eeb6-493e-8a6e-1dc76a75b8fe","timestamp":"2025-03-16T04:11:29.394Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4cfo72cg 404 149 - 0.938 ms - correlationId: 85157e29-93f5-4249-8e14-075d7003180d","timestamp":"2025-03-16T04:11:35.389Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ckapywn 404 149 - 0.804 ms - correlationId: 3181a906-197f-4135-9607-410bf3a8d210","timestamp":"2025-03-16T04:11:41.383Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4coxdwo5 404 149 - 0.868 ms - correlationId: 7885b99a-356d-406e-95c0-541a6409ef64","timestamp":"2025-03-16T04:11:47.382Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ctk5vwg 404 149 - 0.554 ms - correlationId: 998f222d-ff4f-46fd-8484-52e0c794f804","timestamp":"2025-03-16T04:11:53.386Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4cy6nmb7 404 149 - 0.666 ms - correlationId: 0278410a-cc61-4c26-a95e-cf4931137126","timestamp":"2025-03-16T04:11:59.380Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4d2te32j 404 149 - 0.887 ms - correlationId: 7b07026d-e9e5-4fea-8dc4-6f0aa1436119","timestamp":"2025-03-16T04:12:05.382Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4d7g7y5z 404 149 - 0.386 ms - correlationId: 37bfad98-5a17-4ab6-8f31-d5304c08ba14","timestamp":"2025-03-16T04:12:11.388Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4dbbe1k0 404 149 - 0.711 ms - correlationId: c4a0339a-ea21-428f-a00f-f435f88d2a1b","timestamp":"2025-03-16T04:12:16.398Z"}
+{"level":"info","message":"GET /customers 304 - - 106.356 ms - correlationId: 4325f316-6c28-454e-8297-64d5912f35a4","timestamp":"2025-03-16T04:14:11.130Z"}
+{"level":"info","message":"GET /blogs 304 - - 203.081 ms - correlationId: 013780cd-309d-4d9b-baf7-4d4bf2eb15cf","timestamp":"2025-03-16T04:14:12.307Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.784 ms - correlationId: 52c021c4-57dc-44b4-8516-5d52cc5a2161","timestamp":"2025-03-16T04:14:13.425Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4fu5a3nt 404 149 - 0.458 ms - correlationId: 7bd42d23-78fc-4bd6-b106-87a6db540399","timestamp":"2025-03-16T04:14:14.116Z"}
+{"level":"info","message":"GET /messages 304 - - 50.909 ms - correlationId: e3017900-9182-4852-8791-c823373a984d","timestamp":"2025-03-16T04:14:14.181Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4fuugut4 404 149 - 0.775 ms - correlationId: e1544393-25e2-401c-ae07-1d9edbe8b84d","timestamp":"2025-03-16T04:14:15.020Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4fw74e7i 404 149 - 0.601 ms - correlationId: fa8ca255-4386-4229-b545-1903da49d77d","timestamp":"2025-03-16T04:14:16.774Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4fzvyxco 404 149 - 0.628 ms - correlationId: 2cf7c24b-acc8-481c-bdfb-bed186332a83","timestamp":"2025-03-16T04:14:21.556Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4g3re47i 404 149 - 0.620 ms - correlationId: ef3f23dd-b5b2-4984-9e89-6c7f48b41039","timestamp":"2025-03-16T04:14:26.576Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4g7mviv1 404 149 - 0.726 ms - correlationId: ac2b3ae8-78bc-4b2c-a0f3-70dc2a4bc1c1","timestamp":"2025-03-16T04:14:31.597Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4gbi5pcb 404 149 - 0.668 ms - correlationId: 7055e6b7-64fa-437e-9f16-2523b4ecd37b","timestamp":"2025-03-16T04:14:36.611Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4gfdez5p 404 149 - 0.584 ms - correlationId: 3c7e4d43-36f1-41d1-ad05-d987afde3784","timestamp":"2025-03-16T04:14:41.625Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4gj8ss04 404 149 - 0.673 ms - correlationId: c35a81d7-aa88-41a2-914d-123207f367f0","timestamp":"2025-03-16T04:14:46.641Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4gn44gji 404 149 - 0.400 ms - correlationId: 7ebbb8ea-6838-42da-918d-8ea7900a193d","timestamp":"2025-03-16T04:14:51.658Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4gqzcyon 404 149 - 0.612 ms - correlationId: 9c6f81a6-c147-4fd6-9366-bf6278cfecce","timestamp":"2025-03-16T04:14:56.669Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4guuj5ow 404 149 - 0.636 ms - correlationId: f7ef3742-c3d1-416c-8dcd-32ea98d8d194","timestamp":"2025-03-16T04:15:01.680Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4gyppjab 404 149 - 0.580 ms - correlationId: c36c888a-c0e2-4755-b9cf-5ba647ff137d","timestamp":"2025-03-16T04:15:06.690Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4h2l1hc0 404 149 - 0.866 ms - correlationId: d4e699e0-117b-4279-b9a1-f8ecf3f95f14","timestamp":"2025-03-16T04:15:11.707Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4h6gmgm1 404 149 - 0.647 ms - correlationId: 0c263d88-5c9d-4c80-a4f3-ed7b75fb3ad3","timestamp":"2025-03-16T04:15:16.731Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4hac2v49 404 149 - 0.795 ms - correlationId: 171cb4f1-ae47-4d51-bdac-167ba2203886","timestamp":"2025-03-16T04:15:21.752Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4he7kkyw 404 149 - 0.531 ms - correlationId: cf88afe9-4c7e-4c5f-a063-25547cae445c","timestamp":"2025-03-16T04:15:26.773Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4hi2zhb9 404 149 - 0.518 ms - correlationId: 13276efd-7e5b-4f11-bd0d-dc5617618634","timestamp":"2025-03-16T04:15:31.793Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4hlylmvx 404 149 - 0.301 ms - correlationId: 2dec0a08-e969-440b-aff0-07a70192268f","timestamp":"2025-03-16T04:15:36.818Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4hptzdn2 404 149 - 0.609 ms - correlationId: 97545889-39e9-416a-87ef-b424d5bb6647","timestamp":"2025-03-16T04:15:41.837Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4htpfg3p 404 149 - 0.512 ms - correlationId: 7819b278-d0cf-47e7-b70b-0e36d4ca0653","timestamp":"2025-03-16T04:15:46.858Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4hxktygp 404 149 - 0.667 ms - correlationId: 067d5ca5-35ae-48a1-b8e0-32c76ef76b99","timestamp":"2025-03-16T04:15:51.875Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4i1gdufa 404 149 - 0.702 ms - correlationId: bc6f63d1-705d-485a-9e99-23f70aedb23b","timestamp":"2025-03-16T04:15:56.899Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4i5bwfhe 404 149 - 0.741 ms - correlationId: c3346100-83c2-48d8-8078-879fa17c42e7","timestamp":"2025-03-16T04:16:01.922Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4i977iqn 404 149 - 0.588 ms - correlationId: 71173fc4-5102-4714-ba66-95bd399edbac","timestamp":"2025-03-16T04:16:06.938Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4id2sx4a 404 149 - 0.786 ms - correlationId: 04a62ae9-2487-48bc-8864-b597cb61b7ad","timestamp":"2025-03-16T04:16:11.961Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4igy67l9 404 149 - 0.502 ms - correlationId: 315dc60d-85aa-42e8-80f1-5e4cb1b64b9a","timestamp":"2025-03-16T04:16:16.980Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4iktq6q4 404 149 - 0.788 ms - correlationId: b8f9c108-a873-4a43-b36d-0a422698c888","timestamp":"2025-03-16T04:16:22.008Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4iop5l3w 404 149 - 0.319 ms - correlationId: d936da71-1808-4154-b236-bcb37b7d24b1","timestamp":"2025-03-16T04:16:27.022Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4iskjhh3 404 149 - 0.566 ms - correlationId: 5e295235-aba3-4e65-b156-235c6e48ad77","timestamp":"2025-03-16T04:16:32.044Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4iwg08v7 404 149 - 0.326 ms - correlationId: b763bbe1-68ab-40b5-970b-745f84a7d316","timestamp":"2025-03-16T04:16:37.060Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4j0k1en1 404 149 - 0.608 ms - correlationId: 02b3587c-e936-445c-b4bf-c695e9a4edc7","timestamp":"2025-03-16T04:16:42.393Z"}
+{"level":"info","message":"GET /categories 304 - - 49.216 ms - correlationId: 199e6153-975d-4a4b-882f-59b4b3f00fe9","timestamp":"2025-03-16T04:16:43.916Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4j56p0g1 404 149 - 0.934 ms - correlationId: c246d643-9b1f-4f9d-a127-1a470da63696","timestamp":"2025-03-16T04:16:48.391Z"}
+{"level":"info","message":"GET /messages 304 - - 50.724 ms - correlationId: be4b2b94-be7f-4eec-a6a9-7b191f75eee7","timestamp":"2025-03-16T04:16:50.611Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4j9tcd6q 404 149 - 0.417 ms - correlationId: 4614d022-f857-4202-a528-d7c1c2547282","timestamp":"2025-03-16T04:16:54.390Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4jefrwu6 404 149 - 0.531 ms - correlationId: 8500956c-13a5-4ba9-a344-dc67291075bc","timestamp":"2025-03-16T04:17:00.380Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4jj2pp9y 404 149 - 0.316 ms - correlationId: 5f36219e-f7ee-42ef-9a80-97ed1614c78c","timestamp":"2025-03-16T04:17:06.389Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4jnpebj1 404 149 - 0.389 ms - correlationId: 0122db07-6c71-4af5-9376-d74715b03596","timestamp":"2025-03-16T04:17:12.391Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4jsbulkc 404 149 - 0.608 ms - correlationId: 0803c20a-11df-40b8-96ad-3bc6396213d5","timestamp":"2025-03-16T04:17:18.385Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4jwylzey 404 149 - 0.404 ms - correlationId: 298d04dd-3b21-4e8f-8b4a-fee3f029c367","timestamp":"2025-03-16T04:17:24.384Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4k1lb8j0 404 149 - 0.672 ms - correlationId: 66f0a01c-0101-44df-9b69-bebd11ce1b47","timestamp":"2025-03-16T04:17:30.390Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4k67wbz5 404 149 - 0.385 ms - correlationId: 3f3e1499-0ee8-4903-89d8-d5b4410ca019","timestamp":"2025-03-16T04:17:36.384Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4kaugh0q 404 149 - 1.174 ms - correlationId: 9d3c78ee-77d5-42c2-947e-30b06943bf96","timestamp":"2025-03-16T04:17:42.382Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4kfhghei 404 149 - 0.330 ms - correlationId: 684e625e-fd31-4f11-939d-f8698a11cd82","timestamp":"2025-03-16T04:17:48.392Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4kk420u8 404 149 - 0.465 ms - correlationId: 237b4eab-fe31-46ab-ac12-f75346d0639b","timestamp":"2025-03-16T04:17:54.389Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4koqh66y 404 149 - 0.236 ms - correlationId: 1b65de0b-ae39-4419-b486-c27c0399ab7d","timestamp":"2025-03-16T04:18:00.381Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ktd9t0b 404 149 - 0.303 ms - correlationId: 37870ec1-7876-450c-b91f-568a7fdb9217","timestamp":"2025-03-16T04:18:06.384Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ky00k0b 404 149 - 0.557 ms - correlationId: ce7074f8-0568-436f-acfa-43976d66de52","timestamp":"2025-03-16T04:18:12.389Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4l2mt5m8 404 149 - 0.482 ms - correlationId: 9a0011ed-8f40-4556-ba5b-36ca3800ee6c","timestamp":"2025-03-16T04:18:18.394Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4l795ud2 404 149 - 0.400 ms - correlationId: 4b03a12c-9271-41d3-8143-38c5d24400f8","timestamp":"2025-03-16T04:18:24.381Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4lbvwq0w 404 149 - 0.330 ms - correlationId: e89dabca-3729-4d89-9da9-989e13fbd42c","timestamp":"2025-03-16T04:18:30.386Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4lgiodh0 404 149 - 0.294 ms - correlationId: 6bf43552-b3da-4d27-a8db-f8ba4ffd4063","timestamp":"2025-03-16T04:18:36.387Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ll5dmdo 404 149 - 0.757 ms - correlationId: 3964d4f5-6017-4a1f-96ef-13705df4d351","timestamp":"2025-03-16T04:18:42.390Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4lprum81 404 149 - 0.748 ms - correlationId: 17783b31-8eaa-42b8-84db-b45594770ce7","timestamp":"2025-03-16T04:18:48.384Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4luepwq4 404 149 - 0.396 ms - correlationId: e835bfb5-4fa4-48da-8e8b-d197d503ba29","timestamp":"2025-03-16T04:18:54.389Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4lz15wtv 404 149 - 0.713 ms - correlationId: 246b3da0-f83d-418a-bb28-64fdcfefe76c","timestamp":"2025-03-16T04:19:00.384Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4m3o2odx 404 149 - 0.661 ms - correlationId: 0735d4d9-1d32-4b75-873d-9871a235656b","timestamp":"2025-03-16T04:19:06.393Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4m8akjl3 404 149 - 0.577 ms - correlationId: 44d3b9e7-b4ab-430d-8ddd-6a2f3aad8e12","timestamp":"2025-03-16T04:19:12.385Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4mcxfvj2 404 149 - 0.536 ms - correlationId: 6463df84-c6a6-444c-b8c3-dd79ead6a9cf","timestamp":"2025-03-16T04:19:18.392Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4mhk4fgd 404 149 - 0.743 ms - correlationId: 55bce05c-2edc-4a10-88fb-0bcc2841cafc","timestamp":"2025-03-16T04:19:24.392Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4mm6k5vn 404 149 - 0.593 ms - correlationId: b1115797-1966-4ed3-9b61-7705c388ba12","timestamp":"2025-03-16T04:19:30.385Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4mqteuq0 404 149 - 0.536 ms - correlationId: f1193aa2-0359-4ce5-8645-6b261bc27c58","timestamp":"2025-03-16T04:19:36.390Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4mvg2rsb 404 149 - 0.574 ms - correlationId: ad6ae8b9-4165-4e70-b698-0ad6208240ff","timestamp":"2025-03-16T04:19:42.391Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4n02hhlk 404 149 - 0.560 ms - correlationId: dc0ad37c-9e72-44c2-8ee5-ff20163b97fc","timestamp":"2025-03-16T04:19:48.383Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4n4pbm0i 404 149 - 0.549 ms - correlationId: e788b6a9-cdc4-4f80-bc2f-097838a29383","timestamp":"2025-03-16T04:19:54.388Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4n9brd2o 404 149 - 0.532 ms - correlationId: 3ff9881d-f483-490f-b75b-cdf54dc300ac","timestamp":"2025-03-16T04:20:00.381Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ndyqxme 404 149 - 0.866 ms - correlationId: b0131cf2-721d-4cd0-9553-c1c6bef1f615","timestamp":"2025-03-16T04:20:06.390Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4nil3phl 404 149 - 0.542 ms - correlationId: 83429933-4561-4b31-92a3-445be82dc131","timestamp":"2025-03-16T04:20:12.381Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4nn7vuyc 404 149 - 0.550 ms - correlationId: 7e1f2527-931d-4d1f-86f0-76b6387ac5c2","timestamp":"2025-03-16T04:20:18.384Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4nruggpb 404 149 - 0.673 ms - correlationId: 5ec8a756-ce06-4726-80d9-32730966732d","timestamp":"2025-03-16T04:20:24.382Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4nwheuwv 404 149 - 0.829 ms - correlationId: 52e668ad-adf1-4237-b51f-63aa316dc654","timestamp":"2025-03-16T04:20:30.392Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4o13vh5m 404 149 - 0.642 ms - correlationId: ef49ccb8-eccb-443d-8924-4ebd7527b688","timestamp":"2025-03-16T04:20:36.385Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4o5qkbme 404 149 - 0.620 ms - correlationId: 1a842448-c42a-4095-b051-a676821bf40b","timestamp":"2025-03-16T04:20:42.388Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4oad9aa7 404 149 - 0.620 ms - correlationId: ff6ba243-724e-4eaf-829b-c0c7c8d299b6","timestamp":"2025-03-16T04:20:48.386Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4oezv539 404 149 - 0.599 ms - correlationId: a4940024-2782-4942-b03b-340aebe09abb","timestamp":"2025-03-16T04:20:54.384Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ojmfj0g 404 149 - 0.564 ms - correlationId: 216426f3-4486-48b2-828f-25b33d194e90","timestamp":"2025-03-16T04:21:00.383Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4oo94jd8 404 149 - 0.596 ms - correlationId: aea57f02-babd-4dc8-bdeb-4c8854164c22","timestamp":"2025-03-16T04:21:06.381Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4osvr9hr 404 149 - 0.565 ms - correlationId: 47031cd8-45ec-4db5-be1d-a10ebb37add1","timestamp":"2025-03-16T04:21:12.381Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4oxiogpm 404 149 - 0.566 ms - correlationId: 686e390e-0c72-4dbc-b505-e99e0ba586b5","timestamp":"2025-03-16T04:21:18.389Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4p25ewy2 404 149 - 0.775 ms - correlationId: 464e6ded-d775-457d-b0d7-bac0db196d70","timestamp":"2025-03-16T04:21:24.393Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4p6rv56r 404 149 - 0.874 ms - correlationId: 626b7801-9c4c-40ca-8281-630bd4d8147a","timestamp":"2025-03-16T04:21:30.385Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4pbej0q7 404 149 - 0.896 ms - correlationId: 7c6eb341-315d-4eaf-a01b-a3f37cee49b1","timestamp":"2025-03-16T04:21:36.384Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4pg1c0rl 404 149 - 0.690 ms - correlationId: 499fcfd8-693e-4635-b9b2-5c80591ef4fb","timestamp":"2025-03-16T04:21:42.391Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4pknvru6 404 149 - 0.691 ms - correlationId: b15231e3-870b-4ac0-b1f1-e3575a1c62d0","timestamp":"2025-03-16T04:21:48.384Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ppak994 404 149 - 0.651 ms - correlationId: eb9a6932-6a22-4825-b08e-33b8c0650fd1","timestamp":"2025-03-16T04:21:54.386Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ptxghex 404 149 - 0.552 ms - correlationId: 21088b48-ad4d-48ce-9710-7059fd26d417","timestamp":"2025-03-16T04:22:00.395Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4pyjtl1s 404 149 - 0.664 ms - correlationId: 6982ac63-c7b9-4218-b33f-bf8c2e6abedc","timestamp":"2025-03-16T04:22:06.382Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4q36fd47 404 149 - 0.557 ms - correlationId: 18c6a29c-1aab-4803-9475-834bf7b2ba2c","timestamp":"2025-03-16T04:22:12.380Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4q7t8olx 404 149 - 0.515 ms - correlationId: 6e7d79cc-2eda-4819-9176-02f6d98dd685","timestamp":"2025-03-16T04:22:18.383Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4qcfw86b 404 149 - 0.589 ms - correlationId: 88d44cb9-fef0-4ab4-8f93-924669bbb627","timestamp":"2025-03-16T04:22:24.385Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4qh2s8s9 404 149 - 0.395 ms - correlationId: 028eca10-74bc-46b0-9271-3544629d4968","timestamp":"2025-03-16T04:22:30.393Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4qlpfaw0 404 149 - 0.868 ms - correlationId: c4ab668a-b50d-4a29-8c77-e0dcd6875493","timestamp":"2025-03-16T04:22:36.394Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4qqbuko3 404 149 - 0.465 ms - correlationId: 5eb8ea33-346e-4ced-93aa-9d5360c2385e","timestamp":"2025-03-16T04:22:42.383Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4quyrj1t 404 149 - 0.946 ms - correlationId: 4e5891ab-0f76-4bda-8bce-830962ef2d65","timestamp":"2025-03-16T04:22:48.395Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4qzlck39 404 149 - 0.556 ms - correlationId: 7d87759d-799a-4923-814b-e2c94a8f9b54","timestamp":"2025-03-16T04:22:54.390Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4r47uodv 404 149 - 0.832 ms - correlationId: df527c37-5218-4178-8bd6-9483e6a153e1","timestamp":"2025-03-16T04:23:00.383Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4r8um10b 404 149 - 0.539 ms - correlationId: cc86837d-28c7-4ef4-b705-28628e5d4997","timestamp":"2025-03-16T04:23:06.391Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4rdh5by0 404 149 - 0.259 ms - correlationId: 85ad9db2-7dda-47b6-974a-cb335bbc749b","timestamp":"2025-03-16T04:23:12.381Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ri3xqlb 404 149 - 0.450 ms - correlationId: 3adf2c76-b97b-4bd0-8504-6143556afa89","timestamp":"2025-03-16T04:23:18.386Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4rmqirb9 404 149 - 2.469 ms - correlationId: 20408960-d89d-4d6a-b5d8-4fac46d9f302","timestamp":"2025-03-16T04:23:24.386Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4rrdeqe1 404 149 - 0.817 ms - correlationId: 8be59cfe-484b-47cf-a979-9495e158bd2f","timestamp":"2025-03-16T04:23:30.391Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4rw024q6 404 149 - 0.710 ms - correlationId: 147ae9ea-c829-4e71-b20b-272c32526a63","timestamp":"2025-03-16T04:23:36.392Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4s0mqgzg 404 149 - 1.172 ms - correlationId: ee6d5178-a7e3-47c4-8099-9c24351882f5","timestamp":"2025-03-16T04:23:42.392Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4s593top 404 149 - 0.660 ms - correlationId: 09562119-d59a-4512-a931-5ba34212ff87","timestamp":"2025-03-16T04:23:48.381Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4s9vtaj2 404 149 - 0.567 ms - correlationId: feb67b2f-3ab4-49c7-8fd9-3aa527e6e602","timestamp":"2025-03-16T04:23:54.383Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4seieyh0 404 149 - 0.767 ms - correlationId: fde2c9c8-bf7b-438e-9837-75e71d7dd836","timestamp":"2025-03-16T04:24:00.380Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4sj59xbh 404 149 - 0.570 ms - correlationId: 4071f6ff-cd7d-4263-a5d8-ab3ca99244ed","timestamp":"2025-03-16T04:24:06.388Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4snrswt4 404 149 - 0.839 ms - correlationId: c01fee9b-f2e3-4c65-84f1-5041226a76df","timestamp":"2025-03-16T04:24:12.381Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4sseqctt 404 149 - 0.655 ms - correlationId: 3e34c971-47cd-4229-ab8a-29e8690e7da7","timestamp":"2025-03-16T04:24:18.393Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4sx1fezi 404 149 - 1.262 ms - correlationId: 63355a55-78de-4e9a-b765-663e57edd368","timestamp":"2025-03-16T04:24:24.392Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4t1o2wvq 404 149 - 1.025 ms - correlationId: d71ed2ae-73d6-44fb-a06e-431d6a6e4b7b","timestamp":"2025-03-16T04:24:30.391Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4t6ajkvk 404 149 - 0.805 ms - correlationId: e1a115fe-27b0-45c4-af21-3fc108d76110","timestamp":"2025-03-16T04:24:36.385Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4taxgldz 404 149 - 0.605 ms - correlationId: 160a9360-758a-4e84-9efe-c9b4902abcfc","timestamp":"2025-03-16T04:24:42.393Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4tfk2ksc 404 149 - 0.590 ms - correlationId: b6dc492e-6681-44c6-95c3-3254426c019e","timestamp":"2025-03-16T04:24:48.390Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4tk6jfnu 404 149 - 0.568 ms - correlationId: 4a423fb7-05af-4834-8d71-d1adafb6a65a","timestamp":"2025-03-16T04:24:54.383Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4tot7hhp 404 149 - 0.702 ms - correlationId: 7e09ae44-eb6e-44f0-ac99-09e34f785293","timestamp":"2025-03-16T04:25:00.383Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ttfo003 404 149 - 0.834 ms - correlationId: c092e21f-b0ad-4db7-a5e5-ae52613f3d03","timestamp":"2025-03-16T04:25:06.381Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4txbaq2v 404 149 - 0.766 ms - correlationId: 9f950064-5049-4e5c-9396-ab73dc2687f6","timestamp":"2025-03-16T04:25:11.409Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4ttfo003 404 149 - 0.580 ms - correlationId: 9fabdbb3-7c95-4d74-9c4b-5f4fdee071d8","timestamp":"2025-03-16T04:25:15.842Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4u1xmliw 404 149 - 0.789 ms - correlationId: 3c2a36f8-dcef-4e26-964e-bc3687a9dd0e","timestamp":"2025-03-16T04:25:17.394Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4u5t48tg 404 149 - 0.593 ms - correlationId: 694ca5ab-9069-4d03-81e7-16bf6d713538","timestamp":"2025-03-16T04:25:22.413Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4u9oi6vt 404 149 - 0.536 ms - correlationId: a83e3851-c3c9-415f-a99d-aa149095e62a","timestamp":"2025-03-16T04:25:27.431Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4udjzpbn 404 149 - 1.292 ms - correlationId: 58a3419e-e73b-4b02-bd9d-77fb98bd7cb8","timestamp":"2025-03-16T04:25:32.454Z"}
+{"level":"info","message":"GET /socket.io/?EIO=4&transport=polling&t=4uhf89ex 404 149 - 0.700 ms - correlationId: 1440fa64-dba8-41f5-9853-5f1ff7da2ea3","timestamp":"2025-03-16T04:25:37.466Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-16T04:27:17.228Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-16T04:27:18.341Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c6888675sm51713115ad.51 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-16T04:27:18.689Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-16T04:30:33.923Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-16T04:30:34.875Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-7371155077fsm5176911b3a.37 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-16T04:30:35.568Z"}
+{"level":"info","message":"GET /blogs 304 - - 209.195 ms - correlationId: 4dbd4daa-d386-4fc8-a915-be18c284e6cf","timestamp":"2025-03-16T04:30:52.961Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: PYLloDQG69M05WhHAAAB","timestamp":"2025-03-16T04:30:54.361Z"}
+{"level":"info","message":"GET /messages 304 - - 58.620 ms - correlationId: 08e49d0d-6b55-4f6f-b39a-b026d5b744ed","timestamp":"2025-03-16T04:30:54.378Z"}
+{"correlationId":"socket","level":"info","message":"Đã lưu tin nhắn vào MongoDB [object Object]","timestamp":"2025-03-16T04:30:59.398Z"}
+{"correlationId":"socket","level":"warn","message":"Không tìm thấy socket ID cho người dùng: Khách hàng","timestamp":"2025-03-16T04:30:59.399Z"}
+{"correlationId":"socket","level":"info","message":"Đã lưu tin nhắn vào MongoDB [object Object]","timestamp":"2025-03-16T04:31:28.503Z"}
+{"correlationId":"socket","level":"warn","message":"Không tìm thấy socket ID cho người dùng: Khách hàng","timestamp":"2025-03-16T04:31:28.504Z"}
+{"correlationId":"socket","level":"info","message":"Đã lưu tin nhắn vào MongoDB [object Object]","timestamp":"2025-03-16T04:31:31.852Z"}
+{"correlationId":"socket","level":"warn","message":"Không tìm thấy socket ID cho người dùng: Khách hàng","timestamp":"2025-03-16T04:31:31.853Z"}
+{"correlationId":"socket","level":"info","message":"Đã lưu tin nhắn vào MongoDB [object Object]","timestamp":"2025-03-16T04:31:41.339Z"}
+{"correlationId":"socket","level":"warn","message":"Không tìm thấy socket ID cho người dùng: Khách hàng","timestamp":"2025-03-16T04:31:41.340Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-16T05:00:00.723Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T05:09:46.044Z"}
+{"level":"info","message":"GET /messages 200 4334 - 52.239 ms - correlationId: cbdfedbc-f028-4240-88c9-07689abfb812","timestamp":"2025-03-16T05:09:46.851Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: bhMkiu3knep527MPAAAD","timestamp":"2025-03-16T05:09:46.984Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T05:10:19.701Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: amKTgVqavh4Uz6bCAAAF","timestamp":"2025-03-16T05:10:20.175Z"}
+{"level":"info","message":"GET /messages 304 - - 53.913 ms - correlationId: b427ec5a-3baa-414b-a866-431c21fce608","timestamp":"2025-03-16T05:10:20.181Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T05:10:38.239Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.377 ms - correlationId: 3c2bbe17-6935-440b-965e-7786a304eb32","timestamp":"2025-03-16T05:10:38.325Z"}
+{"level":"info","message":"GET /messages 304 - - 55.784 ms - correlationId: d5bf0b14-34e3-4bb9-947c-69537317c4c5","timestamp":"2025-03-16T05:10:39.618Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.639 ms - correlationId: 5be22935-d9a3-4db8-b283-f7cb20a86a9e","timestamp":"2025-03-16T05:11:57.990Z"}
+{"level":"info","message":"GET /messages 304 - - 54.184 ms - correlationId: f85e1ef3-97c6-4ff9-97a5-f93dc0704de4","timestamp":"2025-03-16T05:11:58.779Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.767 ms - correlationId: a6b00e63-6106-4591-8876-80f049463994","timestamp":"2025-03-16T05:12:16.762Z"}
+{"level":"info","message":"GET /messages 304 - - 53.410 ms - correlationId: dc20c81e-5db1-4466-bb3e-7c2c5b2ebe10","timestamp":"2025-03-16T05:12:17.489Z"}
+{"level":"info","message":"GET /faqs 304 - - 53.682 ms - correlationId: 31db5bd4-628a-4e87-8d02-a5f876bf5e00","timestamp":"2025-03-16T05:12:18.365Z"}
+{"level":"info","message":"GET /messages 304 - - 54.567 ms - correlationId: d55031d0-6024-415b-a585-ec46ee41a3fa","timestamp":"2025-03-16T05:12:19.161Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: BWociR603v9c1XLnAAAH","timestamp":"2025-03-16T06:25:16.095Z"}
+{"level":"info","message":"GET /messages 304 - - 371.346 ms - correlationId: c2cd5efc-c6f0-4193-a464-df75eabbaa0f","timestamp":"2025-03-16T06:25:16.439Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T06:25:27.165Z"}
+{"level":"info","message":"GET /messages 304 - - 52.639 ms - correlationId: ac0d9ad1-c67b-4416-baa1-2d33c51229a1","timestamp":"2025-03-16T06:25:27.511Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: ldGkc6qid6tYwlcvAAAJ","timestamp":"2025-03-16T06:25:27.517Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T06:26:53.393Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: eoNQvTet97Pkl2aqAAAL","timestamp":"2025-03-16T06:26:54.189Z"}
+{"level":"info","message":"GET /messages 304 - - 64.606 ms - correlationId: 7d961a04-958e-4e78-9943-49997cc3fbca","timestamp":"2025-03-16T06:26:54.204Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T06:28:22.398Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: cyo4-D5OjuKrDDy2AAAN","timestamp":"2025-03-16T06:28:22.848Z"}
+{"level":"info","message":"GET /messages 304 - - 48.477 ms - correlationId: 7fcfe224-2628-480b-9619-db2432ccb595","timestamp":"2025-03-16T06:28:22.859Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T06:29:06.872Z"}
+{"level":"info","message":"GET /faqs 304 - - 48.452 ms - correlationId: b289f8b2-f4ed-45f9-89ff-23bc4e869ecf","timestamp":"2025-03-16T06:29:06.946Z"}
+{"level":"info","message":"GET /blogs 304 - - 226.014 ms - correlationId: e995351b-56d5-402f-ba43-4d32a8960516","timestamp":"2025-03-16T06:29:08.094Z"}
+{"level":"info","message":"GET /customers 304 - - 102.589 ms - correlationId: 9268f451-beb6-4eca-be9c-167c1e170e67","timestamp":"2025-03-16T06:29:09.698Z"}
+{"level":"info","message":"GET /faqs 304 - - 46.503 ms - correlationId: 3c695bfc-670c-4b78-a562-c51aac48b719","timestamp":"2025-03-16T06:29:10.742Z"}
+{"level":"info","message":"GET /blogs 304 - - 196.535 ms - correlationId: bec6965d-fc35-4da9-afaf-a7a0b5d8978e","timestamp":"2025-03-16T06:29:11.700Z"}
+{"level":"info","message":"GET /customers 304 - - 107.506 ms - correlationId: 9051d967-576c-4803-87a8-449b920a45ce","timestamp":"2025-03-16T06:29:13.467Z"}
+{"level":"info","message":"GET /faqs 304 - - 65.173 ms - correlationId: 25a941d7-b59d-4918-937e-2432d2193625","timestamp":"2025-03-16T06:29:16.650Z"}
+{"level":"info","message":"GET /blogs 304 - - 199.147 ms - correlationId: 64423319-80cf-4083-a0a8-dee71330b7f2","timestamp":"2025-03-16T06:29:17.943Z"}
+{"level":"info","message":"GET /messages 304 - - 47.648 ms - correlationId: a1d59b0a-d3e7-4ab1-8ad6-20bcd7f524fc","timestamp":"2025-03-16T06:29:19.351Z"}
+{"level":"info","message":"GET /blogs 304 - - 211.895 ms - correlationId: c1068d46-2ef0-49ed-bb48-6fc9b659a455","timestamp":"2025-03-16T06:29:21.001Z"}
+{"level":"info","message":"GET /customers 304 - - 101.493 ms - correlationId: b1ca4f2c-159f-47aa-8089-acd9db932ab6","timestamp":"2025-03-16T06:29:21.772Z"}
+{"level":"info","message":"GET /faqs 304 - - 47.728 ms - correlationId: bd2cfbfd-3e39-408d-a179-0730216a8a6b","timestamp":"2025-03-16T06:29:27.039Z"}
+{"level":"info","message":"GET /blogs 304 - - 199.765 ms - correlationId: 019a43b3-6a63-4a5e-82ea-bdc466d0dde0","timestamp":"2025-03-16T06:29:31.576Z"}
+{"level":"info","message":"GET /blogs 304 - - 192.993 ms - correlationId: 7307909b-6818-495e-9dec-7ddaa26ee24c","timestamp":"2025-03-16T06:37:15.021Z"}
+{"level":"info","message":"GET /categories 304 - - 49.362 ms - correlationId: 714e0402-a61e-446f-9716-99b928339466","timestamp":"2025-03-16T06:38:33.334Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.018 ms - correlationId: d96d878c-935e-48a5-a183-89addf6c3e4f","timestamp":"2025-03-16T06:38:41.334Z"}
+{"level":"info","message":"GET /categories 304 - - 46.468 ms - correlationId: d643359a-c778-49d0-a82d-6886eafa4c0c","timestamp":"2025-03-16T06:38:42.509Z"}
+{"level":"info","message":"GET /blogs 304 - - 200.043 ms - correlationId: 50117f9f-c7c1-48a1-9e42-b6457a3ee5a8","timestamp":"2025-03-16T06:38:44.320Z"}
+{"level":"info","message":"GET /categories 304 - - 46.765 ms - correlationId: 45b31f76-fa4c-4ff9-8383-be0c4ba330f2","timestamp":"2025-03-16T06:38:45.324Z"}
+{"level":"info","message":"GET /blogs 304 - - 197.125 ms - correlationId: 1acc93ae-2e52-42a4-8dc1-0f542aed4b30","timestamp":"2025-03-16T06:39:13.203Z"}
+{"level":"info","message":"GET /categories 304 - - 46.056 ms - correlationId: e29f7d54-30d1-4e86-b2e3-810316200c22","timestamp":"2025-03-16T06:39:13.764Z"}
+{"level":"info","message":"GET /blogs 304 - - 198.064 ms - correlationId: f3f790b5-1ba1-4b2b-8fb0-97a14c7fb4f5","timestamp":"2025-03-16T06:39:14.619Z"}
+{"level":"info","message":"GET /categories 304 - - 47.956 ms - correlationId: dcc182f0-a7ba-49e8-8a51-097760532076","timestamp":"2025-03-16T06:39:15.582Z"}
+{"level":"info","message":"GET /blogs 304 - - 202.328 ms - correlationId: a2a95a01-aa58-4f5f-91d2-9051793c30e8","timestamp":"2025-03-16T06:39:16.719Z"}
+{"level":"info","message":"GET /categories 304 - - 48.173 ms - correlationId: 7cfa17ba-5fbe-4e9c-9d67-770141f5aa6c","timestamp":"2025-03-16T06:39:17.637Z"}
+{"level":"info","message":"GET /blogs 304 - - 204.564 ms - correlationId: c67db8c4-1039-4a94-a575-a7897d678f7f","timestamp":"2025-03-16T06:39:34.586Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.500 ms - correlationId: 93925dba-79de-4634-ae40-9953f283bb01","timestamp":"2025-03-16T06:39:36.645Z"}
+{"level":"info","message":"GET /customers 304 - - 97.391 ms - correlationId: 23914373-2ce4-4944-adfb-638ef1040b76","timestamp":"2025-03-16T06:40:15.705Z"}
+{"level":"info","message":"GET /memberships 304 - - 51.824 ms - correlationId: 96c1c705-2c9b-4685-836b-08b11d6fc6fa","timestamp":"2025-03-16T06:41:01.765Z"}
+{"level":"info","message":"GET /customers 304 - - 102.692 ms - correlationId: cef357d6-325e-4476-879b-ddb9abe1f5a3","timestamp":"2025-03-16T06:41:12.071Z"}
+{"level":"info","message":"GET /categories 304 - - 50.926 ms - correlationId: 9eaef39a-d51e-4d6f-bc21-bc1f7e1f7d37","timestamp":"2025-03-16T06:41:13.571Z"}
+{"level":"info","message":"GET /faqs 304 - - 47.961 ms - correlationId: 98ed8d81-8210-4731-afff-eb2939b66e49","timestamp":"2025-03-16T06:41:22.141Z"}
+{"level":"info","message":"GET /faqs 304 - - 48.166 ms - correlationId: 19ccebfa-54c3-4e82-9f33-656133f8a4b7","timestamp":"2025-03-16T06:41:26.492Z"}
+{"level":"info","message":"GET /faqs 304 - - 49.382 ms - correlationId: 016a7f04-3bd6-416b-9147-8a767788427e","timestamp":"2025-03-16T06:41:29.657Z"}
+{"level":"info","message":"GET /blogs 304 - - 198.859 ms - correlationId: fd0d0635-0226-426f-8f8a-5c06ec4ba0ec","timestamp":"2025-03-16T06:41:47.668Z"}
+{"level":"info","message":"GET /categories 304 - - 46.147 ms - correlationId: e110ac78-9da7-44bc-aa38-224d58c898fe","timestamp":"2025-03-16T06:41:51.499Z"}
+{"level":"info","message":"GET /customers 304 - - 95.302 ms - correlationId: 38283ced-6ae1-41c4-9b1c-6cd6c520698c","timestamp":"2025-03-16T06:41:55.317Z"}
+{"level":"info","message":"GET /blogs 304 - - 193.632 ms - correlationId: c22da573-43fc-47ed-a4d7-77d3013a0cf0","timestamp":"2025-03-16T06:42:34.321Z"}
+{"level":"info","message":"GET /categories 304 - - 47.709 ms - correlationId: 86e10bc6-3099-480c-b169-2feaafd03989","timestamp":"2025-03-16T06:42:36.781Z"}
+{"level":"info","message":"GET /categories 304 - - 47.788 ms - correlationId: 56db11aa-9785-4525-aa64-a42533e6dbc4","timestamp":"2025-03-16T06:42:59.092Z"}
+{"level":"info","message":"GET /blogs 304 - - 205.002 ms - correlationId: 55a5826a-4f6c-4d82-bcc8-3b66eb00a2ae","timestamp":"2025-03-16T06:43:02.328Z"}
+{"level":"info","message":"GET /faqs 304 - - 48.065 ms - correlationId: b8583e9e-7435-442c-a489-323e391b3c66","timestamp":"2025-03-16T06:43:03.309Z"}
+{"level":"info","message":"GET /customers 304 - - 99.280 ms - correlationId: 6973dc02-3db6-4658-81bc-0e8a80004e96","timestamp":"2025-03-16T06:43:12.513Z"}
+{"level":"info","message":"GET /memberships 304 - - 47.877 ms - correlationId: ee2fd92e-45d5-42d1-bcba-b8753462d016","timestamp":"2025-03-16T06:43:13.388Z"}
+{"level":"info","message":"GET /customers 304 - - 100.015 ms - correlationId: 582bed6f-8104-44da-b42d-0037cba5cebd","timestamp":"2025-03-16T06:43:18.976Z"}
+{"level":"info","message":"GET /memberships 304 - - 49.284 ms - correlationId: 1404c62b-538a-4c8d-8046-af26228fc3f7","timestamp":"2025-03-16T06:43:20.372Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544c7 200 409 - 533.077 ms - correlationId: ff8474e9-00f3-46e6-8159-182c9d975e31","timestamp":"2025-03-16T06:43:20.856Z"}
+{"level":"info","message":"GET /orders/customer/cus1 200 171 - 49.084 ms - correlationId: 312d780e-8139-4266-9643-1ed3956e73c4","timestamp":"2025-03-16T06:43:20.920Z"}
+{"level":"info","message":"GET /customers 304 - - 95.257 ms - correlationId: c276ce4f-3641-44bb-89ae-e6d0ff603e51","timestamp":"2025-03-16T06:43:22.020Z"}
+{"level":"info","message":"GET /categories 304 - - 49.185 ms - correlationId: 3a2d88e6-9057-453c-9e59-1e0b8457a8aa","timestamp":"2025-03-16T06:43:44.561Z"}
+{"level":"info","message":"GET /categories 304 - - 46.345 ms - correlationId: 19df0bd2-810c-45b3-9fbe-d53b816e9770","timestamp":"2025-03-16T06:46:20.391Z"}
+{"level":"info","message":"GET /blogs 304 - - 198.572 ms - correlationId: 963fb001-3320-4bbd-8edb-fdc4a67a415d","timestamp":"2025-03-16T06:46:53.596Z"}
+{"level":"info","message":"GET /categories 304 - - 47.761 ms - correlationId: ceab6434-015d-4329-82ca-9af38405ff9d","timestamp":"2025-03-16T06:46:54.851Z"}
+{"level":"info","message":"GET /blogs 304 - - 196.102 ms - correlationId: b59edf43-a583-46fe-9b7b-6e73ad1551c7","timestamp":"2025-03-16T06:46:56.659Z"}
+{"level":"info","message":"GET /categories 304 - - 49.402 ms - correlationId: 3d495f22-c630-4dd8-ba0b-60b176155a33","timestamp":"2025-03-16T06:46:58.631Z"}
+{"level":"info","message":"GET /blogs 304 - - 197.191 ms - correlationId: b37a77de-07a4-4bab-bd94-e1556050bb08","timestamp":"2025-03-16T06:47:58.941Z"}
+{"level":"info","message":"GET /categories 304 - - 52.830 ms - correlationId: 8b569bc5-e8e1-4fd5-bc1f-fa56f237e455","timestamp":"2025-03-16T06:48:00.025Z"}
+{"level":"info","message":"GET /customers 304 - - 101.870 ms - correlationId: 6b57ce2f-1269-4a8e-ab8b-6d51868d0ffb","timestamp":"2025-03-16T06:48:01.907Z"}
+{"level":"info","message":"GET /memberships 304 - - 46.846 ms - correlationId: d1535dc6-cf5c-4d55-8b07-568f07e1d669","timestamp":"2025-03-16T06:48:02.754Z"}
+{"level":"info","message":"GET /customers 304 - - 96.564 ms - correlationId: d53bbc65-98e4-4379-90d4-3def8662a9e5","timestamp":"2025-03-16T06:48:04.311Z"}
+{"level":"info","message":"GET /blogs 304 - - 205.331 ms - correlationId: ed03974b-b680-4d43-a312-cc607ee36e58","timestamp":"2025-03-16T06:48:06.243Z"}
+{"level":"info","message":"GET /categories 304 - - 49.532 ms - correlationId: 04f75f88-7a57-4328-8d18-225de9fefb79","timestamp":"2025-03-16T06:48:07.454Z"}
+{"level":"info","message":"GET /categories 304 - - 47.549 ms - correlationId: 04ea36b6-29e9-43f4-b67d-67b1441ad816","timestamp":"2025-03-16T06:48:09.211Z"}
+{"level":"info","message":"GET /blogs 304 - - 197.678 ms - correlationId: 4f04a209-a1b3-4f76-b981-21caf8bd7ed4","timestamp":"2025-03-16T06:48:12.281Z"}
+{"level":"info","message":"GET /categories 304 - - 50.925 ms - correlationId: 1210a4dc-51e2-483a-ae67-51ea3291ff29","timestamp":"2025-03-16T06:48:14.064Z"}
+{"level":"info","message":"GET /categories 304 - - 48.950 ms - correlationId: 4b5acb29-dc2e-4a63-8fed-d89e4b5cedbc","timestamp":"2025-03-16T06:48:16.204Z"}
+{"level":"info","message":"GET /blogs 304 - - 197.387 ms - correlationId: 4e0a351b-0ed0-44b7-b7c3-645bb4ff62a5","timestamp":"2025-03-16T06:48:18.510Z"}
+{"level":"info","message":"GET /categories 304 - - 50.648 ms - correlationId: 462a7af8-272f-4df3-8047-78ddcbc99bbd","timestamp":"2025-03-16T06:48:20.321Z"}
+{"level":"info","message":"GET /categories 304 - - 46.728 ms - correlationId: 882a2b2e-b0a8-4ad9-a929-890e1af6a4a8","timestamp":"2025-03-16T06:49:09.902Z"}
+{"level":"info","message":"GET /blogs 304 - - 197.076 ms - correlationId: 33674e00-f6c1-4c80-ac02-f225eb82c968","timestamp":"2025-03-16T06:49:12.889Z"}
+{"level":"info","message":"GET /categories 304 - - 61.495 ms - correlationId: ba30ed5c-a6b6-479d-acc2-4fe489ecece2","timestamp":"2025-03-16T06:49:14.371Z"}
+{"level":"info","message":"GET /categories 304 - - 50.137 ms - correlationId: ba60a3b7-b25f-4a5d-98f1-fd63ad013a3a","timestamp":"2025-03-16T06:49:16.254Z"}
+{"level":"info","message":"GET /blogs 304 - - 194.385 ms - correlationId: 29d2cf0b-5c06-4711-ac72-f5fbc89800f3","timestamp":"2025-03-16T06:49:22.582Z"}
+{"level":"info","message":"GET /categories 304 - - 48.659 ms - correlationId: 8ccd3f18-db28-45cc-aa67-582aa2b82f9e","timestamp":"2025-03-16T06:49:24.454Z"}
+{"level":"info","message":"GET /blogs 304 - - 198.402 ms - correlationId: e655a592-ce2d-4ed0-a13a-9f07c9521116","timestamp":"2025-03-16T06:49:43.268Z"}
+{"level":"info","message":"GET /categories 304 - - 48.771 ms - correlationId: d1b8b646-bf13-4ed7-a39e-228d93959cbc","timestamp":"2025-03-16T06:49:45.119Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544bb 304 - - 98.446 ms - correlationId: 604b423f-efd6-4be8-b66b-05c9f0828790","timestamp":"2025-03-16T06:49:45.223Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.847 ms - correlationId: c793a655-26c8-40a3-ad8c-376569ccb5cc","timestamp":"2025-03-16T06:50:14.412Z"}
+{"level":"info","message":"GET /categories 304 - - 49.355 ms - correlationId: fa9f761f-11cf-4533-b0e3-b7634cbb1fc5","timestamp":"2025-03-16T06:50:16.551Z"}
+{"level":"info","message":"GET /customers 304 - - 102.078 ms - correlationId: 9fda38e5-e8e7-4aa9-8eaf-26578951965b","timestamp":"2025-03-16T06:50:44.111Z"}
+{"level":"info","message":"GET /memberships 304 - - 48.062 ms - correlationId: cf258456-6f17-45dc-9bca-0470aafb0c65","timestamp":"2025-03-16T06:50:44.958Z"}
+{"level":"info","message":"GET /customers 304 - - 95.479 ms - correlationId: aa656316-48e1-4b09-89c7-026cb16f8b41","timestamp":"2025-03-16T06:50:46.687Z"}
+{"level":"info","message":"GET /categories 304 - - 46.982 ms - correlationId: b94a0c10-f5ff-4484-a038-90e367fd08a2","timestamp":"2025-03-16T06:50:48.835Z"}
+{"level":"info","message":"GET /categories 304 - - 51.472 ms - correlationId: 16c30896-1615-4999-9609-2dbe9a41bbde","timestamp":"2025-03-16T06:50:51.183Z"}
+{"level":"info","message":"GET /faqs 304 - - 59.262 ms - correlationId: d07df756-b7e2-47f9-9316-31ede3a48f99","timestamp":"2025-03-16T06:50:52.511Z"}
+{"level":"info","message":"GET /faqs 304 - - 47.849 ms - correlationId: f6a6a11f-d4c7-4c6a-bad6-43439c32ebc8","timestamp":"2025-03-16T06:50:56.239Z"}
+{"level":"info","message":"GET /faqs/67c7d4f6cdd6907abf6544e6 200 320 - 49.214 ms - correlationId: c1801814-000a-4f8a-95b6-dac249d6c233","timestamp":"2025-03-16T06:50:57.392Z"}
+{"level":"info","message":"GET /faqs 304 - - 48.814 ms - correlationId: d3718ae0-f98f-4499-b1d4-86921bc3cf1d","timestamp":"2025-03-16T06:50:59.423Z"}
+{"level":"info","message":"GET /faqs/67c7d4f6cdd6907abf6544e6 304 - - 49.010 ms - correlationId: 81c5c6eb-d907-4303-b513-9cd9bab812b3","timestamp":"2025-03-16T06:51:01.383Z"}
+{"level":"info","message":"GET /blogs 304 - - 194.578 ms - correlationId: 98f715ee-c496-46f0-86ba-d113d38e8654","timestamp":"2025-03-16T06:51:04.094Z"}
+{"level":"info","message":"GET /categories 304 - - 48.995 ms - correlationId: d6217392-e172-4836-8781-a083cbf4da46","timestamp":"2025-03-16T06:51:06.299Z"}
+{"level":"info","message":"GET /categories 304 - - 48.223 ms - correlationId: cf291699-2cb8-45c8-b01a-b2ec236bd952","timestamp":"2025-03-16T06:56:01.931Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-16T07:00:00.960Z"}
+{"level":"info","message":"GET /categories 304 - - 58.710 ms - correlationId: e94cd72e-01ba-4c50-ab79-2896dd8b1bd3","timestamp":"2025-03-16T07:05:44.984Z"}
+{"level":"info","message":"GET /categories 304 - - 52.617 ms - correlationId: 25913ea5-6474-4bbc-904c-a271fa060c5b","timestamp":"2025-03-16T07:17:23.579Z"}
+{"level":"info","message":"GET /categories 304 - - 46.911 ms - correlationId: 91583826-b835-4564-b4a2-4bd5e93bf46d","timestamp":"2025-03-16T07:22:33.751Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.308 ms - correlationId: 4a20a1a5-6e7d-4ab4-a90f-2966dd5bd6ea","timestamp":"2025-03-16T07:26:20.152Z"}
+{"level":"info","message":"GET /customers 304 - - 98.190 ms - correlationId: 0d3e72f3-46cb-4f89-bec5-e01431106a30","timestamp":"2025-03-16T07:28:54.524Z"}
+{"level":"info","message":"GET /blogs 304 - - 205.406 ms - correlationId: ac19de8d-d6b8-4dd4-90ec-4fc2580129f9","timestamp":"2025-03-16T07:29:04.582Z"}
+{"level":"info","message":"GET /categories 304 - - 48.199 ms - correlationId: 149c15d4-88c9-4f8f-ad11-9fc249f76c8c","timestamp":"2025-03-16T07:29:06.167Z"}
+{"level":"info","message":"GET /blogs 304 - - 728.718 ms - correlationId: 5f750c85-ad21-49b6-927a-afab0415c421","timestamp":"2025-03-16T07:29:10.526Z"}
+{"level":"info","message":"GET /categories 304 - - 56.637 ms - correlationId: 34fd76eb-3433-435b-9448-17cd4d5167d9","timestamp":"2025-03-16T07:29:11.603Z"}
+{"level":"info","message":"GET /blogs 304 - - 208.624 ms - correlationId: 6135b832-7b94-4ad5-bc51-f4085b94e990","timestamp":"2025-03-16T07:29:19.548Z"}
+{"level":"info","message":"GET /faqs 304 - - 48.629 ms - correlationId: a20a7f68-52cc-48cb-9b9d-21307ebb3990","timestamp":"2025-03-16T07:29:36.511Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: XkmvGBXmKDp6ICtZAAAP","timestamp":"2025-03-16T07:29:38.062Z"}
+{"level":"info","message":"GET /messages 304 - - 49.459 ms - correlationId: 9eee3833-33c9-4ccc-b63f-e526df3c98ff","timestamp":"2025-03-16T07:29:38.096Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T07:32:38.642Z"}
+{"level":"info","message":"GET /customers 304 - - 99.773 ms - correlationId: a52438e1-ab9f-4c9a-a7af-233ba93d0c78","timestamp":"2025-03-16T07:32:38.751Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544c9 200 456 - 50.209 ms - correlationId: 94d82822-8bbf-44a3-8427-8ddced55b4d6","timestamp":"2025-03-16T07:32:40.168Z"}
+{"level":"info","message":"GET /memberships 304 - - 52.595 ms - correlationId: b541deda-7228-4122-9d7f-d841ab152922","timestamp":"2025-03-16T07:32:40.171Z"}
+{"level":"info","message":"GET /orders/customer/cus3 200 324 - 49.710 ms - correlationId: c99d503d-b194-4ffd-aef8-f6468fbd2622","timestamp":"2025-03-16T07:32:40.224Z"}
+{"level":"info","message":"GET /customers 304 - - 96.018 ms - correlationId: 8cd5a9bd-37ce-4877-8231-62b24fc78550","timestamp":"2025-03-16T07:32:42.233Z"}
+{"level":"info","message":"GET /memberships 304 - - 49.312 ms - correlationId: 78ebb724-4e07-46e3-a438-3353678cf822","timestamp":"2025-03-16T07:32:43.183Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544cb 200 464 - 51.462 ms - correlationId: 91acda2b-ec71-4480-86fe-c68af651c773","timestamp":"2025-03-16T07:32:43.184Z"}
+{"level":"info","message":"GET /orders/customer/cus5 200 254 - 50.807 ms - correlationId: 6f0e2562-2388-44eb-8028-6fd2ea1c7211","timestamp":"2025-03-16T07:32:43.240Z"}
+{"level":"info","message":"GET /messages 304 - - 61.263 ms - correlationId: 1113c11e-130d-4cf5-8de2-a103ff352771","timestamp":"2025-03-16T07:33:30.306Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: 03Lw1v4Z1GsnH1qNAAAR","timestamp":"2025-03-16T07:34:14.790Z"}
+{"level":"info","message":"GET /messages 304 - - 50.095 ms - correlationId: b44dd97f-5c70-4e06-ac88-b0c0b7fbb808","timestamp":"2025-03-16T07:34:14.804Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T07:34:29.827Z"}
+{"level":"info","message":"GET /customers 304 - - 101.359 ms - correlationId: b1bea047-72a2-4dce-a15e-071ce07819cd","timestamp":"2025-03-16T07:34:29.947Z"}
+{"level":"info","message":"GET /memberships 304 - - 50.264 ms - correlationId: 242a71bf-0bd1-4ef1-821e-fa9d6de61055","timestamp":"2025-03-16T07:34:35.807Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544e4 200 461 - 50.259 ms - correlationId: f7f96d36-37ee-4357-8c86-86bf66e88ea0","timestamp":"2025-03-16T07:34:35.808Z"}
+{"level":"info","message":"GET /orders/customer/cus30 404 72 - 54.987 ms - correlationId: 8e02d060-deda-48a6-9eb5-7a3e070c7a3c","timestamp":"2025-03-16T07:34:35.868Z"}
+{"level":"info","message":"GET /customers 304 - - 101.282 ms - correlationId: 2b98245c-5325-422b-9a50-735f518ed263","timestamp":"2025-03-16T07:34:38.071Z"}
+{"level":"info","message":"GET /memberships 304 - - 48.986 ms - correlationId: d881398e-b129-430c-8036-ced18aa66cfd","timestamp":"2025-03-16T07:34:41.979Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544e0 200 455 - 49.418 ms - correlationId: 35cb9539-ba60-4abe-b512-e7ff049c3994","timestamp":"2025-03-16T07:34:41.980Z"}
+{"level":"info","message":"GET /orders/customer/cus26 404 72 - 51.110 ms - correlationId: dd7217e7-347f-450f-816e-c2c8a3dd85d9","timestamp":"2025-03-16T07:34:42.038Z"}
+{"level":"info","message":"GET /messages 304 - - 49.991 ms - correlationId: 6e8a9973-05ad-42b7-b1a7-d4675ed17fa4","timestamp":"2025-03-16T07:35:11.908Z"}
+{"level":"info","message":"GET /messages 304 - - 52.051 ms - correlationId: 359ff158-bb19-4f5d-9a4d-1ddc8558916d","timestamp":"2025-03-16T07:39:01.820Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: rrEbENR0lCsvDP26AAAT","timestamp":"2025-03-16T07:39:49.395Z"}
+{"level":"info","message":"GET /messages 304 - - 52.702 ms - correlationId: d29123aa-6f87-4d46-a189-ad0562494004","timestamp":"2025-03-16T07:39:49.400Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T07:43:02.765Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.504 ms - correlationId: 177bd0ea-2a55-42af-8202-5b7521482db7","timestamp":"2025-03-16T07:43:02.843Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.145 ms - correlationId: 77ecbe9b-28d2-4d8f-9407-dcb6fc8549ee","timestamp":"2025-03-16T07:45:41.348Z"}
+{"level":"info","message":"GET /categories 304 - - 52.358 ms - correlationId: 18e2bdbd-a2af-4fb0-8392-4c45ddbc8077","timestamp":"2025-03-16T07:45:46.134Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.593 ms - correlationId: 1b96ce5a-fc6e-49ff-8cb9-44a963cd0ef4","timestamp":"2025-03-16T07:45:51.861Z"}
+{"level":"info","message":"GET /customers 304 - - 114.084 ms - correlationId: 28861e87-96a8-4538-be59-46150ed27e39","timestamp":"2025-03-16T07:45:53.473Z"}
+{"level":"info","message":"GET /messages 304 - - 54.575 ms - correlationId: 6bde295d-ab0e-40ad-a680-1969e91f8c48","timestamp":"2025-03-16T07:45:55.383Z"}
+{"level":"info","message":"GET /categories 304 - - 51.316 ms - correlationId: cc5152b7-98ff-489e-a33f-285472911db9","timestamp":"2025-03-16T07:46:00.626Z"}
+{"level":"info","message":"GET /blogs 304 - - 202.320 ms - correlationId: 5db5b10b-f593-4e7f-90ba-da86dd87d913","timestamp":"2025-03-16T07:46:01.580Z"}
+{"level":"info","message":"GET /customers 304 - - 100.206 ms - correlationId: 504ba6c2-41a5-4520-998e-4d467df632c2","timestamp":"2025-03-16T07:46:03.227Z"}
+{"level":"info","message":"GET /blogs 304 - - 205.309 ms - correlationId: 976c8a6c-a4ab-473c-82f3-34e6c8c0ce17","timestamp":"2025-03-16T07:46:08.036Z"}
+{"level":"info","message":"GET /categories 304 - - 52.035 ms - correlationId: 85fbff86-adc5-4cd1-98b3-2bc1d47e1fce","timestamp":"2025-03-16T07:46:08.970Z"}
+{"level":"info","message":"GET /faqs 304 - - 47.901 ms - correlationId: c24860b4-2a03-4968-b507-b3f1f65d365e","timestamp":"2025-03-16T07:46:11.426Z"}
+{"level":"info","message":"GET /messages 304 - - 55.709 ms - correlationId: 920aa710-be29-454e-b0fd-69fe8286cb14","timestamp":"2025-03-16T07:46:14.263Z"}
+{"level":"info","message":"GET /blogs 304 - - 200.090 ms - correlationId: d3203839-bf24-47af-97d4-d92770bd31a2","timestamp":"2025-03-16T07:46:39.416Z"}
+{"level":"info","message":"GET /faqs 304 - - 54.258 ms - correlationId: 27644d5d-61db-47ff-89c1-ce9f56b7afac","timestamp":"2025-03-16T07:46:40.451Z"}
+{"level":"info","message":"GET /messages 304 - - 50.964 ms - correlationId: a3f81f9c-731e-4f62-8ff3-0846731a2328","timestamp":"2025-03-16T07:46:59.706Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: JrqRLlOfTGQmQFsyAAAV","timestamp":"2025-03-16T07:47:44.725Z"}
+{"level":"info","message":"GET /messages 304 - - 52.131 ms - correlationId: 1d1a3c91-3033-4e07-a305-4faf389e761b","timestamp":"2025-03-16T07:47:44.743Z"}
+{"correlationId":"socket","level":"info","message":"Đã lưu tin nhắn vào MongoDB [object Object]","timestamp":"2025-03-16T07:47:57.848Z"}
+{"correlationId":"socket","level":"warn","message":"Không tìm thấy socket ID cho người dùng: Khách hàng","timestamp":"2025-03-16T07:47:57.849Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T07:48:14.265Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: MBgDRqEMSaTZH7ThAAAX","timestamp":"2025-03-16T07:48:14.498Z"}
+{"level":"info","message":"GET /messages 200 4472 - 57.881 ms - correlationId: 05362808-0faa-479e-ba3a-ba99b9abec3b","timestamp":"2025-03-16T07:48:14.519Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-16T08:31:21.434Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-16T08:31:22.639Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c6888675sm54599095ad.51 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-16T08:31:23.031Z"}
+{"level":"info","message":"GET /customers 304 - - 125.915 ms - correlationId: 2b74403f-3d6e-48e9-a3a3-6feca78c2dea","timestamp":"2025-03-16T08:34:51.842Z"}
+{"level":"info","message":"GET /blogs 304 - - 216.870 ms - correlationId: bbe884f7-a0a4-45d7-b2cc-d7eb38301d05","timestamp":"2025-03-16T08:34:55.523Z"}
+{"level":"info","message":"GET /categories 304 - - 55.223 ms - correlationId: 3881dd9e-0006-4e88-8e6f-dda6f163f9b9","timestamp":"2025-03-16T08:34:56.384Z"}
+{"level":"info","message":"GET /customers 304 - - 153.537 ms - correlationId: 602de506-f1ba-43a4-937d-4c6b4f3055ba","timestamp":"2025-03-16T08:34:58.621Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: uP4mc_snzRC_8qGYAAAB","timestamp":"2025-03-16T08:35:01.122Z"}
+{"level":"info","message":"GET /messages 304 - - 70.703 ms - correlationId: 6cbb938a-66ba-4529-8fe5-3d021b37870e","timestamp":"2025-03-16T08:35:01.147Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T08:35:04.446Z"}
+{"level":"info","message":"GET /customers 304 - - 108.877 ms - correlationId: b1557369-e701-414d-b7cd-3230872d6616","timestamp":"2025-03-16T08:35:04.569Z"}
+{"level":"info","message":"GET /blogs 304 - - 221.757 ms - correlationId: b305522b-3b23-443d-a3a8-1a4e1b259fc4","timestamp":"2025-03-16T08:35:07.250Z"}
+{"level":"info","message":"GET /categories 304 - - 53.372 ms - correlationId: be6f6450-209f-4820-aa11-a7e66fd1df16","timestamp":"2025-03-16T08:35:08.167Z"}
+{"level":"info","message":"GET /blogs 304 - - 217.471 ms - correlationId: ad467393-2850-4f22-8695-13a9f5e81238","timestamp":"2025-03-16T08:37:29.715Z"}
+{"level":"info","message":"GET /categories 304 - - 52.400 ms - correlationId: b39616a6-aef6-4a66-8b8a-b2401e5a3a65","timestamp":"2025-03-16T08:37:30.735Z"}
+{"level":"info","message":"GET /blogs 304 - - 216.086 ms - correlationId: 101ec0c3-9256-4859-8506-f988b5ec16af","timestamp":"2025-03-16T08:38:27.017Z"}
+{"level":"info","message":"GET /customers 304 - - 118.046 ms - correlationId: 9497ad68-6461-4b45-8683-c5f51eafdccd","timestamp":"2025-03-16T08:38:30.035Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.907 ms - correlationId: 6b5b4a37-2177-42e7-8f73-e8252e40260c","timestamp":"2025-03-16T08:38:33.672Z"}
+{"level":"info","message":"GET /blogs 304 - - 214.865 ms - correlationId: b9f94600-87e5-45a5-847f-a03ce0682bf0","timestamp":"2025-03-16T08:38:41.617Z"}
+{"level":"info","message":"GET /faqs 304 - - 53.702 ms - correlationId: b0186187-351b-4485-9ddf-9077ee1a51ce","timestamp":"2025-03-16T08:38:57.807Z"}
+{"level":"info","message":"GET /customers 304 - - 109.322 ms - correlationId: 7d0373fe-936a-44c1-9357-7ff01d43010d","timestamp":"2025-03-16T08:39:03.464Z"}
+{"level":"info","message":"GET /blogs 304 - - 219.765 ms - correlationId: 13f7699b-0953-43d3-a824-d264d8b79cf5","timestamp":"2025-03-16T08:40:10.648Z"}
+{"level":"info","message":"GET /customers 304 - - 104.929 ms - correlationId: f019162d-a09c-4cba-b0e4-0f55cc6fe1a8","timestamp":"2025-03-16T08:40:11.844Z"}
+{"level":"info","message":"GET /customers 304 - - 113.868 ms - correlationId: fec60fd4-8aa2-4144-865a-f4302749f928","timestamp":"2025-03-16T08:41:08.697Z"}
+{"level":"info","message":"GET /faqs 304 - - 56.834 ms - correlationId: 679ef4fc-2b28-4a3e-a2da-2a0466c04911","timestamp":"2025-03-16T08:42:28.935Z"}
+{"level":"info","message":"GET /categories 304 - - 53.111 ms - correlationId: 9354def7-35e2-4220-a647-d5a317bd0bdd","timestamp":"2025-03-16T08:42:31.887Z"}
+{"level":"info","message":"GET /customers 304 - - 103.969 ms - correlationId: bf42fd01-4f20-4188-900c-70dd3ff43121","timestamp":"2025-03-16T08:42:33.715Z"}
+{"level":"info","message":"GET /blogs 304 - - 224.449 ms - correlationId: dcdfd1e7-5332-4192-8e30-8d57cecb4bb1","timestamp":"2025-03-16T08:42:49.412Z"}
+{"level":"info","message":"GET /categories 304 - - 53.463 ms - correlationId: 99325641-867d-4559-aa29-fc2639a2bb0a","timestamp":"2025-03-16T08:42:51.054Z"}
+{"level":"info","message":"GET /customers 304 - - 108.996 ms - correlationId: 696a7506-557a-40cf-bcf6-bfaa36e16022","timestamp":"2025-03-16T08:42:53.039Z"}
+{"level":"info","message":"GET /blogs 304 - - 212.119 ms - correlationId: 9af51cc9-1f02-400f-9985-29ef8c8f44f1","timestamp":"2025-03-16T08:44:15.985Z"}
+{"level":"info","message":"GET /categories 304 - - 53.534 ms - correlationId: f1034577-7ad7-4457-8a12-25f9f1dd16ca","timestamp":"2025-03-16T08:44:16.607Z"}
+{"level":"info","message":"GET /faqs 304 - - 54.783 ms - correlationId: 4c846214-71ef-4082-b465-62ac5d363766","timestamp":"2025-03-16T08:44:22.559Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: IwxuRYqpAVwJ65HfAAAD","timestamp":"2025-03-16T08:44:24.517Z"}
+{"level":"info","message":"GET /messages 304 - - 56.713 ms - correlationId: e413326f-750c-47ef-9309-64f10fff23e0","timestamp":"2025-03-16T08:44:24.549Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T08:44:25.868Z"}
+{"level":"info","message":"GET /faqs 304 - - 53.706 ms - correlationId: 4a41d834-1f94-4f69-982a-ccb3413ebbc4","timestamp":"2025-03-16T08:44:25.935Z"}
+{"level":"info","message":"GET /categories 304 - - 55.132 ms - correlationId: b22a9abf-d363-4da7-bdcc-c1d51fefbb21","timestamp":"2025-03-16T08:44:27.470Z"}
+{"level":"info","message":"GET /blogs 304 - - 208.871 ms - correlationId: e69dd438-51c4-4fad-aeab-fb4c521f8395","timestamp":"2025-03-16T08:44:28.633Z"}
+{"level":"info","message":"GET /categories 304 - - 57.175 ms - correlationId: 5676e6af-3f35-4871-b9a6-a453bda0416e","timestamp":"2025-03-16T08:44:33.129Z"}
+{"level":"info","message":"GET /customers 304 - - 106.623 ms - correlationId: 6967e3d3-48aa-4cc5-b02f-3a4303319a24","timestamp":"2025-03-16T08:44:40.131Z"}
+{"level":"info","message":"GET /memberships 304 - - 52.676 ms - correlationId: f0c77489-c961-48ca-963e-aeaa6fa3e163","timestamp":"2025-03-16T08:45:51.370Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544c9 304 - - 451.632 ms - correlationId: ad6fff24-2191-4744-aa38-49bb458f45f2","timestamp":"2025-03-16T08:45:51.772Z"}
+{"level":"info","message":"GET /orders/customer/cus3 200 190 - 49.703 ms - correlationId: 9f5d6c67-a16d-4998-ba9d-f640a1b3838a","timestamp":"2025-03-16T08:45:51.853Z"}
+{"level":"info","message":"GET /customers 304 - - 104.050 ms - correlationId: 880e99a7-ff7f-4026-bfd8-6b0e55b3f1e5","timestamp":"2025-03-16T08:45:57.798Z"}
+{"level":"info","message":"GET /customers 304 - - 100.899 ms - correlationId: ef603f2e-2f8b-4016-b146-3f11284a5b96","timestamp":"2025-03-16T08:49:48.380Z"}
+{"level":"info","message":"GET /customers 304 - - 109.166 ms - correlationId: 7696f511-cde7-45ae-bf30-ca9705e85269","timestamp":"2025-03-16T08:49:52.978Z"}
+{"level":"info","message":"GET /orders/customer/cus1 200 208 - 52.667 ms - correlationId: 667ee36d-7db0-46a3-bacc-f549620671bf","timestamp":"2025-03-16T08:49:55.213Z"}
+{"level":"info","message":"GET /orders/customer/cus_1741416910230 404 72 - 56.281 ms - correlationId: 31349121-947f-43f6-9489-de4984fa5ad4","timestamp":"2025-03-16T08:50:09.343Z"}
+{"level":"info","message":"DELETE /customers/67cbe9cee80243809ef18fd8 200 44 - 62.267 ms - correlationId: 8b210a33-4da1-477b-979f-a47ac557ed6b","timestamp":"2025-03-16T08:50:09.418Z"}
+{"level":"info","message":"GET /customers 200 15477 - 100.657 ms - correlationId: 10095051-10da-4a19-8333-0ef2f0e96e11","timestamp":"2025-03-16T08:50:11.392Z"}
+{"level":"info","message":"GET /blogs 304 - - 200.876 ms - correlationId: c1fec593-7802-4ee7-88c4-9c98c1f5f354","timestamp":"2025-03-16T08:50:22.093Z"}
+{"level":"info","message":"GET /categories 304 - - 51.129 ms - correlationId: 4b82e421-32b5-4c9e-a2e9-94688b472596","timestamp":"2025-03-16T08:50:23.176Z"}
+{"level":"info","message":"GET /customers 304 - - 98.196 ms - correlationId: 7649210a-e9f1-484f-9144-01fac7ae7e88","timestamp":"2025-03-16T08:50:34.541Z"}
+{"level":"info","message":"GET /blogs 304 - - 208.167 ms - correlationId: f6e193ff-d728-4855-a3eb-2f376a7434d4","timestamp":"2025-03-16T08:50:50.281Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.933 ms - correlationId: 435d9cba-015b-4d3b-9f87-afd5bf606bb1","timestamp":"2025-03-16T08:50:53.268Z"}
+{"level":"info","message":"GET /customers 304 - - 101.046 ms - correlationId: b7319d5f-bd21-4162-8d82-c13f6710c13b","timestamp":"2025-03-16T08:50:58.798Z"}
+{"level":"info","message":"GET /fashions 404 147 - 3.924 ms - correlationId: 8a4140f8-09ce-486e-96f1-4f78db1a0efe","timestamp":"2025-03-16T08:52:18.971Z"}
+{"level":"info","message":"GET /customers 304 - - 100.541 ms - correlationId: 94702736-754f-4450-b9dd-078fb2aaa38a","timestamp":"2025-03-16T08:52:25.845Z"}
+{"level":"info","message":"GET /customers 304 - - 103.722 ms - correlationId: d522be9a-1eb1-430e-8389-23e2f2ece78e","timestamp":"2025-03-16T08:55:09.220Z"}
+{"level":"info","message":"GET /customers 304 - - 97.840 ms - correlationId: 9a534a0e-beb3-4526-abe1-38941e0d43fe","timestamp":"2025-03-16T08:58:36.287Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-16T09:00:00.251Z"}
+{"level":"info","message":"GET /customers 304 - - 107.549 ms - correlationId: 231ef4ac-e1b0-4b73-be99-7d52da480de8","timestamp":"2025-03-16T09:00:52.330Z"}
+{"level":"info","message":"GET /faqs 304 - - 55.351 ms - correlationId: 80abc447-436e-4289-91ca-d433f4fe53a8","timestamp":"2025-03-16T09:10:11.688Z"}
+{"level":"info","message":"GET /customers 304 - - 99.578 ms - correlationId: ef020a6a-be21-4852-8834-c8296ee813d1","timestamp":"2025-03-16T09:10:14.419Z"}
+{"level":"info","message":"GET /customers 304 - - 101.869 ms - correlationId: 094e46d4-b6af-4fea-87da-5b61a8397ff8","timestamp":"2025-03-16T09:24:36.758Z"}
+{"level":"info","message":"GET /customers 304 - - 101.388 ms - correlationId: c5749180-e897-4b15-80d7-63fde5b95560","timestamp":"2025-03-16T09:24:38.634Z"}
+{"level":"info","message":"GET /customers 304 - - 108.157 ms - correlationId: da6c659e-812f-476f-b7ab-855c1a938ec4","timestamp":"2025-03-16T09:28:56.037Z"}
+{"level":"info","message":"GET /customers 304 - - 100.562 ms - correlationId: 25e29597-37d6-41ef-b3ef-7349f49dc888","timestamp":"2025-03-16T09:35:54.421Z"}
+{"level":"info","message":"GET /blogs 304 - - 208.603 ms - correlationId: f2d833ad-35ec-4d1d-b707-cd34e76161b6","timestamp":"2025-03-16T09:45:15.217Z"}
+{"level":"info","message":"GET /blogs 304 - - 197.207 ms - correlationId: 53fd44fc-1c06-4bb2-878d-fa97f8280f9b","timestamp":"2025-03-16T09:46:26.047Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-16T10:00:01.048Z"}
+{"level":"info","message":"GET /blogs 304 - - 205.532 ms - correlationId: 8829a7a0-47e3-42a2-b834-69d356009b93","timestamp":"2025-03-16T10:04:34.954Z"}
+{"level":"info","message":"GET /blogs 304 - - 207.121 ms - correlationId: d8b87836-4f8e-470a-8b74-30dd3337e8f3","timestamp":"2025-03-16T10:05:07.306Z"}
+{"level":"info","message":"GET /blogs 304 - - 228.248 ms - correlationId: 494548ee-d329-42da-ac78-12021e9e101f","timestamp":"2025-03-16T10:05:13.204Z"}
+{"level":"info","message":"GET /blogs 304 - - 196.319 ms - correlationId: 88cbecc5-ed44-43e8-9f51-fd7013edfc48","timestamp":"2025-03-16T10:09:07.711Z"}
+{"level":"info","message":"GET /blogs 304 - - 213.260 ms - correlationId: e9fe6ee6-6655-40d6-8571-cf59e3075193","timestamp":"2025-03-16T10:10:26.341Z"}
+{"level":"info","message":"GET /customers 304 - - 104.453 ms - correlationId: 26cd5a64-72a0-401c-9da9-0910af0ea28d","timestamp":"2025-03-16T10:10:45.962Z"}
+{"level":"info","message":"GET /blogs 304 - - 207.076 ms - correlationId: 26560934-204c-4c3c-87fe-58f390a08608","timestamp":"2025-03-16T10:11:26.359Z"}
+{"level":"info","message":"GET /customers 304 - - 101.736 ms - correlationId: 1835c2cf-a676-495d-ae02-22c6d198effe","timestamp":"2025-03-16T10:11:29.492Z"}
+{"level":"info","message":"GET /blogs 304 - - 197.926 ms - correlationId: bd7eee8c-a411-4152-a847-f3697c24a168","timestamp":"2025-03-16T10:11:34.571Z"}
+{"level":"info","message":"GET /blogs 304 - - 211.485 ms - correlationId: 36682158-03ef-4460-851b-5aa207cabd65","timestamp":"2025-03-16T10:11:58.620Z"}
+{"level":"info","message":"GET /categories 304 - - 51.271 ms - correlationId: 64037fb0-b500-4ace-a9fc-eb07e3865725","timestamp":"2025-03-16T10:12:01.677Z"}
+{"level":"info","message":"GET /faqs 304 - - 60.791 ms - correlationId: 5c9da475-ad69-4172-83db-b1f862efdc79","timestamp":"2025-03-16T10:12:03.930Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: MsBCGYxD1EHxYbu8AAAF","timestamp":"2025-03-16T10:12:06.103Z"}
+{"level":"info","message":"GET /messages 304 - - 67.165 ms - correlationId: 9bd064d9-68fc-490a-97c3-d65886494a70","timestamp":"2025-03-16T10:12:06.132Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T10:12:16.919Z"}
+{"level":"info","message":"GET /customers 304 - - 101.207 ms - correlationId: 24fd7bd6-2c9f-4368-a2bd-3e1287d49d6f","timestamp":"2025-03-16T10:12:17.037Z"}
+{"level":"info","message":"GET /memberships 304 - - 47.894 ms - correlationId: bf58b79a-10f2-4283-8fa4-d735d646c038","timestamp":"2025-03-16T10:12:19.925Z"}
+{"level":"info","message":"GET /customers 304 - - 97.656 ms - correlationId: fef9234b-9dd1-427f-b6ae-74168fa047e7","timestamp":"2025-03-16T10:12:24.930Z"}
+{"level":"info","message":"GET /memberships 304 - - 50.448 ms - correlationId: 5cd30089-2e0e-4308-8225-1b81ec13cf07","timestamp":"2025-03-16T10:12:31.205Z"}
+{"level":"info","message":"GET /customers 304 - - 98.247 ms - correlationId: 434e1abe-1ded-4fac-95eb-df2acab42b54","timestamp":"2025-03-16T10:12:35.081Z"}
+{"level":"info","message":"GET /memberships 304 - - 47.833 ms - correlationId: 690bd7dd-f884-4937-9db8-5491fac26345","timestamp":"2025-03-16T10:12:39.512Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544c7 200 409 - 58.982 ms - correlationId: 5379da66-299f-4cde-a615-c27c4460256d","timestamp":"2025-03-16T10:12:39.527Z"}
+{"level":"info","message":"GET /orders/customer/cus1 304 - - 56.357 ms - correlationId: ffc506d1-2aa8-495f-b95b-018a757dc1db","timestamp":"2025-03-16T10:12:39.594Z"}
+{"level":"info","message":"GET /customers 304 - - 108.122 ms - correlationId: 4ceb7da5-04a5-458d-8085-2794b65e82ad","timestamp":"2025-03-16T10:12:50.323Z"}
+{"level":"info","message":"GET /categories 304 - - 54.716 ms - correlationId: 37552720-3a33-4325-8dde-7a75fab01823","timestamp":"2025-03-16T10:13:19.293Z"}
+{"level":"info","message":"GET /blogs 304 - - 208.376 ms - correlationId: 77197d82-40b6-4137-96b5-cc03e2e77e02","timestamp":"2025-03-16T10:13:20.685Z"}
+{"level":"info","message":"GET /faqs 304 - - 53.727 ms - correlationId: 5957f3aa-4d8a-4465-9129-d17480b7875c","timestamp":"2025-03-16T10:13:22.968Z"}
+{"level":"info","message":"GET /messages 304 - - 54.323 ms - correlationId: c28557dd-db3f-410a-982c-eacb24c405be","timestamp":"2025-03-16T10:13:27.057Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.765 ms - correlationId: d57ec4d9-2516-4101-94c2-d8e652f4c293","timestamp":"2025-03-16T10:13:54.764Z"}
+{"level":"info","message":"GET /messages 304 - - 52.547 ms - correlationId: 16eb8b1c-7304-454b-8d4b-3f82ed5c7ad8","timestamp":"2025-03-16T10:13:55.476Z"}
+{"level":"info","message":"GET /api/productstocks 200 8995 - 78.064 ms - correlationId: a7af9155-eb03-486d-afac-93320b52ef96","timestamp":"2025-03-16T10:15:16.314Z"}
+{"level":"info","message":"GET /customers 304 - - 101.613 ms - correlationId: 2bf89a6b-6afb-478b-9978-49d1eacfd9d5","timestamp":"2025-03-16T10:15:20.435Z"}
+{"level":"info","message":"GET /memberships 304 - - 52.791 ms - correlationId: 515636c2-c5bb-4db7-a67e-726a532d39e3","timestamp":"2025-03-16T10:15:24.351Z"}
+{"level":"info","message":"GET /blogs 304 - - 212.982 ms - correlationId: 8703aedf-c011-4988-a3bd-0caa04194448","timestamp":"2025-03-16T10:16:14.880Z"}
+{"level":"info","message":"GET /categories 304 - - 54.278 ms - correlationId: 18afedcb-f26f-4353-bf92-37488978978c","timestamp":"2025-03-16T10:16:15.865Z"}
+{"level":"info","message":"GET /categories 304 - - 50.333 ms - correlationId: 70cb71fc-4536-4824-bc2b-71cd1760c9a5","timestamp":"2025-03-16T10:19:18.382Z"}
+{"level":"info","message":"GET /customers 304 - - 106.905 ms - correlationId: 98e7fab3-b903-4c16-bf90-b7176a133100","timestamp":"2025-03-16T10:22:22.598Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: nwDMpFXzHyjAu0faAAAH","timestamp":"2025-03-16T10:22:28.301Z"}
+{"level":"info","message":"GET /messages 304 - - 56.910 ms - correlationId: b4e3c711-fa8e-42a0-bc53-dec41946eff3","timestamp":"2025-03-16T10:22:28.335Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T10:22:31.395Z"}
+{"level":"info","message":"GET /blogs 304 - - 209.921 ms - correlationId: a17ce6c9-fa41-4195-b298-dd990df31375","timestamp":"2025-03-16T10:22:31.620Z"}
+{"level":"info","message":"GET /categories 304 - - 53.750 ms - correlationId: 2130dc90-20b8-4ac7-b6b2-f7ac44e4c76d","timestamp":"2025-03-16T10:22:32.991Z"}
+{"level":"info","message":"GET /blogs 304 - - 227.028 ms - correlationId: 0c675e06-21d3-4071-a533-bbaf5508f745","timestamp":"2025-03-16T10:22:35.760Z"}
+{"level":"info","message":"GET /categories 304 - - 52.791 ms - correlationId: 03caf7e5-597b-4616-87fd-f5b2030a11a7","timestamp":"2025-03-16T10:22:37.962Z"}
+{"level":"info","message":"GET /blogs 304 - - 212.627 ms - correlationId: e523f31b-bca6-4ad7-9266-a626505bb5f1","timestamp":"2025-03-16T10:22:39.107Z"}
+{"level":"info","message":"GET /categories 304 - - 53.305 ms - correlationId: dc1e70fd-57ee-4958-8067-27f2db1030d3","timestamp":"2025-03-16T10:22:41.226Z"}
+{"level":"info","message":"GET /blogs 304 - - 218.665 ms - correlationId: 81b5ed9f-84aa-4c92-bd8b-4c548ba8201c","timestamp":"2025-03-16T10:22:43.319Z"}
+{"level":"info","message":"GET /customers 304 - - 106.790 ms - correlationId: b7b82789-3270-49ac-96a4-b91c3afc8585","timestamp":"2025-03-16T10:22:45.216Z"}
+{"level":"info","message":"GET /categories 304 - - 53.631 ms - correlationId: 972ceaba-eb94-4da9-bdfb-5f6218a279a2","timestamp":"2025-03-16T10:22:46.251Z"}
+{"level":"info","message":"GET /faqs 304 - - 54.767 ms - correlationId: 95990c6e-03f7-4914-b84c-58c3cbdc7a1f","timestamp":"2025-03-16T10:22:47.363Z"}
+{"level":"info","message":"GET /customers 304 - - 103.559 ms - correlationId: c0a3997f-e3b0-42fb-8c7a-937f033727ce","timestamp":"2025-03-16T10:23:48.273Z"}
+{"level":"info","message":"GET /faqs 304 - - 53.081 ms - correlationId: e7d70d2d-a2d7-45ed-a0c7-822633c5912f","timestamp":"2025-03-16T10:24:33.189Z"}
+{"level":"info","message":"GET /customers 304 - - 106.784 ms - correlationId: 7f26bdcf-3a6b-457f-9d1a-067608eff6d3","timestamp":"2025-03-16T10:24:53.830Z"}
+{"level":"info","message":"GET /faqs 304 - - 50.845 ms - correlationId: 85aa1be5-a39b-420e-9dab-7a208a08fee7","timestamp":"2025-03-16T10:24:56.050Z"}
+{"level":"info","message":"GET /customers 304 - - 101.979 ms - correlationId: 652d8b7d-5e0c-4b0c-8416-ae09e72110bd","timestamp":"2025-03-16T10:27:29.381Z"}
+{"level":"info","message":"GET /faqs 304 - - 99.703 ms - correlationId: 4b52de39-a0ab-4edf-9314-63b29a6c49ac","timestamp":"2025-03-16T10:27:31.171Z"}
+{"level":"info","message":"GET /categories 304 - - 52.866 ms - correlationId: 15b914d7-06c2-431b-9bef-bb587216b9c4","timestamp":"2025-03-16T10:27:32.401Z"}
+{"level":"info","message":"GET /categories 304 - - 49.151 ms - correlationId: 7a14ceea-1cd3-4106-971f-e418df268900","timestamp":"2025-03-16T10:27:44.992Z"}
+{"level":"info","message":"GET /categories 304 - - 50.732 ms - correlationId: cf721d82-8a3e-4b0d-8fa5-3f8603426d25","timestamp":"2025-03-16T10:32:13.584Z"}
+{"level":"info","message":"GET /customers 304 - - 102.887 ms - correlationId: 91205d08-298b-48b2-9ccb-c68a8b3b8f12","timestamp":"2025-03-16T10:32:14.449Z"}
+{"level":"info","message":"GET /memberships 304 - - 50.233 ms - correlationId: bb1ad9c8-e7da-43df-950d-4dbcd9fd6d56","timestamp":"2025-03-16T10:32:15.987Z"}
+{"level":"info","message":"GET /customers 304 - - 105.473 ms - correlationId: ac182381-cd1d-4f3b-9a3a-6fd00c0cbc67","timestamp":"2025-03-16T10:32:20.606Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544ca 200 459 - 46.464 ms - correlationId: 8c48e62d-f092-46c8-b6af-26b105677eb3","timestamp":"2025-03-16T10:32:21.969Z"}
+{"level":"info","message":"GET /memberships 304 - - 54.336 ms - correlationId: e3f1b155-0505-4a32-a1bb-87491e9af590","timestamp":"2025-03-16T10:32:21.976Z"}
+{"level":"info","message":"GET /orders/customer/cus4 200 190 - 52.849 ms - correlationId: b3dd09bf-0e1a-4b8f-b968-069105bf53b2","timestamp":"2025-03-16T10:32:22.035Z"}
+{"level":"info","message":"GET /customers 304 - - 114.032 ms - correlationId: 901da5f1-a39e-4b8e-876a-142578b67039","timestamp":"2025-03-16T10:32:27.288Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.175 ms - correlationId: 0412cd62-d30b-4ba2-819f-14b760f74572","timestamp":"2025-03-16T10:32:30.128Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.126 ms - correlationId: 76e637c9-c188-4f01-9236-db85248f5f45","timestamp":"2025-03-16T10:32:34.240Z"}
+{"level":"info","message":"GET /blogs 304 - - 221.035 ms - correlationId: ee6cd7ca-efc4-471f-915c-8c5140f085dc","timestamp":"2025-03-16T10:32:42.402Z"}
+{"level":"info","message":"GET /categories 304 - - 52.800 ms - correlationId: 340fdda4-a9e7-4a87-8355-9d2eaf2d00ac","timestamp":"2025-03-16T10:32:44.782Z"}
+{"level":"info","message":"GET /categories/67c7d4f6cdd6907abf6544b5 304 - - 57.945 ms - correlationId: 4458ee9e-214f-43f1-a0ed-8b99e6aae6e8","timestamp":"2025-03-16T10:32:48.345Z"}
+{"level":"info","message":"GET /categories 304 - - 52.049 ms - correlationId: 1f77af8f-546d-47d3-9c53-b97a805a59f9","timestamp":"2025-03-16T10:32:49.873Z"}
+{"level":"info","message":"GET /customers 304 - - 114.848 ms - correlationId: 8a0965e9-db11-40c2-8eff-5a9deb9028c9","timestamp":"2025-03-16T10:33:03.561Z"}
+{"level":"info","message":"GET /blogs 304 - - 210.865 ms - correlationId: 6ac9974f-d368-4b22-a5f4-4f4d57ded5d9","timestamp":"2025-03-16T10:33:08.287Z"}
+{"level":"info","message":"GET /categories 304 - - 50.930 ms - correlationId: 78a7616b-4307-4bb7-8099-5ac8f91a54a6","timestamp":"2025-03-16T10:33:09.228Z"}
+{"level":"info","message":"GET /customers 304 - - 107.194 ms - correlationId: dae4adc7-d2d2-4c94-909c-79216c712fb0","timestamp":"2025-03-16T10:33:11.055Z"}
+{"level":"info","message":"GET /blogs 304 - - 208.335 ms - correlationId: 97b2d18d-4a2a-4022-8ced-d75a7ab3038e","timestamp":"2025-03-16T10:33:14.321Z"}
+{"level":"info","message":"GET /categories 304 - - 49.759 ms - correlationId: 2298a8c7-37b4-4b17-b545-67c1f5ff0b52","timestamp":"2025-03-16T10:33:15.171Z"}
+{"level":"info","message":"GET /blogs 304 - - 211.004 ms - correlationId: 0f8e4415-cce5-4398-a1ad-66063f9c670c","timestamp":"2025-03-16T10:33:16.884Z"}
+{"level":"info","message":"GET /customers 304 - - 102.849 ms - correlationId: 861f4eb6-2e22-4585-ae93-2b4837bba577","timestamp":"2025-03-16T10:34:29.623Z"}
+{"level":"info","message":"GET /blogs 304 - - 218.318 ms - correlationId: c4b2faa1-bbf6-4632-aba1-6c4f3669939d","timestamp":"2025-03-16T10:35:18.269Z"}
+{"level":"info","message":"GET /categories 304 - - 51.992 ms - correlationId: 4b6b288d-8fe6-44cd-8cb9-4344f476dbf8","timestamp":"2025-03-16T10:35:19.976Z"}
+{"level":"info","message":"GET /blogs 304 - - 214.250 ms - correlationId: f5a1ee58-b17a-4842-9dfa-e36298275cf7","timestamp":"2025-03-16T10:35:21.847Z"}
+{"level":"info","message":"GET /customers 304 - - 104.404 ms - correlationId: 489035fd-5627-42e5-a9fa-e1d3cd4fd1b0","timestamp":"2025-03-16T10:35:23.196Z"}
+{"level":"info","message":"GET /faqs 304 - - 55.916 ms - correlationId: d4f747ab-74e4-46ad-921d-83d1eb891a55","timestamp":"2025-03-16T10:35:24.347Z"}
+{"level":"info","message":"GET /blogs 304 - - 212.688 ms - correlationId: af419914-7fc7-47f4-977b-ed03facf7ed8","timestamp":"2025-03-16T10:35:41.506Z"}
+{"level":"info","message":"GET /customers 304 - - 105.299 ms - correlationId: b6de454b-f8ac-4aa6-819f-7bd2696740fd","timestamp":"2025-03-16T10:36:15.656Z"}
+{"level":"info","message":"GET /blogs 304 - - 213.271 ms - correlationId: b525ef16-0e2c-45be-b4aa-470855e5e0cb","timestamp":"2025-03-16T10:36:20.456Z"}
+{"level":"info","message":"GET /customers 304 - - 102.978 ms - correlationId: 9e1a2b5a-7959-410c-a70e-d669b29c4f40","timestamp":"2025-03-16T10:36:25.664Z"}
+{"level":"info","message":"GET /messages 304 - - 52.939 ms - correlationId: ac8c6dda-fd97-4a30-b2af-310679f4b5bc","timestamp":"2025-03-16T10:37:57.498Z"}
+{"level":"info","message":"GET /messages 200 4472 - 54.683 ms - correlationId: ce0c4c76-7187-45d0-9d1d-67a6cad14ab1","timestamp":"2025-03-16T10:38:47.181Z"}
+{"level":"info","message":"POST /messages 404 148 - 0.196 ms - correlationId: f77458db-789c-4951-b631-4b4e6511aaa7","timestamp":"2025-03-16T10:40:06.392Z"}
+{"level":"info","message":"GET /customers 304 - - 107.724 ms - correlationId: f66d49d2-86b3-439f-99a6-93ae092510e9","timestamp":"2025-03-16T10:40:49.663Z"}
+{"level":"info","message":"GET /blogs 304 - - 220.094 ms - correlationId: ec12275d-f7f3-4e52-adac-3d8de5e93ebf","timestamp":"2025-03-16T10:40:59.755Z"}
+{"level":"info","message":"GET /categories 304 - - 56.689 ms - correlationId: 734978a2-51c8-4819-a32a-a1b7d96272c8","timestamp":"2025-03-16T10:41:07.070Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 102.647 ms - correlationId: 0d080d61-0cd4-45e9-8ed9-00efa908a915","timestamp":"2025-03-16T10:41:07.179Z"}
+{"level":"info","message":"GET /blogs 304 - - 208.961 ms - correlationId: d6b1f758-c371-4d05-847d-deaaf962bdf2","timestamp":"2025-03-16T10:41:09.074Z"}
+{"level":"info","message":"GET /categories 304 - - 52.992 ms - correlationId: ff21a71f-14b2-41bf-ae28-a8d7285a2a94","timestamp":"2025-03-16T10:41:32.003Z"}
+{"level":"info","message":"GET /faqs 304 - - 58.012 ms - correlationId: 24555da3-cb22-4ab2-817c-5b8dfe98a6a6","timestamp":"2025-03-16T10:41:33.859Z"}
+{"level":"info","message":"GET /blogs 304 - - 209.867 ms - correlationId: 62039e11-c429-4c9c-b1d1-30f5b6c45ee5","timestamp":"2025-03-16T10:41:38.992Z"}
+{"level":"info","message":"GET /blogs 304 - - 217.068 ms - correlationId: 4cc46490-ff1d-419b-b1f7-6b40dc150b75","timestamp":"2025-03-16T10:42:22.528Z"}
+{"level":"info","message":"GET /blogs 304 - - 209.417 ms - correlationId: d6498305-9cb9-4548-a557-b80c5fc0fb48","timestamp":"2025-03-16T10:45:33.468Z"}
+{"level":"info","message":"GET /blogs 304 - - 212.893 ms - correlationId: d135bb0a-c001-40f1-bd71-65cd04c88c46","timestamp":"2025-03-16T10:46:28.791Z"}
+{"level":"info","message":"GET /blogs 304 - - 319.498 ms - correlationId: b1583b45-533f-4acf-83b2-735c4d90c382","timestamp":"2025-03-16T10:46:49.751Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-16T11:00:00.361Z"}
+{"level":"info","message":"GET /blogs 304 - - 1102.229 ms - correlationId: 732bde35-4856-4a87-888a-799358e4e666","timestamp":"2025-03-16T12:02:49.907Z"}
+{"level":"info","message":"GET /customers 304 - - 103.544 ms - correlationId: ea71390b-82fa-474b-bc62-71cdd6a00980","timestamp":"2025-03-16T12:06:07.067Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: VCZQid8Svn3p9WwpAAAJ","timestamp":"2025-03-16T12:07:31.389Z"}
+{"level":"info","message":"GET /messages 304 - - 56.566 ms - correlationId: 9799d114-d722-40b7-9605-9488916b36b4","timestamp":"2025-03-16T12:07:31.402Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T12:07:36.288Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.594 ms - correlationId: 9aae125f-268c-466b-935f-3167a7bb68a0","timestamp":"2025-03-16T12:07:36.350Z"}
+{"level":"info","message":"GET /faqs/67c7d4f6cdd6907abf6544e6 304 - - 48.468 ms - correlationId: 476dcc9b-d068-4eb4-9d5a-b07007c5b7db","timestamp":"2025-03-16T12:07:40.306Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.115 ms - correlationId: 4560fe6f-4362-483a-b05b-35bd5d31ff58","timestamp":"2025-03-16T12:07:43.081Z"}
+{"level":"info","message":"GET /blogs 304 - - 235.131 ms - correlationId: fe44c48a-22d0-46b6-b3c8-ceaf76309fa5","timestamp":"2025-03-16T12:07:48.362Z"}
+{"level":"info","message":"GET /categories 304 - - 54.731 ms - correlationId: 19f45ae8-9675-4954-a613-6e10187873b6","timestamp":"2025-03-16T12:07:50.528Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 100.569 ms - correlationId: 7224bec3-4881-4ed3-b96f-2f39d06d24c3","timestamp":"2025-03-16T12:07:50.634Z"}
+{"level":"info","message":"GET /customers 304 - - 103.864 ms - correlationId: 289bb862-df65-4bc7-9641-3d5740ff1dce","timestamp":"2025-03-16T12:09:04.558Z"}
+{"level":"info","message":"GET /memberships 304 - - 55.580 ms - correlationId: 70a1d8b4-df0b-47a1-bdc4-a31e3ccaebfd","timestamp":"2025-03-16T12:09:07.101Z"}
+{"level":"info","message":"GET /blogs 304 - - 212.165 ms - correlationId: 3e83b878-c0bf-43de-930d-2229a9a30673","timestamp":"2025-03-16T12:09:10.104Z"}
+{"level":"info","message":"GET /categories 304 - - 50.656 ms - correlationId: 11e68e09-2f63-4e8c-b066-ae8c1f995f88","timestamp":"2025-03-16T12:09:12.130Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.883 ms - correlationId: cf4109a2-e7c4-46e9-b42a-9f3c0a8efc73","timestamp":"2025-03-16T12:09:17.467Z"}
+{"level":"info","message":"GET /customers 304 - - 104.715 ms - correlationId: b7d7d5ef-3b00-49fc-88b6-94d16c71fe64","timestamp":"2025-03-16T12:10:17.127Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.277 ms - correlationId: 1457f82b-6ff3-4de5-8088-0d99377a6270","timestamp":"2025-03-16T12:10:19.323Z"}
+{"level":"info","message":"GET /customers 304 - - 101.191 ms - correlationId: b5d95ee1-a914-4c77-a85f-048b6a83b278","timestamp":"2025-03-16T12:10:24.204Z"}
+{"level":"info","message":"GET /blogs 304 - - 207.127 ms - correlationId: a585d3e3-91fe-46ce-955f-8030e9f03d08","timestamp":"2025-03-16T12:10:27.212Z"}
+{"level":"info","message":"GET /categories 304 - - 60.025 ms - correlationId: a465fc85-2193-48ee-8b99-27590b69f822","timestamp":"2025-03-16T12:10:28.300Z"}
+{"level":"info","message":"GET /customers 304 - - 108.698 ms - correlationId: 08c9c899-6e3b-4492-b10c-388261853b5d","timestamp":"2025-03-16T12:10:30.313Z"}
+{"level":"info","message":"GET /faqs 304 - - 53.661 ms - correlationId: 0dd37472-a351-4233-8bcb-2b8b995c0a28","timestamp":"2025-03-16T12:10:32.488Z"}
+{"level":"info","message":"GET /faqs 304 - - 72.714 ms - correlationId: affad127-cc71-4ba7-8d26-d55bdd32acb2","timestamp":"2025-03-16T12:25:53.069Z"}
+{"level":"info","message":"GET /blogs 304 - - 215.030 ms - correlationId: 580a4a80-e328-41b9-9d72-c13befe69129","timestamp":"2025-03-16T12:25:58.150Z"}
+{"level":"info","message":"GET /blogs 304 - - 199.207 ms - correlationId: b88542e7-0070-45f7-b6ec-f76e0187ff11","timestamp":"2025-03-16T12:31:31.646Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.396 ms - correlationId: fd8bfcc9-19ea-4ead-9aa7-2651a53262a4","timestamp":"2025-03-16T12:31:50.234Z"}
+{"level":"info","message":"GET /blogs 304 - - 193.866 ms - correlationId: 1682dea7-852b-460a-b62f-9d946fc2a512","timestamp":"2025-03-16T12:32:05.854Z"}
+{"level":"info","message":"GET /blogs 304 - - 235.240 ms - correlationId: 9a9b278b-e692-404b-83a1-8e1fd0f8ee1b","timestamp":"2025-03-16T12:33:11.684Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.413 ms - correlationId: 0211ca81-e7d4-4ce4-af3c-cce316eb00ca","timestamp":"2025-03-16T12:33:30.798Z"}
+{"level":"info","message":"GET /blogs 304 - - 202.219 ms - correlationId: 0d25f15c-0321-4c49-817c-332110d7709b","timestamp":"2025-03-16T12:33:52.002Z"}
+{"level":"info","message":"GET /blogs 304 - - 192.695 ms - correlationId: 57bcb95c-7886-4076-a27f-837d30c6c7ed","timestamp":"2025-03-16T12:34:05.149Z"}
+{"level":"info","message":"GET /blogs 304 - - 210.618 ms - correlationId: 44af0c9c-858d-46a1-88d3-07824bb4f0c2","timestamp":"2025-03-16T12:34:38.676Z"}
+{"level":"info","message":"GET /customers 304 - - 100.588 ms - correlationId: c5693cce-38e9-4531-bc48-2067610ef04b","timestamp":"2025-03-16T12:34:41.390Z"}
+{"level":"info","message":"GET /faqs 304 - - 49.860 ms - correlationId: bceb94bd-03b2-41b9-9a93-d029b7b0804e","timestamp":"2025-03-16T12:34:44.914Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: ejV2uLFOTvcZ3-XyAAAL","timestamp":"2025-03-16T12:34:48.004Z"}
+{"level":"info","message":"GET /messages 304 - - 55.033 ms - correlationId: 170e7611-0fbe-4b49-a4e7-1e01b4f56cb8","timestamp":"2025-03-16T12:34:48.034Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T12:35:09.850Z"}
+{"level":"info","message":"GET /customers 304 - - 97.795 ms - correlationId: 50fc94ed-97f0-4223-a372-768073a78e3e","timestamp":"2025-03-16T12:35:09.970Z"}
+{"level":"info","message":"GET /messages 304 - - 56.578 ms - correlationId: faa20e38-8390-4ded-bb24-37e83cb9c789","timestamp":"2025-03-16T12:35:12.487Z"}
+{"level":"info","message":"GET /customers 304 - - 101.069 ms - correlationId: 14f5bd65-bd9c-4da3-a4e5-1cbe0abc560e","timestamp":"2025-03-16T12:48:04.890Z"}
+{"level":"info","message":"GET /messages 304 - - 53.314 ms - correlationId: 27f9803c-6965-412a-84dd-5bfd1e7d2f6b","timestamp":"2025-03-16T12:48:06.498Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: XVfCzgwGH0e9erZKAAAN","timestamp":"2025-03-16T12:53:08.001Z"}
+{"level":"info","message":"GET /messages 304 - - 51.068 ms - correlationId: 03cdc8c8-44bb-4d0a-909e-e06087c5a5fe","timestamp":"2025-03-16T12:53:08.016Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T12:57:29.884Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: on7-JBOZwWHxhVGoAAAP","timestamp":"2025-03-16T12:57:30.361Z"}
+{"level":"info","message":"GET /messages 304 - - 55.488 ms - correlationId: 8cb8c0fe-ecb8-4580-8053-0f21b9a376d4","timestamp":"2025-03-16T12:57:30.381Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T12:57:47.768Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: oLMxjCmCbc4LqyJvAAAR","timestamp":"2025-03-16T12:57:48.043Z"}
+{"level":"info","message":"GET /messages 304 - - 50.304 ms - correlationId: 6793f337-ecd2-4a0b-9db1-9eb14c71deab","timestamp":"2025-03-16T12:57:48.066Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T12:57:56.346Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: ZpDzSX0_fN_eMn09AAAT","timestamp":"2025-03-16T12:57:56.500Z"}
+{"level":"info","message":"GET /messages 304 - - 53.668 ms - correlationId: 7d987e2f-e1f6-48b2-8f97-a4cfa731ea8d","timestamp":"2025-03-16T12:57:56.513Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T12:58:41.883Z"}
+{"level":"info","message":"GET /customers 304 - - 104.942 ms - correlationId: fdb153b6-14d4-4253-b887-0fa5b0a1bb75","timestamp":"2025-03-16T12:58:42.023Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-16T13:00:00.918Z"}
+{"level":"info","message":"GET /messages 304 - - 53.955 ms - correlationId: ef02a276-87a6-4f0b-a6ea-b1cf9d6fc7c2","timestamp":"2025-03-16T13:00:11.447Z"}
+{"level":"info","message":"GET /customers 304 - - 114.016 ms - correlationId: 34d9ece6-a0ef-4494-8398-c80792a92c3f","timestamp":"2025-03-16T13:01:10.821Z"}
+{"level":"info","message":"GET /memberships 304 - - 53.249 ms - correlationId: 2d357f0d-40bf-4ff3-88e7-f33170c76a4a","timestamp":"2025-03-16T13:02:28.747Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544c7 304 - - 386.522 ms - correlationId: 18d3e9a3-c7ce-4f62-ace8-90fecc7ed8aa","timestamp":"2025-03-16T13:02:29.084Z"}
+{"level":"info","message":"GET /orders/customer/cus1 304 - - 88.056 ms - correlationId: 49e86968-1312-4fbd-a739-c7202fe957d5","timestamp":"2025-03-16T13:02:29.199Z"}
+{"level":"info","message":"PUT /customers/67c7d4f6cdd6907abf6544c7 200 466 - 136.054 ms - correlationId: 864aabc7-28ea-47c6-b66b-2b92c710e750","timestamp":"2025-03-16T13:02:39.401Z"}
+{"level":"info","message":"GET /customers 200 15483 - 105.563 ms - correlationId: 8bdd1554-0f3c-4486-91f2-22a18bf4bfc7","timestamp":"2025-03-16T13:02:40.993Z"}
+{"level":"info","message":"GET /memberships 304 - - 51.762 ms - correlationId: 42cd871b-6291-4491-964d-9910546b1c1f","timestamp":"2025-03-16T13:02:44.973Z"}
+{"level":"info","message":"POST /customers 400 45 - 1.127 ms - correlationId: 22583c23-2d14-43d0-b545-bde92e89de94","timestamp":"2025-03-16T13:03:04.786Z"}
+{"level":"info","message":"GET /customers 304 - - 105.593 ms - correlationId: ed334f67-72cf-4958-9df2-70cd899f1718","timestamp":"2025-03-16T13:03:09.696Z"}
+{"level":"info","message":"GET /orders/customer/cus1 304 - - 49.857 ms - correlationId: 64dca3b4-6547-4ed4-95b3-61f1d139d368","timestamp":"2025-03-16T13:03:19.832Z"}
+{"level":"info","message":"GET /orders/customer/cus_1741416834621 404 72 - 51.075 ms - correlationId: aa322cab-2042-4cef-afe8-f49219397c92","timestamp":"2025-03-16T13:03:26.532Z"}
+{"level":"info","message":"DELETE /customers/67cbe982e80243809ef18fd6 200 44 - 71.971 ms - correlationId: dc080f55-ae33-4d35-b91d-ddb3b6df86fa","timestamp":"2025-03-16T13:03:26.612Z"}
+{"level":"info","message":"GET /customers 200 15287 - 119.120 ms - correlationId: 43b64d33-3567-4cce-93d8-8eb2e538eed1","timestamp":"2025-03-16T13:03:29.432Z"}
+{"level":"info","message":"GET /memberships 304 - - 48.130 ms - correlationId: 1d34a089-e914-4e9b-8449-253ed547b103","timestamp":"2025-03-16T13:03:32.359Z"}
+{"level":"info","message":"GET /customers/67cbeb2ebc61c677d278e68a 200 194 - 53.255 ms - correlationId: 7d4e3ea1-aa58-439e-8f65-4c5d8b898387","timestamp":"2025-03-16T13:03:32.362Z"}
+{"level":"info","message":"GET /orders/customer/cus_1741417262877 404 72 - 49.484 ms - correlationId: 24ae862c-cc81-4b31-bd5d-a0728352063f","timestamp":"2025-03-16T13:03:32.419Z"}
+{"level":"info","message":"GET /customers 304 - - 146.815 ms - correlationId: 98e1e410-3f82-494d-ba1d-2b3dc757e62d","timestamp":"2025-03-16T13:03:36.509Z"}
+{"level":"info","message":"GET /messages 200 4604 - 55.715 ms - correlationId: 3324996b-fbd8-4b1b-909c-6664d6b3c124","timestamp":"2025-03-16T13:04:05.831Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: 3MDXNaMHIMnSh6wfAAAV","timestamp":"2025-03-16T13:06:42.289Z"}
+{"level":"info","message":"GET /messages 304 - - 63.720 ms - correlationId: 6b83dc1a-5cbe-4944-837b-d7a7f5d1c86e","timestamp":"2025-03-16T13:06:42.292Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:07:52.888Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.329 ms - correlationId: 7ac378ee-088f-4ba8-8317-ea121fff6c2c","timestamp":"2025-03-16T13:07:52.983Z"}
+{"level":"info","message":"GET /messages 304 - - 57.040 ms - correlationId: 319bd0e2-2360-4e08-9eea-107a0cb8ef0d","timestamp":"2025-03-16T13:07:56.028Z"}
+{"level":"info","message":"GET /customers 200 15483 - 103.842 ms - correlationId: 342bc06a-3c12-48b9-835d-5f95c16f76df","timestamp":"2025-03-16T13:07:59.444Z"}
+{"level":"info","message":"GET /blogs 304 - - 211.872 ms - correlationId: ec9a6468-a2dc-4601-8a3f-622b4c481910","timestamp":"2025-03-16T13:08:08.709Z"}
+{"level":"info","message":"GET /blogs 304 - - 206.797 ms - correlationId: 99b89b2a-f82f-4c59-b9f1-e141401c2b78","timestamp":"2025-03-16T13:09:08.632Z"}
+{"level":"info","message":"GET /categories 304 - - 53.324 ms - correlationId: b0504189-4cb8-4dd2-9359-0af71b53fd10","timestamp":"2025-03-16T13:09:30.370Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 304 - - 102.317 ms - correlationId: 45718f17-f5f7-4313-bd5c-cdb685ed1b08","timestamp":"2025-03-16T13:09:30.481Z"}
+{"level":"info","message":"PUT /blogs/67c7d4f6cdd6907abf6544b9 200 4986 - 584.779 ms - correlationId: 8a0f3ab1-2dcf-4c4a-b554-2b4ffcfae6ee","timestamp":"2025-03-16T13:09:48.466Z"}
+{"level":"info","message":"GET /blogs 200 52386 - 225.861 ms - correlationId: f5f388c7-9ad1-4c2f-a845-543f173ba765","timestamp":"2025-03-16T13:09:50.180Z"}
+{"level":"info","message":"GET /categories 304 - - 48.821 ms - correlationId: 8ee51543-1fc6-4195-ad98-0d552dfce468","timestamp":"2025-03-16T13:09:53.482Z"}
+{"level":"info","message":"POST /blogs 201 166 - 68.119 ms - correlationId: 164f3c4a-c4c5-49b7-874f-3500c1545c36","timestamp":"2025-03-16T13:10:16.847Z"}
+{"level":"info","message":"GET /blogs 200 52597 - 215.964 ms - correlationId: a462f247-19cc-4a23-83b9-7680a5e23ddd","timestamp":"2025-03-16T13:10:18.485Z"}
+{"level":"info","message":"GET /blogs 304 - - 208.968 ms - correlationId: 5e0bbc53-bcfa-43cd-a7ee-499557ace7a2","timestamp":"2025-03-16T13:11:58.956Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: LwkzFkBhZYEt_WI-AAAX","timestamp":"2025-03-16T13:11:59.869Z"}
+{"level":"info","message":"GET /messages 200 2 - 50.623 ms - correlationId: 4d992078-7418-49bd-ab9b-f939af87ca2d","timestamp":"2025-03-16T13:11:59.899Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:12:05.377Z"}
+{"level":"info","message":"GET /customers 304 - - 104.513 ms - correlationId: 0c90794c-0ba4-4dfb-868c-e51049d6b26d","timestamp":"2025-03-16T13:12:05.504Z"}
+{"level":"info","message":"GET /messages 200 472 - 56.395 ms - correlationId: ca1bbfc8-2edd-44f6-8e5c-3c60bc0675b2","timestamp":"2025-03-16T13:12:52.702Z"}
+{"level":"info","message":"GET /customers 304 - - 103.395 ms - correlationId: 206931b5-d454-45de-9cea-23e3a3abfb15","timestamp":"2025-03-16T13:12:59.371Z"}
+{"level":"info","message":"GET /messages 200 776 - 61.362 ms - correlationId: 866cade0-fa28-4326-9908-8e80ecd85481","timestamp":"2025-03-16T13:13:34.891Z"}
+{"level":"info","message":"GET /messages 304 - - 63.436 ms - correlationId: 7420aeb9-1d1a-4f1b-80e8-a112811f15be","timestamp":"2025-03-16T13:15:02.424Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: NmvoI2Sbu33OYDwDAAAZ","timestamp":"2025-03-16T13:15:02.455Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:15:33.521Z"}
+{"level":"info","message":"GET /messages 304 - - 51.203 ms - correlationId: 8022f154-8ed1-4d8a-a045-60cad91f8da9","timestamp":"2025-03-16T13:15:34.901Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: pDJEXPfZOvF5cy8HAAAb","timestamp":"2025-03-16T13:15:34.969Z"}
+{"correlationId":"socket","level":"info","message":"Đã lưu tin nhắn vào MongoDB [object Object]","timestamp":"2025-03-16T13:15:52.485Z"}
+{"correlationId":"socket","level":"warn","message":"Không tìm thấy socket ID cho người dùng: Khách hàng","timestamp":"2025-03-16T13:15:52.486Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:15:55.340Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: FpuPgCyibkzLKkdFAAAd","timestamp":"2025-03-16T13:15:55.614Z"}
+{"level":"info","message":"GET /messages 200 965 - 53.307 ms - correlationId: 515e4f94-6a54-4d0d-b20a-2fead6aa54b4","timestamp":"2025-03-16T13:15:55.627Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:19:57.731Z"}
+{"level":"info","message":"GET /customers 304 - - 104.753 ms - correlationId: 47113ac5-acf6-4256-a1c2-472cde0496d5","timestamp":"2025-03-16T13:19:57.879Z"}
+{"level":"info","message":"GET /categories 304 - - 50.314 ms - correlationId: 719851b7-b5db-4702-96f4-14dd3c842b4a","timestamp":"2025-03-16T13:20:05.519Z"}
+{"level":"info","message":"POST /categories 201 97 - 63.509 ms - correlationId: e5436369-a86d-4eff-908c-0c2de868e92a","timestamp":"2025-03-16T13:20:34.320Z"}
+{"level":"info","message":"GET /categories 200 412 - 63.705 ms - correlationId: 3d53b311-3512-436e-bbd8-59356740c57f","timestamp":"2025-03-16T13:20:36.101Z"}
+{"level":"info","message":"GET /categories/67d6d022dd942ac490ecdf8f 200 97 - 51.518 ms - correlationId: ede299a0-0a19-451f-99a8-e8a205179271","timestamp":"2025-03-16T13:20:40.698Z"}
+{"level":"info","message":"GET /categories 304 - - 57.305 ms - correlationId: 4f6dfcd3-861e-432e-9061-0c9f1c4e8880","timestamp":"2025-03-16T13:20:42.662Z"}
+{"level":"info","message":"DELETE /categories/67d6d022dd942ac490ecdf8f 200 34 - 54.902 ms - correlationId: ae462202-e2dd-4ae8-9de5-b880a057e9bf","timestamp":"2025-03-16T13:20:44.372Z"}
+{"level":"info","message":"GET /categories 200 314 - 57.145 ms - correlationId: 3943c9ba-1a68-4402-a173-91c2f177bb3e","timestamp":"2025-03-16T13:20:45.782Z"}
+{"level":"info","message":"GET /faqs 304 - - 53.012 ms - correlationId: de69b2b4-f101-4b18-abbc-77704ac41ccb","timestamp":"2025-03-16T13:21:05.199Z"}
+{"level":"info","message":"POST /faqs 201 95 - 57.854 ms - correlationId: ecfdfb7b-45c7-4c89-b3e9-80bdec1d6e7c","timestamp":"2025-03-16T13:21:26.113Z"}
+{"level":"info","message":"GET /faqs 200 1674 - 79.666 ms - correlationId: 44460d97-9956-4e30-935b-b474c9c926e7","timestamp":"2025-03-16T13:21:27.761Z"}
+{"level":"info","message":"GET /faqs/67d6d056dd942ac490ecdf90 200 95 - 52.040 ms - correlationId: a507a33e-db9b-4bdf-a05d-058eb311288a","timestamp":"2025-03-16T13:21:33.497Z"}
+{"level":"info","message":"GET /faqs 304 - - 48.871 ms - correlationId: e3d2e369-2bb7-45ac-8556-6d87253f27f4","timestamp":"2025-03-16T13:21:36.114Z"}
+{"level":"info","message":"DELETE /faqs/67d6d056dd942ac490ecdf90 200 27 - 54.470 ms - correlationId: 49b4b12a-f69b-4bb3-b252-185e88e4c763","timestamp":"2025-03-16T13:21:39.349Z"}
+{"level":"info","message":"GET /faqs 200 1578 - 55.354 ms - correlationId: d64b6d9c-cb75-4848-95d0-fba78ec351f5","timestamp":"2025-03-16T13:21:40.977Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.185 ms - correlationId: aa1b41d6-e191-4fcb-902f-83e5b402c6f1","timestamp":"2025-03-16T13:23:24.513Z"}
+{"level":"info","message":"POST /faqs 201 95 - 60.266 ms - correlationId: c3049fbf-0edc-49cf-87ef-4caf6db91b3b","timestamp":"2025-03-16T13:23:54.989Z"}
+{"level":"info","message":"GET /faqs 200 1674 - 50.581 ms - correlationId: 957bfdfd-0b2d-4a5e-8689-95c7e85fe2ad","timestamp":"2025-03-16T13:23:56.814Z"}
+{"level":"info","message":"GET /faqs/67d6d0eadd942ac490ecdf91 200 95 - 54.354 ms - correlationId: 6e2f974c-38a4-4b3b-918a-c296dd9186e4","timestamp":"2025-03-16T13:24:03.283Z"}
+{"level":"info","message":"GET /faqs 304 - - 58.168 ms - correlationId: 0ae6d0be-3839-46c0-b7f5-95a5a6592285","timestamp":"2025-03-16T13:24:05.340Z"}
+{"level":"info","message":"DELETE /faqs/67d5bda600074d75859dc8e8 200 27 - 53.644 ms - correlationId: da752bdd-abb4-4a75-9552-0178f4e6e2c2","timestamp":"2025-03-16T13:24:06.870Z"}
+{"level":"info","message":"GET /faqs 200 1298 - 52.663 ms - correlationId: 45e1a55a-b583-412b-b0c7-12ca26df4756","timestamp":"2025-03-16T13:24:08.378Z"}
+{"level":"info","message":"DELETE /faqs/67d6d0eadd942ac490ecdf91 200 27 - 51.436 ms - correlationId: 1f77f3c7-a218-40d9-81ac-8ae82a71dce2","timestamp":"2025-03-16T13:24:11.095Z"}
+{"level":"info","message":"GET /faqs 200 1202 - 50.330 ms - correlationId: 13482023-a012-48dd-b0c6-c3cafbdd92ea","timestamp":"2025-03-16T13:24:12.290Z"}
+{"level":"info","message":"GET /categories 304 - - 52.567 ms - correlationId: ce8641f7-20a9-40ff-9034-b664a54e71d9","timestamp":"2025-03-16T13:24:27.370Z"}
+{"level":"info","message":"POST /categories 201 78 - 61.753 ms - correlationId: fb4ff491-ffbd-4145-ab71-816bfb7e06a1","timestamp":"2025-03-16T13:24:47.254Z"}
+{"level":"info","message":"GET /categories 200 393 - 49.614 ms - correlationId: 29f756dd-e2c9-4409-b647-807c4a7ddb04","timestamp":"2025-03-16T13:24:48.590Z"}
+{"level":"info","message":"GET /categories/67d6d11fdd942ac490ecdf92 200 78 - 66.269 ms - correlationId: 705a9935-79e6-4a3e-9747-938a0735b9d5","timestamp":"2025-03-16T13:24:51.983Z"}
+{"level":"info","message":"PUT /categories/67d6d11fdd942ac490ecdf92 200 82 - 108.715 ms - correlationId: e78b38de-2636-49be-9561-86e0c0bb0b07","timestamp":"2025-03-16T13:24:56.582Z"}
+{"level":"info","message":"GET /categories 200 397 - 50.245 ms - correlationId: f3e2a7c5-d279-4e24-a07c-27d040eb756d","timestamp":"2025-03-16T13:24:57.858Z"}
+{"level":"info","message":"DELETE /categories/67d6d11fdd942ac490ecdf92 200 34 - 56.638 ms - correlationId: b950a56c-80dd-455f-872f-b362206839d9","timestamp":"2025-03-16T13:24:59.770Z"}
+{"level":"info","message":"GET /categories 200 314 - 54.081 ms - correlationId: 1a3e9f92-079e-40c6-9d33-15a3befff8c7","timestamp":"2025-03-16T13:25:01.362Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: 5LECqVcyICc6qNarAAAf","timestamp":"2025-03-16T13:25:20.218Z"}
+{"level":"info","message":"GET /messages 200 941 - 50.609 ms - correlationId: 7283bf77-e9eb-49b5-af4a-4bdea9a527af","timestamp":"2025-03-16T13:25:20.254Z"}
+{"correlationId":"socket","level":"info","message":"Đã lưu tin nhắn vào MongoDB [object Object]","timestamp":"2025-03-16T13:25:42.845Z"}
+{"correlationId":"socket","level":"warn","message":"Không tìm thấy socket ID cho người dùng: Khách hàng","timestamp":"2025-03-16T13:25:42.846Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:27:19.454Z"}
+{"level":"info","message":"GET /customers 304 - - 104.097 ms - correlationId: b432c8d0-4a54-4204-aff1-4325d40cba98","timestamp":"2025-03-16T13:27:19.581Z"}
+{"level":"info","message":"GET /blogs 304 - - 219.232 ms - correlationId: a7b70459-2fc8-4799-80a2-014cc66fa930","timestamp":"2025-03-16T13:27:29.389Z"}
+{"level":"info","message":"GET /categories 304 - - 52.430 ms - correlationId: 91028d5a-3884-4114-bd51-fb6699d7bc4f","timestamp":"2025-03-16T13:27:44.485Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 200 4994 - 101.077 ms - correlationId: ddc0df29-f410-422a-a84a-328f50f4cc17","timestamp":"2025-03-16T13:27:44.593Z"}
+{"level":"info","message":"PUT /blogs/67c7d4f6cdd6907abf6544b9 200 5003 - 576.850 ms - correlationId: 6589ffed-4b9c-4587-b54a-4a1715078fb2","timestamp":"2025-03-16T13:27:54.603Z"}
+{"level":"info","message":"GET /blogs 200 52614 - 220.587 ms - correlationId: f7a86c42-2977-49f6-a9de-1460b9e43aca","timestamp":"2025-03-16T13:27:56.335Z"}
+{"level":"info","message":"GET /categories 304 - - 59.085 ms - correlationId: 5caabf02-c7f3-4865-9de6-878295954c66","timestamp":"2025-03-16T13:27:58.154Z"}
+{"level":"info","message":"GET /blogs 304 - - 209.706 ms - correlationId: 3d41cbd9-e92e-4028-a5b1-f4a6c8c84c1b","timestamp":"2025-03-16T13:28:07.354Z"}
+{"level":"info","message":"GET /customers 304 - - 104.717 ms - correlationId: 74f2c171-299b-4a05-955e-74e71db45f57","timestamp":"2025-03-16T13:28:32.275Z"}
+{"level":"info","message":"GET /blogs 304 - - 222.345 ms - correlationId: a88c29b0-cafd-4d6e-8c77-5dfc6d848c15","timestamp":"2025-03-16T13:28:40.854Z"}
+{"level":"info","message":"GET /categories 304 - - 53.494 ms - correlationId: 79056b52-8e6f-4041-959e-e54fa8ed26f1","timestamp":"2025-03-16T13:28:55.769Z"}
+{"level":"info","message":"POST /blogs 201 159 - 61.011 ms - correlationId: d46c834a-9f8c-4218-89c1-41f12c3f753b","timestamp":"2025-03-16T13:29:15.234Z"}
+{"level":"info","message":"GET /blogs 200 52818 - 207.763 ms - correlationId: 7d182f4f-49fd-4718-97b9-adc1926441bc","timestamp":"2025-03-16T13:29:17.008Z"}
+{"level":"info","message":"DELETE /blogs/67d6cdb8dd942ac490ecdf8d 200 35 - 58.397 ms - correlationId: c400680f-05c6-497e-9086-56e9a1e2e2ad","timestamp":"2025-03-16T13:29:27.047Z"}
+{"level":"info","message":"GET /blogs 200 52607 - 216.290 ms - correlationId: 4dd332ea-4570-4227-8d7d-69058444f9b4","timestamp":"2025-03-16T13:29:29.040Z"}
+{"level":"info","message":"GET /categories 304 - - 54.633 ms - correlationId: 54127802-e28e-4fad-a8b2-ecb5e680b93f","timestamp":"2025-03-16T13:29:30.891Z"}
+{"level":"info","message":"GET /blogs/67d6d22bdd942ac490ecdf94 200 203 - 106.509 ms - correlationId: 91a0c9b4-b5d2-40e4-8c67-fd3d265bb660","timestamp":"2025-03-16T13:29:31.005Z"}
+{"level":"info","message":"PUT /blogs/67d6d22bdd942ac490ecdf94 200 206 - 111.722 ms - correlationId: 58659d29-f2a3-463f-a559-8ca920f0b42e","timestamp":"2025-03-16T13:29:36.205Z"}
+{"level":"info","message":"GET /blogs 200 52597 - 210.690 ms - correlationId: c52cb257-250f-44d9-9674-b01be6573990","timestamp":"2025-03-16T13:29:37.923Z"}
+{"level":"info","message":"GET /categories 304 - - 52.601 ms - correlationId: 454add50-cc63-4eb0-94a4-00b93ebbfb3b","timestamp":"2025-03-16T13:29:50.417Z"}
+{"level":"info","message":"POST /categories 201 93 - 55.118 ms - correlationId: 7d3030f0-4813-4aaa-9c2c-0f59b2de6407","timestamp":"2025-03-16T13:30:13.906Z"}
+{"level":"info","message":"GET /categories 200 408 - 49.850 ms - correlationId: 42305907-8615-4dd4-a752-9768c52578f4","timestamp":"2025-03-16T13:30:15.605Z"}
+{"level":"info","message":"GET /categories/67d6d265dd942ac490ecdf95 200 93 - 53.822 ms - correlationId: 985cf53c-0057-4cd3-9355-ced80580f3dc","timestamp":"2025-03-16T13:30:18.906Z"}
+{"level":"info","message":"PUT /categories/67d6d265dd942ac490ecdf95 200 89 - 113.186 ms - correlationId: f8b517ea-0fbb-4ee8-a518-dc365931487f","timestamp":"2025-03-16T13:30:22.883Z"}
+{"level":"info","message":"GET /categories 200 404 - 55.580 ms - correlationId: 303202e3-2a54-4ae7-ac3d-8a13f15f6e9e","timestamp":"2025-03-16T13:30:24.263Z"}
+{"level":"info","message":"DELETE /categories/67d6d265dd942ac490ecdf95 200 34 - 57.956 ms - correlationId: 4fac62fc-e679-4afb-94e7-66f0517a7827","timestamp":"2025-03-16T13:30:26.400Z"}
+{"level":"info","message":"GET /categories 200 314 - 53.409 ms - correlationId: 06ad5a7a-ee57-4506-a307-283240ddeb5e","timestamp":"2025-03-16T13:30:27.865Z"}
+{"level":"info","message":"GET /faqs 304 - - 50.730 ms - correlationId: 2170ae08-c6e6-4e3a-a87d-58f6a0a463a6","timestamp":"2025-03-16T13:30:38.234Z"}
+{"level":"info","message":"POST /faqs 201 96 - 54.941 ms - correlationId: 8c0664dc-d7d0-405a-8095-fc39cbb8b027","timestamp":"2025-03-16T13:31:01.984Z"}
+{"level":"info","message":"GET /faqs 200 1299 - 51.259 ms - correlationId: 6eb77c44-a60e-4bcc-909d-68c490bc98b8","timestamp":"2025-03-16T13:31:03.622Z"}
+{"level":"info","message":"GET /faqs/67d6d295dd942ac490ecdf96 200 96 - 49.913 ms - correlationId: 742f90ea-208c-485e-9da1-4fca7bfe1ccd","timestamp":"2025-03-16T13:31:06.813Z"}
+{"level":"info","message":"PUT /faqs/67d6d295dd942ac490ecdf96 200 142 - 103.748 ms - correlationId: a34e2dc1-d2ac-4584-99a8-73952350f6e2","timestamp":"2025-03-16T13:31:11.493Z"}
+{"level":"info","message":"GET /faqs 200 1299 - 58.784 ms - correlationId: 8bffee31-6fab-495b-9433-543eeaf60d68","timestamp":"2025-03-16T13:31:12.806Z"}
+{"level":"info","message":"DELETE /faqs/67d6d295dd942ac490ecdf96 200 27 - 54.469 ms - correlationId: 93fa4f38-d44c-4ceb-a140-d2438bf5af14","timestamp":"2025-03-16T13:31:14.781Z"}
+{"level":"info","message":"GET /faqs 200 1202 - 54.843 ms - correlationId: b5fa56c0-6d56-40ac-9bc3-a89f4a3673e4","timestamp":"2025-03-16T13:31:16.158Z"}
+{"level":"info","message":"GET /messages 200 1130 - 54.703 ms - correlationId: f57525b3-dcc2-4a7c-8d2e-aefd480458c8","timestamp":"2025-03-16T13:31:26.332Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: qqqqx4eW1n6g7HSAAAAh","timestamp":"2025-03-16T13:31:54.858Z"}
+{"level":"info","message":"GET /messages 200 941 - 55.746 ms - correlationId: 99da1606-1cda-43c4-aa0d-5057f23045ff","timestamp":"2025-03-16T13:31:54.872Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:31:59.652Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: DEu6lBFp9cCMjxNwAAAj","timestamp":"2025-03-16T13:31:59.866Z"}
+{"level":"info","message":"GET /messages 304 - - 49.182 ms - correlationId: aefea2da-ed61-4c22-ac64-ec1bcc8698b7","timestamp":"2025-03-16T13:31:59.892Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:32:01.649Z"}
+{"level":"info","message":"GET /faqs 304 - - 53.657 ms - correlationId: ef19cbf7-43ee-41b8-ae09-3e2dda7ec651","timestamp":"2025-03-16T13:32:01.721Z"}
+{"level":"info","message":"GET /messages 304 - - 49.890 ms - correlationId: f08a22ae-9e0c-4e47-b50e-9f798c487449","timestamp":"2025-03-16T13:32:09.109Z"}
+{"level":"info","message":"GET /customers 304 - - 105.532 ms - correlationId: 34673935-5277-4285-8a81-87bbb0b9844a","timestamp":"2025-03-16T13:32:43.765Z"}
+{"level":"info","message":"GET /memberships 304 - - 51.434 ms - correlationId: c149a77f-6b9f-4de5-8230-b847aea527db","timestamp":"2025-03-16T13:33:02.509Z"}
+{"level":"info","message":"GET /customers 304 - - 99.715 ms - correlationId: 82a20761-e2ff-4fc8-bb58-373c3f85ed41","timestamp":"2025-03-16T13:33:10.419Z"}
+{"level":"info","message":"GET /customers/67c7d4f6cdd6907abf6544c7 200 415 - 49.022 ms - correlationId: b1bcd105-8c7d-4d01-9558-6d3152810d6d","timestamp":"2025-03-16T13:33:16.077Z"}
+{"level":"info","message":"GET /memberships 304 - - 54.671 ms - correlationId: 9ad21815-7860-4ae4-971a-d34e75c522fd","timestamp":"2025-03-16T13:33:16.080Z"}
+{"level":"info","message":"GET /orders/customer/cus1 304 - - 50.328 ms - correlationId: 0989cd41-95b8-4aee-971d-d745c6d62cce","timestamp":"2025-03-16T13:33:16.137Z"}
+{"level":"info","message":"GET /customers 304 - - 104.650 ms - correlationId: 2b4d5751-90cf-470d-b8a5-ddaf0ff32857","timestamp":"2025-03-16T13:33:23.416Z"}
+{"level":"info","message":"GET /blogs 304 - - 223.514 ms - correlationId: e118ef0e-0225-4860-b6dd-71a981edb7c4","timestamp":"2025-03-16T13:33:37.178Z"}
+{"level":"info","message":"GET /categories 304 - - 52.187 ms - correlationId: 8a0e5f1a-367f-4c81-abad-c08e3971254b","timestamp":"2025-03-16T13:33:40.140Z"}
+{"level":"info","message":"GET /blogs 304 - - 292.559 ms - correlationId: 766a8477-65c0-4db4-ab8f-6c48cce7d1a8","timestamp":"2025-03-16T13:33:47.637Z"}
+{"level":"info","message":"GET /categories 304 - - 49.673 ms - correlationId: 78bcac2a-bb59-4f9d-9a25-f75410737550","timestamp":"2025-03-16T13:34:00.429Z"}
+{"level":"info","message":"GET /blogs/67c7d4f6cdd6907abf6544b9 200 5011 - 109.555 ms - correlationId: 91afaae1-9c79-4bbb-b187-450d129d3d17","timestamp":"2025-03-16T13:34:00.545Z"}
+{"level":"info","message":"GET /categories 304 - - 49.175 ms - correlationId: cf752fa5-c91d-4da6-a6d0-7ce54ff79632","timestamp":"2025-03-16T13:34:07.589Z"}
+{"level":"info","message":"GET /faqs 304 - - 54.638 ms - correlationId: 1d6aefa4-84a3-4aaa-a6b4-981bd4a7e1ba","timestamp":"2025-03-16T13:34:17.502Z"}
+{"level":"info","message":"GET /faqs 304 - - 52.300 ms - correlationId: 0f9b6250-da1f-4b8c-9003-2d56139f9866","timestamp":"2025-03-16T13:34:25.553Z"}
+{"level":"info","message":"GET /faqs/67c7d4f6cdd6907abf6544e6 304 - - 49.363 ms - correlationId: 7c91ff42-ddb7-4d18-af1d-3ba7855c58be","timestamp":"2025-03-16T13:34:27.008Z"}
+{"level":"info","message":"GET /faqs 304 - - 51.439 ms - correlationId: 2bb3e4aa-89a7-490f-ad95-101dce384333","timestamp":"2025-03-16T13:34:29.534Z"}
+{"level":"info","message":"GET /messages 304 - - 51.654 ms - correlationId: ce8fa756-d1ee-42de-9add-684f037d6d14","timestamp":"2025-03-16T13:34:34.846Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: 6751fSGpwnT7hEC8AAAl","timestamp":"2025-03-16T13:35:03.012Z"}
+{"level":"info","message":"GET /messages 304 - - 50.588 ms - correlationId: c3e671cc-8f99-46a4-8a57-1541b763839d","timestamp":"2025-03-16T13:35:03.028Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:35:53.344Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: eKaoGYtIP5twuFsZAAAn","timestamp":"2025-03-16T13:35:53.667Z"}
+{"level":"info","message":"GET /messages 304 - - 49.599 ms - correlationId: 2cbcaf26-2abd-4503-af23-b7f0defad36d","timestamp":"2025-03-16T13:35:53.677Z"}
+{"correlationId":"socket","level":"info","message":"Đã lưu tin nhắn vào MongoDB [object Object]","timestamp":"2025-03-16T13:35:59.551Z"}
+{"correlationId":"socket","level":"warn","message":"Không tìm thấy socket ID cho người dùng: Khách hàng","timestamp":"2025-03-16T13:35:59.552Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:36:28.830Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: biY26p7rryT1TjR-AAAp","timestamp":"2025-03-16T13:36:29.122Z"}
+{"level":"info","message":"GET /messages 200 1075 - 50.080 ms - correlationId: ec4023c8-2ca3-478d-9abf-f129652811f5","timestamp":"2025-03-16T13:36:29.138Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:36:37.431Z"}
+{"level":"info","message":"GET /faqs 304 - - 100.269 ms - correlationId: 99826ce5-bf31-44cf-9cac-7c3ff6605016","timestamp":"2025-03-16T13:36:37.558Z"}
