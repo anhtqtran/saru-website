@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ContactService } from '../services/contact.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact',
@@ -10,8 +12,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ContactComponent implements OnInit {
 
   contactForm: FormGroup;
+  isSubmitting = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private contactService: ContactService, private toastr: ToastrService
+  ) {
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -19,14 +23,22 @@ export class ContactComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  onSubmit(): void {
+  async onSubmit(): Promise<void> {
     if (this.contactForm.valid) {
-      console.log(this.contactForm.value);
-      // Thực hiện hành động gửi form, ví dụ gọi API gửi thông tin
+      this.isSubmitting = true;
+      try {
+        await this.contactService.sendEmail(this.contactForm.value);
+        this.toastr.success('Gửi thành công!', 'Thành công');
+        this.contactForm.reset();
+      } catch (error) {
+        this.toastr.error('Gửi thất bại. Vui lòng thử lại.', 'Lỗi');
+      } finally {
+        this.isSubmitting = false;
+      }
     } else {
-      console.log("Form không hợp lệ");
+      this.toastr.warning('Vui lòng điền đầy đủ thông tin.', 'Cảnh báo');
     }
   }
 

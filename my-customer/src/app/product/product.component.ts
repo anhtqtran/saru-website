@@ -4,7 +4,7 @@ import { CartService } from '../services/cart.service'; // Thêm CartService
 import { Subscription } from 'rxjs';
 import { Product, Pagination } from '../classes/Product';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product',
@@ -42,10 +42,23 @@ export class ProductComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private cartService: CartService, // Thêm CartService
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
+
   ) {}
 
   ngOnInit(): void {
+    this.subscriptions.push(
+      this.route.queryParams.subscribe(params => {
+        const category = params['category'] || '';
+        if (category !== this.filters.category) { 
+          this.filters.category = category; 
+          this.selectedCategory = category; 
+          console.log('Category from query params:', category);
+          this.loadProducts(); 
+        }
+      })
+    );
     this.loadProducts();
     this.loadFilterData();
     this.loadCategories();
@@ -141,7 +154,10 @@ export class ProductComponent implements OnInit, OnDestroy {
       ...this.filters,
       category: this.selectedCategory,
       brand: this.selectedBrand,
+      wineVolume: this.selectedWineVolume,
+      wineType: this.selectedWineType
     };
+    this.loadProducts();
   }
 
   onPageChange(page: number): void {

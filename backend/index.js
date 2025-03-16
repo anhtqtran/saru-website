@@ -14,6 +14,7 @@ const rateLimit = require('express-rate-limit');
 const winston = require('winston');
 const cron = require('node-cron');
 const multer = require('multer'); // Thêm dòng này
+const nodemailer = require('nodemailer');
 const mail = require('./node-mailer');
 const app = express();
 
@@ -932,14 +933,39 @@ cron.schedule('0 * * * *', async () => {
 
 
 
+const transporter = nodemailer.createTransport({
+  host: 'smtp.gmail.com',
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  },
+  tls: {
+    rejectUnauthorized: false
+  }
+});
+
+
+console.log(transporter); // Kiểm tra khởi tạo
+
 (async () => {
   try {
+    console.log('Đang xác minh Nodemailer...'); // Kiểm tra luồng thực thi
     await transporter.verify();
     logger.info("Kết nối Nodemailer thành công!", { correlationId: 'system' });
   } catch (error) {
     logger.error('Lỗi cấu hình Nodemailer', { error: error.message, code: error.code, correlationId: 'system' });
   }
 })();
+// (async () => {
+//   try {
+//     await transporter.verify();
+//     logger.info("Kết nối Nodemailer thành công!", { correlationId: 'system' });
+//   } catch (error) {
+//     logger.error('Lỗi cấu hình Nodemailer', { error: error.message, code: error.code, correlationId: 'system' });
+//   }
+// })();
 
 app.post('/api/login', authLimiter, [
   body('email').isEmail().normalizeEmail(),
@@ -1790,6 +1816,40 @@ app.get("/messages", async (req, res) => {
   }
 });
 
+//=================================FEEDBACKS API=================================//
+// API lấy danh sách feedback gộp thông tin
+app.get('/api/feedbacks', async (req, res) => {
+  try {
+    // Lấy tất cả reviews
+    const reviews = await reviewCollection.find().toArray();
+
+    // Gộp dữ liệu từ products và customers
+    const feedbacks = await Promise.all(
+      reviews.map(async (review) => {
+        // Tìm product liên quan dựa trên ProductID
+        const product = await productCollection.findOne({ ProductID: review.ProductID });
+        // Tìm customer liên quan dựa trên CustomerID
+        const customer = await customerCollection.findOne({ CustomerID: review.CustomerID });
+
+        return {
+          reviewID: review.ReviewID,
+          productName: product ? product.ProductName : 'Unknown Product',
+          customerName: customer ? customer.CustomerName : 'Unknown Customer',
+          customerAvatar: customer ? customer.CustomerAvatar || 'https://dummyjson.com/icon/default/128' : 'https://dummyjson.com/icon/default/128', // Ảnh mặc định nếu không có
+          content: review.Content,
+          rating: review.Rating,
+          datePosted: review.DatePosted,
+        };
+      })
+    );
+
+    logger.info('Fetched feedbacks successfully', { count: feedbacks.length, correlationId: req.correlationId });
+    res.status(200).json(feedbacks);
+  } catch (error) {
+    logger.error('Error fetching feedbacks', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 
 //=====anhthucode
 app.post('/api/upload', upload.single('image'), async (req, res) => {
