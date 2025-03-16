@@ -142,14 +142,19 @@
     <div class="mt-10">
       <h2 class="text-xl font-semibold text-gray-800 mb-4">Sản phẩm liên quan</h2>
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-        <div *ngFor="let relatedProduct of prod.relatedProducts" (click)="goToProductDetail($event, relatedProduct._id)" class="border rounded-lg p-4 shadow-md bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
-          <div class="w-full h-48 flex justify-center items-center overflow-hidden rounded-lg">
-            <img *ngIf="relatedProduct.ProductImageCover" [src]="relatedProduct.ProductImageCover" alt="{{relatedProduct.ProductName}}" class="w-full h-full object-contain transition-transform duration-300 ease-in-out hover:scale-105">
-            <img *ngIf="!relatedProduct.ProductImageCover" src="assets/images/default-product.png" alt="No image" class="w-32 h-32 object-contain">
-          </div>
-          <h3 class="text-lg font-semibold mt-3 text-gray-800 truncate">{{relatedProduct.ProductName}}</h3>
-          <p class="text-xl font-bold text-red-600 mt-1">{{relatedProduct.ProductPrice | currency:'VND':'symbol'}}</p>
-        </div>
+        <div *ngFor="let relatedProduct of prod.relatedProducts" 
+        (click)="goToProductDetail($event, relatedProduct._id)" 
+        class="border rounded-lg p-4 shadow-md bg-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer">
+     <div class="w-full h-48 flex justify-center items-center overflow-hidden rounded-lg">
+       <img 
+         [src]="relatedProduct.ProductImageCover || 'assets/images/default-product.png'" 
+         alt="{{relatedProduct.ProductName}}" 
+         class="w-full h-full object-contain transition-transform duration-300 ease-in-out hover:scale-105"
+         (error)="relatedProduct.ProductImageCover = 'assets/images/default-product.png'">
+     </div>
+     <h3 class="text-lg font-semibold mt-3 text-gray-800 truncate">{{relatedProduct.ProductName}}</h3>
+     <p class="text-xl font-bold text-red-600 mt-1">{{relatedProduct.ProductPrice | currency:'VND':'symbol'}}</p>
+   </div>
         <div *ngIf="!(prod.relatedProducts && prod.relatedProducts.length)" class="text-gray-500 italic">Không có sản phẩm liên quan.</div>
       </div>
     </div>

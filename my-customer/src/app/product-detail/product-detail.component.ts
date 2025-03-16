@@ -113,45 +113,57 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  loadProductDetail(id: string): void {
+  async loadProductDetail(id: string): Promise<void> {
     this.isLoading = true;
-    this.productService.getProductDetail(id).subscribe({
-      next: (data: Product | null) => {
-        if (data === null) {
-          console.error('Product data is null');
-          this.snackBar.open('Không thể tải chi tiết sản phẩm.', 'OK', { duration: 3000 });
-          this.isLoading = false;
-          return;
-        }
-        if (!data.reviews) data.reviews = [];
-        console.log('Review data:', data.reviews);
-        console.log('Product data from API:', data);
-        console.log('Related products _id:', data.relatedProducts?.map(rp => rp._id) || []);
-
-        if (data.relatedProducts && data.relatedProducts.length > 0) {
-          console.log('Kiểu dữ liệu _id sản phẩm liên quan đầu tiên:', typeof data.relatedProducts[0]._id);
-          console.log('Constructor name _id sản phẩm liên quan đầu tiên:', data.relatedProducts[0]._id.constructor.name);
-        }
-
-        this.product = {
-          ...data,
-          currentPrice: data.currentPrice ?? data.ProductPrice ?? 0,
-          originalPrice: data.originalPrice ?? data.ProductPrice ?? 0,
-          stockStatus: data.stockStatus ?? 'In Stock',
-          isOnSale: !!data.isOnSale,
-          discountPercentage: data.discountPercentage ?? 0,
-          averageRating: data.averageRating ?? 0,
-          totalReviewCount: data.totalReviewCount ?? 0
-        };
-        this.selectedImage = this.product.ProductImageCover || 'assets/images/default-product.png';
-        this.isLoading = false;
-      },
-      error: (error) => {
-        console.error('Error loading product detail:', error.message);
+    try {
+      const data = await this.productService.getProductDetail(id).toPromise();
+      if (!data) {
+        console.error('Product data is null');
         this.snackBar.open('Không thể tải chi tiết sản phẩm.', 'OK', { duration: 3000 });
         this.isLoading = false;
+        return;
       }
-    });
+
+      console.log('Related products data:', data.relatedProducts);
+      if (!data.reviews) data.reviews = [];
+
+      const enrichedProduct = await this.enrichProductData(data);
+      this.product = {
+        ...enrichedProduct,
+        currentPrice: enrichedProduct.currentPrice ?? enrichedProduct.ProductPrice ?? 0,
+        originalPrice: enrichedProduct.originalPrice ?? enrichedProduct.ProductPrice ?? 0,
+        stockStatus: enrichedProduct.stockStatus ?? 'In Stock',
+        isOnSale: !!enrichedProduct.isOnSale,
+        discountPercentage: enrichedProduct.discountPercentage ?? 0,
+        averageRating: enrichedProduct.averageRating ?? 0,
+        totalReviewCount: enrichedProduct.totalReviewCount ?? 0
+      };
+      this.selectedImage = this.product.ProductImageCover || 'assets/images/default-product.png';
+      this.isLoading = false;
+    } catch (error) {
+      console.error('Error loading product detail:', error);
+      this.snackBar.open('Không thể tải chi tiết sản phẩm.', 'OK', { duration: 3000 });
+      this.isLoading = false;
+    }
+  }
+
+  private async enrichProductData(product: Product): Promise<Product> {
+    if (product.relatedProducts && product.relatedProducts.length > 0) {
+      const enrichedRelated = await Promise.all(
+        product.relatedProducts.map(async related => {
+          if (!related.ProductImageCover) {
+            const imageData = await this.productService.getImageForRelatedProduct(related._id).toPromise();
+            return {
+              ...related,
+              ProductImageCover: imageData?.ProductImageCover || 'assets/images/default-product.png'
+            };
+          }
+          return related;
+        })
+      );
+      return { ...product, relatedProducts: enrichedRelated };
+    }
+    return product;
   }
 
   openLightbox(image: string): void {
@@ -161,7 +173,7 @@ export class ProductDetailComponent implements OnInit {
   selectImage(image: string): void {
     this.selectedImage = image || 'assets/images/default-product.png';
   }
-
+  
   addToCart(product: Product): void {
     if (product) {
       this.productService.addToCart(product._id, 1).subscribe({

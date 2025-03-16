@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, retry, throwError, combineLatest, of, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, retry, throwError, combineLatest, of, tap, switchMap } from 'rxjs';
 import { Product, Pagination } from '../classes/Product';
 
 @Injectable({
@@ -123,11 +123,47 @@ export class ProductService {
     if (!id) return of(null);
     return this.http.get<Product>(`${this.apiUrl}/products/${id}`).pipe(
       retry(2),
-      map(response => response || null),
+      map(async response => {
+        if (!response) return null;
+        if (response.relatedProducts && response.relatedProducts.length > 0) {
+          return await this.enrichRelatedProducts(response);
+        }
+        return response;
+      }),
+      switchMap(promise => promise), // Chuyển Promise thành Observable
       catchError(err => {
         console.warn(`Product ${id} not found or error occurred:`, err);
         return of(null);
       })
+    );
+  }
+
+  private async enrichRelatedProducts(product: Product): Promise<Product> {
+    if (!product.relatedProducts || product.relatedProducts.length === 0) return product;
+
+    const enrichedRelatedProducts = await Promise.all(
+      product.relatedProducts.map(async related => {
+        if (related._id && !related.ProductImageCover) {
+          const imageData = await this.getImageForRelatedProduct(related._id).toPromise();
+          return {
+            ...related,
+            ProductImageCover: imageData?.ProductImageCover || 'assets/images/default-product.png'
+          };
+        }
+        return related;
+      })
+    );
+
+    return {
+      ...product,
+      relatedProducts: enrichedRelatedProducts
+    };
+  }
+
+  getImageForRelatedProduct(productId: string): Observable<any> {
+    return this.http.get<{ ImageID: string }>(`${this.apiUrl}/products/${productId}`, { params: { fields: 'ImageID' } }).pipe(
+      switchMap(product => this.getImage(product.ImageID)),
+      catchError(() => of({ ProductImageCover: 'assets/images/default-product.png' }))
     );
   }
 

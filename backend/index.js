@@ -654,36 +654,62 @@ app.get('/api/products/:id', async (req, res) => {
       ? Number((validReviews.reduce((sum, r) => sum + r.Rating, 0) / validReviews.length).toFixed(1))
       : 0;
 
-    const relatedProducts = await productCollection.find({
-      CateID: product.CateID,
-      _id: { $ne: productId }
-    })
-      .limit(4)
-      .project({ ProductName: 1, ProductPrice: 1, ProductImageCover: 1, _id: 1 })
-      .toArray();
-
-    const relatedProductsWithStringId = relatedProducts.map(p => ({
-      ...p,
-      _id: p._id.toHexString()
-    }));
-
-    res.json({
-      ...productWithImages,
-      reviews: reviewsAgg,
-      averageRating,
-      totalReviewCount: validReviews.length,
-      relatedProducts: relatedProductsWithStringId
-    });
-  } catch (err) {
-    logger.error('Error fetching product detail', {
-      error: err.message,
-      stack: err.stack,
-      id: req.params.id,
-      correlationId: req.correlationId
-    });
-    res.status(500).json({ message: 'Lỗi hệ thống, vui lòng thử lại sau.', error: err.message });
-  }
-});
+      const relatedProducts = await productCollection.aggregate([
+        {
+          $match: {
+            CateID: product.CateID,
+            _id: { $ne: new ObjectId(productId) }
+          }
+        },
+        { $limit: 4 },
+        {
+          $lookup: {
+            from: "images",
+            let: { imageId: "$ImageID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$ImageID", "$$imageId"] } } },
+              { $project: { _id: 0, ProductImageCover: 1, ProductImageSub1: 1, ProductImageSub2: 1, ProductImageSub3: 1 } }
+            ],
+            as: "image"
+          }
+        },
+        { $unwind: { path: "$image", preserveNullAndEmptyArrays: true } },
+        {
+          $project: {
+            _id: 1,
+            ProductName: 1,
+            ProductPrice: 1,
+            ProductImageCover: { $ifNull: ["$image.ProductImageCover"] },
+            ProductImageSub1: "$image.ProductImageSub1",
+            ProductImageSub2: "$image.ProductImageSub2",
+            ProductImageSub3: "$image.ProductImageSub3"
+          }
+        }
+      ]).toArray();
+  
+      const relatedProductsWithStringId = relatedProducts.map(p => ({
+        ...p,
+        _id: p._id.toHexString()
+      }));
+  
+      // Giả định productWithImages, reviewsAgg, averageRating, validReviews đã được định nghĩa trước đó
+      res.json({
+        ...productWithImages,
+        reviews: reviewsAgg,
+        averageRating,
+        totalReviewCount: validReviews.length,
+        relatedProducts: relatedProductsWithStringId
+      });
+    } catch (err) {
+      logger.error('Error fetching product detail', {
+        error: err.message,
+        stack: err.stack,
+        id: req.params.id,
+        correlationId: req.correlationId
+      });
+      res.status(500).json({ message: 'Lỗi hệ thống, vui lòng thử lại sau.', error: err.message });
+    }
+  });
 
 // ===================== COMPARE API =====================
 

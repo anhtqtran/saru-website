@@ -1,3 +1,10 @@
+export interface RelatedProduct {
+  _id: string;
+  ProductName: string;
+  ProductPrice: number;
+  ProductImageCover?: string; // Thêm để chuẩn bị cho dữ liệu mới
+}
+
 export class Product {
   constructor(
     public _id: any = null,
@@ -21,20 +28,20 @@ export class Product {
     public ProductImageSub1?: string,
     public ProductImageSub2?: string,
     public ProductImageSub3?: string,
-    public averageRating?: number, // Có trong cả hai nhánh
-    public totalReviewCount?: number, // Có trong cả hai nhánh
-    public reviews?: Array<any>, // Có trong cả hai nhánh
-    public relatedProducts?: Array<any>, // Có trong cả hai nhánh
-    public CateName?: string, // Từ HEAD
-    public reviewCount?: number, // Từ HEAD
-    public description?: string, // Từ HEAD
-    public currentPrice: number = 0, // Từ main
-    public stockStatus?: string, // Từ main
-    public isOnSale?: boolean, // Từ main
-    public isPromotion?: boolean, // Từ main
-    public PromotionValue?: number, // Từ main
-    public originalPrice: number = 0, // Từ main
-    public discountPercentage: number = 0 // Từ main
+    public averageRating?: number,
+    public totalReviewCount?: number,
+    public reviews?: Array<any>,
+    public relatedProducts?: RelatedProduct[], // Cập nhật thành mảng RelatedProduct
+    public CateName?: string,
+    public reviewCount?: number,
+    public description?: string,
+    public currentPrice: number = 0,
+    public stockStatus?: string,
+    public isOnSale?: boolean,
+    public isPromotion?: boolean,
+    public PromotionValue?: number,
+    public originalPrice: number = 0,
+    public discountPercentage: number = 0
   ) {}
 }
 
