@@ -679,10 +679,10 @@ app.get('/api/products/:id', async (req, res) => {
             _id: 1,
             ProductName: 1,
             ProductPrice: 1,
-            ProductImageCover: { $ifNull: ["$image.ProductImageCover"] },
-            ProductImageSub1: "$image.ProductImageSub1",
-            ProductImageSub2: "$image.ProductImageSub2",
-            ProductImageSub3: "$image.ProductImageSub3"
+            ProductImageCover: { $ifNull: ["$image.ProductImageCover",""] },
+            ProductImageSub1: { $ifNull: ["$image.ProductImageSub1", ""] },
+            ProductImageSub2: { $ifNull: ["$image.ProductImageSub2", ""] },
+            ProductImageSub3: { $ifNull: ["$image.ProductImageSub3", ""] },
           }
         }
       ]).toArray();
