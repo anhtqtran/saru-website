@@ -208,60 +208,60 @@ app.get('/api/categories', async (req, res) => {
   }
 });
 
-// app.get('/api/products', async (req, res) => {
-//   try {
-//     const page = Math.max(1, parseInt(req.query.page) || 1);
-//     const limit = Math.min(50, Math.max(1, parseInt(req.query.limit) || 100));
-//     const skip = (page - 1) * limit;
+app.get('/api/products', async (req, res) => {
+  try {
+    const page = Math.max(1, parseInt(req.query.page) || 1);
+    const limit = Math.min(50, Math.max(1, parseInt(req.query.limit) || 100));
+    const skip = (page - 1) * limit;
 
-//     const filter = {};
-//     if (req.query.brand) filter.ProductBrand = req.query.brand;
-//     if (req.query.category) filter.CateID = req.query.category;
-//     if (req.query.minPrice || req.query.maxPrice) {
-//       filter.ProductPrice = {};
-//       if (req.query.minPrice) filter.ProductPrice.$gte = parseInt(req.query.minPrice);
-//       if (req.query.maxPrice) filter.ProductPrice.$lte = parseInt(req.query.maxPrice);
-//     }
-//     if (req.query.wineVolume) filter.WineVolume = req.query.wineVolume;
-//     if (req.query.wineType) filter.WineType = req.query.wineType;
-//     if (req.query.wineIngredient) filter.WineIngredient = req.query.wineIngredient;
-//     if (req.query.wineFlavor) filter.WineFlavor = req.query.wineFlavor;
-//     if (req.query.bestSellers === 'true') filter.isBestSeller = true;
-//     if (req.query.onSale === 'true') filter.isPromotion = true;
+    const filter = {};
+    if (req.query.brand) filter.ProductBrand = req.query.brand;
+    if (req.query.category) filter.CateID = req.query.category;
+    if (req.query.minPrice || req.query.maxPrice) {
+      filter.ProductPrice = {};
+      if (req.query.minPrice) filter.ProductPrice.$gte = parseInt(req.query.minPrice);
+      if (req.query.maxPrice) filter.ProductPrice.$lte = parseInt(req.query.maxPrice);
+    }
+    if (req.query.wineVolume) filter.WineVolume = req.query.wineVolume;
+    if (req.query.wineType) filter.WineType = req.query.wineType;
+    if (req.query.wineIngredient) filter.WineIngredient = req.query.wineIngredient;
+    if (req.query.wineFlavor) filter.WineFlavor = req.query.wineFlavor;
+    if (req.query.bestSellers === 'true') filter.isBestSeller = true;
+    if (req.query.onSale === 'true') filter.isPromotion = true;
 
     
 
-//     const sortOptions = {
-//       'priceAsc': { ProductPrice: 1 },
-//       'priceDesc': { ProductPrice: -1 }
-//     };
-//     const sort = sortOptions[req.query.sort] || { ProductPrice: -1 };
+    const sortOptions = {
+      'priceAsc': { ProductPrice: 1 },
+      'priceDesc': { ProductPrice: -1 }
+    };
+    const sort = sortOptions[req.query.sort] || { ProductPrice: -1 };
 
-//     const [items, total] = await Promise.all([
-//       productCollection.find(filter).sort(sort).skip(skip).limit(limit).toArray(),
-//       productCollection.countDocuments(filter)
-//     ]);
+    const [items, total] = await Promise.all([
+      productCollection.find(filter).sort(sort).skip(skip).limit(limit).toArray(),
+      productCollection.countDocuments(filter)
+    ]);
 
-//     const cateIDs = [...new Set(items.map(p => p.CateID))];
-//     const categories = await categoryCollection.find({ CateID: { $in: cateIDs } }).toArray();
-//     const cateMap = categories.reduce((acc, cur) => {
-//       acc[cur.CateID] = cur.CateName;
-//       return acc;
-//     }, {});
+    const cateIDs = [...new Set(items.map(p => p.CateID))];
+    const categories = await categoryCollection.find({ CateID: { $in: cateIDs } }).toArray();
+    const cateMap = categories.reduce((acc, cur) => {
+      acc[cur.CateID] = cur.CateName;
+      return acc;
+    }, {});
 
-//     const productsWithCategories = items.map(p => ({
-//       ...p,
-//       CateName: cateMap[p.CateID] || 'Unknown'
-//     }));
-//     res.json({
-//       data: productsWithCategories,
-//       pagination: { currentPage: page, totalPages: Math.ceil(total / limit), totalItems: total }
-//     });
-//   } catch (err) {
-//     logger.error('Error in GET /api/products', { error: err.message, correlationId: req.correlationId });
-//     res.status(500).json({ error: err.message });
-//   }
-// });
+    const productsWithCategories = items.map(p => ({
+      ...p,
+      CateName: cateMap[p.CateID] || 'Unknown'
+    }));
+    res.json({
+      data: productsWithCategories,
+      pagination: { currentPage: page, totalPages: Math.ceil(total / limit), totalItems: total }
+    });
+  } catch (err) {
+    logger.error('Error in GET /api/products', { error: err.message, correlationId: req.correlationId });
+    res.status(500).json({ error: err.message });
+  }
+});
 
 app.get('/api/filters', async (req, res) => {
   try {
@@ -2020,11 +2020,15 @@ app.get("/promotions", cors(), async (req, res) => {
   try {
     const promotions = await promotionsCollection.find({}).toArray();
     
-    // Thêm ScopeName cho từng promotion
+    // Thêm ScopeName cho từng promotion, tương tự như trong /combined-data-promotions
     const promotionsWithScope = await Promise.all(promotions.map(async (promotion) => {
-      const scope = await promotionScopeCollection.findOne({ SCOPEID: promotion.SCOPEID || 0 });
-      const scopeName = scope ? scope.SCOPE : 'Toàn ngành hàng';
-      return { ...promotion, ScopeName: scopeName };
+      const scopeId = promotion.ScopeID !== undefined ? Number(promotion.ScopeID) : 0; // Chuẩn hóa ScopeID
+      console.log(`Debug: PromotionID=${promotion.PromotionID}, Raw ScopeID=${promotion.ScopeID}, Converted ScopeID=${scopeId}`); // Log chi tiết
+      const scope = await promotionScopeCollection.findOne({ ScopeID: scopeId }); // Sử dụng ScopeID
+      console.log(`Debug: Promotion Scope found for ScopeID ${scopeId}:`, scope); // Log kết quả truy vấn
+      const scopeName = scope && scope.SCOPE ? scope.SCOPE : 'Toàn ngành hàng'; // Sử dụng SCOPE (in hoa) để khớp với dữ liệu thực tế
+      console.log(`Debug: PromotionID=${promotion.PromotionID}, ScopeName=${scopeName}`); // Log ScopeName
+      return { ...promotion, ScopeName: scopeName, type: 'promotion' };
     }));
 
     res.status(200).json(promotionsWithScope);
@@ -2037,7 +2041,6 @@ app.get("/promotions", cors(), async (req, res) => {
 // GET /promotions/:id
 app.get("/promotions/:id", cors(), async (req, res) => {
   try {
-    // Kiểm tra xem ID có hợp lệ không
     if (!ObjectId.isValid(req.params["id"])) {
       return res.status(400).json({ message: "Invalid promotion ID" });
     }
@@ -2046,9 +2049,13 @@ app.get("/promotions/:id", cors(), async (req, res) => {
     const promotion = await promotionsCollection.findOne({ _id: o_id });
 
     if (promotion) {
-      const scope = await promotionScopeCollection.findOne({ SCOPEID: promotion.SCOPEID || 0 });
-      const scopeName = scope ? scope.SCOPE : 'Toàn ngành hàng';
-      res.status(200).json({ ...promotion, ScopeName: scopeName });
+      const scopeId = promotion.ScopeID !== undefined ? Number(promotion.ScopeID) : 0; // Chuẩn hóa ScopeID
+      console.log(`Debug: PromotionID=${promotion.PromotionID}, Raw ScopeID=${promotion.ScopeID}, Converted ScopeID=${scopeId}`); // Log chi tiết
+      const scope = await promotionScopeCollection.findOne({ ScopeID: scopeId }); // Sử dụng ScopeID
+      console.log(`Debug: Promotion Scope found for ScopeID ${scopeId}:`, scope); // Log kết quả truy vấn
+      const scopeName = scope && scope.SCOPE ? scope.SCOPE : 'Toàn ngành hàng'; // Sử dụng SCOPE (in hoa) để khớp với dữ liệu thực tế
+      console.log(`Debug: PromotionID=${promotion.PromotionID}, ScopeName=${scopeName}`); // Log ScopeName
+      res.status(200).json({ ...promotion, ScopeName: scopeName, type: 'promotion' });
     } else {
       res.status(404).json({ message: "Promotion not found" });
     }
@@ -2061,43 +2068,32 @@ app.get("/promotions/:id", cors(), async (req, res) => {
 // GET /vouchers (Lấy tất cả vouchers)
 app.get("/vouchers", cors(), async (req, res) => {
   try {
-    // Lấy tất cả vouchers từ vouchersCollection
     const vouchers = await voucherCollection.find({}).toArray();
 
-    // Kiểm tra xem có dữ liệu voucher không
     if (!vouchers || vouchers.length === 0) {
       console.log("Debug: Không tìm thấy voucher nào.");
       return res.status(200).json([]);
     }
 
-    // Thêm ScopeName và UsedCount cho từng voucher
+    // Thêm UsedCount, RemainingQuantity và ScopeName cho từng voucher
     const vouchersWithDetails = await Promise.all(vouchers.map(async (voucher) => {
-      // Đảm bảo VoucherID tồn tại, nếu không thì gán giá trị mặc định là chuỗi rỗng
       const usedCount = await orderCollection.countDocuments({ VoucherID: voucher.VoucherID || '' });
-
-      // Đảm bảo ScopeID là số và tồn tại, nếu không thì mặc định là 0
-      const scopeId = voucher.ScopeID !== undefined ? Number(voucher.ScopeID) : 0;
-      console.log(`Debug: VoucherID=${voucher.VoucherID}, ScopeID=${scopeId}`); // Log để kiểm tra ScopeID
-
-      // Truy vấn ScopeName từ promotionScopeCollection
-      const scope = await promotionScopeCollection.findOne({ SCOPEID: scopeId });
-      console.log(`Debug: Scope found for SCOPEID ${scopeId}:`, scope); // Log kết quả truy vấn scope
-
-      // Gán ScopeName, nếu không tìm thấy thì mặc định là 'Toàn ngành hàng'
-      const scopeName = scope && scope.SCOPE ? scope.SCOPE : 'Toàn ngành hàng';
-
-      // Log để kiểm tra ScopeName
-      console.log(`Debug: VoucherID=${voucher.VoucherID}, ScopeName=${scopeName}`);
-
+      const scopeId = voucher.ScopeID !== undefined ? Number(voucher.ScopeID) : 0; // Chuẩn hóa ScopeID
+      console.log(`Debug: VoucherID=${voucher.VoucherID}, Raw ScopeID=${voucher.ScopeID}, Converted ScopeID=${scopeId}`); // Log chi tiết
+      const scope = await promotionScopeCollection.findOne({ ScopeID: scopeId }); // Sử dụng ScopeID
+      console.log(`Debug: Voucher Scope found for ScopeID ${scopeId}:`, scope); // Log kết quả truy vấn
+      const scopeName = scope && scope.SCOPE ? scope.SCOPE : 'Toàn ngành hàng'; // Sử dụng SCOPE (in hoa) để khớp với dữ liệu thực tế
+      console.log(`Debug: VoucherID=${voucher.VoucherID}, ScopeName=${scopeName}`); // Log ScopeName
       return {
         ...voucher,
         UsedCount: usedCount,
         RemainingQuantity: voucher.VoucherQuantity - usedCount,
-        ScopeName: scopeName // Đảm bảo ScopeName được bao gồm
+        ScopeName: scopeName,
+        type: 'voucher'
       };
     }));
 
-    console.log("Debug: Final vouchersWithDetails:", vouchersWithDetails); // Log kết quả cuối cùng
+    console.log("Debug: Final vouchersWithDetails:", vouchersWithDetails);
     res.status(200).json(vouchersWithDetails);
   } catch (error) {
     console.error("❌ Lỗi khi lấy danh sách vouchers:", error);
@@ -2108,7 +2104,6 @@ app.get("/vouchers", cors(), async (req, res) => {
 // GET /vouchers/:id
 app.get("/vouchers/:id", cors(), async (req, res) => {
   try {
-    // Kiểm tra xem ID có hợp lệ không
     if (!ObjectId.isValid(req.params["id"])) {
       return res.status(400).json({ message: "Invalid voucher ID" });
     }
@@ -2118,13 +2113,18 @@ app.get("/vouchers/:id", cors(), async (req, res) => {
 
     if (voucher) {
       const usedCount = await orderCollection.countDocuments({ VoucherID: voucher.VoucherID || '' });
-      const scope = await promotionScopeCollection.findOne({ SCOPEID: voucher.SCOPEID || 0 });
-      const scopeName = scope ? scope.SCOPE : 'Toàn ngành hàng';
+      const scopeId = voucher.ScopeID !== undefined ? Number(voucher.ScopeID) : 0; // Chuẩn hóa ScopeID
+      console.log(`Debug: VoucherID=${voucher.VoucherID}, Raw ScopeID=${voucher.ScopeID}, Converted ScopeID=${scopeId}`); // Log chi tiết
+      const scope = await promotionScopeCollection.findOne({ ScopeID: scopeId }); // Sử dụng ScopeID
+      console.log(`Debug: Voucher Scope found for ScopeID ${scopeId}:`, scope); // Log kết quả truy vấn
+      const scopeName = scope && scope.SCOPE ? scope.SCOPE : 'Toàn ngành hàng'; // Sử dụng SCOPE (in hoa) để khớp với dữ liệu thực tế
+      console.log(`Debug: VoucherID=${voucher.VoucherID}, ScopeName=${scopeName}`); // Log ScopeName
       res.status(200).json({
         ...voucher,
         UsedCount: usedCount,
         RemainingQuantity: voucher.VoucherQuantity - usedCount,
-        ScopeName: scopeName
+        ScopeName: scopeName,
+        type: 'voucher'
       });
     } else {
       res.status(404).json({ message: "Voucher not found" });

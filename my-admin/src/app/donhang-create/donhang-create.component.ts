@@ -6,12 +6,13 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 interface Order {
+  OrderID: string;
   CustomerID: string;
   OrderDate: string;
   OrderStatusID: number;
   PaymentMethodID: number;
   PaymentStatusID: number;
-  items: { ProductID: string; ProductName: string; Quantity: number; Price?: number }[];
+  items: { ProductID: string; ProductName: string; Quantity: number; Price: number }[];
   VoucherID?: string;
   TotalOrderAmount?: number;
 }
@@ -24,8 +25,9 @@ interface Customer {
 
 interface Product {
   id: string;
+  ProductID: string;
   ProductName: string;
-  ProductPrice: string;
+  ProductPrice: number;
 }
 
 @Component({
@@ -36,49 +38,29 @@ interface Product {
   imports: [CommonModule, FormsModule],
 })
 export class DonhangCreateComponent implements OnInit {
-  // Định nghĩa customer cho thông tin khách hàng
-  customer = {
-    name: '',
-    phone: '',
-    email: '',
-    address: '',
-    city: ''
-  };
-
-  // Định nghĩa products thay vì items để khớp với HTML
-  products: { name: string; quantity: number; price: number; total?: number }[] = [
-    { name: '', quantity: 1, price: 0 }
-  ];
-
   order: Order = {
-    CustomerID: '',
-    OrderDate: new Date().toISOString().split('T')[0], // Mặc định ngày hiện tại
-    OrderStatusID: 1, // Chờ xác nhận
-    PaymentMethodID: 0,
-    PaymentStatusID: 1, // Chưa thanh toán
-    items: [],
-    VoucherID: ''
-  };
-
-  customers: Customer[] = [];
-  paymentMethods = [
-    { PaymentMethodID: 1, PaymentMethod: 'Tiền mặt' },
-    { PaymentMethodID: 2, PaymentMethod: 'Chuyển khoản ngân hàng' }
-  ];
-  isPopupVisible = false;
-  popupMessage = '';
-  errMessage = '';
-  successMessage = '';
-
-  newOrder: any = {
     OrderID: '',
     CustomerID: '',
     OrderDate: new Date().toISOString().split('T')[0],
     OrderStatusID: 1,
+    PaymentMethodID: 1,
     PaymentStatusID: 1,
-    TotalOrderAmount: 0,
-    items: []
+    items: [],
+    VoucherID: '',
+    TotalOrderAmount: 0
   };
+
+  customers: Customer[] = [];
+  products: Product[] = [];
+  paymentMethods = [
+    { PaymentMethodID: 1, PaymentMethod: 'Tiền mặt' },
+    { PaymentMethodID: 2, PaymentMethod: 'Chuyển khoản ngân hàng' }
+  ];
+  suggestions: { [key: number]: Product[] } = {};
+  isPopupVisible = false;
+  popupMessage = '';
+  errMessage = '';
+  successMessage = '';
 
   constructor(
     private orderService: OrderServiceService,
@@ -88,49 +70,96 @@ export class DonhangCreateComponent implements OnInit {
 
   ngOnInit() {
     this.loadCustomers();
+    this.loadProducts();
+    this.addProduct(); // Thêm một sản phẩm mặc định khi khởi tạo
   }
 
   loadCustomers() {
-    this.http.get<Customer[]>('http://localhost:4002/customers').subscribe({
+    this.http.get<Customer[]>('http://localhost:4000/customers').subscribe({
       next: (data) => (this.customers = data),
       error: (err) => (this.errMessage = 'Lỗi khi tải danh sách khách hàng: ' + err.message),
     });
   }
 
+  loadProducts() {
+    this.http.get<Product[]>('http://localhost:4000/api/products').subscribe({
+      next: (data) => {
+        this.products = data.map(product => ({
+          id: product.id || '',
+          ProductID: product.ProductID || '',
+          ProductName: product.ProductName || '',
+          ProductPrice: Number(product.ProductPrice) || 0
+        }));
+      },
+      error: (err) => (this.errMessage = 'Lỗi khi tải danh sách sản phẩm: ' + err.message),
+    });
+  }
+
   addProduct() {
-    this.products.push({ name: '', quantity: 1, price: 0 });
+    this.order.items.push({ ProductID: '', ProductName: '', Quantity: 1, Price: 0 });
+    this.suggestions[this.order.items.length - 1] = [];
   }
 
-  updateTotalPrice() {
-    this.products.forEach(product => {
-      product.total = product.quantity * product.price;
-    });
-  }
-
-  removeProductWithConfirmation(index: number) {
+  removeProduct(index: number) {
     this.showPopup('Bạn có chắc muốn xóa sản phẩm này?', () => {
-      this.products.splice(index, 1);
-      this.updateTotalPrice();
+      this.order.items.splice(index, 1);
+      delete this.suggestions[index];
+      this.updateTotalAmount();
     });
   }
 
-  submitOrderWithConfirmation() {
-    this.showPopup('Bạn có chắc muốn lưu đơn hàng này?', () => {
-      // Map products sang items để gửi lên server
-      this.order.items = this.products.map(p => ({
-        ProductID: '', // Cần logic để lấy ProductID từ danh sách sản phẩm thực tế
-        ProductName: p.name,
-        Quantity: p.quantity,
-        Price: p.price
-      }));
-      this.order.CustomerID = this.customers.find(c => c.CustomerName === this.customer.name)?.CustomerID || '';
-      this.order.TotalOrderAmount = this.getTotalAmount();
+  onProductSearch(index: number, event: Event) {
+    const input = (event.target as HTMLInputElement).value.toLowerCase();
+    if (input) {
+      this.suggestions[index] = this.products.filter(product =>
+        product.ProductName.toLowerCase().includes(input)
+      );
+    } else {
+      this.suggestions[index] = [];
+    }
+  }
 
-      this.http.post('http://localhost:4002/orders', this.order).subscribe({
-        next: () => {
+  showSuggestions(index: number) {
+    if (this.order.items[index].ProductName && this.suggestions[index]?.length === 0) {
+      this.suggestions[index] = this.products.filter(product =>
+        product.ProductName.toLowerCase().includes(this.order.items[index].ProductName.toLowerCase())
+      );
+    }
+  }
+
+  hideSuggestions(index: number) {
+    setTimeout(() => {
+      this.suggestions[index] = [];
+    }, 200);
+  }
+
+  selectProduct(index: number, product: Product) {
+    const item = this.order.items[index];
+    item.ProductID = product.ProductID;
+    item.ProductName = product.ProductName;
+    item.Price = product.ProductPrice || 0;
+    this.suggestions[index] = [];
+    this.updateTotalAmount();
+  }
+
+  updateTotalAmount() {
+    this.order.TotalOrderAmount = this.order.items.reduce((sum, item) => {
+      return sum + (item.Price || 0) * (item.Quantity || 0);
+    }, 0);
+  }
+
+  submitOrder() {
+    this.showPopup('Bạn có chắc muốn tạo đơn hàng này?', () => {
+      if (!this.order.OrderID || !this.order.CustomerID || this.order.items.length === 0) {
+        this.errMessage = 'Vui lòng điền đầy đủ thông tin và ít nhất một sản phẩm!';
+        return;
+      }
+
+      this.orderService.addOrder(this.order).subscribe({
+        next: (response) => {
           this.successMessage = 'Tạo đơn hàng thành công!';
           this.errMessage = '';
-          setTimeout(() => this.router.navigate(['/']), 2000);
+          setTimeout(() => this.router.navigate(['/donhang-list']), 2000);
         },
         error: (err) => {
           this.errMessage = `Lỗi khi tạo đơn hàng: ${err.message}`;
@@ -140,58 +169,34 @@ export class DonhangCreateComponent implements OnInit {
     });
   }
 
-  resetFormWithConfirmation() {
+  resetForm() {
     this.showPopup('Bạn có chắc muốn reset form?', () => {
-      this.customer = { name: '', phone: '', email: '', address: '', city: '' };
-      this.products = [{ name: '', quantity: 1, price: 0 }];
       this.order = {
+        OrderID: '',
         CustomerID: '',
         OrderDate: new Date().toISOString().split('T')[0],
         OrderStatusID: 1,
-        PaymentMethodID: 0,
+        PaymentMethodID: 1,
         PaymentStatusID: 1,
         items: [],
-        VoucherID: ''
+        VoucherID: '',
+        TotalOrderAmount: 0
       };
+      this.suggestions = {};
+      this.addProduct();
       this.isPopupVisible = false;
-    });
-  }
-
-  getTotalAmount(): number {
-    return this.products.reduce((sum, p) => sum + (p.quantity * p.price), 0);
-  }
-
-  private showPopup(message: string, onConfirm: () => void) {
-    this.popupMessage = message;
-    this.isPopupVisible = true;
-    this.confirmPopup = () => {
-      onConfirm();
-      this.isPopupVisible = false;
-    };
-    this.cancelPopup = () => {
-      this.isPopupVisible = false;
-    };
-  }
-  createOrder() {
-    // Tính tổng tiền dựa trên items
-    this.newOrder.TotalOrderAmount = this.newOrder.items.reduce((sum: number, item: any) => {
-      return sum + (item.Price || 0) * (item.Quantity || 0);
-    }, 0);
-
-    this.orderService.addOrder(this.newOrder).subscribe({
-      next: (response) => {
-        console.log('Tạo đơn hàng thành công:', response);
-        this.router.navigate(['/donhang-list']);
-      },
-      error: (err) => {
-        this.errMessage = `Lỗi khi tạo đơn hàng: ${err.message}`;
-        console.error('Lỗi createOrder:', err);
-      }
     });
   }
 
   goBack() {
     this.router.navigate(['/donhang-list']);
+  }
+
+  private showPopup(message: string, onConfirm: () => void) {
+    this.popupMessage = message;
+    this.isPopupVisible = true;
+    this.confirmPopup = onConfirm;
+    this.cancelPopup = () => (this.isPopupVisible = false);
   }
 
   confirmPopup: () => void = () => {};

@@ -1,52 +1,61 @@
-<!-- donhang-create.component.html -->
 <div class="max-w-5xl mx-auto bg-gray-100 p-4">
   <div class="bg-white p-6 rounded-lg shadow-md">
     <h1 class="text-3xl font-bold text-[#B16628] mb-6">Tạo Đơn Hàng Mới</h1>
-    <form (ngSubmit)="createOrder()" class="space-y-6">
+    <form (ngSubmit)="submitOrder()" class="space-y-6">
       <div class="grid grid-cols-2 gap-4">
+        <!-- Mã Đơn Hàng -->
         <div>
           <label class="block text-sm font-medium text-gray-700" for="orderId">Mã Đơn Hàng</label>
           <input
             type="text"
             id="orderId"
-            [(ngModel)]="newOrder.OrderID"
+            [(ngModel)]="order.OrderID"
             name="OrderID"
             class="mt-1 p-2 border rounded-md w-full"
             required
             placeholder="Nhập mã đơn hàng"
           />
         </div>
+
+        <!-- Khách Hàng -->
         <div>
           <label class="block text-sm font-medium text-gray-700" for="customerId">Mã Khách Hàng</label>
-          <input
-            type="text"
+          <select
             id="customerId"
-            [(ngModel)]="newOrder.CustomerID"
+            [(ngModel)]="order.CustomerID"
             name="CustomerID"
             class="mt-1 p-2 border rounded-md w-full"
             required
-            placeholder="Nhập mã khách hàng"
-          />
+          >
+            <option value="" disabled>Chọn khách hàng</option>
+            <option *ngFor="let customer of customers" [value]="customer.CustomerID">
+              {{ customer.CustomerName }} ({{ customer.CustomerID }})
+            </option>
+          </select>
         </div>
       </div>
+
       <div class="grid grid-cols-2 gap-4">
+        <!-- Ngày Tạo -->
         <div>
           <label class="block text-sm font-medium text-gray-700" for="orderDate">Ngày Tạo</label>
           <input
             type="date"
             id="orderDate"
-            [(ngModel)]="newOrder.OrderDate"
+            [(ngModel)]="order.OrderDate"
             name="OrderDate"
             class="mt-1 p-2 border rounded-md w-full"
             required
-            [value]="newOrder.OrderDate || ''"
+            [value]="order.OrderDate || ''"
           />
         </div>
+
+        <!-- Trạng Thái Đơn Hàng -->
         <div>
           <label class="block text-sm font-medium text-gray-700" for="orderStatus">Trạng Thái Đơn Hàng</label>
           <select
             id="orderStatus"
-            [(ngModel)]="newOrder.OrderStatusID"
+            [(ngModel)]="order.OrderStatusID"
             name="OrderStatusID"
             class="mt-1 p-2 border rounded-md w-full"
             required
@@ -59,12 +68,14 @@
           </select>
         </div>
       </div>
+
       <div class="grid grid-cols-2 gap-4">
+        <!-- Trạng Thái Thanh Toán -->
         <div>
           <label class="block text-sm font-medium text-gray-700" for="paymentStatus">Trạng Thái Thanh Toán</label>
           <select
             id="paymentStatus"
-            [(ngModel)]="newOrder.PaymentStatusID"
+            [(ngModel)]="order.PaymentStatusID"
             name="PaymentStatusID"
             class="mt-1 p-2 border rounded-md w-full"
             required
@@ -73,24 +84,31 @@
             <option value="2">Đã thanh toán</option>
           </select>
         </div>
+
+        <!-- Phương Thức Thanh Toán -->
         <div>
-          <label class="block text-sm font-medium text-gray-700" for="totalAmount">Tổng Tiền</label>
-          <input
-            type="number"
-            id="totalAmount"
-            [(ngModel)]="newOrder.TotalOrderAmount"
-            name="TotalOrderAmount"
+          <label class="block text-sm font-medium text-gray-700" for="paymentMethod">Phương Thức Thanh Toán</label>
+          <select
+            id="paymentMethod"
+            [(ngModel)]="order.PaymentMethodID"
+            name="PaymentMethodID"
             class="mt-1 p-2 border rounded-md w-full"
-            placeholder="Nhập tổng tiền"
-          />
+            required
+          >
+            <option value="" disabled>Chọn phương thức</option>
+            <option *ngFor="let method of paymentMethods" [value]="method.PaymentMethodID">
+              {{ method.PaymentMethod }}
+            </option>
+          </select>
         </div>
       </div>
+
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-2">Danh Sách Sản Phẩm</label>
         <table class="w-full bg-gray-100 rounded-lg shadow-md mb-4">
           <thead>
             <tr class="bg-gray-200">
-              <th class="p-2 text-left">Tên Sản Phẩm</th>
+              <th class="p-2 text-left">Sản Phẩm</th>
               <th class="p-2 text-left">Số Lượng</th>
               <th class="p-2 text-left">Giá</th>
               <th class="p-2 text-left">Thành Tiền</th>
@@ -98,23 +116,42 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of newOrder.items; let i = index">
-              <td class="p-2">
+            <tr *ngFor="let item of order.items; let i = index">
+              <td class="p-2 relative">
                 <input
                   type="text"
                   [(ngModel)]="item.ProductName"
+                  (input)="onProductSearch(i, $event)"
+                  (focus)="showSuggestions(i)"
+                  (blur)="hideSuggestions(i)"
                   name="item{{i}}ProductName"
                   class="p-2 border rounded-md w-full"
                   placeholder="Nhập tên sản phẩm"
+                  autocomplete="off"
                 />
+                <!-- Danh sách gợi ý -->
+                <ul
+                  *ngIf="suggestions[i]!.length > 0"
+                  class="absolute z-10 bg-white border rounded-md w-full mt-1 max-h-48 overflow-y-auto shadow-lg"
+                >
+                  <li
+                    *ngFor="let product of suggestions[i]"
+                    (mousedown)="selectProduct(i, product)"
+                    class="p-2 hover:bg-gray-100 cursor-pointer"
+                  >
+                    {{ product.ProductName }} ({{ product.ProductPrice | currency: 'đ' }})
+                  </li>
+                </ul>
               </td>
               <td class="p-2">
                 <input
                   type="number"
                   [(ngModel)]="item.Quantity"
+                  (ngModelChange)="updateTotalAmount()"
                   name="item{{i}}Quantity"
                   class="p-2 border rounded-md w-full"
-                  placeholder="Nhập số lượng"
+                  min="1"
+                  required
                 />
               </td>
               <td class="p-2">
@@ -122,15 +159,15 @@
                   type="number"
                   [(ngModel)]="item.Price"
                   name="item{{i}}Price"
-                  class="p-2 border rounded-md w-full"
-                  placeholder="Nhập giá"
+                  class="p-2 border rounded-md w-full bg-gray-100"
+                  readonly
                 />
               </td>
-              <td class="p-2">{{ (item.Price || 0) * (item.Quantity || 0) | currency:'đ' }}</td>
+              <td class="p-2">{{ (item.Price || 0) * (item.Quantity || 0) | currency: 'đ' }}</td>
               <td class="p-2">
                 <button
                   type="button"
-                  (click)="newOrder.items.splice(i, 1)"
+                  (click)="removeProduct(i)"
                   class="bg-red-500 text-white px-2 py-1 rounded-md"
                 >
                   Xóa
@@ -141,17 +178,60 @@
         </table>
         <button
           type="button"
-          (click)="newOrder.items.push({ ProductName: '', Quantity: 0, Price: 0 })"
+          (click)="addProduct()"
           class="bg-green-500 text-white px-4 py-2 rounded-md mb-4"
         >
           Thêm Sản Phẩm
         </button>
       </div>
-      <div class="flex justify-end space-x-4">
-        <button type="submit" class="bg-[#F8BC3B] text-white px-4 py-2 rounded-md hover:opacity-90">Tạo Đơn Hàng</button>
-        <button type="button" (click)="goBack()" class="bg-gray-300 text-black px-4 py-2 rounded-md">Hủy</button>
+
+      <!-- Tổng Tiền -->
+      <div class="flex justify-end mb-4">
+        <p class="text-lg font-semibold">
+          Tổng Tiền: {{ order.TotalOrderAmount | currency: 'đ' }}
+        </p>
       </div>
+
+      <div class="flex justify-end space-x-4">
+        <button type="submit" class="bg-[#F8BC3B] text-white px-4 py-2 rounded-md hover:opacity-90">
+          Tạo Đơn Hàng
+        </button>
+        <button type="button" (click)="resetForm()" class="bg-gray-300 text-black px-4 py-2 rounded-md">
+          Reset
+        </button>
+        <button type="button" (click)="goBack()" class="bg-gray-300 text-black px-4 py-2 rounded-md">
+          Hủy
+        </button>
+      </div>
+
       <p *ngIf="errMessage" class="text-red-500 mt-4">{{ errMessage }}</p>
+      <p *ngIf="successMessage" class="text-green-500 mt-4">{{ successMessage }}</p>
     </form>
+
+    <!-- Popup xác nhận -->
+    <div
+      class="fixed inset-0 bg-gray-600 bg-opacity-50 flex items-center justify-center"
+      [class.hidden]="!isPopupVisible"
+    >
+      <div class="bg-white p-6 rounded-md shadow-lg">
+        <p class="mb-4 text-center">{{ popupMessage }}</p>
+        <div class="flex justify-center space-x-4">
+          <button
+            type="button"
+            (click)="confirmPopup()"
+            class="px-4 py-2 bg-[#F8BC3B] text-white rounded-md"
+          >
+            Xác nhận
+          </button>
+          <button
+            type="button"
+            (click)="cancelPopup()"
+            class="px-4 py-2 bg-gray-300 rounded-md"
+          >
+            Hủy
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

@@ -161,10 +161,6 @@ export class DonhangListComponent implements OnInit {
     this.updateDisplayedOrders();
   }
 
-  openCreateOrder(): void {
-    this.router.navigate(['/add-order']);
-  }
-
   onEdit(orderId: string): void {
     this.router.navigate([`/donhang-detail/${orderId}`]);
   }
@@ -326,5 +322,9 @@ export class DonhangListComponent implements OnInit {
         this.selectAllChecked = false;
         this.updateDisplayedOrders();
       })
+  }
+
+  openCreateOrder() {
+    this.router.navigate(['/donhang-create']);
   }
 }

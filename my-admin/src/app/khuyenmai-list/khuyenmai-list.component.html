@@ -100,14 +100,14 @@
           <td class="p-4 text-center">
             {{ promotion.type === 'voucher' ? (promotion.remainingQuantity ?? 'N/A') : 'N/A' }}
           </td>
-          <td class="p-4 text-center">{{ promotion.ScopeName || 'Toàn ngành hàng' }}</td> <!-- Đồng nhất với ScopeName -->
+          <td class="p-4 text-center">{{ promotion.ScopeName || 'Toàn ngành hàng' }}</td> 
           <td class="px-6 py-4 text-center">
             <div class="flex justify-center space-x-4 items-center">
               <button (click)="confirmDelete(promotion)" class="flex items-center">
-                <img src="/images/trash icon.png" alt="Trash Bin" class="w-6 h-6 filter invert-27 sepia-89 saturate-7491 hue-rotate-331 brightness-85 contrast-101 hover:brightness-75 hover:hue-rotate-15">
+                <img src="assets/images/trash icon.png" alt="Trash Bin" class="w-6 h-6 filter invert-27 sepia-89 saturate-7491 hue-rotate-331 brightness-85 contrast-101 hover:brightness-75 hover:hue-rotate-15">
               </button>
               <button (click)="goToPromotionDetail(promotion)" class="flex items-center">
-                <img src="/images/edit icon.png" alt="Edit" class="w-6 h-6 filter invert-45 sepia-92 saturate-2495 hue-rotate-186 brightness-95 contrast-103 hover:brightness-75 hover:hue-rotate-15">
+                <img src="assets/images/edit icon.png" alt="Edit" class="w-6 h-6 filter invert-45 sepia-92 saturate-2495 hue-rotate-186 brightness-95 contrast-103 hover:brightness-75 hover:hue-rotate-15">
               </button>
             </div>
           </td>

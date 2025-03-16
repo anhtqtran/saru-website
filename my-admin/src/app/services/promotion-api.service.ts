@@ -20,32 +20,41 @@ export class PromotionApiService {
     vouchers: Voucher[];
     promotionStatuses: PromotionStatus[];
     voucherStatuses: VoucherStatus[];
-    promotionScopes: { SCOPEID: number; SCOPE: string }[]; // Đồng nhất với backend
+    promotionScopes: { SCOPEID: number; SCOPE: string }[];
     total: { promotions: number; vouchers: number };
   }> {
     const headers = new HttpHeaders().set("Content-Type", "application/json");
     const requestOptions = { headers: headers };
 
     return this._http.get<any>(this.combinedDataUrl, requestOptions).pipe(
-      map(res => ({
-        promotions: res.promotions.map((p: any) => ({
-          ...p,
-          SCOPEID: p.SCOPEID !== undefined ? Number(p.SCOPEID) : 0, // Đồng nhất SCOPEID
-          ScopeName: p.ScopeName || 'Toàn ngành hàng' // Giữ ScopeName
-        })) as Promotion[],
-        vouchers: res.vouchers.map((v: any) => ({
-          ...v,
-          SCOPEID: v.SCOPEID !== undefined ? Number(v.SCOPEID) : 0, // Đồng nhất SCOPEID
-          ScopeName: v.ScopeName || 'Toàn ngành hàng' // Giữ ScopeName
-        })) as Voucher[],
-        promotionStatuses: res.promotionStatuses as PromotionStatus[],
-        voucherStatuses: res.voucherStatuses as VoucherStatus[],
-        promotionScopes: res.promotionScopes.map((scope: any) => ({
-          SCOPEID: scope.SCOPEID, // Đồng nhất với backend
-          SCOPE: scope.SCOPE // Đồng nhất với backend
-        })) as { SCOPEID: number; SCOPE: string }[],
-        total: res.total as { promotions: number; vouchers: number }
-      })),
+      map(res => {
+        console.log('Dữ liệu thô từ API:', res); // Log dữ liệu thô từ API
+
+        // Ánh xạ promotionScopes chính xác theo backend
+        const promotionScopes = res.promotionScopes
+          ? res.promotionScopes.map((scope: any) => ({
+              SCOPEID: scope.ScopeID !== undefined ? Number(scope.ScopeID) : 0, // Sử dụng ScopeID từ backend
+              SCOPE: scope.Scope || 'Toàn ngành hàng' // Sử dụng Scope từ backend
+            }))
+          : [{ SCOPEID: 0, SCOPE: 'Toàn ngành hàng' }]; // Giá trị mặc định nếu không có dữ liệu
+
+        return {
+          promotions: res.promotions.map((p: any) => ({
+            ...p,
+            SCOPEID: p.SCOPEID !== undefined ? Number(p.SCOPEID) : 0,
+            ScopeName: p.ScopeName || 'Toàn ngành hàng'
+          })) as Promotion[],
+          vouchers: res.vouchers.map((v: any) => ({
+            ...v,
+            SCOPEID: v.SCOPEID !== undefined ? Number(v.SCOPEID) : 0,
+            ScopeName: v.ScopeName || 'Toàn ngành hàng'
+          })) as Voucher[],
+          promotionStatuses: res.promotionStatuses as PromotionStatus[],
+          voucherStatuses: res.voucherStatuses as VoucherStatus[],
+          promotionScopes: promotionScopes as { SCOPEID: number; SCOPE: string }[],
+          total: res.total as { promotions: number; vouchers: number }
+        };
+      }),
       retry(3),
       catchError(this.handleError)
     );
@@ -89,18 +98,29 @@ export class PromotionApiService {
   getItemById(id: string, type: 'promotion' | 'voucher'): Observable<any> {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     const requestOptions = { headers: headers };
+    
+    // Xác định URL dựa trên type
     const url = type === 'promotion' ? `${this.promotionsDeleteUrl}/${id}` : `${this.vouchersDeleteUrl}/${id}`;
 
     return this._http.get<any>(url, requestOptions).pipe(
-      map(item => ({
-        ...item,
-        SCOPEID: item.SCOPEID !== undefined ? Number(item.SCOPEID) : 0, // Đồng nhất SCOPEID
-        ScopeName: item.ScopeName || 'Toàn ngành hàng' // Giữ ScopeName
-      })),
+      map(item => {
+        // Kiểm tra dữ liệu trả về
+        if (!item) {
+          throw new Error(`${type} không tồn tại với ID: ${id}`);
+        }
+
+        // Backend đã trả về ScopeID và ScopeName, chỉ cần kiểm tra và trả về dữ liệu
+        return {
+          ...item,
+          ScopeID: item.ScopeID !== undefined ? Number(item.ScopeID) : 0, // Đảm bảo ScopeID là số
+          ScopeName: item.ScopeName || 'Toàn ngành hàng' // Giữ ScopeName từ backend, fallback nếu không có
+        };
+      }),
       retry(3),
       catchError(this.handleError)
     );
   }
+
 
   // Cập nhật dữ liệu khuyến mãi hoặc voucher
   updateItem(id: string, type: 'promotion' | 'voucher', data: any): Observable<any> {

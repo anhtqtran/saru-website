@@ -112,15 +112,20 @@ export class KhuyenmaiDetailComponent implements OnInit {
   loadCombinedData() {
     this._service.getCombinedData().subscribe({
       next: (data) => {
-        this.promotionScopes = data.promotionScopes.map((scope: any) => ({
-          SCOPEID: Number(scope.SCOPEID),
-          SCOPE: scope.SCOPE || 'Toàn ngành hàng'
-        }));
-        this.updateScopeName();
+        console.log('Dữ liệu từ service:', data); // Log dữ liệu từ service
+        if (data.promotionScopes && Array.isArray(data.promotionScopes)) {
+          this.promotionScopes = [...data.promotionScopes]; // Sao chép trực tiếp dữ liệu từ service
+          console.log('Danh sách scopes sau khi xử lý:', this.promotionScopes); // Log để kiểm tra
+          this.updateScopeName();
+        } else {
+          this.errMessage = 'Danh sách phạm vi áp dụng không hợp lệ.';
+          this.promotionScopes = [{ SCOPEID: 0, SCOPE: 'Toàn ngành hàng' }];
+        }
       },
       error: (err) => {
         console.error('❌ Lỗi khi load combined data:', err);
         this.errMessage = 'Không thể tải danh sách phạm vi áp dụng.';
+        this.promotionScopes = [{ SCOPEID: 0, SCOPE: 'Toàn ngành hàng' }];
       }
     });
   }
