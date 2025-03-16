@@ -1,137 +1,187 @@
-<div class="font-inter bg-gray-100 text-gray-800">
-  <div class="w-full mx-auto p-6">
-    <div class="flex space-x-6">
-      <!-- Thông tin đơn hàng (2/3 màn hình) -->
-      <div class="flex-2 bg-white p-6 rounded-md shadow-lg w-2/3">
-        <div class="flex justify-between items-center mb-6">
-          <div>
-            <p class="text-xl font-semibold text-[#B16628]">Mã đơn: #{{order.code}}</p>
-            <p class="text-sm text-gray-500">{{order.date}}</p>
-          </div>
-          <div>
-            <span class="text-yellow-600">Trạng thái giao hàng: <span class="text-orange-500">{{order.shippingStatus}}</span></span><br>
-            <span class="text-yellow-600">Trạng thái thanh toán: <span class="text-orange-500">{{order.paymentStatus}}</span></span>
-          </div>
-        </div>
-
-        <div class="bg-white p-6 rounded-md shadow-lg">
-          <div class="mt-6">
-            <table class="min-w-full table-auto">
-              <thead class="bg-[#F8BC3B] text-white">
-                <tr>
-                  <th class="px-4 py-2 text-center">Sản phẩm</th>
-                  <th class="px-4 py-2 text-center">Số lượng</th>
-                  <th class="px-4 py-2 text-center">Giá</th>
-                  <th class="px-4 py-2 text-center">Thành tiền</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of order.items">
-                  <td class="px-4 py-2 text-center">{{item.name}}</td>
-                  <td class="px-4 py-2 text-center">{{item.quantity}}</td>
-                  <td class="px-4 py-2 text-center">{{item.price | currency:'VND':'symbol':'1.0-0'}}</td>
-                  <td class="px-4 py-2 text-center">{{item.total | currency:'VND':'symbol':'1.0-0'}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <!-- Shipping Info -->
-          <div class="mt-6">
-            <h3 class="text-xl font-semibold text-[#B16628]">Thông tin vận chuyển</h3>
-            <div class="flex justify-between mt-2">
-              <p class="text-sm">Mã vận chuyển:</p>
-              <p class="text-sm font-semibold">{{order.shippingInfo.code}}</p>
-            </div>
-            <div class="flex justify-between mt-2">
-              <p class="text-sm">Đơn vị vận chuyển:</p>
-              <p class="text-sm font-semibold">{{order.shippingInfo.company}}</p>
-            </div>
-            <div class="flex justify-between mt-2">
-              <p class="text-sm">Kho lấy hàng:</p>
-              <p class="text-sm font-semibold">{{order.shippingInfo.warehouse}}</p>
-            </div>
-            <div class="flex justify-between mt-2">
-              <p class="text-sm">Tổng khối lượng:</p>
-              <p class="text-sm font-semibold">{{order.shippingInfo.weight}}</p>
-            </div>
-          </div>
-
-          <!-- Order Action Buttons -->
-          <div class="mt-6 flex space-x-4">
-            <button (click)="updateShippingOrder()" class="bg-[#F2E8DA] text-gray-800 px-4 py-2 rounded-md">Cập nhật vận đơn</button>
-            <button (click)="printOrder()" class="bg-[#D8A850] text-white px-4 py-2 rounded-md">In vận đơn</button>
-          </div>
-        </div>
-
-        <!-- Payment Info -->
-        <div class="bg-white p-6 rounded-md shadow-lg mt-6">
-          <h3 class="text-xl font-semibold text-[#B16628]">Chưa thanh toán</h3>
-          <div class="mt-4">
-            <label for="order-note" class="block text-sm text-[#B16628]">Ghi chú đơn hàng:</label>
-            <textarea [(ngModel)]="order.note" id="order-note" class="w-full p-2 border rounded-md" placeholder="Nhập ghi chú..."></textarea>
-          </div>
-
-          <div class="mt-4 flex justify-between items-center">
+<div class="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md" *ngIf="order">
+  <div class="flex justify-between items-center mb-4">
+    <div>
+      <p class="text-lg font-bold">
+        Mã đơn: <span>#{{ order.OrderID || 'SARUK3456' }}</span>
+      </p>
+      <p class="text-sm text-gray-600">
+        {{ order.OrderDate || '20/01/2025' }}
+      </p>
+    </div>
+    <div>
+      <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md">
+        ADMIN <i class="fas fa-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+  <div class="flex justify-between items-center mb-4">
+    <div>
+      <p class="text-sm">
+        <span class="text-red-500">●</span>
+        Trạng thái giao hàng:
+        <span class="font-bold">
+          {{ order.OrderStatusText || 'Chưa giao hàng' }}
+        </span>
+      </p>
+      <p class="text-sm">
+        <span class="text-yellow-500">●</span>
+        Trạng thái thanh toán:
+        <span class="font-bold">
+          {{ order.PaymentStatusText || 'Chờ xử lý' }}
+        </span>
+      </p>
+    </div>
+  </div>
+  <div class="bg-gray-200 p-4 rounded-lg mb-4">
+    <div class="flex justify-between items-center mb-2">
+      <p class="font-bold">Đơn giao hàng</p>
+    </div>
+    <table class="w-full bg-white rounded-lg shadow-md mb-4">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="p-2 text-left">Tên sản phẩm</th>
+          <th class="p-2 text-left">Số lượng</th>
+          <th class="p-2 text-left">Giá</th>
+          <th class="p-2 text-left">Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of order.items || []">
+          <td class="p-2 flex items-center">
+            <img
+              alt="Product image"
+              class="w-12 h-12 mr-2"
+              height="50"
+              [src]="item.ProductImageCover || 'https://storage.googleapis.com/a1aa/image/S24dPZZMnMisNif8YB7zl1Qn-eIaStGNI-P_nDrssek.jpg'"
+              width="50"
+            />
             <div>
-              <p class="text-sm text-[#B16628]">Tổng tiền hàng: {{order.totalAmount | currency:'VND':'symbol':'1.0-0'}}</p>
-              <p class="text-sm text-[#B16628]">Giảm giá: {{order.discount | currency:'VND':'symbol':'1.0-0'}}</p>
+              <p>{{ item.ProductName || 'SKU' }}</p>
             </div>
-            <div class="flex flex-col items-end">
-              <p class="text-lg font-semibold text-[#B16628]">Tổng tiền: {{order.finalTotal | currency:'VND':'symbol':'1.0-0'}}</p>
-              <p class="text-sm text-[#B16628]">Phương thức thanh toán: {{order.paymentMethod}}</p>
-            </div>
-          </div>
-
-          <button (click)="updateOrder()" class="bg-[#F8BC3B] text-white px-4 py-2 rounded-md mt-6">Cập nhật</button>
-        </div>
+          </td>
+          <td class="p-2">{{ item.Quantity || 2 }}</td>
+          <td class="p-2">{{ item.Price || 100000 | number:'1.0-0' }} đ</td>
+          <td class="p-2">{{ item.TotalPrice || 200000 | number:'1.0-0' }} đ</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="flex justify-between items-center mb-4">
+      <div>
+        <p>Kho lấy hàng: {{ order.Warehouse || 'Địa điểm mặc định' }}</p>
+        <p>
+          Mã vận chuyển:
+          <span class="text-blue-500">{{ order.ShippingCode || '0123452888' }}</span>
+        </p>
+        <p>
+          Đơn vị vận chuyển:
+          <span class="text-blue-500">{{ order.ShippingProvider || 'Ahamove.vn' }}</span>
+        </p>
+        <p>
+          Vận đơn:
+          <span class="text-blue-500">{{ order.TrackingNumber || 'S123E24555-2373-1123' }}</span>
+        </p>
       </div>
-
-      <!-- Thông tin khách hàng (1/3 màn hình) -->
-      <div class="w-1/3 bg-white p-6 rounded-md shadow-lg">
-        <div class="mb-4">
-          <h3 class="text-xl font-semibold text-[#B16628]">Thông tin người mua</h3>
-          <p class="text-sm text-[#38312F]">{{customer.name}}</p>
-          <p class="text-sm text-[#38312F]">Đã đặt {{customer.orderCount}} đơn hàng</p>
-          <p class="text-sm text-[#38312F]">Doanh thu tích lũy: {{customer.totalRevenue | currency:'VND':'symbol':'1.0-0'}}</p>
-          <p class="text-sm text-[#38312F]">Điểm tích lũy: {{customer.loyaltyPoints}}</p>
+      <div>
+        <p>Tổng khối lượng: {{ order.TotalWeight || '1.2 kg' }}</p>
+        <p>Trạng thái vận chuyển: {{ order.ShippingStatus || 'Đang giao' }}</p>
+      </div>
+    </div>
+    <div class="mb-4">
+      <div class="flex items-center mb-2">
+        <label class="mr-2 font-bold">Cập nhật trạng thái giao hàng:</label>
+        <select
+          [(ngModel)]="order.OrderStatusID"
+          name="OrderStatusID"
+          class="border p-2 rounded-md"
+          (change)="updateOrderStatusText()"
+        >
+          <option *ngFor="let status of orderStatuses" [value]="status.OrderStatusID">
+            {{ status.Status }}
+          </option>
+        </select>
+      </div>
+      <div class="flex items-center mb-2">
+        <label class="mr-2 font-bold">Cập nhật trạng thái thanh toán:</label>
+        <select
+          [(ngModel)]="order.PaymentStatusID"
+          name="PaymentStatusID"
+          class="border p-2 rounded-md"
+          (change)="updatePaymentStatusText()"
+        >
+          <option *ngFor="let status of paymentStatuses" [value]="status.PaymentStatusID">
+            {{ status.PaymentStatus }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="flex justify-between">
+      <button class="bg-yellow-500 text-white px-4 py-2 rounded-md" (click)="cancelDelivery()">Hủy giao hàng</button>
+      <button class="bg-yellow-500 text-white px-4 py-2 rounded-md" (click)="updateShipping()">Cập nhật vận đơn</button>
+      <button class="bg-yellow-500 text-white px-4 py-2 rounded-md" (click)="printShipping()">In vận đơn</button>
+    </div>
+  </div>
+  <div class="bg-gray-200 p-4 rounded-lg mb-4">
+    <div class="flex justify-between items-center mb-2">
+      <p class="font-bold">
+        {{ order.PaymentStatusText === 'Đã thanh toán' ? 'Đã thanh toán' : 'Chưa thanh toán' }}
+      </p>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2" for="order-note">Ghi chú đơn hàng</label>
+      <textarea
+        class="w-full p-2 border rounded-md"
+        id="order-note"
+        rows="3"
+        [(ngModel)]="order.OrderNote"
+        name="OrderNote"
+      ></textarea>
+    </div>
+    <div class="mb-4">
+      <p *ngIf="order.VoucherID">
+        Voucher áp dụng: {{ order.VoucherID }} (Giảm {{ getVoucherValue(order.VoucherID) }}%, tương ứng {{ order.VoucherDiscount | number:'1.0-0' }} đ)
+      </p>
+      <p *ngIf="!order.VoucherID">Không có voucher được áp dụng.</p>
+    </div>
+    <div class="flex justify-between items-center mb-4">
+      <div>
+        <p>Số lượng sản phẩm: {{ (order.items || []).length || 2 }}</p>
+        <p>Giá: {{ order.Subtotal | number:'1.0-0' }} đ</p>
+        <p>Phí vận chuyển: {{ (order.ShippingFee || 5000) | number:'1.0-0' }} đ</p>
+        <div *ngIf="order?.VoucherID" class="mb-4">
+          <label class="block mb-2 font-semibold">Thông tin Voucher:</label>
+          <p>Voucher ID: {{ order.VoucherID }}</p>
+          <p *ngIf="order.VoucherDetails">Giá trị giảm: {{ order.VoucherDetails.VoucherValue }}%</p>
+          <p *ngIf="order.VoucherDetails">Hạn sử dụng: {{ order.VoucherDetails.VoucherExpiredDate | date }}</p>
+          <p *ngIf="order.VoucherDetails">Số lượng còn lại: {{ order.VoucherDetails.VoucherQuantity }}</p>
+          <p>Giảm giá: {{ order.VoucherDiscount || 0 }} đ</p>
         </div>
-
-        <div class="mb-4">
-          <h3 class="text-xl font-semibold text-[#B16628]">Thông tin giao hàng</h3>
-          <div class="flex justify-between mt-2">
-            <p class="text-sm text-[#38312F]">Tên người nhận:</p>
-            <p class="text-sm font-semibold text-[#38312F]">{{customer.name}}</p>
-          </div>
-          <div class="flex justify-between mt-2">
-            <p class="text-sm text-[#38312F]">Số điện thoại:</p>
-            <p class="text-sm font-semibold text-[#38312F]">{{customer.phone}}</p>
-          </div>
-          <div class="flex justify-between mt-2">
-            <p class="text-sm text-[#38312F]">Địa chỉ giao hàng:</p>
-            <p class="text-sm font-semibold text-[#38312F]">{{customer.address}}</p>
-          </div>
-          <div class="flex justify-between mt-2">
-            <p class="text-sm text-[#38312F]">Ghi chú về khách hàng:</p>
-            <p class="text-sm font-semibold text-[#38312F]">{{customer.note}}</p>
-          </div>
-        </div>
-
-        <div class="flex justify-between items-center mt-6">
-          <button *ngIf="orderStatus === 'Chưa xác nhận'" (click)="confirmOrder()" class="bg-[#D8A850] text-white px-4 py-2 rounded-md">Xác nhận đơn hàng</button>
-          <p *ngIf="orderStatus === 'Đã xác nhận'" class="text-[#F8BC3B] font-semibold">Đơn hàng đã được xác thực</p>
-        </div>
+        <p>Tổng tiền: {{ order.TotalOrderAmount | number:'1.0-0' }} đ</p>
+        <p>Phương thức thanh toán: {{ order.PaymentMethodText || 'COD' }}</p>
+      </div>
+      <div>
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded-md" (click)="updateOrder()">Cập nhật</button>
       </div>
     </div>
   </div>
-
-  <!-- Popup xác nhận -->
-  <div *ngIf="isPopupVisible" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-    <div class="bg-white p-6 rounded-md shadow-lg">
-      <p class="mb-4 text-center">{{popupMessage}}</p>
-      <div class="flex justify-center space-x-4">
-        <button (click)="closePopup()" class="px-4 py-2 bg-gray-300 rounded-md">Đóng</button>
-      </div>
+  <div class="flex justify-between items-start">
+    <div class="bg-gray-200 p-4 rounded-lg w-full">
+      <p class="font-bold mb-2">Thông tin người mua</p>
+      <p>{{ order.CustomerName }}</p>
+      <p>Đã đặt: {{ order.OrderCount || 1 }} đơn hàng</p>
+      <p>Doanh thu tích lũy: {{ (order.TotalRevenue || order.TotalOrderAmount) | number:'1.0-0' }} đ</p>
+      <p>Điểm tích lũy: {{ order.Points | number:'1.0-0' }}</p>
+      <p class="font-bold mt-4">Thông tin giao hàng</p>
+      <p>{{ order.CustomerName }}</p>
+      <p>{{ order.CustomerPhone }}</p>
+      <p>Địa chỉ giao hàng:</p>
+      <p>{{ order.CustomerAdd.address }}</p>
+      <p>{{ order.CustomerAdd.city }}, {{ order.CustomerAdd.state }}</p>
+      <p class="font-bold mt-4">Ghi chú của khách hàng</p>
+      <p>{{ order.CustomerNote || 'Không có' }}</p>
     </div>
   </div>
+</div>
+
+<div *ngIf="!order" class="text-center p-6">
+  <p>Đang tải hoặc không tìm thấy đơn hàng...</p>
 </div>
