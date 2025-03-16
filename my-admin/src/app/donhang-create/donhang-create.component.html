@@ -1,17 +1,28 @@
-<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg mt-8">
-  <h2 class="text-3xl font-bold text-center mb-6 text-[#B16628]">THÊM ĐƠN HÀNG MỚI</h2>
+<div class="container mx-auto p-6">
+  <h2 class="text-2xl font-bold mb-6 text-[#B16628] text-center">Tạo đơn hàng mới</h2>
+
+  <div *ngIf="errMessage" class="text-red-500 mb-4">
+    {{ errMessage }}
+  </div>
+
+  <div *ngIf="successMessage" class="text-green-500 mb-4">
+    {{ successMessage }}
+  </div>
+
   <form (ngSubmit)="onSubmit()">
-    <!-- Thông tin khách hàng -->
+    <!-- Khách hàng -->
     <div class="mb-4">
-      <label class="block text-base font-semibold mt-2 text-[#B16628]">Khách hàng <span class="text-red-500">*</span></label>
+      <label for="CustomerID" class="block text-base font-semibold mt-2 text-[#B16628]">Khách hàng <span class="text-red-500">*</span></label>
       <select
         [(ngModel)]="order.CustomerID"
         name="CustomerID"
+        id="CustomerID"
         required
+        aria-label="Chọn khách hàng"
         class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]"
       >
         <option value="" disabled>Chọn khách hàng</option>
-        <option *ngFor="let customer of customers" [value]="customer._id">
+        <option *ngFor="let customer of customers" [value]="customer.CustomerID">
           {{ customer.CustomerName }}
         </option>
       </select>
@@ -19,23 +30,27 @@
 
     <!-- Ngày đặt hàng -->
     <div class="mb-4">
-      <label class="block text-base font-semibold mt-2 text-[#B16628]">Ngày đặt hàng <span class="text-red-500">*</span></label>
+      <label for="OrderDate" class="block text-base font-semibold mt-2 text-[#B16628]">Ngày đặt hàng <span class="text-red-500">*</span></label>
       <input
         type="date"
         [(ngModel)]="order.OrderDate"
         name="OrderDate"
+        id="OrderDate"
         required
+        aria-label="Chọn ngày đặt hàng"
         class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]"
       />
     </div>
 
     <!-- Trạng thái đơn hàng -->
     <div class="mb-4">
-      <label class="block text-base font-semibold mt-2 text-[#B16628]">Trạng thái đơn hàng <span class="text-red-500">*</span></label>
+      <label for="OrderStatusID" class="block text-base font-semibold mt-2 text-[#B16628]">Trạng thái đơn hàng <span class="text-red-500">*</span></label>
       <select
         [(ngModel)]="order.OrderStatusID"
         name="OrderStatusID"
+        id="OrderStatusID"
         required
+        aria-label="Chọn trạng thái đơn hàng"
         class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]"
       >
         <option value="" disabled>Chọn trạng thái</option>
@@ -47,32 +62,54 @@
 
     <!-- Phương thức thanh toán -->
     <div class="mb-4">
-      <label class="block text-base font-semibold mt-2 text-[#B16628]">Phương thức thanh toán <span class="text-red-500">*</span></label>
+      <label for="PaymentMethodID" class="block text-base font-semibold mt-2 text-[#B16628]">Phương thức thanh toán <span class="text-red-500">*</span></label>
       <select
         [(ngModel)]="order.PaymentMethodID"
         name="PaymentMethodID"
+        id="PaymentMethodID"
         required
+        aria-label="Chọn phương thức thanh toán"
         class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]"
       >
         <option value="" disabled>Chọn phương thức</option>
-        <option *ngFor="let method of paymentMethods" [value]="method._id">
-          {{ method.Method }}
+        <option *ngFor="let method of paymentMethods" [value]="method.PaymentMethodID">
+          {{ method.PaymentMethod }}
         </option>
       </select>
     </div>
 
     <!-- Trạng thái thanh toán -->
     <div class="mb-4">
-      <label class="block text-base font-semibold mt-2 text-[#B16628]">Trạng thái thanh toán <span class="text-red-500">*</span></label>
+      <label for="PaymentStatusID" class="block text-base font-semibold mt-2 text-[#B16628]">Trạng thái thanh toán <span class="text-red-500">*</span></label>
       <select
         [(ngModel)]="order.PaymentStatusID"
         name="PaymentStatusID"
+        id="PaymentStatusID"
         required
+        aria-label="Chọn trạng thái thanh toán"
         class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]"
       >
         <option value="" disabled>Chọn trạng thái</option>
-        <option *ngFor="let status of paymentStatuses" [value]="status._id">
-          {{ status.Status }}
+        <option *ngFor="let status of paymentStatuses" [value]="status.PaymentStatusID">
+          {{ status.PaymentStatus }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Áp dụng khuyến mãi -->
+    <div class="mb-4">
+      <label for="VoucherID" class="block text-base font-semibold mt-2 text-[#B16628]">Áp dụng khuyến mãi</label>
+      <select
+        [(ngModel)]="order.VoucherID"
+        name="VoucherID"
+        id="VoucherID"
+        aria-label="Chọn khuyến mãi"
+        (ngModelChange)="updateTotalAmount()"
+        class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]"
+      >
+        <option value="" disabled>Chọn khuyến mãi</option>
+        <option *ngFor="let voucher of vouchers" [value]="voucher.VoucherID">
+          {{ voucher.VoucherID }} - Giảm {{ voucher.VoucherValue }}% (Hết hạn: {{ voucher.VoucherExpiredDate }})
         </option>
       </select>
     </div>
@@ -80,77 +117,115 @@
     <!-- Sản phẩm -->
     <div class="mb-4">
       <label class="block text-base font-semibold mt-2 text-[#B16628]">Sản phẩm <span class="text-red-500">*</span></label>
-      <div *ngFor="let item of order.items; let i = index" class="mb-2 flex space-x-2 items-center">
-        <select
-          [(ngModel)]="item.ProductID"
-          [name]="'product_' + i"
-          required
-          class="w-1/2 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]"
-          (change)="updateProductPrice(i)"
+      <div *ngIf="isLoading" class="text-gray-500">Đang tải sản phẩm...</div>
+      <div *ngIf="!isLoading">
+        <div *ngFor="let item of order.items; let i = index" class="mb-2 flex space-x-2 items-center">
+          <div class="relative w-1/2">
+            <input
+              type="text"
+              [(ngModel)]="item.ProductName"
+              [name]="'product_' + i"
+              [id]="'product_' + i"
+              required
+              (input)="onProductSearch(i, $event)"
+              (focus)="showSuggestions(i)"
+              (blur)="hideSuggestions(i)"
+              class="w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]"
+              placeholder="Nhập tên sản phẩm..."
+              aria-label="Nhập tên sản phẩm"
+            />
+            <div *ngIf="suggestions[i] && suggestions[i].length > 0" class="absolute z-10 w-full bg-white border border-gray-300 rounded-md mt-1 max-h-40 overflow-y-auto">
+              <div *ngFor="let suggestion of suggestions[i]" (click)="selectProduct(i, suggestion)" class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                {{ suggestion.ProductName }} ({{ suggestion.ProductPrice }} VNĐ)
+              </div>
+            </div>
+          </div>
+          <input
+            type="number"
+            [(ngModel)]="item.Quantity"
+            [name]="'quantity_' + i"
+            [id]="'quantity_' + i"
+            placeholder="Số lượng"
+            min="1"
+            required
+            class="w-1/4 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]"
+            (input)="updateTotalAmount()"
+            aria-label="Nhập số lượng sản phẩm"
+          />
+          <button
+            type="button"
+            (click)="removeProduct(i)"
+            class="text-red-500 hover:text-red-700"
+            aria-label="Xóa sản phẩm"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+        <button
+          type="button"
+          (click)="addProduct()"
+          class="text-blue-500 hover:text-blue-700 mt-2"
+          aria-label="Thêm sản phẩm mới"
         >
-          <option value="" disabled>Chọn sản phẩm</option>
-          <option *ngFor="let product of products" [value]="product._id">
-            {{ product.name }} ({{ product.price }} VNĐ)
-          </option>
-        </select>
-        <input
-          type="number"
-          [(ngModel)]="item.Quantity"
-          [name]="'quantity_' + i"
-          placeholder="Số lượng"
-          min="1"
-          required
-          class="w-1/4 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-[#F8BC3B]"
-          (input)="updateProductPrice(i)"
-        />
-        <button type="button" (click)="removeProduct(i)" class="text-red-500 hover:text-red-700">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+          + Thêm sản phẩm
         </button>
       </div>
-      <button type="button" (click)="addProduct()" class="text-blue-500 hover:text-blue-700 mt-2">
-        + Thêm sản phẩm
-      </button>
     </div>
 
     <!-- Tổng tiền -->
     <div class="mb-4">
       <label class="block text-base font-semibold mt-2 text-[#B16628]">Tổng tiền</label>
-      <p class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100">
-        {{ getTotalAmount() }} VNĐ
-      </p>
+      <div class="w-full px-4 py-2 border border-gray-300 rounded-md bg-gray-100">
+        <p>Tổng trước giảm: {{ getSubtotal() }} VNĐ</p>
+        <p *ngIf="order.VoucherID && getDiscount() > 0">Giảm giá: {{ getDiscount() }} VNĐ</p>
+        <p>Tổng sau giảm: {{ getTotalAmount() }} VNĐ</p>
+      </div>
     </div>
 
     <!-- Nút điều khiển -->
-    <div class="flex justify-between mt-4 space-x-4">
+    <div class="flex justify-end space-x-4">
       <button
         type="button"
         (click)="showCancelPopup()"
-        class="bg-[#F8BC3B] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#f0a826]"
+        class="px-6 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors duration-300"
+        aria-label="Hủy bỏ tạo đơn hàng"
       >
-        Hủy thay đổi
+        Hủy
       </button>
       <button
         type="submit"
-        class="bg-[#F8BC3B] text-white px-6 py-2 rounded-md shadow-md hover:bg-[#f0a826]"
         [disabled]="isSubmitting"
+        class="px-6 py-2 bg-[#B16628] text-white rounded-md hover:bg-[#F8BC3B] transition-colors duration-300"
+        aria-label="Lưu đơn hàng"
       >
-        Lưu
+        {{ isSubmitting ? 'Đang lưu...' : 'Lưu' }}
       </button>
     </div>
   </form>
-</div>
 
-<!-- Pop-up xác nhận hủy -->
-<div *ngIf="isCancelPopupVisible" class="fixed inset-0 bg-[#F2E8DA] bg-opacity-50 flex justify-center items-center z-50">
-  <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-    <p class="text-lg font-semibold mb-4 text-gray-800">Bạn chắc chắn muốn hủy thay đổi?</p>
-    <button (click)="confirmCancel()" class="bg-[#F8BC3B] text-white px-6 py-2 rounded-md shadow-md mr-2 hover:bg-[#f0a826]">
-      Xác nhận
-    </button>
-    <button (click)="closeCancelPopup()" class="border border-[#F8BC3B] text-[#F8BC3B] px-6 py-2 rounded-md shadow-md hover:bg-[#F8BC3B] hover:text-white transition">
-      Hủy
-    </button>
+  <!-- Popup xác nhận hủy -->
+  <div *ngIf="isCancelPopupVisible" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm w-full">
+      <h3 class="text-lg font-semibold mb-4">Xác nhận hủy</h3>
+      <p class="mb-4">Bạn có chắc chắn muốn hủy? Các thay đổi sẽ không được lưu.</p>
+      <div class="flex justify-end space-x-4">
+        <button
+          (click)="closeCancelPopup()"
+          class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 transition-colors duration-300"
+          aria-label="Không hủy bỏ"
+        >
+          Không
+        </button>
+        <button
+          (click)="confirmCancel()"
+          class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors duration-300"
+          aria-label="Xác nhận hủy bỏ"
+        >
+          Có
+        </button>
+      </div>
+    </div>
   </div>
 </div>

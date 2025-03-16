@@ -27,6 +27,8 @@ const customerCollection = database.collection("customers");
 const orderdetailsCollection = database.collection("orderdetails");
 const productCollection = database.collection("products");
 const imagesCollection = database.collection("images");
+const voucherCollection = database.collection("Vouchers");
+const voucherConditionCollection = database.collection("VoucherConditions");
 
 // API kiểm tra kết nối server
 app.get("/", (req, res) => {
@@ -159,7 +161,7 @@ app.get("/orders/:id", async (req, res) => {
   }
 });
 
-// Các endpoint khác giữ nguyên
+// Customer
 app.get("/customers", async (req, res) => {
   try {
     const customers = await customerCollection.find().toArray();
@@ -168,7 +170,7 @@ app.get("/customers", async (req, res) => {
     res.status(500).json({ message: "Lỗi khi lấy danh sách khách hàng", error: error.message });
   }
 });
-
+//Trạng thái order
 app.get("/order-status", async (req, res) => {
   try {
     const orderStatuses = await orderStatusCollection.find().toArray();
@@ -177,7 +179,7 @@ app.get("/order-status", async (req, res) => {
     res.status(500).json({ message: "Lỗi khi lấy trạng thái đơn hàng", error: error.message });
   }
 });
-
+//Phương thức thanh toán
 app.get("/payment-methods", async (req, res) => {
   try {
     const paymentMethods = await paymentMethodCollection.find().toArray();
@@ -186,7 +188,7 @@ app.get("/payment-methods", async (req, res) => {
     res.status(500).json({ message: "Lỗi khi lấy phương thức thanh toán", error: error.message });
   }
 });
-
+//trạng thái thanh toán
 app.get("/payment-status", async (req, res) => {
   try {
     const paymentStatuses = await paymentStatusCollection.find().toArray();
@@ -195,7 +197,7 @@ app.get("/payment-status", async (req, res) => {
     res.status(500).json({ message: "Lỗi khi lấy trạng thái thanh toán", error: error.message });
   }
 });
-
+//sản phẩm
 app.get("/products", async (req, res) => {
   try {
     const products = await productCollection.find().toArray();
@@ -224,7 +226,9 @@ app.delete("/orders/:id", async (req, res) => {
 app.post("/orders", async (req, res) => {
   try {
     const newOrder = req.body;
+    console.log('Dữ liệu nhận từ frontend:', newOrder);
     if (!newOrder || !newOrder.CustomerID || !newOrder.OrderID) {
+      console.log('Dữ liệu không hợp lệ:', { CustomerID: newOrder.CustomerID, OrderID: newOrder.OrderID });
       return res.status(400).json({ message: "Dữ liệu đơn hàng không hợp lệ" });
     }
     newOrder.createdAt = new Date();
@@ -236,7 +240,7 @@ app.post("/orders", async (req, res) => {
     }
   } catch (error) {
     console.error("Lỗi khi tạo đơn hàng:", error);
-    res.status(500).json({ message: "Lỗi server khi tạo đơn hàng" });
+    res.status(500).json({ message: "Lỗi server khi tạo đơn hàng", error: error.message });
   }
 });
 
@@ -258,6 +262,29 @@ app.put("/orders/:id", async (req, res) => {
     res.status(500).json({ message: "Lỗi server khi cập nhật đơn hàng" });
   }
 });
+
+// API lấy danh sách voucher
+app.get("/vouchers", async (req, res) => {
+  try {
+    const vouchers = await voucherCollection.find().toArray();
+    res.json(vouchers);
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách voucher:", error);
+    res.status(500).json({ message: "Lỗi server khi lấy danh sách voucher", error: error.message });
+  }
+});
+
+// API lấy danh sách điều kiện voucher
+app.get("/voucher-conditions", async (req, res) => {
+  try {
+    const conditions = await voucherConditionCollection.find().toArray();
+    res.json(conditions);
+  } catch (error) {
+    console.error("Lỗi khi lấy danh sách điều kiện voucher:", error);
+    res.status(500).json({ message: "Lỗi server khi lấy điều kiện voucher", error: error.message });
+  }
+});
+
 
 // API gộp dữ liệu
 app.get("/combined-data", cors(), async (req, res) => {
