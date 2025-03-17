@@ -14,6 +14,7 @@ const rateLimit = require('express-rate-limit');
 const winston = require('winston');
 const cron = require('node-cron');
 const multer = require('multer'); // Thêm dòng này
+const nodemailer = require('nodemailer');
 const mail = require('./node-mailer');
 const app = express();
 
@@ -653,36 +654,62 @@ app.get('/api/products/:id', async (req, res) => {
       ? Number((validReviews.reduce((sum, r) => sum + r.Rating, 0) / validReviews.length).toFixed(1))
       : 0;
 
-    const relatedProducts = await productCollection.find({
-      CateID: product.CateID,
-      _id: { $ne: productId }
-    })
-      .limit(4)
-      .project({ ProductName: 1, ProductPrice: 1, ProductImageCover: 1, _id: 1 })
-      .toArray();
-
-    const relatedProductsWithStringId = relatedProducts.map(p => ({
-      ...p,
-      _id: p._id.toHexString()
-    }));
-
-    res.json({
-      ...productWithImages,
-      reviews: reviewsAgg,
-      averageRating,
-      totalReviewCount: validReviews.length,
-      relatedProducts: relatedProductsWithStringId
-    });
-  } catch (err) {
-    logger.error('Error fetching product detail', {
-      error: err.message,
-      stack: err.stack,
-      id: req.params.id,
-      correlationId: req.correlationId
-    });
-    res.status(500).json({ message: 'Lỗi hệ thống, vui lòng thử lại sau.', error: err.message });
-  }
-});
+      const relatedProducts = await productCollection.aggregate([
+        {
+          $match: {
+            CateID: product.CateID,
+            _id: { $ne: new ObjectId(productId) }
+          }
+        },
+        { $limit: 4 },
+        {
+          $lookup: {
+            from: "images",
+            let: { imageId: "$ImageID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$ImageID", "$$imageId"] } } },
+              { $project: { _id: 0, ProductImageCover: 1, ProductImageSub1: 1, ProductImageSub2: 1, ProductImageSub3: 1 } }
+            ],
+            as: "image"
+          }
+        },
+        { $unwind: { path: "$image", preserveNullAndEmptyArrays: true } },
+        {
+          $project: {
+            _id: 1,
+            ProductName: 1,
+            ProductPrice: 1,
+            ProductImageCover: { $ifNull: ["$image.ProductImageCover",""] },
+            ProductImageSub1: { $ifNull: ["$image.ProductImageSub1", ""] },
+            ProductImageSub2: { $ifNull: ["$image.ProductImageSub2", ""] },
+            ProductImageSub3: { $ifNull: ["$image.ProductImageSub3", ""] },
+          }
+        }
+      ]).toArray();
+  
+      const relatedProductsWithStringId = relatedProducts.map(p => ({
+        ...p,
+        _id: p._id.toHexString()
+      }));
+  
+      // Giả định productWithImages, reviewsAgg, averageRating, validReviews đã được định nghĩa trước đó
+      res.json({
+        ...productWithImages,
+        reviews: reviewsAgg,
+        averageRating,
+        totalReviewCount: validReviews.length,
+        relatedProducts: relatedProductsWithStringId
+      });
+    } catch (err) {
+      logger.error('Error fetching product detail', {
+        error: err.message,
+        stack: err.stack,
+        id: req.params.id,
+        correlationId: req.correlationId
+      });
+      res.status(500).json({ message: 'Lỗi hệ thống, vui lòng thử lại sau.', error: err.message });
+    }
+  });
 
 // ===================== COMPARE API =====================
 
@@ -1714,8 +1741,9 @@ const { Server } = require('socket.io');
 const server = require('http').createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:4200", "http://localhost:4002"],
+    origin: ["http://localhost:4001", "http://localhost:4002", "http://localhost:4200"], // Thêm localhost:4200 nếu cần
     methods: ["GET", "POST"],
+    credentials: true // Thêm dòng này
   },
 });
 
@@ -1730,7 +1758,7 @@ io.on("connection", (socket) => {
   });
 
   socket.on("sendMessage", async (data) => {
-    console.log("📥 Tin nhắn nhận được:", data);
+    console.log("Tin nhắn nhận được:", data);
     if (!data.targetUser) {
       logger.warn("Thiếu targetUser trong dữ liệu gửi đến server", { correlationId: 'socket' });
       return;
@@ -1779,6 +1807,40 @@ app.get("/messages", async (req, res) => {
   }
 });
 
+//=================================FEEDBACKS API=================================//
+// API lấy danh sách feedback gộp thông tin
+app.get('/api/feedbacks', async (req, res) => {
+  try {
+    // Lấy tất cả reviews
+    const reviews = await reviewCollection.find().toArray();
+
+    // Gộp dữ liệu từ products và customers
+    const feedbacks = await Promise.all(
+      reviews.map(async (review) => {
+        // Tìm product liên quan dựa trên ProductID
+        const product = await productCollection.findOne({ ProductID: review.ProductID });
+        // Tìm customer liên quan dựa trên CustomerID
+        const customer = await customerCollection.findOne({ CustomerID: review.CustomerID });
+
+        return {
+          reviewID: review.ReviewID,
+          productName: product ? product.ProductName : 'Unknown Product',
+          customerName: customer ? customer.CustomerName : 'Unknown Customer',
+          customerAvatar: customer ? customer.CustomerAvatar || 'https://dummyjson.com/icon/default/128' : 'https://dummyjson.com/icon/default/128', // Ảnh mặc định nếu không có
+          content: review.Content,
+          rating: review.Rating,
+          datePosted: review.DatePosted,
+        };
+      })
+    );
+
+    logger.info('Fetched feedbacks successfully', { count: feedbacks.length, correlationId: req.correlationId });
+    res.status(200).json(feedbacks);
+  } catch (error) {
+    logger.error('Error fetching feedbacks', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
 
 //=====anhthucode
 app.post('/api/upload', upload.single('image'), async (req, res) => {
@@ -1792,7 +1854,7 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
 
     res.json({ message: "Upload thành công!", url: imageUrl });
   } catch (err) {
-    console.error("❌ Lỗi upload ảnh:", err);
+    console.error("Lỗi upload ảnh:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -1862,7 +1924,7 @@ app.get('/api/products-full-details', async (req, res) => {
 
     res.json({ data: productsWithDetails });
   } catch (err) {
-    console.error('❌ Lỗi trong API /api/products-full-details:', err);
+    console.error('Lỗi trong API /api/products-full-details:', err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -1936,7 +1998,7 @@ app.get('/api/productstocks', async (req, res) => {
 
     res.json(stocks);
   } catch (err) {
-    console.error("❌ Lỗi khi lấy dữ liệu tồn kho:", err);
+    console.error("Lỗi khi lấy dữ liệu tồn kho:", err);
     res.status(500).json({ error: 'Lỗi server!' });
   }
 });

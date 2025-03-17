@@ -50,6 +50,8 @@ import { BlogcategoryComponent } from './blogcategory/blogcategory.component';
 import { MessageComponent } from './message/message.component';
 import { PaymentdetailComponent } from './paymentdetail/paymentdetail.component';
 import { PaymentsuccessfulComponent } from './paymentsuccessful/paymentsuccessful.component';
+import { BlogrssComponent } from './blogrss/blogrss.component';
+import { EmojiPipe } from './pipe/emoji.pipe';
 
 
 
@@ -90,7 +92,7 @@ import { PaymentsuccessfulComponent } from './paymentsuccessful/paymentsuccessfu
     MessageComponent,
     PaymentdetailComponent,
     PaymentsuccessfulComponent,
-
+    BlogrssComponent,
   ],
   imports: [
     AppRoutingModule,
@@ -112,6 +114,7 @@ import { PaymentsuccessfulComponent } from './paymentsuccessful/paymentsuccessfu
       preventDuplicates: true,
       closeButton: true
     }),
+    EmojiPipe
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

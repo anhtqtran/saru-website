@@ -38,6 +38,7 @@ export class BlogdetailComponent implements OnInit {
           title: data.BlogTitle,
           image: data.BlogImage,
           summary: data.BlogContent.substring(0, 150) + '...',
+          categoryID: data.categoryID,
           categoryName: data.categoryName,
           content: data.BlogContent
         };

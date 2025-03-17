@@ -33,17 +33,15 @@
 
       <!-- Nội dung -->
       <div class="p-4">
-        <h2
-          class="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#85461F] transition-colors duration-200 line-clamp-2"
-        >
+        <a [routerLink]="'/blog/' + blog.id" class="block text-xl font-bold text-gray-900 mb-3 group-hover:text-[#F8BC3B] transition-colors duration-200 line-clamp-2">
           {{ blog.title }}
-        </h2>
+        </a>        
         <p class="text-gray-600 text-sm line-clamp-2 mb-4 leading-relaxed">
           {{ blog.summary }}
         </p>
         <a
           [routerLink]="['/blog', blog.id]"
-          class="inline-flex items-center text-[#F8BC3B] hover:text-indigo-800 font-semibold transition-colors duration-200 group"
+          class="inline-flex items-center text-[#F8BC3B] hover:text-[#85461F] font-semibold transition-colors duration-200 group"
         >
           Đọc thêm
           <svg
@@ -67,7 +65,7 @@
 
   <!-- Loading state -->
   <div *ngIf="!blogs.length && !error" class="text-center py-20">
-    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-indigo-600 mx-auto mb-6"></div>
+    <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#F8BC3B] mx-auto mb-6"></div>
     <p class="text-gray-500 text-lg font-medium">Đang tải bài viết...</p>
   </div>
 

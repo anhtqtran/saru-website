@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SocketService, Message, SendMessageData } from "../services/socket.service";
 
 @Component({
@@ -9,9 +9,17 @@ import { SocketService, Message, SendMessageData } from "../services/socket.serv
 })
 export class MessageComponent implements OnInit, OnDestroy {
   isChatOpen: boolean = false;
-  message: string = "";
+  message: string = '';
   messages: Message[] = [];
-  customerName: string = "Khách hàng";
+  customerName: string = 'Khách hàng';
+  isEmojiPickerOpen: boolean = false;
+  hasNewMessage: boolean = false;
+
+  // Danh sách emoji (có thể mở rộng)
+  emojis: string[] = [
+    '😀', '😍', '😂', '😎', '😢', '😡', '👍', '👏', '❤️', '🔥',
+    '😊', '😘', '🤩', '😴', '😱', '😤', '👀', '💪', '💕', '✨'
+  ];
 
   constructor(private socketService: SocketService) {}
 
@@ -21,7 +29,7 @@ export class MessageComponent implements OnInit, OnDestroy {
     this.socketService.getMessages().subscribe({
       next: (data) => {
         this.messages = data.filter(
-          (msg) => msg.user === this.customerName || (msg.user === "Admin" && msg.targetUser === this.customerName)
+          (msg) => msg.user === this.customerName || (msg.user === 'Admin' && msg.targetUser === this.customerName)
         );
       },
       error: (err) => {
@@ -31,8 +39,11 @@ export class MessageComponent implements OnInit, OnDestroy {
 
     this.socketService.onReceiveMessage().subscribe({
       next: (data) => {
-        if (data.user === "Admin" && data.targetUser === this.customerName) {
+        if (data.user === 'Admin' && data.targetUser === this.customerName) {
           this.messages.push(data);
+          if (!this.isChatOpen) {
+            this.hasNewMessage = true; // Hiển thị badge khi có tin nhắn mới và chat chưa mở
+          }
           this.messages = [...this.messages];
         } else if (data.user === this.customerName) {
           this.messages.push(data);
@@ -47,6 +58,18 @@ export class MessageComponent implements OnInit, OnDestroy {
 
   toggleChat(): void {
     this.isChatOpen = !this.isChatOpen;
+    if (this.isChatOpen) {
+      this.hasNewMessage = false; // Ẩn badge khi mở chat
+    }
+  }
+
+  toggleEmojiPicker(): void {
+    this.isEmojiPickerOpen = !this.isEmojiPickerOpen;
+  }
+
+  selectEmoji(emoji: string): void {
+    this.message += emoji;
+    this.isEmojiPickerOpen = false;
   }
 
   sendMessage(): void {
@@ -54,18 +77,22 @@ export class MessageComponent implements OnInit, OnDestroy {
       const newMessage: SendMessageData = { 
         user: this.customerName, 
         message: this.message,
-        targetUser: "Admin"
+        targetUser: 'Admin'
       };
-      // Thêm tin nhắn vào danh sách với kiểu Message (thêm timestamp giả lập nếu cần)
-      const displayMessage: Message = {
-        ...newMessage,
-        timestamp: new Date().toISOString() // Giả lập timestamp cho hiển thị
-      };
-      this.messages.push(displayMessage);
-      this.socketService.sendMessage(newMessage);
-      this.message = "";
-      this.messages = [...this.messages];
+      this.sendMessageToServer(newMessage);
     }
+  }
+
+  private sendMessageToServer(newMessage: SendMessageData): void {
+    // Thêm tin nhắn vào danh sách với kiểu Message
+    const displayMessage: Message = {
+      ...newMessage,
+      timestamp: new Date().toISOString()
+    };
+    this.messages.push(displayMessage);
+    this.socketService.sendMessage(newMessage);
+    this.message = '';
+    this.messages = [...this.messages];
   }
 
   ngOnDestroy(): void {
