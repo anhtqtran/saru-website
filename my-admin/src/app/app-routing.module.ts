@@ -27,10 +27,10 @@ const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   // { path: 'dashboard', component: DashboardComponent },
   { path: 'inventorymanage', component: InventorymanagementComponent },
-  {path:'products',component:ProductlistComponent},
+  {path:'admin/products',component:ProductlistComponent},
   { path: 'edit-product', component: EditproductComponent },
 
-  {path: 'orders', component:DonhangListComponent},
+  {path: 'admin/orders', component:DonhangListComponent},
   { path: 'donhang-create', component: DonhangCreateComponent },
   { path: 'donhang-detail/:id', component: DonhangDetailComponent }, 
   {path: 'promotions', component: KhuyenmaiListComponent},

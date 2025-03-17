@@ -6184,3 +6184,265 @@
 {"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-16T13:36:37.431Z"}
 {"level":"info","message":"GET /faqs 304 - - 100.269 ms - correlationId: 99826ce5-bf31-44cf-9cac-7c3ff6605016","timestamp":"2025-03-16T13:36:37.558Z"}
 
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T07:06:36.858Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T07:06:37.978Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c6bbebebsm68047275ad.201 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T07:06:39.567Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 78.358 ms - correlationId: 6ac19701-a1ef-46d5-b14e-9d0f801a826f","timestamp":"2025-03-17T07:13:43.514Z"}
+{"level":"info","message":"GET /customers 200 15483 - 105.839 ms - correlationId: 734433ef-7e6f-4318-8f8c-61158ecc9bc8","timestamp":"2025-03-17T07:13:52.631Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 64.714 ms - correlationId: 489ccf48-c486-4bf0-96ca-71b3044f5b92","timestamp":"2025-03-17T07:14:00.499Z"}
+{"level":"info","message":"GET /blogs 200 52597 - 201.979 ms - correlationId: a4b4cc7e-2539-4044-9214-cf6fac55e42f","timestamp":"2025-03-17T07:16:14.043Z"}
+{"level":"info","message":"GET /categories 304 - - 52.718 ms - correlationId: 12e33ee9-2454-4fc4-b119-d33f4f5062b6","timestamp":"2025-03-17T07:16:15.008Z"}
+{"level":"info","message":"GET /customers 304 - - 99.680 ms - correlationId: ee9db04f-4ccd-4633-a1e9-3cd273a8c16c","timestamp":"2025-03-17T07:16:16.714Z"}
+{"level":"info","message":"GET /faqs 200 1202 - 52.236 ms - correlationId: c7dfbfc1-20c8-43c0-9ebe-d28e187c649e","timestamp":"2025-03-17T07:16:24.721Z"}
+{"correlationId":"socket","level":"info","message":"User Admin registered with socket ID: HmneaXIZOBwrcFRwAAAB","timestamp":"2025-03-17T07:16:28.215Z"}
+{"level":"info","message":"GET /messages 200 1075 - 54.158 ms - correlationId: a684e0de-5431-42d5-b18a-ed80957c0de5","timestamp":"2025-03-17T07:16:28.234Z"}
+{"correlationId":"socket","level":"info","message":"User Admin disconnected","timestamp":"2025-03-17T07:16:52.338Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 59.740 ms - correlationId: 39123aaa-b6ca-40c4-9b0c-5b484d8b08bd","timestamp":"2025-03-17T07:16:52.482Z"}
+{"level":"info","message":"GET /customers 304 - - 99.555 ms - correlationId: 0237da40-c92f-42c4-8aa9-bb467c2a46e9","timestamp":"2025-03-17T07:19:44.660Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 66.988 ms - correlationId: 937a0630-44af-4f62-923c-d85e21221f4e","timestamp":"2025-03-17T07:19:48.044Z"}
+{"level":"info","message":"GET /customers 304 - - 122.876 ms - correlationId: 80eabf21-f473-4907-a0a5-675987adae13","timestamp":"2025-03-17T07:20:23.510Z"}
+{"level":"info","message":"GET /customers 304 - - 102.028 ms - correlationId: c713a7eb-4220-4fcc-9727-87a200071809","timestamp":"2025-03-17T07:21:20.397Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 120.228 ms - correlationId: ede5a228-3001-4609-9a8d-09d766a7ee58","timestamp":"2025-03-17T07:21:21.419Z"}
+{"level":"info","message":"GET /api/filters 304 - - 542.213 ms - correlationId: 5e931539-c045-4794-8963-c3df235eb1e3","timestamp":"2025-03-17T07:21:21.842Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 113.964 ms - correlationId: b08b6050-a318-435f-a34a-07a506e3140b","timestamp":"2025-03-17T07:21:33.032Z"}
+{"level":"info","message":"GET /api/filters 304 - - 204.692 ms - correlationId: 58b28434-3aa6-4350-8ca6-075ac9d98601","timestamp":"2025-03-17T07:21:33.125Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ba 200 3236 - 149.924 ms - correlationId: 2f87561b-932f-4e8c-8d3d-7a26266e1c44","timestamp":"2025-03-17T07:21:34.638Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ba 304 - - 152.751 ms - correlationId: f452c677-e7b3-447f-9219-dc09c231664c","timestamp":"2025-03-17T07:22:40.115Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 122.043 ms - correlationId: 6c8ff535-b6e1-43ca-9278-3e210d829d59","timestamp":"2025-03-17T07:22:41.069Z"}
+{"level":"info","message":"GET /api/filters 304 - - 169.320 ms - correlationId: f4bdd375-8fd0-4c35-afbb-64376dca37e0","timestamp":"2025-03-17T07:22:41.119Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 114.996 ms - correlationId: c54c2869-f307-4ad0-95c6-a83895c61598","timestamp":"2025-03-17T07:23:15.496Z"}
+{"level":"info","message":"GET /api/filters 304 - - 203.833 ms - correlationId: 3cde139c-802a-4b14-9eaa-b6b3d7c12124","timestamp":"2025-03-17T07:23:15.588Z"}
+{"level":"info","message":"GET /order-status 200 418 - 56.720 ms - correlationId: fcc27f20-04fc-446d-880a-ac9fcda74c50","timestamp":"2025-03-17T07:23:16.767Z"}
+{"level":"info","message":"GET /customers 304 - - 141.967 ms - correlationId: b3a771ce-a25f-484a-8f63-12d531c5055c","timestamp":"2025-03-17T07:23:16.862Z"}
+{"level":"info","message":"GET /payment-status 200 182 - 375.526 ms - correlationId: 6f50caed-ce30-4a90-bb7b-0b4542729ed7","timestamp":"2025-03-17T07:23:17.090Z"}
+{"level":"info","message":"GET /payment-methods 200 295 - 429.663 ms - correlationId: 72eaa49e-08ba-4f3f-8e50-ac94182223eb","timestamp":"2025-03-17T07:23:17.148Z"}
+{"level":"info","message":"GET /orders 200 19970 - 1568.352 ms - correlationId: 83410a3a-2683-42bb-b03b-e2b2aaa5b040","timestamp":"2025-03-17T07:23:18.276Z"}
+{"level":"info","message":"GET /payment-methods 304 - - 53.384 ms - correlationId: 04d982f9-eb9f-4759-9b15-adfcac420a7d","timestamp":"2025-03-17T07:24:02.060Z"}
+{"level":"info","message":"GET /order-status 304 - - 63.750 ms - correlationId: 2619c4b2-bf42-45d2-81df-ed51f39a6a5e","timestamp":"2025-03-17T07:24:02.065Z"}
+{"level":"info","message":"GET /payment-status 304 - - 64.505 ms - correlationId: 171b36af-5f44-4428-b610-78efb4e22055","timestamp":"2025-03-17T07:24:02.070Z"}
+{"level":"info","message":"GET /customers 304 - - 104.816 ms - correlationId: 5e8e1325-fd09-4682-ae43-cdd67cf54216","timestamp":"2025-03-17T07:24:02.114Z"}
+{"level":"info","message":"GET /orders 304 - - 1354.012 ms - correlationId: 9edfb0ee-6ce5-4948-9f56-840f0ed89979","timestamp":"2025-03-17T07:24:03.352Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 57.651 ms - correlationId: 8bf66dda-2d43-4d71-a61d-af39b31b7ece","timestamp":"2025-03-17T07:24:04.842Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 125.005 ms - correlationId: f40e2cf6-faea-4e71-a6f7-0e7f5edbcaf0","timestamp":"2025-03-17T07:24:23.809Z"}
+{"level":"info","message":"GET /api/filters 304 - - 207.723 ms - correlationId: b581feac-ffc4-4adf-ac0d-de20194eac9b","timestamp":"2025-03-17T07:24:23.896Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 56.330 ms - correlationId: 1c2e3697-a30f-4d47-8612-c214c15d0574","timestamp":"2025-03-17T07:24:26.505Z"}
+{"level":"info","message":"GET /order-status 304 - - 58.015 ms - correlationId: 9ece6a08-09c1-4ed5-9995-30514351d2df","timestamp":"2025-03-17T07:24:41.813Z"}
+{"level":"info","message":"GET /payment-methods 304 - - 57.259 ms - correlationId: a3204dc7-08bd-467d-93e4-69f84197cb5b","timestamp":"2025-03-17T07:24:41.816Z"}
+{"level":"info","message":"GET /payment-status 304 - - 62.856 ms - correlationId: ca17d029-4e1e-4c26-9e75-6b35febd300a","timestamp":"2025-03-17T07:24:41.820Z"}
+{"level":"info","message":"GET /customers 304 - - 90.451 ms - correlationId: 35a0d8de-53fa-4068-82db-983763ed34d9","timestamp":"2025-03-17T07:24:41.852Z"}
+{"level":"info","message":"GET /customers 304 - - 726.973 ms - correlationId: 735eea60-e110-49f5-8ff4-79e4755dff67","timestamp":"2025-03-17T07:24:42.876Z"}
+{"level":"info","message":"GET /orders 304 - - 1442.904 ms - correlationId: b555c9ea-fca4-45ac-8694-3416e30b3d2c","timestamp":"2025-03-17T07:24:43.195Z"}
+{"level":"info","message":"GET /blogs 304 - - 196.852 ms - correlationId: 867eb662-1733-498c-a0fd-1f7b498ec673","timestamp":"2025-03-17T07:24:44.497Z"}
+{"level":"info","message":"GET /categories 304 - - 50.498 ms - correlationId: dba1def8-62c1-48e4-927f-72fc78eec1b3","timestamp":"2025-03-17T07:24:45.033Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 117.479 ms - correlationId: 088539ae-02f2-4547-8fc4-ade091067dad","timestamp":"2025-03-17T07:24:46.034Z"}
+{"level":"info","message":"GET /api/filters 304 - - 188.971 ms - correlationId: 68eb1a4e-e61b-4450-a65a-9fa0309b1bf0","timestamp":"2025-03-17T07:24:46.108Z"}
+{"level":"info","message":"GET /api/products/search?q=Ruou 200 2 - 43.329 ms - correlationId: 92eb3250-0a5b-4705-ae05-aec192f29ea0","timestamp":"2025-03-17T07:24:54.872Z"}
+{"level":"info","message":"GET /api/products/search?q=R%C6%B0%E1%BB%A3u 200 115 - 49.565 ms - correlationId: c2f6524a-047b-4877-be02-b93ad08712fd","timestamp":"2025-03-17T07:24:55.315Z"}
+{"level":"info","message":"GET /api/products/search?q=R%C6%B0%E1%BB%A3u 304 - - 41.027 ms - correlationId: 9166e6c4-36ad-445a-bab9-c18234498d5f","timestamp":"2025-03-17T07:25:14.317Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 103.103 ms - correlationId: c88626b5-eabe-4198-8401-82f93f8db111","timestamp":"2025-03-17T07:25:21.876Z"}
+{"level":"info","message":"GET /api/filters 304 - - 206.151 ms - correlationId: 7f0c85a2-1ab3-4d7e-9c15-55af7247eed6","timestamp":"2025-03-17T07:25:21.982Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 55.792 ms - correlationId: a810f4d3-ca89-41a7-a811-7af73e2263d3","timestamp":"2025-03-17T07:25:25.981Z"}
+{"level":"info","message":"GET /api/products-full-details' 404 169 - 2.431 ms - correlationId: 347373b5-6dfa-4f68-9c17-3b6b7bf1cfb2","timestamp":"2025-03-17T07:37:03.409Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 118.179 ms - correlationId: ab6d30c1-5173-48c5-baa8-05859dd858ff","timestamp":"2025-03-17T07:37:14.991Z"}
+{"level":"info","message":"GET /api/filters 304 - - 164.830 ms - correlationId: ae2a7ca6-35ed-4f48-a761-12159b3c2985","timestamp":"2025-03-17T07:37:15.040Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 60.356 ms - correlationId: af0a8e65-0559-46ae-9b22-373e328e301c","timestamp":"2025-03-17T07:38:21.810Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 103.710 ms - correlationId: 1ffb4958-53d3-4be4-9c89-be0766512e7c","timestamp":"2025-03-17T07:38:35.531Z"}
+{"level":"info","message":"GET /favicon.ico 404 150 - 0.785 ms - correlationId: a821d01d-17f3-49e0-94cf-69c64694f1f7","timestamp":"2025-03-17T07:38:35.614Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T07:38:51.150Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T07:38:52.264Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c6bbfff4sm68138095ad.210 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T07:38:53.793Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T07:39:14.324Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T07:39:15.291Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c6888486sm68235625ad.11 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T07:39:16.872Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-17T08:00:00.721Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T08:19:45.478Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T08:19:46.479Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c6bd547asm69115945ad.248 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T08:19:46.978Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T14:17:27.147Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-30153385044sm6679819a91.0 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T14:17:29.476Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T14:17:30.102Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 76.871 ms - correlationId: 88ec7e6a-63c7-4595-9f5a-ccec0b179491","timestamp":"2025-03-17T14:18:21.653Z"}
+{"level":"info","message":"GET /api/filters 304 - - 229.596 ms - correlationId: afccdf2d-a84b-40a2-ad5b-58b0e54e8754","timestamp":"2025-03-17T14:18:22.894Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 424.182 ms - correlationId: e234001b-cc46-409e-9a08-6d228d7045f0","timestamp":"2025-03-17T14:18:23.092Z"}
+{"level":"info","message":"GET /order-status 304 - - 56.947 ms - correlationId: feec23f9-9b23-41bc-8bbb-5dca0029378f","timestamp":"2025-03-17T14:18:23.968Z"}
+{"level":"info","message":"GET /payment-methods 304 - - 95.318 ms - correlationId: 081f9673-cf5e-4555-9e58-6219aa5a5d56","timestamp":"2025-03-17T14:18:24.016Z"}
+{"level":"info","message":"GET /payment-status 304 - - 350.692 ms - correlationId: b2061542-43c9-420e-b13a-58bc14a9bf2f","timestamp":"2025-03-17T14:18:24.265Z"}
+{"level":"info","message":"GET /customers 304 - - 406.962 ms - correlationId: 63a04041-5ede-4072-82f5-4459e3a1ae4d","timestamp":"2025-03-17T14:18:24.324Z"}
+{"level":"info","message":"GET /orders 304 - - 1670.821 ms - correlationId: 49a7d42a-17ba-4840-9db1-8d0d8b925b12","timestamp":"2025-03-17T14:18:25.579Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 119.777 ms - correlationId: 7eafdd4d-bf56-423d-87f2-977e97a889a7","timestamp":"2025-03-17T14:18:25.750Z"}
+{"level":"info","message":"GET /api/filters 304 - - 237.976 ms - correlationId: 766e461a-1f77-482f-9146-3804cd06a77d","timestamp":"2025-03-17T14:18:25.872Z"}
+{"level":"info","message":"GET /customers 304 - - 112.703 ms - correlationId: 00e53b0b-0394-4158-99d9-293ba6ceb6cb","timestamp":"2025-03-17T14:18:26.964Z"}
+{"level":"info","message":"GET /order-status 304 - - 65.235 ms - correlationId: b2985aeb-d89d-4aa7-ba97-fad8ea406dac","timestamp":"2025-03-17T14:18:28.837Z"}
+{"level":"info","message":"GET /payment-methods 304 - - 62.659 ms - correlationId: ed4d73e9-7afd-4e5e-bade-6e4ddb1319fc","timestamp":"2025-03-17T14:18:28.841Z"}
+{"level":"info","message":"GET /payment-status 304 - - 70.109 ms - correlationId: f05df248-0b9f-45c0-8e11-faec317cb2ea","timestamp":"2025-03-17T14:18:28.846Z"}
+{"level":"info","message":"GET /customers 304 - - 96.604 ms - correlationId: 074bc172-f77d-41f8-b37c-d23c340950b3","timestamp":"2025-03-17T14:18:28.877Z"}
+{"level":"info","message":"GET /orders 304 - - 1417.443 ms - correlationId: 111dc974-e725-4b7a-bde1-65c48a45c10f","timestamp":"2025-03-17T14:18:30.187Z"}
+{"level":"info","message":"GET /order-status 304 - - 50.498 ms - correlationId: 98a2dbe9-319c-4063-bae3-25f758d49c58","timestamp":"2025-03-17T14:18:32.119Z"}
+{"level":"info","message":"GET /payment-status 304 - - 62.035 ms - correlationId: b2b9db85-ff92-4323-a4e0-7abeb9d04461","timestamp":"2025-03-17T14:18:32.132Z"}
+{"level":"info","message":"GET /payment-methods 304 - - 62.439 ms - correlationId: f7c2931c-cc01-4623-8250-1beb5ecc67d6","timestamp":"2025-03-17T14:18:32.136Z"}
+{"level":"info","message":"GET /customers 304 - - 101.729 ms - correlationId: f3e4709d-f49a-4745-8274-738826dbbdad","timestamp":"2025-03-17T14:18:32.179Z"}
+{"level":"info","message":"GET /orders 304 - - 1407.028 ms - correlationId: a17bbc34-1909-4f00-919a-2f7ee1cea2c5","timestamp":"2025-03-17T14:18:33.472Z"}
+{"level":"info","message":"GET /order-status 304 - - 56.941 ms - correlationId: 50054ec7-9d6a-4b82-a38e-0d07204ff54f","timestamp":"2025-03-17T14:18:33.558Z"}
+{"level":"info","message":"GET /payment-status 304 - - 55.937 ms - correlationId: 822b84b7-f555-41cf-b4aa-7402cf36a954","timestamp":"2025-03-17T14:18:33.561Z"}
+{"level":"info","message":"GET /payment-methods 304 - - 55.673 ms - correlationId: 596b5945-804f-4535-9706-e9234d3514fa","timestamp":"2025-03-17T14:18:33.567Z"}
+{"level":"info","message":"GET /customers 304 - - 113.324 ms - correlationId: 5921fbd9-e9bf-49ba-ab6a-c7d4b3492fd3","timestamp":"2025-03-17T14:18:33.626Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 149.760 ms - correlationId: c39043d7-fe71-42ee-8cf3-6c9acab8c455","timestamp":"2025-03-17T14:18:34.563Z"}
+{"level":"info","message":"GET /orders 304 - - 1475.182 ms - correlationId: e11b6713-0262-4264-a4d8-37500185bf94","timestamp":"2025-03-17T14:18:34.974Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 199.416 ms - correlationId: 37604f8e-5229-4baa-a929-0ada4b5b34d9","timestamp":"2025-03-17T14:18:35.714Z"}
+{"level":"info","message":"GET /api/filters 304 - - 365.495 ms - correlationId: 27973e94-6fc1-4e1e-b044-66173bbd3b12","timestamp":"2025-03-17T14:18:35.882Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 54.580 ms - correlationId: 39edefaf-d521-4974-9d98-98f893825fd5","timestamp":"2025-03-17T14:18:43.686Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 57.268 ms - correlationId: aa7ff53e-2363-4b8c-b295-d684aee28d9d","timestamp":"2025-03-17T14:20:35.767Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 115.346 ms - correlationId: 2b018ad3-f050-4a74-8dca-caa902d86851","timestamp":"2025-03-17T14:21:06.639Z"}
+{"level":"info","message":"GET /api/filters 304 - - 223.826 ms - correlationId: 7133904d-5b36-4aea-972c-0676b4c133e4","timestamp":"2025-03-17T14:21:06.750Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 61.162 ms - correlationId: 6cd68c65-eb26-4662-8263-8e72a1f183ef","timestamp":"2025-03-17T14:21:08.833Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 119.365 ms - correlationId: 3cb0f014-276c-4035-a163-44d50437c1d6","timestamp":"2025-03-17T14:21:26.354Z"}
+{"level":"info","message":"GET /favicon.ico 404 150 - 1.568 ms - correlationId: 6a61de22-6dc6-4ee4-ab50-8d4ca0a70cfc","timestamp":"2025-03-17T14:21:26.422Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 56.403 ms - correlationId: 395bef45-a2ea-4601-bbf4-4c7220269e2a","timestamp":"2025-03-17T14:22:46.857Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 55.759 ms - correlationId: f2288fd1-cb01-4ec4-9747-3fcdc68b25eb","timestamp":"2025-03-17T14:27:30.560Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 58.873 ms - correlationId: 92a5deaa-f7f8-4d42-9878-a448ed64c99c","timestamp":"2025-03-17T14:28:22.933Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 126.090 ms - correlationId: 8743516c-594c-4fed-abf6-d540695c163e","timestamp":"2025-03-17T14:28:39.780Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 115.196 ms - correlationId: 8604aa48-50a4-4fa2-a825-5746db58407f","timestamp":"2025-03-17T14:28:42.279Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 114.746 ms - correlationId: bb81fccb-199d-44c1-94a0-db5dff9d09b9","timestamp":"2025-03-17T14:28:43.532Z"}
+{"level":"info","message":"GET /api/filters 304 - - 206.712 ms - correlationId: 3656489b-a83d-401d-b6c0-08dc0b2f3b53","timestamp":"2025-03-17T14:28:43.624Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 111.527 ms - correlationId: 896733ff-926b-4e43-a974-6e24770543e7","timestamp":"2025-03-17T14:28:44.515Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 119.892 ms - correlationId: 88a58000-381e-4d8c-a755-bc675baa2c1b","timestamp":"2025-03-17T14:28:46.787Z"}
+{"level":"info","message":"GET /api/products-full-details - - - - ms - correlationId: 049edb1c-7de7-4113-8b6b-339865eb009f","timestamp":"2025-03-17T14:28:47.428Z"}
+{"level":"info","message":"GET /api/products-full-details - - - - ms - correlationId: 8290706a-e8b2-424f-a5ad-27696125d5cb","timestamp":"2025-03-17T14:28:47.562Z"}
+{"level":"info","message":"GET /api/products-full-details 200 30049 - 67.843 ms - correlationId: d5010387-cbf1-473c-b68f-9acc098a2f44","timestamp":"2025-03-17T14:28:47.697Z"}
+{"level":"info","message":"GET /api/products-full-details 200 30049 - 68.751 ms - correlationId: 9482f1f2-a851-4690-8b02-607917875d57","timestamp":"2025-03-17T14:28:47.830Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 70.259 ms - correlationId: 5ef5cfd3-299a-4c22-b504-0c43270ee54c","timestamp":"2025-03-17T14:28:47.970Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 68.605 ms - correlationId: be081d78-5334-4335-8047-360255b0b167","timestamp":"2025-03-17T14:28:48.112Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 56.691 ms - correlationId: a11b7eee-2c43-4512-adc0-5fe692f3c36d","timestamp":"2025-03-17T14:28:55.765Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T14:30:12.896Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T14:30:14.147Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-7371155934asm7868558b3a.56 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T14:30:14.433Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 67.104 ms - correlationId: 092d42c1-5d3b-42f8-a734-c5f28142a072","timestamp":"2025-03-17T14:30:16.519Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 62.427 ms - correlationId: 448e1ece-a4b9-43b7-84ff-a11240f4331b","timestamp":"2025-03-17T14:30:19.581Z"}
+{"level":"info","message":"GET /api/products-with-stock 200 111126 - 284.681 ms - correlationId: c78539f1-6ff4-4d6d-bcbd-b0c53853965d","timestamp":"2025-03-17T14:31:15.977Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T14:32:33.308Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T14:32:34.532Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c6ba6913sm75647315ad.142 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T14:32:34.732Z"}
+{"level":"info","message":"GET /api/productstocks 200 14369 - 126.478 ms - correlationId: 7460227b-bc14-4222-becc-aeabc9661e43","timestamp":"2025-03-17T14:32:42.869Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T14:33:56.814Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c688d93esm75771505ad.45 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T14:33:58.357Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T14:33:58.503Z"}
+{"level":"info","message":"GET /api/productstocks 200 15299 - 115.083 ms - correlationId: 0f65b2fc-923c-4ad2-9722-c72efa80eab8","timestamp":"2025-03-17T14:33:59.537Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 127.133 ms - correlationId: 0c482411-8ede-4c09-a7e5-879e70bb6206","timestamp":"2025-03-17T14:34:03.631Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T14:34:49.708Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T14:34:51.261Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-7371167da34sm7640550b3a.88 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T14:34:51.268Z"}
+{"level":"info","message":"GET /api/productstocks 200 14237 - 118.877 ms - correlationId: 4e2bc7bc-a618-4747-8884-4d6a5cd8e8d4","timestamp":"2025-03-17T14:34:52.642Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 112.915 ms - correlationId: fb733c5e-fb61-4a5a-963d-2d9a0bcf96d6","timestamp":"2025-03-17T14:35:13.712Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T14:35:37.631Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T14:35:39.058Z"}
+{"level":"info","message":"GET /api/productstocks 200 8850 - 61.074 ms - correlationId: ea697ee0-da50-4763-bb46-07fa0d7a875c","timestamp":"2025-03-17T14:35:39.459Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-301535a53f1sm6253466a91.1 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T14:35:44.887Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T14:36:47.331Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T14:36:48.962Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 41be03b00d2f7-af56ea7daddsm7289981a12.54 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T14:36:49.277Z"}
+{"level":"info","message":"GET /api/productstocks 200 3954 - 67.821 ms - correlationId: a0e021d2-0e39-4ba4-b46b-940bcb48e081","timestamp":"2025-03-17T14:36:49.354Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T14:43:21.948Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-7371155077fsm7616889b3a.37 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T14:43:23.365Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T14:43:23.566Z"}
+{"level":"info","message":"GET /api/productstocks 200 8850 - 59.408 ms - correlationId: 112b007a-1511-4628-84b1-513e4679f058","timestamp":"2025-03-17T14:44:04.489Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 358.588 ms - correlationId: 0357276a-5b3d-45f2-ba98-f4c26f9591fa","timestamp":"2025-03-17T14:44:08.344Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 172.062 ms - correlationId: bbddc154-0445-4397-ad58-d33de0270359","timestamp":"2025-03-17T14:44:44.147Z"}
+{"level":"info","message":"GET /api/filters 304 - - 560.667 ms - correlationId: 0cdc773a-ea4b-4407-8e05-ebcf07456ec8","timestamp":"2025-03-17T14:44:44.539Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 61.928 ms - correlationId: 83c30b93-2af0-4a90-9b38-ef09e9d5d3f2","timestamp":"2025-03-17T14:44:49.055Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 65.377 ms - correlationId: edb0dc56-13a7-43a8-b2b4-5f9d1f41f709","timestamp":"2025-03-17T14:48:34.733Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 55.094 ms - correlationId: 7f591f86-9d5d-4b48-9f3d-f4ff73201fc8","timestamp":"2025-03-17T14:48:35.614Z"}
+{"level":"info","message":"PUT /api/productstocks/pro2 404 161 - 1.306 ms - correlationId: 3acfdaf9-1c3b-444a-813f-c818fbab49d2","timestamp":"2025-03-17T14:48:40.481Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 116.200 ms - correlationId: 834d2a09-9ba0-4f94-9906-b46307172522","timestamp":"2025-03-17T14:54:44.256Z"}
+{"level":"info","message":"GET /api/filters 304 - - 232.627 ms - correlationId: 7f07171b-ebac-4101-9a4d-3e384a6606f2","timestamp":"2025-03-17T14:54:44.374Z"}
+{"level":"info","message":"GET /api/products/67cedd78aaf7ee8b1e4bf2ba 304 - - 154.418 ms - correlationId: 3a5d3a3a-761c-4486-b7b0-9f14c00adcc1","timestamp":"2025-03-17T14:59:51.187Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-17T15:00:00.384Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 165.340 ms - correlationId: aad8def1-74bd-47f4-88a6-ae44f6237120","timestamp":"2025-03-17T15:01:28.401Z"}
+{"level":"info","message":"GET /api/filters 304 - - 207.991 ms - correlationId: 0743efb2-a05f-41a6-8e69-18961c652635","timestamp":"2025-03-17T15:01:28.454Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 128.412 ms - correlationId: 527d67ea-eb69-4e82-a1bd-604feee05d93","timestamp":"2025-03-17T15:03:19.863Z"}
+{"level":"info","message":"GET /api/filters 304 - - 212.987 ms - correlationId: f5dd184f-80e0-48a4-a5b5-146bf9f325dc","timestamp":"2025-03-17T15:03:19.950Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 128.721 ms - correlationId: dd7c28cd-c3eb-44a1-a956-2138316cb39f","timestamp":"2025-03-17T15:03:21.917Z"}
+{"level":"info","message":"GET /api/filters 304 - - 221.651 ms - correlationId: 7b062d65-058b-4e61-b951-94a064ff415a","timestamp":"2025-03-17T15:03:22.013Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 64.088 ms - correlationId: 37380bc2-27da-49f5-aa0b-f750498fe88d","timestamp":"2025-03-17T15:03:31.909Z"}
+{"level":"info","message":"PUT /api/productstocks/67c7d4f8cdd6907abf6545a3 404 181 - 1.515 ms - correlationId: b21d4eaa-ef54-4109-a694-96b0ca4518d9","timestamp":"2025-03-17T15:03:35.267Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T15:06:49.082Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T15:06:50.781Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-30153631fa8sm6180876a91.33 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T15:06:51.399Z"}
+{"level":"info","message":"PUT /api/productstocks/67c7d4f8cdd6907abf6545a3 200 8850 - 67.707 ms - correlationId: 8075bcd7-f76d-4d88-a1e3-c52617441b8a","timestamp":"2025-03-17T15:06:57.235Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 139.975 ms - correlationId: 2c888b82-ad9f-4013-a239-e1c1fac54f39","timestamp":"2025-03-17T15:07:03.188Z"}
+{"level":"info","message":"GET /api/filters 304 - - 524.641 ms - correlationId: 5f601dda-63bc-42a1-9566-f32e3fe65f7b","timestamp":"2025-03-17T15:07:03.578Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 137.047 ms - correlationId: 12049612-6562-465c-add0-f9498aca9c98","timestamp":"2025-03-17T15:07:05.574Z"}
+{"level":"info","message":"GET /api/filters 304 - - 217.705 ms - correlationId: a1f4eeec-31a4-41ee-abe7-796ce0eb8224","timestamp":"2025-03-17T15:07:05.657Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 61.795 ms - correlationId: 8257258e-2bf7-4599-b56a-c1496e43b5e9","timestamp":"2025-03-17T15:07:24.213Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 127.855 ms - correlationId: 5f6537ff-54ea-4a42-aef0-66badea66996","timestamp":"2025-03-17T15:07:26.808Z"}
+{"level":"info","message":"GET /api/filters 304 - - 213.927 ms - correlationId: 08ff99dc-b1e2-4263-a900-889b644a9872","timestamp":"2025-03-17T15:07:26.898Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 58.926 ms - correlationId: 6b5a41bb-c66c-4280-a88e-949c7f5d9ee2","timestamp":"2025-03-17T15:07:28.454Z"}
+{"level":"info","message":"PUT /api/productstocks/67c7d4f8cdd6907abf6545a3 200 8850 - 62.919 ms - correlationId: 976cd121-aac3-4a8a-b75f-12a463c5b176","timestamp":"2025-03-17T15:07:31.411Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 127.778 ms - correlationId: 91ded9ab-d114-4232-91d8-64e857c6b095","timestamp":"2025-03-17T15:07:35.246Z"}
+{"level":"info","message":"PUT /api/productstocks/67c7d4f8cdd6907abf6545a3 200 8850 - 61.231 ms - correlationId: b8eaba00-004f-4603-9267-67f12bb57df5","timestamp":"2025-03-17T15:07:46.373Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T15:11:15.280Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T15:11:16.867Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c68884fcsm76784525ad.16 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T15:11:16.895Z"}
+{"level":"info","message":"PUT /api/productstocks/67c7d4f8cdd6907abf6545a3 200 114 - 61.529 ms - correlationId: ac02b4e6-2599-4faf-82af-b12081c14a24","timestamp":"2025-03-17T15:11:21.264Z"}
+{"level":"info","message":"GET /api/productstocks 200 8850 - 72.364 ms - correlationId: b3990bb4-70bd-4852-8cd4-284a7343153c","timestamp":"2025-03-17T15:11:23.967Z"}
+{"level":"info","message":"GET /api/products-full-details 200 30049 - 159.409 ms - correlationId: 8817c89d-49f8-4003-bfde-9f0b8343bd9c","timestamp":"2025-03-17T15:11:27.353Z"}
+{"level":"info","message":"GET /api/filters 304 - - 531.179 ms - correlationId: 3594c2a6-fad4-4234-a442-71e6dc3ea334","timestamp":"2025-03-17T15:11:27.731Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 61.635 ms - correlationId: e23b8c10-43c4-406e-8e40-639a04047449","timestamp":"2025-03-17T15:11:30.401Z"}
+{"level":"info","message":"GET /api/filters 304 - - 216.344 ms - correlationId: 104510ad-eed0-4ab1-a801-4d0da5f1737c","timestamp":"2025-03-17T15:13:50.538Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 60.716 ms - correlationId: 4f12d525-22c9-4d9d-a142-d7097c3a6b98","timestamp":"2025-03-17T15:14:20.185Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 121.163 ms - correlationId: a997e46a-593a-4deb-b53d-22bfc8ba9a12","timestamp":"2025-03-17T15:16:13.447Z"}
+{"level":"info","message":"GET /api/filters 304 - - 218.282 ms - correlationId: 10a1f7e2-1795-4ea5-b181-1564026b57bc","timestamp":"2025-03-17T15:16:13.547Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 59.839 ms - correlationId: b13f655f-40fe-480a-b817-6644718caeb5","timestamp":"2025-03-17T15:16:14.903Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 125.991 ms - correlationId: c0536e59-d3fd-40f3-823d-1bc23a2814a4","timestamp":"2025-03-17T15:17:06.299Z"}
+{"level":"info","message":"GET /api/filters 304 - - 221.171 ms - correlationId: 6909ebe3-956a-4419-b131-1f001e83dfc2","timestamp":"2025-03-17T15:17:06.396Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 58.379 ms - correlationId: 414900bf-395b-4d48-b900-ce46953fa1f1","timestamp":"2025-03-17T15:19:12.940Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T15:26:20.537Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d2e1a72fcca58-7371167e11asm7926160b3a.101 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T15:26:22.094Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T15:26:22.194Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 124.474 ms - correlationId: 9e51f636-109f-4629-808f-5243969cd837","timestamp":"2025-03-17T15:27:28.192Z"}
+{"level":"info","message":"GET /api/filters 304 - - 657.051 ms - correlationId: bb74312e-d607-44fa-a9e7-a6c6dd4b1372","timestamp":"2025-03-17T15:27:28.727Z"}
+{"level":"info","message":"GET /api/productstocks 200 10604 - 64.939 ms - correlationId: fb1e5651-716b-4824-9368-5ec2f0b07929","timestamp":"2025-03-17T15:27:32.000Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 117.644 ms - correlationId: aa2d2aa6-b93c-4369-bad7-6e72ca8f610c","timestamp":"2025-03-17T15:27:32.055Z"}
+{"level":"info","message":"GET /api/productstocks?CateName=R%C6%B0%E1%BB%A3u%20T%C3%A2y%20B%E1%BA%AFc&ProductBrand=R%C6%B0%E1%BB%A3u%20Zuji 200 2 - 55.664 ms - correlationId: cdc3f107-2472-4fee-bea0-c615cdee0fb9","timestamp":"2025-03-17T15:27:45.120Z"}
+{"level":"info","message":"GET /api/productstocks?CateName=R%C6%B0%E1%BB%A3u%20T%C3%A2y%20B%E1%BA%AFc 200 2 - 54.896 ms - correlationId: 0e5fb516-61c1-42bc-be6d-d80be761136a","timestamp":"2025-03-17T15:27:53.478Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 58.160 ms - correlationId: 16d7989d-7f7d-4c4e-8fbc-0517bc749ef0","timestamp":"2025-03-17T15:28:04.912Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 119.335 ms - correlationId: 7f6d236a-a1b3-476a-8b0e-aa4842989876","timestamp":"2025-03-17T15:28:04.975Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-17T16:00:00.197Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T16:05:27.555Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c68bedb1sm76926725ad.106 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T16:05:29.408Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T16:05:30.197Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 64.959 ms - correlationId: 7e4e738c-6f89-404e-a600-f3cad8c2a476","timestamp":"2025-03-17T16:05:36.467Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 413.713 ms - correlationId: a264604d-fbef-4e98-a0cf-9824fc7002ee","timestamp":"2025-03-17T16:05:36.816Z"}
+{"level":"info","message":"GET /api/products/filters 400 48 - 1.798 ms - correlationId: 0030e84d-8fda-4e54-bc52-94ba2e4fb67f","timestamp":"2025-03-17T16:06:43.644Z"}
+{"level":"info","message":"GET /api/productstocks/filter 200 7033 - 60.626 ms - correlationId: 67eaea11-1c2e-434f-9d36-430168957d69","timestamp":"2025-03-17T16:07:05.743Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T16:08:38.058Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c68882ecsm76895545ad.24 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T16:08:39.562Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T16:08:39.619Z"}
+{"level":"info","message":"GET /api/productstocks/filter 200 7156 - 72.908 ms - correlationId: 707eecfc-68af-48f3-acff-3a1ae849c767","timestamp":"2025-03-17T16:08:40.210Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 59.000 ms - correlationId: 1955399b-4652-4495-8a81-4c8d3cb977d5","timestamp":"2025-03-17T16:13:15.018Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 561.826 ms - correlationId: dd2e7ca4-1ab8-43f7-894d-c748c4939e78","timestamp":"2025-03-17T16:13:15.526Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 61.287 ms - correlationId: fe6876d4-ca3c-44fc-8d44-8e466624163c","timestamp":"2025-03-17T16:16:21.948Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 129.727 ms - correlationId: b4d16465-d678-43be-ada7-d7a20e17a6f5","timestamp":"2025-03-17T16:16:22.018Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T16:22:52.243Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 98e67ed59e1d1-301535347f8sm6289662a91.28 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T16:22:53.763Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T16:22:53.866Z"}
+{"level":"info","message":"GET /api/productstocks/filter 200 13422 - 70.591 ms - correlationId: eaa77bd4-f765-4b9f-97eb-5d32399ab728","timestamp":"2025-03-17T16:22:54.645Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 63.011 ms - correlationId: 1ead969c-8cc6-4a0b-920b-5151309f22c4","timestamp":"2025-03-17T16:23:07.422Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 432.650 ms - correlationId: 03db7ebf-5295-4a70-a99e-a53f9b0618f4","timestamp":"2025-03-17T16:23:07.797Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 57.692 ms - correlationId: 3d4c0e45-51f8-4a2f-90fc-deb8278e6e65","timestamp":"2025-03-17T16:25:18.978Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 119.186 ms - correlationId: 20feecec-ce54-430b-adf8-e3a8a9fa56c4","timestamp":"2025-03-17T16:25:19.042Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 69.754 ms - correlationId: bd648e27-6d49-45e7-9909-c804a5376e07","timestamp":"2025-03-17T16:27:17.883Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 119.401 ms - correlationId: 9e94a708-62ea-43bd-95fa-d5a6d8621662","timestamp":"2025-03-17T16:27:17.936Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 60.005 ms - correlationId: c02bccfd-068f-47ec-acd2-5bf8197d51bc","timestamp":"2025-03-17T16:29:41.088Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 163.701 ms - correlationId: 7d9d3a3e-1800-4d8f-bd49-480776d77755","timestamp":"2025-03-17T16:29:41.194Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 116.475 ms - correlationId: 6f68c7f8-7901-41b3-afb8-ddfa5c719348","timestamp":"2025-03-17T16:31:06.455Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 502.842 ms - correlationId: 8b477ef4-d9d0-487c-9e87-ed02c66dfe97","timestamp":"2025-03-17T16:31:06.840Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 120.120 ms - correlationId: 0c3f97cc-0e9f-4bb3-81d4-e88373b45dbf","timestamp":"2025-03-17T16:33:24.839Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 160.092 ms - correlationId: f3f78d55-dba9-4981-ba15-d0abe16c0173","timestamp":"2025-03-17T16:33:24.878Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 217.291 ms - correlationId: eeac9811-8816-4b75-b327-179a641dab06","timestamp":"2025-03-17T16:33:49.407Z"}
+{"level":"info","message":"GET /api/filters 304 - - 227.791 ms - correlationId: dd9a9080-601d-4aa8-a3c9-bf2634ac8428","timestamp":"2025-03-17T16:33:49.418Z"}
+{"level":"info","message":"GET /payment-status 304 - - 53.918 ms - correlationId: 2d646bb7-e4b8-45ba-9a74-3529ca542ec9","timestamp":"2025-03-17T16:33:52.268Z"}
+{"level":"info","message":"GET /order-status 304 - - 53.553 ms - correlationId: ced0d422-3a5a-4943-b443-3e365b280cab","timestamp":"2025-03-17T16:33:52.272Z"}
+{"level":"info","message":"GET /customers 304 - - 142.114 ms - correlationId: b58cec93-7f24-4724-82f5-faf607e04d74","timestamp":"2025-03-17T16:33:52.372Z"}
+{"level":"info","message":"GET /payment-methods 304 - - 484.415 ms - correlationId: 1cb2d9fc-177f-4f33-b540-d4c1d0fa9d7b","timestamp":"2025-03-17T16:33:52.710Z"}
+{"level":"info","message":"GET /customers 304 - - 212.551 ms - correlationId: f991e7c7-da1e-4625-891e-f9ee884080e1","timestamp":"2025-03-17T16:33:53.177Z"}
+{"level":"info","message":"GET /orders 304 - - 1801.805 ms - correlationId: b4f7ecbe-0346-4c02-9a0b-742dace03613","timestamp":"2025-03-17T16:33:54.023Z"}

@@ -22,18 +22,7 @@ export class ProductService {
     );
   }
 
-  // getProducts(): Observable<any[]> {
-  //   return this.http.get<any>(`${this.apiUrl}/products`).pipe(
-  //     map((data: any) => {
-  //       console.log('Raw data from API:', data); // Log dữ liệu thô từ API
-  //       return Array.isArray(data) ? data : [];
-  //     }),
-  //     catchError((error) => {
-  //       console.error('Error fetching products:', error); // Log lỗi chi tiết
-  //       return of([]); // Trả về mảng rỗng nếu có lỗi
-  //     })
-  //   );
-  // }
+
   deleteProduct(productId: string): Observable<void> {
     const deleteUrl = `http://localhost:4000/api/products/${productId}`;
     console.log("🛑 Gọi API xóa:", deleteUrl);

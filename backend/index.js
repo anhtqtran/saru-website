@@ -296,64 +296,7 @@ app.get('/api/products/recommendations', async (req, res) => {
   }
 });
 
-// app.get('/api/products/:id', async (req, res) => {
-//   try {
-//     const product = await productCollection.findOne({ _id: new ObjectId(req.params.id) });
-//     if (!product) return res.status(404).json({ message: "Sản phẩm không tồn tại." });
 
-//     const image = await imageCollection.findOne({ ImageID: product.ImageID });
-//     const productWithImages = {
-//       ...product,
-//       ProductImageCover: image?.ProductImageCover || '',
-//       ProductImageSub1: image?.ProductImageSub1 || '',
-//       ProductImageSub2: image?.ProductImageSub2 || '',
-//       ProductImageSub3: image?.ProductImageSub3 || ''
-//     };
-
-//     const reviewsAgg = await reviewCollection.aggregate([
-//       { $match: { ProductID: product.ProductID } },
-//       { $sort: { DatePosted: -1 } },
-//       {
-//         $project: {
-//           _id: 0,
-//           CustomerID: 1,
-//           Rating: { $min: [{ $max: ["$Rating", 0] }, 5] },
-//           Content: 1,
-//           DatePosted: { $dateToString: { format: "%d/%m/%Y", date: "$DatePosted" } }
-//         }
-//       }
-//     ]).toArray();
-
-//     const validReviews = reviewsAgg.filter(r => r.Rating > 0);
-//     const averageRating = validReviews.length > 0
-//       ? Number((validReviews.reduce((sum, r) => sum + r.Rating, 0) / validReviews.length).toFixed(1))
-//       : 0;
-
-//     const relatedProducts = await productCollection.find({
-//       CateID: product.CateID,
-//       _id: { $ne: new ObjectId(req.params.id) }
-//     })
-//       .limit(4)
-//       .project({ ProductName: 1, ProductPrice: 1, ProductImageCover: 1, _id: 1 })
-//       .toArray();
-
-//     const relatedProductsWithStringId = relatedProducts.map(p => ({
-//       ...p,
-//       _id: p._id.toHexString()
-//     }));
-
-//     res.json({
-//       ...productWithImages,
-//       reviews: reviewsAgg,
-//       averageRating,
-//       totalReviewCount: validReviews.length,
-//       relatedProducts: relatedProductsWithStringId
-//     });
-//   } catch (err) {
-//     logger.error('Error fetching product detail', { error: err.message, correlationId: req.correlationId });
-//     res.status(500).json({ message: 'Lỗi hệ thống, vui lòng thử lại sau.' });
-//   }
-// });
 
 // ===================== COMPARE API =====================
 app.post('/api/compare', authenticateToken, async (req, res) => {
@@ -921,9 +864,61 @@ app.post('/api/reviews', async (req, res) => {
   }
 });
 
+app.put('/api/productstocks/:id', async (req, res) => {
+  try {
+    const { id } = req.params; // Lấy `_id` từ URL
+    const { StockQuantity } = req.body; // Lấy số lượng tồn kho mới từ body
+
+    // Kiểm tra dữ liệu hợp lệ
+    if (!StockQuantity && StockQuantity !== 0) {
+      return res.status(400).json({ error: "❌ StockQuantity không hợp lệ!" });
+    }
+
+    // Cập nhật số lượng tồn kho trong MongoDB
+    const result = await database.collection('productstocks').updateOne(
+      { _id: new ObjectId(id) }, // Tìm sản phẩm theo `_id`
+      { $set: { StockQuantity: StockQuantity } } // Cập nhật tồn kho mới
+    );
+
+    // Kiểm tra xem có bản ghi nào được cập nhật không
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: "❌ Không tìm thấy sản phẩm để cập nhật!" });
+    }
+
+    res.json({ message: "✅ Cập nhật thành công!", updatedStock: { _id: id, StockQuantity } });
+  } catch (err) {
+    console.error("❌ Lỗi khi cập nhật tồn kho:", err);
+    res.status(500).json({ error: "Lỗi server!" });
+  }
+});
+
+
+
 // app.get('/api/productstocks', async (req, res) => {
 //   try {
-//     const stocks = await database.collection('productstocks').find().toArray();
+//     const stocks = await database.collection('productstocks').aggregate([
+//       {
+//         $lookup: {
+//           from: "products",
+//           localField: "ProductID",
+//           foreignField: "ProductID",
+//           as: "productInfo"
+//         }
+//       },
+//       { $unwind: "$productInfo" },
+//       {
+//         $project: {
+//           _id: 1,
+//           ProductID: 1,
+//           StockQuantity: 1,
+//           ProductName: "$productInfo.ProductName",
+//           ProductSKU: "$productInfo.ProductSKU",
+        
+//         }
+//       },
+      
+//     ]).toArray();
+
 //     res.json(stocks);
 //   } catch (err) {
 //     console.error("❌ Lỗi khi lấy dữ liệu tồn kho:", err);
@@ -933,6 +928,16 @@ app.post('/api/reviews', async (req, res) => {
 
 app.get('/api/productstocks', async (req, res) => {
   try {
+    const { CateName, ProductBrand } = req.query; // Lấy giá trị từ query params
+    let filter = {};
+
+    if (CateName) {
+      filter.CateName = CateName; // Lọc theo nhóm sản phẩm
+    }
+    if (ProductBrand) {
+      filter.ProductBrand = ProductBrand; // Lọc theo thương hiệu
+    }
+
     const stocks = await database.collection('productstocks').aggregate([
       {
         $lookup: {
@@ -949,9 +954,12 @@ app.get('/api/productstocks', async (req, res) => {
           ProductID: 1,
           StockQuantity: 1,
           ProductName: "$productInfo.ProductName",
-          ProductSKU: "$productInfo.ProductSKU"
+          ProductSKU: "$productInfo.ProductSKU",
+          CateName: "$productInfo.CateName",
+          ProductBrand: "$productInfo.ProductBrand",
         }
-      }
+      },
+      { $match: filter } // Áp dụng bộ lọc
     ]).toArray();
 
     res.json(stocks);
@@ -960,6 +968,7 @@ app.get('/api/productstocks', async (req, res) => {
     res.status(500).json({ error: 'Lỗi server!' });
   }
 });
+
 
 app.get('/api/products', async (req, res) => {
   try {
@@ -1013,11 +1022,80 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
-// app.delete('/api/products?limit=100', (req, res) => {
-//   const productId = req.params.id;
-//   // Code xử lý xóa sản phẩm ở đây
-//   res.json({ message: `Đã xóa sản phẩm ${productId}` });
-// });
+app.get('/api/productstocks/filter', async (req, res) => {
+  try {
+    const stocks = await database.collection('productstocks').aggregate([
+      // Kết nối với bảng products để lấy thông tin sản phẩm
+      {
+        $lookup: {
+          from: "products",
+          localField: "ProductID",
+          foreignField: "ProductID",
+          as: "productInfo"
+        }
+      },
+      { $unwind: "$productInfo" },
+
+      // Kết nối với bảng categories để lấy CateName
+      {
+        $lookup: {
+          from: "categories",
+          localField: "productInfo.CateID",  // Dùng CateID từ bảng products
+          foreignField: "CateID",
+          as: "categoryInfo"
+        }
+      },
+      { $unwind: { path: "$categoryInfo", preserveNullAndEmptyArrays: true } }, // Tránh lỗi nếu không có category
+
+      // Chỉ lấy các trường cần thiết
+      {
+        $project: {
+          _id: 1,
+          ProductID: 1,
+          StockQuantity: 1,
+          CateID: "$productInfo.CateID",
+          CateName: { $ifNull: ["$categoryInfo.CateName", "Chưa có nhóm"] }, // Nếu không có, hiển thị mặc định
+          ProductBrand: "$productInfo.ProductBrand",
+          ProductName: "$productInfo.ProductName",
+          ProductSKU: "$productInfo.ProductSKU"
+        }
+      }
+    ]).toArray();
+
+    res.json(stocks);
+  } catch (err) {
+    console.error("❌ Lỗi khi lấy dữ liệu tồn kho:", err);
+    res.status(500).json({ error: 'Lỗi server!' });
+  }
+});
+
+
+
+
+app.put('/api/productstocks/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { StockQuantity } = req.body;
+
+    if (!ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "ID không hợp lệ" });
+    }
+
+    const result = await database.collection('productstocks').updateOne(
+      { _id: new ObjectId(id) }, 
+      { $set: { StockQuantity } }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ error: "Không tìm thấy sản phẩm" });
+    }
+
+    res.json({ message: "Cập nhật thành công" });
+  } catch (err) {
+    console.error("❌ Lỗi khi cập nhật tồn kho:", err);
+    res.status(500).json({ error: 'Lỗi server!' });
+  }
+});
 
 app.delete('/api/products/:id', async (req, res) => {
   try {
@@ -1131,50 +1209,7 @@ app.get('/api/products-full-details', async (req, res) => {
   }
 });
 
-// app.post('/api/products', async (req, res) => {
-//   try {
-//     const { ProductID, ImageID, CateID, ProductName, ProductPrice, ProductBrand, 
-//             ProductFullDescription, ProductShortDescription, ProductSKU, ProductImages, StockQuantity } = req.body;
 
-//     const existingImage = await imageCollection.findOne({ ImageID });
-//     if (!existingImage) {
-//       const imageData = {
-//         ImageID,
-//         ProductImageCover: ProductImages[0] || "",
-//         ProductImageSub1: ProductImages[1] || "",
-//         ProductImageSub2: ProductImages[2] || "",
-//         ProductImageSub3: ProductImages[3] || "",
-//       };
-//       await imageCollection.insertOne(imageData);
-//     }
-
-//     const newProduct = {
-//       ProductID,
-//       ImageID,
-//       CateID,
-//       ProductName,
-//       ProductPrice: Number(ProductPrice) || 0,
-//       ProductBrand,
-//       ProductFullDescription,
-//       ProductShortDescription,
-//       ProductSKU,
-//       CreatedAt: new Date()
-//     };
-
-//     await productCollection.insertOne(newProduct);
-
-//     await database.collection('productstocks').updateOne(
-//       { ProductID },
-//       { $set: { StockQuantity: Number(StockQuantity) || 0 } },
-//       { upsert: true }
-//     );
-
-//     res.json({ message: "Sản phẩm đã được thêm!", product: newProduct });
-//   } catch (err) {
-//     console.error("❌ Lỗi khi thêm sản phẩm:", err);
-//     res.status(500).json({ error: err.message });
-//   }
-// });
 
 app.post('/api/upload', upload.single('image'), async (req, res) => {
   try {
@@ -1191,56 +1226,6 @@ app.post('/api/upload', upload.single('image'), async (req, res) => {
   }
 });
 
-// app.put('/api/products/:id', async (req, res) => {
-//   try {
-//     const productId = req.params.id;
-//     const updatedData = req.body;
-
-//     const result = await productCollection.updateOne(
-//       { ProductID: productId },
-//       { $set: updatedData }
-//     );
-
-//     if (result.matchedCount === 0) {
-//       return res.status(404).json({ message: "Sản phẩm không tồn tại." });
-//     }
-
-//     res.json({ message: `Sản phẩm ${productId} đã được cập nhật!` });
-//   } catch (err) {
-//     console.error("❌ Lỗi khi cập nhật sản phẩm:", err);
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-
-// app.put('/api/products/:id', async (req, res) => {
-//   try {
-//     const productId = req.params.id;
-//     const updatedData = req.body;
-
-//     delete updatedData._id;
-//     delete updatedData.ProductID;
-
-//     let query = { _id: new ObjectId(productId) };
-//     const result = await productCollection.updateOne(query, { $set: updatedData });
-
-//     if (result.matchedCount === 0) {
-//       return res.status(404).json({ message: "Sản phẩm không tồn tại." });
-//     }
-
-//     if (updatedData.StockQuantity !== undefined) {
-//       await database.collection('productstocks').updateOne(
-//         { ProductID: updatedData.ProductID || req.body.ProductID },
-//         { $set: { StockQuantity: Number(updatedData.StockQuantity) || 0 } },
-//         { upsert: true }
-//       );
-//     }
-
-//     res.json({ message: `Sản phẩm ${productId} đã được cập nhật!` });
-//   } catch (err) {
-//     console.error("❌ Lỗi khi cập nhật sản phẩm:", err);
-//     res.status(500).json({ error: err.message, stack: err.stack });
-//   }
-// });
 
 app.get('/api/products/:id', async (req, res) => {
   try {

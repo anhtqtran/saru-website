@@ -86,7 +86,7 @@ import { ConsultantComponent } from './consultant/consultant.component';
 
     KhuyenmaiDetailComponent,
     KhuyenmaiListComponent,
-    KhuyenmaiListComponent
+    KhuyenmaiListComponent,
 
     ReactiveFormsModule,
     MatSelectModule,
@@ -108,7 +108,7 @@ import { ConsultantComponent } from './consultant/consultant.component';
         ]
       }
     })
->>>>>>> newadmin-main-tuvy
+
   ],
   providers: [Title],
   bootstrap: [AppComponent]
