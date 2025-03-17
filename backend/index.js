@@ -101,8 +101,10 @@ const authLimiter = rateLimit({
 });
 
 // Kết nối MongoDB
+
 let client, database, productCollection, imageCollection, categoryCollection, reviewCollection, orderDetailCollection, accountCollection, customerCollection,
-    orderCollection, orderStatusCollection, paymentMethodCollection, paymentStatusCollection, voucherCollection, voucherConditionCollection;
+    orderCollection, orderStatusCollection, paymentMethodCollection, paymentStatusCollection, voucherCollection, voucherConditionCollection, blogCollection, blogCategoryCollection, faqCollection, membershipCollection, messageCollection;
+
 async function connectDB() {
   const uri = process.env.MONGODB_URI;
   client = new MongoClient(uri);
@@ -126,6 +128,13 @@ async function connectDB() {
     promotionsCollection = database.collection("promotions");
     promotionStatusesCollection = database.collection("promotionstatuses");
     promotionScopeCollection = database.collection ("promotionscopes")
+    blogCollection = database.collection('blogs');
+    blogCategoryCollection = database.collection('blogcategories');
+    faqCollection = database.collection('faqs');
+    membershipCollection = database.collection('memberships');
+    orderCollection = database.collection('orders');
+    messageCollection = database.collection('consultants');
+
 
     await productCollection.createIndex({ ProductID: 1 }, { unique: true });
     await accountCollection.createIndex({ CustomerEmail: 1 }, { unique: true });
@@ -1824,6 +1833,22 @@ app.put('/orders/:id', async (req, res) => {
   }
 });
 
+//=============TUVY-BACKEND=================
+
+
+// API cho Categories
+app.post('/categories', async (req, res) => {
+  try {
+    const { CateblogID, CateblogName } = req.body;
+    const category = { CateblogID, CateblogName };
+    const result = await blogCategoryCollection.insertOne(category);
+    res.status(201).json({ ...category, _id: result.insertedId });
+  } catch (error) {
+    logger.error('Error in POST /categories', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 // Trạng thái order
 app.get("/order-status", async (req, res) => {
@@ -1998,13 +2023,555 @@ app.get("/combined-data", cors(), async (req, res) => {
     res.status(200).json(combinedData);
   } catch (error) {
     console.error("❌ Lỗi khi xử lý /combined-data:", error);
-    res.status(500).json({ error: "Internal server error", details: error.message });
+    res.status(500).json({ error: "Internal server error", details: error.message })
+  }});
+
+app.get('/categories', async (req, res) => {
+  try {
+    const categories = await blogCategoryCollection.find({}).toArray();
+    res.json(categories);
+  } catch (error) {
+    logger.error('Error in GET /categories', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/categories/:id', async (req, res) => {
+  try {
+    const category = await blogCategoryCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!category) {
+      return res.status(404).json({ message: "Không tìm thấy danh mục" });
+    }
+    res.json(category);
+  } catch (error) {
+    logger.error('Error in GET /categories/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/categories/:id', async (req, res) => {
+  try {
+    const { CateblogID, CateblogName } = req.body;
+    const result = await blogCategoryCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { CateblogID, CateblogName } }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy danh mục" });
+    }
+    const updatedCategory = await blogCategoryCollection.findOne({ _id: new ObjectId(req.params.id) });
+    res.json(updatedCategory);
+  } catch (error) {
+    logger.error('Error in PUT /categories/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/categories/:id', async (req, res) => {
+  try {
+    const result = await blogCategoryCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy danh mục" });
+    }
+    res.json({ message: "Đã xóa danh mục" });
+  } catch (error) {
+    logger.error('Error in DELETE /categories/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// API cho Blogs
+app.post('/blogs', async (req, res) => {
+  try {
+    const { BlogTitle, BlogContent, categoryID, BlogImage } = req.body;
+
+    // Kiểm tra BlogImage có phải là mảng không, nếu không thì chuyển thành mảng
+    const blogImages = Array.isArray(BlogImage) ? BlogImage : (BlogImage ? [BlogImage] : []);
+
+    // Kiểm tra dữ liệu đầu vào
+    if (!BlogTitle || !BlogContent) {
+      return res.status(400).json({ message: "Thiếu thông tin bắt buộc: BlogTitle hoặc BlogContent" });
+    }
+
+    const blog = {
+      BlogTitle,
+      BlogContent,
+      categoryID: categoryID ? new ObjectId(categoryID) : null,
+      BlogImage: blogImages, // Lưu dưới dạng mảng
+    };
+    const result = await blogCollection.insertOne(blog);
+    res.status(201).json({ ...blog, _id: result.insertedId });
+  } catch (error) {
+    logger.error('Error in POST /blogs', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/blogs/:id', async (req, res) => {
+  try {
+    const blog = await blogCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!blog) {
+      return res.status(404).json({ message: "Không tìm thấy bài viết" });
+    }
+
+    // Đảm bảo BlogImage là mảng
+    blog.BlogImage = Array.isArray(blog.BlogImage) ? blog.BlogImage : (blog.BlogImage ? [blog.BlogImage] : []);
+
+    const category = blog.categoryID
+      ? await blogCategoryCollection.findOne({ _id: new ObjectId(blog.categoryID) })
+      : null;
+    res.json({
+      ...blog,
+      categoryName: category ? category.CateblogName : "Unknown",
+    });
+  } catch (error) {
+    logger.error('Error in GET /blogs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/blogs', async (req, res) => {
+  try {
+    const blogs = await blogCollection.find({}).toArray();
+
+    // Đảm bảo BlogImage là mảng cho tất cả bài viết
+    const blogsWithImages = blogs.map(blog => ({
+      ...blog,
+      BlogImage: Array.isArray(blog.BlogImage) ? blog.BlogImage : (blog.BlogImage ? [blog.BlogImage] : []),
+    }));
+
+    const categoryIds = [...new Set(blogsWithImages.map(b => b.categoryID).filter(id => id))];
+    const categories = await blogCategoryCollection.find({ _id: { $in: categoryIds.map(id => new ObjectId(id)) } }).toArray();
+    const categoryMap = categories.reduce((acc, cat) => {
+      acc[cat._id.toString()] = cat.CateblogName;
+      return acc;
+    }, {});
+
+    const blogsWithCategories = blogsWithImages.map(blog => ({
+      ...blog,
+      categoryName: blog.categoryID ? categoryMap[blog.categoryID] || "Unknown" : "Unknown",
+    }));
+
+    res.json(blogsWithCategories);
+  } catch (error) {
+    logger.error('Error in GET /blogs', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/blogs/:id', async (req, res) => {
+  try {
+    const { BlogTitle, BlogContent, categoryID, BlogImage } = req.body;
+
+    // Kiểm tra BlogImage có phải là mảng không, nếu không thì chuyển thành mảng
+    const blogImages = Array.isArray(BlogImage) ? BlogImage : (BlogImage ? [BlogImage] : []);
+
+    // Kiểm tra dữ liệu đầu vào
+    if (!BlogTitle || !BlogContent) {
+      return res.status(400).json({ message: "Thiếu thông tin bắt buộc: BlogTitle hoặc BlogContent" });
+    }
+
+    const result = await blogCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      {
+        $set: {
+          BlogTitle,
+          BlogContent,
+          categoryID: categoryID ? new ObjectId(categoryID) : null,
+          BlogImage: blogImages, // Cập nhật dưới dạng mảng
+        },
+      }
+    );
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy bài viết" });
+    }
+
+    const updatedBlog = await blogCollection.findOne({ _id: new ObjectId(req.params.id) });
+    res.json({ message: "Cập nhật thành công", blog: updatedBlog });
+  } catch (error) {
+    logger.error('Error in PUT /blogs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/blogs/:id', async (req, res) => {
+  try {
+    const result = await blogCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy bài viết" });
+    }
+    res.json({ message: "Đã xóa bài viết" });
+  } catch (error) {
+    logger.error('Error in DELETE /blogs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/blogs/category/:categoryID', async (req, res) => {
+  try {
+    const categoryID = new ObjectId(req.params.categoryID);
+    const blogs = await blogCollection.find({ categoryID }).sort({ _id: -1 }).toArray();
+    if (!blogs.length) {
+      return res.status(404).json({ message: "Không tìm thấy bài viết nào thuộc danh mục này" });
+    }
+    const category = await blogCategoryCollection.findOne({ _id: categoryID });
+    const blogsWithCategory = blogs.map(blog => ({
+      ...blog,
+      categoryName: category ? category.CateblogName : "Unknown"
+    }));
+    res.json(blogsWithCategory);
+  } catch (error) {
+    logger.error('Error in GET /blogs/category/:categoryID', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/blogs/category/:categoryID/paginated', async (req, res) => {
+  try {
+    const { page = 1, limit = 10 } = req.query;
+    const categoryID = new ObjectId(req.params.categoryID);
+    const skip = (page - 1) * limit;
+    const blogs = await blogCollection.find({ categoryID })
+      .sort({ _id: -1 })
+      .skip(skip)
+      .limit(parseInt(limit))
+      .toArray();
+    const totalBlogs = await blogCollection.countDocuments({ categoryID });
+    const category = await blogCategoryCollection.findOne({ _id: categoryID });
+    const blogsWithCategory = blogs.map(blog => ({
+      ...blog,
+      categoryName: category ? category.CateblogName : "Unknown"
+    }));
+    res.json({
+      blogs: blogsWithCategory,
+      totalBlogs,
+      currentPage: parseInt(page),
+      totalPages: Math.ceil(totalBlogs / limit)
+    });
+  } catch (error) {
+    logger.error('Error in GET /blogs/category/:categoryID/paginated', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/blogs/category/:categoryID/search', async (req, res) => {
+  try {
+    const { searchTerm } = req.query;
+    const categoryID = new ObjectId(req.params.categoryID);
+    const blogs = await blogCollection.find({
+      categoryID,
+      $or: [
+        { BlogTitle: { $regex: searchTerm, $options: 'i' } },
+        { BlogContent: { $regex: searchTerm, $options: 'i' } }
+      ]
+    }).sort({ _id: -1 }).toArray();
+    if (!blogs.length) {
+      return res.status(404).json({ message: 'Không tìm thấy bài viết nào phù hợp' });
+    }
+    const category = await blogCategoryCollection.findOne({ _id: categoryID });
+    const blogsWithCategory = blogs.map(blog => ({
+      ...blog,
+      categoryName: category ? category.CateblogName : "Unknown"
+    }));
+    res.json(blogsWithCategory);
+  } catch (error) {
+    logger.error('Error in GET /blogs/category/:categoryID/search', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// API cho FAQs
+app.post('/faqs', async (req, res) => {
+  try {
+    const { FaqID, FaqTitle, FaqContent } = req.body;
+    const faq = { FaqID, FaqTitle, FaqContent };
+    const result = await faqCollection.insertOne(faq);
+    res.status(201).json({ ...faq, _id: result.insertedId });
+  } catch (error) {
+    logger.error('Error in POST /faqs', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/faqs/:id', async (req, res) => {
+  try {
+    const faq = await faqCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!faq) {
+      return res.status(404).json({ message: "Không tìm thấy FAQ" });
+    }
+    res.json(faq);
+  } catch (error) {
+    logger.error('Error in GET /faqs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/faqs', async (req, res) => {
+  try {
+    const faqs = await faqCollection.find({}).toArray();
+    res.json(faqs);
+  } catch (error) {
+    logger.error('Error in GET /faqs', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/faqs/:id', async (req, res) => {
+  try {
+    const { FaqID, FaqTitle, FaqContent } = req.body;
+    const result = await faqCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { FaqID, FaqTitle, FaqContent } }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy FAQ" });
+    }
+    const updatedFaq = await faqCollection.findOne({ _id: new ObjectId(req.params.id) });
+    res.json({ message: "Cập nhật thành công", faq: updatedFaq });
+  } catch (error) {
+    logger.error('Error in PUT /faqs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/faqs/:id', async (req, res) => {
+  try {
+    const result = await faqCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy FAQ" });
+    }
+    res.json({ message: "Đã xóa FAQ" });
+  } catch (error) {
+    logger.error('Error in DELETE /faqs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// API cho Customers
+app.get('/customers', async (req, res) => {
+  try {
+    const customers = await customerCollection.find({}).toArray();
+    res.json(customers);
+  } catch (error) {
+    logger.error('Error in GET /customers', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi lấy danh sách khách hàng" });
+  }
+});
+
+app.get('/customers/:id', async (req, res) => {
+  try {
+    const customer = await customerCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!customer) {
+      return res.status(404).json({ message: "Không tìm thấy khách hàng" });
+    }
+    res.json(customer);
+  } catch (error) {
+    logger.error('Error in GET /customers/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi truy vấn khách hàng" });
+  }
+});
+
+app.post('/customers', async (req, res) => {
+  try {
+    const { CustomerName, CustomerPhone } = req.body;
+    if (!CustomerName || !CustomerPhone) {
+      return res.status(400).json({ message: "Thiếu thông tin bắt buộc" });
+    }
+    const result = await customerCollection.insertOne(req.body);
+    res.status(201).json({ message: "Thêm khách hàng thành công", _id: result.insertedId });
+  } catch (error) {
+    logger.error('Error in POST /customers', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi thêm khách hàng" });
+  }
+});
+
+app.put('/customers/:id', async (req, res) => {
+  try {
+    const result = await customerCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: req.body }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy khách hàng để cập nhật" });
+    }
+    const updatedCustomer = await customerCollection.findOne({ _id: new ObjectId(req.params.id) });
+    res.json({ message: "Cập nhật thành công", customer: updatedCustomer });
+  } catch (error) {
+    logger.error('Error in PUT /customers/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi cập nhật khách hàng" });
+  }
+});
+
+app.delete('/customers/:id', async (req, res) => {
+  try {
+    const result = await customerCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy khách hàng để xóa" });
+    }
+    res.json({ message: "Xóa khách hàng thành công" });
+  } catch (error) {
+    logger.error('Error in DELETE /customers/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi xóa khách hàng" });
+  }
+});
+
+// API cho Memberships
+app.get('/memberships', async (req, res) => {
+  try {
+    const memberships = await membershipCollection.find({}).toArray();
+    res.json(memberships);
+  } catch (error) {
+    logger.error('Error in GET /memberships', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: "Lỗi khi lấy danh sách memberships" });
+  }
+});
+
+app.get('/memberships/:id', async (req, res) => {
+  try {
+    const membership = await membershipCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!membership) {
+      return res.status(404).json({ message: "Membership không tồn tại" });
+    }
+    res.json(membership);
+  } catch (error) {
+    logger.error('Error in GET /memberships/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: "Lỗi khi lấy membership" });
+  }
+});
+
+app.post('/memberships', async (req, res) => {
+  try {
+    const { MemberType, MemberID } = req.body;
+    const result = await membershipCollection.insertOne({ MemberType, MemberID });
+    res.status(201).json({ _id: result.insertedId, MemberType, MemberID });
+  } catch (error) {
+    logger.error('Error in POST /memberships', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: "Lỗi khi thêm membership" });
+  }
+});
+
+app.put('/memberships/:id', async (req, res) => {
+  try {
+    const { MemberType, MemberID } = req.body;
+    const result = await membershipCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { MemberType, MemberID } }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Membership không tồn tại" });
+    }
+    const updatedMembership = await membershipCollection.findOne({ _id: new ObjectId(req.params.id) });
+    res.json(updatedMembership);
+  } catch (error) {
+    logger.error('Error in PUT /memberships/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: "Lỗi khi cập nhật membership" });
+  }
+});
+
+app.delete('/memberships/:id', async (req, res) => {
+  try {
+    const result = await membershipCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Membership không tồn tại" });
+    }
+    res.json({ message: "Xóa membership thành công" });
+  } catch (error) {
+    logger.error('Error in DELETE /memberships/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: "Lỗi khi xóa membership" });
+  }
+});
+
+// API cho Orders
+app.get('/orders/customer/:customerID', async (req, res) => {
+  try {
+    const customerID = req.params.customerID;
+    const orders = await orderCollection.find({ CustomerID: customerID }).toArray();
+    if (!orders.length) {
+      return res.status(404).json({ message: "Không tìm thấy đơn hàng nào cho khách hàng này." });
+    }
+    res.json(orders);
+  } catch (error) {
+    logger.error('Error in GET /orders/customer/:customerID', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi lấy lịch sử đơn hàng" });
+  }
+});
+
+// WebSocket và Message Handling
+const { Server } = require('socket.io');
+const server = require('http').createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: ["http://localhost:4001", "http://localhost:4002", "http://localhost:4200"], // Thêm localhost:4200 nếu cần
+    methods: ["GET", "POST"],
+    credentials: true // Thêm dòng này
+  },
+});
+
+const clients = new Map();
+
+io.on("connection", (socket) => {
+  console.log(`User connected: ${socket.id}`);
+
+  socket.on("register", (userName) => {
+    clients.set(userName, socket.id);
+    logger.info(`User ${userName} registered with socket ID: ${socket.id}`, { correlationId: 'socket' });
+  });
+
+  socket.on("sendMessage", async (data) => {
+    console.log("Tin nhắn nhận được:", data);
+    if (!data.targetUser) {
+      logger.warn("Thiếu targetUser trong dữ liệu gửi đến server", { correlationId: 'socket' });
+      return;
+    }
+
+    const newMessage = {
+      user: data.user,
+      message: data.message,
+      targetUser: data.targetUser,
+      timestamp: new Date(),
+    };
+    await messageCollection.insertOne(newMessage);
+    logger.info("Đã lưu tin nhắn vào MongoDB", { message: newMessage, correlationId: 'socket' });
+
+    const targetSocketId = clients.get(data.targetUser);
+    if (targetSocketId) {
+      io.to(targetSocketId).emit("receiveMessage", {
+        user: data.user,
+        message: data.message,
+        targetUser: data.targetUser,
+      });
+      logger.info(`Đã gửi tin nhắn đến ${data.targetUser} (socket ID: ${targetSocketId})`, { correlationId: 'socket' });
+    } else {
+      logger.warn(`Không tìm thấy socket ID cho người dùng: ${data.targetUser}`, { correlationId: 'socket' });
+    }
+  });
+
+  socket.on("disconnect", () => {
+    for (const [userName, socketId] of clients.entries()) {
+      if (socketId === socket.id) {
+        clients.delete(userName);
+        logger.info(`User ${userName} disconnected`, { correlationId: 'socket' });
+        break;
+      }
+    }
+  });
+});
+
+app.get("/messages", async (req, res) => {
+  try {
+    const messages = await messageCollection.find({}).sort({ timestamp: 1 }).toArray();
+    res.json(messages);
+  } catch (error) {
+    logger.error('Error in GET /messages', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi lấy tin nhắn" });
+
   }
 });
 
 // ===================== SERVER START =====================
 
-app.listen(port, () => {
+server.listen(port, () => {
   logger.info(`Server running on port ${port}`, { correlationId: 'system' });
 });
 
