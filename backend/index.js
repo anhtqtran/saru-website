@@ -957,42 +957,6 @@ cron.schedule('0 * * * *', async () => {
   logger.info('Cleaned up expired OTPs', { correlationId: 'system' });
 });
 
-
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
-
-
-console.log(transporter); // Kiểm tra khởi tạo
-
-(async () => {
-  try {
-    console.log('Đang xác minh Nodemailer...'); // Kiểm tra luồng thực thi
-    await transporter.verify();
-    logger.info("Kết nối Nodemailer thành công!", { correlationId: 'system' });
-  } catch (error) {
-    logger.error('Lỗi cấu hình Nodemailer', { error: error.message, code: error.code, correlationId: 'system' });
-  }
-})();
-// (async () => {
-//   try {
-//     await transporter.verify();
-//     logger.info("Kết nối Nodemailer thành công!", { correlationId: 'system' });
-//   } catch (error) {
-//     logger.error('Lỗi cấu hình Nodemailer', { error: error.message, code: error.code, correlationId: 'system' });
-//   }
-// })();
-
 app.post('/api/login', authLimiter, [
   body('email').isEmail().normalizeEmail(),
   body('password').notEmpty()
