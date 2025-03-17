@@ -6446,3 +6446,20 @@
 {"level":"info","message":"GET /payment-methods 304 - - 484.415 ms - correlationId: 1cb2d9fc-177f-4f33-b540-d4c1d0fa9d7b","timestamp":"2025-03-17T16:33:52.710Z"}
 {"level":"info","message":"GET /customers 304 - - 212.551 ms - correlationId: f991e7c7-da1e-4625-891e-f9ee884080e1","timestamp":"2025-03-17T16:33:53.177Z"}
 {"level":"info","message":"GET /orders 304 - - 1801.805 ms - correlationId: b4f7ecbe-0346-4c02-9a0b-742dace03613","timestamp":"2025-03-17T16:33:54.023Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T16:48:36.255Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials 6a1803df08f44-6eade330e97sm56754756d6.83 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T16:48:38.864Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T16:48:40.895Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 78.651 ms - correlationId: ed73fee9-3812-4ff6-829b-191ed165d3ea","timestamp":"2025-03-17T16:52:07.057Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 507.712 ms - correlationId: 5176a9b0-a13d-4366-b00a-ecd152ceb4ed","timestamp":"2025-03-17T16:52:07.498Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 135.552 ms - correlationId: 54db79f0-cf40-46fe-9667-33ecd104177d","timestamp":"2025-03-17T16:52:08.640Z"}
+{"level":"info","message":"GET /api/filters 304 - - 221.573 ms - correlationId: e9b2fedd-46f7-42da-bba0-fced66ef56a0","timestamp":"2025-03-17T16:52:08.728Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 61.658 ms - correlationId: 2fafa121-426d-48d7-b558-1a9d8c597a72","timestamp":"2025-03-17T16:52:12.589Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 134.424 ms - correlationId: 16955afe-aa08-46b4-bd60-b10bbfe04b31","timestamp":"2025-03-17T16:52:12.665Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 66.462 ms - correlationId: 0798578a-4814-4d2a-aef3-e474c6cade9e","timestamp":"2025-03-17T16:55:38.820Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 130.063 ms - correlationId: 4fb11a4c-c93e-420d-8c3a-5173860913db","timestamp":"2025-03-17T16:55:38.886Z"}
+{"level":"info","message":"GET /api/productstocks 304 - - 58.986 ms - correlationId: 59e8fa07-1159-4d06-a688-c04401f49f02","timestamp":"2025-03-17T16:59:30.670Z"}
+{"level":"info","message":"GET /api/products-full-details 304 - - 127.227 ms - correlationId: 2dec2619-c8e0-4f5e-8c2a-1cfc86bb28d3","timestamp":"2025-03-17T16:59:30.754Z"}
+{"correlationId":"system","level":"info","message":"Server running on port 4000","timestamp":"2025-03-17T16:59:58.786Z"}
+{"correlationId":"system","level":"info","message":"Connected to MongoDB","timestamp":"2025-03-17T16:59:59.942Z"}
+{"code":"EAUTH","correlationId":"system","error":"Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to\n535 5.7.8  https://support.google.com/mail/?p=BadCredentials d9443c01a7336-225c68a4134sm77754435ad.56 - gsmtp","level":"error","message":"Lỗi cấu hình Nodemailer","timestamp":"2025-03-17T17:00:00.393Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-17T17:00:00.764Z"}
