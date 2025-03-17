@@ -930,17 +930,6 @@ cron.schedule('0 * * * *', async () => {
   logger.info('Cleaned up expired OTPs', { correlationId: 'system' });
 });
 
-
-
-(async () => {
-  try {
-    await transporter.verify();
-    logger.info("Kết nối Nodemailer thành công!", { correlationId: 'system' });
-  } catch (error) {
-    logger.error('Lỗi cấu hình Nodemailer', { error: error.message, code: error.code, correlationId: 'system' });
-  }
-})();
-
 app.post('/api/login', authLimiter, [
   body('email').isEmail().normalizeEmail(),
   body('password').notEmpty()
