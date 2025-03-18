@@ -4,6 +4,7 @@ const port = 4000;
 const { body, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const { v4: uuidv4 } = require('uuid');
@@ -14,7 +15,6 @@ const rateLimit = require('express-rate-limit');
 const winston = require('winston');
 const cron = require('node-cron');
 const multer = require('multer'); // Thêm dòng này
-const nodemailer = require('nodemailer');
 const mail = require('./node-mailer');
 const app = express();
 
@@ -851,7 +851,6 @@ app.delete('/api/compare/:productId', authenticateToken, async (req, res) => {
 });
 
 // ===================== CART API =====================
-
 app.post('/api/cart', authenticateToken, async (req, res) => {
   const { productId, quantity } = req.body;
   if (!productId || quantity <= 0) return res.status(400).json({ error: "Invalid input" });
@@ -986,7 +985,7 @@ app.post('/api/login', authLimiter, [
 
     const token = jwt.sign({ AccountID: account.AccountID }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    try {
+      try {
       const cartCollection = database.collection('carts');
       const compareCollection = database.collection('compares');
 
@@ -2033,5 +2032,4 @@ process.on('SIGTERM', async () => {
   logger.info('MongoDB connection closed', { correlationId: 'system' });
   process.exit(0);
 });
-
 

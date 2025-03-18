@@ -1,0 +1,28 @@
+<div class="flex min-h-screen font-inter bg-gray-100 text-gray-800">
+  <!-- Sidebar -->
+  <aside class="w-[260px] min-w-[240px] bg-white shadow-lg p-6 fixed h-full">
+    <div class="flex items-center mb-8 space-x-4">
+      <img src="assets/images/1.2 LOGO ngang nền trắng.png" alt="Logo" class="w-40 h-auto object-contain">
+    </div>
+    <nav>
+      <ul class="space-y-4 text-base">
+        <li *ngFor="let item of [
+          {id: 'home', name: 'TRANG CHỦ', icon: 'home.png'},
+          {id: 'products', name: 'SẢN PHẨM', icon: 'products.png'},
+          {id: 'orders', name: 'ĐƠN HÀNG', icon: 'orders.png'},
+          {id: 'customers', name: 'KHÁCH HÀNG', icon: 'customers.png'},
+          {id: 'news', name: 'TIN TỨC', icon: 'news.png'},
+          {id: 'faqs', name: 'FAQS', icon: 'faqs.png'},
+          {id: 'promotions', name: 'KHUYẾN MÃI', icon: 'promotions.png'},
+          {id: 'consultation', name: 'TƯ VẤN', icon: 'consultation.png'}
+        ]">
+          <a [routerLink]="item.id === 'home' ? '/inventorymanage' : '/' + item.id" 
+             class="flex items-center px-4 py-3 rounded-md transition-colors duration-300 hover:bg-[#F8BC3B] hover:text-white cursor-pointer">
+            <img [src]="'assets/images/' + item.icon" [alt]="item.name" class="w-6 h-6 mr-3"> 
+            <span class="font-medium">{{ item.name }}</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+

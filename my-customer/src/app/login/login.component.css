@@ -64,6 +64,14 @@ form.log-in-form {
   width: 27em;
 }
 
+<<<<<<< HEAD
+
+input[type="checkbox"] {
+  margin-right: 5px;
+}
+
+.remember-label {
+=======
 .spinner {
   display: inline-block;
   width: 1rem;
@@ -83,6 +91,7 @@ input[type="checkbox"] {
 .remember-label {
     margin-right: 16REM;
 
+>>>>>>> main
   margin-right: 16REM;
 }
 .title {
@@ -95,7 +104,11 @@ input[type="checkbox"] {
   max-width: 540px;
   width: 100%;
   background-color: #f0f0f0;
+<<<<<<< HEAD
+  margin: 5px 0;
+=======
   margin: 20px 0;
+>>>>>>> main
   height: 55px;
   border-radius: 55px;
   display: grid;
@@ -107,6 +120,13 @@ input[type="checkbox"] {
 .input-field:hover {
   background-color: #e0e0e0; /* Thay đổi màu nền khi hover */
 }
+<<<<<<< HEAD
+
+.input-field:focus {
+  border: 2px solid #5995fd;
+  outline: none;
+} 
+=======
 /* Ghi đè hiệu ứng focus cho các input trong form đăng nhập và đăng ký */
 .input-field:focus {
   border-color: none; /* Loại bỏ viền focus */
@@ -117,6 +137,7 @@ input[type="checkbox"] {
 }
 
 
+>>>>>>> main
 .input-field i {
   text-align: center;
   line-height: 55px;
@@ -141,6 +162,16 @@ input[type="checkbox"] {
   font-weight: 500;
 }
 
+<<<<<<< HEAD
+.error {
+  color: red;
+  font-size: 0.9rem; /* Thay đổi kích thước font cho thông báo lỗi */
+  margin-bottom: 8px; /* Thêm khoảng cách giữa input và thông báo lỗi */
+  text-align: left;
+  margin-left: 5em;
+}
+
+=======
 .error-active {
   border: 2px solid red; /* Đánh dấu viền đỏ khi có lỗi */
   background-color: #ffebee; /* Nền nhạt đỏ để nổi bật */
@@ -173,6 +204,7 @@ input[type="checkbox"] {
   background-color: #fff; /* Nền trắng cho lỗi để dễ đọc */
   padding: 2px 5px; /* Padding để lỗi không bị cắt */
 }
+>>>>>>> main
 .btn {
   max-width: 540px;
   width: 100%;
@@ -444,6 +476,9 @@ a:hover {
     bottom: 28%;
     left: 50%;
   }
+<<<<<<< HEAD
+}
+=======
 }
 
 .loading {
@@ -451,3 +486,4 @@ a:hover {
   text-align: center;
   margin-top: 10px;
 }
+>>>>>>> main

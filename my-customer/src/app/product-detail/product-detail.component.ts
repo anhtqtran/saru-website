@@ -3,9 +3,13 @@ import { ProductService } from '../services/product.service';
 import { Product } from '../classes/Product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+<<<<<<< HEAD
+
+=======
 import { HomepageProductsService } from '../services/homepage-products.service'; // Hỗ trợ best-seller
 import { BestSellingProduct } from '../classes/BestSellingProduct'; // Class cho best-seller
 import { Lightbox } from 'ngx-lightbox'; // Tính năng lightbox
+>>>>>>> main
 
 @Component({
   selector: 'app-product-detail',
@@ -21,15 +25,27 @@ export class ProductDetailComponent implements OnInit {
 
   constructor(
     private productService: ProductService,
+<<<<<<< HEAD
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackBar: MatSnackBar
+=======
     private bestSellerIdService: HomepageProductsService,
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
     private lightbox: Lightbox
+>>>>>>> main
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
+<<<<<<< HEAD
+      const id = params['id'];
+      if (id) {
+        this.loadProductDetail(id);
+      } else {
+=======
       const productId = params['id'];
       if (productId) {
         this.bestSellerIdService.getBestSellerIds().subscribe({
@@ -67,11 +83,38 @@ export class ProductDetailComponent implements OnInit {
         });
       } else {
         this.snackBar.open('Không tìm thấy ID sản phẩm', 'OK', { duration: 3000 });
+>>>>>>> main
         this.isLoading = false;
       }
     });
   }
 
+<<<<<<< HEAD
+  loadProductDetail(id: string): void {
+    this.isLoading = true;
+    this.productService.getProductDetail(id).subscribe({
+        next: (data: Product) => {
+          if (!data.reviews) data.reviews = [];
+          console.log('Review data:', data.reviews);
+            console.log('Product data from API:', data);
+            console.log('Related products _id:', data.relatedProducts?.map(rp => rp._id) || []);
+            // **Thêm LOG kiểu dữ liệu _id của sản phẩm liên quan VÀO ĐÂY:**
+            if (data.relatedProducts && data.relatedProducts.length > 0) {
+                console.log('Kiểu dữ liệu _id sản phẩm liên quan đầu tiên:', typeof data.relatedProducts[0]._id);
+                console.log('Constructor name _id sản phẩm liên quan đầu tiên:', data.relatedProducts[0]._id.constructor.name);
+            }
+
+            this.product = { ...data };
+            this.selectedImage = this.product.ProductImageCover || 'assets/images/default-product.png';
+            this.isLoading = false;
+        },
+        error: (error) => {
+            console.error('Error loading product detail:', error.message);
+            this.isLoading = false;
+        }
+    });
+}
+=======
   loadBestSellerDetail(productId: string): void {
     this.isLoading = true;
     this.bestSellerIdService.getBestSellerDetail(productId).subscribe({
@@ -169,23 +212,48 @@ export class ProductDetailComponent implements OnInit {
   openLightbox(image: string): void {
     this.lightbox.open([{ src: image, thumb: image }]);
   }
+>>>>>>> main
 
   selectImage(image: string): void {
     this.selectedImage = image || 'assets/images/default-product.png';
   }
+<<<<<<< HEAD
+
+=======
   
+>>>>>>> main
   addToCart(product: Product): void {
     if (product) {
       this.productService.addToCart(product._id, 1).subscribe({
         next: () => this.snackBar.open('Đã thêm vào giỏ hàng!', 'OK', { duration: 3000 }),
+<<<<<<< HEAD
+        error: (error) => console.error('Error adding to cart:', error.message)
+=======
         error: (error) => {
           console.error('Error adding to cart:', error.message);
           this.snackBar.open('Lỗi khi thêm vào giỏ hàng', 'OK', { duration: 3000 });
         }
+>>>>>>> main
       });
     }
   }
 
+<<<<<<< HEAD
+  // Trong product.component.ts hoặc product-detail.component.ts
+  addToCompare(product: Product): void {
+    console.log('Adding to compare, productId:', product._id); // Log để kiểm tra
+    this.productService.addToCompare(product._id.toString()).subscribe({
+      next: (response) => {
+        console.log('Add to compare response:', response); // Log để kiểm tra
+        this.snackBar.open('Đã thêm vào danh sách so sánh!', 'OK', { duration: 3000 });
+      },
+      error: (error) => {
+        console.error('Error adding to compare:', error);
+        this.snackBar.open('Lỗi khi thêm vào danh sách so sánh', 'Close', { duration: 3000 });
+      }
+    });
+  }
+=======
   addToCompare(product: Product): void {
     if (product) {
       console.log('Adding to compare, productId:', product._id);
@@ -202,6 +270,7 @@ export class ProductDetailComponent implements OnInit {
     }
   }
 
+>>>>>>> main
   setActiveTab(tabName: string): void {
     this.activeTab = tabName;
   }
@@ -216,6 +285,29 @@ export class ProductDetailComponent implements OnInit {
     return Array(5 - (roundedRating > 5 ? 5 : roundedRating)).fill(0);
   }
 
+<<<<<<< HEAD
+// Phương thức điều hướng đến trang chi tiết sản phẩm
+goToProductDetail(event: Event, productId: string): void {
+  event.stopPropagation(); // Dừng lan truyền sự kiện
+  console.log('Clicked product ID:', productId); // Thêm log này
+  
+  if (!productId) {
+    console.error('Invalid productId:', productId);
+    return;
+  }
+
+  // Thêm dòng này để ngăn sự kiện click lan ra các phần tử cha
+  event.stopPropagation(); 
+  
+  this.router.navigate(['/products', productId]).then(navigationResult => {
+    console.log('Navigation success:', navigationResult);
+    if (!navigationResult) {
+      console.error('Navigation failed, check route config');
+    }
+  });
+}
+
+=======
   goToProductDetail(event: Event, productId: string): void {
     event.stopPropagation();
     console.log('Clicked product ID:', productId);
@@ -234,4 +326,5 @@ export class ProductDetailComponent implements OnInit {
       }
     });
   }
+>>>>>>> main
 }

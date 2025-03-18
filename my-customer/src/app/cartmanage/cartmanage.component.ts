@@ -1,6 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { DecimalPipe } from '@angular/common';
+<<<<<<< HEAD
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router'
+@Component({
+  selector: 'app-cartmanage',
+  templateUrl: './cartmanage.component.html',
+  styleUrls: ['./cartmanage.component.css'],
+  providers: [DecimalPipe],
+  imports :[FormsModule,CommonModule]
+=======
 import { Router } from '@angular/router'
 @Component({
   selector: 'app-cartmanage',
@@ -8,6 +19,7 @@ import { Router } from '@angular/router'
   templateUrl: './cartmanage.component.html',
   styleUrls: ['./cartmanage.component.css'],
   providers: [DecimalPipe],
+>>>>>>> main
 })
 export class CartmanageComponent implements OnInit {
   cartItems: any[] = [];
@@ -68,4 +80,8 @@ export class CartmanageComponent implements OnInit {
   }
 
  
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main

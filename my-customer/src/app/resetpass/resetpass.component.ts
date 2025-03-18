@@ -1,14 +1,37 @@
 import { Component } from '@angular/core';
+<<<<<<< HEAD
+import { Router } from '@angular/router';
+
+
+=======
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 
+>>>>>>> main
 @Component({
   selector: 'app-resetpass',
   standalone: false,
   templateUrl: './resetpass.component.html',
   styleUrl: './resetpass.component.css'
 })
+<<<<<<< HEAD
+export class ResetpassComponent {
+
+constructor(private router: Router) {}
+
+onSubmit() {
+  // Chuyển hướng đến trang sendcode
+  this.router.navigate(['/sendcode']);
+}
+
+hidePopup() {
+  // Logic để ẩn popup nếu cần
+}
+
+
+}
+=======
 
 export class ResetpassComponent {
   forgotPasswordForm: FormGroup;
@@ -53,3 +76,4 @@ export class ResetpassComponent {
     this.router.navigate(['/login']);
   }
 }
+>>>>>>> main

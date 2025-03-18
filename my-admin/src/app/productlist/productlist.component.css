@@ -1,0 +1,237 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles với Tailwind */
+
+/* Header */
+.admin-header {
+    @apply flex justify-end p-4 bg-black;
+}
+
+.admin-button {
+    @apply bg-white border border-gray-300 px-4 py-2 rounded-lg font-bold cursor-pointer;
+}
+
+/* Container chính */
+.container {
+    @apply w-full h-full  mx-auto bg-white p-6 rounded-lg shadow-md mt-10;
+}
+
+/* Tiêu đề */
+.product-header {
+    @apply flex justify-between items-center mb-6;
+}
+
+.product-header h1 {
+    @apply text-2xl font-bold;
+}
+
+.add-product-button {
+    @apply flex items-center bg-yellow-400 px-4 py-2 rounded-lg font-bold hover:bg-yellow-500 transition;
+}
+
+.add-product-button img {
+    @apply w-4 h-4 mr-2;
+}
+
+/* Điều kiện lọc & tìm kiếm */
+.product-controls {
+    @apply flex items-center gap-4 mb-5;
+}
+
+/* Bộ lọc */
+.filter-container {
+    @apply relative;
+}
+
+/* .filter-button {
+    @apply flex items-center border border-black px-4 py-2 rounded-full font-bold;
+} */
+
+.filter-buttons {
+    @apply flex justify-between mt-2 items-center border border-black px-4 py-2 rounded-full font-bold;
+}
+
+.filter-button img {
+    @apply w-4 h-4 mr-2;
+}
+
+/* Dropdown */
+/* .filter-dropdown {
+    @apply absolute left-0 mt-2 w-64 bg-white border border-gray-300 rounded-lg shadow-md p-4 hidden;
+} */
+
+.filter-dropdown {
+    @apply absolute left-0 mt-2 w-64 bg-white border border-gray-300 rounded-lg shadow-md p-4 z-50;
+}
+
+.cancel-button {
+    @apply px-3 py-1 bg-gray-300 text-black rounded cursor-pointer hover:bg-gray-400;
+}
+
+.apply-button {
+    @apply px-3 py-1 bg-orange-500 text-white rounded cursor-pointer hover:bg-orange-600;
+}
+
+/* Thanh tìm kiếm */
+.search-container {
+    @apply flex items-center border border-black rounded-full px-4 py-2 w-full;
+}
+
+.search-bar {
+    @apply border-none outline-none flex-grow;
+}
+
+.search-icon {
+    @apply w-4 h-4 mr-2;
+}
+
+/* Bảng sản phẩm */
+.product-table {
+    @apply w-full border-collapse;
+}
+
+.product-table thead {
+    @apply bg-gray-200;
+}
+
+.product-table th,
+.product-table td {
+    @apply border border-gray-300 p-4 text-left;
+}
+
+/* Thông tin sản phẩm */
+.product-info {
+    @apply flex items-center gap-4;
+}
+
+.product-info img {
+    @apply w-10;
+}
+
+/* Hành động */
+.actions {
+    @apply flex gap-3 cursor-pointer;
+}
+
+.actions img {
+    @apply w-5;
+}
+
+/* Footer */
+.product-footer {
+    @apply flex justify-between mt-5;
+}
+
+.product-footer select {
+    @apply p-2 border border-gray-300 rounded-full;
+}
+
+.product-footer p {
+    @apply text-sm text-gray-600;
+}
+img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .search-container {
+    position: relative;
+}
+
+.search-container ul {
+    position: absolute;
+    top: 100%; /* Đẩy xuống ngay dưới input */
+    left: 0;
+    width: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    z-index: 50; /* Đảm bảo hiển thị trên các phần khác */
+}
+
+.search-container ul li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.search-container ul li:hover {
+    background-color: #f3f3f3;
+}
+
+/* Style cho modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 800px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+  }
+  
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .product-images {
+    margin-bottom: 20px;
+  }
+  
+  .image-gallery {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .product-image {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .product-info p {
+    margin: 5px 0;
+  }
+  
+  .product-info strong {
+    display: inline-block;
+    width: 200px;
+  }
+  
+  .action-icon {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+  }
