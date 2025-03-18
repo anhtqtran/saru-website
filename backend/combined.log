@@ -12426,3 +12426,4 @@
 {"AccountID":"acc_1741507487684","cart":[{"productId":"67cedd78aaf7ee8b1e4bf2e2","quantity":1},{"productId":"67d271f21f0372e8a7b7361c","quantity":2},{"productId":"67d1bcde06b2e927137c4bac","quantity":2},{"productId":"67cedd78aaf7ee8b1e4bf2e6","quantity":3},{"productId":"67cedd78aaf7ee8b1e4bf2e9","quantity":1},{"productId":"67cedd78aaf7ee8b1e4bf2f1","quantity":1}],"correlationId":"7c28abb6-f435-4c7a-bbde-3152d24149e9","level":"info","message":"Fetched cart from MongoDB","timestamp":"2025-03-18T03:52:57.165Z"}
 {"level":"info","message":"GET /api/cart 304 - - 129.355 ms - correlationId: 7c28abb6-f435-4c7a-bbde-3152d24149e9","timestamp":"2025-03-18T03:52:57.169Z"}
 {"level":"info","message":"GET /categories 304 - - 95.996 ms - correlationId: 197a2445-cd16-40b0-9799-c58b08c9f897","timestamp":"2025-03-18T03:52:59.252Z"}
+{"correlationId":"system","level":"info","message":"Cleaned up expired OTPs","timestamp":"2025-03-18T04:00:00.393Z"}
