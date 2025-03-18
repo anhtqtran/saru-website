@@ -15,12 +15,12 @@ export class SocketService {
     this.socket = io("http://localhost:4000");
   }
 
-  // 🔥 Đăng ký tên người dùng khi kết nối
+  // Đăng ký tên người dùng khi kết nối
   registerUser(userName: string) {
     this.socket.emit("register", userName);
   }
 
-  // 🔥 Lấy tin nhắn từ MongoDB
+  // Lấy tin nhắn từ MongoDB
   getMessages(): Observable<any> {
     return this.http.get(this.apiUrl);
   }

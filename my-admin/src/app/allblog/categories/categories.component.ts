@@ -52,4 +52,7 @@ export class CategoriesComponent implements AfterViewInit {
         this.getServerData();
       })
     }
+    toggleAdminMenu(): void {
+      console.log('Admin menu toggled');
+    }
   }

@@ -156,5 +156,7 @@ export class CustomerdetailComponent {
       default: return "Không xác định";
     }
   }
+  toggleAdminMenu(): void {
+    console.log('Admin menu toggled');
+  }
 }
-

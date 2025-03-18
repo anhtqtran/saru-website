@@ -54,4 +54,7 @@ export class CategoryFormComponent {
       this.router.navigate(['/admin/categories-blog']);
   });
   }
+  toggleAdminMenu(): void {
+    console.log('Admin menu toggled');
+  }
 }

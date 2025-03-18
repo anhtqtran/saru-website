@@ -32,9 +32,13 @@ export class DashboardComponent {
       });
     }
   }
-  
-  
+  openDropdownId: string | null = null;
 
+  toggleDropdown(id: string) {
+    this.openDropdownId = this.openDropdownId === id ? null : id;
+  }
 
-
+  isDropdownOpen(id: string): boolean {
+    return this.openDropdownId === id;
+  }
 }

@@ -14,7 +14,7 @@
                 <option>Kho Sài Gòn</option>
             </select>
         </div>
-        <button class="export-button" #exportButton>
+        <button class="export-button" #exportButton (click)="exportToCSV()">
             Xuất dữ liệu
         </button>
     </div>
@@ -26,27 +26,26 @@
             </button>
             <div class="filter-dropdown" #filterDropdown>
                 <p>Hiển thị sản phẩm theo:</p>
-                <select>
-                    <option>Loại sản phẩm</option>
-                    <option>Nhà cung cấp</option>
-                    <option>Giá sản phẩm</option>
+                <select [(ngModel)]="selectedFilterType" (change)="updateFilterOptions()">
+                    <option value="CateName">Nhóm sản phẩm</option>
+                    <option value="ProductBrand">Thương hiệu</option>
                 </select>
-                <p>Là:</p>
-                <select>
-                    <option>Khác</option>
-                    <option>Thực phẩm</option>
-                    <option>Đồ uống</option>
-                </select>
+                
+                <select [(ngModel)]="selectedFilterValue">
+                    <option *ngFor="let option of filterOptions" [value]="option">{{ option }}</option>
+                </select>                
+           
                 <div class="filter-buttons">
-                    <button class="cancel-button" #cancelFilter>Hủy</button>
-                    <button class="apply-button" #applyFilter>Thêm điều kiện lọc</button>
+                    <button class="cancel-button" (click)="resetFilters()">Hủy</button>
+                    <button class="apply-button" (click)="applyFilters()">Lọc</button>
                 </div>
             </div>
         </div>
         <div class="search-container">
             <img src="/assets/images/Search.png" alt="Tìm kiếm" class="search-icon">
-            <input type="text" class="search-bar" placeholder="Tìm kiếm" #searchBar>
+            <input type="text" class="search-bar" placeholder="Tìm kiếm sản phẩm..." [(ngModel)]="searchQuery" (input)="applySearch()">
         </div>
+        
     </div>
 
     <table class="inventory-table">
@@ -56,6 +55,7 @@
                     <input type="checkbox" [checked]="selectAll" (change)="toggleAllSelection()">
                 </th>
                 <th>Sản phẩm</th>
+                
                 <th>Tồn kho</th>
                 <th>Hành động</th>
             </tr>
@@ -72,6 +72,7 @@
                         <small>{{ product.ProductSKU }}</small>
                     </div>
                 </td>
+               
                 
                 <td><span class="quantity-display">{{ product.StockQuantity }}</span></td>
                 <td class="actions">
@@ -82,7 +83,8 @@
                             <input type="number" [(ngModel)]="product.StockQuantity" min="0" class="quantity-input" />
                         </span>
                         <button class="quantity-btn plus" (click)="increaseQuantity(i)">+</button>
-                        <button class="save-button">Lưu</button>
+                        <button class="save-button" (click)="saveQuantity(i)">Lưu</button>
+
                     </div>
                 </td>
             </tr>

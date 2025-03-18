@@ -1,0 +1,36 @@
+/* Hiệu ứng xổ xuống */
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        max-height: 500px; /* Đủ lớn để chứa nội dung, có thể điều chỉnh */
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        opacity: 1;
+        max-height: 500px;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        max-height: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.filter-container {
+    animation: slideDown 0.3s ease-out forwards;
+    overflow: hidden;
+}
+
+/* Khi ẩn bộ lọc (cần thêm logic để áp dụng animation khi ẩn) */
+.filter-container.ng-leave {
+    animation: slideUp 0.3s ease-in forwards;
+}

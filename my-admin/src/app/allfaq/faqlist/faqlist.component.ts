@@ -52,5 +52,8 @@ export class FaqlistComponent {
       this.getServerData();
     })
   }
+  toggleAdminMenu(): void {
+    console.log('Admin menu toggled');
+  }
 }
     

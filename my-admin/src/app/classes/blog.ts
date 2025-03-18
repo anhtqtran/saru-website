@@ -4,5 +4,6 @@ export interface Blog {
     BlogTitle: String,
     BlogContent: String,
     categoryID: String,
+    categoryName: string;
     BlogImage: string[],
   }

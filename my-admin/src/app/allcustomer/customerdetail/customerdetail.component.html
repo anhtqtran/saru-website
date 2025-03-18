@@ -1,143 +1,151 @@
-<div class="flex flex-col px-40 mt-10">
-  <h1 class="text-3xl font-bold text-[#85461F] text-center mb-6">
-    {{ id ? 'Cập nhật khách hàng' : 'Tạo khách hàng mới' }}
-  </h1>
-
-  <form class="shadow-lg rounded-lg bg-white p-6" [formGroup]="customerForm">
-    <h3 class="py-5 text-[#38312F] font-semibold text-xl border-b border-gray-300 mt-6">Thông tin cá nhân</h3>
-    <div class="grid grid-cols-2 gap-6 mt-4">
-      
-      <!-- Mã khách hàng -->
-      <mat-form-field class="w-full">
-        <mat-label>Mã khách hàng</mat-label>
-        <input matInput type="text" formControlName="CustomerID">
-      </mat-form-field>
-
-      <!-- Tên khách hàng -->
-      <mat-form-field class="w-full">
-        <mat-label>Tên khách hàng</mat-label>
-        <input matInput type="text" formControlName="CustomerName">
-      </mat-form-field>
-
-      <!-- Số điện thoại -->
-      <mat-form-field class="w-full">
-        <mat-label>Số điện thoại</mat-label>
-        <input matInput type="text" formControlName="CustomerPhone">
-      </mat-form-field>
-
-      <!-- Ngày sinh -->
-      <mat-form-field class="w-full">
-        <mat-label>Ngày sinh</mat-label>
-        <input matInput [matDatepicker]="picker" formControlName="CustomerBirth">
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-
-      <!-- Ảnh đại diện -->
-      <div class="w-full flex flex-col items-center">
+<header class="flex justify-end items-center mb-9  rounded-lg">
+  <button 
+    class="flex items-center text-white bg-[#F8BC3B] px-4 py-2 rounded-lg font-bold hover:bg-[#85461F] transition"
+    (click)="toggleAdminMenu()"
+  >
+    ADMIN
+  </button>
+</header>
+<div class="flex flex-col px-15 mt-4">
+    <h1 class="text-3xl font-bold text-[#85461F] mb-6">
+      {{ id ? 'Cập nhật khách hàng' : 'Tạo khách hàng mới' }}
+    </h1>
+  
+    <form class="shadow-lg rounded-lg bg-white p-6" [formGroup]="customerForm">
+      <h3 class="py-5 text-[#38312F] font-semibold text-xl border-b border-gray-300 mt-6">Thông tin cá nhân</h3>
+      <div class="grid grid-cols-2 gap-6 mt-4">
+        
+        <!-- Mã khách hàng -->
         <mat-form-field class="w-full">
-          <mat-label>URL ảnh đại diện</mat-label>
-          <input matInput type="text" formControlName="CustomerAvatar">
+          <mat-label>Mã khách hàng</mat-label>
+          <input matInput type="text" formControlName="CustomerID">
         </mat-form-field>
-        <div *ngIf="customerForm.value.CustomerAvatar" class="mt-2">
-          <img [src]="customerForm.value.CustomerAvatar" alt="Avatar" class="w-20 h-20 rounded-full border">
+  
+        <!-- Tên khách hàng -->
+        <mat-form-field class="w-full">
+          <mat-label>Tên khách hàng</mat-label>
+          <input matInput type="text" formControlName="CustomerName">
+        </mat-form-field>
+  
+        <!-- Số điện thoại -->
+        <mat-form-field class="w-full">
+          <mat-label>Số điện thoại</mat-label>
+          <input matInput type="text" formControlName="CustomerPhone">
+        </mat-form-field>
+  
+        <!-- Ngày sinh -->
+        <mat-form-field class="w-full">
+          <mat-label>Ngày sinh</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="CustomerBirth">
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+  
+        <!-- Ảnh đại diện -->
+        <div class="w-full flex flex-col items-center">
+          <mat-form-field class="w-full">
+            <mat-label>URL ảnh đại diện</mat-label>
+            <input matInput type="text" formControlName="CustomerAvatar">
+          </mat-form-field>
+          <div *ngIf="customerForm.value.CustomerAvatar" class="mt-2">
+            <img [src]="customerForm.value.CustomerAvatar" alt="Avatar" class="w-20 h-20 rounded-full border">
+          </div>
+        </div>
+  
+        <!-- Chọn loại thành viên (Cân chỉnh chiều cao) -->
+        <mat-form-field class="w-full h-19 flex items-center">
+          <mat-label>Chọn loại thành viên</mat-label>
+          <mat-select formControlName="MemberID">
+            <mat-option *ngFor="let item of memberships" [value]="item.MemberID">
+              {{ item.MemberType }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+        <!-- Checkbox Nhận Email Quảng Cáo -->
+        <div class="w-full flex items-center">
+          <mat-checkbox [formControl]="customerForm.controls['ReceiveEmail']">
+            Đồng ý nhận email quảng cáo
+          </mat-checkbox>
         </div>
       </div>
-
-      <!-- Chọn loại thành viên (Cân chỉnh chiều cao) -->
-      <mat-form-field class="w-full h-19 flex items-center">
-        <mat-label>Chọn loại thành viên</mat-label>
-        <mat-select formControlName="MemberID">
-          <mat-option *ngFor="let item of memberships" [value]="item.MemberID">
-            {{ item.MemberType }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <!-- Checkbox Nhận Email Quảng Cáo -->
-      <div class="w-full flex items-center">
-        <mat-checkbox [formControl]="customerForm.controls['ReceiveEmail']">
-          Đồng ý nhận email quảng cáo
-        </mat-checkbox>
+  
+      <!-- Địa chỉ khách hàng -->
+      <h3 class="py-5 text-[#38312F] font-semibold text-xl border-b border-gray-300 mt-6">Địa chỉ khách hàng</h3>
+      <div class="grid grid-cols-2 gap-6 mt-4">
+        <mat-form-field class="w-full">
+          <mat-label>Địa chỉ</mat-label>
+          <input matInput type="text" formControlName="Address">
+        </mat-form-field>
+  
+        <mat-form-field class="w-full">
+          <mat-label>Thành phố</mat-label>
+          <input matInput type="text" formControlName="City">
+        </mat-form-field>
+  
+        <mat-form-field class="w-full">
+          <mat-label>Bang</mat-label>
+          <input matInput type="text" formControlName="State">
+        </mat-form-field>
+  
+        <mat-form-field class="w-full">
+          <mat-label>Mã bưu điện</mat-label>
+          <input matInput type="text" formControlName="PostalCode">
+        </mat-form-field>
+  
+        <mat-form-field class="w-full">
+          <mat-label>Quốc gia</mat-label>
+          <input matInput type="text" formControlName="Country">
+        </mat-form-field>
       </div>
-    </div>
-
-    <!-- Địa chỉ khách hàng -->
-    <h3 class="py-5 text-[#38312F] font-semibold text-xl border-b border-gray-300 mt-6">Địa chỉ khách hàng</h3>
-    <div class="grid grid-cols-2 gap-6 mt-4">
-      <mat-form-field class="w-full">
-        <mat-label>Địa chỉ</mat-label>
-        <input matInput type="text" formControlName="Address">
-      </mat-form-field>
-
-      <mat-form-field class="w-full">
-        <mat-label>Thành phố</mat-label>
-        <input matInput type="text" formControlName="City">
-      </mat-form-field>
-
-      <mat-form-field class="w-full">
-        <mat-label>Bang</mat-label>
-        <input matInput type="text" formControlName="State">
-      </mat-form-field>
-
-      <mat-form-field class="w-full">
-        <mat-label>Mã bưu điện</mat-label>
-        <input matInput type="text" formControlName="PostalCode">
-      </mat-form-field>
-
-      <mat-form-field class="w-full">
-        <mat-label>Quốc gia</mat-label>
-        <input matInput type="text" formControlName="Country">
-      </mat-form-field>
-    </div>
-
-    <!-- Lịch sử đơn hàng -->
-    <h3 class="py-5 text-[#38312F] font-semibold text-xl border-b border-gray-300 mt-6">Lịch sử đơn hàng</h3>
-    <div class="mt-4">
-      <table mat-table [dataSource]="orders" class="w-full border border-gray-300 rounded-lg mt-4">
-        
-        <!-- Mã đơn hàng -->
-        <ng-container matColumnDef="OrderID">
-          <th mat-header-cell *matHeaderCellDef class="py-3 px-4 text-left bg-gray-200"> Mã đơn hàng </th>
-          <td mat-cell *matCellDef="let order" class="py-3 px-4"> {{ order.OrderID }} </td>
-        </ng-container>
-
-        <!-- Ngày đặt hàng -->
-        <ng-container matColumnDef="OrderDate">
-          <th mat-header-cell *matHeaderCellDef class="py-3 px-4 text-left bg-gray-200"> Ngày đặt hàng </th>
-          <td mat-cell *matCellDef="let order" class="py-3 px-4"> {{ order.OrderDate | date:'yyyy-MM-dd' }} </td>
-        </ng-container>
-
-        <!-- Trạng thái đơn hàng -->
-        <ng-container matColumnDef="OrderStatus">
-          <th mat-header-cell *matHeaderCellDef class="py-3 px-4 text-left bg-gray-200"> Trạng thái </th>
-          <td mat-cell *matCellDef="let order" class="py-3 px-4"> {{ getStatusText(order.OrderStatusID) }} </td>
-        </ng-container>
-
-        <!-- Nút xem chi tiết -->
-        <ng-container matColumnDef="action">
-          <th mat-header-cell *matHeaderCellDef class="py-3 px-4 bg-gray-200"></th>
-          <td mat-cell *matCellDef="let order" class="py-3 px-4 text-right">
-            <button class="bg-[#F8BC3B] text-black font-medium py-2 px-3 rounded-full transition hover:bg-[#85461F] hover:text-white"
-                    [routerLink]="['/orders', order.OrderID]">
-              Xem chi tiết
-            </button>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="['OrderID', 'OrderDate', 'OrderStatus', 'action']"></tr>
-        <tr mat-row *matRowDef="let row; columns: ['OrderID', 'OrderDate', 'OrderStatus', 'action'];"></tr>
-
-      </table>
-    </div>
-
-    <!-- Nút lưu -->
-    <div class="w-full flex justify-center mt-6">
-      <button class="bg-[#F8BC3B] text-black font-medium py-2 px-6 rounded-full transition hover:bg-[#85461F] hover:text-white" 
-              (click)="saveCustomer()">
-        {{ id ? 'Cập nhật' : 'Lưu' }}
-      </button>
-    </div>
-
-  </form>
-</div>
+  
+      <!-- Lịch sử đơn hàng -->
+      <h3 class="py-5 text-[#38312F] font-semibold text-xl border-b border-gray-300 mt-6">Lịch sử đơn hàng</h3>
+      <div class="mt-4">
+        <table mat-table [dataSource]="orders" class="w-full border border-gray-300 rounded-lg mt-4">
+          
+          <!-- Mã đơn hàng -->
+          <ng-container matColumnDef="OrderID">
+            <th mat-header-cell *matHeaderCellDef class="py-3 px-4 text-left bg-gray-200"> Mã đơn hàng </th>
+            <td mat-cell *matCellDef="let order" class="py-3 px-4"> {{ order.OrderID }} </td>
+          </ng-container>
+  
+          <!-- Ngày đặt hàng -->
+          <ng-container matColumnDef="OrderDate">
+            <th mat-header-cell *matHeaderCellDef class="py-3 px-4 text-left bg-gray-200"> Ngày đặt hàng </th>
+            <td mat-cell *matCellDef="let order" class="py-3 px-4"> {{ order.OrderDate | date:'yyyy-MM-dd' }} </td>
+          </ng-container>
+  
+          <!-- Trạng thái đơn hàng -->
+          <ng-container matColumnDef="OrderStatus">
+            <th mat-header-cell *matHeaderCellDef class="py-3 px-4 text-left bg-gray-200"> Trạng thái </th>
+            <td mat-cell *matCellDef="let order" class="py-3 px-4"> {{ getStatusText(order.OrderStatusID) }} </td>
+          </ng-container>
+  
+          <!-- Nút xem chi tiết -->
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef class="py-3 px-4 bg-gray-200"></th>
+            <td mat-cell *matCellDef="let order" class="py-3 px-4 text-right">
+              <button class="bg-[#F8BC3B] text-black font-medium py-2 px-3 rounded-full transition hover:bg-[#85461F] hover:text-white"
+                      [routerLink]="['/orders', order.OrderID]">
+                Xem chi tiết
+              </button>
+            </td>
+          </ng-container>
+  
+          <tr mat-header-row *matHeaderRowDef="['OrderID', 'OrderDate', 'OrderStatus', 'action']"></tr>
+          <tr mat-row *matRowDef="let row; columns: ['OrderID', 'OrderDate', 'OrderStatus', 'action'];"></tr>
+  
+        </table>
+      </div>
+  
+      <!-- Nút lưu -->
+      <div class="w-full flex justify-center mt-6">
+        <button class="bg-[#F8BC3B] text-black font-medium py-2 px-6 rounded-full transition hover:bg-[#85461F] hover:text-white" 
+                (click)="saveCustomer()">
+          {{ id ? 'Cập nhật' : 'Lưu' }}
+        </button>
+      </div>
+  
+    </form>
+  </div>

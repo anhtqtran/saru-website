@@ -683,6 +683,6 @@ export class EditproductComponent implements AfterViewInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/products']);
+    this.router.navigate(['admin/products']);
   }
 }

@@ -55,4 +55,7 @@ export class FaqdetailComponent {
       this.router.navigate(['/admin/faqs']);
   });
   }
+  toggleAdminMenu(): void {
+    console.log('Admin menu toggled');
+  }
 }

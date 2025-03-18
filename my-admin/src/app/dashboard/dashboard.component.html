@@ -5,24 +5,43 @@
       <img src="assets/images/1.2 LOGO ngang nền trắng.png" alt="Logo" class="w-40 h-auto object-contain">
     </div>
     <nav>
-      <ul class="space-y-4 text-base">
+      <ul class="space-y-2 text-base">
         <li *ngFor="let item of [
           {id: 'home', name: 'TRANG CHỦ', icon: 'home.png'},
           {id: 'products', name: 'SẢN PHẨM', icon: 'products.png'},
           {id: 'orders', name: 'ĐƠN HÀNG', icon: 'orders.png'},
           {id: 'customers', name: 'KHÁCH HÀNG', icon: 'customers.png'},
-          {id: 'news', name: 'TIN TỨC', icon: 'news.png'},
+          {id: 'blogs', name: 'TIN TỨC', icon: 'news.png', hasDropdown: true},
           {id: 'faqs', name: 'FAQS', icon: 'faqs.png'},
           {id: 'promotions', name: 'KHUYẾN MÃI', icon: 'promotions.png'},
-          {id: 'consultation', name: 'TƯ VẤN', icon: 'consultation.png'}
-        ]">
-          <a [routerLink]="item.id === 'home' ? '/inventorymanage' : '/' + item.id" 
-             class="flex items-center px-4 py-3 rounded-md transition-colors duration-300 hover:bg-[#F8BC3B] hover:text-white cursor-pointer">
-            <img [src]="'assets/images/' + item.icon" [alt]="item.name" class="w-6 h-6 mr-3"> 
-            <span class="font-medium">{{ item.name }}</span>
-          </a>
+          {id: 'consultant', name: 'TƯ VẤN', icon: 'consultation.png'}
+        ]" class="relative">
+          <!-- Menu chính -->
+          <div>
+            <a (click)="item.hasDropdown ? toggleDropdown(item.id) : null"
+               [routerLink]="item.hasDropdown ? null : (item.id === 'home' ? '/inventorymanage' : '/admin/' + item.id)" 
+               class="flex items-center px-4 py-3 rounded-md transition-colors duration-300 hover:bg-[#F8BC3B] hover:text-white cursor-pointer">
+              <img [src]="'assets/images/' + item.icon" [alt]="item.name" class="w-6 h-6 mr-3"> 
+              <span class="font-medium">{{ item.name }}</span>
+              <svg *ngIf="item.hasDropdown" class="w-4 h-4 ml-auto transition-transform duration-300" [ngClass]="{'rotate-180': isDropdownOpen(item.id)}" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </a>
+            <!-- Dropdown cho TIN TỨC -->
+            <div *ngIf="item.id === 'blogs' && isDropdownOpen(item.id)" 
+                 class="pl-8 mt-1 space-y-1 bg-gray-50 rounded-md transition-all duration-300 ease-in-out">
+              <a [routerLink]="'/admin/blogs'" 
+                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#F8BC3B] hover:text-white rounded-md">
+                QUẢN LÝ BÀI VIẾT
+              </a>
+              <a [routerLink]="'admin/categories-blog'" 
+                 class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#F8BC3B] hover:text-white rounded-md">
+                QUẢN LÝ DANH MỤC
+              </a>
+            </div>
+          </div>
         </li>
       </ul>
     </nav>
   </aside>
-
+</div>
