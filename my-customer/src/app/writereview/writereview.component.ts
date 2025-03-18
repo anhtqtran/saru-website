@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Review } from '../classes/Reviews';
+<<<<<<< HEAD
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -10,6 +11,14 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './writereview.component.html',
   styleUrl: './writereview.component.css',
   imports: [CommonModule, FormsModule]
+=======
+
+@Component({
+  selector: 'app-writereview',
+  standalone: false,
+  templateUrl: './writereview.component.html',
+  styleUrl: './writereview.component.css',
+>>>>>>> main
 })
 export class WritereviewComponent implements OnInit {
   orderId: string = ''; // Lưu OrderID

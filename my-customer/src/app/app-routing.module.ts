@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
+<<<<<<< HEAD
 
 import { RouterModule, Routes, Scroll } from '@angular/router';
 import { PaymentdetailComponent } from './paymentdetail/paymentdetail.component';
 
+=======
+import { RouterModule, Routes, Scroll } from '@angular/router';
+  
+>>>>>>> main
 import { TrangchuBannerCamketComponent } from './trangchu-banner-camket/trangchu-banner-camket.component';
 import { LoginComponent } from './login/login.component';
 import { ResetpassComponent } from './resetpass/resetpass.component'; 
@@ -17,6 +22,10 @@ import { ProductComponent } from './product/product.component';
 import { WritereviewComponent } from './writereview/writereview.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { PaymentsuccessfulComponent } from './paymentsuccessful/paymentsuccessful.component';
+<<<<<<< HEAD
+=======
+import { PaymentdetailComponent } from './paymentdetail/paymentdetail.component';
+>>>>>>> main
 import { AccountmanageComponent } from './accountmanage/accountmanage.component';
 import { CartmanageComponent } from './cartmanage/cartmanage.component';
 import { OrderdetailComponent } from './orderdetail/orderdetail.component';
@@ -24,6 +33,7 @@ import { OrderhistoryComponent } from './orderhistory/orderhistory.component';
 import { ReviewpageComponent } from './reviewpage/reviewpage.component';
 import { BlogComponent } from './blog/blog.component';
 import { FaqsComponent } from './faqs/faqs.component';
+<<<<<<< HEAD
 
 import { CompareComponent } from './compare/compare.component'; 
 
@@ -34,6 +44,17 @@ import { AuthGuard } from './guard/auth.guard'; // Nhập AuthGuard
 
 const routes: Routes = [
 
+=======
+import { CompareComponent } from './compare/compare.component'; 
+
+import { AuthGuard } from './guard/auth.guard'; // Nhập AuthGuard
+import { BlogdetailComponent } from './blogdetail/blogdetail.component';
+import { BlogcategoryComponent } from './blogcategory/blogcategory.component';
+import { MessageComponent } from './message/message.component';
+import { BlogrssComponent } from './blogrss/blogrss.component';
+
+const routes: Routes = [
+>>>>>>> main
   { path: 'login', component: LoginComponent },
   { path: 'resetpass', component: ResetpassComponent},
   { path: 'sendcode', component: SendcodeComponent },
@@ -43,6 +64,7 @@ const routes: Routes = [
   { path: 'commitment', component: CommitmentComponent},
   { path: 'contact', component: ContactComponent},
   { path: 'history', component: HistoryComponent},
+<<<<<<< HEAD
 
 
   { path: 'product', component: ProductComponent},
@@ -55,6 +77,19 @@ const routes: Routes = [
   { path: 'blog', component: BlogComponent},
   { path: 'faqs', component: FaqsComponent},
 
+=======
+  { path: 'account', component: AccountmanageComponent, canActivate:[AuthGuard]},
+  { path: 'cart', component: CartmanageComponent},
+  { path: 'order-detail', component: OrderdetailComponent, canActivate:[AuthGuard]},
+  { path: 'order-history', component: OrderhistoryComponent, canActivate:[AuthGuard]},
+  { path: 'review', component: ReviewpageComponent},
+  { path: 'blog', component: BlogComponent},
+  { path: 'blog/:id', component: BlogdetailComponent },
+  { path: 'category/:id', component: BlogcategoryComponent },
+  { path: 'blogrss', component: BlogrssComponent },
+  { path: 'faqs', component: FaqsComponent},
+  { path: 'boxchat', component: MessageComponent},
+>>>>>>> main
   { path: '', redirectTo: '/homepage', pathMatch: 'full' }, // Route mặc định
   { path: 'product', component: ProductComponent }, // Route cho danh sách sản phẩm
   { 
@@ -69,6 +104,7 @@ const routes: Routes = [
     pathMatch: 'full' 
   },
   { path: 'compare', component: CompareComponent},
+<<<<<<< HEAD
 
 
 
@@ -79,16 +115,30 @@ const routes: Routes = [
   },
   { path: 'homepage', component: TrangchuBannerCamketComponent },
   { path: 'trangchu-banner-camket/trangchu-banner-camket.component', component: TrangchuBannerCamketComponent },
+=======
+  { path: 'product-detail/:id', component: ProductDetailComponent },
+  { path: 'account', component: AccountmanageComponent, canActivate:[AuthGuard]},
+  { path: 'cart', component: CartmanageComponent},
+  { path: 'orderdetail', component: OrderdetailComponent},
+  { path: 'order-history', component: OrderhistoryComponent, canActivate:[AuthGuard]},
+  { path: 'review', component: ReviewpageComponent},
+  { path: 'blog', component: BlogComponent},
+  { path: 'faqs', component: FaqsComponent},
+>>>>>>> main
   { path: 'paymentdetail', component: PaymentdetailComponent }, // Thêm route cho trang thanh toán
   // { path: '**', redirectTo: 'cart' }, // Mặc định chuyển về giỏ hàng nếu đường dẫn không tồn tại
   { path: 'paymentsuccessful', component: PaymentsuccessfulComponent },
   { path: 'writereview', component: WritereviewComponent }
+<<<<<<< HEAD
 
 
 
 
 ];
   
+=======
+];
+>>>>>>> main
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, {

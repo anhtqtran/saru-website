@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import "tailwindcss";
 @tailwind base;
 @tailwind components;
@@ -6,15 +7,31 @@
 /* Định dạng chung */
 body {
     @apply font-sans bg-gray-100;
+=======
+/* Định dạng chung */
+body {
+    font-family: sans-serif;
+    background-color: #f7fafc; /* equivalent to bg-gray-100 in Tailwind CSS */
+>>>>>>> main
 }
 
 /* Navbar */
 .navbar {
+<<<<<<< HEAD
     @apply flex items-center justify-between p-3 bg-gray-200 border-b border-gray-300;
+=======
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem;
+    background-color: #e2e8f0; /* bg-gray-200 */
+    border-bottom: 1px solid #d1d5db; /* border-gray-300 */
+>>>>>>> main
 }
 
 /* Logo */
 .logo img {
+<<<<<<< HEAD
     @apply w-16 h-auto rounded-lg;
 }
 
@@ -29,10 +46,48 @@ body {
 
 .nav-menu a {
     @apply text-gray-700 font-bold px-4 py-2 transition duration-300 ease-in-out rounded-md hover:bg-gray-300 hover:text-blue-500;
+=======
+    width: 4rem; /* w-16 */
+    height: auto;
+    border-radius: 0.5rem; /* rounded-lg */
+}
+.nav-menu {
+    display: flex;
+    gap: 1.25rem; /* gap-5 */
+    list-style: none; /* list-none */
+}
+.nav-menu li {
+    position: relative; /* relative */
+}
+
+.nav-menu a {
+    color: #4a5568; /* text-gray-700 */
+    font-weight: bold; /* font-bold */
+    padding: 1rem; /* px-4 py-2 */
+    transition: all 0.3s ease-in-out; /* transition duration-300 ease-in-out */
+    border-radius: 0.375rem; /* rounded-md */
+}
+.nav-menu a:hover {
+    background-color: #e2e8f0; /* hover:bg-gray-300 */
+    color: #4299e1; /* hover:text-blue-500 */
+}
+
+.nav-menu a {
+    color: #4a5568; /* text-gray-700 */
+    font-weight: bold; /* font-bold */
+    padding: 1rem; /* px-4 py-2 */
+    transition: all 0.3s ease-in-out; /* transition duration-300 ease-in-out */
+    border-radius: 0.375rem; /* rounded-md */
+}
+.nav-menu a:hover {
+    background-color: #e2e8f0; /* hover:bg-gray-300 */
+    color: #4299e1; /* hover:text-blue-500 */
+>>>>>>> main
 }
 
 /* Dropdown Menu */
 .dropdown {
+<<<<<<< HEAD
     @apply hidden absolute top-10 left-0 bg-white shadow-lg rounded-md list-none;
 }
 
@@ -46,29 +101,87 @@ body {
 
 .nav-menu li:hover .dropdown {
     @apply block;
+=======
+    display: none;
+    position: absolute;
+    top: 2.5rem; /* top-10 */
+    left: 0;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
+    border-radius: 0.375rem; /* rounded-md */
+    list-style: none;
+}
+
+.dropdown li {
+    width: 18rem; /* w-72 */
+}
+
+.dropdown a {
+        display: block;
+        padding: 0.75rem 1rem; /* px-4 py-3 */
+        color: #4a5568; /* text-gray-700 */
+        white-space: nowrap;
+        transition: background-color 0.3s ease-in-out;
+    }
+    .dropdown a:hover {
+        background-color: #f7fafc; /* hover:bg-gray-100 */
+}
+
+.nav-menu li:hover .dropdown {
+    display: block;
+>>>>>>> main
 }
 
 /* Icons */
 .icons {
+<<<<<<< HEAD
     @apply flex gap-4;
 }
 
 .icons a img {
     @apply w-6 h-6 transition-transform duration-200 transform hover:scale-110;
+=======
+    display: flex;
+    gap: 1rem; /* gap-4 */
+}
+
+.icons a img {
+        width: 1.5rem; /* w-6 */
+        height: 1.5rem; /* h-6 */
+        transition: transform 0.2s; /* transition-transform duration-200 */
+        transform: scale(1); /* transform */
+    }
+    .icons a img:hover {
+        transform: scale(1.1); /* hover:scale-110 */
+>>>>>>> main
 }
 
 /* Container cho giỏ hàng */
 .cart-container {
+<<<<<<< HEAD
     @apply flex justify-between gap-5 p-5;
+=======
+    display: flex;
+    justify-content: space-between;
+    gap: 1.25rem; /* gap-5 */
+    padding: 1.25rem; /* p-5 */
+>>>>>>> main
 }
 
 /* Tiêu đề Giỏ hàng */
 h1 {
+<<<<<<< HEAD
     @apply text-2xl font-bold mb-5;
+=======
+    font-size: 1.5rem; /* text-2xl */
+    font-weight: bold; /* font-bold */
+    margin-bottom: 1.25rem; /* mb-5 */
+>>>>>>> main
 }
 
 /* Bảng sản phẩm */
 .cart-items {
+<<<<<<< HEAD
     @apply flex-2 bg-white p-5 rounded-lg shadow-md;
 }
 
@@ -86,10 +199,45 @@ table th, table td {
 
 .product-info img {
     @apply w-12 h-12 rounded-md object-cover;
+=======
+    flex: 2;
+    background-color: white;
+    padding: 1.25rem; /* p-5 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+}
+ 
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    text-align: left;
+    padding-left: 0.75rem; /* px-3 */
+    padding-right: 0.75rem;
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #d1d5db; /* border-gray-300 */
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* gap-4 */
+}
+
+.product-info img {
+    width: 3rem; /* w-12 */
+    height: 3rem; /* h-12 */
+    border-radius: 0.375rem; /* rounded-md */
+    object-fit: cover;
+>>>>>>> main
 }
 
 /* Số lượng sản phẩm */
 .quantity-control {
+<<<<<<< HEAD
     @apply flex items-center gap-2;
 }
 
@@ -99,19 +247,59 @@ table th, table td {
 
 .quantity-control input {
     @apply w-12 text-center border border-gray-300 rounded-md;
+=======
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* gap-2 */
+}
+
+.quantity-control button {
+    background-color: #d1d5db; /* bg-gray-300 */
+    border: none;
+    padding-left: 0.75rem; /* px-3 */
+    padding-right: 0.75rem;
+    padding-top: 0.25rem; /* py-1 */
+    padding-bottom: 0.25rem;
+    border-radius: 0.375rem; /* rounded-md */
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.quantity-control button:hover {
+    background-color: #9ca3af; /* hover:bg-gray-400 */
+}
+
+.quantity-control input {
+    width: 3rem; /* w-12 */
+    text-align: center;
+    border: 1px solid #d1d5db; /* border-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+>>>>>>> main
 }
 
 /* Nút xóa */
 .delete-button {
+<<<<<<< HEAD
     @apply bg-transparent border-none cursor-pointer;
 }
 
 .delete-button img {
     @apply w-5 h-5;
+=======
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-button img {
+    width: 1.25rem; /* w-5 */
+    height: 1.25rem; /* h-5 */
+>>>>>>> main
 }
 
 /* Thông tin Đơn hàng */
 .order-summary {
+<<<<<<< HEAD
     @apply flex-1 bg-white p-5 rounded-lg shadow-md;
 }
 
@@ -129,10 +317,52 @@ table th, table td {
 
 .order-button {
     @apply w-full px-4 py-2 bg-yellow-400 text-white font-bold rounded-md cursor-pointer transition-all hover:bg-yellow-500;
+=======
+    flex: 1;
+    background-color: white;
+    padding: 1.25rem; /* p-5 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+}
+
+.order-summary h2 {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: bold;
+    margin-bottom: 1.25rem; /* mb-5 */
+}
+
+.order-summary p {
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.order-summary .total {
+    font-weight: bold;
+    font-size: 1.125rem; /* text-lg */
+    margin-top: 0.75rem; /* mt-3 */
+}
+
+.order-button {
+    width: 100%;
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem;
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem;
+    background-color: #f59e0b; /* bg-yellow-400 */
+    color: white;
+    font-weight: bold;
+    border-radius: 0.375rem; /* rounded-md */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.order-button:hover {
+    background-color: #d97706; /* hover:bg-yellow-500 */
+>>>>>>> main
 }
 
 /* Sản phẩm liên quan */
 .related-products {
+<<<<<<< HEAD
     @apply mt-10;
 }
 
@@ -150,16 +380,69 @@ table th, table td {
 
 .product-card img {
     @apply w-4/5 h-4/5 object-cover rounded-md;
+=======
+    margin-top: 2.5rem; /* mt-10 */
+}
+
+.related-products h2 {
+    font-size: 1.25rem; /* text-xl */
+    font-weight: bold;
+    margin-bottom: 1.25rem; /* mb-5 */
+    text-align: center;
+}
+
+.products-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.25rem; /* gap-5 */
+}
+
+.product-card {
+    width: 9rem; /* w-36 */
+    height: 9rem; /* h-36 */
+    background-color: #d1d5db; /* bg-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-card img {
+    width: 80%; /* w-4/5 */
+    height: 80%; /* h-4/5 */
+    object-fit: cover;
+    border-radius: 0.375rem; /* rounded-md */
+>>>>>>> main
 }
 
 /* Nền mờ khi hiển thị popup */
 .popup-overlay {
+<<<<<<< HEAD
     @apply fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black;
+=======
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5); /* bg-black với opacity */
+>>>>>>> main
 }
 
 /* Khung popup */
 .popup-content {
+<<<<<<< HEAD
     @apply bg-gray-100 rounded-lg shadow-lg w-96 text-center;
+=======
+    background-color: #f3f4f6; /* bg-gray-100 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg */
+    width: 24rem; /* w-96 */
+    text-align: center;
+>>>>>>> main
     animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -177,15 +460,47 @@ table th, table td {
 
 /* Header popup */
 .popup-header {
+<<<<<<< HEAD
     @apply bg-gray-400 text-white text-lg font-bold py-3 rounded-t-lg;
+=======
+    background-color: #9ca3af; /* bg-gray-400 */
+    color: white;
+    font-size: 1.125rem; /* text-lg */
+    font-weight: bold;
+    padding-top: 0.75rem; /* py-3 */
+    padding-bottom: 0.75rem;
+    border-top-left-radius: 0.5rem; /* rounded-t-lg */
+    border-top-right-radius: 0.5rem;
+>>>>>>> main
 }
 
 /* Nội dung popup */
 .popup-body {
+<<<<<<< HEAD
     @apply p-5;
+=======
+    padding: 1.25rem; /* p-5 */
+>>>>>>> main
 }
 
 /* Nút popup */
 .popup-button {
+<<<<<<< HEAD
     @apply bg-yellow-400 text-white font-bold px-5 py-2 rounded-md hover:bg-yellow-500;
 }
+=======
+    background-color: #f59e0b; /* bg-yellow-400 */
+    color: white;
+    font-weight: bold;
+    padding-left: 1.25rem; /* px-5 */
+    padding-right: 1.25rem;
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem;
+    border-radius: 0.375rem; /* rounded-md */
+    transition: background-color 0.3s ease;
+}
+
+.popup-button:hover {
+    background-color: #d97706; /* hover:bg-yellow-500 */
+}
+>>>>>>> main

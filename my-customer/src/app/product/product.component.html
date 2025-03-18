@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container mx-auto p-6">
   <!-- Bộ lọc và danh sách sản phẩm -->
   <div class="flex flex-col md:flex-row gap-8">
@@ -106,3 +107,136 @@
     </div>
   </div>
 </div>
+=======
+
+  <div class="container mx-auto p-8">
+    <!-- Bộ lọc và danh sách sản phẩm -->
+    <div class="flex flex-col md:flex-row gap-10">
+      <!-- Bộ lọc -->
+      <div class="w-full md:w-1/4 bg-white p-6 rounded-2xl shadow-md transition-all duration-300 hover:shadow-lg border border-[#E2BF9E]">
+        <h2 class="text-2xl font-bold mb-6 text-[#85461F]">Bộ Lọc</h2>
+
+        <!-- Danh mục -->
+        <div class="mb-6">
+          <label class="block mb-2 text-sm font-semibold text-[#85461F]">Danh mục</label>
+          <select [(ngModel)]="selectedCategory" (change)="onFilterChange()" class="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#F8BC3B] focus:border-[#F8BC3B] focus:outline-none transition-all duration-200 bg-[#F2E8DA] text-[#85461F]">
+            <option value="">Chọn danh mục</option>
+            <option *ngFor="let category of categories" [value]="category.CateID">
+              {{ category.CateName }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Giá -->
+        <div class="mb-6">
+          <label class="block mb-2 text-sm font-semibold text-[#85461F]">Khoảng giá</label>
+          <input type="number" [(ngModel)]="filters.minPrice" placeholder="Giá tối thiểu" class="w-full p-3 border border-gray-200 rounded-lg mb-2 focus:ring-2 focus:ring-[#F8BC3B] focus:border-[#F8BC3B] focus:outline-none transition-all duration-200 bg-[#F2E8DA] text-[#85461F]">
+          <input type="number" [(ngModel)]="filters.maxPrice" placeholder="Giá tối đa" class="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#F8BC3B] focus:border-[#F8BC3B] focus:outline-none transition-all duration-200 bg-[#F2E8DA] text-[#85461F]">
+        </div>
+
+        <!-- Sắp xếp -->
+        <div class="mb-6">
+          <label class="block mb-2 text-sm font-semibold text-[#85461F]">Sắp xếp</label>
+          <select [(ngModel)]="filters.sort" (change)="onFilterChange()" class="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#F8BC3B] focus:border-[#F8BC3B] focus:outline-none transition-all duration-200 bg-[#F2E8DA] text-[#85461F]">
+            <option value="priceAsc">Giá: Thấp đến Cao</option>
+            <option value="priceDesc">Giá: Cao đến Thấp</option>
+          </select>
+        </div>
+
+        <!-- Thương hiệu -->
+        <div class="mb-6">
+          <label class="block mb-2 text-sm font-semibold text-[#85461F]">Thương hiệu</label>
+          <select [(ngModel)]="selectedBrand" (change)="onFilterChange()" class="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#F8BC3B] focus:border-[#F8BC3B] focus:outline-none transition-all duration-200 bg-[#F2E8DA] text-[#85461F]">
+            <option value="">Tất cả</option>
+            <option *ngFor="let brand of brands" [value]="brand">{{ brand }}</option>
+          </select>
+        </div>
+
+        <!-- Dung tích rượu -->
+        <div class="mb-6">
+          <label class="block mb-2 text-sm font-semibold text-[#85461F]">Dung tích</label>
+          <select [(ngModel)]="selectedWineVolume" (change)="onFilterChange()" class="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#F8BC3B] focus:border-[#F8BC3B] focus:outline-none transition-all duration-200 bg-[#F2E8DA] text-[#85461F]">
+            <option value="">Tất cả</option>
+            <option *ngFor="let volume of wineVolumes" [value]="volume">{{ volume }}</option>
+          </select>
+        </div>
+
+        <!-- Loại rượu -->
+        <div class="mb-6">
+          <label class="block mb-2 text-sm font-semibold text-[#85461F]">Loại rượu</label>
+          <select [(ngModel)]="selectedWineType" (change)="onFilterChange()" class="w-full p-3 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#F8BC3B] focus:border-[#F8BC3B] focus:outline-none transition-all duration-200 bg-[#F2E8DA] text-[#85461F]">
+            <option value="">Tất cả</option>
+            <option *ngFor="let type of wineTypes" [value]="type">{{ type }}</option>
+          </select>
+        </div>
+
+        <!-- Bộ lọc khác -->
+        <div class="mb-6">
+          <label class="block mb-2 text-sm font-semibold text-[#85461F]">Khác</label>
+          <label class="flex items-center mb-2">
+            <input type="checkbox" [(ngModel)]="filters.bestSellers" (change)="onFilterChange()" class="mr-2 accent-[#F8BC3B]">
+            <span class="text-[#85461F]">Bán chạy nhất</span>
+          </label>
+          <label class="flex items-center">
+            <input type="checkbox" [(ngModel)]="filters.onSale" (change)="onFilterChange()" class="mr-2 accent-[#F8BC3B]">
+            <span class="text-[#85461F]">Đang giảm giá</span>
+          </label>
+        </div>
+
+        <!-- Nút Apply -->
+        <button (click)="onFilterChange()" class="w-full bg-[#F8BC3B] text-[#85461F] p-3 rounded-lg hover:bg-[#D8A850] transition-all duration-300 font-semibold shadow-md">Áp dụng bộ lọc</button>
+      </div>
+
+      <!-- Danh sách sản phẩm -->
+      <div class="w-full md:w-3/4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div *ngFor="let product of products" (click)="goToProductDetail(product._id)" class="border border-[#E2BF9E] rounded-2xl p-6 bg-white shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer relative overflow-hidden">
+            <!-- Nhãn sale hoặc Best Seller -->
+            <div *ngIf="product?.isOnSale" class="absolute top-4 left-4 bg-[#B16628] text-white text-sm font-bold px-4 py-2 rounded-full shadow-md">
+              {{ product.discountPercentage }}% OFF
+            </div>
+
+
+            <div class="w-full h-64 flex justify-center items-center overflow-hidden rounded-xl">
+              <img *ngIf="product?.ProductImageCover" [src]="product.ProductImageCover" alt="{{product?.ProductName || 'No name'}}" class="w-full h-full object-contain transition-all duration-300 hover:scale-110">
+              <img *ngIf="!product?.ProductImageCover" src="assets/images/default-product.png" alt="No image" class="w-48 h-48 object-contain">
+            </div>
+
+            <h3 class="text-xl font-semibold mt-4 text-[#85461F] truncate">{{product?.ProductName || 'No name'}}</h3>
+
+            <!-- Giá hiện tại và giá gốc -->
+            <div class="flex items-center gap-3 mt-2">
+              <p class="text-2xl font-bold text-[#F8BC3B]" *ngIf="product?.currentPrice != null">{{ product.currentPrice | currency:'VND' }}</p>
+              <p *ngIf="product?.isOnSale && product?.originalPrice != null && product?.currentPrice != null && product.originalPrice! > product.currentPrice!" class="text-base text-gray-500 line-through">{{ product.originalPrice | currency:'VND' }}</p>
+            </div>
+
+            <!-- Tình trạng kho -->
+            <p class="text-sm text-[#1F7D53] mt-2 font-medium" *ngIf="product?.stockStatus">{{product.stockStatus === 'In Stock' ? 'Còn hàng' : 'Hết hàng'}}</p>
+
+            <!-- Đánh giá -->
+            <p class="text-sm text-[#DDD121] mt-2 flex items-center" *ngIf="product?.averageRating">
+              ★ {{product?.averageRating || 0}} <span class="text-gray-600 ml-2">({{product?.totalReviewCount || 0}} Reviews)</span>
+            </p>
+
+            <p class="text-sm text-[#85461F] mt-2 font-medium" *ngIf="product?.ProductBrand">Thương hiệu: {{product.ProductBrand}}</p>
+
+            <!-- Nút Thêm vào giỏ và So sánh -->
+            <button (click)="$event.stopPropagation(); addToCart(product)" class="mt-4 w-full bg-[#F8BC3B] text-white p-3 rounded-lg hover:bg-[#D8A850] transition-all duration-300 font-semibold shadow-md">Thêm vào giỏ</button>
+            <button (click)="$event.stopPropagation(); addToCompare(product)" class="mt-2 w-full bg-[#E2BF9E] text-white p-3 rounded-lg hover:bg-[#AA793D] transition-all duration-300 font-semibold">So sánh</button>
+          </div>
+        </div>
+
+        <!-- Phân trang -->
+        <div class="mt-10 flex justify-center items-center space-x-4">
+          <button *ngIf="pagination.currentPage > 1" (click)="onPageChange(pagination.currentPage - 1)" class="px-6 py-3 bg-[#F2E8DA] text-[#85461F] rounded-lg hover:bg-[#D8A850] hover:text-white transition-all duration-200 flex items-center font-semibold">
+            <i class="fa-solid fa-chevron-left mr-2"></i> Trước
+          </button>
+          <button *ngFor="let page of getPageNumbers()" (click)="onPageChange(page)" [ngClass]="{'bg-[#F8BC3B] text-[#85461F]': page === pagination.currentPage, 'bg-[#F2E8DA] text-[#85461F]': page !== pagination.currentPage}" class="px-6 py-3 rounded-lg hover:bg-[#D8A850] hover:text-white transition-all duration-200 font-semibold">{{page}}</button>
+          <button *ngIf="pagination.currentPage < pagination.totalPages" (click)="onPageChange(pagination.currentPage + 1)" class="px-6 py-3 bg-[#F2E8DA] text-[#85461F] rounded-lg hover:bg-[#D8A850] hover:text-white transition-all duration-200 flex items-center font-semibold">
+            Sau <i class="fa-solid fa-chevron-right ml-2"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+>>>>>>> main

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import "tailwindcss";
 /* Reset CSS */
 @tailwind base;
@@ -6,15 +7,30 @@
 
 body {
     @apply font-sans bg-gray-100;
+=======
+
+body {
+    font-family: 'sans-serif';
+    background-color: #f7fafc; /* Equivalent to bg-gray-100 in Tailwind CSS */
+>>>>>>> main
 }
 
 /* Container chính */
 .checkout-container {
+<<<<<<< HEAD
     @apply flex justify-between max-w-4xl mx-auto mt-10 gap-8;
+=======
+    display: flex;
+    justify-content: space-between;
+    max-width: 64rem; /* Equivalent to max-w-4xl */
+    margin: 2.5rem auto 0; /* Equivalent to mx-auto mt-10 */
+    gap: 2rem; /* Equivalent to gap-8 */
+>>>>>>> main
 }
 
 /* Form Địa chỉ nhận hàng */
 .shipping-info {
+<<<<<<< HEAD
     @apply w-3/5 bg-white p-6 rounded-lg shadow-md;
 }
 
@@ -29,34 +45,100 @@ h2 {
 
 .input-group label {
     @apply font-bold text-sm block mb-1;
+=======
+    width: 60%;
+    background-color: white;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+}
+
+h2 {
+    font-size: 1.125rem; /* text-lg */
+    font-weight: bold; /* font-bold */
+    margin-bottom: 1rem; /* mb-4 */
+}
+.input-group {
+    margin-bottom: 1rem; /* mb-4 */
+}
+.input-group label {
+    font-weight: bold; /* font-bold */
+    font-size: 0.875rem; /* text-sm */
+    display: block; /* block */
+}
+.input-group input,
+.input-group select {
+    width: 100%; /* w-full */
+    padding: 0.5rem; /* p-2 */
+    border: 1px solid #d1d5db; /* border border-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 0.875rem; /* text-sm */
+>>>>>>> main
 }
 
 .input-group input,
 .input-group select {
+<<<<<<< HEAD
     @apply w-full p-2 border border-gray-300 rounded-md text-sm;
+=======
+    width: 100%; /* w-full */
+    padding: 0.5rem; /* p-2 */
+    border: 1px solid #d1d5db; /* border border-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 0.875rem; /* text-sm */
+>>>>>>> main
 }
 
 /* Định dạng dấu * */
 span {
+<<<<<<< HEAD
     @apply text-black;
+=======
+    color: #000000; /* text-black */
+>>>>>>> main
 }
 
 /* Xác nhận */
 .confirm-button {
+<<<<<<< HEAD
     @apply w-full p-3 bg-yellow-400 text-black font-bold border-none rounded-md cursor-pointer transition;
 }
 
 .confirm-button:hover {
     @apply bg-yellow-500;
+=======
+    width: 100%; /* w-full */
+    padding: 0.75rem; /* p-3 */
+    background-color: #f59e0b; /* bg-yellow-400 */
+    color: #000000; /* text-black */
+    font-weight: bold; /* font-bold */
+    border: none; /* border-none */
+    border-radius: 0.375rem; /* rounded-md */
+    cursor: pointer; /* cursor-pointer */
+    transition: background-color 0.3s ease; /* transition */
+}
+
+.confirm-button:hover {
+    background-color: #d97706; /* bg-yellow-500 */
+>>>>>>> main
 }
 
 /* Đơn hàng */
 .order-summary {
+<<<<<<< HEAD
     @apply w-2/5 bg-white p-6 rounded-lg shadow-md;
+=======
+    width: 40%; /* w-2/5 */
+    background-color: #ffffff; /* bg-white */
+    padding: 1.5rem; /* p-6 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-md */
+>>>>>>> main
 }
 
 /* Sản phẩm */
 .order-item {
+<<<<<<< HEAD
     @apply flex items-center gap-4 border border-black p-3 rounded-md bg-white;
 }
 
@@ -70,20 +152,57 @@ span {
 
 .order-item span {
     @apply font-bold;
+=======
+    display: flex; /* flex */
+    align-items: center; /* items-center */
+    gap: 1rem; /* gap-4 */
+    border: 1px solid #000000; /* border border-black */
+    padding: 0.75rem; /* p-3 */
+    border-radius: 0.375rem; /* rounded-md */
+    background-color: #ffffff; /* bg-white */
+}
+
+.order-item img {
+    width: 2.5rem; /* w-10 */
+    height: 2.5rem; /* h-10 */
+    background-color: #d1d5db; /* bg-gray-300 */
+    border-radius: 0.25rem; /* rounded */
+}
+
+.order-item p {
+    flex: 1; /* flex-1 */
+    font-size: 0.875rem; /* text-sm */
+}
+
+.order-item span {
+    font-weight: bold; /* font-bold */
+>>>>>>> main
 }
 
 /* Chi tiết đơn hàng */
 .order-details p,
 .order-details h5 {
+<<<<<<< HEAD
     @apply flex justify-between mb-2;
 }
 
 .order-details .total {
     @apply font-bold text-lg;
+=======
+    display: flex; /* flex */
+    justify-content: space-between; /* justify-between */
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.order-details .total {
+    font-weight: bold; /* font-bold */
+    font-size: 1.125rem; /* text-lg */
+>>>>>>> main
 }
 
 /* Phương thức thanh toán */
 .payment-methods {
+<<<<<<< HEAD
     @apply flex justify-between mt-3;
 }
 
@@ -96,15 +215,49 @@ span {
 }
 .payment-option.selected {
     @apply bg-black text-white;
+=======
+    display: flex; /* flex */
+    justify-content: space-between; /* justify-between */
+    margin-top: 0.75rem; /* mt-3 */
+}
+
+.payment-option {
+    flex: 1; /* flex-1 */
+    padding: 0.25rem; /* p-1 */
+    border: 1px solid #000000; /* border border-black */
+    background-color: #d1d5db; /* bg-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 0.75rem; /* text-xs */
+    cursor: pointer; /* cursor-pointer */
+    transition: background-color 0.3s ease, color 0.3s ease; /* transition */
+    margin-right: 0.5rem; /* mr-2 */
+}
+
+.payment-option:hover {
+    background-color: #000000; /* bg-black */
+    color: #ffffff; /* text-white */
+}
+
+.payment-option.selected {
+    background-color: #000000; /* bg-black */
+    color: #ffffff; /* text-white */
+>>>>>>> main
 }
 
 /* Nếu phương thức được chọn, đổi màu sang đen */
 .selected-method {
+<<<<<<< HEAD
     @apply bg-black text-white font-bold;
+=======
+    background-color: #000000; /* bg-black */
+    color: #ffffff; /* text-white */
+    font-weight: bold; /* font-bold */
+>>>>>>> main
 }
 
 /* 🔥 Hiển thị danh sách ví điện tử */
 .e-wallet-options {
+<<<<<<< HEAD
     @apply mt-3;
 }
 
@@ -114,33 +267,91 @@ span {
 
 .wallet-select {
     @apply w-full p-2 border border-gray-300 rounded-md text-sm bg-white;
+=======
+    margin-top: 0.75rem; /* mt-3 */
+}
+
+.wallet-label {
+    font-weight: bold; /* font-bold */
+    font-size: 0.875rem; /* text-sm */
+    display: block; /* block */
+    margin-bottom: 0.25rem; /* mb-1 */
+}
+
+.wallet-select {
+    width: 100%; /* w-full */
+    padding: 0.5rem; /* p-2 */
+    border: 1px solid #d1d5db; /* border border-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    font-size: 0.875rem; /* text-sm */
+    background-color: #ffffff; /* bg-white */
+>>>>>>> main
 }
 
 /* Cảnh báo khi chưa chọn phương thức */
 .payment-error {
+<<<<<<< HEAD
     @apply text-red-600 text-sm mt-2 text-center font-bold;
+=======
+    color: #dc2626; /* text-red-600 */
+    font-size: 0.875rem; /* text-sm */
+    margin-top: 0.5rem; /* mt-2 */
+    text-align: center; /* text-center */
+    font-weight: bold; /* font-bold */
+>>>>>>> main
 }
 
 /* Nút thanh toán */
 .checkout-button {
+<<<<<<< HEAD
     @apply w-full p-3 bg-yellow-400 text-black font-bold border-none rounded-md cursor-pointer transition mt-4;
 }
 
 .checkout-button:hover {
     @apply bg-yellow-500;
+=======
+    width: 100%; /* w-full */
+    padding: 0.75rem; /* p-3 */
+    background-color: #f59e0b; /* bg-yellow-400 */
+    color: #000000; /* text-black */
+    font-weight: bold; /* font-bold */
+    border: none; /* border-none */
+    border-radius: 0.375rem; /* rounded-md */
+    cursor: pointer; /* cursor-pointer */
+    transition: background-color 0.3s ease; /* transition */
+    margin-top: 1rem; /* mt-4 */
+}
+
+.checkout-button:hover {
+    background-color: #d97706; /* bg-yellow-500 */
+>>>>>>> main
 }
 
 /* Điều khoản */
 .terms {
+<<<<<<< HEAD
     @apply text-xs text-gray-600 mt-3 text-center;
 }
 
 .error-message {
     @apply text-red-500 text-sm mt-1;
+=======
+    font-size: 0.75rem; /* text-xs */
+    color: #4b5563; /* text-gray-600 */
+    margin-top: 0.75rem; /* mt-3 */
+    text-align: center; /* text-center */
+}
+
+.error-message {
+    color: #ef4444; /* text-red-500 */
+    font-size: 0.875rem; /* text-sm */
+    margin-top: 0.25rem; /* mt-1 */
+>>>>>>> main
 }
 
 /* Dấu * màu đỏ */
 .required {
+<<<<<<< HEAD
     @apply text-red-500;
 }
 
@@ -150,9 +361,44 @@ span {
 
 .input {
     @apply w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none bg-white;
+=======
+    color: #ef4444; /* text-red-500 */
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* space-y-4 */
+}
+
+.input {
+    width: 100%; /* w-full */
+    padding: 0.75rem; /* p-3 */
+    border: 1px solid #d1d5db; /* border border-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    outline: none; /* outline-none */
+    background-color: #ffffff; /* bg-white */
+}
+
+.input:focus {
+    outline: 2px solid #3b82f6; /* focus:outline-2 focus:outline-blue-500 */
+>>>>>>> main
 }
 
 /* Select dropdown có border */
 .select {
+<<<<<<< HEAD
     @apply w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none bg-white;
+=======
+    width: 100%; /* w-full */
+    padding: 0.75rem; /* p-3 */
+    border: 1px solid #d1d5db; /* border border-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    outline: none; /* outline-none */
+    background-color: #ffffff; /* bg-white */
+}
+
+.select:focus {
+    outline: 2px solid #3b82f6; /* focus:outline-2 focus:outline-blue-500 */
+>>>>>>> main
 }

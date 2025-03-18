@@ -5,7 +5,10 @@ import { Router } from '@angular/router';
 import { Account } from '../classes/Account';
 import { ProductService } from './product.service';
 
+<<<<<<< HEAD
 // Interface cho từng loại response từ backend
+=======
+>>>>>>> main
 interface LoginResponse {
   message: string;
   token: string;
@@ -46,6 +49,7 @@ export class AuthService {
   ) {
     const token = this.getToken();
     if (token) {
+<<<<<<< HEAD
       this.verifyToken().subscribe(isValid => {
         if (isValid) {
           this.refreshUserData();
@@ -67,12 +71,43 @@ export class AuthService {
           this.removeToken();
           this.currentUserSubject.next(null);
           this.loginStatus.next(false);
+=======
+      this.verifyToken().subscribe({
+        next: (isValid) => {
+          if (isValid) {
+            this.refreshUserData();
+            this.http.get<{ message: string; account: Account }>(`${this.apiUrl}/verify-token`, {
+              headers: new HttpHeaders({ Authorization: `Bearer ${token}` })
+            }).subscribe({
+              next: (response) => {
+                this._currentUser = response.account;
+                this.currentUserSubject.next(response.account);
+                this.loginStatus.next(true);
+                this.productService.notifyLoginStatusChanged(); // Thông báo thay đổi trạng thái
+              },
+              error: () => {
+                this.removeToken();
+                this.currentUserSubject.next(null);
+                this.loginStatus.next(false);
+                this.productService.notifyLoginStatusChanged(); // Thông báo khi token không hợp lệ
+              }
+            });
+          } else {
+            this.removeToken();
+            this.currentUserSubject.next(null);
+            this.loginStatus.next(false);
+            this.productService.notifyLoginStatusChanged(); // Thông báo khi token không hợp lệ
+          }
+>>>>>>> main
         }
       });
     }
   }
 
+<<<<<<< HEAD
   // Xử lý lỗi chi tiết hơn dựa trên mã HTTP status
+=======
+>>>>>>> main
   private handleError(error: any): Observable<never> {
     let errorMessage = 'Đã xảy ra lỗi, vui lòng thử lại sau.';
     if (error.error instanceof ErrorEvent) {
@@ -103,7 +138,10 @@ export class AuthService {
     return throwError(() => new Error(errorMessage));
   }
 
+<<<<<<< HEAD
   // Đăng nhập
+=======
+>>>>>>> main
   private currentUserSubject = new BehaviorSubject<Account | null>(null);
   currentUser$ = this.currentUserSubject.asObservable();
 
@@ -115,7 +153,12 @@ export class AuthService {
           this._currentUser = response.account;
           this.currentUserSubject.next(response.account);
           this.loginStatus.next(true);
+<<<<<<< HEAD
           this.refreshUserData(); // Tải lại dữ liệu sau đăng nhập
+=======
+          this.refreshUserData();
+          this.productService.notifyLoginStatusChanged(); // Thông báo thay đổi trạng thái
+>>>>>>> main
           this.router.navigate(['/homepage']);
         }
       }),
@@ -123,14 +166,22 @@ export class AuthService {
     );
   }
 
+<<<<<<< HEAD
   // Đăng ký
+=======
+>>>>>>> main
   signUp(credentials: { email: string; password: string; subscribe?: boolean }): Observable<RegisterResponse> {
     return this.http.post<RegisterResponse>(`${this.apiUrl}/register`, credentials).pipe(
       tap((response) => {
         if (response.token) {
           this.storeToken(response.token);
           this.loginStatus.next(true);
+<<<<<<< HEAD
           this.refreshUserData(); // Tải lại dữ liệu sau đăng ký
+=======
+          this.refreshUserData();
+          this.productService.notifyLoginStatusChanged(); // Thông báo thay đổi trạng thái
+>>>>>>> main
           this.router.navigate(['/homepage']);
         }
       }),
@@ -138,28 +189,40 @@ export class AuthService {
     );
   }
 
+<<<<<<< HEAD
   // Quên mật khẩu
+=======
+>>>>>>> main
   forgotPassword(email: string): Observable<ForgotPasswordResponse> {
     return this.http.post<ForgotPasswordResponse>(`${this.apiUrl}/forgot-password`, { email }).pipe(
       catchError(this.handleError)
     );
   }
 
+<<<<<<< HEAD
   // Xác minh OTP
+=======
+>>>>>>> main
   verifyOtp(email: string, otp: string): Observable<VerifyOtpResponse> {
     return this.http.post<VerifyOtpResponse>(`${this.apiUrl}/verify-otp`, { email, otp }).pipe(
       catchError(this.handleError)
     );
   }
 
+<<<<<<< HEAD
   // Đặt lại mật khẩu
+=======
+>>>>>>> main
   resetPassword(email: string, newPassword: string): Observable<ResetPasswordResponse> {
     return this.http.post<ResetPasswordResponse>(`${this.apiUrl}/reset-password`, { email, newPassword }).pipe(
       catchError(this.handleError)
     );
   }
 
+<<<<<<< HEAD
   // Tải lại dữ liệu giỏ hàng và danh sách so sánh
+=======
+>>>>>>> main
   private refreshUserData(): void {
     this.productService.getCartItems().subscribe({
       next: (cart) => {
@@ -177,24 +240,36 @@ export class AuthService {
     });
   }
 
+<<<<<<< HEAD
   // Lưu token
+=======
+>>>>>>> main
   storeToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
   }
 
+<<<<<<< HEAD
   // Lấy token
+=======
+>>>>>>> main
   getToken(): string | null {
     return localStorage.getItem(this.tokenKey);
   }
 
+<<<<<<< HEAD
   // Xóa token
+=======
+>>>>>>> main
   removeToken(): void {
     localStorage.removeItem(this.tokenKey);
     this._currentUser = null;
     this.loginStatus.next(false);
   }
 
+<<<<<<< HEAD
   // Kiểm tra trạng thái đăng nhập
+=======
+>>>>>>> main
   isLoggedIn(): boolean {
     return !!this.getToken();
   }
@@ -211,38 +286,64 @@ export class AuthService {
     );
   }
 
+<<<<<<< HEAD
   // Đăng xuất
+=======
+>>>>>>> main
   logout(): void {
     const token = this.getToken();
     if (token) {
       this.http.post(`${this.apiUrl}/logout`, {}, {
+<<<<<<< HEAD
         headers: new HttpHeaders({ Authorization: `Bearer ${token}` })
+=======
+        headers: new HttpHeaders({ Authorization: `Bearer ${token}` }),
+        withCredentials: true // Đảm bảo gửi cookie session nếu có
+>>>>>>> main
       }).subscribe({
         next: () => {
           this.removeToken();
           this.currentUserSubject.next(null);
+<<<<<<< HEAD
+=======
+          this.productService.notifyLoginStatusChanged(); // Thông báo thay đổi trạng thái
+>>>>>>> main
           this.router.navigate(['/login']);
         },
         error: (err) => {
           console.error('Logout API error:', err);
           this.removeToken();
           this.currentUserSubject.next(null);
+<<<<<<< HEAD
+=======
+          this.productService.notifyLoginStatusChanged(); // Thông báo ngay cả khi lỗi
+>>>>>>> main
           this.router.navigate(['/login']);
         }
       });
     } else {
       this.removeToken();
       this.currentUserSubject.next(null);
+<<<<<<< HEAD
+=======
+      this.productService.notifyLoginStatusChanged(); // Thông báo thay đổi trạng thái
+>>>>>>> main
       this.router.navigate(['/login']);
     }
   }
 
+<<<<<<< HEAD
   // Lấy thông tin user hiện tại
+=======
+>>>>>>> main
   getCurrentUser(): Account | null {
     return this._currentUser;
   }
 
+<<<<<<< HEAD
   // Theo dõi trạng thái đăng nhập
+=======
+>>>>>>> main
   getLoginStatus(): Observable<boolean> {
     return this.loginStatus.asObservable();
   }

@@ -12,6 +12,7 @@
   "dependencies": {
     "@angular/animations": "^19.2.1",
     "@angular/cdk": "^19.2.2",
+<<<<<<< HEAD
     "@angular/common": "^19.2.1",
     "@angular/compiler": "^19.2.1",
     "@angular/core": "^19.2.1",
@@ -24,14 +25,40 @@
     "ngx-toastr": "^19.0.0",
     "postcss": "^8.5.2",
     "rxjs": "~7.8.0",
+=======
+    "@angular/common": "^19.1.0",
+    "@angular/compiler": "^19.1.0",
+    "@angular/core": "^19.1.0",
+    "@angular/forms": "^19.1.0",
+    "@angular/material": "^19.2.2",
+    "@angular/platform-browser": "^19.1.0",
+    "@angular/platform-browser-dynamic": "^19.1.0",
+    "@angular/router": "^19.1.0",
+    "@tailwindcss/postcss": "^4.0.6",
+    "ng2-img-max": "^2.2.9",
+    "ngx-lightbox": "^3.0.0",
+    "ngx-swiper-wrapper": "^10.0.0",
+    "ngx-toastr": "^19.0.0",
+    "postcss": "^8.5.2",
+    "rss-parser": "^3.13.0",
+    "rxjs": "~7.8.0",
+    "socket.io-client": "^4.8.1",
+    "swiper": "^11.2.5",
+>>>>>>> main
     "tailwindcss": "^4.0.6",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
+<<<<<<< HEAD
     "@angular-devkit/build-angular": "^19.2.1",
     "@angular/cli": "^19.2.1",
     "@angular/compiler-cli": "^19.2.1",
+=======
+    "@angular-devkit/build-angular": "^19.1.5",
+    "@angular/cli": "^19.1.5",
+    "@angular/compiler-cli": "^19.1.0",
+>>>>>>> main
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.5.0",
     "karma": "~6.4.0",
@@ -41,4 +68,8 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.7.2"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> main

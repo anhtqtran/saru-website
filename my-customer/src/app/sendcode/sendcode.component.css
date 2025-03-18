@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 .otp-group input {
+=======
+/* .otp-group input {
+>>>>>>> main
     width: 2.5rem;
     height: 2.5rem;
     text-align: center;
@@ -10,8 +14,25 @@
 }
 .otp-group input:last-child {
     margin-right: 0;
+<<<<<<< HEAD
 }
 
+=======
+} */
+
+.otp-group input {
+    width: 48px;
+    height: 48px;
+    text-align: center;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 18px;
+  }
+  .otp-group input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+  }
+>>>>>>> main
 
 .overlay {
     position: fixed;

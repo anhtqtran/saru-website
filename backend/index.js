@@ -13,7 +13,9 @@ const { MongoClient, ObjectId } = require('mongodb');
 const session = require('express-session');
 const rateLimit = require('express-rate-limit');
 const winston = require('winston');
-
+const cron = require('node-cron');
+const multer = require('multer'); // Thêm dòng này
+const mail = require('./node-mailer');
 const app = express();
 
 // Cấu hình Winston Logger
@@ -29,24 +31,6 @@ const logger = winston.createLogger({
     new winston.transports.Console()
   ]
 });
-app.use(cors({
-  origin: '*',  // Cho phép mọi origin truy cập (hoặc thay '*' bằng danh sách origin cụ thể)
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
-// Phần comment về Redis từ mã gốc của bạn
-// const { RedisStore } = require('connect-redis');
-// const redis = require('redis');
-// const redisClient = redis.createClient({
-//     host: '172.24.81.243',
-//     port: 6379
-// });
-// redisClient.on('error', (err) => {
-//   logger.error('Redis Client Error', { error: err.message });
-// });
-// redisClient.connect().catch(err => {
-//   logger.error('Failed to connect to Redis', { error: err.message });
-// });
 
 // Cấu hình express-session với maxAge từ biến môi trường
 const sessionMaxAge = parseInt(process.env.SESSION_MAX_AGE) || 24 * 60 * 60 * 1000; // Mặc định 24 giờ
@@ -63,21 +47,16 @@ app.use(session({
 }));
 
 // Middleware
-app.use(bodyParser.json({ limit: '50mb' }));
-app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
-
-app.use(express.json({ limit: '50mb' }));  // Giới hạn JSON lên 50MB
-app.use(express.urlencoded({ limit: '50mb', extended: true })); // Cho phép dữ liệu form lớn
-
-const multer = require('multer');
-
-// Cấu hình Multer
-const storage = multer.memoryStorage(); // Lưu ảnh vào bộ nhớ trước khi xử lý
-const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } }); // Giới hạn 5MB
+app.use(bodyParser.json({ limit: '50mb' })); // Cập nhật từ đoạn code ngắn
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true })); // Cập nhật từ đoạn code ngắn
+app.use(express.json({ limit: '50mb' })); // Cập nhật từ đoạn code ngắn
+app.use(express.urlencoded({ limit: '50mb', extended: true })); // Thêm từ đoạn code ngắn
 
 app.use(cors({
   origin: ['http://localhost:4001', 'http://localhost:4002', 'http://localhost:4200'],
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Thêm từ đoạn code ngắn
+  allowedHeaders: ['Content-Type', 'Authorization'] // Thêm từ đoạn code ngắn
 }));
 
 // Middleware để gán correlationId cho mỗi request
@@ -85,6 +64,10 @@ app.use((req, res, next) => {
   req.correlationId = uuidv4();
   next();
 });
+
+// Cấu hình Multer
+const storage = multer.memoryStorage(); // Lưu ảnh vào bộ nhớ trước khi xử lý
+const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } }); // Giới hạn 5MB
 
 // Cấu hình morgan
 morgan.token('correlationId', (req) => req.correlationId);
@@ -101,10 +84,14 @@ const authLimiter = rateLimit({
 });
 
 // Kết nối MongoDB
-let client, database, productCollection, imageCollection, categoryCollection, reviewCollection, orderDetailCollection, accountCollection, customerCollection,
-    orderCollection, orderStatusCollection, paymentMethodCollection, paymentStatusCollection, voucherCollection, voucherConditionCollection;
+// Khai báo các biến toàn cục
+let client;
+let database;
+let productCollection, imageCollection, categoryCollection, reviewCollection, orderDetailCollection, accountCollection, customerCollection, productstockCollection, blogCollection, blogCategoryCollection, faqCollection, membershipCollection, orderCollection, messageCollection;
+
 async function connectDB() {
   const uri = process.env.MONGODB_URI;
+  // const uri = process.env.mongoConnection;
   client = new MongoClient(uri);
   try {
     await client.connect();
@@ -116,16 +103,14 @@ async function connectDB() {
     orderDetailCollection = database.collection('orderdetails');
     accountCollection = database.collection('accounts');
     customerCollection = database.collection('customers');
-    orderCollection = database.collection('orders'); 
-    orderStatusCollection = database.collection('orderstatuses'); 
-    paymentMethodCollection = database.collection('paymentmethods'); 
-    paymentStatusCollection = database.collection('paymentstatuses')
-    voucherCollection = database.collection('Vouchers'); 
-    voucherConditionCollection = database.collection('VoucherConditions');
-    productCategoryCollection = database.collection ('productcategories');
-    promotionsCollection = database.collection("promotions");
-    promotionStatusesCollection = database.collection("promotionstatuses");
-    promotionScopeCollection = database.collection ("promotionscopes")
+    productstockCollection = database.collection('productstocks');
+    blogCollection = database.collection('blogs');
+    blogCategoryCollection = database.collection('blogcategories');
+    faqCollection = database.collection('faqs');
+    membershipCollection = database.collection('memberships');
+    orderCollection = database.collection('orders');
+    messageCollection = database.collection('consultants');
+
 
     await productCollection.createIndex({ ProductID: 1 }, { unique: true });
     await accountCollection.createIndex({ CustomerEmail: 1 }, { unique: true });
@@ -139,6 +124,15 @@ async function connectDB() {
   }
 }
 connectDB();
+
+
+// //===Kết nối Mongoose
+// mongoose.connect(process.env.MONGODB_URI).then(() => {
+//   logger.info('Connected to MongoDB with Mongoose', { correlationId: 'system' });
+// }).catch(err => {
+//   logger.error('Failed to connect to MongoDB with Mongoose', { error: err.message, correlationId: 'system' });
+//   process.exit(1);
+// });
 
 // Middleware kiểm tra đăng nhập
 function authenticateToken(req, res, next) {
@@ -162,8 +156,165 @@ function authenticateToken(req, res, next) {
   }
 }
 
-// Toàn bộ code từ file gốc (giữ nguyên, bao gồm cả comment)
 // ===================== PRODUCT API =====================
+
+const bestSellingProductsPipeline = (productId) => [
+  ...(productId ? [] : [{ $group: { _id: "$ProductID", totalQuantity: { $sum: "$Quantity" } } }]),
+  ...(productId ? [{ $match: { _id: productId } }] : []),
+  ...(productId ? [] : [{ $sort: { totalQuantity: -1 } }]),
+  ...(productId ? [] : [{ $limit: 5 }]),
+  {
+    $lookup: {
+      from: "products",
+      let: { pid: "$_id" },
+      pipeline: [
+        { $match: { $expr: { $eq: ["$ProductID", "$$pid"] } } },
+        {
+          $lookup: {
+            from: "images",
+            let: { imageId: "$ImageID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$ImageID", "$$imageId"] } } },
+              { $project: { _id: 0, ProductImageCover: 1 } }
+            ],
+            as: "image"
+          }
+        },
+        { $unwind: { path: "$image", preserveNullAndEmptyArrays: true } },
+        {
+          $lookup: {
+            from: "productcategories",
+            let: { cateId: "$CateID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$CateID", "$$cateId"] } } },
+              { $project: { _id: 0, CateName: 1 } }
+            ],
+            as: "category"
+          }
+        },
+        { $unwind: { path: "$category", preserveNullAndEmptyArrays: true } },
+        {
+          $lookup: {
+            from: "reviews",
+            let: { productId: "$ProductID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$ProductID", "$$productId"] } } },
+              {
+                $group: {
+                  _id: null,
+                  averageRating: { $avg: "$Rating" },
+                  reviewCount: { $sum: 1 }
+                }
+              }
+            ],
+            as: "reviews"
+          }
+        },
+        { $unwind: { path: "$reviews", preserveNullAndEmptyArrays: true } },
+        {
+          $project: {
+            _id: 1,
+            ProductID: 1,
+            ProductName: 1,
+            ProductPrice: 1,
+            ProductImageCover: { $ifNull: ["$image.ProductImageCover", "default-image-url"] },
+            CateName: { $ifNull: ["$category.CateName", "Không có danh mục"] },
+            averageRating: { $ifNull: ["$reviews.averageRating", 0] },
+            reviewCount: { $ifNull: ["$reviews.reviewCount", 0] },
+            description: 1,
+            relatedProducts: 1
+          }
+        }
+      ],
+      as: "product"
+    }
+  },
+  { $match: { "product": { $ne: [] } } },
+  { $unwind: { path: "$product", preserveNullAndEmptyArrays: false } },
+  {
+    $project: {
+      _id: "$product._id",
+      productId: "$_id",
+      productName: "$product.ProductName",
+      productPrice: "$product.ProductPrice",
+      productImageCover: "$product.ProductImageCover",
+      categoryName: "$product.CateName",
+      totalQuantity: { $ifNull: ["$totalQuantity", 0] },
+      averageRating: "$product.averageRating",
+      reviewCount: "$product.reviewCount",
+      description: "$product.description",
+      relatedProducts: "$product.relatedProducts"
+    }
+  }
+];
+
+app.get('/api/products/best-selling', async (req, res) => {
+  try {
+    console.log('Request received:', req.method, req.url, req.query);
+
+    if (Object.keys(req.query).length > 0) {
+      console.log('Query params not supported:', req.query);
+      return res.status(400).json({ message: 'This endpoint does not accept query parameters' });
+    }
+
+    const bestSellingProducts = await orderDetailCollection.aggregate(bestSellingProductsPipeline()).toArray();
+    console.log('Aggregation result:', bestSellingProducts);
+
+    if (!bestSellingProducts.length) {
+      console.log('No best-selling products found');
+      return res.status(200).json([]);
+    }
+
+    res.status(200).json(bestSellingProducts);
+  } catch (err) {
+    console.error('Aggregation error:', err.stack);
+    res.status(500).json({ message: 'Server error', error: err.message });
+  }
+});
+
+app.get('/api/products/map-id/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    console.log('Request received for mapping ProductID to _id:', req.method, req.url, { productId });
+
+    const product = await productCollection.findOne(
+      { ProductID: productId },
+      { projection: { _id: 1 } }
+    );
+
+    if (!product) {
+      console.log('Product not found for ProductID:', productId);
+      return res.status(404).json({ message: 'Sản phẩm không tồn tại.' });
+    }
+
+    res.status(200).json({ _id: product._id.toHexString() });
+  } catch (err) {
+    console.error('Error mapping ProductID to _id:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
+});
+
+app.get('/api/products/best-seller-detail/:productId', async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    console.log('Request received for best-seller-detail:', req.method, req.url, { productId });
+
+    const pipeline = bestSellingProductsPipeline(productId);
+    const result = await orderDetailCollection.aggregate(pipeline).toArray();
+
+    if (!result.length) {
+      console.log('No best seller detail found for productId:', productId);
+      return res.status(404).json({ message: 'Sản phẩm không tồn tại.' });
+    }
+
+    console.log('Best seller detail result:', result[0]);
+    res.status(200).json(result[0]);
+  } catch (err) {
+    console.error('Aggregation error for best seller detail:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
+});
+
 app.get('/api/images/:imageId', async (req, res) => {
   try {
     const image = await imageCollection.findOne({ ImageID: req.params.imageId });
@@ -190,17 +341,16 @@ app.get('/api/products/search', async (req, res) => {
     const suggestions = await productCollection.find({
       ProductName: { $regex: keyword, $options: "i" }
     }).limit(5).project({ ProductName: 1, _id: 0 }).toArray();
-    
     res.json(suggestions.map(s => s.ProductName));
   } catch (err) {
-    console.error('❌ Lỗi API /api/products/search:', err);
+    logger.error('Error in GET /api/products/search', { error: err.message, correlationId: req.correlationId });
     res.status(500).json({ error: err.message });
   }
 });
 
 app.get('/api/categories', async (req, res) => {
   try {
-    const categories = await database.collection('productcategories').find().toArray();
+    const categories = await categoryCollection.find().toArray();
     res.json(categories);
   } catch (err) {
     logger.error('Error in GET /api/categories', { error: err.message, correlationId: req.correlationId });
@@ -210,8 +360,10 @@ app.get('/api/categories', async (req, res) => {
 
 app.get('/api/products', async (req, res) => {
   try {
+    console.log("📢 API `/api/products` đã được gọi!"); // Thêm log từ đoạn code ngắn
+
     const page = Math.max(1, parseInt(req.query.page) || 1);
-    const limit = Math.min(50, Math.max(1, parseInt(req.query.limit) || 100));
+    const limit = Math.min(50, Math.max(1, parseInt(req.query.limit) || 12));
     const skip = (page - 1) * limit;
 
     const filter = {};
@@ -227,9 +379,7 @@ app.get('/api/products', async (req, res) => {
     if (req.query.wineIngredient) filter.WineIngredient = req.query.wineIngredient;
     if (req.query.wineFlavor) filter.WineFlavor = req.query.wineFlavor;
     if (req.query.bestSellers === 'true') filter.isBestSeller = true;
-    if (req.query.onSale === 'true') filter.isPromotion = true;
-
-    
+    if (req.query.onSale === 'true') filter.PromotionID = { $ne: null };
 
     const sortOptions = {
       'priceAsc': { ProductPrice: 1 },
@@ -242,6 +392,85 @@ app.get('/api/products', async (req, res) => {
       productCollection.countDocuments(filter)
     ]);
 
+    const productIDs = items.map(p => p.ProductID);
+    const promotionIDs = items.map(p => p.PromotionID).filter(id => id !== null);
+
+    // Gộp với collection images từ đoạn code ngắn
+    const productsWithImages = await database.collection('products').aggregate([
+      { $match: { ProductID: { $in: productIDs } } },
+      {
+        $lookup: {
+          from: 'images',
+          localField: 'ImageID',
+          foreignField: 'ImageID',
+          as: 'imageData'
+        }
+      },
+      {
+        $unwind: {
+          path: '$imageData',
+          preserveNullAndEmptyArrays: true
+        }
+      },
+      {
+        $project: {
+          _id: 1,
+          ProductID: 1,
+          ProductName: 1,
+          ProductSKU: 1,
+          CateID: 1,
+          ProductBrand: 1,
+          ImageID: 1,
+          ProductPrice: 1,
+          PromotionID: 1,
+          ProductImageCover: { $ifNull: ['$imageData.ProductImageCover', ''] },
+          ProductImageSub1: { $ifNull: ['$imageData.ProductImageSub1', ''] },
+          ProductImageSub2: { $ifNull: ['$imageData.ProductImageSub2', ''] },
+          ProductImageSub3: { $ifNull: ['$imageData.ProductImageSub3', ''] }
+        }
+      }
+    ]).toArray();
+
+    // Map sản phẩm với ảnh vào items
+    const productMap = productsWithImages.reduce((acc, p) => {
+      acc[p.ProductID] = p;
+      return acc;
+    }, {});
+
+    const stocks = await productstockCollection.find({ ProductID: { $in: productIDs } }).toArray();
+    const stockMap = stocks.reduce((acc, stock) => {
+      acc[stock.ProductID] = stock.StockQuantity;
+      return acc;
+    }, {});
+
+    const promotions = await database.collection('promotions').find({ PromotionID: { $in: promotionIDs } }).toArray();
+    const promotionMap = promotions.reduce((acc, promo) => {
+      acc[promo.PromotionID] = {
+        startDate: new Date(promo.PromotionStartDate),
+        expiredDate: new Date(promo.PromotionExpiredDate),
+        value: promo.PromotionValue
+      };
+      return acc;
+    }, {});
+
+    const reviewsAgg = await reviewCollection.aggregate([
+      { $match: { ProductID: { $in: productIDs } } },
+      {
+        $group: {
+          _id: "$ProductID",
+          averageRating: { $avg: { $min: [{ $max: ["$Rating", 0] }, 5] } },
+          totalReviewCount: { $sum: 1 }
+        }
+      }
+    ]).toArray();
+    const reviewMap = reviewsAgg.reduce((acc, r) => {
+      acc[r._id] = {
+        averageRating: Number(r.averageRating.toFixed(1)) || null,
+        totalReviewCount: r.totalReviewCount || 0
+      };
+      return acc;
+    }, {});
+
     const cateIDs = [...new Set(items.map(p => p.CateID))];
     const categories = await categoryCollection.find({ CateID: { $in: cateIDs } }).toArray();
     const cateMap = categories.reduce((acc, cur) => {
@@ -249,15 +478,64 @@ app.get('/api/products', async (req, res) => {
       return acc;
     }, {});
 
-    const productsWithCategories = items.map(p => ({
-      ...p,
-      CateName: cateMap[p.CateID] || 'Unknown'
-    }));
+    const currentDate = new Date('2025-03-11');
+
+    const productsWithDetails = items.map(p => {
+      const stockQuantity = stockMap[p.ProductID] || 0;
+      const stockStatus = stockQuantity > 0 ? 'In Stock' : 'Out of Stock';
+
+      let isOnSale = false;
+      let currentPrice = p.ProductPrice || 0;
+      let discountPercentage = 0;
+
+      if (p.PromotionID !== null) {
+        const promo = promotionMap[p.PromotionID];
+        if (promo) {
+          const startDate = promo.startDate;
+          const expiredDate = promo.expiredDate;
+          const promotionValue = promo.value;
+
+          if (currentDate >= startDate && currentDate <= expiredDate) {
+            const discountMultiplier = 1 - (promotionValue / 100);
+            currentPrice = p.ProductPrice * discountMultiplier;
+            isOnSale = true;
+            discountPercentage = promotionValue;
+          }
+        }
+      }
+
+      const reviewData = reviewMap[p.ProductID] || { averageRating: null, totalReviewCount: 0 };
+      const productWithImage = productMap[p.ProductID] || {};
+
+      return {
+        ...p,
+        CateName: cateMap[p.CateID] || 'Unknown',
+        currentPrice: currentPrice,
+        originalPrice: p.ProductPrice || 0,
+        stockStatus: stockStatus,
+        isOnSale: isOnSale,
+        discountPercentage: discountPercentage,
+        averageRating: reviewData.averageRating,
+        totalReviewCount: reviewData.totalReviewCount,
+        ProductImageCover: productWithImage.ProductImageCover || '',
+        ProductImageSub1: productWithImage.ProductImageSub1 || '',
+        ProductImageSub2: productWithImage.ProductImageSub2 || '',
+        ProductImageSub3: productWithImage.ProductImageSub3 || ''
+      };
+    });
+
+    if (!productsWithDetails.length) {
+      console.log('⚠️ Không tìm thấy dữ liệu'); // Thêm log từ đoạn code ngắn
+    }
+
+    console.log("📢 Dữ liệu trả về:", JSON.stringify(productsWithDetails, null, 2)); // Thêm log từ đoạn code ngắn
+
     res.json({
-      data: productsWithCategories,
+      data: productsWithDetails,
       pagination: { currentPage: page, totalPages: Math.ceil(total / limit), totalItems: total }
     });
   } catch (err) {
+    console.error('❌ Lỗi chi tiết:', err.stack); // Thêm log lỗi chi tiết từ đoạn code ngắn
     logger.error('Error in GET /api/products', { error: err.message, correlationId: req.correlationId });
     res.status(500).json({ error: err.message });
   }
@@ -287,71 +565,168 @@ app.get('/api/products/recommendations', async (req, res) => {
   }
 });
 
-// app.get('/api/products/:id', async (req, res) => {
-//   try {
-//     const product = await productCollection.findOne({ _id: new ObjectId(req.params.id) });
-//     if (!product) return res.status(404).json({ message: "Sản phẩm không tồn tại." });
+app.get('/api/products/:id', async (req, res) => {
+  try {
+    if (!ObjectId.isValid(req.params.id)) {
+      logger.warn('Invalid ObjectId provided', { id: req.params.id, correlationId: req.correlationId });
+      return res.status(400).json({ message: 'ID sản phẩm không hợp lệ.' });
+    }
 
-//     const image = await imageCollection.findOne({ ImageID: product.ImageID });
-//     const productWithImages = {
-//       ...product,
-//       ProductImageCover: image?.ProductImageCover || '',
-//       ProductImageSub1: image?.ProductImageSub1 || '',
-//       ProductImageSub2: image?.ProductImageSub2 || '',
-//       ProductImageSub3: image?.ProductImageSub3 || ''
-//     };
+    const productId = new ObjectId(req.params.id);
+    const product = await productCollection.findOne({ _id: productId });
+    if (!product) {
+      logger.info('Product not found', { id: req.params.id, correlationId: req.correlationId });
+      return res.status(404).json({ message: 'Sản phẩm không tồn tại.' });
+    }
 
-//     const reviewsAgg = await reviewCollection.aggregate([
-//       { $match: { ProductID: product.ProductID } },
-//       { $sort: { DatePosted: -1 } },
-//       {
-//         $project: {
-//           _id: 0,
-//           CustomerID: 1,
-//           Rating: { $min: [{ $max: ["$Rating", 0] }, 5] },
-//           Content: 1,
-//           DatePosted: { $dateToString: { format: "%d/%m/%Y", date: "$DatePosted" } }
-//         }
-//       }
-//     ]).toArray();
+    const stock = await productstockCollection.findOne({ ProductID: product.ProductID });
+    const stockQuantity = stock ? stock.StockQuantity : 0;
+    const stockStatus = stockQuantity > 0 ? 'In Stock' : 'Out of Stock';
 
-//     const validReviews = reviewsAgg.filter(r => r.Rating > 0);
-//     const averageRating = validReviews.length > 0
-//       ? Number((validReviews.reduce((sum, r) => sum + r.Rating, 0) / validReviews.length).toFixed(1))
-//       : 0;
+    let isOnSale = false;
+    let currentPrice = product.ProductPrice || 0;
+    let discountPercentage = 0;
+    const currentDate = new Date('2025-03-11');
 
-//     const relatedProducts = await productCollection.find({
-//       CateID: product.CateID,
-//       _id: { $ne: new ObjectId(req.params.id) }
-//     })
-//       .limit(4)
-//       .project({ ProductName: 1, ProductPrice: 1, ProductImageCover: 1, _id: 1 })
-//       .toArray();
+    if (product.PromotionID) {
+      const promo = await database.collection('promotions').findOne({ PromotionID: product.PromotionID });
+      if (promo) {
+        const startDate = new Date(promo.PromotionStartDate);
+        const expiredDate = new Date(promo.PromotionExpiredDate);
+        const promotionValue = promo.PromotionValue;
 
-//     const relatedProductsWithStringId = relatedProducts.map(p => ({
-//       ...p,
-//       _id: p._id.toHexString()
-//     }));
+        if (currentDate >= startDate && currentDate <= expiredDate) {
+          const discountMultiplier = 1 - (promotionValue / 100);
+          currentPrice = product.ProductPrice * discountMultiplier;
+          isOnSale = true;
+          discountPercentage = promotionValue;
+        }
+      }
+    }
 
-//     res.json({
-//       ...productWithImages,
-//       reviews: reviewsAgg,
-//       averageRating,
-//       totalReviewCount: validReviews.length,
-//       relatedProducts: relatedProductsWithStringId
-//     });
-//   } catch (err) {
-//     logger.error('Error fetching product detail', { error: err.message, correlationId: req.correlationId });
-//     res.status(500).json({ message: 'Lỗi hệ thống, vui lòng thử lại sau.' });
-//   }
-// });
+    const image = await imageCollection.findOne({ ImageID: product.ImageID }) || {};
+    const productWithImages = {
+      ...product,
+      ProductImageCover: image.ProductImageCover || '',
+      ProductImageSub1: image.ProductImageSub1 || '',
+      ProductImageSub2: image.ProductImageSub2 || '',
+      ProductImageSub3: image.ProductImageSub3 || '',
+      currentPrice: currentPrice,
+      originalPrice: product.ProductPrice || 0,
+      stockStatus: stockStatus,
+      isOnSale: isOnSale,
+      discountPercentage: discountPercentage
+    };
+
+    const reviewsAgg = await reviewCollection.aggregate([
+      { $match: { ProductID: product.ProductID } },
+      { $sort: { DatePosted: -1 } },
+      {
+        $project: {
+          _id: 0,
+          CustomerID: 1,
+          Rating: { $min: [{ $max: ["$Rating", 0] }, 5] },
+          Content: 1,
+          DatePosted: {
+            $cond: {
+              if: { $eq: [{ $type: "$DatePosted" }, "string"] },
+              then: {
+                $let: {
+                  vars: { convertedDate: { $toDate: "$DatePosted" } },
+                  in: {
+                    $cond: {
+                      if: { $eq: [{ $type: "$$convertedDate" }, "date"] },
+                      then: { $dateToString: { format: "%d/%m/%Y", date: "$$convertedDate" } },
+                      else: "N/A"
+                    }
+                  }
+                }
+              },
+              else: { $dateToString: { format: "%d/%m/%Y", date: "$DatePosted" } }
+            }
+          }
+        }
+      }
+    ]).toArray();
+
+    const validReviews = reviewsAgg.filter(r => r.Rating > 0);
+    const averageRating = validReviews.length > 0
+      ? Number((validReviews.reduce((sum, r) => sum + r.Rating, 0) / validReviews.length).toFixed(1))
+      : 0;
+
+      const relatedProducts = await productCollection.aggregate([
+        {
+          $match: {
+            CateID: product.CateID,
+            _id: { $ne: new ObjectId(productId) }
+          }
+        },
+        { $limit: 4 },
+        {
+          $lookup: {
+            from: "images",
+            let: { imageId: "$ImageID" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$ImageID", "$$imageId"] } } },
+              { $project: { _id: 0, ProductImageCover: 1, ProductImageSub1: 1, ProductImageSub2: 1, ProductImageSub3: 1 } }
+            ],
+            as: "image"
+          }
+        },
+        { $unwind: { path: "$image", preserveNullAndEmptyArrays: true } },
+        {
+          $project: {
+            _id: 1,
+            ProductName: 1,
+            ProductPrice: 1,
+            ProductImageCover: { $ifNull: ["$image.ProductImageCover",""] },
+            ProductImageSub1: { $ifNull: ["$image.ProductImageSub1", ""] },
+            ProductImageSub2: { $ifNull: ["$image.ProductImageSub2", ""] },
+            ProductImageSub3: { $ifNull: ["$image.ProductImageSub3", ""] },
+          }
+        }
+      ]).toArray();
+  
+      const relatedProductsWithStringId = relatedProducts.map(p => ({
+        ...p,
+        _id: p._id.toHexString()
+      }));
+  
+      // Giả định productWithImages, reviewsAgg, averageRating, validReviews đã được định nghĩa trước đó
+      res.json({
+        ...productWithImages,
+        reviews: reviewsAgg,
+        averageRating,
+        totalReviewCount: validReviews.length,
+        relatedProducts: relatedProductsWithStringId
+      });
+    } catch (err) {
+      logger.error('Error fetching product detail', {
+        error: err.message,
+        stack: err.stack,
+        id: req.params.id,
+        correlationId: req.correlationId
+      });
+      res.status(500).json({ message: 'Lỗi hệ thống, vui lòng thử lại sau.', error: err.message });
+    }
+  });
 
 // ===================== COMPARE API =====================
+
 app.post('/api/compare', authenticateToken, async (req, res) => {
   const { productId } = req.body;
-  if (!productId) return res.status(400).json({ error: "Invalid productId" });
+  if (!productId || !ObjectId.isValid(productId)) {
+    logger.warn('Invalid productId provided', { productId, correlationId: req.correlationId });
+    return res.status(400).json({ error: "Invalid or missing productId" });
+  }
 
   try {
+    const productExists = await productCollection.findOne({ _id: new ObjectId(productId) });
+    if (!productExists) {
+      logger.warn('Product not found for compare', { productId, correlationId: req.correlationId });
+      return res.status(404).json({ error: "Product not found" });
+    }
+
     if (req.isAuthenticated) {
       const AccountID = req.account.AccountID;
       const compareCollection = database.collection('compares');
@@ -379,12 +754,13 @@ app.post('/api/compare', authenticateToken, async (req, res) => {
     }
   } catch (err) {
     logger.error('Error in POST /api/compare', { error: err.message, correlationId: req.correlationId });
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 
 app.get('/api/compare', authenticateToken, async (req, res) => {
   try {
+    let compareList = [];
     if (req.isAuthenticated) {
       const AccountID = req.account.AccountID;
       const compareCollection = database.collection('compares');
@@ -396,17 +772,16 @@ app.get('/api/compare', authenticateToken, async (req, res) => {
         req.session.compareList = [];
         logger.info('Synchronized compare list from session to MongoDB', { AccountID, correlationId: req.correlationId });
       }
-
-      logger.info('Fetched compare list from MongoDB', { AccountID, compareList: compare ? compare.items : [], correlationId: req.correlationId });
-      res.json(compare ? compare.items : []);
+      compareList = compare ? compare.items : [];
+      logger.info('Fetched compare list from MongoDB', { AccountID, compareList, correlationId: req.correlationId });
     } else {
-      const compareList = req.session.compareList || [];
+      compareList = req.session.compareList || [];
       logger.info('Fetched compare list from session', { sessionId: req.sessionID, compareList, correlationId: req.correlationId });
-      res.json(compareList);
     }
+    res.json(compareList);
   } catch (err) {
     logger.error('Error in GET /api/compare', { error: err.message, correlationId: req.correlationId });
-    res.status(500).json({ message: 'Lỗi hệ thống khi lấy danh sách so sánh.', error: err.message });
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
@@ -416,27 +791,32 @@ app.delete('/api/compare/all', authenticateToken, async (req, res) => {
       const AccountID = req.account.AccountID;
       const compareCollection = database.collection('compares');
       await compareCollection.deleteOne({ AccountID });
-      logger.info('Cleared compare list in MongoDB', { AccountID, correlationId: req.correlationId });
+      req.session.compareList = [];
+      logger.info('Cleared compare list in MongoDB and session', { AccountID, correlationId: req.correlationId });
       res.json({ message: "Cleared all compare items", compareList: [] });
     } else {
       req.session.compareList = [];
-      req.session.save((err) => {
-        if (err) {
-          logger.error('Error saving session in DELETE /api/compare/all', { error: err.message, correlationId: req.correlationId });
-          return res.status(500).json({ error: err.message });
-        }
-        logger.info('Cleared compare list in session', { sessionId: req.sessionID, correlationId: req.correlationId });
-        res.json({ message: "Cleared all compare items", compareList: req.session.compareList });
+      await new Promise((resolve, reject) => {
+        req.session.save((err) => {
+          if (err) reject(err);
+          else resolve();
+        });
       });
+      logger.info('Cleared compare list in session', { sessionId: req.sessionID, correlationId: req.correlationId });
+      res.json({ message: "Cleared all compare items", compareList: [] });
     }
   } catch (err) {
     logger.error('Error in DELETE /api/compare/all', { error: err.message, correlationId: req.correlationId });
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
 app.delete('/api/compare/:productId', authenticateToken, async (req, res) => {
   const productId = req.params.productId;
+  if (!productId || !ObjectId.isValid(productId)) {
+    logger.warn('Invalid productId provided', { productId, correlationId: req.correlationId });
+    return res.status(400).json({ error: "Invalid or missing productId" });
+  }
 
   try {
     if (req.isAuthenticated) {
@@ -451,18 +831,22 @@ app.delete('/api/compare/:productId', authenticateToken, async (req, res) => {
       res.json({ message: "Removed from compare list", compareList: updatedCompare ? updatedCompare.items : [] });
     } else {
       req.session.compareList = (req.session.compareList || []).filter(id => id !== productId);
-      req.session.save((err) => {
-        if (err) {
-          logger.error('Error saving session in DELETE /api/compare/:productId', { error: err.message, correlationId: req.correlationId });
-          return res.status(500).json({ error: err.message });
-        }
-        logger.info('Removed from compare list in session', { sessionId: req.sessionID, compareList: req.session.compareList, correlationId: req.correlationId });
-        res.json({ message: "Removed from compare list", compareList: req.session.compareList });
+      await new Promise((resolve, reject) => {
+        req.session.save((err) => {
+          if (err) {
+            logger.error('Error saving session in DELETE /api/compare/:productId', { error: err.message, correlationId: req.correlationId });
+            reject(err);
+          } else {
+            logger.info('Removed from compare list in session', { sessionId: req.sessionID, compareList: req.session.compareList, correlationId: req.correlationId });
+            resolve();
+          }
+        });
       });
+      res.json({ message: "Removed from compare list", compareList: req.session.compareList });
     }
   } catch (err) {
     logger.error('Error in DELETE /api/compare/:productId', { error: err.message, correlationId: req.correlationId });
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: 'Internal server error' });
   }
 });
 
@@ -564,7 +948,6 @@ app.delete('/api/cart/:productId', authenticateToken, async (req, res) => {
 });
 
 // ===================== LOGIN, SIGNUP, RESETPASS =====================
-const cron = require('node-cron');
 
 cron.schedule('0 * * * *', async () => {
   await accountCollection.deleteMany({
@@ -572,28 +955,6 @@ cron.schedule('0 * * * *', async () => {
   });
   logger.info('Cleaned up expired OTPs', { correlationId: 'system' });
 });
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 587,
-  secure: false,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  },
-  tls: {
-    rejectUnauthorized: false
-  }
-});
-
-(async () => {
-  try {
-    await transporter.verify();
-    logger.info("Kết nối Nodemailer thành công!", { correlationId: 'system' });
-  } catch (error) {
-    logger.error('Lỗi cấu hình Nodemailer', { error: error.message, code: error.code, correlationId: 'system' });
-  }
-})();
 
 app.post('/api/login', authLimiter, [
   body('email').isEmail().normalizeEmail(),
@@ -624,8 +985,7 @@ app.post('/api/login', authLimiter, [
 
     const token = jwt.sign({ AccountID: account.AccountID }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    // Đồng bộ session với MongoDB
-    try {
+      try {
       const cartCollection = database.collection('carts');
       const compareCollection = database.collection('compares');
 
@@ -732,7 +1092,7 @@ app.post('/api/forgot-password', authLimiter, [
   try {
     const account = await accountCollection.findOne({ CustomerEmail: email });
     if (!account) {
-      logger.warn('Forgot password attempt with non-existent email', { email, correlationId: req.correlationId });
+      logger.warn('Forgot password attempt with non-existent email', { email, correlationId: reqDeclaringId });
       return res.status(404).json({ message: 'Email không tồn tại.' });
     }
 
@@ -832,222 +1192,668 @@ app.get('/api/verify-token', authenticateToken, (req, res) => {
   res.json({ message: 'Token hợp lệ', account: req.account });
 });
 
-app.post('/api/reviews', async (req, res) => {
+// ===================== BLOG NỔI BẬT API ====================
+
+app.get('/api/blogs/random', async (req, res) => {
   try {
-    const { ReviewID, ProductID, CustomerID, Content, Rating, DatePosted, Images } = req.body;
+    const cateblogId = req.query.cateblogId || 'cateblog1';
+    console.log('Request received for random blogs:', req.method, req.url, { cateblogId });
 
-    if (!ProductID || !CustomerID || !Rating || !Content) {
-      return res.status(400).json({ error: "Thiếu thông tin đánh giá!" });
-    }
-
-    const newReview = {
-      ReviewID,
-      ProductID,
-      CustomerID,
-      Content,
-      Rating: Math.min(Math.max(Rating, 1), 5), // Đảm bảo rating nằm trong khoảng 1-5
-      DatePosted: new Date(DatePosted).toISOString(),
-      Images: Images || []
-    };
-
-    await reviewCollection.insertOne(newReview);
-    res.json({ message: "Đánh giá đã được lưu thành công!", review: newReview });
-  } catch (err) {
-    console.error("Lỗi khi lưu đánh giá:", err);
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.get('/api/reviews', async (req, res) => {
-  try {
-    const reviews = await reviewCollection.find().sort({ DatePosted: -1 }).toArray();
-    res.json(reviews);
-  } catch (err) {
-    console.error("Lỗi khi lấy danh sách đánh giá:", err);
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.get('/api/reviews/:productId', async (req, res) => {
-  try {
-    const productId = req.params.productId;
-    if (!productId) {
-      return res.status(400).json({ error: "Thiếu ID sản phẩm!" });
-    }
-
-    const reviews = await reviewCollection.find({ ProductID: productId })
-      .sort({ DatePosted: -1 })
-      .toArray();
-
-    res.json(reviews);
-  } catch (err) {
-    console.error("Lỗi khi lấy đánh giá của sản phẩm:", err);
-    res.status(500).json({ error: err.message });
-  }
-});
-
-app.post('/api/reviews', async (req, res) => {
-  try {
-    const { ReviewID, ProductID, CustomerID, Content, Rating, DatePosted, Images } = req.body;
-
-    if (!ProductID || !CustomerID || !Rating || !Content) {
-      return res.status(400).json({ error: "Thiếu thông tin đánh giá!" });
-    }
-
-    const newReview = {
-      ReviewID: `review_${new Date().getTime()}`,
-      ProductID,
-      CustomerID,
-      Content,
-      Rating: Math.min(Math.max(Rating, 1), 5),
-      DatePosted: new Date().toISOString(),
-      Images: Images || []
-    };
-
-    await reviewCollection.insertOne(newReview);
-    res.json({ message: "Đánh giá đã được lưu thành công!", review: newReview });
-  } catch (err) {
-    console.error("Lỗi khi lưu đánh giá:", err);
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// app.get('/api/productstocks', async (req, res) => {
-//   try {
-//     const stocks = await database.collection('productstocks').find().toArray();
-//     res.json(stocks);
-//   } catch (err) {
-//     console.error("❌ Lỗi khi lấy dữ liệu tồn kho:", err);
-//     res.status(500).json({ error: 'Lỗi server!' });
-//   }
-// });
-
-app.get('/api/productstocks', async (req, res) => {
-  try {
-    const stocks = await database.collection('productstocks').aggregate([
+    const pipeline = [
       {
         $lookup: {
-          from: "products",
-          localField: "ProductID",
-          foreignField: "ProductID",
-          as: "productInfo"
+          from: 'blogcategories',
+          localField: 'categoryID',
+          foreignField: '_id',
+          as: 'category'
         }
       },
-      { $unwind: "$productInfo" },
+      { $unwind: { path: '$category', preserveNullAndEmptyArrays: true } },
+      { $match: { 'category.CateblogID': cateblogId } },
+      { $sample: { size: 2 } },
       {
         $project: {
-          _id: 1,
-          ProductID: 1,
-          StockQuantity: 1,
-          ProductName: "$productInfo.ProductName",
-          ProductSKU: "$productInfo.ProductSKU"
+          id: '$_id',
+          _id: 0,
+          title: '$BlogTitle',
+          image: '$BlogImage',
+          summary: { $substr: ['$BlogContent', 0, 150] },
+          categoryName: '$category.CateblogName'
         }
       }
-    ]).toArray();
+    ];
 
-    res.json(stocks);
+    const blogs = await blogCollection.aggregate(pipeline).toArray();
+    console.log('Random blogs result:', blogs);
+
+    if (!blogs.length) {
+      console.log('No blogs found for category:', cateblogId);
+      return res.status(200).json([]);
+    }
+
+    res.status(200).json(blogs);
   } catch (err) {
-    console.error("❌ Lỗi khi lấy dữ liệu tồn kho:", err);
-    res.status(500).json({ error: 'Lỗi server!' });
+    console.error('Error fetching random blogs:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
   }
 });
 
-app.get('/api/products', async (req, res) => {
+app.get('/api/blogs/:id', async (req, res) => {
   try {
-    console.log("📢 API `/api/products` đã được gọi!");
+    const blogId = req.params.id;
+    console.log('Request received for blog detail:', req.method, req.url, { blogId });
 
-    const productsWithImages = await database.collection('products').aggregate([
+    const blog = await blogCollection.findOne({ _id: new ObjectId(blogId) });
+    if (!blog) {
+      console.log('Blog not found:', blogId);
+      return res.status(404).json({ message: 'Bài viết không tồn tại.' });
+    }
+
+    const pipeline = [
+      { $match: { _id: new ObjectId(blogId) } },
       {
         $lookup: {
-          from: 'images',
-          localField: 'ImageID',
-          foreignField: 'ImageID',
-          as: 'imageData'
+          from: 'blogcategories',
+          localField: 'categoryID',
+          foreignField: '_id',
+          as: 'category'
         }
       },
-      {
-        $unwind: {
-          path: '$imageData',
-          preserveNullAndEmptyArrays: true
-        }
-      },
+      { $unwind: { path: '$category', preserveNullAndEmptyArrays: true } },
       {
         $project: {
-          _id: 1,
-          ProductID: 1,
-          ProductName: 1,
-          ProductSKU: 1,
-          CateID: 1,
-          CateName: 1,
-          ProductBrand: 1,
-          ImageID: 1,
-          ProductImageCover: {
-            $ifNull: ['$imageData.ProductImageCover', '']
-          }
+          id: '$_id',
+          _id: 0,
+          title: '$BlogTitle',
+          image: '$BlogImage',
+          content: '$BlogContent',
+          categoryName: '$category.CateblogName',
+          datePosted: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } }
         }
-      },
-      { $limit: 100 }
-    ]).toArray();
+      }
+    ];
 
-    if (!productsWithImages.length) {
-      console.log('⚠️ Không tìm thấy dữ liệu');
-    }
+    const detailedBlog = await blogCollection.aggregate(pipeline).toArray();
+    console.log('Blog detail result:', detailedBlog);
 
-    console.log("📢 Dữ liệu trả về:", JSON.stringify(productsWithImages, null, 2));
-    res.json({ data: productsWithImages });
+    res.status(200).json(detailedBlog[0]);
   } catch (err) {
-    console.error('❌ Lỗi chi tiết:', err.stack);
-    res.status(500).json({
-      error: 'Lỗi server!',
-      details: err.message
-    });
+    console.error('Error fetching blog detail:', err.stack);
+    res.status(500).json({ message: 'Lỗi server', error: err.message });
+  }
+});
+//=============TUVY-APP.JS=================
+
+// API cho Categories
+app.post('/categories', async (req, res) => {
+  try {
+    const { CateblogID, CateblogName } = req.body;
+    const category = { CateblogID, CateblogName };
+    const result = await blogCategoryCollection.insertOne(category);
+    res.status(201).json({ ...category, _id: result.insertedId });
+  } catch (error) {
+    logger.error('Error in POST /categories', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
   }
 });
 
-// app.delete('/api/products?limit=100', (req, res) => {
-//   const productId = req.params.id;
-//   // Code xử lý xóa sản phẩm ở đây
-//   res.json({ message: `Đã xóa sản phẩm ${productId}` });
-// });
-
-app.delete('/api/products/:id', async (req, res) => {
+app.get('/categories', async (req, res) => {
   try {
-    const productId = req.params.id;
-    if (!ObjectId.isValid(productId)) {
-      return res.status(400).json({ message: "ID sản phẩm không hợp lệ." });
+    const categories = await blogCategoryCollection.find({}).toArray();
+    res.json(categories);
+  } catch (error) {
+    logger.error('Error in GET /categories', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/categories/:id', async (req, res) => {
+  try {
+    const category = await blogCategoryCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!category) {
+      return res.status(404).json({ message: "Không tìm thấy danh mục" });
     }
+    res.json(category);
+  } catch (error) {
+    logger.error('Error in GET /categories/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
 
-    const result = await productCollection.deleteOne({ _id: new ObjectId(productId) });
+app.put('/categories/:id', async (req, res) => {
+  try {
+    const { CateblogID, CateblogName } = req.body;
+    const result = await blogCategoryCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { CateblogID, CateblogName } }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy danh mục" });
+    }
+    const updatedCategory = await blogCategoryCollection.findOne({ _id: new ObjectId(req.params.id) });
+    res.json(updatedCategory);
+  } catch (error) {
+    logger.error('Error in PUT /categories/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
 
+app.delete('/categories/:id', async (req, res) => {
+  try {
+    const result = await blogCategoryCollection.deleteOne({ _id: new ObjectId(req.params.id) });
     if (result.deletedCount === 0) {
-      return res.status(404).json({ message: "Sản phẩm không tồn tại." });
+      return res.status(404).json({ message: "Không tìm thấy danh mục" });
     }
-
-    res.json({ message: `Đã xóa sản phẩm với _id ${productId}` });
-  } catch (err) {
-    console.error("❌ Lỗi khi xóa sản phẩm:", err);
-    res.status(500).json({ error: err.message });
+    res.json({ message: "Đã xóa danh mục" });
+  } catch (error) {
+    logger.error('Error in DELETE /categories/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
   }
 });
 
-app.get('/api/products-with-stock', async (req, res) => {
+// API cho Blogs
+app.post('/blogs', async (req, res) => {
   try {
-    const products = await database.collection('products').find({}).toArray();
-    const stocks = await database.collection('productstocks').find({}).toArray();
+    const { BlogTitle, BlogContent, categoryID, BlogImage } = req.body;
+    const blog = {
+      BlogTitle,
+      BlogContent,
+      categoryID: categoryID ? new ObjectId(categoryID) : null, // Chuyển thành ObjectId nếu có
+      BlogImage,
+    };
+    const result = await blogCollection.insertOne(blog);
+    res.status(201).json({ ...blog, _id: result.insertedId });
+  } catch (error) {
+    logger.error('Error in POST /blogs', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
 
-    const stockMap = stocks.reduce((acc, stock) => {
-      acc[stock.ProductID] = stock.StockQuantity;
+app.get('/blogs/:id', async (req, res) => {
+  try {
+    const blog = await blogCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!blog) {
+      return res.status(404).json({ message: "Không tìm thấy bài viết" });
+    }
+    const category = blog.categoryID
+      ? await blogCategoryCollection.findOne({ _id: new ObjectId(blog.categoryID) })
+      : null;
+    res.json({
+      ...blog,
+      categoryName: category ? category.CateblogName : "Unknown"
+    });
+  } catch (error) {
+    logger.error('Error in GET /blogs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/blogs', async (req, res) => {
+  try {
+    const blogs = await blogCollection.find({}).toArray();
+    const categoryIds = [...new Set(blogs.map(b => b.categoryID).filter(id => id))]; // Lấy danh sách categoryID duy nhất
+    const categories = await blogCategoryCollection.find({ _id: { $in: categoryIds.map(id => new ObjectId(id)) } }).toArray();
+    const categoryMap = categories.reduce((acc, cat) => {
+      acc[cat._id.toString()] = cat.CateblogName;
       return acc;
     }, {});
-
-    const productsWithStock = products.map(product => ({
-      ...product,
-      StockQuantity: stockMap[product.ProductID] || 0
+    const blogsWithCategories = blogs.map(blog => ({
+      ...blog,
+      categoryName: blog.categoryID ? categoryMap[blog.categoryID] || "Unknown" : "Unknown" // Chỉ lấy một categoryName
     }));
+    res.json(blogsWithCategories);
+  } catch (error) {
+    logger.error('Error in GET /blogs', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
 
-    res.json({ data: productsWithStock });
+app.put('/blogs/:id', async (req, res) => {
+  try {
+    const { BlogTitle, BlogContent, categoryID, BlogImage } = req.body;
+    const result = await blogCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      {
+        $set: {
+          BlogTitle,
+          BlogContent,
+          categoryID: categoryID ? new ObjectId(categoryID) : null,
+          BlogImage
+        }
+      }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy bài viết" });
+    }
+    const updatedBlog = await blogCollection.findOne({ _id: new ObjectId(req.params.id) });
+    res.json({ message: "Cập nhật thành công", blog: updatedBlog });
+  } catch (error) {
+    logger.error('Error in PUT /blogs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/blogs/:id', async (req, res) => {
+  try {
+    const result = await blogCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy bài viết" });
+    }
+    res.json({ message: "Đã xóa bài viết" });
+  } catch (error) {
+    logger.error('Error in DELETE /blogs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/blogs/category/:categoryID', async (req, res) => {
+  try {
+    const categoryID = new ObjectId(req.params.categoryID);
+    const blogs = await blogCollection.find({ categoryID }).sort({ _id: -1 }).toArray();
+    if (!blogs.length) {
+      return res.status(404).json({ message: "Không tìm thấy bài viết nào thuộc danh mục này" });
+    }
+    const category = await blogCategoryCollection.findOne({ _id: categoryID });
+    const blogsWithCategory = blogs.map(blog => ({
+      ...blog,
+      categoryName: category ? category.CateblogName : "Unknown"
+    }));
+    res.json(blogsWithCategory);
+  } catch (error) {
+    logger.error('Error in GET /blogs/category/:categoryID', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/blogs/category/:categoryID/paginated', async (req, res) => {
+  try {
+    const { page = 1, limit = 10 } = req.query;
+    const categoryID = new ObjectId(req.params.categoryID);
+    const skip = (page - 1) * limit;
+    const blogs = await blogCollection.find({ categoryID })
+      .sort({ _id: -1 })
+      .skip(skip)
+      .limit(parseInt(limit))
+      .toArray();
+    const totalBlogs = await blogCollection.countDocuments({ categoryID });
+    const category = await blogCategoryCollection.findOne({ _id: categoryID });
+    const blogsWithCategory = blogs.map(blog => ({
+      ...blog,
+      categoryName: category ? category.CateblogName : "Unknown"
+    }));
+    res.json({
+      blogs: blogsWithCategory,
+      totalBlogs,
+      currentPage: parseInt(page),
+      totalPages: Math.ceil(totalBlogs / limit)
+    });
+  } catch (error) {
+    logger.error('Error in GET /blogs/category/:categoryID/paginated', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/blogs/category/:categoryID/search', async (req, res) => {
+  try {
+    const { searchTerm } = req.query;
+    const categoryID = new ObjectId(req.params.categoryID);
+    const blogs = await blogCollection.find({
+      categoryID,
+      $or: [
+        { BlogTitle: { $regex: searchTerm, $options: 'i' } },
+        { BlogContent: { $regex: searchTerm, $options: 'i' } }
+      ]
+    }).sort({ _id: -1 }).toArray();
+    if (!blogs.length) {
+      return res.status(404).json({ message: 'Không tìm thấy bài viết nào phù hợp' });
+    }
+    const category = await blogCategoryCollection.findOne({ _id: categoryID });
+    const blogsWithCategory = blogs.map(blog => ({
+      ...blog,
+      categoryName: category ? category.CateblogName : "Unknown"
+    }));
+    res.json(blogsWithCategory);
+  } catch (error) {
+    logger.error('Error in GET /blogs/category/:categoryID/search', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// API cho FAQs
+app.post('/faqs', async (req, res) => {
+  try {
+    const { FaqID, FaqTitle, FaqContent } = req.body;
+    const faq = { FaqID, FaqTitle, FaqContent };
+    const result = await faqCollection.insertOne(faq);
+    res.status(201).json({ ...faq, _id: result.insertedId });
+  } catch (error) {
+    logger.error('Error in POST /faqs', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/faqs/:id', async (req, res) => {
+  try {
+    const faq = await faqCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!faq) {
+      return res.status(404).json({ message: "Không tìm thấy FAQ" });
+    }
+    res.json(faq);
+  } catch (error) {
+    logger.error('Error in GET /faqs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.get('/faqs', async (req, res) => {
+  try {
+    const faqs = await faqCollection.find({}).toArray();
+    res.json(faqs);
+  } catch (error) {
+    logger.error('Error in GET /faqs', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.put('/faqs/:id', async (req, res) => {
+  try {
+    const { FaqID, FaqTitle, FaqContent } = req.body;
+    const result = await faqCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { FaqID, FaqTitle, FaqContent } }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy FAQ" });
+    }
+    const updatedFaq = await faqCollection.findOne({ _id: new ObjectId(req.params.id) });
+    res.json({ message: "Cập nhật thành công", faq: updatedFaq });
+  } catch (error) {
+    logger.error('Error in PUT /faqs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/faqs/:id', async (req, res) => {
+  try {
+    const result = await faqCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy FAQ" });
+    }
+    res.json({ message: "Đã xóa FAQ" });
+  } catch (error) {
+    logger.error('Error in DELETE /faqs/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// API cho Customers
+app.get('/customers', async (req, res) => {
+  try {
+    const customers = await customerCollection.find({}).toArray();
+    res.json(customers);
+  } catch (error) {
+    logger.error('Error in GET /customers', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi lấy danh sách khách hàng" });
+  }
+});
+
+app.get('/customers/:id', async (req, res) => {
+  try {
+    const customer = await customerCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!customer) {
+      return res.status(404).json({ message: "Không tìm thấy khách hàng" });
+    }
+    res.json(customer);
+  } catch (error) {
+    logger.error('Error in GET /customers/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi truy vấn khách hàng" });
+  }
+});
+
+app.post('/customers', async (req, res) => {
+  try {
+    const { CustomerName, CustomerPhone } = req.body;
+    if (!CustomerName || !CustomerPhone) {
+      return res.status(400).json({ message: "Thiếu thông tin bắt buộc" });
+    }
+    const result = await customerCollection.insertOne(req.body);
+    res.status(201).json({ message: "Thêm khách hàng thành công", _id: result.insertedId });
+  } catch (error) {
+    logger.error('Error in POST /customers', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi thêm khách hàng" });
+  }
+});
+
+app.put('/customers/:id', async (req, res) => {
+  try {
+    const result = await customerCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: req.body }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy khách hàng để cập nhật" });
+    }
+    const updatedCustomer = await customerCollection.findOne({ _id: new ObjectId(req.params.id) });
+    res.json({ message: "Cập nhật thành công", customer: updatedCustomer });
+  } catch (error) {
+    logger.error('Error in PUT /customers/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi cập nhật khách hàng" });
+  }
+});
+
+app.delete('/customers/:id', async (req, res) => {
+  try {
+    const result = await customerCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Không tìm thấy khách hàng để xóa" });
+    }
+    res.json({ message: "Xóa khách hàng thành công" });
+  } catch (error) {
+    logger.error('Error in DELETE /customers/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi xóa khách hàng" });
+  }
+});
+
+// API cho Memberships
+app.get('/memberships', async (req, res) => {
+  try {
+    const memberships = await membershipCollection.find({}).toArray();
+    res.json(memberships);
+  } catch (error) {
+    logger.error('Error in GET /memberships', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: "Lỗi khi lấy danh sách memberships" });
+  }
+});
+
+app.get('/memberships/:id', async (req, res) => {
+  try {
+    const membership = await membershipCollection.findOne({ _id: new ObjectId(req.params.id) });
+    if (!membership) {
+      return res.status(404).json({ message: "Membership không tồn tại" });
+    }
+    res.json(membership);
+  } catch (error) {
+    logger.error('Error in GET /memberships/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: "Lỗi khi lấy membership" });
+  }
+});
+
+app.post('/memberships', async (req, res) => {
+  try {
+    const { MemberType, MemberID } = req.body;
+    const result = await membershipCollection.insertOne({ MemberType, MemberID });
+    res.status(201).json({ _id: result.insertedId, MemberType, MemberID });
+  } catch (error) {
+    logger.error('Error in POST /memberships', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: "Lỗi khi thêm membership" });
+  }
+});
+
+app.put('/memberships/:id', async (req, res) => {
+  try {
+    const { MemberType, MemberID } = req.body;
+    const result = await membershipCollection.updateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: { MemberType, MemberID } }
+    );
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ message: "Membership không tồn tại" });
+    }
+    const updatedMembership = await membershipCollection.findOne({ _id: new ObjectId(req.params.id) });
+    res.json(updatedMembership);
+  } catch (error) {
+    logger.error('Error in PUT /memberships/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: "Lỗi khi cập nhật membership" });
+  }
+});
+
+app.delete('/memberships/:id', async (req, res) => {
+  try {
+    const result = await membershipCollection.deleteOne({ _id: new ObjectId(req.params.id) });
+    if (result.deletedCount === 0) {
+      return res.status(404).json({ message: "Membership không tồn tại" });
+    }
+    res.json({ message: "Xóa membership thành công" });
+  } catch (error) {
+    logger.error('Error in DELETE /memberships/:id', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: "Lỗi khi xóa membership" });
+  }
+});
+
+// API cho Orders
+app.get('/orders/customer/:customerID', async (req, res) => {
+  try {
+    const customerID = req.params.customerID;
+    const orders = await orderCollection.find({ CustomerID: customerID }).toArray();
+    if (!orders.length) {
+      return res.status(404).json({ message: "Không tìm thấy đơn hàng nào cho khách hàng này." });
+    }
+    res.json(orders);
+  } catch (error) {
+    logger.error('Error in GET /orders/customer/:customerID', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi lấy lịch sử đơn hàng" });
+  }
+});
+
+// WebSocket và Message Handling
+const { Server } = require('socket.io');
+const server = require('http').createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: ["http://localhost:4001", "http://localhost:4002", "http://localhost:4200"], // Thêm localhost:4200 nếu cần
+    methods: ["GET", "POST"],
+    credentials: true // Thêm dòng này
+  },
+});
+
+const clients = new Map();
+
+io.on("connection", (socket) => {
+  console.log(`User connected: ${socket.id}`);
+
+  socket.on("register", (userName) => {
+    clients.set(userName, socket.id);
+    logger.info(`User ${userName} registered with socket ID: ${socket.id}`, { correlationId: 'socket' });
+  });
+
+  socket.on("sendMessage", async (data) => {
+    console.log("Tin nhắn nhận được:", data);
+    if (!data.targetUser) {
+      logger.warn("Thiếu targetUser trong dữ liệu gửi đến server", { correlationId: 'socket' });
+      return;
+    }
+
+    const newMessage = {
+      user: data.user,
+      message: data.message,
+      targetUser: data.targetUser,
+      timestamp: new Date(),
+    };
+    await messageCollection.insertOne(newMessage);
+    logger.info("Đã lưu tin nhắn vào MongoDB", { message: newMessage, correlationId: 'socket' });
+
+    const targetSocketId = clients.get(data.targetUser);
+    if (targetSocketId) {
+      io.to(targetSocketId).emit("receiveMessage", {
+        user: data.user,
+        message: data.message,
+        targetUser: data.targetUser,
+      });
+      logger.info(`Đã gửi tin nhắn đến ${data.targetUser} (socket ID: ${targetSocketId})`, { correlationId: 'socket' });
+    } else {
+      logger.warn(`Không tìm thấy socket ID cho người dùng: ${data.targetUser}`, { correlationId: 'socket' });
+    }
+  });
+
+  socket.on("disconnect", () => {
+    for (const [userName, socketId] of clients.entries()) {
+      if (socketId === socket.id) {
+        clients.delete(userName);
+        logger.info(`User ${userName} disconnected`, { correlationId: 'socket' });
+        break;
+      }
+    }
+  });
+});
+
+app.get("/messages", async (req, res) => {
+  try {
+    const messages = await messageCollection.find({}).sort({ timestamp: 1 }).toArray();
+    res.json(messages);
+  } catch (error) {
+    logger.error('Error in GET /messages', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ error: "Lỗi khi lấy tin nhắn" });
+  }
+});
+
+//=================================FEEDBACKS API=================================//
+// API lấy danh sách feedback gộp thông tin
+app.get('/api/feedbacks', async (req, res) => {
+  try {
+    // Lấy tất cả reviews
+    const reviews = await reviewCollection.find().toArray();
+
+    // Gộp dữ liệu từ products và customers
+    const feedbacks = await Promise.all(
+      reviews.map(async (review) => {
+        // Tìm product liên quan dựa trên ProductID
+        const product = await productCollection.findOne({ ProductID: review.ProductID });
+        // Tìm customer liên quan dựa trên CustomerID
+        const customer = await customerCollection.findOne({ CustomerID: review.CustomerID });
+
+        return {
+          reviewID: review.ReviewID,
+          productName: product ? product.ProductName : 'Unknown Product',
+          customerName: customer ? customer.CustomerName : 'Unknown Customer',
+          customerAvatar: customer ? customer.CustomerAvatar || 'https://dummyjson.com/icon/default/128' : 'https://dummyjson.com/icon/default/128', // Ảnh mặc định nếu không có
+          content: review.Content,
+          rating: review.Rating,
+          datePosted: review.DatePosted,
+        };
+      })
+    );
+
+    logger.info('Fetched feedbacks successfully', { count: feedbacks.length, correlationId: req.correlationId });
+    res.status(200).json(feedbacks);
+  } catch (error) {
+    logger.error('Error fetching feedbacks', { error: error.message, correlationId: req.correlationId });
+    res.status(500).json({ message: 'Server error', error: error.message });
+  }
+});
+
+//=====anhthucode
+app.post('/api/upload', upload.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+
+    // Giả sử bạn upload lên Cloudinary hoặc Firebase ở đây
+    const imageUrl = `https://your-cloud.com/${req.file.filename}`;
+
+    res.json({ message: "Upload thành công!", url: imageUrl });
   } catch (err) {
-    console.error('Lỗi trong API /api/products-with-stock:', err);
+    console.error("Lỗi upload ảnh:", err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -1117,895 +1923,108 @@ app.get('/api/products-full-details', async (req, res) => {
 
     res.json({ data: productsWithDetails });
   } catch (err) {
-    console.error('❌ Lỗi trong API /api/products-full-details:', err);
+    console.error('Lỗi trong API /api/products-full-details:', err);
     res.status(500).json({ error: err.message });
   }
 });
 
-// app.post('/api/products', async (req, res) => {
-//   try {
-//     const { ProductID, ImageID, CateID, ProductName, ProductPrice, ProductBrand, 
-//             ProductFullDescription, ProductShortDescription, ProductSKU, ProductImages, StockQuantity } = req.body;
-
-//     const existingImage = await imageCollection.findOne({ ImageID });
-//     if (!existingImage) {
-//       const imageData = {
-//         ImageID,
-//         ProductImageCover: ProductImages[0] || "",
-//         ProductImageSub1: ProductImages[1] || "",
-//         ProductImageSub2: ProductImages[2] || "",
-//         ProductImageSub3: ProductImages[3] || "",
-//       };
-//       await imageCollection.insertOne(imageData);
-//     }
-
-//     const newProduct = {
-//       ProductID,
-//       ImageID,
-//       CateID,
-//       ProductName,
-//       ProductPrice: Number(ProductPrice) || 0,
-//       ProductBrand,
-//       ProductFullDescription,
-//       ProductShortDescription,
-//       ProductSKU,
-//       CreatedAt: new Date()
-//     };
-
-//     await productCollection.insertOne(newProduct);
-
-//     await database.collection('productstocks').updateOne(
-//       { ProductID },
-//       { $set: { StockQuantity: Number(StockQuantity) || 0 } },
-//       { upsert: true }
-//     );
-
-//     res.json({ message: "Sản phẩm đã được thêm!", product: newProduct });
-//   } catch (err) {
-//     console.error("❌ Lỗi khi thêm sản phẩm:", err);
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-
-app.post('/api/upload', upload.single('image'), async (req, res) => {
+app.post('/api/reviews', async (req, res) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: "No file uploaded" });
-    }
-    
-    const imageUrl = `https://your-cloud.com/${req.file.filename}`;
+    const { ProductID, CustomerID, Content, Rating, DatePosted, Images } = req.body;
 
-    res.json({ message: "Upload thành công!", url: imageUrl });
-  } catch (err) {
-    console.error("❌ Lỗi upload ảnh:", err);
-    res.status(500).json({ error: err.message });
-  }
-});
-
-// app.put('/api/products/:id', async (req, res) => {
-//   try {
-//     const productId = req.params.id;
-//     const updatedData = req.body;
-
-//     const result = await productCollection.updateOne(
-//       { ProductID: productId },
-//       { $set: updatedData }
-//     );
-
-//     if (result.matchedCount === 0) {
-//       return res.status(404).json({ message: "Sản phẩm không tồn tại." });
-//     }
-
-//     res.json({ message: `Sản phẩm ${productId} đã được cập nhật!` });
-//   } catch (err) {
-//     console.error("❌ Lỗi khi cập nhật sản phẩm:", err);
-//     res.status(500).json({ error: err.message });
-//   }
-// });
-
-// app.put('/api/products/:id', async (req, res) => {
-//   try {
-//     const productId = req.params.id;
-//     const updatedData = req.body;
-
-//     delete updatedData._id;
-//     delete updatedData.ProductID;
-
-//     let query = { _id: new ObjectId(productId) };
-//     const result = await productCollection.updateOne(query, { $set: updatedData });
-
-//     if (result.matchedCount === 0) {
-//       return res.status(404).json({ message: "Sản phẩm không tồn tại." });
-//     }
-
-//     if (updatedData.StockQuantity !== undefined) {
-//       await database.collection('productstocks').updateOne(
-//         { ProductID: updatedData.ProductID || req.body.ProductID },
-//         { $set: { StockQuantity: Number(updatedData.StockQuantity) || 0 } },
-//         { upsert: true }
-//       );
-//     }
-
-//     res.json({ message: `Sản phẩm ${productId} đã được cập nhật!` });
-//   } catch (err) {
-//     console.error("❌ Lỗi khi cập nhật sản phẩm:", err);
-//     res.status(500).json({ error: err.message, stack: err.stack });
-//   }
-// });
-
-app.get('/api/products/:id', async (req, res) => {
-  try {
-    const productId = req.params.id;
-    if (!ObjectId.isValid(productId)) {
-      return res.status(400).json({ message: "ID sản phẩm không hợp lệ." });
+    if (!ProductID || !CustomerID || !Rating || !Content) {
+      return res.status(400).json({ error: "Thiếu thông tin đánh giá!" });
     }
 
-    const product = await productCollection.findOne({ _id: new ObjectId(productId) });
-    if (!product) {
-      return res.status(404).json({ message: "Sản phẩm không tồn tại." });
-    }
-
-    const image = await imageCollection.findOne({ ImageID: product.ImageID });
-    const stock = await database.collection('productstocks').findOne({ ProductID: product.ProductID });
-
-    const productWithDetails = {
-      _id: product._id.toString(),
-      ProductID: product.ProductID,
-      CateID: product.CateID,
-      ProductName: product.ProductName || "",
-      ProductPrice: product.ProductPrice || 0,
-      ProductBrand: product.ProductBrand || "",
-      ProductShortDescription: product.ProductShortDescription || "",
-      ProductFullDescription: product.ProductFullDescription || "",
-      ProductSKU: product.ProductSKU || "",
-      StockQuantity: stock ? stock.StockQuantity || 0 : 0,
-      IsPromotion: product.IsPromotion || false,
-      AllowOutOfStock: product.AllowOutOfStock || false,
-      WineType: product.WineType || "",
-      WineVolume: product.WineVolume || "",
-      ComparePrice: product.ComparePrice || 0,
-      ProductImageCover: image?.ProductImageCover || "",
-      ProductImageSub1: image?.ProductImageSub1 || "",
-      ProductImageSub2: image?.ProductImageSub2 || "",
-      ProductImageSub3: image?.ProductImageSub3 || ""
+    const newReview = {
+      ReviewID: `review_${new Date().getTime()}`,
+      ProductID,
+      CustomerID,
+      Content,
+      Rating: Math.min(Math.max(Rating, 1), 5),
+      DatePosted: new Date().toISOString(),
+      Images: Images || []
     };
 
-    res.json(productWithDetails);
+    await reviewCollection.insertOne(newReview);
+    res.json({ message: "Đánh giá đã được lưu thành công!", review: newReview });
   } catch (err) {
-    console.error('Error fetching product detail:', err);
-    res.status(500).json({ message: 'Lỗi hệ thống', error: err.message });
-  }
-});
-
-app.get('/api/products', async (req, res) => {
-  try {
-    const products = await productCollection.find().toArray();
-    const productsWithDetails = await Promise.all(products.map(async (product) => {
-      const image = await imageCollection.findOne({ ImageID: product.ImageID });
-      const stock = await database.collection('productstocks').findOne({ ProductID: product.ProductID });
-
-      return {
-        _id: product._id.toString(),
-        ProductID: product.ProductID,
-        CateID: product.CateID,
-        ProductName: product.ProductName || "",
-        ProductPrice: product.ProductPrice || 0,
-        ProductBrand: product.ProductBrand || "",
-        ProductShortDescription: product.ProductShortDescription || "",
-        ProductFullDescription: product.ProductFullDescription || "",
-        ProductSKU: product.ProductSKU || "",
-        StockQuantity: stock ? stock.StockQuantity || 0 : 0,
-        IsPromotion: product.IsPromotion || false,
-        AllowOutOfStock: product.AllowOutOfStock || false,
-        WineType: product.WineType || "",
-        WineVolume: product.WineVolume || "",
-        ComparePrice: product.ComparePrice || 0,
-        ProductImageCover: image?.ProductImageCover || "",
-        ProductImageSub1: image?.ProductImageSub1 || "",
-        ProductImageSub2: image?.ProductImageSub2 || "",
-        ProductImageSub3: image?.ProductImageSub3 || ""
-      };
-    }));
-
-    res.json(productsWithDetails);
-  } catch (err) {
-    console.error('Error fetching products:', err);
-    res.status(500).json({ message: 'Lỗi hệ thống', error: err.message });
-  }
-});
-
-app.post('/api/products', async (req, res) => {
-  try {
-    const newProduct = req.body;
-
-    const existingProduct = await productCollection.findOne({ ProductID: newProduct.ProductID });
-    if (existingProduct) {
-      return res.status(400).json({ message: "Sản phẩm với ProductID này đã tồn tại." });
-    }
-
-    const result = await productCollection.insertOne(newProduct);
-
-    if (newProduct.ProductImages && newProduct.ProductImages.length > 0) {
-      await imageCollection.insertOne({
-        ImageID: newProduct.ImageID,
-        ProductImageCover: newProduct.ProductImages[0] || "",
-        ProductImageSub1: newProduct.ProductImages[1] || "",
-        ProductImageSub2: newProduct.ProductImages[2] || "",
-        ProductImageSub3: newProduct.ProductImages[3] || ""
-      });
-    }
-
-    await database.collection('productstocks').insertOne({
-      ProductID: newProduct.ProductID,
-      StockQuantity: Number(newProduct.StockQuantity) || 0
-    });
-
-    res.status(201).json({ message: "Sản phẩm đã được thêm thành công!", productId: result.insertedId });
-  } catch (err) {
-    console.error("❌ Lỗi khi thêm sản phẩm:", err);
+    console.error("Lỗi khi lưu đánh giá:", err);
     res.status(500).json({ error: err.message });
   }
 });
 
-app.put('/api/products/:id', async (req, res) => {
+app.get('/api/reviews/:productId', async (req, res) => {
   try {
-    const productId = req.params.id;
-    const updatedData = req.body;
-
-    delete updatedData._id;
-
-    const result = await productCollection.updateOne(
-      { _id: new ObjectId(productId) },
-      { $set: {
-        ProductID: updatedData.ProductID,
-        CateID: updatedData.CateID,
-        ProductName: updatedData.ProductName,
-        ProductPrice: Number(updatedData.ProductPrice) || 0,
-        ProductBrand: updatedData.ProductBrand,
-        ProductShortDescription: updatedData.ProductShortDescription,
-        ProductFullDescription: updatedData.ProductFullDescription,
-        ProductSKU: updatedData.ProductSKU,
-        StockQuantity: Number(updatedData.StockQuantity) || 0,
-        IsPromotion: updatedData.IsPromotion,
-        AllowOutOfStock: updatedData.AllowOutOfStock,
-        WineType: updatedData.WineType,
-        WineVolume: updatedData.WineVolume,
-        ComparePrice: Number(updatedData.ComparePrice) || 0
-      }}
-    );
-
-    if (result.matchedCount === 0) {
-      return res.status(404).json({ message: "Sản phẩm không tồn tại." });
+    const productId = req.params.productId;
+    if (!productId) {
+      return res.status(400).json({ error: "Thiếu ID sản phẩm!" });
     }
 
-    if (updatedData.ProductImages && updatedData.ProductImages.length > 0) {
-      await imageCollection.updateOne(
-        { ImageID: updatedData.ImageID },
-        { $set: {
-          ProductImageCover: updatedData.ProductImages[0] || "",
-          ProductImageSub1: updatedData.ProductImages[1] || "",
-          ProductImageSub2: updatedData.ProductImages[2] || "",
-          ProductImageSub3: updatedData.ProductImages[3] || ""
-        }},
-        { upsert: true }
-      );
-    }
+    const reviews = await reviewCollection.find({ ProductID: productId })
+      .sort({ DatePosted: -1 })
+      .toArray();
 
-    await database.collection('productstocks').updateOne(
-      { ProductID: updatedData.ProductID },
-      { $set: { StockQuantity: Number(updatedData.StockQuantity) || 0 } },
-      { upsert: true }
-    );
-
-    res.json({ message: `Sản phẩm ${productId} đã được cập nhật!` });
+    res.json(reviews);
   } catch (err) {
-    console.error("❌ Lỗi khi cập nhật sản phẩm:", err);
-    res.status(500).json({ error: err.message, stack: err.stack });
+    console.error("Lỗi khi lấy đánh giá của sản phẩm:", err);
+    res.status(500).json({ error: err.message });
   }
 });
 
-// API kiểm tra kết nối server
-app.get("/", (req, res) => {
-  res.send("This Web server is processed for MongoDB");
-});
-
-// API lấy danh sách đơn hàng
-app.get("/orders", async (req, res) => {
+app.get('/api/productstocks', async (req, res) => {
   try {
-    const result = await orderCollection.find({}).toArray();
-
-    const ordersWithDetails = await Promise.all(result.map(async (order) => {
-      const customer = await customerCollection.findOne({ CustomerID: order.CustomerID });
-      const paymentStatus = await paymentStatusCollection.findOne({ PaymentStatusID: order.PaymentStatusID });
-      const paymentMethod = await paymentMethodCollection.findOne({ PaymentMethodID: order.PaymentMethodID });
-      const orderStatus = await orderStatusCollection.findOne({ OrderStatusID: order.OrderStatusID });
-
-      const orderDetails = await orderDetailCollection.find({ OrderID: order.OrderID }).toArray();
-      const productIds = orderDetails.map(detail => detail.ProductID);
-      const products = await productCollection.find({ ProductID: { $in: productIds } }).toArray();
-      const imageIds = products.map(product => product.ImageID).filter(id => id);
-      const images = await imageCollection.find({ ImageID: { $in: imageIds } }).toArray();
-      const cateIds = products.map(product => product.CateID).filter(id => id);
-      const categories = await productCategoryCollection.find({ CateID: { $in: cateIds } }).toArray();
-
-      const detailedOrderItems = orderDetails.map((detail) => {
-        const product = products.find(p => p.ProductID === detail.ProductID);
-        const image = images.find(i => i.ImageID === product?.ImageID);
-        const category = categories.find(c => c.CateID === product?.CateID);
-        const price = product && product.ProductPrice ? parseFloat(product.ProductPrice) : 0;
-        const quantity = detail.Quantity || 0;
-        return {
-          ProductID: detail.ProductID,
-          Quantity: quantity,
-          ProductName: product ? product.ProductName : "Không xác định",
-          ProductCategory: {
-            CateName: category ? category.CateName : "Không xác định",
-            CateDescription: category ? category.CateDescription : "Không có mô tả",
-          },
-          ProductImageCover: image ? image.ProductImageCover : "",
-          Price: price,
-          TotalPrice: price * quantity,
-        };
-      });
-
-      const TotalOrderAmount = detailedOrderItems.reduce((sum, item) => sum + (item.TotalPrice || 0), 0);
-
-      return {
-        _id: order._id.toString(),
-        OrderID: order.OrderID,
-        OrderDate: order.OrderDate,
-        CustomerID: order.CustomerID,
-        CustomerName: customer ? customer.CustomerName : "Không xác định",
-        CustomerAdd: customer ? customer.CustomerAdd : { address: '', city: '', state: '' },
-        CustomerPhone: customer ? customer.CustomerPhone : "",
-        OrderStatusID: order.OrderStatusID,
-        OrderStatusText: orderStatus ? orderStatus.Status : "Không xác định",
-        PaymentStatusID: order.PaymentStatusID,
-        PaymentStatusText: paymentStatus ? paymentStatus.PaymentStatus : "Không xác định",
-        PaymentMethodID: order.PaymentMethodID,
-        PaymentMethodText: paymentMethod ? paymentMethod.PaymentMethod : "Không xác định",
-        items: detailedOrderItems,
-        TotalOrderAmount: TotalOrderAmount,
-      };
-    }));
-
-    res.json(ordersWithDetails);
-  } catch (error) {
-    console.error("Lỗi khi lấy danh sách đơn hàng:", error);
-    res.status(500).json({ message: "Lỗi server khi lấy đơn hàng!", error: error.message });
-  }
-});
-
-// API lấy chi tiết đơn hàng
-app.get("/orders/:id", async (req, res) => {
-  try {
-    const orderId = req.params.id;
-
-    console.log('Order ID nhận từ request:', orderId, ' (Kiểu:', typeof orderId, ')');
-
-    let order;
-    if (ObjectId.isValid(orderId)) {
-      order = await orderCollection.findOne({ _id: new ObjectId(orderId) });
-      console.log('Kết quả tìm kiếm bằng ObjectId:', orderId, ' - Tìm thấy:', !!order);
-    }
-    if (!order) {
-      order = await orderCollection.findOne({ OrderID: orderId }); // Thêm tìm kiếm bằng OrderID
-      console.log('Kết quả tìm kiếm bằng OrderID:', orderId, ' - Tìm thấy:', !!order);
-    }
-
-    if (!order) {
-      console.log(`Không tìm thấy đơn hàng với ID: ${orderId}`);
-      return res.status(404).json({ message: `Đơn hàng với ID ${orderId} không tồn tại` });
-    }
-
-    const customer = await customerCollection.findOne({ CustomerID: order.CustomerID });
-    console.log('Thông tin khách hàng cho CustomerID:', order.CustomerID, 'Dữ liệu:', customer);
-
-    const paymentStatus = await paymentStatusCollection.findOne({ PaymentStatusID: order.PaymentStatusID });
-    const paymentMethod = await paymentMethodCollection.findOne({ PaymentMethodID: order.PaymentMethodID });
-    const orderStatus = await orderStatusCollection.findOne({ OrderStatusID: order.OrderStatusID });
-
-    const orderDetails = await orderDetailCollection.find({ OrderID: order.OrderID }).toArray();
-    console.log('Dữ liệu orderDetails:', orderDetails);
-
-    if (orderDetails.length === 0) {
-      console.log("Không tìm thấy chi tiết đơn hàng cho OrderID:", order.OrderID);
-      return res.json({
-        ...order,
-        _id: order._id.toString(),
-        CustomerName: customer ? customer.CustomerName : "Không xác định",
-        CustomerAdd: customer && customer.CustomerAdd ? customer.CustomerAdd : { address: '', city: '', state: '' },
-        CustomerPhone: customer ? customer.CustomerPhone : "",
-        OrderStatusText: orderStatus ? orderStatus.Status : "Không xác định",
-        PaymentStatusText: paymentStatus ? paymentStatus.PaymentStatus : "Không xác định",
-        PaymentMethodText: paymentMethod ? paymentMethod.PaymentMethod : "Không xác định",
-        items: [],
-        TotalOrderAmount: 0,
-        VoucherID: order.VoucherID || null,
-        VoucherDetails: null,
-        VoucherDiscount: 0
-      });
-    }
-
-    // Lấy thông tin voucher nếu có VoucherID
-    let voucherDetails = null;
-    let voucherDiscount = 0;
-    if (order.VoucherID) {
-      voucherDetails = await voucherCollection.findOne({ VoucherID: order.VoucherID });
-      if (voucherDetails) {
-        console.log('Thông tin voucher tìm thấy:', voucherDetails);
-        if (new Date(voucherDetails.VoucherExpiredDate) > new Date() && voucherDetails.VoucherQuantity > 0) {
-          const subtotal = await orderDetails.reduce(async (sumPromise, detail) => {
-              const sum = await sumPromise;
-              const product = await productCollection.findOne({ ProductID: detail.ProductID });
-              const price = product && product.ProductPrice ? parseFloat(product.ProductPrice) : 0;
-              return sum + (price * (detail.Quantity || 0));
-          }, Promise.resolve(0));
-          voucherDiscount = (subtotal * voucherDetails.VoucherValue) / 100 || 0;
-          console.log('Voucher áp dụng thành công, Discount:', voucherDiscount);
-        } else {
-          console.log('Voucher không hợp lệ (hết hạn hoặc hết số lượng)');
+    const stocks = await database.collection('productstocks').aggregate([
+      {
+        $lookup: {
+          from: "products",
+          localField: "ProductID",
+          foreignField: "ProductID",
+          as: "productInfo"
         }
-      } else {
-        console.log(`Không tìm thấy voucher với ID: ${order.VoucherID}`);
+      },
+      { $unwind: "$productInfo" },
+      {
+        $project: {
+          _id: 1,
+          ProductID: 1,
+          StockQuantity: 1,
+          ProductName: "$productInfo.ProductName",
+          ProductSKU: "$productInfo.ProductSKU"
+        }
       }
-    }
+    ]).toArray();
 
-    const productIds = orderDetails.map(detail => detail.ProductID);
-    const products = await productCollection.find({ ProductID: { $in: productIds } }).toArray();
-    const imageIds = products.map(product => product.ImageID).filter(id => id);
-    const images = await imageCollection.find({ ImageID: { $in: imageIds } }).toArray();
-    const cateIds = products.map(product => product.CateID).filter(id => id);
-    const categories = await productCategoryCollection.find({ CateID: { $in: cateIds } }).toArray();
-
-    const detailedOrderItems = orderDetails.map((detail) => {
-      const product = products.find(p => p.ProductID === detail.ProductID);
-      const image = images.find(i => i.ImageID === product?.ImageID);
-      const category = categories.find(c => c.CateID === product?.CateID);
-      const price = product && product.ProductPrice ? parseFloat(product.ProductPrice) : 0;
-      const quantity = detail.Quantity || 0;
-      return {
-        ProductID: detail.ProductID,
-        Quantity: quantity,
-        ProductName: product ? product.ProductName : "Không xác định",
-        ProductCategory: {
-          CateName: category ? category.CateName : "Không xác định",
-          CateDescription: category ? category.CateDescription : "Không có mô tả",
-        },
-        ProductImageCover: image ? image.ProductImageCover : "",
-        Price: price,
-        TotalPrice: price * quantity,
-      };
-    });
-
-    const TotalOrderAmount = detailedOrderItems.reduce((sum, item) => sum + (item.TotalPrice || 0), 0) - voucherDiscount;
-
-    const orderWithDetails = {
-      _id: order._id.toString(),
-      OrderID: order.OrderID,
-      OrderDate: order.OrderDate,
-      CustomerID: order.CustomerID,
-      CustomerName: customer ? customer.CustomerName : "Không xác định",
-      CustomerAdd: customer && customer.CustomerAdd ? customer.CustomerAdd : { address: '', city: '', state: '' },
-      CustomerPhone: customer ? customer.CustomerPhone : "",
-      OrderStatusID: order.OrderStatusID,
-      OrderStatusText: orderStatus ? orderStatus.Status : "Không xác định",
-      PaymentStatusID: order.PaymentStatusID,
-      PaymentStatusText: paymentStatus ? paymentStatus.PaymentStatus : "Không xác định",
-      PaymentMethodID: order.PaymentMethodID,
-      PaymentMethodText: paymentMethod ? paymentMethod.PaymentMethod : "Không xác định",
-      VoucherID: order.VoucherID || null,
-      VoucherDetails: voucherDetails ? {
-        VoucherID: voucherDetails.VoucherID,
-        VoucherValue: voucherDetails.VoucherValue,
-        VoucherExpiredDate: voucherDetails.VoucherExpiredDate,
-        VoucherQuantity: voucherDetails.VoucherQuantity
-      } : null,
-      VoucherDiscount: voucherDiscount,
-      items: detailedOrderItems,
-      TotalOrderAmount: TotalOrderAmount
-    };
-
-    res.json(orderWithDetails);
-  } catch (error) {
-    console.error("Lỗi chi tiết khi lấy thông tin đơn hàng:", error);
-    res.status(500).json({ message: "Lỗi server khi lấy thông tin đơn hàng", error: error.message });
+    res.json(stocks);
+  } catch (err) {
+    console.error("Lỗi khi lấy dữ liệu tồn kho:", err);
+    res.status(500).json({ error: 'Lỗi server!' });
   }
 });
 
-// API cập nhật đơn hàng
-app.put('/orders/:id', async (req, res) => {
+app.post('/api/send-email', async (req, res) => {
   try {
-    const orderId = req.params.id;
-    const updatedData = req.body;
-
-    console.log('Cập nhật đơn hàng với ID:', orderId, 'Data:', updatedData);
-
-    // Kiểm tra dữ liệu đầu vào
-    if (!updatedData || Object.keys(updatedData).length === 0) {
-      return res.status(400).json({ message: 'Dữ liệu cập nhật không được để trống' });
-    }
-
-    // Kiểm tra PaymentStatusID nếu có
-    if (updatedData.PaymentStatusID !== undefined) {
-      const paymentStatusExists = await paymentStatusCollection.findOne({ PaymentStatusID: updatedData.PaymentStatusID });
-      if (!paymentStatusExists) {
-        return res.status(400).json({ message: `PaymentStatusID ${updatedData.PaymentStatusID} không hợp lệ. Chỉ chấp nhận 0 hoặc 1.` });
-      }
-    }
-
-    let result;
-    if (ObjectId.isValid(orderId)) {
-      const objectId = new ObjectId(orderId);
-      result = await orderCollection.findOneAndUpdate(
-        { _id: objectId },
-        { $set: updatedData },
-        { returnDocument: 'after' }
-      );
-    } else {
-      // Nếu orderId không phải ObjectId hợp lệ, thử tìm bằng chuỗi thô
-      result = await orderCollection.findOneAndUpdate(
-        { _id: orderId },
-        { $set: updatedData },
-        { returnDocument: 'after' }
-      );
-    }
-
-    if (!result || !result.value) {
-      console.log(`Không tìm thấy đơn hàng để cập nhật với ID: ${orderId}`);
-      return res.status(404).json({ message: `Đơn hàng với ID ${orderId} không tồn tại` });
-    }
-
-    const updatedOrder = result.value;
-    const customer = await customerCollection.findOne({ CustomerID: updatedOrder.CustomerID });
-    const paymentStatus = await paymentStatusCollection.findOne({ PaymentStatusID: updatedOrder.PaymentStatusID });
-    const paymentMethod = await paymentMethodCollection.findOne({ PaymentMethodID: updatedOrder.PaymentMethodID });
-    const orderStatus = await orderStatusCollection.findOne({ OrderStatusID: updatedOrder.OrderStatusID });
-
-    const orderDetails = await orderDetailCollection.find({ OrderID: updatedOrder.OrderID }).toArray();
-    const productIds = orderDetails.map(detail => detail.ProductID);
-    const products = await productCollection.find({ ProductID: { $in: productIds } }).toArray();
-    const imageIds = products.map(product => product.ImageID).filter(id => id);
-    const images = await imageCollection.find({ ImageID: { $in: imageIds } }).toArray();
-    const cateIds = products.map(product => product.CateID).filter(id => id);
-    const categories = await productCategoryCollection.find({ CateID: { $in: cateIds } }).toArray();
-
-    const detailedOrderItems = orderDetails.map((detail) => {
-      const product = products.find(p => p.ProductID === detail.ProductID);
-      const image = images.find(i => i.ImageID === product?.ImageID);
-      const category = categories.find(c => c.CateID === product?.CateID);
-      const price = product && product.ProductPrice ? parseFloat(product.ProductPrice) : 0;
-      const quantity = detail.Quantity || 0;
-      return {
-        ProductID: detail.ProductID,
-        Quantity: quantity,
-        ProductName: product ? product.ProductName : "Không xác định",
-        ProductCategory: {
-          CateName: category ? category.CateName : "Không xác định",
-          CateDescription: category ? category.CateDescription : "Không có mô tả",
-        },
-        ProductImageCover: image ? image.ProductImageCover : "",
-        Price: price,
-        TotalPrice: price * quantity,
-      };
-    });
-
-    const TotalOrderAmount = detailedOrderItems.reduce((sum, item) => sum + (item.TotalPrice || 0), 0);
-
-    const orderWithDetails = {
-      _id: updatedOrder._id.toString(),
-      OrderID: updatedOrder.OrderID,
-      OrderDate: updatedOrder.OrderDate,
-      CustomerID: updatedOrder.CustomerID,
-      CustomerName: customer ? customer.CustomerName : "Không xác định",
-      CustomerAdd: customer ? customer.CustomerAdd : { address: '', city: '', state: '' },
-      CustomerPhone: customer ? customer.CustomerPhone : "",
-      OrderStatusID: updatedOrder.OrderStatusID,
-      OrderStatusText: updatedData.OrderStatusText || (orderStatus ? orderStatus.Status : "Không xác định"),
-      PaymentStatusID: updatedOrder.PaymentStatusID,
-      PaymentStatusText: updatedData.PaymentStatusText || (paymentStatus ? paymentStatus.PaymentStatus : "Không xác định"),
-      PaymentMethodID: updatedOrder.PaymentMethodID,
-      PaymentMethodText: paymentMethod ? paymentMethod.PaymentMethod : "Không xác định",
-      items: detailedOrderItems,
-      TotalOrderAmount: TotalOrderAmount,
-    };
-
-    res.json(orderWithDetails);
-  } catch (error) {
-    console.error('Lỗi khi cập nhật đơn hàng:', error);
-    res.status(500).json({ message: 'Lỗi server khi cập nhật đơn hàng', error: error.message });
-  }
-});
-
-// API xóa đơn hàng
-app.delete('/orders/:id', async (req, res) => {
-  try {
-    const orderId = req.params.id;
-
-    console.log('Xóa đơn hàng với ID:', orderId);
-
-    let result;
-    if (ObjectId.isValid(orderId)) {
-      const objectId = new ObjectId(orderId);
-      result = await orderCollection.findOneAndDelete({ _id: objectId });
-    } else {
-      result = await orderCollection.findOneAndDelete({ _id: orderId });
-    }
-
-    if (!result.value) {
-      console.log(`Không tìm thấy đơn hàng với ID: ${orderId}`);
-      return res.status(404).json({ message: `Đơn hàng với ID ${orderId} không tồn tại` });
-    }
-
-    res.status(200).json({ message: `Xóa đơn hàng ${orderId} thành công` });
-  } catch (error) {
-    console.error('Lỗi khi xóa đơn hàng:', error);
-    res.status(500).json({ message: 'Lỗi server khi xóa đơn hàng', error: error.message });
-  }
-});
-
-// Customer
-app.get("/customers", async (req, res) => {
-  try {
-    const customers = await customerCollection.find().toArray();
-    res.json(customers);
-  } catch (error) {
-    res.status(500).json({ message: "Lỗi khi lấy danh sách khách hàng", error: error.message });
-  }
-});
-
-app.get("/customers/:id", async (req, res) => {
-  try {
-    const customerId = req.params.id;
-    const customer = await customerCollection.findOne({ CustomerID: customerId });
-
-    if (!customer) {
-      return res.status(404).json({ message: `Không tìm thấy khách hàng với ID: ${customerId}` });
-    }
-
-    res.json(customer);
-  } catch (error) {
-    res.status(500).json({ message: "Lỗi khi lấy thông tin khách hàng", error: error.message });
-  }
-});
-
-app.put('/orders/:id', async (req, res) => {
-  try {
-    const orderId = req.params.id;
-    const updatedData = req.body;
-
-    console.log('Cập nhật đơn hàng với ID:', orderId, 'Data:', updatedData);
-
-    if (updatedData.VoucherID) {
-      const voucher = await voucherCollection.findOne({ VoucherID: updatedData.VoucherID });
-      if (voucher && new Date(voucher.VoucherExpiredDate) > new Date() && voucher.VoucherQuantity > 0) {
-        const subtotal = (updatedData.items || []).reduce((sum, item) => sum + (item.TotalPrice || 0), 0);
-        updatedData.VoucherDiscount = (subtotal * voucher.VoucherValue) / 100 || 0;
-      } else {
-        updatedData.VoucherDiscount = 0;
-      }
-    }
-
-    if (!updatedData || Object.keys(updatedData).length === 0) {
-      return res.status(400).json({ message: 'Dữ liệu cập nhật không được để trống' });
-    }
-
-    if (updatedData.PaymentStatusID !== undefined) {
-      const paymentStatusExists = await paymentStatusCollection.findOne({ PaymentStatusID: updatedData.PaymentStatusID });
-      if (!paymentStatusExists) {
-        return res.status(400).json({ message: `PaymentStatusID ${updatedData.PaymentStatusID} không hợp lệ. Chỉ chấp nhận 0 hoặc 1.` });
-      }
-    }
-
-    let result;
-    if (ObjectId.isValid(orderId)) {
-      result = await orderCollection.findOneAndUpdate(
-        { _id: new ObjectId(orderId) },
-        { $set: updatedData },
-        { returnDocument: 'after' }
-      );
-    } else {
-      result = await orderCollection.findOneAndUpdate(
-        { OrderID: orderId }, // Thêm tìm kiếm bằng OrderID
-        { $set: updatedData },
-        { returnDocument: 'after' }
-      );
-    }
-
-    if (!result || !result.value) {
-      console.log(`Không tìm thấy đơn hàng để cập nhật với ID: ${orderId}`);
-      return res.status(404).json({ message: `Đơn hàng với ID ${orderId} không tồn tại` });
-    }
-
-    // ... (phần còn lại giữ nguyên)
-  } catch (error) {
-    console.error('Lỗi khi cập nhật đơn hàng:', error);
-    res.status(500).json({ message: 'Lỗi server khi cập nhật đơn hàng', error: error.message });
+    await mail.sendNotificationEmail(req.body)
+    return res.status(200).json({ message: 'Tin nhắn của bạn đã được gửi đi.' });
+  } catch (err) {
+    console.error("❌ Lỗi khi gửi tin nhắn liên hệ:", err);
+    res.status(500).json({ error: err.message });
   }
 });
 
 
-// Trạng thái order
-app.get("/order-status", async (req, res) => {
-  try {
-    const orderStatuses = await orderStatusCollection.find().toArray();
-    res.json(orderStatuses);
-  } catch (error) {
-    res.status(500).json({ message: "Lỗi khi lấy trạng thái đơn hàng", error: error.message });
-  }
-});
 
-// Phương thức thanh toán
-app.get("/payment-methods", async (req, res) => {
-  try {
-    const paymentMethods = await paymentMethodCollection.find().toArray();
-    res.json(paymentMethods);
-  } catch (error) {
-    res.status(500).json({ message: "Lỗi khi lấy phương thức thanh toán", error: error.message });
-  }
-});
+// Khởi động server sau khi kết nối MongoDB
+async function startServer() {
+  await connectDB();
+  server.listen(port, () => {
+    logger.info(`Server running on port ${port}`, { correlationId: 'system' });
+  });
+}
 
-// Trạng thái thanh toán
-app.get("/payment-status", async (req, res) => {
-  try {
-    const paymentStatuses = await paymentStatusCollection.find().toArray();
-    res.json(paymentStatuses);
-  } catch (error) {
-    res.status(500).json({ message: "Lỗi khi lấy trạng thái thanh toán", error: error.message });
-  }
-});
-
-// Sản phẩm (trùng với file gốc nên comment lại, giữ nguyên API từ file gốc)
-// app.get("/products", async (req, res) => {
-//   try {
-//     const products = await productCollection.find().toArray();
-//     res.json(products);
-//   } catch (error) {
-//     res.status(500).json({ message: "Lỗi khi lấy danh sách sản phẩm", error: error.message });
-//   }
-// });
-
-// Xóa đơn hàng
-// app.delete("/orders/:id", async (req, res) => {
-//   try {
-//     const orderId = req.params.id;
-//     const result = await orderCollection.deleteOne({ _id: new ObjectId(orderId) });
-//     if (result.deletedCount === 0) {
-//       return res.status(404).json({ message: "Không tìm thấy đơn hàng để xóa" });
-//     }
-//     res.json({ message: "Đơn hàng đã được xóa thành công!" });
-//   } catch (error) {
-//     console.error("Lỗi khi xóa đơn hàng:", error);
-//     res.status(500).json({ message: "Lỗi server khi xóa đơn hàng" });
-//   }
-// });
-
-// // API tạo đơn hàng mới
-// app.post("/orders", async (req, res) => {
-//   try {
-//     const newOrder = req.body;
-//     console.log('Dữ liệu nhận từ frontend:', newOrder);
-//     if (!newOrder || !newOrder.CustomerID || !newOrder.OrderID) {
-//       console.log('Dữ liệu không hợp lệ:', { CustomerID: newOrder.CustomerID, OrderID: newOrder.OrderID });
-//       return res.status(400).json({ message: "Dữ liệu đơn hàng không hợp lệ" });
-//     }
-//     newOrder.createdAt = new Date();
-//     const result = await orderCollection.insertOne(newOrder);
-//     if (result.acknowledged) {
-//       res.status(201).json({ message: "Đơn hàng đã được tạo thành công!", OrderID: result.insertedId });
-//     } else {
-//       res.status(500).json({ message: "Không thể tạo đơn hàng" });
-//     }
-//   } catch (error) {
-//     console.error("Lỗi khi tạo đơn hàng:", error);
-//     res.status(500).json({ message: "Lỗi server khi tạo đơn hàng", error: error.message });
-//   }
-// });
-
-// // Cập nhật đơn hàng
-// app.put("/orders/:id", async (req, res) => {
-//   try {
-//     const orderId = req.params.id;
-//     const updatedOrder = req.body;
-//     const result = await orderCollection.updateOne(
-//       { _id: new ObjectId(orderId) },
-//       { $set: updatedOrder }
-//     );
-//     if (result.matchedCount === 0) {
-//       return res.status(404).json({ message: "Không tìm thấy đơn hàng để cập nhật" });
-//     }
-//     res.json({ message: "Cập nhật đơn hàng thành công!" });
-//   } catch (error) {
-//     console.error("Lỗi khi cập nhật đơn hàng:", error);
-//     res.status(500).json({ message: "Lỗi server khi cập nhật đơn hàng" });
-//   }
-// });
-
-// API lấy danh sách voucher
-// app.get("/vouchers", async (req, res) => {
-//   try {
-//     const vouchers = await voucherCollection.find().toArray();
-//     console.log('Danh sách voucher:', vouchers);
-//     res.json(vouchers);
-//   } catch (error) {
-//     res.status(500).json({ message: "Lỗi khi lấy danh sách voucher", error: error.message });
-//   }
-// });
-
-// API lấy danh sách điều kiện voucher
-app.get("/voucher-conditions", async (req, res) => {
-  try {
-    const conditions = await voucherConditionCollection.find().toArray();
-    res.json(conditions);
-  } catch (error) {
-    console.error("Lỗi khi lấy danh sách điều kiện voucher:", error);
-    res.status(500).json({ message: "Lỗi server khi lấy điều kiện voucher", error: error.message });
-  }
-});
-
-// API gộp dữ liệu
-app.get("/combined-data", cors(), async (req, res) => {
-  try {
-    const orders = await orderCollection.find({}).toArray();
-    const orderStatuses = await orderStatusCollection.find({}).toArray();
-    const paymentMethods = await paymentMethodCollection.find({}).toArray();
-    const paymentStatuses = await paymentStatusCollection.find({}).toArray();
-    const customers = await customerCollection.find({}).toArray();
-
-    console.log('Dữ liệu paymentMethods:', paymentMethods);
-    console.log('Dữ liệu paymentStatuses:', paymentStatuses);
-
-    const combinedOrders = orders.map(order => {
-      const orderStatus = orderStatuses.find(status => status.OrderStatusID === order.OrderStatusID);
-      const orderStatusText = orderStatus ? orderStatus.Status : "Không xác định";
-
-      const paymentMethod = paymentMethods.find(method => method.PaymentMethodID === order.PaymentMethodID);
-      const paymentMethodText = paymentMethod ? paymentMethod.PaymentMethod : "Không xác định";
-
-      const paymentStatus = paymentStatuses.find(status => status.PaymentStatusID === order.PaymentStatusID);
-      const paymentStatusText = paymentStatus ? paymentStatus.PaymentStatus : "Không xác định";
-
-      const customer = customers.find(cust => cust.CustomerID === order.CustomerID);
-      const customerName = customer ? customer.CustomerName : "Không xác định";
-
-      console.log(`Đơn hàng ${order.OrderID}:`, {
-        PaymentMethodID: order.PaymentMethodID,
-        PaymentMethodText: paymentMethodText,
-        PaymentStatusID: order.PaymentStatusID,
-        PaymentStatusText: paymentStatusText
-      });
-
-      return {
-        ...order,
-        OrderStatusText: orderStatusText,
-        PaymentMethodText: paymentMethodText,
-        PaymentStatusText: paymentStatusText,
-        CustomerName: customerName,
-      };
-    });
-
-    combinedOrders.sort((a, b) => new Date(b.OrderDate) - new Date(a.OrderDate));
-
-    const combinedData = {
-      orders: combinedOrders,
-      orderStatuses,
-      paymentMethods,
-      paymentStatuses,
-      customers,
-      total: { orders: combinedOrders.length },
-    };
-
-    res.status(200).json(combinedData);
-  } catch (error) {
-    console.error("❌ Lỗi khi xử lý /combined-data:", error);
-    res.status(500).json({ error: "Internal server error", details: error.message });
-  }
-});
-
-// ===================== SERVER START =====================
-
-app.listen(port, () => {
-  logger.info(`Server running on port ${port}`, { correlationId: 'system' });
+startServer().catch(err => {
+  logger.error('Failed to start server', { error: err.message, correlationId: 'system' });
+  process.exit(1);
 });
 
 process.on('SIGTERM', async () => {
@@ -2014,373 +2033,3 @@ process.on('SIGTERM', async () => {
   process.exit(0);
 });
 
-//==============================PROMOTIONS AND VOUCHERS===================================
-// GET /promotions (Lấy tất cả promotions)
-app.get("/promotions", cors(), async (req, res) => {
-  try {
-    const promotions = await promotionsCollection.find({}).toArray();
-    
-    // Thêm ScopeName cho từng promotion, tương tự như trong /combined-data-promotions
-    const promotionsWithScope = await Promise.all(promotions.map(async (promotion) => {
-      const scopeId = promotion.ScopeID !== undefined ? Number(promotion.ScopeID) : 0; // Chuẩn hóa ScopeID
-      console.log(`Debug: PromotionID=${promotion.PromotionID}, Raw ScopeID=${promotion.ScopeID}, Converted ScopeID=${scopeId}`); // Log chi tiết
-      const scope = await promotionScopeCollection.findOne({ ScopeID: scopeId }); // Sử dụng ScopeID
-      console.log(`Debug: Promotion Scope found for ScopeID ${scopeId}:`, scope); // Log kết quả truy vấn
-      const scopeName = scope && scope.SCOPE ? scope.SCOPE : 'Toàn ngành hàng'; // Sử dụng SCOPE (in hoa) để khớp với dữ liệu thực tế
-      console.log(`Debug: PromotionID=${promotion.PromotionID}, ScopeName=${scopeName}`); // Log ScopeName
-      return { ...promotion, ScopeName: scopeName, type: 'promotion' };
-    }));
-
-    res.status(200).json(promotionsWithScope);
-  } catch (error) {
-    console.error("❌ Lỗi khi lấy danh sách promotions:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// GET /promotions/:id
-app.get("/promotions/:id", cors(), async (req, res) => {
-  try {
-    if (!ObjectId.isValid(req.params["id"])) {
-      return res.status(400).json({ message: "Invalid promotion ID" });
-    }
-
-    const o_id = new ObjectId(req.params["id"]);
-    const promotion = await promotionsCollection.findOne({ _id: o_id });
-
-    if (promotion) {
-      const scopeId = promotion.ScopeID !== undefined ? Number(promotion.ScopeID) : 0; // Chuẩn hóa ScopeID
-      console.log(`Debug: PromotionID=${promotion.PromotionID}, Raw ScopeID=${promotion.ScopeID}, Converted ScopeID=${scopeId}`); // Log chi tiết
-      const scope = await promotionScopeCollection.findOne({ ScopeID: scopeId }); // Sử dụng ScopeID
-      console.log(`Debug: Promotion Scope found for ScopeID ${scopeId}:`, scope); // Log kết quả truy vấn
-      const scopeName = scope && scope.SCOPE ? scope.SCOPE : 'Toàn ngành hàng'; // Sử dụng SCOPE (in hoa) để khớp với dữ liệu thực tế
-      console.log(`Debug: PromotionID=${promotion.PromotionID}, ScopeName=${scopeName}`); // Log ScopeName
-      res.status(200).json({ ...promotion, ScopeName: scopeName, type: 'promotion' });
-    } else {
-      res.status(404).json({ message: "Promotion not found" });
-    }
-  } catch (error) {
-    console.error("❌ Lỗi khi lấy promotion:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// GET /vouchers (Lấy tất cả vouchers)
-app.get("/vouchers", cors(), async (req, res) => {
-  try {
-    const vouchers = await voucherCollection.find({}).toArray();
-
-    if (!vouchers || vouchers.length === 0) {
-      console.log("Debug: Không tìm thấy voucher nào.");
-      return res.status(200).json([]);
-    }
-
-    // Thêm UsedCount, RemainingQuantity và ScopeName cho từng voucher
-    const vouchersWithDetails = await Promise.all(vouchers.map(async (voucher) => {
-      const usedCount = await orderCollection.countDocuments({ VoucherID: voucher.VoucherID || '' });
-      const scopeId = voucher.ScopeID !== undefined ? Number(voucher.ScopeID) : 0; // Chuẩn hóa ScopeID
-      console.log(`Debug: VoucherID=${voucher.VoucherID}, Raw ScopeID=${voucher.ScopeID}, Converted ScopeID=${scopeId}`); // Log chi tiết
-      const scope = await promotionScopeCollection.findOne({ ScopeID: scopeId }); // Sử dụng ScopeID
-      console.log(`Debug: Voucher Scope found for ScopeID ${scopeId}:`, scope); // Log kết quả truy vấn
-      const scopeName = scope && scope.SCOPE ? scope.SCOPE : 'Toàn ngành hàng'; // Sử dụng SCOPE (in hoa) để khớp với dữ liệu thực tế
-      console.log(`Debug: VoucherID=${voucher.VoucherID}, ScopeName=${scopeName}`); // Log ScopeName
-      return {
-        ...voucher,
-        UsedCount: usedCount,
-        RemainingQuantity: voucher.VoucherQuantity - usedCount,
-        ScopeName: scopeName,
-        type: 'voucher'
-      };
-    }));
-
-    console.log("Debug: Final vouchersWithDetails:", vouchersWithDetails);
-    res.status(200).json(vouchersWithDetails);
-  } catch (error) {
-    console.error("❌ Lỗi khi lấy danh sách vouchers:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// GET /vouchers/:id
-app.get("/vouchers/:id", cors(), async (req, res) => {
-  try {
-    if (!ObjectId.isValid(req.params["id"])) {
-      return res.status(400).json({ message: "Invalid voucher ID" });
-    }
-
-    const o_id = new ObjectId(req.params["id"]);
-    const voucher = await voucherCollection.findOne({ _id: o_id });
-
-    if (voucher) {
-      const usedCount = await orderCollection.countDocuments({ VoucherID: voucher.VoucherID || '' });
-      const scopeId = voucher.ScopeID !== undefined ? Number(voucher.ScopeID) : 0; // Chuẩn hóa ScopeID
-      console.log(`Debug: VoucherID=${voucher.VoucherID}, Raw ScopeID=${voucher.ScopeID}, Converted ScopeID=${scopeId}`); // Log chi tiết
-      const scope = await promotionScopeCollection.findOne({ ScopeID: scopeId }); // Sử dụng ScopeID
-      console.log(`Debug: Voucher Scope found for ScopeID ${scopeId}:`, scope); // Log kết quả truy vấn
-      const scopeName = scope && scope.SCOPE ? scope.SCOPE : 'Toàn ngành hàng'; // Sử dụng SCOPE (in hoa) để khớp với dữ liệu thực tế
-      console.log(`Debug: VoucherID=${voucher.VoucherID}, ScopeName=${scopeName}`); // Log ScopeName
-      res.status(200).json({
-        ...voucher,
-        UsedCount: usedCount,
-        RemainingQuantity: voucher.VoucherQuantity - usedCount,
-        ScopeName: scopeName,
-        type: 'voucher'
-      });
-    } else {
-      res.status(404).json({ message: "Voucher not found" });
-    }
-  } catch (error) {
-    console.error("❌ Lỗi khi lấy voucher:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// GET /combined-data-promotions
-app.get("/combined-data-promotions", cors(), async (req, res) => {
-  try {
-    const promotions = await promotionsCollection.find({}).toArray();
-    const vouchers = await voucherCollection.find({}).toArray();
-    const promotionStatuses = await promotionStatusesCollection.find({}).toArray();
-    const voucherStatuses = await voucherConditionCollection.find({}).toArray();
-    const promotionScopes = await promotionScopeCollection.find({}).toArray();
-
-    // Thêm UsedCount và ScopeName cho vouchers
-    const vouchersWithUsage = await Promise.all(vouchers.map(async (voucher) => {
-      const usedCount = await orderCollection.countDocuments({ VoucherID: voucher.VoucherID || '' });
-      const scopeId = voucher.ScopeID !== undefined ? Number(voucher.ScopeID) : 0; // Chuẩn hóa ScopeID
-      console.log(`Debug: VoucherID=${voucher.VoucherID}, ScopeID=${scopeId}`); // Debug ScopeID
-      const scope = await promotionScopeCollection.findOne({ ScopeID: scopeId }); // Sửa thành ScopeID để khớp với dữ liệu
-      console.log(`Debug: Voucher Scope found for ScopeID ${scopeId}:`, scope); // Debug kết quả truy vấn
-      const scopeName = scope && scope.Scope ? scope.Scope : 'Toàn ngành hàng'; // Sửa thành Scope để khớp với dữ liệu
-      return {
-        ...voucher,
-        UsedCount: usedCount,
-        RemainingQuantity: voucher.VoucherQuantity - usedCount,
-        ScopeName: scopeName,
-        type: 'voucher'
-      };
-    }));
-
-    // Thêm ScopeName cho promotions
-    const promotionsWithScope = await Promise.all(promotions.map(async (promotion) => {
-      const scopeId = promotion.ScopeID !== undefined ? Number(promotion.ScopeID) : 0; // Chuẩn hóa ScopeID
-      console.log(`Debug: PromotionID=${promotion.PromotionID}, ScopeID=${scopeId}`); // Debug ScopeID
-      const scope = await promotionScopeCollection.findOne({ ScopeID: scopeId }); // Sửa thành ScopeID để khớp với dữ liệu
-      console.log(`Debug: Promotion Scope found for ScopeID ${scopeId}:`, scope); // Debug kết quả truy vấn
-      const scopeName = scope && scope.Scope ? scope.Scope : 'Toàn ngành hàng'; // Sửa thành Scope để khớp với dữ liệu
-      return {
-        ...promotion,
-        ScopeName: scopeName,
-        type: 'promotion'
-      };
-    }));
-
-    const combinedItems = [...promotionsWithScope, ...vouchersWithUsage].sort((a, b) => {
-      const dateA = new Date(a.type === 'promotion' ? a.PromotionStartDate : a.VoucherStartDate).getTime();
-      const dateB = new Date(b.type === 'promotion' ? b.PromotionStartDate : b.VoucherStartDate).getTime();
-      if (dateA !== dateB) {
-        return dateB - dateA;
-      }
-      return a.type === 'promotion' && b.type === 'voucher' ? -1 : 1;
-    });
-
-    const combinedData = {
-      promotions: combinedItems.filter(item => item.type === 'promotion'),
-      vouchers: combinedItems.filter(item => item.type === 'voucher'),
-      promotionStatuses: promotionStatuses,
-      voucherStatuses: voucherStatuses,
-      promotionScopes: promotionScopes,
-      total: {
-        promotions: combinedItems.filter(item => item.type === 'promotion').length,
-        vouchers: combinedItems.filter(item => item.type === 'voucher').length
-      }
-    };
-
-    res.status(200).json(combinedData);
-  } catch (error) {
-    console.error("❌ Lỗi khi xử lý /combined-data-promotions:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// DELETE /promotions/:id
-app.delete("/promotions/:id", cors(), async (req, res) => {
-  try {
-    if (!ObjectId.isValid(req.params["id"])) {
-      return res.status(400).json({ message: "Invalid promotion ID" });
-    }
-
-    const o_id = new ObjectId(req.params["id"]);
-    const result = await promotionsCollection.deleteOne({ _id: o_id });
-    if (result.deletedCount === 1) {
-      res.status(200).json({ message: "Promotion deleted successfully" });
-    } else {
-      res.status(404).json({ message: "Promotion not found" });
-    }
-  } catch (error) {
-    console.error("❌ Lỗi khi xóa promotion:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// DELETE /vouchers/:id
-app.delete("/vouchers/:id", cors(), async (req, res) => {
-  try {
-    if (!ObjectId.isValid(req.params["id"])) {
-      return res.status(400).json({ message: "Invalid voucher ID" });
-    }
-
-    const o_id = new ObjectId(req.params["id"]);
-    const result = await voucherCollection.deleteOne({ _id: o_id });
-    if (result.deletedCount === 1) {
-      res.status(200).json({ message: "Voucher deleted successfully" });
-    } else {
-      res.status(404).json({ message: "Voucher not found" });
-    }
-  } catch (error) {
-    console.error("❌ Lỗi khi xóa voucher:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// PUT /promotions/:id/end
-app.put("/promotions/:id/end", cors(), async (req, res) => {
-  try {
-    if (!ObjectId.isValid(req.params["id"])) {
-      return res.status(400).json({ message: "Invalid promotion ID" });
-    }
-
-    const o_id = new ObjectId(req.params["id"]);
-    const today = new Date().toISOString();
-    const result = await promotionsCollection.updateOne(
-      { _id: o_id },
-      { $set: { PromotionExpiredDate: today } }
-    );
-    if (result.matchedCount === 1) {
-      res.status(200).json({ message: "Promotion ended successfully" });
-    } else {
-      res.status(404).json({ message: "Promotion not found" });
-    }
-  } catch (error) {
-    console.error("❌ Lỗi khi kết thúc promotion:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// PUT /vouchers/:id/end
-app.put("/vouchers/:id/end", cors(), async (req, res) => {
-  try {
-    if (!ObjectId.isValid(req.params["id"])) {
-      return res.status(400).json({ message: "Invalid voucher ID" });
-    }
-
-    const o_id = new ObjectId(req.params["id"]);
-    const today = new Date().toISOString();
-    const result = await voucherCollection.updateOne(
-      { _id: o_id },
-      { $set: { VoucherExpiredDate: today } }
-    );
-    if (result.matchedCount === 1) {
-      res.status(200).json({ message: "Voucher ended successfully" });
-    } else {
-      res.status(404).json({ message: "Voucher not found" });
-    }
-  } catch (error) {
-    console.error("❌ Lỗi khi kết thúc voucher:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// PUT /promotions/:id
-app.put("/promotions/:id", cors(), async (req, res) => {
-  try {
-    if (!ObjectId.isValid(req.params["id"])) {
-      return res.status(400).json({ message: "Invalid promotion ID" });
-    }
-
-    const o_id = new ObjectId(req.params["id"]);
-    const updateData = req.body;
-    const result = await promotionsCollection.updateOne(
-      { _id: o_id },
-      { $set: {
-        PromotionID: updateData.PromotionID,
-        PromotionStartDate: updateData.PromotionStartDate,
-        PromotionExpiredDate: updateData.PromotionExpiredDate,
-        PromotionConditionID: updateData.PromotionConditionID,
-        PromotionValue: updateData.PromotionValue,
-        SCOPEID: updateData.SCOPEID || 0 // Đảm bảo SCOPEID mặc định là 0 nếu không có
-      }}
-    );
-    if (result.matchedCount === 1) {
-      res.status(200).json({ message: "Promotion updated successfully" });
-    } else {
-      res.status(404).json({ message: "Promotion not found" });
-    }
-  } catch (error) {
-    console.error("❌ Lỗi khi cập nhật promotion:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// PUT /vouchers/:id
-app.put("/vouchers/:id", cors(), async (req, res) => {
-  try {
-    if (!ObjectId.isValid(req.params["id"])) {
-      return res.status(400).json({ message: "Invalid voucher ID" });
-    }
-
-    const o_id = new ObjectId(req.params["id"]);
-    const updateData = req.body;
-    const result = await voucherCollection.updateOne(
-      { _id: o_id },
-      { $set: {
-        VoucherID: updateData.VoucherID,
-        VoucherStartDate: updateData.VoucherStartDate,
-        VoucherExpiredDate: updateData.VoucherExpiredDate,
-        VoucherConditionID: updateData.VoucherConditionID,
-        VoucherQuantity: updateData.VoucherQuantity,
-        VoucherValue: updateData.VoucherValue,
-        RemainingQuantity: updateData.RemainingQuantity,
-        SCOPEID: updateData.SCOPEID || 0 // Đảm bảo SCOPEID mặc định là 0 nếu không có
-      }}
-    );
-    if (result.matchedCount === 1) {
-      res.status(200).json({ message: "Voucher updated successfully" });
-    } else {
-      res.status(404).json({ message: "Voucher not found" });
-    }
-  } catch (error) {
-    console.error("❌ Lỗi khi cập nhật voucher:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// POST /promotions
-app.post("/promotions", cors(), async (req, res) => {
-  try {
-    const newPromotion = req.body;
-    const result = await promotionsCollection.insertOne({
-      ...newPromotion,
-      SCOPEID: newPromotion.SCOPEID || 0 // Đảm bảo SCOPEID mặc định là 0 nếu không có
-    });
-    res.status(201).json({ message: "Promotion created successfully", id: result.insertedId });
-  } catch (error) {
-    console.error("❌ Lỗi khi tạo mới promotion:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
-
-// POST /vouchers
-app.post("/vouchers", cors(), async (req, res) => {
-  try {
-    const newVoucher = req.body;
-    const result = await voucherCollection.insertOne({
-      ...newVoucher,
-      SCOPEID: newVoucher.SCOPEID || 0 // Đảm bảo SCOPEID mặc định là 0 nếu không có
-    });
-    res.status(201).json({ message: "Voucher created successfully", id: result.insertedId });
-  } catch (error) {
-    console.error("❌ Lỗi khi tạo mới voucher:", error);
-    res.status(500).json({ error: "Internal server error" });
-  }
-});

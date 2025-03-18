@@ -64,12 +64,34 @@ form.log-in-form {
   width: 27em;
 }
 
+<<<<<<< HEAD
 
 input[type="checkbox"] {
   margin-right: 5px;
 }
 
 .remember-label {
+=======
+.spinner {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid #fff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 0.5rem;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+  margin-top: 20px;
+}
+
+.remember-label {
+    margin-right: 16REM;
+
+>>>>>>> main
   margin-right: 16REM;
 }
 .title {
@@ -82,7 +104,11 @@ input[type="checkbox"] {
   max-width: 540px;
   width: 100%;
   background-color: #f0f0f0;
+<<<<<<< HEAD
   margin: 5px 0;
+=======
+  margin: 20px 0;
+>>>>>>> main
   height: 55px;
   border-radius: 55px;
   display: grid;
@@ -94,11 +120,24 @@ input[type="checkbox"] {
 .input-field:hover {
   background-color: #e0e0e0; /* Thay đổi màu nền khi hover */
 }
+<<<<<<< HEAD
 
 .input-field:focus {
   border: 2px solid #5995fd;
   outline: none;
 } 
+=======
+/* Ghi đè hiệu ứng focus cho các input trong form đăng nhập và đăng ký */
+.input-field:focus {
+  border-color: none; /* Loại bỏ viền focus */
+  outline-color: none; /* Đảm bảo không có outline */
+  box-shadow: none;
+  --focus-border: none; 
+
+}
+
+
+>>>>>>> main
 .input-field i {
   text-align: center;
   line-height: 55px;
@@ -123,6 +162,7 @@ input[type="checkbox"] {
   font-weight: 500;
 }
 
+<<<<<<< HEAD
 .error {
   color: red;
   font-size: 0.9rem; /* Thay đổi kích thước font cho thông báo lỗi */
@@ -131,6 +171,40 @@ input[type="checkbox"] {
   margin-left: 5em;
 }
 
+=======
+.error-active {
+  border: 2px solid red; /* Đánh dấu viền đỏ khi có lỗi */
+  background-color: #ffebee; /* Nền nhạt đỏ để nổi bật */
+  position: relative; /* Đảm bảo vị trí tương đối để chứa lỗi */
+}
+
+.error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px; /* Giữ khoảng cách trên */
+  text-align: left;
+  margin-left: 0; /* Loại bỏ margin-left: 5em để lỗi không bị lệch */
+  width: 100%; /* Đảm bảo lỗi chiếm 100% chiều rộng của input */
+  padding: 2px 10px; /* Thêm padding để lỗi không bị cắt */
+  box-sizing: border-box; /* Đảm bảo padding không làm tràn */
+  position: absolute;
+  bottom: -25px; /* Đặt lỗi ngay dưới input, điều chỉnh nếu cần */
+  background-color: #fff; /* Nền trắng để dễ đọc */
+  z-index: 1; /* Đảm bảo lỗi hiển thị trên input */
+}
+.input-field.error-active .error {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  text-align: left;
+  margin-left: 0; /* Loại bỏ margin-left: 5em để lỗi hiển thị trong phạm vi input */
+  width: 100%; /* Đảm bảo lỗi hiển thị hết 100% chiều rộng của input */
+  position: absolute;
+  bottom: -30px; /* Đặt lỗi ngay dưới input */
+  background-color: #fff; /* Nền trắng cho lỗi để dễ đọc */
+  padding: 2px 5px; /* Padding để lỗi không bị cắt */
+}
+>>>>>>> main
 .btn {
   max-width: 540px;
   width: 100%;
@@ -402,4 +476,14 @@ a:hover {
     bottom: 28%;
     left: 50%;
   }
+<<<<<<< HEAD
 }
+=======
+}
+
+.loading {
+  color: #555;
+  text-align: center;
+  margin-top: 10px;
+}
+>>>>>>> main

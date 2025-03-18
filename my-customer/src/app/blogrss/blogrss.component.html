@@ -1,0 +1,67 @@
+<div class="container mx-auto px-6 py-16 bg-gray-50 min-h-screen">
+    <!-- Tiêu đề -->
+    <div class="mb-16 text-center">
+      <h2 class="text-4xl font-bold text-gray-900 mb-6 animate-fade-in tracking-tight">
+        Kiến Thức Chung
+      </h2>
+      <div class="w-32 h-1 bg-gradient-to-r from-[#F8BC3B] to-[#85461F] mx-auto rounded-full"></div>
+    </div>
+  
+    <!-- Danh sách bài viết RSS -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div
+        *ngFor="let article of articles"
+        class="bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 group"
+      >
+        <!-- Tiêu đề và ngày đăng -->
+        <div class="p-6">
+          <a
+            [href]="article.link"
+            target="_blank"
+            class="block text-xl font-semibold text-gray-900 mb-3 group-hover:text-[#F8BC3B] transition-colors duration-200 line-clamp-2"
+          >
+            {{ article.title }}
+          </a>
+          <p class="text-sm text-gray-500 mb-4">
+            {{ article.pubDate | date: 'medium' }}
+          </p>
+  
+          <!-- Nội dung tóm tắt -->
+          <p class="text-gray-700 text-sm line-clamp-3 leading-relaxed">
+            {{ article.contentSnippet }}
+          </p>
+        </div>
+  
+        <!-- Nút "Đọc thêm" -->
+        <div class="px-6 pb-6">
+          <a
+            [href]="article.link"
+            target="_blank"
+            class="inline-flex items-center text-[#F8BC3B] hover:text-[#85461F] font-semibold transition-colors duration-200 group"
+          >
+            Đọc thêm
+            <svg
+              class="w-4 h-4 ml-2 transform transition-transform duration-200 group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 5l7 7-7 7"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Trạng thái không có bài viết -->
+    <div *ngIf="!articles.length" class="text-center py-20">
+      <div class="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#F8BC3B] mx-auto mb-6"></div>
+      <p class="text-gray-500 text-lg font-medium">Đang tải bài viết...</p>
+    </div>
+  </div>

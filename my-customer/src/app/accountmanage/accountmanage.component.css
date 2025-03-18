@@ -1,4 +1,5 @@
 /* Reset CSS */
+<<<<<<< HEAD
 @import "tailwindcss";
 
 @tailwind base;
@@ -8,15 +9,29 @@
 /* Định dạng chung */
 body {
     @apply bg-gray-100 font-sans;
+=======
+
+/* Định dạng chung */
+body {
+    background-color: #f7fafc; /* bg-gray-100 */
+    font-family: sans-serif; /* font-sans */
+>>>>>>> main
 }
 
 /* Container chính */
 .container {
+<<<<<<< HEAD
     @apply flex gap-5 p-5;
+=======
+    display: flex;
+    gap: 1.25rem; /* gap-5 */
+    padding: 1.25rem; /* p-5 */
+>>>>>>> main
 }
 
 /* Sidebar */
 .sidebar {
+<<<<<<< HEAD
     @apply w-64 bg-white p-5 rounded-lg shadow-lg;
 }
 
@@ -42,10 +57,57 @@ body {
 
 .sidebar-menu li a {
     @apply text-gray-700 hover:text-blue-500 block;
+=======
+    width: 16rem; /* w-64 */
+    background-color: #ffffff; /* bg-white */
+    padding: 1.25rem; /* p-5 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+}
+
+.profile {
+    text-align: center;
+    margin-bottom: 1.25rem; /* mb-5 */
+}
+
+.profile img {
+    width: 5rem; /* w-20 */
+    height: 5rem; /* h-20 */
+    border-radius: 9999px; /* rounded-full */
+    margin-left: auto; /* mx-auto */
+    margin-right: auto; /* mx-auto */
+    margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.profile p {
+    font-size: 0.875rem; /* text-sm */
+    color: #4b5563; /* text-gray-600 */
+}
+
+.sidebar-menu {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-menu li {
+    padding-top: 0.75rem; /* py-3 */
+    padding-bottom: 0.75rem; /* py-3 */
+    border-bottom: 1px solid #d1d5db; /* border-b border-gray-300 */
+}
+
+.sidebar-menu li a {
+    color: #374151; /* text-gray-700 */
+    display: block; /* block */
+}
+
+.sidebar-menu li a:hover {
+    color: #3b82f6; /* hover:text-blue-500 */
+>>>>>>> main
 }
 
 /* Thông tin cá nhân */
 .personal-info {
+<<<<<<< HEAD
     @apply flex-1 bg-white p-5 rounded-lg shadow-lg;
 }
 
@@ -59,10 +121,35 @@ body {
 
 .details p {
     @apply text-lg mb-2;
+=======
+    flex: 1; /* flex-1 */
+    background-color: #ffffff; /* bg-white */
+    padding: 1.25rem; /* p-5 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+}
+
+.info-box {
+    display: flex; /* flex */
+    align-items: center; /* items-center */
+    gap: 1.25rem; /* gap-5 */
+}
+
+.avatar img {
+    width: 6rem; /* w-24 */
+    height: 6rem; /* h-24 */
+    border-radius: 9999px; /* rounded-full */
+}
+
+.details p {
+    font-size: 1.125rem; /* text-lg */
+    margin-bottom: 0.5rem; /* mb-2 */
+>>>>>>> main
 }
 
 /* Button */
 .edit-button, .cancel-button {
+<<<<<<< HEAD
     @apply px-4 py-2 rounded-full border-2;
 }
 
@@ -72,10 +159,39 @@ body {
 
 .cancel-button {
     @apply bg-yellow-100 text-gray-700 border-yellow-300 hover:bg-gray-300;
+=======
+    padding-left: 1rem; /* px-4 */
+    padding-right: 1rem; /* px-4 */
+    padding-top: 0.5rem; /* py-2 */
+    padding-bottom: 0.5rem; /* py-2 */
+    border-radius: 9999px; /* rounded-full */
+    border-width: 2px; /* border-2 */
+}
+
+.edit-button {
+    background-color: #fbbf24; /* bg-yellow-400 */
+    color: #ffffff; /* text-white */
+    border-color: #fbbf24; /* border-yellow-400 */
+}
+
+.edit-button:hover {
+    background-color: #f59e0b; /* hover:bg-yellow-500 */
+}
+
+.cancel-button {
+    background-color: #fef3c7; /* bg-yellow-100 */
+    color: #374151; /* text-gray-700 */
+    border-color: #fcd34d; /* border-yellow-300 */
+}
+
+.cancel-button:hover {
+    background-color: #d1d5db; /* hover:bg-gray-300 */
+>>>>>>> main
 }
 
 /* Địa chỉ nhận hàng */
 .address-section {
+<<<<<<< HEAD
     @apply mt-5 bg-white p-5 rounded-lg shadow-lg;
 }
 
@@ -106,10 +222,84 @@ body {
 .input-place {
     @apply w-2/3 p-2 border rounded-full;
 }
+=======
+    margin-top: 1.25rem; /* mt-5 */
+    background-color: #ffffff; /* bg-white */
+    padding: 1.25rem; /* p-5 */
+    border-radius: 0.5rem; /* rounded-lg */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* shadow-lg */
+}
+
+.address-list {
+    margin-top: 0.75rem; /* mt-3 */
+}
+
+.address-card {
+    display: flex; /* flex */
+    justify-content: space-between; /* justify-between */
+    align-items: center; /* items-center */
+    padding: 1rem; /* p-4 */
+    border: 1px solid #d1d5db; /* border border-gray-300 */
+    border-radius: 0.375rem; /* rounded-md */
+    margin-bottom: 0.75rem; /* mb-3 */
+    background-color: #ffffff; /* bg-white */
+}
+
+.address-card p {
+    font-size: 0.875rem; /* text-sm */
+}
+
+.address-container {
+    display: flex; /* flex */
+    justify-content: center; /* justify-center */
+    margin-top: 1.25rem; /* mt-5 */
+}
+
+.add-address-button {
+    padding-left: 1.5rem; /* px-6 */
+    padding-right: 1.5rem; /* px-6 */
+    padding-top: 0.75rem; /* py-3 */
+    padding-bottom: 0.75rem; /* py-3 */
+    background-color: #fbbf24; /* bg-yellow-400 */
+    color: #ffffff; /* text-white */
+    border-radius: 9999px; /* rounded-full */
+    font-size: 1.125rem; /* text-lg */
+    cursor: pointer; /* cursor-pointer */
+}
+
+.add-address-button:hover {
+    background-color: #f59e0b; /* hover:bg-yellow-500 */
+}
+
+.delete-button {
+    padding-left: 0.75rem; /* px-3 */
+    padding-right: 0.75rem; /* px-3 */
+    padding-top: 0.25rem; /* py-1 */
+    padding-bottom: 0.25rem; /* py-1 */
+    background-color: #fbbf24; /* bg-yellow-400 */
+    color: #ffffff; /* text-white */
+    border-radius: 9999px; /* rounded-full */
+    font-size: 0.875rem; /* text-sm */
+    cursor: pointer; /* cursor-pointer */
+}
+
+.delete-button:hover {
+    background-color: #d97706; /* hover:bg-yellow-600 */
+}
+
+.input-place {
+    width: 66.666667%; /* w-2/3 */
+    padding: 0.5rem; /* p-2 */
+    border-width: 1px; /* border */
+    border-radius: 9999px; /* rounded-full */
+}
+
+>>>>>>> main
 .text-gray-500 {
     color: #6b7280;
 }
 
+<<<<<<< HEAD
 .editbtn{
     @apply px-3 py-1 bg-gray-200 text-black border border-black rounded-full text-sm cursor-pointer hover:bg-gray-400;
 }
@@ -138,4 +328,56 @@ body {
     @apply text-gray-700 hover:text-blue-500;
 }
 
+=======
+.editbtn {
+    padding-left: 0.75rem; /* px-3 */
+    padding-right: 0.75rem; /* px-3 */
+    padding-top: 0.25rem; /* py-1 */
+    padding-bottom: 0.25rem; /* py-1 */
+    background-color: #e5e7eb; /* bg-gray-200 */
+    color: #000000; /* text-black */
+    border: 1px solid #000000; /* border border-black */
+    border-radius: 9999px; /* rounded-full */
+    font-size: 0.875rem; /* text-sm */
+    cursor: pointer; /* cursor-pointer */
+}
+
+.editbtn:hover {
+    background-color: #9ca3af; /* hover:bg-gray-400 */
+}
+
+/* Footer */
+.footer {
+    background-color: #e5e7eb; /* bg-gray-200 */
+    padding: 1.25rem; /* p-5 */
+    margin-top: 1.25rem; /* mt-5 */
+}
+
+.footer-highlights {
+    display: flex; /* flex */
+    justify-content: space-around; /* justify-around */
+    margin-bottom: 1.25rem; /* mb-5 */
+}
+
+.footer-main {
+    display: flex; /* flex */
+    justify-content: space-between; /* justify-between */
+}
+
+.footer-info {
+    width: 33.333333%; /* w-1/3 */
+}
+
+.footer-links ul {
+    list-style: none; /* list-none */
+}
+
+.footer-links ul li a {
+    color: #374151; /* text-gray-700 */
+}
+
+.footer-links ul li a:hover {
+    color: #3b82f6; /* hover:text-blue-500 */
+}
+>>>>>>> main
 

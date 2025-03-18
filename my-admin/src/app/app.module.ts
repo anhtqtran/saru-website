@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+<<<<<<< HEAD
 import { AppRoutingModule } from './app-routing.module'; // ✅ Import routes
 import { AppComponent } from './app.component';
 import { InventorymanagementComponent } from './inventorymanagement/inventorymanagement.component';
@@ -38,6 +39,23 @@ import { KhuyenmaiListComponent } from './khuyenmai-list/khuyenmai-list.componen
     KhuyenmaiDetailComponent,
     KhuyenmaiListComponent,
     KhuyenmaiListComponent
+=======
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'; // Import HttpClientModule
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+  
+
+@NgModule({
+  declarations: [
+    AppComponent,
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule,
+>>>>>>> main
   ],
   providers: [],
   bootstrap: [AppComponent]

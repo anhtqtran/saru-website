@@ -1,0 +1,75 @@
+<div class="flex flex-col px-40 mt-10">
+  @if(id){
+    <h1 class="text-3xl font-bold text-[#85461F]">Cập nhật bài viết</h1>
+  } @else {
+    <h1 class="text-3xl font-bold text-[#85461F]">Tạo bài viết mới</h1>
+  }
+  <form class="shadow p-4 mt-10" [formGroup]="blogForm">
+    <div class="flex flex-wrap">
+
+      <div class="w-full flex flex-col" formArrayName="BlogImage">
+        <div class="flex justify-between items-center">
+          <p class="py-5 text-[#38312F] font-semibold text-xl">Hình bài viết: </p>
+          <div class="button-group">
+            <button class="flex items-center bg-[#F8BC3B] text-black font-medium py-4 px-4 rounded-full h-10 transition hover:bg-[#85461F] hover:text-white" (click)="addBlogImage()">Thêm ảnh</button>
+            <button class="flex items-center bg-[#F8BC3B] text-black font-medium py-4 px-4 rounded-full h-10 transition hover:bg-[#85461F] hover:text-white" (click)="removeBlogImage()">Xóa ảnh</button>
+          </div>
+        </div>
+        @for (item of BlogImage.controls; track $index) {
+        <mat-form-field class="w-full">
+          <mat-label class="text-s">Hình {{$index}}</mat-label>
+          <input matInput type="text" [formControlName]="$index"/>
+        </mat-form-field>
+        }
+      </div>
+
+      <div class="w-full">
+        <p class="py-5 text-[#38312F] font-semibold text-xl">
+          ID bài viết: 
+        </p>
+        <mat-form-field class="w-full">
+          <mat-label class="text-s">Nhập ID...</mat-label>
+          <input matInput type="text" formControlName="BlogID">
+        </mat-form-field>
+      </div>
+
+      <div class="w-full">
+        <p class="py-5 text-[#38312F] font-semibold text-xl">
+          Tiêu đề bài viết: 
+        </p>
+        <mat-form-field class="w-full">
+          <mat-label class="text-s">Nhập tiêu đề...</mat-label>
+          <input matInput type="text" formControlName="BlogTitle">
+        </mat-form-field>
+      </div>
+
+      <div class="w-full">
+        <p class="py-5 text-[#38312F] font-semibold text-xl">
+          Nội dung bài viết: 
+        </p>
+        <quill-editor
+          formControlName="BlogContent"
+          placeholder="Nhập nội dung bài viết tại đây...">
+        </quill-editor>      
+      </div>
+
+      <mat-form-field class="w-full">
+        <mat-label>Danh mục</mat-label>
+        <mat-select formControlName="categoryID">
+            <mat-option *ngFor="let item of categories" [value]="item._id">
+                {{ item.CateblogName }}  <!-- ✅ Hiển thị tên danh mục, nhưng lưu `_id` -->
+            </mat-option>
+        </mat-select>
+      </mat-form-field>    
+
+    </div>
+
+    <div class="w-full flex justify-center">
+      @if(id){
+        <button class="flex items-center bg-[#F8BC3B] text-black font-medium py-2 px-4 rounded-full transition hover:bg-[#85461F] hover:text-white"(click)="updateBlog()">Cập nhật</button>
+      }@else{
+        <button class="flex items-center bg-[#F8BC3B] text-black font-medium py-2 px-4 rounded-full transition hover:bg-[#85461F] hover:text-white" (click)="addBlog()">Lưu</button>
+      }
+    </div>
+  </form>
+</div>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import "tailwindcss";
 
 @tailwind base;
@@ -12,10 +13,43 @@
 /* Tiêu đề */
 .review-container h1 {
     @apply text-2xl font-bold mb-6 text-gray-800;
+=======
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container chính */
+.review-container {
+    width: 600px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Tiêu đề */
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+>>>>>>> main
 }
 
 /* Thông tin sản phẩm */
 .product-info {
+<<<<<<< HEAD
     @apply flex items-center gap-4 mb-6 border-b pb-4;
 }
 
@@ -69,4 +103,135 @@ textarea {
 /* Đảm bảo chiều cao hợp lý để không bị footer che mất */
 .main-content {
     @apply flex flex-col flex-grow min-h-[75vh]; /* Giữ đủ cao nhưng không tràn */
+=======
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.product-info img {
+    width: 80px;
+    height: 80px;
+    background: #ccc;
+    border-radius: 5px;
+}
+
+/* Đánh giá sao */
+.rating-section p {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.stars {
+    font-size: 22px;
+    color: #FBBC05;
+    font-weight: bold;
+}
+
+.rating-text {
+    color: #FBBC05;
+    font-size: 16px;
+    margin-left: 8px;
+}
+
+/* Hộp nhập đánh giá */
+textarea {
+    width: 100%;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    margin-top: 10px;
+    resize: none;
+}
+
+/* Nút tải ảnh */
+.upload-button {
+    display: block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #FBBC05;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.upload-button:hover {
+    background-color: #FBBC05;
+}
+
+/* Nút điều hướng */
+/* Chỉnh lại phần chứa nút */
+/* Chỉnh lại phần chứa nút */
+.review-buttons {
+    display: flex;
+    justify-content: flex-end; /* Đưa các nút về bên phải */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    gap: 20px; /* Khoảng cách giữa hai nút */
+    margin-top: 15px;
+}
+
+/* Nút trở lại */
+.back-button {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    padding-bottom: 0px;
+}
+
+.back-button::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #000;
+    position: absolute;
+    left: 0;
+    bottom: -4px; /* Tạo khoảng cách hợp lý với chữ */
+}
+
+.back-button:hover {
+    opacity: 0.7;
+}
+
+/* Nút hoàn thành */
+.submit-button {
+    padding: 10px 25px;
+    background-color: #FBBC05;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #FBBC05;
+}
+
+
+/* Nút hoàn thành */
+.submit-button {
+    padding: 10px 20px;
+    background-color: #FBBC05;
+    color: black;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+    background-color: #e6b800;
+>>>>>>> main
 }

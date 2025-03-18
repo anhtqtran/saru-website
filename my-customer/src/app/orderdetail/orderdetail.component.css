@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 @import "tailwindcss";
 /* Reset CSS */
 @tailwind base;
@@ -6,20 +7,55 @@
 
 body {
     @apply font-sans bg-gray-100 flex justify-center items-center h-screen;
+=======
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+>>>>>>> main
 }
 
 /* Container chính */
 .order-container {
+<<<<<<< HEAD
     @apply w-[600px] bg-white p-5 rounded-lg shadow-md text-center;
+=======
+    width: 600px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+>>>>>>> main
 }
 
 /* Tiêu đề */
 .order-title {
+<<<<<<< HEAD
     @apply text-lg font-bold bg-gray-400 p-3 rounded-md mb-5;
+=======
+    font-size: 22px;
+    font-weight: bold;
+    background-color: #bfbfbf;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+>>>>>>> main
 }
 
 /* Chi tiết đơn hàng và vận chuyển */
 .order-details {
+<<<<<<< HEAD
     @apply flex justify-between gap-3 mb-5;
 }
 
@@ -33,15 +69,49 @@ body {
 
 .order-box p {
     @apply text-sm mb-1;
+=======
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.order-box {
+    width: 48%;
+    background: #f3f3f3;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.order-box h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.order-box p {
+    font-size: 14px;
+    margin-bottom: 5px;
+>>>>>>> main
 }
 
 /* Hình ảnh sản phẩm */
 .order-box img {
+<<<<<<< HEAD
     @apply w-20 h-20 bg-gray-300 rounded-md my-2;
+=======
+    width: 80px;
+    height: 80px;
+    background: #ccc;
+    border-radius: 5px;
+    margin: 10px 0;
+>>>>>>> main
 }
 
 /* Tổng chi phí */
 .cost-summary {
+<<<<<<< HEAD
     @apply bg-gray-200 p-4 rounded-md text-left w-1/2 mx-auto;
 }
 
@@ -51,13 +121,50 @@ body {
 
 .cost-summary p {
     @apply text-sm mb-1;
+=======
+    background: #f3f3f3;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: left;
+    width: 50%;
+    margin: 0 auto;
+}
+
+.cost-summary h2 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.cost-summary p {
+    font-size: 14px;
+    margin-bottom: 5px;
+>>>>>>> main
 }
 
 /* Nút Viết Đánh Giá */
 .review-button {
+<<<<<<< HEAD
     @apply block mx-auto mt-5 px-6 py-2 bg-yellow-400 text-black font-bold border-none rounded-md text-base cursor-pointer transition;
 }
 
 .review-button:hover {
     @apply bg-yellow-500;
+=======
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px 25px;
+    background-color: #FBBC05;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.review-button:hover {
+    background-color: #e6b800;
+>>>>>>> main
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+<<<<<<< HEAD
 import { InventorymanagementComponent } from './inventorymanagement/inventorymanagement.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductlistComponent } from './productlist/productlist.component';
@@ -24,9 +25,17 @@ const routes: Routes = [
   { path: 'khuyenmai-detail', component: KhuyenmaiDetailComponent },
   {path: 'khuyenmai-detail/:id/:type',component: KhuyenmaiDetailComponent},
 ];
+=======
+
+const routes: Routes = [];
+>>>>>>> main
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
+<<<<<<< HEAD
 export class AppRoutingModule {}
+=======
+export class AppRoutingModule { }
+>>>>>>> main

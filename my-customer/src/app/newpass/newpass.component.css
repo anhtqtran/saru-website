@@ -12,3 +12,17 @@
     z-index: 1000;
 }
 
+<<<<<<< HEAD
+=======
+.relative {
+    position: relative;
+  }
+  
+  .fas {
+    color: #666;
+  }
+  
+  .fas:hover {
+    color: #333;
+  }
+>>>>>>> main
