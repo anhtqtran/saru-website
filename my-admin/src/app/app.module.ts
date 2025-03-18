@@ -21,8 +21,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
-import { QuillModule } from 'ngx-quill';
-
+import { QuillModule } from 'ngx-quill'; // Import từ 'ngx-quill'
 import { InventorymanagementComponent } from './inventorymanagement/inventorymanagement.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProductlistComponent } from './productlist/productlist.component'; 
