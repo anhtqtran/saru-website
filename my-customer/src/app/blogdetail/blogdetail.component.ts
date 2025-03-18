@@ -1,28 +1,12 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-
-=======
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BlogService } from '../services/blog.service';
 import { Blog, BlogDetail } from '../classes/Blogs'; // Chỉ dùng Blog và BlogDetail
->>>>>>> main
 
 @Component({
   selector: 'app-blogdetail',
   standalone: false,
   templateUrl: './blogdetail.component.html',
-<<<<<<< HEAD
-  styleUrl: './blogdetail.component.css'
-})
-export class BlogdetailComponent {
-  //set title of page
-  public constructor(private titleService: Title){
-    this.titleService.setTitle("Rượu Mận: Đặc sản tình yêu và kí ức vùng trời Tây Bắc - SARU"); 
-  }
-}
-=======
   styleUrls: ['./blogdetail.component.css']
 })
 export class BlogdetailComponent implements OnInit {
@@ -96,4 +80,3 @@ export class BlogdetailComponent implements OnInit {
     });
   }
 }
->>>>>>> main

@@ -1,14 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import { AuthService } from '../services/auth.service';
-<<<<<<< HEAD
-import { Subscription } from 'rxjs';
-import { Router } from '@angular/router';
-=======
 import { BlogService } from '../services/blog.service';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
->>>>>>> main
 
 @Component({
   selector: 'app-header',
@@ -24,25 +19,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   compareSubscription?: Subscription;
   updateSubscription?: Subscription;
   loginStatusSubscription?: Subscription;
-<<<<<<< HEAD
-  isLoggedIn: boolean = false;
-  currentUser: any = null;
-=======
   routeSubscription?: Subscription;
   isLoggedIn: boolean = false;
   currentUser: any = null;
   blogCategories: { _id: string; CateblogID: string; CateblogName: string }[] = [];
->>>>>>> main
 
   constructor(
     private productService: ProductService,
     public authService: AuthService,
-<<<<<<< HEAD
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
-=======
     private blogService: BlogService,
     private router: Router,
     private route: ActivatedRoute
@@ -51,7 +35,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadBlogCategories();
 
->>>>>>> main
     const token = localStorage.getItem('authToken');
     console.log('Auth token:', token);
     this.updateCartAndCompareCount();
@@ -87,8 +70,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       this.compareItemCount = compare?.length || 0;
       console.log('Compare updated via Observable:', this.compareItemCount);
     });
-<<<<<<< HEAD
-=======
     
     // Lắng nghe thay đổi đường dẫn để cập nhật nội dung danh mục blog
     this.routeSubscription = this.router.events.subscribe(event => {
@@ -96,7 +77,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         this.loadBlogCategories(); // Gọi lại API khi đường dẫn thay đổi
       }
     });
->>>>>>> main
   }
 
   ngOnDestroy(): void {
@@ -104,8 +84,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.compareSubscription?.unsubscribe();
     this.updateSubscription?.unsubscribe();
     this.loginStatusSubscription?.unsubscribe();
-<<<<<<< HEAD
-=======
     this.routeSubscription?.unsubscribe();
   }
 
@@ -120,7 +98,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         console.error('Lỗi khi tải danh mục blog:', err);
       }
     });
->>>>>>> main
   }
 
   toggleSearchBar(searchBox: HTMLInputElement) {
@@ -160,13 +137,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     });
   }
 
-<<<<<<< HEAD
-=======
   handleOpenSubmenu(category: string): void {
     this.router.navigate(['/product'], { queryParams: { category } });
   }
 
->>>>>>> main
   logout(): void {
     this.authService.logout();
     this.isLoggedIn = false;

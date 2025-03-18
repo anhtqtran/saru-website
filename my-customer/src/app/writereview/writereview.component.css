@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-@import "tailwindcss";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Container chính: Tăng chiều cao nhưng không tràn màn hình */
-.review-container {
-    @apply max-w-5xl mx-auto bg-white p-8 rounded-lg shadow-lg flex flex-col min-h-[70vh]; /* Tăng chiều dài nhưng không tràn màn hình */
-}
-
-/* Tiêu đề */
-.review-container h1 {
-    @apply text-2xl font-bold mb-6 text-gray-800;
-=======
 /* Reset CSS */
 * {
     margin: 0;
@@ -44,66 +28,10 @@ h1 {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 15px;
->>>>>>> main
 }
 
 /* Thông tin sản phẩm */
 .product-info {
-<<<<<<< HEAD
-    @apply flex items-center gap-4 mb-6 border-b pb-4;
-}
-
-.product-info img {
-    @apply w-28 h-28 rounded-lg border; /* Tăng kích thước hình ảnh */
-}
-
-.product-info h5 {
-    @apply text-lg font-semibold text-gray-700;
-}
-
-/* Phần rating */
-.rating-section {
-    @apply flex flex-col items-start gap-2;
-}
-
-.rating-section p {
-    @apply text-sm font-medium text-gray-600;
-}
-
-.stars {
-    @apply flex gap-1;
-}
-
-.stars span {
-    @apply text-3xl cursor-pointer transition-all; /* Tăng kích thước sao */
-}
-
-.stars .filled {
-    @apply text-yellow-500;
-}
-
-/* Ô nhập đánh giá */
-textarea {
-    @apply w-full h-24 p-3 border rounded-md focus:ring-2 focus:ring-yellow-500; /* Điều chỉnh chiều cao */
-}
-
-/* Nút */
-.review-buttons {
-    @apply flex justify-between mt-6;
-}
-
-.back-button {
-    @apply px-6 py-2 border border-gray-400 rounded-md text-gray-600 hover:bg-gray-100 transition;
-}
-
-.submit-button {
-    @apply px-6 py-2 bg-yellow-500 text-white rounded-md font-bold hover:bg-yellow-600 transition;
-}
-
-/* Đảm bảo chiều cao hợp lý để không bị footer che mất */
-.main-content {
-    @apply flex flex-col flex-grow min-h-[75vh]; /* Giữ đủ cao nhưng không tràn */
-=======
     display: flex;
     align-items: center;
     gap: 15px;
@@ -233,5 +161,4 @@ textarea {
 
 .submit-button:hover {
     background-color: #e6b800;
->>>>>>> main
 }

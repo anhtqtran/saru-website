@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 export interface RelatedProduct {
   _id: string;
   ProductName: string;
@@ -7,7 +5,6 @@ export interface RelatedProduct {
   ProductImageCover?: string; // Thêm để chuẩn bị cho dữ liệu mới
 }
 
->>>>>>> main
 export class Product {
   constructor(
     public _id: any = null,
@@ -26,21 +23,11 @@ export class Product {
     public WineType?: string,
     public WineIngredient?: string,
     public WineFlavor?: string,
-<<<<<<< HEAD
-    public condition?: string, // Thêm trường condition
-=======
     public condition?: string,
->>>>>>> main
     public ProductImageCover?: string,
     public ProductImageSub1?: string,
     public ProductImageSub2?: string,
     public ProductImageSub3?: string,
-<<<<<<< HEAD
-    public averageRating?: number, // Thêm trường đánh giá trung bình
-    public totalReviewCount?: number, // Thêm tổng số đánh giá
-    public reviews?: Array<any>, // Thêm danh sách đánh giá (tùy chọn chi tiết)
-    public relatedProducts?: Array<any> // Thêm danh sách sản phẩm liên quan
-=======
     public averageRating?: number,
     public totalReviewCount?: number,
     public reviews?: Array<any>,
@@ -55,7 +42,6 @@ export class Product {
     public PromotionValue?: number,
     public originalPrice: number = 0,
     public discountPercentage: number = 0
->>>>>>> main
   ) {}
 }
 

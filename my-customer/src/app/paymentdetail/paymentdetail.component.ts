@@ -1,24 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
-<<<<<<< HEAD
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-=======
->>>>>>> main
 import { PaymentInfo } from '../classes/Payment';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-paymentdetail',
-<<<<<<< HEAD
-  standalone: true,
-  templateUrl: './paymentdetail.component.html',
-  styleUrl: './paymentdetail.component.css',
-  imports: [CommonModule, FormsModule]
-=======
   standalone: false,
   templateUrl: './paymentdetail.component.html',
   styleUrl: './paymentdetail.component.css',
->>>>>>> main
 })
 export class PaymentdetailComponent implements OnInit {
   cartItems: any[] = [];
@@ -153,8 +142,4 @@ export class PaymentdetailComponent implements OnInit {
 
 
 
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> main

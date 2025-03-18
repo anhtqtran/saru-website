@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, catchError } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Product } from '../classes/Product';
-=======
->>>>>>> main
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-<<<<<<< HEAD
   private productsUrl = 'http://localhost:4000/api/products-full-details';
   private filtersUrl = 'http://localhost:4000/api/filters';
   private apiUrl = 'http://localhost:4000/api';
@@ -70,8 +66,4 @@ export class ProductService {
     return this.http.get<{ data: Product[] }>(url);
   }
   
-=======
-
-  constructor() { }
->>>>>>> main
 }

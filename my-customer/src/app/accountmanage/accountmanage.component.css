@@ -1,63 +1,20 @@
 /* Reset CSS */
-<<<<<<< HEAD
-@import "tailwindcss";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Định dạng chung */
-body {
-    @apply bg-gray-100 font-sans;
-=======
 
 /* Định dạng chung */
 body {
     background-color: #f7fafc; /* bg-gray-100 */
     font-family: sans-serif; /* font-sans */
->>>>>>> main
 }
 
 /* Container chính */
 .container {
-<<<<<<< HEAD
-    @apply flex gap-5 p-5;
-=======
     display: flex;
     gap: 1.25rem; /* gap-5 */
     padding: 1.25rem; /* p-5 */
->>>>>>> main
 }
 
 /* Sidebar */
 .sidebar {
-<<<<<<< HEAD
-    @apply w-64 bg-white p-5 rounded-lg shadow-lg;
-}
-
-.profile {
-    @apply text-center mb-5;
-}
-
-.profile img {
-    @apply w-20 h-20 rounded-full mx-auto mb-2;
-}
-
-.profile p {
-    @apply text-sm text-gray-600;
-}
-
-.sidebar-menu {
-    @apply list-none p-0;
-}
-
-.sidebar-menu li {
-    @apply py-3 border-b border-gray-300;
-}
-
-.sidebar-menu li a {
-    @apply text-gray-700 hover:text-blue-500 block;
-=======
     width: 16rem; /* w-64 */
     background-color: #ffffff; /* bg-white */
     padding: 1.25rem; /* p-5 */
@@ -102,26 +59,10 @@ body {
 
 .sidebar-menu li a:hover {
     color: #3b82f6; /* hover:text-blue-500 */
->>>>>>> main
 }
 
 /* Thông tin cá nhân */
 .personal-info {
-<<<<<<< HEAD
-    @apply flex-1 bg-white p-5 rounded-lg shadow-lg;
-}
-
-.info-box {
-    @apply flex items-center gap-5;
-}
-
-.avatar img {
-    @apply w-24 h-24 rounded-full;
-}
-
-.details p {
-    @apply text-lg mb-2;
-=======
     flex: 1; /* flex-1 */
     background-color: #ffffff; /* bg-white */
     padding: 1.25rem; /* p-5 */
@@ -144,22 +85,10 @@ body {
 .details p {
     font-size: 1.125rem; /* text-lg */
     margin-bottom: 0.5rem; /* mb-2 */
->>>>>>> main
 }
 
 /* Button */
 .edit-button, .cancel-button {
-<<<<<<< HEAD
-    @apply px-4 py-2 rounded-full border-2;
-}
-
-.edit-button {
-    @apply bg-yellow-400 text-white border-yellow-400 hover:bg-yellow-500;
-}
-
-.cancel-button {
-    @apply bg-yellow-100 text-gray-700 border-yellow-300 hover:bg-gray-300;
-=======
     padding-left: 1rem; /* px-4 */
     padding-right: 1rem; /* px-4 */
     padding-top: 0.5rem; /* py-2 */
@@ -186,43 +115,10 @@ body {
 
 .cancel-button:hover {
     background-color: #d1d5db; /* hover:bg-gray-300 */
->>>>>>> main
 }
 
 /* Địa chỉ nhận hàng */
 .address-section {
-<<<<<<< HEAD
-    @apply mt-5 bg-white p-5 rounded-lg shadow-lg;
-}
-
-.address-list {
-    @apply mt-3;
-}
-
-.address-card {
-    @apply flex justify-between items-center p-4 border border-gray-300 rounded-md mb-3 bg-white;
-}
-
-.address-card p {
-    @apply text-sm;
-}
-
-.address-container {
-    @apply flex justify-center mt-5;
-}
-
-.add-address-button {
-    @apply px-6 py-3 bg-yellow-400 text-white rounded-full text-lg cursor-pointer hover:bg-yellow-500;
-}
-
-.delete-button {
-    @apply px-3 py-1 bg-yellow-400 text-white rounded-full text-sm cursor-pointer hover:bg-yellow-600;
-}
-
-.input-place {
-    @apply w-2/3 p-2 border rounded-full;
-}
-=======
     margin-top: 1.25rem; /* mt-5 */
     background-color: #ffffff; /* bg-white */
     padding: 1.25rem; /* p-5 */
@@ -294,41 +190,10 @@ body {
     border-radius: 9999px; /* rounded-full */
 }
 
->>>>>>> main
 .text-gray-500 {
     color: #6b7280;
 }
 
-<<<<<<< HEAD
-.editbtn{
-    @apply px-3 py-1 bg-gray-200 text-black border border-black rounded-full text-sm cursor-pointer hover:bg-gray-400;
-}
-/* Footer */
-.footer {
-    @apply bg-gray-200 p-5 mt-5;
-}
-
-.footer-highlights {
-    @apply flex justify-around mb-5;
-}
-
-.footer-main {
-    @apply flex justify-between;
-}
-
-.footer-info {
-    @apply w-1/3;
-}
-
-.footer-links ul {
-    @apply list-none;
-}
-
-.footer-links ul li a {
-    @apply text-gray-700 hover:text-blue-500;
-}
-
-=======
 .editbtn {
     padding-left: 0.75rem; /* px-3 */
     padding-right: 0.75rem; /* px-3 */
@@ -379,5 +244,4 @@ body {
 .footer-links ul li a:hover {
     color: #3b82f6; /* hover:text-blue-500 */
 }
->>>>>>> main
 

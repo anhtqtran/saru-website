@@ -1,63 +1,11 @@
-<<<<<<< HEAD
-import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-=======
 import { Component, OnInit } from '@angular/core';
 import { BlogService } from '../services/blog.service';
 import { Blog } from '../classes/Blogs'; // Chỉ dùng Blog
->>>>>>> main
 
 @Component({
   selector: 'app-blog',
   standalone: false,
   templateUrl: './blog.component.html',
-<<<<<<< HEAD
-  styleUrl: './blog.component.css'
-})
-export class BlogComponent {
-  //set title of page
-  public constructor(private titleService: Title){
-    this.titleService.setTitle("Blogs - SARU"); 
-  }
-
-  changeBackground(id: string) {
-    const div = document.getElementById(id);
-    const button = div?.querySelector('button');
-    if (div && button) {
-      div.style.backgroundColor = '#757575';
-      button.style.backgroundColor = '#757575';
-      button.style.color = '#FFFFFF';
-    }
-  }
-
-  resetBackground(id: string) {
-    const div = document.getElementById(id);
-    const button = div?.querySelector('button');
-    if (div && button) {
-      div.style.backgroundColor = 'transparent';
-      button.style.backgroundColor = 'transparent';
-      button.style.color = '#757575';
-    }
-  }
-  changeBackground1(id: string) {
-    const div = document.getElementById(id);
-    const button = div?.querySelector('button');
-    if (div && button) {
-      div.style.backgroundColor = 'transparent';
-      button.style.backgroundColor = 'transparent';
-      button.style.color = '#757575';
-    }
-  }
-
-  resetBackground1(id: string) {
-    const div = document.getElementById(id);
-    const button = div?.querySelector('button');
-    if (div && button) {
-      div.style.backgroundColor = '#757575';
-      button.style.backgroundColor = '#757575';
-      button.style.color = '#FFFFFF';
-    }
-=======
   styleUrls: ['./blog.component.css']
 })
 export class BlogComponent implements OnInit {
@@ -106,6 +54,5 @@ export class BlogComponent implements OnInit {
     return this.blogs
       .filter(blog => blog.categoryName === this.categories.find(c => c._id === categoryId)?.CateblogName)
       .slice(0, 3);
->>>>>>> main
   }
 }

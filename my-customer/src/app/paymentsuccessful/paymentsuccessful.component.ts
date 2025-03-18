@@ -2,11 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-paymentsuccessful',
-<<<<<<< HEAD
-  // standalone: false,
-=======
   standalone: false,
->>>>>>> main
   templateUrl: './paymentsuccessful.component.html',
   styleUrl: './paymentsuccessful.component.css'
 })
@@ -29,8 +25,4 @@ export class PaymentsuccessfulComponent {
       }
     }).catch(error => console.error("Lỗi điều hướng:", error));
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> main
