@@ -162,7 +162,7 @@ const bestSellingProductsPipeline = (productId) => [
   ...(productId ? [] : [{ $group: { _id: "$ProductID", totalQuantity: { $sum: "$Quantity" } } }]),
   ...(productId ? [{ $match: { _id: productId } }] : []),
   ...(productId ? [] : [{ $sort: { totalQuantity: -1 } }]),
-  ...(productId ? [] : [{ $limit: 5 }]),
+  ...(productId ? [] : [{ $limit: 8 }]),
   {
     $lookup: {
       from: "products",
