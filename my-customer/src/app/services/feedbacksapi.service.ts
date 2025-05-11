@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FeedbacksapiService {
-  private apiUrl = 'http://localhost:4000/api/feedbacks';
+  private apiUrl = 'https://saru-website-2.onrender.com/api/feedbacks';
   constructor(private http: HttpClient) { }
   getFeedbacks(): Observable<Feedback[]> {
     return this.http.get<Feedback[]>(this.apiUrl);

@@ -7,7 +7,7 @@ import { Product, Pagination } from '../classes/Product';
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:4000/api';
+  private apiUrl = 'https://saru-website-2.onrender.com/api';
   private compareListUpdated = new BehaviorSubject<void>(undefined);
   private cartSubject = new BehaviorSubject<any[]>([]);
   private compareSubject = new BehaviorSubject<string[]>([]);

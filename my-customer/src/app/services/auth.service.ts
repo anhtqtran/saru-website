@@ -33,7 +33,7 @@ interface ResetPasswordResponse {
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:4000/api';
+  private apiUrl = 'https://saru-website-2.onrender.com/api';
   private tokenKey = 'authToken';
   private _currentUser: Account | null = null;
   private loginStatus = new BehaviorSubject<boolean>(this.isLoggedIn());

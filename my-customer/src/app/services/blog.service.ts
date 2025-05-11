@@ -24,7 +24,7 @@ interface Blog {
   providedIn: 'root'
 })
 export class BlogService {
-  private apiUrl = 'http://localhost:4000'; // Đổi thành URL backend của bạn nếu khác
+  private apiUrl = 'https://saru-website-2.onrender.com'; // Đổi thành URL backend của bạn nếu khác
 
   constructor(private http: HttpClient) {}
 

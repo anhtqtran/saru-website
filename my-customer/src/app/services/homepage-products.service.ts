@@ -26,7 +26,7 @@ interface BestSellerDetailResponse {
   providedIn: 'root'
 })
 export class HomepageProductsService {
-  private apiUrl = 'http://localhost:4000/api';
+  private apiUrl = 'https://saru-website-2.onrender.com/api';
   private loading = false;
   private compareListUpdated = new Subject<void>();
 

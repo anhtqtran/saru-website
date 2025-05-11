@@ -7,7 +7,7 @@ import { map, catchError } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class BlogapiService {
-  private apiUrl = 'http://localhost:4000/api';
+  private apiUrl = 'https://saru-website-2.onrender.com/api';
 
   constructor(private http: HttpClient) {}
 

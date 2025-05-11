@@ -26,9 +26,9 @@ export interface SendMessageData {
 })
 export class SocketService {
   private socket: Socket;
-  private apiUrl = "http://localhost:4000/messages";
+  private apiUrl = "https://saru-website-2.onrender.com/messages";
   private messageListenerRegistered = false;
-  private socketUrl = "http://localhost:4000";
+  private socketUrl = "https://saru-website-2.onrender.com";
 
   constructor(private http: HttpClient) {
     this.socket = io(this.socketUrl, {

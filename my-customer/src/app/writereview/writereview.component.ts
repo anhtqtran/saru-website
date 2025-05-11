@@ -60,7 +60,7 @@ export class WritereviewComponent implements OnInit {
   //   });
 
   //   // ✅ Gửi đánh giá lên server
-  //   this.http.post('http://localhost:4000/api/reviews', reviewsToSubmit).subscribe(
+  //   this.http.post('https://saru-website-2.onrender.com/api/reviews', reviewsToSubmit).subscribe(
   //     () => {
   //       alert("✅ Đánh giá của bạn đã được gửi thành công!");
   //       this.router.navigate(['/orderdetail'], { queryParams: { orderId: this.orderId } });
@@ -117,7 +117,7 @@ export class WritereviewComponent implements OnInit {
     console.log("✅ Dữ liệu đánh giá gửi lên API:", reviewsToSubmit);
   
     // ✅ Gửi đánh giá lên server
-    this.http.post('http://localhost:4000/api/reviews', reviewsToSubmit).subscribe(
+    this.http.post('https://saru-website-2.onrender.com/api/reviews', reviewsToSubmit).subscribe(
       () => {
         alert("✅ Đánh giá của bạn đã được gửi thành công!");
         this.router.navigate(['/orderdetail'], { queryParams: { orderId: this.orderId } });

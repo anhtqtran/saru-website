@@ -14,7 +14,7 @@ export class FaqsComponent implements OnInit {
 
   ngOnInit() {
     // Gọi API để lấy danh sách FAQs từ MongoDB
-    this.http.get('http://localhost:4000/faqs').subscribe(
+    this.http.get('https://saru-website-2.onrender.com/faqs').subscribe(
       (response: any) => {
         this.faqs = response.map((faq: any) => ({
           _id: faq._id,

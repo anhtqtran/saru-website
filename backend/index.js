@@ -53,7 +53,7 @@ app.use(express.json({ limit: '50mb' })); // Cập nhật từ đoạn code ng�
 app.use(express.urlencoded({ limit: '50mb', extended: true })); // Thêm từ đoạn code ngắn
 
 app.use(cors({
-  origin: ['http://localhost:4001', 'http://localhost:4002', 'http://localhost:4200'],
+  origin: ['http://localhost:4001', 'http://localhost:4002', 'http://localhost:4200', 'https://saru-client-b3d41.web.app'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Thêm từ đoạn code ngắn
   allowedHeaders: ['Content-Type', 'Authorization'] // Thêm từ đoạn code ngắn
@@ -1740,7 +1740,7 @@ const { Server } = require('socket.io');
 const server = require('http').createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: ["http://localhost:4001", "http://localhost:4002", "http://localhost:4200"], // Thêm localhost:4200 nếu cần
+    origin: ["http://localhost:4001", "http://localhost:4002", "http://localhost:4200", "https://saru-client-b3d41.web.app"], // Thêm localhost:4200 nếu cần
     methods: ["GET", "POST"],
     credentials: true // Thêm dòng này
   },
