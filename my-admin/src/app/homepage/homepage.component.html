@@ -1,0 +1,78 @@
+<div class="min-h-screen p-6 font-inter">
+  <!-- Header -->
+  <header class="flex justify-between items-center mb-9  rounded-lg">
+    <h1 class="text-5xl font-bold text-[#85461F]">Trang chủ</h1>
+    <button 
+      class="flex items-center text-white bg-[#F8BC3B] px-4 py-2 rounded-lg font-bold hover:bg-[#85461F] transition"
+      (click)="toggleAdminMenu()"
+    >
+      ADMIN
+    </button>
+  </header>
+
+  <!-- Upper Section: Quick Statistics (All Time) -->
+  <p class="font-bold m-2 text-[#85461F]">Toàn thời gian</p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <div class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-[#38312F]">Tổng số sản phẩm</h2>
+      <p class="text-4xl font-bold text-[#F8BC3B]">{{ dashboardData.listingCount }}</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-[#38312F]">Đơn hàng chưa xử lý</h2>
+      <p class="text-4xl font-bold text-[#F8BC3B]">{{ dashboardData.pendingOrders }}</p>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-[#38312F]">Tin nhắn khách hàng</h2>
+      <p class="text-4xl font-bold text-[#F8BC3B]">{{ dashboardData.messagesCount }}</p>
+    </div>
+  </div>
+
+  <!-- Lower Section: Performance Statistics (This Week) -->
+  <p class="font-bold m-2 text-[#85461F]">{{ getCurrentWeekRange() }}</p>
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+    <!-- <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+      <h2 class="text-2xl font-bold text-[#38312F]">Tổng lượt bán ra</h2>
+      <div class="flex items-center">
+        <p class="text-4xl font-bold text-[#F8BC3B]">{{ dashboardData.totalSales | number }}</p>
+        <span class="ml-2 text-green-500">{{ dashboardData.salesChange }}</span>
+        <span class="ml-2 text-xl text-[#38312F]">🛒</span>
+      </div>
+    </div>
+    <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+      <h2 class="text-2xl font-bold text-[#38312F]">Tổng doanh thu</h2>
+      <div class="flex items-center">
+        <p class="text-4xl font-bold text-[#F8BC3B]">{{ dashboardData.totalIncome | currency:'VND' }}</p>
+        <span class="ml-2 text-green-500">{{ dashboardData.incomeChange | currency:'VND' }}</span>
+        <span class="ml-2 text-xl text-[#38312F]">💰</span>
+      </div>
+    </div> -->
+    <div class="bg-white p-4 rounded-lg shadow-md flex flex-col items-center">
+      <h2 class="text-2xl font-bold text-[#38312F]">Tỷ lệ chuyển đổi</h2>
+      <div class="flex items-center">
+        <p class="text-4xl font-bold text-[#F8BC3B]">{{ dashboardData.conversionRate }}%</p>
+        <span class="ml-2 text-green-500">+{{ dashboardData.rateChange }}%</span>
+        <span class="ml-2 text-xl text-[#38312F]">✔️</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lower Section: Charts -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Sales Performance Chart -->
+    <div class="bg-white p-4 rounded-lg shadow-md relative">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-2xl font-bold text-[#38312F]">Sales Performance</h2>
+        <button class="text-[#85461F] hover:text-[#D8A850]" (click)="toggleSettings()">
+          <span class="text-xl">⚙️</span>
+        </button>
+      </div>
+      <canvas id="salesChart" class="w-full" style="max-height: 300px;"></canvas>
+    </div>
+
+    <!-- Popular Categories Chart -->
+    <div class="bg-white p-4 rounded-lg shadow-md">
+      <h2 class="text-2xl font-bold text-[#38312F] mb-4">Popular Categories</h2>
+      <canvas id="categoriesChart" class="w-full" style="max-height: 300px;"></canvas>
+    </div>
+  </div>
+</div>

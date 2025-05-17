@@ -1,0 +1,108 @@
+<div class="container w-full h-screen flex flex-col">
+
+    
+    <div>
+        <h1>Tồn kho</h1>
+    </div>
+
+    <div class="inventory-header">
+        <div class="warehouse-info">
+            <label>Kho đang quản lý:</label>
+            <select #warehouseSelect>
+                <option>Địa chỉ mặc định</option>
+                <option>Kho Hà Nội</option>
+                <option>Kho Sài Gòn</option>
+            </select>
+        </div>
+        <button class="export-button" #exportButton (click)="exportToCSV()">
+            Xuất dữ liệu
+        </button>
+    </div>
+
+    <div class="product-controls">
+        <div class="filter-container">
+            <button class="filter-button" #filterButton>
+                <img src="/assets/images/stock.png" alt="Thêm điều kiện lọc"> Thêm điều kiện lọc
+            </button>
+            <div class="filter-dropdown" #filterDropdown>
+                <p>Hiển thị sản phẩm theo:</p>
+                <select [(ngModel)]="selectedFilterType" (change)="updateFilterOptions()">
+                    <option value="CateName">Nhóm sản phẩm</option>
+                    <option value="ProductBrand">Thương hiệu</option>
+                </select>
+                
+                <select [(ngModel)]="selectedFilterValue">
+                    <option *ngFor="let option of filterOptions" [value]="option">{{ option }}</option>
+                </select>                
+           
+                <div class="filter-buttons">
+                    <button class="cancel-button" (click)="resetFilters()">Hủy</button>
+                    <button class="apply-button" (click)="applyFilters()">Lọc</button>
+                </div>
+            </div>
+        </div>
+        <div class="search-container">
+            <img src="/assets/images/Search.png" alt="Tìm kiếm" class="search-icon">
+            <input type="text" class="search-bar" placeholder="Tìm kiếm sản phẩm..." [(ngModel)]="searchQuery" (input)="applySearch()">
+        </div>
+        
+    </div>
+
+    <table class="inventory-table">
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" [checked]="selectAll" (change)="toggleAllSelection()">
+                </th>
+                <th>Sản phẩm</th>
+                
+                <th>Tồn kho</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let product of displayedProducts; let i = index">
+                <td>
+                    <input type="checkbox" [checked]="selectedProducts.has(i)" (change)="toggleSelection(i)">
+                </td>
+                <td class="product-info">
+                    <img [src]="product.ProductImageCover" alt="Sản phẩm" *ngIf="product.ProductImageCover">
+                    <div>
+                        <p>{{ product.ProductName }}</p>
+                        <small>{{ product.ProductSKU }}</small>
+                    </div>
+                </td>
+               
+                
+                <td><span class="quantity-display">{{ product.StockQuantity }}</span></td>
+                <td class="actions">
+                    <div class="actioncompo">
+                        <button class="reset-btn" (click)="resetQuantity(i)">Đặt lại</button>
+                        <button class="quantity-btn minus" (click)="decreaseQuantity(i)">−</button>
+                        <span class="quantity">
+                            <input type="number" [(ngModel)]="product.StockQuantity" min="0" class="quantity-input" />
+                        </span>
+                        <button class="quantity-btn plus" (click)="increaseQuantity(i)">+</button>
+                        <button class="save-button" (click)="saveQuantity(i)">Lưu</button>
+
+                    </div>
+                </td>
+            </tr>
+            <tr *ngIf="displayedProducts.length === 0">
+                <td colspan="4" class="no-data">Không có dữ liệu để hiển thị.</td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+    <div class="product-footer">
+        <select [(ngModel)]="selectedRows" (change)="updateTableRows()">
+            <option [value]="10">Hiển thị 10</option>
+            <option [value]="20">Hiển thị 20</option>
+            <option [value]="50">Hiển thị 50</option>
+            <option [value]="100">Hiển thị 100</option>
+        </select>
+        <p>Tổng sản phẩm: {{ allProducts.length }}</p>
+    </div>
+</div>
+

@@ -1,0 +1,187 @@
+<div class="max-w-5xl mx-auto bg-white p-6 rounded-lg shadow-md" *ngIf="order">
+  <div class="flex justify-between items-center mb-4">
+    <div>
+      <p class="text-lg font-bold">
+        Mã đơn: <span>#{{ order.OrderID || 'SARUK3456' }}</span>
+      </p>
+      <p class="text-sm text-gray-600">
+        {{ order.OrderDate || '20/01/2025' }}
+      </p>
+    </div>
+    <div>
+      <button class="bg-gray-200 text-gray-700 px-4 py-2 rounded-md">
+        ADMIN <i class="fas fa-chevron-down"></i>
+      </button>
+    </div>
+  </div>
+  <div class="flex justify-between items-center mb-4">
+    <div>
+      <p class="text-sm">
+        <span class="text-red-500">●</span>
+        Trạng thái giao hàng:
+        <span class="font-bold">
+          {{ order.OrderStatusText || 'Chưa giao hàng' }}
+        </span>
+      </p>
+      <p class="text-sm">
+        <span class="text-yellow-500">●</span>
+        Trạng thái thanh toán:
+        <span class="font-bold">
+          {{ order.PaymentStatusText || 'Chờ xử lý' }}
+        </span>
+      </p>
+    </div>
+  </div>
+  <div class="bg-gray-200 p-4 rounded-lg mb-4">
+    <div class="flex justify-between items-center mb-2">
+      <p class="font-bold">Đơn giao hàng</p>
+    </div>
+    <table class="w-full bg-white rounded-lg shadow-md mb-4">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="p-2 text-left">Tên sản phẩm</th>
+          <th class="p-2 text-left">Số lượng</th>
+          <th class="p-2 text-left">Giá</th>
+          <th class="p-2 text-left">Thành tiền</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of order.items || []">
+          <td class="p-2 flex items-center">
+            <img
+              alt="Product image"
+              class="w-12 h-12 mr-2"
+              height="50"
+              [src]="item.ProductImageCover || 'https://storage.googleapis.com/a1aa/image/S24dPZZMnMisNif8YB7zl1Qn-eIaStGNI-P_nDrssek.jpg'"
+              width="50"
+            />
+            <div>
+              <p>{{ item.ProductName || 'SKU' }}</p>
+            </div>
+          </td>
+          <td class="p-2">{{ item.Quantity || 2 }}</td>
+          <td class="p-2">{{ item.Price || 100000 | number:'1.0-0' }} đ</td>
+          <td class="p-2">{{ item.TotalPrice || 200000 | number:'1.0-0' }} đ</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="flex justify-between items-center mb-4">
+      <div>
+        <p>Kho lấy hàng: {{ order.Warehouse || 'Địa điểm mặc định' }}</p>
+        <p>
+          Mã vận chuyển:
+          <span class="text-blue-500">{{ order.ShippingCode || '0123452888' }}</span>
+        </p>
+        <p>
+          Đơn vị vận chuyển:
+          <span class="text-blue-500">{{ order.ShippingProvider || 'Ahamove.vn' }}</span>
+        </p>
+        <p>
+          Vận đơn:
+          <span class="text-blue-500">{{ order.TrackingNumber || 'S123E24555-2373-1123' }}</span>
+        </p>
+      </div>
+      <div>
+        <p>Tổng khối lượng: {{ order.TotalWeight || '1.2 kg' }}</p>
+        <p>Trạng thái vận chuyển: {{ order.ShippingStatus || 'Đang giao' }}</p>
+      </div>
+    </div>
+    <div class="mb-4">
+      <div class="flex items-center mb-2">
+        <label class="mr-2 font-bold">Cập nhật trạng thái giao hàng:</label>
+        <select
+          [(ngModel)]="order.OrderStatusID"
+          name="OrderStatusID"
+          class="border p-2 rounded-md"
+          (change)="updateOrderStatusText()"
+        >
+          <option *ngFor="let status of orderStatuses" [value]="status.OrderStatusID">
+            {{ status.Status }}
+          </option>
+        </select>
+      </div>
+      <div class="flex items-center mb-2">
+        <label class="mr-2 font-bold">Cập nhật trạng thái thanh toán:</label>
+        <select
+          [(ngModel)]="order.PaymentStatusID"
+          name="PaymentStatusID"
+          class="border p-2 rounded-md"
+          (change)="updatePaymentStatusText()"
+        >
+          <option *ngFor="let status of paymentStatuses" [value]="status.PaymentStatusID">
+            {{ status.PaymentStatus }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="flex justify-between">
+      <button class="bg-yellow-500 text-white px-4 py-2 rounded-md" (click)="cancelDelivery()">Hủy giao hàng</button>
+      <button class="bg-yellow-500 text-white px-4 py-2 rounded-md" (click)="updateShipping()">Cập nhật vận đơn</button>
+      <button class="bg-yellow-500 text-white px-4 py-2 rounded-md" (click)="printShipping()">In vận đơn</button>
+    </div>
+  </div>
+  <div class="bg-gray-200 p-4 rounded-lg mb-4">
+    <div class="flex justify-between items-center mb-2">
+      <p class="font-bold">
+        {{ order.PaymentStatusText === 'Đã thanh toán' ? 'Đã thanh toán' : 'Chưa thanh toán' }}
+      </p>
+    </div>
+    <div class="mb-4">
+      <label class="block mb-2" for="order-note">Ghi chú đơn hàng</label>
+      <textarea
+        class="w-full p-2 border rounded-md"
+        id="order-note"
+        rows="3"
+        [(ngModel)]="order.OrderNote"
+        name="OrderNote"
+      ></textarea>
+    </div>
+    <div class="mb-4">
+      <p *ngIf="order.VoucherID">
+        Voucher áp dụng: {{ order.VoucherID }} (Giảm {{ getVoucherValue(order.VoucherID) }}%, tương ứng {{ order.VoucherDiscount | number:'1.0-0' }} đ)
+      </p>
+      <p *ngIf="!order.VoucherID">Không có voucher được áp dụng.</p>
+    </div>
+    <div class="flex justify-between items-center mb-4">
+      <div>
+        <p>Số lượng sản phẩm: {{ (order.items || []).length || 2 }}</p>
+        <p>Giá: {{ order.Subtotal | number:'1.0-0' }} đ</p>
+        <p>Phí vận chuyển: {{ (order.ShippingFee || 5000) | number:'1.0-0' }} đ</p>
+        <div *ngIf="order?.VoucherID" class="mb-4">
+          <label class="block mb-2 font-semibold">Thông tin Voucher:</label>
+          <p>Voucher ID: {{ order.VoucherID }}</p>
+          <p *ngIf="order.VoucherDetails">Giá trị giảm: {{ order.VoucherDetails.VoucherValue }}%</p>
+          <p *ngIf="order.VoucherDetails">Hạn sử dụng: {{ order.VoucherDetails.VoucherExpiredDate | date }}</p>
+          <p *ngIf="order.VoucherDetails">Số lượng còn lại: {{ order.VoucherDetails.VoucherQuantity }}</p>
+          <p>Giảm giá: {{ order.VoucherDiscount || 0 }} đ</p>
+        </div>
+        <p>Tổng tiền: {{ order.TotalOrderAmount | number:'1.0-0' }} đ</p>
+        <p>Phương thức thanh toán: {{ order.PaymentMethodText || 'COD' }}</p>
+      </div>
+      <div>
+        <button class="bg-yellow-500 text-white px-4 py-2 rounded-md" (click)="updateOrder()">Cập nhật</button>
+      </div>
+    </div>
+  </div>
+  <div class="flex justify-between items-start">
+    <div class="bg-gray-200 p-4 rounded-lg w-full">
+      <p class="font-bold mb-2">Thông tin người mua</p>
+      <p>{{ order.CustomerName }}</p>
+      <p>Đã đặt: {{ order.OrderCount || 1 }} đơn hàng</p>
+      <p>Doanh thu tích lũy: {{ (order.TotalRevenue || order.TotalOrderAmount) | number:'1.0-0' }} đ</p>
+      <p>Điểm tích lũy: {{ order.Points | number:'1.0-0' }}</p>
+      <p class="font-bold mt-4">Thông tin giao hàng</p>
+      <p>{{ order.CustomerName }}</p>
+      <p>{{ order.CustomerPhone }}</p>
+      <p>Địa chỉ giao hàng:</p>
+      <p>{{ order.CustomerAdd.address }}</p>
+      <p>{{ order.CustomerAdd.city }}, {{ order.CustomerAdd.state }}</p>
+      <p class="font-bold mt-4">Ghi chú của khách hàng</p>
+      <p>{{ order.CustomerNote || 'Không có' }}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!order" class="text-center p-6">
+  <p>Đang tải hoặc không tìm thấy đơn hàng...</p>
+</div>
