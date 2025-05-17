@@ -27,7 +27,7 @@ export class ReviewService {
     return this.http.get<Customer>(`${this.apiUrl}/customers/${customerId}`);
   }
 
-//   deleteReview(reviewId: string): Observable<any> {
-//   return this.http.delete(`${this.apiUrl}/reviews/${reviewId}`);
-// }
+  deleteReview(reviewId: string): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/reviews/${reviewId}`);
+}
 }

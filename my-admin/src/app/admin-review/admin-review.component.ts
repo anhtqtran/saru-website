@@ -10,15 +10,16 @@ import { Customer } from '../classes/review';
   styleUrl: './admin-review.component.css'
 })
 export class AdminReviewComponent implements OnInit {
-  reviewsWithCustomer: { review: Review, customer: Customer }[] = [];
+   reviewsWithCustomer: { review: Review, customer: Customer }[] = [];
   filteredReviewsWithCustomer: { review: Review, customer: Customer }[] = [];
 
-  // Biến lọc
   filterStartDate: string = '';
   filterEndDate: string = '';
-  filterRatings: number[] = []; // Thay đổi thành mảng để lưu nhiều giá trị
+  filterRatings: number[] = [];
 
-  constructor(private reviewService: ReviewService) { }
+  sortOrder: string = 'newest'; // Mặc định sắp xếp mới nhất
+
+  constructor(private reviewService: ReviewService) {}
 
   ngOnInit(): void {
     this.loadReviewsWithCustomers();
@@ -27,7 +28,6 @@ export class AdminReviewComponent implements OnInit {
   loadReviewsWithCustomers(): void {
     this.reviewService.getReviewsWithCustomers(this.filterStartDate, this.filterEndDate, this.filterRatings.join(',')).subscribe(
       (data: any[]) => {
-        // Ánh xạ dữ liệu từ API vào reviewsWithCustomer
         this.reviewsWithCustomer = data.map(item => ({
           review: {
             _id: item._id || '',
@@ -50,7 +50,7 @@ export class AdminReviewComponent implements OnInit {
             ReceiveEmail: item.ReceiveEmail || false
           }
         }));
-        this.applyFilters(); // Áp dụng lọc ngay sau khi tải dữ liệu
+        this.applyFilters();
       },
       (error) => {
         console.error('Lỗi khi tải danh sách đánh giá với thông tin khách hàng:', error);
@@ -60,8 +60,7 @@ export class AdminReviewComponent implements OnInit {
 
   applyFilters(): void {
     this.filteredReviewsWithCustomer = [...this.reviewsWithCustomer];
-  
-    // Lọc theo thời gian
+
     if (this.filterStartDate || this.filterEndDate) {
       const start = this.filterStartDate ? new Date(this.filterStartDate).getTime() : -Infinity;
       const end = this.filterEndDate ? new Date(this.filterEndDate).getTime() : Infinity;
@@ -70,25 +69,45 @@ export class AdminReviewComponent implements OnInit {
         return reviewDate >= start && reviewDate <= end;
       });
     }
-  
-    // Lọc theo số sao (nhiều giá trị)
+
     if (this.filterRatings.length > 0) {
       this.filteredReviewsWithCustomer = this.filteredReviewsWithCustomer.filter(item =>
         this.filterRatings.includes(item.review.Rating)
       );
     }
+
+    // Sắp xếp
+    this.filteredReviewsWithCustomer.sort((a, b) => {
+      switch (this.sortOrder) {
+        case 'newest':
+          return new Date(b.review.DatePosted).getTime() - new Date(a.review.DatePosted).getTime();
+        case 'oldest':
+          return new Date(a.review.DatePosted).getTime() - new Date(b.review.DatePosted).getTime();
+        case 'ratingAsc':
+          return a.review.Rating - b.review.Rating;
+        case 'ratingDesc':
+          return b.review.Rating - a.review.Rating;
+        default:
+          return 0;
+      }
+    });
   }
 
-//   deleteReview(reviewId: string): void {
-//   if (!confirm('Bạn có chắc chắn muốn xóa đánh giá này?')) {
-//     return;
-//   }
-//   this.reviewService.deleteReview(reviewId).subscribe({
-//     next: () => this.loadReviewsWithCustomers(),
-//     error: (err) => {
-//       console.error('Lỗi khi xóa đánh giá:', err);
-//       alert('Xóa đánh giá thất bại, vui lòng thử lại.');
-//     }
-//   });
-// }
+  deleteReview(reviewId?: string): void {
+  if (!reviewId) {
+    console.warn('Delete called without reviewId');
+    return;
+  }
+  if (!confirm('Bạn có chắc chắn muốn xóa đánh giá này?')) {
+    return;
+  }
+  this.reviewService.deleteReview(reviewId).subscribe({
+    next: () => this.loadReviewsWithCustomers(),
+    error: (err) => {
+      console.error('Lỗi khi xóa đánh giá:', err);
+      alert('Xóa đánh giá thất bại, vui lòng thử lại.');
+    }
+  });
+}
+
 }
